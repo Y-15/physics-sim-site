@@ -9,6 +9,9 @@ hero:
     - theme: brand
       text: 🚀 斜方投射を体験する
       link: /mechanics/projectile
+    - theme: brand
+      text: 🕰️ 単振り子を体験する
+      link: /mechanics/pendulum
     - theme: alt
       text: 📚 このサイトについて
       link: /about

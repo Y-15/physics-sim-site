@@ -9,6 +9,7 @@ export default defineConfig({
   title: '物理ラボ - 視覚でわかる物理学',
   description: '動くシミュレーションと美しい数式で直感的に学べる物理の解説サイト',
   lang: 'ja-JP',
+  ignoreDeadLinks: true,
 
   // 数式（MathJax）を有効化 ($...$ や $$...$$ が自動で数式になります)
   markdown: {
@@ -34,7 +35,7 @@ export default defineConfig({
           text: '力学編',
           items: [
             { text: '斜方投射（放物運動）', link: '/mechanics/projectile' },
-            { text: '単振り子（準備中）', link: '/mechanics/pendulum' },
+            { text: '単振り子（等時性と周期）', link: '/mechanics/pendulum' },
             { text: 'ばねの単振動（準備中）', link: '/mechanics/spring' }
           ]
         }
