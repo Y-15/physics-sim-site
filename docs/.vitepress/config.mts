@@ -6,8 +6,8 @@ const base = (process.env.BASE_PATH || (process.env.GITHUB_REPOSITORY ? `/${proc
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   base,
-  title: '物理ラボ - 視覚でわかる物理学',
-  description: '動くシミュレーションと美しい数式で直感的に学べる物理の解説サイト',
+  title: '高校物理シミュレーションラボ',
+  description: '高校物理・共通テスト・大学受験対応。動くシミュレーションと数式で直感的に完全理解できる無料学習サイト',
   lang: 'ja-JP',
   ignoreDeadLinks: true,
 
@@ -25,26 +25,49 @@ export default defineConfig({
     nav: [
       { text: 'ホーム', link: '/' },
       { text: '力学', link: '/mechanics/projectile' },
-      { text: '電磁気学', link: '/electromagnetism/index' },
-      { text: 'このサイトについて', link: '/about' }
+      { text: '波動', link: '/waves/index' },
+      { text: '電磁気', link: '/electromagnetism/index' },
+      { text: '熱力学', link: '/thermodynamics/index' },
+      { text: '受験・学習ガイド', link: '/about' }
     ],
 
     sidebar: {
       '/mechanics/': [
         {
-          text: '力学編',
+          text: '力学（高校物理）',
           items: [
-            { text: '斜方投射（放物運動）', link: '/mechanics/projectile' },
-            { text: '単振り子（等時性と周期）', link: '/mechanics/pendulum' },
-            { text: 'ばねの単振動（準備中）', link: '/mechanics/spring' }
+            { text: '斜方投射（放物運動の公式）', link: '/mechanics/projectile' },
+            { text: '単振り子（等時性と周期公式）', link: '/mechanics/pendulum' },
+            { text: 'ばねの単振動（準備中）', link: '/mechanics/spring' },
+            { text: '運動量保存則と衝突（準備中）', link: '/mechanics/momentum' }
+          ]
+        }
+      ],
+      '/waves/': [
+        {
+          text: '波動（高校物理）',
+          items: [
+            { text: '波の重ね合わせと定常波（準備中）', link: '/waves/index' },
+            { text: 'ドップラー効果（準備中）', link: '/waves/doppler' },
+            { text: '光の干渉・ヤングの実験（準備中）', link: '/waves/young' }
           ]
         }
       ],
       '/electromagnetism/': [
         {
-          text: '電磁気学編',
+          text: '電磁気（高校物理）',
           items: [
-            { text: 'クーロンの法則と電場（準備中）', link: '/electromagnetism/index' }
+            { text: 'クーロンの法則と電場（準備中）', link: '/electromagnetism/index' },
+            { text: 'コンデンサー回路（準備中）', link: '/electromagnetism/capacitor' },
+            { text: '電磁誘導とファラデーの法則（準備中）', link: '/electromagnetism/induction' }
+          ]
+        }
+      ],
+      '/thermodynamics/': [
+        {
+          text: '熱力学（高校物理）',
+          items: [
+            { text: '気体の状態方程式とP-V図（準備中）', link: '/thermodynamics/index' }
           ]
         }
       ]
