@@ -1,0 +1,15 @@
+{
+  "name": "physics-sim-site",
+  "version": "1.0.0",
+  "description": "Interactive Physics Simulation & Learning Site",
+  "type": "module",
+  "scripts": {
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs"
+  },
+  "devDependencies": {
+    "markdown-it-mathjax3": "^4.3.2",
+    "vitepress": "^1.5.0"
+  }
+}
