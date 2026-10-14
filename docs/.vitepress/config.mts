@@ -36,12 +36,15 @@ export default defineConfig({
         {
           text: '力学（高校物理）',
           items: [
+            { text: '🏎️ 等加速度直線運動とv-tグラフ', link: '/mechanics/acceleration' },
             { text: '🚀 斜方投射（放物運動の公式）', link: '/mechanics/projectile' },
-            { text: '🕰️ 単振り子（等時性と周期公式）', link: '/mechanics/pendulum' },
+            { text: '📐 摩擦力と斜面上の運動（摩擦角）', link: '/mechanics/friction' },
             { text: '🔩 ばねの単振動（復元力とエネルギー）', link: '/mechanics/spring' },
             { text: '💥 運動量保存則と衝突（反発係数）', link: '/mechanics/momentum' },
+            { text: '🕰️ 単振り子（等時性と周期公式）', link: '/mechanics/pendulum' },
             { text: '🔄 等速円運動・向心加速度・向心力', link: '/mechanics/circular' },
-            { text: '万有引力とケプラーの法則（準備中）', link: '/mechanics/gravitation' }
+            { text: '🪐 万有引力と人工衛星・ケプラー則', link: '/mechanics/gravitation' },
+            { text: '剛体のつり合いとモーメント（準備中）', link: '/mechanics/moment' }
           ]
         }
       ],
