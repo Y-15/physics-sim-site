@@ -10,6 +10,16 @@ export default defineConfig({
   description: '高校物理・共通テスト・大学受験対応。動くシミュレーションと数式で直感的に完全理解できる無料学習サイト',
   lang: 'ja-JP',
   ignoreDeadLinks: true,
+  cleanUrls: false,
+  lastUpdated: true,
+
+  // 共通パーツ（注意書きなど）はページとして出力しない
+  srcExclude: ['parts/**'],
+
+  // 検索エンジン向けサイトマップ
+  sitemap: {
+    hostname: 'https://y-15.github.io/physics-sim-site/'
+  },
 
   // 数式（MathJax）を有効化 ($...$ や $$...$$ が自動で数式になります)
   markdown: {
@@ -39,12 +49,14 @@ export default defineConfig({
             { text: '🏎️ 等加速度直線運動とv-tグラフ', link: '/mechanics/acceleration' },
             { text: '🚀 斜方投射（放物運動の公式）', link: '/mechanics/projectile' },
             { text: '📐 摩擦力と斜面上の運動（摩擦角）', link: '/mechanics/friction' },
+            { text: '⚙️ 運動の法則・連結物体の運動方程式と滑車', link: '/mechanics/newton' },
+            { text: '⚡ 仕事・仕事率と力学的エネルギー保存則', link: '/mechanics/energy' },
             { text: '🔩 ばねの単振動（復元力とエネルギー）', link: '/mechanics/spring' },
             { text: '💥 運動量保存則と衝突（反発係数）', link: '/mechanics/momentum' },
             { text: '🕰️ 単振り子（等時性と周期公式）', link: '/mechanics/pendulum' },
             { text: '🔄 等速円運動・向心加速度・向心力', link: '/mechanics/circular' },
             { text: '🪐 万有引力と人工衛星・ケプラー則', link: '/mechanics/gravitation' },
-            { text: '剛体のつり合いとモーメント（準備中）', link: '/mechanics/moment' }
+            { text: '⚖️ 剛体のつり合いと力のモーメント', link: '/mechanics/moment' }
           ]
         }
       ],
@@ -53,7 +65,7 @@ export default defineConfig({
           text: '波動（高校物理）',
           items: [
             { text: '✅ 定常波・重ね合わせ・ドップラー効果', link: '/waves/index' },
-            { text: '光の干渉・ヤングの実験（準備中）', link: '/waves/young' }
+            { text: '🌈 光の干渉・ヤングの二重スリット実験', link: '/waves/young' }
           ]
         }
       ],
@@ -61,7 +73,8 @@ export default defineConfig({
         {
           text: '電磁気（高校物理）',
           items: [
-            { text: 'クーロンの法則と電場（準備中）', link: '/electromagnetism/index' },
+            { text: '📖 電磁気学編トップ', link: '/electromagnetism/index' },
+            { text: '⚡ クーロンの法則・電場と電位', link: '/electromagnetism/field' },
             { text: 'コンデンサー回路（準備中）', link: '/electromagnetism/capacitor' },
             { text: '電磁誘導とファラデーの法則（準備中）', link: '/electromagnetism/induction' }
           ]
@@ -71,7 +84,8 @@ export default defineConfig({
         {
           text: '熱力学（高校物理）',
           items: [
-            { text: '気体の状態方程式とP-V図（準備中）', link: '/thermodynamics/index' }
+            { text: '📖 熱力学編トップ', link: '/thermodynamics/index' },
+            { text: '🔥 気体の状態変化・P-V図と熱力学第1法則', link: '/thermodynamics/gas-law' }
           ]
         }
       ]

@@ -1,459 +1,238 @@
 <template>
-  <div class="sim-container">
-    <div class="sim-header">
-      <span class="sim-title">🪐 万有引力と人工衛星の軌道・ケプラーの法則</span>
-      <span class="sim-badge">第1宇宙速度・脱出速度・面積速度一定</span>
+  <div class="lab" style="--ac:#38bdf8;--ac2:#c084fc">
+    <div class="lab-head">
+      <span class="lab-title">🪐 人工衛星の軌道シミュレーター（地球のまわり）</span>
+      <span class="lab-badge">第1・第2宇宙速度／面積速度一定</span>
     </div>
 
-    <div class="canvas-wrapper">
-      <canvas ref="canvasRef" width="700" height="420"></canvas>
-    </div>
+    <div class="lab-canvas"><canvas ref="canvasRef"></canvas></div>
 
-    <div class="controls-grid">
-      <div class="control-item">
-        <label>初速比 (v₀ / v₁): <strong>{{ speedRatio.toFixed(2) }}倍</strong></label>
-        <input type="range" v-model.number="speedRatio" min="0.5" max="1.55" step="0.02" />
-        <div style="font-size:0.75rem;color:#a1a1aa;margin-top:2px">
-          1.0 = 円軌道、1.41 (√2) = 脱出速度（第2宇宙速度）
-        </div>
+    <div class="lab-msg" v-if="status">{{ status }}</div>
+
+    <div class="lab-controls">
+      <div class="lab-ctrl">
+        <label>打ち出す速さ（円軌道の速さ v₁ の何倍か）: <strong>{{ ratio.toFixed(2) }} 倍</strong></label>
+        <input type="range" v-model.number="ratio" min="0.6" max="1.55" step="0.01" />
+        <div class="lab-note">1.00 = 円軌道、1.41（√2）以上 = 地球の引力圏から脱出</div>
       </div>
-      <div class="control-item">
-        <label>初期距離 r₀: <strong>{{ initialR.toFixed(1) }} × 10³ km</strong></label>
-        <input type="range" v-model.number="initialR" min="10" max="25" step="1" />
+      <div class="lab-ctrl">
+        <label>打ち出す位置（地球中心からの距離）r₀: <strong>{{ r0.toFixed(1) }} ×10³ km</strong></label>
+        <input type="range" v-model.number="r0" min="7" max="20" step="0.5" />
+        <div class="lab-note">地表からの高さ h = {{ ((r0 - RE) * 1000).toFixed(0) }} km（地球半径 6370 km）</div>
       </div>
-      <div class="control-item">
-        <label>軌道プリセット:</label>
-        <div style="display:flex;gap:6px;margin-top:6px;flex-wrap:wrap">
-          <button :class="['preset-btn', { active: Math.abs(speedRatio - 1.0) < 0.02 }]" @click="setPreset(1.0)">
-            🛰️ 円軌道 (v₁)
-          </button>
-          <button :class="['preset-btn', { active: Math.abs(speedRatio - 1.2) < 0.02 }]" @click="setPreset(1.2)">
-            ☄️ 楕円軌道 (1.2v₁)
-          </button>
-          <button :class="['preset-btn', { active: Math.abs(speedRatio - 1.414) < 0.02 }]" @click="setPreset(1.414)">
-            🚀 脱出軌道 (√2v₁)
-          </button>
+      <div class="lab-ctrl">
+        <label>プリセット</label>
+        <div class="lab-row">
+          <button class="lab-chip" :class="{ on: Math.abs(ratio - 1) < 0.005 }" @click="preset(1)">円軌道</button>
+          <button class="lab-chip" :class="{ on: Math.abs(ratio - 1.2) < 0.005 }" @click="preset(1.2)">楕円軌道</button>
+          <button class="lab-chip" :class="{ on: Math.abs(ratio - 0.8) < 0.005 }" @click="preset(0.8)">遅すぎる</button>
+          <button class="lab-chip" :class="{ on: Math.abs(ratio - 1.45) < 0.005 }" @click="preset(1.45)">脱出</button>
         </div>
+        <label style="margin-top:0.5rem"><input type="checkbox" v-model="showSectors" /> 一定時間ごとに掃く面積を表示</label>
       </div>
     </div>
 
-    <div class="stats-grid">
-      <div class="stat-card" :class="{ highlight: orbitType === '円軌道' || orbitType === '楕円軌道' }">
-        <div class="stat-label">現在の軌道の種類</div>
-        <div class="stat-value" :style="{ fontSize: '1.15rem', color: orbitColor }">
-          {{ orbitType }}
+    <div class="lab-stats">
+      <div class="lab-stat hl">
+        <div class="k">現在の速さ v</div>
+        <div class="v">{{ (curV * 1000).toFixed(2) }} <small>km/s</small></div>
+        <div class="f">この位置での円軌道の速さ {{ (vc0 * 1000).toFixed(2) }} km/s</div>
+      </div>
+      <div class="lab-stat">
+        <div class="k">地球中心からの距離 r</div>
+        <div class="v">{{ curR.toFixed(1) }} <small>×10³ km</small></div>
+      </div>
+      <div class="lab-stat">
+        <div class="k">面積速度 ½ r v sinθ</div>
+        <div class="v">{{ (areal / 1e3).toFixed(2) }} <small>×10⁹ m²/s</small></div>
+        <div class="f">軌道上のどこでも一定（第2法則）</div>
+      </div>
+      <div class="lab-stat">
+        <div class="k">力学的エネルギー（1 kg あたり）</div>
+        <div class="v" :style="{ color: energy < 0 ? '#38bdf8' : '#f59e0b', fontSize: '1rem' }">
+          {{ (energy * 1e6).toFixed(1) }} <small>×10⁶ J/kg</small>
         </div>
-        <div class="stat-formula">{{ orbitDescription }}</div>
+        <div class="f">{{ energy < 0 ? '負 → 地球に束縛される' : '0 以上 → 無限遠へ脱出' }}</div>
       </div>
-      <div class="stat-card highlight">
-        <div class="stat-label">現在の速さ v</div>
-        <div class="stat-value">{{ curV.toFixed(2) }} <span class="unit">km/s</span></div>
-        <div class="stat-formula">第1宇宙速度 v₁ = {{ v1.toFixed(2) }} km/s</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-label">天体中心からの距離 r</div>
-        <div class="stat-value">{{ curR.toFixed(1) }} <span class="unit">×10³ km</span></div>
-        <div class="stat-formula">{{ curR < initialR ? '近地点に接近中' : '遠地点に接近中' }}</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-label">全力学的エネルギー E</div>
-        <div class="stat-value" :style="{ color: totalE < 0 ? '#38bdf8' : '#f59e0b' }">
-          {{ totalE < 0 ? 'E < 0 (束縛)' : 'E ≥ 0 (脱出)' }}
-        </div>
-        <div class="stat-formula">E = ½mv² - GMm/r = 一定</div>
+      <div class="lab-stat">
+        <div class="k">公転周期 T</div>
+        <div class="v">{{ periodText }}</div>
+        <div class="f">T² ∝ a³（第3法則）</div>
       </div>
     </div>
 
-    <div class="action-buttons">
-      <button class="btn btn-primary" @click="togglePlay">
-        {{ isPlaying ? '⏸ 一時停止' : '▶ 再生' }}
-      </button>
-      <button class="btn btn-secondary" @click="reset">⏮ 軌道をリセット</button>
+    <div class="lab-btns">
+      <button class="lab-btn primary" @click="playing = !playing">{{ playing ? '⏸ 一時停止' : '▶ 再生' }}</button>
+      <button class="lab-btn" @click="reset">⏮ 打ち上げ直す</button>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref, computed, onMounted, onUnmounted, watch } from 'vue'
+import { ref, computed, onMounted, watch } from 'vue'
+import { setupCanvas, clearGrid, arrow, text, dot, line, useLoop } from './simUtils.js'
 
+const W = 720, H = 420
 const canvasRef = ref(null)
-const isPlaying = ref(true)
+let ctx = null
 
-const speedRatio = ref(1.0)
-const initialR = ref(16.0) // 16 * 10^3 km
-const GM = 1000 // シミュレーション用無次元重力パラメータ
+// 単位：距離 Mm（=10³ km）、時間 s、速さ Mm/s
+const GM = 3.986e-4 // 地球の GM [Mm³/s²]
+const RE = 6.37 // 地球半径 [Mm]
 
-// 第1宇宙速度 (円軌道速度): v1 = sqrt(GM / r0)
-const v1 = computed(() => Math.sqrt(GM / initialR.value))
-const curV = ref(0)
-const curR = ref(16.0)
-const totalE = ref(-1)
+const ratio = ref(1.0)
+const r0 = ref(10)
+const playing = ref(true)
+const showSectors = ref(true)
+const status = ref('')
 
-const orbitType = computed(() => {
-  const r = speedRatio.value
-  if (Math.abs(r - 1.0) < 0.03) return '円軌道'
-  if (r < 1.0) return '内側楕円軌道'
-  if (r < 1.41) return '外側楕円軌道'
-  if (Math.abs(r - 1.414) < 0.04) return '放物線軌道 (脱出限界)'
-  return '双曲線軌道 (宇宙へ脱出)'
-})
+const vc0 = computed(() => Math.sqrt(GM / r0.value)) // 打ち出し位置での円軌道の速さ
+const T0 = computed(() => 2 * Math.PI * Math.sqrt(r0.value ** 3 / GM))
 
-const orbitColor = computed(() => {
-  if (orbitType.value === '円軌道') return '#10b981'
-  if (orbitType.value.includes('楕円')) return '#38bdf8'
-  if (orbitType.value.includes('放物線')) return '#fbbf24'
-  return '#f43f5e'
-})
-
-const orbitDescription = computed(() => {
-  if (orbitType.value === '円軌道') return '速さ一定・完全対称'
-  if (orbitType.value.includes('楕円')) return 'ケプラー第2法則：近地点で最速'
-  return '引力を振り切り無限遠へ飛び去る'
-})
-
-// 状態変数 (2D運動シミュレーション)
-let px = 0, py = 0
-let vx = 0, vy = 0
+let x = 0, y = 0, vx = 0, vy = 0, simT = 0, stopped = false
 let trail = []
-let animId = null
-let lastTime = null
+let orbitT = Infinity
+const curV = ref(0), curR = ref(0), areal = ref(0), energy = ref(0)
 
-function setPreset(val) {
-  speedRatio.value = val
-  reset()
-}
+const periodText = computed(() => {
+  if (energy.value >= 0) return '— (周回しない)'
+  const a = -GM / (2 * energy.value)
+  const T = 2 * Math.PI * Math.sqrt(a ** 3 / GM)
+  return `${(T / 3600).toFixed(2)} 時間`
+})
+
+function preset(v) { ratio.value = v }
 
 function reset() {
-  px = 0
-  py = initialR.value
-  vx = v1.value * speedRatio.value
-  vy = 0
-  trail = []
+  x = -r0.value; y = 0
+  vx = 0; vy = -vc0.value * ratio.value // 反時計回り
+  simT = 0; stopped = false; trail = [{ x, y, t: 0 }]
+  status.value = ''
+  measure()
+  orbitT = energy.value < 0 ? 2 * Math.PI * Math.sqrt((-GM / (2 * energy.value)) ** 3 / GM) : Infinity
 }
 
-function updatePhysics(dt) {
-  // ルンゲクッタ4次法 (RK4) による天体軌道の数値積分
-  const substeps = 8
-  const subDt = dt / substeps
+function acc(px, py) {
+  const r2 = px * px + py * py
+  const r = Math.sqrt(r2)
+  const a = -GM / r2
+  return [a * px / r, a * py / r]
+}
 
-  for (let s = 0; s < substeps; s++) {
-    const k1v = accelAt(px, py)
-    const k1x = { x: vx, y: vy }
+function rk4(h) {
+  const [a1x, a1y] = acc(x, y)
+  const [a2x, a2y] = acc(x + 0.5 * h * vx, y + 0.5 * h * vy)
+  const v2x = vx + 0.5 * h * a1x, v2y = vy + 0.5 * h * a1y
+  const [a3x, a3y] = acc(x + 0.5 * h * v2x, y + 0.5 * h * v2y)
+  const v3x = vx + 0.5 * h * a2x, v3y = vy + 0.5 * h * a2y
+  const [a4x, a4y] = acc(x + h * v3x, y + h * v3y)
+  const v4x = vx + h * a3x, v4y = vy + h * a3y
+  x += (h / 6) * (vx + 2 * v2x + 2 * v3x + v4x)
+  y += (h / 6) * (vy + 2 * v2y + 2 * v3y + v4y)
+  vx += (h / 6) * (a1x + 2 * a2x + 2 * a3x + a4x)
+  vy += (h / 6) * (a1y + 2 * a2y + 2 * a3y + a4y)
+}
 
-    const k2x = { x: vx + 0.5 * subDt * k1v.x, y: vy + 0.5 * subDt * k1v.y }
-    const k2v = accelAt(px + 0.5 * subDt * k1x.x, py + 0.5 * subDt * k1x.y)
-
-    const k3x = { x: vx + 0.5 * subDt * k2v.x, y: vy + 0.5 * subDt * k2v.y }
-    const k3v = accelAt(px + 0.5 * subDt * k2x.x, py + 0.5 * subDt * k2x.y)
-
-    const k4x = { x: vx + subDt * k3v.x, y: vy + subDt * k3v.y }
-    const k4v = accelAt(px + subDt * k3x.x, py + subDt * k3x.y)
-
-    px += (subDt / 6) * (k1x.x + 2 * k2x.x + 2 * k3x.x + k4x.x)
-    py += (subDt / 6) * (k1x.y + 2 * k2x.y + 2 * k3x.y + k4x.y)
-    vx += (subDt / 6) * (k1v.x + 2 * k2v.x + 2 * k3v.x + k4v.x)
-    vy += (subDt / 6) * (k1v.y + 2 * k2v.y + 2 * k3v.y + k4v.y)
-  }
-
-  const r = Math.hypot(px, py)
-  const v = Math.hypot(vx, vy)
+function measure() {
+  const r = Math.hypot(x, y), v = Math.hypot(vx, vy)
   curR.value = r
   curV.value = v
-  totalE.value = 0.5 * v * v - GM / r
-
-  trail.push({ x: px, y: py })
-  if (trail.length > 500) trail.shift()
+  // 1 Mm²/s = 10¹² m²/s。表示（×10⁹ m²/s）では areal/1e3 を使うので、ここで 1e6 倍しておく
+  areal.value = 0.5 * Math.abs(x * vy - y * vx) * 1e6
+  // 1 kg あたりの力学的エネルギー [Mm²/s² = 10¹² J/kg]。表示では ×10⁶ J/kg に換算
+  energy.value = 0.5 * v * v - GM / r
 }
 
-function accelAt(x, y) {
-  const r2 = x * x + y * y
-  const r = Math.sqrt(r2)
-  if (r < 1.0) return { x: 0, y: 0 }
-  const a = -GM / r2
-  return { x: a * (x / r), y: a * (y / r) }
-}
-
-function draw(timestamp) {
-  if (!lastTime) lastTime = timestamp
-  const dt = Math.min(0.04, (timestamp - lastTime) / 1000)
-  lastTime = timestamp
-
-  if (isPlaying.value) {
-    updatePhysics(dt * 3.5)
-  }
-
-  const canvas = canvasRef.value
-  if (!canvas) return
-  const ctx = canvas.getContext('2d')
-  const w = canvas.width, h = canvas.height
-
-  ctx.fillStyle = '#05070e'
-  ctx.fillRect(0, 0, w, h)
-
-  // 背景の星々
-  ctx.fillStyle = 'rgba(255, 255, 255, 0.4)'
-  for (let i = 0; i < 40; i++) {
-    const sx = (i * 12347) % w
-    const sy = (i * 23497) % h
-    ctx.fillRect(sx, sy, 1.5, 1.5)
-  }
-
-  const originX = w * 0.48
-  const originY = h * 0.52
-  const scale = 7.5 // px per unit
-
-  // 軌跡 (Trail)
-  if (trail.length > 1) {
-    ctx.strokeStyle = orbitColor.value
-    ctx.lineWidth = 1.8
-    ctx.beginPath()
-    for (let i = 0; i < trail.length; i++) {
-      const tx = originX + trail[i].x * scale
-      const ty = originY - trail[i].y * scale
-      if (i === 0) ctx.moveTo(tx, ty)
-      else ctx.lineTo(tx, ty)
+function step(dtReal) {
+  if (stopped) return
+  const simDt = dtReal * (T0.value / 7) // 円軌道1周 ≒ 7 秒で表示
+  const N = 40
+  for (let i = 0; i < N; i++) {
+    rk4(simDt / N)
+    simT += simDt / N
+    const r = Math.hypot(x, y)
+    if (r < RE) {
+      stopped = true
+      status.value = '💥 地表に落下しました。速さが足りないと、軌道の一部が地球の内側に入ってしまいます。'
+      break
     }
-    ctx.stroke()
+    if (r > 30 * r0.value) {
+      stopped = true
+      status.value = '🚀 地球の引力圏から脱出しました（力学的エネルギーが 0 以上）。'
+      break
+    }
   }
-
-  // 面積速度一定の掃引扇形（現在と1つ前の位置との三角形）
-  ctx.fillStyle = 'rgba(56, 189, 248, 0.12)'
-  ctx.beginPath()
-  ctx.moveTo(originX, originY)
-  const satScreenX = originX + px * scale
-  const satScreenY = originY - py * scale
-  ctx.lineTo(satScreenX, satScreenY)
-  if (trail.length > 15) {
-    const oldP = trail[Math.max(0, trail.length - 15)]
-    ctx.lineTo(originX + oldP.x * scale, originY - oldP.y * scale)
-  }
-  ctx.closePath()
-  ctx.fill()
-
-  // 中心天体（地球・太陽）
-  const planetR = 24
-  const grad = ctx.createRadialGradient(originX - 4, originY - 4, 3, originX, originY, planetR)
-  grad.addColorStop(0, '#67e8f9')
-  grad.addColorStop(0.6, '#0284c7')
-  grad.addColorStop(1, '#082f49')
-  ctx.fillStyle = grad
-  ctx.beginPath(); ctx.arc(originX, originY, planetR, 0, Math.PI*2); ctx.fill()
-
-  ctx.strokeStyle = 'rgba(103, 232, 249, 0.3)'
-  ctx.lineWidth = 3
-  ctx.beginPath(); ctx.arc(originX, originY, planetR + 3, 0, Math.PI*2); ctx.stroke()
-
-  ctx.fillStyle = '#fff'; ctx.font = 'bold 10px sans-serif'
-  ctx.textAlign = 'center'; ctx.textBaseline = 'middle'
-  ctx.fillText('地球 M', originX, originY)
-  ctx.textBaseline = 'alphabetic'
-
-  // 人工衛星 / 惑星
-  const satR = 7
-  ctx.fillStyle = '#fbbf24'
-  ctx.beginPath(); ctx.arc(satScreenX, satScreenY, satR, 0, Math.PI*2); ctx.fill()
-  ctx.strokeStyle = '#fff'; ctx.lineWidth = 1.5; ctx.stroke()
-
-  // 速度ベクトル矢印 (緑)
-  const vScale = 3.5
-  const endVx = satScreenX + vx * vScale
-  const endVy = satScreenY - vy * vScale
-  ctx.strokeStyle = '#10b981'; ctx.lineWidth = 2.5
-  ctx.beginPath(); ctx.moveTo(satScreenX, satScreenY); ctx.lineTo(endVx, endVy); ctx.stroke()
-
-  // 矢印頭
-  const vAngle = Math.atan2(-vy, vx)
-  ctx.fillStyle = '#10b981'
-  ctx.beginPath()
-  ctx.moveTo(endVx, endVy)
-  ctx.lineTo(endVx - 7 * Math.cos(vAngle - Math.PI/6), endVy - 7 * Math.sin(vAngle - Math.PI/6))
-  ctx.lineTo(endVx - 7 * Math.cos(vAngle + Math.PI/6), endVy - 7 * Math.sin(vAngle + Math.PI/6))
-  ctx.fill()
-
-  // 万有引力線（中心へ向かう点線）
-  ctx.strokeStyle = 'rgba(239, 68, 68, 0.5)'
-  ctx.lineWidth = 1.5; ctx.setLineDash([3, 3])
-  ctx.beginPath(); ctx.moveTo(satScreenX, satScreenY); ctx.lineTo(originX, originY); ctx.stroke()
-  ctx.setLineDash([])
-
-  // 近地点・遠地点テキスト
-  ctx.fillStyle = '#94a3b8'; ctx.font = '11px sans-serif'; ctx.textAlign = 'left'
-  ctx.fillText('万有引力 F = GMm/r² (中心向き)', 16, 26)
-
-  animId = requestAnimationFrame(draw)
+  if (simT <= orbitT * 1.001) trail.push({ x, y, t: simT })
+  if (trail.length > 4000) trail.shift()
+  measure()
 }
 
-function togglePlay() {
-  isPlaying.value = !isPlaying.value
+function draw() {
+  clearGrid(ctx, W, H, 0, '#05070e')
+  // 背景の星
+  ctx.fillStyle = 'rgba(255,255,255,0.35)'
+  for (let i = 0; i < 60; i++) ctx.fillRect((i * 9973) % W, (i * 7919) % H, 1.4, 1.4)
+
+  const cx = W * 0.32, cy = H * 0.5
+  const s = 100 / r0.value // px / Mm
+  const X = (px) => cx + px * s
+  const Y = (py) => cy - py * s
+
+  // 掃いた面積（一定時間ごと）
+  if (showSectors.value && energy.value < 0 && trail.length > 2) {
+    const dtSec = T0.value / 12
+    let start = 0
+    let idx = 0
+    for (let i = 1; i < trail.length; i++) {
+      const k = Math.floor(trail[i].t / dtSec)
+      if (k !== idx || i === trail.length - 1) {
+        ctx.beginPath()
+        ctx.moveTo(cx, cy)
+        for (let j = start; j <= i; j++) ctx.lineTo(X(trail[j].x), Y(trail[j].y))
+        ctx.closePath()
+        ctx.fillStyle = idx % 2 ? 'rgba(192,132,252,0.16)' : 'rgba(56,189,248,0.16)'
+        ctx.fill()
+        start = i
+        idx = k
+      }
+    }
+  }
+
+  // 軌跡
+  ctx.strokeStyle = energy.value < 0 ? '#38bdf8' : '#f59e0b'
+  ctx.lineWidth = 1.8
+  ctx.beginPath()
+  trail.forEach((p, i) => (i ? ctx.lineTo(X(p.x), Y(p.y)) : ctx.moveTo(X(p.x), Y(p.y))))
+  ctx.stroke()
+
+  // 地球（縮尺どおり）
+  const g = ctx.createRadialGradient(cx - 10, cy - 10, 4, cx, cy, RE * s)
+  g.addColorStop(0, '#7dd3fc'); g.addColorStop(0.55, '#0369a1'); g.addColorStop(1, '#0c4a6e')
+  dot(ctx, cx, cy, RE * s, g)
+  text(ctx, '地球', cx, cy + 4, '#e0f2fe', 'bold 12px sans-serif', 'center')
+
+  // 衛星・ベクトル
+  const sx = X(x), sy = Y(y)
+  line(ctx, sx, sy, cx, cy, 'rgba(239,68,68,0.45)', 1.2, [3, 3])
+  const r = Math.hypot(x, y)
+  const aMag = GM / (r * r)
+  const aLen = Math.min(70, aMag * 6.5e6)
+  arrow(ctx, sx, sy, sx - (x / r) * aLen, sy + (y / r) * aLen, '#f87171', 2.2, '万有引力', { font: '11px sans-serif' })
+  arrow(ctx, sx, sy, sx + vx * 9000, sy - vy * 9000, '#34d399', 2.5, 'v', { font: 'bold 12px sans-serif' })
+  dot(ctx, sx, sy, 6, '#fbbf24', '#fff')
+
+  text(ctx, `打ち出し点での v₁ = ${(vc0.value * 1000).toFixed(2)} km/s,  脱出に必要な速さ v₂ = ${(Math.SQRT2 * vc0.value * 1000).toFixed(2)} km/s`, 14, 22, '#cbd5e1', '12px sans-serif')
+  text(ctx, '※ 地球の大きさ・距離は縮尺どおり。時間は大幅に早送りしています', 14, H - 12, '#64748b', '11px sans-serif')
 }
 
-watch([speedRatio, initialR], () => {
-  reset()
-})
-
+watch([ratio, r0], reset)
 onMounted(() => {
+  ctx = setupCanvas(canvasRef.value, W, H)
   reset()
-  animId = requestAnimationFrame(draw)
 })
-
-onUnmounted(() => {
-  if (animId) cancelAnimationFrame(animId)
+useLoop((dt) => {
+  if (!ctx) return
+  if (playing.value) step(dt)
+  draw()
 })
 </script>
-
-<style scoped>
-.sim-container {
-  background: linear-gradient(145deg, #0f172a, #05070e);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 16px;
-  padding: 1.5rem;
-  margin: 1.5rem 0;
-  color: #f4f4f5;
-  font-family: 'Outfit', sans-serif;
-}
-.sim-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1rem;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-}
-.sim-title {
-  font-size: 1.1rem;
-  font-weight: 700;
-  background: linear-gradient(90deg, #38bdf8, #c084fc);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-.sim-badge {
-  background: rgba(192, 132, 252, 0.15);
-  color: #c084fc;
-  border: 1px solid rgba(192, 132, 252, 0.3);
-  font-size: 0.75rem;
-  padding: 0.2rem 0.6rem;
-  border-radius: 9999px;
-  font-weight: 600;
-}
-.canvas-wrapper {
-  background: #05070e;
-  border-radius: 12px;
-  overflow: hidden;
-  border: 1px solid #1e293b;
-  display: flex;
-  justify-content: center;
-  margin-bottom: 1rem;
-}
-canvas {
-  width: 100%;
-  max-width: 700px;
-  height: auto;
-}
-.controls-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1rem;
-  margin-bottom: 1.25rem;
-}
-.control-item {
-  background: rgba(255, 255, 255, 0.03);
-  padding: 0.75rem 1rem;
-  border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.06);
-}
-.control-item label {
-  display: block;
-  font-size: 0.85rem;
-  margin-bottom: 0.4rem;
-  color: #d4d4d8;
-}
-.control-item input[type=range] {
-  width: 100%;
-  accent-color: #c084fc;
-  cursor: pointer;
-}
-.preset-btn {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: #d4d4d8;
-  padding: 0.35rem 0.75rem;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 0.78rem;
-  transition: all 0.2s;
-}
-.preset-btn:hover {
-  background: rgba(255, 255, 255, 0.12);
-  color: #fff;
-}
-.preset-btn.active {
-  background: rgba(192, 132, 252, 0.25);
-  border-color: #c084fc;
-  color: #e9d5ff;
-}
-.action-buttons {
-  display: flex;
-  gap: 0.75rem;
-  flex-wrap: wrap;
-  margin-top: 1rem;
-}
-.btn {
-  padding: 0.5rem 1.2rem;
-  border-radius: 8px;
-  font-weight: 600;
-  cursor: pointer;
-  border: none;
-  transition: all 0.2s;
-  font-size: 0.9rem;
-}
-.btn-primary {
-  background: linear-gradient(135deg, #c084fc, #6366f1);
-  color: white;
-}
-.btn-primary:hover {
-  opacity: 0.9;
-  transform: translateY(-1px);
-}
-.btn-secondary {
-  background: rgba(255, 255, 255, 0.08);
-  color: #f4f4f5;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-}
-.stats-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-  gap: 0.75rem;
-  margin-bottom: 1rem;
-}
-.stat-card {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  border-radius: 10px;
-  padding: 0.85rem;
-  text-align: center;
-}
-.stat-card.highlight {
-  border-color: rgba(192, 132, 252, 0.4);
-  background: rgba(192, 132, 252, 0.07);
-}
-.stat-label {
-  font-size: 0.8rem;
-  color: #a1a1aa;
-  margin-bottom: 0.3rem;
-}
-.stat-value {
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: #f4f4f5;
-}
-.stat-value .unit {
-  font-size: 0.85rem;
-  color: #a1a1aa;
-  font-weight: 400;
-}
-.stat-formula {
-  font-size: 0.75rem;
-  color: #71717a;
-  margin-top: 0.3rem;
-}
-</style>

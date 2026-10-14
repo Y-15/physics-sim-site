@@ -1,26 +1,16 @@
 import DefaultTheme from 'vitepress/theme'
-import ProjectileSim from '../components/ProjectileSim.vue'
-import PendulumSim from '../components/PendulumSim.vue'
-import WavesSim from '../components/WavesSim.vue'
-import SpringSim from '../components/SpringSim.vue'
-import MomentumSim from '../components/MomentumSim.vue'
-import CircularSim from '../components/CircularSim.vue'
-import AccelerationSim from '../components/AccelerationSim.vue'
-import FrictionSim from '../components/FrictionSim.vue'
-import GravitationSim from '../components/GravitationSim.vue'
+import './sim.css'
+
+// components/ 以下の .vue をすべてグローバル登録（ファイル名 = コンポーネント名）
+const modules = import.meta.glob('../components/*.vue', { eager: true })
 
 export default {
   extends: DefaultTheme,
   enhanceApp({ app }) {
     // グローバルコンポーネントとして登録
-    app.component('ProjectileSim', ProjectileSim)
-    app.component('PendulumSim', PendulumSim)
-    app.component('WavesSim', WavesSim)
-    app.component('SpringSim', SpringSim)
-    app.component('MomentumSim', MomentumSim)
-    app.component('CircularSim', CircularSim)
-    app.component('AccelerationSim', AccelerationSim)
-    app.component('FrictionSim', FrictionSim)
-    app.component('GravitationSim', GravitationSim)
+    for (const path in modules) {
+      const name = path.split('/').pop()!.replace(/\.vue$/, '')
+      app.component(name, (modules[path] as any).default)
+    }
   }
 }

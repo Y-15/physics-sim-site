@@ -1,0 +1,191 @@
+/* ==========================================================
+   シミュレーター共通スタイル（新規コンポーネント用: .lab-*）
+   アクセント色は各コンポーネントで --ac / --ac2 を指定する
+   ========================================================== */
+.lab {
+  --ac: #38bdf8;
+  --ac2: #a855f7;
+  background: linear-gradient(145deg, #18181b, #09090b);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 1.25rem;
+  margin: 1.5rem 0;
+  color: #f4f4f5;
+  font-family: 'Outfit', 'Noto Sans JP', sans-serif;
+  box-shadow: 0 10px 30px -12px rgba(0, 0, 0, 0.6);
+}
+.lab-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 0.9rem;
+}
+.lab-title {
+  font-size: 1.08rem;
+  font-weight: 700;
+  background: linear-gradient(90deg, var(--ac), var(--ac2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.lab-badge {
+  font-size: 0.74rem;
+  font-weight: 600;
+  padding: 0.2rem 0.65rem;
+  border-radius: 9999px;
+  color: var(--ac);
+  border: 1px solid color-mix(in srgb, var(--ac) 40%, transparent);
+  background: color-mix(in srgb, var(--ac) 14%, transparent);
+}
+.lab-tabs {
+  display: flex;
+  gap: 0.45rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.9rem;
+}
+.lab-canvas {
+  background: #09090b;
+  border: 1px solid #27272a;
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+.lab-canvas canvas {
+  width: 100%;
+  max-width: 720px;
+  height: auto;
+  display: block;
+  touch-action: none;
+}
+.lab-controls {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 0.8rem;
+  margin-bottom: 1rem;
+}
+.lab-ctrl {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 10px;
+  padding: 0.65rem 0.9rem;
+}
+.lab-ctrl label {
+  display: block;
+  font-size: 0.84rem;
+  color: #d4d4d8;
+  margin-bottom: 0.35rem;
+}
+.lab-ctrl input[type='range'] {
+  width: 100%;
+  accent-color: var(--ac);
+  cursor: pointer;
+}
+.lab-ctrl .lab-note {
+  font-size: 0.73rem;
+  color: #a1a1aa;
+  margin-top: 0.25rem;
+}
+.lab-row {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+  margin-top: 0.3rem;
+}
+.lab-chip {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #d4d4d8;
+  padding: 0.3rem 0.7rem;
+  border-radius: 7px;
+  font-size: 0.79rem;
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+.lab-chip:hover {
+  background: rgba(255, 255, 255, 0.11);
+  color: #fff;
+}
+.lab-chip.on {
+  color: var(--ac);
+  border-color: var(--ac);
+  background: color-mix(in srgb, var(--ac) 20%, transparent);
+}
+.lab-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 0.65rem;
+  margin-bottom: 0.9rem;
+}
+.lab-stat {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 10px;
+  padding: 0.7rem;
+  text-align: center;
+}
+.lab-stat.hl {
+  border-color: color-mix(in srgb, var(--ac) 45%, transparent);
+  background: color-mix(in srgb, var(--ac) 7%, transparent);
+}
+.lab-stat .k {
+  font-size: 0.77rem;
+  color: #a1a1aa;
+  margin-bottom: 0.2rem;
+}
+.lab-stat .v {
+  font-size: 1.18rem;
+  font-weight: 700;
+  color: #f4f4f5;
+  font-variant-numeric: tabular-nums;
+}
+.lab-stat .v small {
+  font-size: 0.78rem;
+  font-weight: 400;
+  color: #a1a1aa;
+}
+.lab-stat .f {
+  font-size: 0.72rem;
+  color: #71717a;
+  margin-top: 0.2rem;
+}
+.lab-btns {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+.lab-btn {
+  padding: 0.48rem 1.15rem;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.08);
+  color: #f4f4f5;
+  font-weight: 600;
+  font-size: 0.88rem;
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+.lab-btn:hover {
+  transform: translateY(-1px);
+  background: rgba(255, 255, 255, 0.14);
+}
+.lab-btn.primary {
+  border: none;
+  color: #fff;
+  background: linear-gradient(135deg, var(--ac), var(--ac2));
+}
+.lab-btn.primary:hover {
+  opacity: 0.92;
+}
+.lab-msg {
+  font-size: 0.82rem;
+  color: #d4d4d8;
+  background: rgba(255, 255, 255, 0.04);
+  border-left: 3px solid var(--ac);
+  border-radius: 6px;
+  padding: 0.5rem 0.75rem;
+  margin-bottom: 0.9rem;
+}
