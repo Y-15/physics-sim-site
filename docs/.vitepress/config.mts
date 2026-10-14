@@ -38,6 +38,7 @@ export default defineConfig({
       { text: '波動', link: '/waves/index' },
       { text: '電磁気', link: '/electromagnetism/index' },
       { text: '熱力学', link: '/thermodynamics/index' },
+      { text: '原子', link: '/atomic/index' },
       { text: '受験・学習ガイド', link: '/about' }
     ],
 
@@ -55,6 +56,7 @@ export default defineConfig({
             { text: '💥 運動量保存則と衝突（反発係数）', link: '/mechanics/momentum' },
             { text: '🕰️ 単振り子（等時性と周期公式）', link: '/mechanics/pendulum' },
             { text: '🔄 等速円運動・向心加速度・向心力', link: '/mechanics/circular' },
+            { text: '🚀 慣性力・見かけの重力・遠心力', link: '/mechanics/inertia' },
             { text: '🪐 万有引力と人工衛星・ケプラー則', link: '/mechanics/gravitation' },
             { text: '⚖️ 剛体のつり合いと力のモーメント', link: '/mechanics/moment' }
           ]
@@ -78,6 +80,7 @@ export default defineConfig({
             { text: '📖 電磁気学編トップ', link: '/electromagnetism/index' },
             { text: '⚡ クーロンの法則・電場と電位', link: '/electromagnetism/field' },
             { text: '🔋 コンデンサー回路と静電エネルギー・誘電体', link: '/electromagnetism/capacitor' },
+            { text: '💡 直流回路とキルヒホッフの法則・非オーム抵抗', link: '/electromagnetism/circuit' },
             { text: '🌀 磁場中の荷電粒子の運動・ローレンツ力', link: '/electromagnetism/lorentz' },
             { text: '🧲 電磁誘導の法則と導線棒の運動', link: '/electromagnetism/induction' }
           ]
@@ -90,6 +93,15 @@ export default defineConfig({
             { text: '📖 熱力学編トップ', link: '/thermodynamics/index' },
             { text: '🔥 気体の状態変化・P-V図と熱力学第1法則', link: '/thermodynamics/gas-law' },
             { text: '🔬 気体分子運動論と二乗平均速度', link: '/thermodynamics/kinetic-theory' }
+          ]
+        }
+      ],
+      '/atomic/': [
+        {
+          text: '原子物理（高校物理）',
+          items: [
+            { text: '📖 原子物理編トップ', link: '/atomic/index' },
+            { text: '💡 光電効果とアインシュタインの光量子仮説', link: '/atomic/photoelectric' }
           ]
         }
       ]

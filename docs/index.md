@@ -7,17 +7,17 @@ hero:
   tagline: "共通テスト・定期テスト・大学入試対応。教科書の図や公式がリアルタイムに動く！完全無料の高校物理インタラクティブ学習サイト"
   actions:
     - theme: brand
-      text: 🚀 斜方投射（放物運動）
-      link: /mechanics/projectile
+      text: 💡 光電効果・光量子説
+      link: /atomic/photoelectric
     - theme: brand
+      text: 🚀 慣性力・見かけの重力
+      link: /mechanics/inertia
+    - theme: alt
+      text: ⚡ 直流回路・非オーム抵抗
+      link: /electromagnetism/circuit
+    - theme: alt
       text: 🌊 定常波・ドップラー効果
       link: /waves/index
-    - theme: alt
-      text: 🔩 ばねの単振動
-      link: /mechanics/spring
-    - theme: alt
-      text: 💥 運動量保存と衝突
-      link: /mechanics/momentum
 
 features:
   - icon: 🎯
@@ -56,6 +56,8 @@ features:
   おもりを直接ドラッグして揺らせる！微小近似と大振幅（楕円積分）の周期ズレ、ルンゲ・クッタ法RK4実装。
 * **[🔄 等速円運動・向心加速度・向心力](/mechanics/circular)**  
   速度と向心加速度の直交ベクトル、周期 $T=2\pi/\omega$、向心力 $F=mr\omega^2$、単振動への正射影。
+* **[🚀 慣性力・見かけの重力・遠心力](/mechanics/inertia)**  
+  加速する台車のつり革、エレベーター内の無重量状態、回転円盤上の遠心力と滑り出し限界。静止系（外から）と非慣性系（中から）の視点切り替えシミュレーター。
 * **[🪐 万有引力の法則と人工衛星の軌道・ケプラー則](/mechanics/gravitation)**  
   天体周回シミュレーター。第1宇宙速度（円軌道）、楕円軌道（面積速度一定）、第2宇宙速度（脱出速度 $\sqrt{2}v_1$）。
 * **[⚖️ 剛体のつり合いと力のモーメント](/mechanics/moment)**  
@@ -80,6 +82,8 @@ features:
   2つの点電荷がつくる電場ベクトル・電気力線・等電位線の2Dリアルタイムマップ。点電荷をドラッグ移動させ、電場（ベクトル合成）と電位（スカラー和）の違いを体感。
 * **[🔋 コンデンサーの回路と静電エネルギー・誘電体](/electromagnetism/capacitor)**  
   平行平板コンデンサーの極板間隔 $d$、面積 $S$、誘電体挿入、スイッチON/OFF（電圧一定 vs 電荷一定）のリアルタイムシミュレーター。極板間引力 $F=\frac{1}{2}QE$、静電エネルギー収支の完全理解。
+* **[💡 直流回路とキルヒホッフの法則・非オーム抵抗・ホイートストンブリッジ](/electromagnetism/circuit)**  
+  キルヒホッフ第1・第2法則による2電源回路網、電球の非線形 $I$-$V$ 特性と負荷線のリアルタイム作図、ホイートストンブリッジの平衡条件 $R_1 R_4 = R_2 R_3$ の動的シミュレーター。
 * **[🌀 磁場中の荷電粒子の運動・ローレンツ力](/electromagnetism/lorentz)**  
   一様磁場中の等速円運動（半径 $r=\frac{mv}{qB}$、周期 $T=\frac{2\pi m}{qB}$）と、直交電磁場による速度セレクター（直進条件 $v=E/B$）のリアルタイムシミュレーター。
 * **[🧲 電磁誘導の法則・レンツの法則と導線棒の運動](/electromagnetism/induction)**  
@@ -96,6 +100,14 @@ features:
   立方体容器の壁への分子衝突力積から圧力 $P = \frac{1}{3}\frac{N m \overline{v^2}}{V}$ を導く5段階ステップ。絶対温度の正体（$\frac{1}{2}m\overline{v^2} = \frac{3}{2}k_B T$）と、マクスウェル速度分布・二乗平均速度の完全理解。
 * **[📖 熱力学編トップ](/thermodynamics/index)**  
   高校熱力学の重要公式マップと今後の公開予定。
+
+---
+
+### ⚛️ 原子物理（Atomic Physics）
+* **[💡 光電効果とアインシュタインの光量子仮説](/atomic/photoelectric)**  
+  真空光電管での光子飛来・電子放出アニメーション、阻止電圧 $V_0$、飽和電流 $I_s$ の $I$-$V$ 曲線、およびアインシュタインの直線（傾き $h/e$、切片 $-W/e$）のリアルタイム解析シミュレーター。
+* **[📖 原子物理編トップ](/atomic/index)**  
+  高校原子物理の学習ロードマップ（光量子説、ボーアの水素模型、物質波、核反応）。
 
 ---
 
