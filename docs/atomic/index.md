@@ -34,11 +34,11 @@ description: 光量子仮説、ボーアの水素原子模型、物質波、放�
 </div>
 
 <div class="feature-card">
-  <h3>🔬 <a href="../about.html">ボーアの水素原子模型と量子条件</a></h3>
+  <h3>🔬 <a href="./bohr.html">ボーアの水素原子模型と量子条件</a></h3>
   <p>
-    なぜ電子は原子核に墜落しないのか？角運動量の量子化 $mvr = n\dfrac{h}{2\pi}$ とド・ブロイ波の定常波条件、エネルギー準位とバルマー系列の光スペクトル。
+    なぜ電子は原子核に墜落しないのか？角運動量の量子化 $mvr = n\dfrac{h}{2\pi}$ とド・ブロイ波の定常波条件、エネルギー準位 $E_n = -\dfrac{13.6}{n^2}\,\text{eV}$ と発光スペクトル系列の完全導出。
   </p>
-  <span class="tag">近日公開</span>
+  <span class="tag">シミュレーター完備</span>
 </div>
 
 <div class="feature-card">

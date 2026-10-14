@@ -101,7 +101,8 @@ export default defineConfig({
           text: '原子物理（高校物理）',
           items: [
             { text: '📖 原子物理編トップ', link: '/atomic/index' },
-            { text: '💡 光電効果とアインシュタインの光量子仮説', link: '/atomic/photoelectric' }
+            { text: '💡 光電効果とアインシュタインの光量子仮説', link: '/atomic/photoelectric' },
+            { text: '🔬 ボーアの水素原子模型と量子条件', link: '/atomic/bohr' }
           ]
         }
       ]
