@@ -66,7 +66,8 @@ export default defineConfig({
           items: [
             { text: '🌊 波の式とグラフ（y-xグラフとy-tグラフ）', link: '/waves/wave-equation' },
             { text: '✅ 定常波・重ね合わせ・ドップラー効果', link: '/waves/index' },
-            { text: '🌈 光の干渉・ヤングの二重スリット実験', link: '/waves/young' }
+            { text: '🌈 光の干渉・ヤングの二重スリット実験', link: '/waves/young' },
+            { text: '🔍 光の屈折・全反射とレンズの結像公式', link: '/waves/optics' }
           ]
         }
       ],
@@ -78,7 +79,7 @@ export default defineConfig({
             { text: '⚡ クーロンの法則・電場と電位', link: '/electromagnetism/field' },
             { text: '🔋 コンデンサー回路と静電エネルギー・誘電体', link: '/electromagnetism/capacitor' },
             { text: '🌀 磁場中の荷電粒子の運動・ローレンツ力', link: '/electromagnetism/lorentz' },
-            { text: '電磁誘導とファラデーの法則（準備中）', link: '/electromagnetism/induction' }
+            { text: '🧲 電磁誘導の法則と導線棒の運動', link: '/electromagnetism/induction' }
           ]
         }
       ],
