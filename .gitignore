@@ -1,4 +1,5 @@
 node_modules
+android_app_ref
 .DS_Store
 dist
 docs/.vitepress/dist

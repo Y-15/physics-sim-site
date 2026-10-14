@@ -36,10 +36,12 @@ export default defineConfig({
         {
           text: '力学（高校物理）',
           items: [
-            { text: '斜方投射（放物運動の公式）', link: '/mechanics/projectile' },
-            { text: '単振り子（等時性と周期公式）', link: '/mechanics/pendulum' },
-            { text: 'ばねの単振動（準備中）', link: '/mechanics/spring' },
-            { text: '運動量保存則と衝突（準備中）', link: '/mechanics/momentum' }
+            { text: '🚀 斜方投射（放物運動の公式）', link: '/mechanics/projectile' },
+            { text: '🕰️ 単振り子（等時性と周期公式）', link: '/mechanics/pendulum' },
+            { text: '🔩 ばねの単振動（復元力とエネルギー）', link: '/mechanics/spring' },
+            { text: '💥 運動量保存則と衝突（反発係数）', link: '/mechanics/momentum' },
+            { text: '🔄 等速円運動・向心加速度・向心力', link: '/mechanics/circular' },
+            { text: '万有引力とケプラーの法則（準備中）', link: '/mechanics/gravitation' }
           ]
         }
       ],
@@ -47,8 +49,7 @@ export default defineConfig({
         {
           text: '波動（高校物理）',
           items: [
-            { text: '波の重ね合わせと定常波（準備中）', link: '/waves/index' },
-            { text: 'ドップラー効果（準備中）', link: '/waves/doppler' },
+            { text: '✅ 定常波・重ね合わせ・ドップラー効果', link: '/waves/index' },
             { text: '光の干渉・ヤングの実験（準備中）', link: '/waves/young' }
           ]
         }
