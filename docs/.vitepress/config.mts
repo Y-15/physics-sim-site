@@ -64,6 +64,7 @@ export default defineConfig({
         {
           text: '波動（高校物理）',
           items: [
+            { text: '🌊 波の式とグラフ（y-xグラフとy-tグラフ）', link: '/waves/wave-equation' },
             { text: '✅ 定常波・重ね合わせ・ドップラー効果', link: '/waves/index' },
             { text: '🌈 光の干渉・ヤングの二重スリット実験', link: '/waves/young' }
           ]
@@ -75,7 +76,8 @@ export default defineConfig({
           items: [
             { text: '📖 電磁気学編トップ', link: '/electromagnetism/index' },
             { text: '⚡ クーロンの法則・電場と電位', link: '/electromagnetism/field' },
-            { text: 'コンデンサー回路（準備中）', link: '/electromagnetism/capacitor' },
+            { text: '🔋 コンデンサー回路と静電エネルギー・誘電体', link: '/electromagnetism/capacitor' },
+            { text: '🌀 磁場中の荷電粒子の運動・ローレンツ力', link: '/electromagnetism/lorentz' },
             { text: '電磁誘導とファラデーの法則（準備中）', link: '/electromagnetism/induction' }
           ]
         }
@@ -85,7 +87,8 @@ export default defineConfig({
           text: '熱力学（高校物理）',
           items: [
             { text: '📖 熱力学編トップ', link: '/thermodynamics/index' },
-            { text: '🔥 気体の状態変化・P-V図と熱力学第1法則', link: '/thermodynamics/gas-law' }
+            { text: '🔥 気体の状態変化・P-V図と熱力学第1法則', link: '/thermodynamics/gas-law' },
+            { text: '🔬 気体分子運動論と二乗平均速度', link: '/thermodynamics/kinetic-theory' }
           ]
         }
       ]
