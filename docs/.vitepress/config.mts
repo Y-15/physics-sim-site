@@ -72,7 +72,8 @@ export default defineConfig({
             { text: '🔄 等速円運動・向心加速度・向心力', link: '/mechanics/circular' },
             { text: '🚀 慣性力・見かけの重力・遠心力', link: '/mechanics/inertia' },
             { text: '🪐 万有引力と人工衛星・ケプラー則', link: '/mechanics/gravitation' },
-            { text: '⚖️ 剛体のつり合いと力のモーメント', link: '/mechanics/moment' }
+            { text: '⚖️ 剛体のつり合いと力のモーメント', link: '/mechanics/moment' },
+            { text: '🧱 剛体の転倒条件と滑り出し限界', link: '/mechanics/toppling' }
           ]
         }
       ],
@@ -82,8 +83,10 @@ export default defineConfig({
           items: [
             { text: '🌊 波の式とグラフ（y-xグラフとy-tグラフ）', link: '/waves/wave-equation' },
             { text: '✅ 定常波・重ね合わせ・ドップラー効果', link: '/waves/index' },
+            { text: '🔊 ドップラー効果の完全攻略', link: '/waves/doppler' },
             { text: '🌈 光の干渉・ヤングの二重スリット実験', link: '/waves/young' },
-            { text: '🔍 光の屈折・全反射とレンズの結像公式', link: '/waves/optics' }
+            { text: '🔍 光の屈折・全反射とレンズの結像公式', link: '/waves/optics' },
+            { text: '✨ 薄膜干渉とニュートンリング', link: '/waves/thin-film' }
           ]
         }
       ],
@@ -118,7 +121,8 @@ export default defineConfig({
             { text: '📖 原子物理編トップ', link: '/atomic/index' },
             { text: '💡 光電効果とアインシュタインの光量子仮説', link: '/atomic/photoelectric' },
             { text: '🔬 ボーアの水素原子模型と量子条件', link: '/atomic/bohr' },
-            { text: '☢️ 放射性崩壊・半減期と放射線の性質', link: '/atomic/decay' }
+            { text: '☢️ 放射性崩壊・半減期と放射線の性質', link: '/atomic/decay' },
+            { text: '⚛️ コンプトン効果と光子の運動量', link: '/atomic/compton' }
           ]
         }
       ]
