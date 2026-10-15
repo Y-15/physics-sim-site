@@ -22,6 +22,34 @@ description: 高校物理「波動（Waves）」の実践問題・オリジナ�
 **【問題】**  
 周期が 0.25 s の波の振動数を求めなさい。
 
+<div class="vector-graph-card">
+  <div class="graph-title">📐 正弦波の波形（y-xグラフ）と波の基本式</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-w-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+  </defs>
+  <line x1="30" y1="85" x2="470" y2="85" stroke="#64748b" stroke-width="1.5"/>
+  <line x1="50" y1="145" x2="50" y2="25" stroke="#64748b" stroke-width="1.5"/>
+  <text x="42" y="30" fill="#94a3b8" font-size="10">y</text>
+  <text x="465" y="98" fill="#94a3b8" font-size="10">x</text>
+  <path d="M 50,85 Q 95,25 140,85 T 230,85 T 320,85 T 410,85" fill="none" stroke="#38bdf8" stroke-width="2.5"/>
+  <line x1="50" y1="45" x2="230" y2="45" stroke="#fbbf24" stroke-width="1.5"/>
+  <line x1="50" y1="40" x2="50" y2="50" stroke="#fbbf24" stroke-width="1.5"/>
+  <line x1="230" y1="40" x2="230" y2="50" stroke="#fbbf24" stroke-width="1.5"/>
+  <rect x="120" y="35" width="45" height="16" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
+  <text x="142" y="47" fill="#fbbf24" font-size="10" font-weight="700" text-anchor="middle">波長 λ</text>
+  <line x1="95" y1="85" x2="95" y2="55" stroke="#f43f5e" stroke-width="1.5"/>
+  <rect x="100" y="65" width="40" height="15" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
+  <text x="120" y="76" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">振幅 A</text>
+  <line x1="330" y1="35" x2="390" y2="35" stroke="#34d399" stroke-width="2" marker-end="url(#arr-w-cyan)"/>
+  <rect x="340" y="18" width="55" height="15" rx="3" fill="#0f172a" stroke="#34d399" stroke-width="1"/>
+  <text x="367" y="29" fill="#34d399" font-size="9" font-weight="700" text-anchor="middle">進行方向 v</text>
+  <rect x="290" y="115" width="180" height="24" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="380" y="131" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">基本式: v ＝ fλ ＝ λ/T</text>
+</svg>
+  <div class="graph-caption">振幅 A、波長 λ、周期 T と波の速さ v = fλ の関係をグラフから読み取ります。</div>
+</div>
+
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
 
@@ -70,6 +98,34 @@ $$
 
 **【問題】**  
 波長 1.5 m、振動数 8.0 Hz の波の速さを求めなさい。
+
+<div class="vector-graph-card">
+  <div class="graph-title">📐 正弦波の波形（y-xグラフ）と波の基本式</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-w-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+  </defs>
+  <line x1="30" y1="85" x2="470" y2="85" stroke="#64748b" stroke-width="1.5"/>
+  <line x1="50" y1="145" x2="50" y2="25" stroke="#64748b" stroke-width="1.5"/>
+  <text x="42" y="30" fill="#94a3b8" font-size="10">y</text>
+  <text x="465" y="98" fill="#94a3b8" font-size="10">x</text>
+  <path d="M 50,85 Q 95,25 140,85 T 230,85 T 320,85 T 410,85" fill="none" stroke="#38bdf8" stroke-width="2.5"/>
+  <line x1="50" y1="45" x2="230" y2="45" stroke="#fbbf24" stroke-width="1.5"/>
+  <line x1="50" y1="40" x2="50" y2="50" stroke="#fbbf24" stroke-width="1.5"/>
+  <line x1="230" y1="40" x2="230" y2="50" stroke="#fbbf24" stroke-width="1.5"/>
+  <rect x="120" y="35" width="45" height="16" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
+  <text x="142" y="47" fill="#fbbf24" font-size="10" font-weight="700" text-anchor="middle">波長 λ</text>
+  <line x1="95" y1="85" x2="95" y2="55" stroke="#f43f5e" stroke-width="1.5"/>
+  <rect x="100" y="65" width="40" height="15" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
+  <text x="120" y="76" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">振幅 A</text>
+  <line x1="330" y1="35" x2="390" y2="35" stroke="#34d399" stroke-width="2" marker-end="url(#arr-w-cyan)"/>
+  <rect x="340" y="18" width="55" height="15" rx="3" fill="#0f172a" stroke="#34d399" stroke-width="1"/>
+  <text x="367" y="29" fill="#34d399" font-size="9" font-weight="700" text-anchor="middle">進行方向 v</text>
+  <rect x="290" y="115" width="180" height="24" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="380" y="131" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">基本式: v ＝ fλ ＝ λ/T</text>
+</svg>
+  <div class="graph-caption">振幅 A、波長 λ、周期 T と波の速さ v = fλ の関係をグラフから読み取ります。</div>
+</div>
 
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
@@ -120,6 +176,34 @@ $$
 **【問題】**  
 振動数 440 Hz と 446 Hz の二つの音を同時に鳴らした。1秒間のうなりの回数を求めなさい。
 
+<div class="vector-graph-card">
+  <div class="graph-title">📐 正弦波の波形（y-xグラフ）と波の基本式</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-w-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+  </defs>
+  <line x1="30" y1="85" x2="470" y2="85" stroke="#64748b" stroke-width="1.5"/>
+  <line x1="50" y1="145" x2="50" y2="25" stroke="#64748b" stroke-width="1.5"/>
+  <text x="42" y="30" fill="#94a3b8" font-size="10">y</text>
+  <text x="465" y="98" fill="#94a3b8" font-size="10">x</text>
+  <path d="M 50,85 Q 95,25 140,85 T 230,85 T 320,85 T 410,85" fill="none" stroke="#38bdf8" stroke-width="2.5"/>
+  <line x1="50" y1="45" x2="230" y2="45" stroke="#fbbf24" stroke-width="1.5"/>
+  <line x1="50" y1="40" x2="50" y2="50" stroke="#fbbf24" stroke-width="1.5"/>
+  <line x1="230" y1="40" x2="230" y2="50" stroke="#fbbf24" stroke-width="1.5"/>
+  <rect x="120" y="35" width="45" height="16" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
+  <text x="142" y="47" fill="#fbbf24" font-size="10" font-weight="700" text-anchor="middle">波長 λ</text>
+  <line x1="95" y1="85" x2="95" y2="55" stroke="#f43f5e" stroke-width="1.5"/>
+  <rect x="100" y="65" width="40" height="15" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
+  <text x="120" y="76" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">振幅 A</text>
+  <line x1="330" y1="35" x2="390" y2="35" stroke="#34d399" stroke-width="2" marker-end="url(#arr-w-cyan)"/>
+  <rect x="340" y="18" width="55" height="15" rx="3" fill="#0f172a" stroke="#34d399" stroke-width="1"/>
+  <text x="367" y="29" fill="#34d399" font-size="9" font-weight="700" text-anchor="middle">進行方向 v</text>
+  <rect x="290" y="115" width="180" height="24" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="380" y="131" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">基本式: v ＝ fλ ＝ λ/T</text>
+</svg>
+  <div class="graph-caption">振幅 A、波長 λ、周期 T と波の速さ v = fλ の関係をグラフから読み取ります。</div>
+</div>
+
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
 
@@ -168,6 +252,34 @@ $$
 
 **【問題】**  
 光が鏡の法線となす角 35° で入射した。反射角を求めなさい。
+
+<div class="vector-graph-card">
+  <div class="graph-title">📐 正弦波の波形（y-xグラフ）と波の基本式</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-w-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+  </defs>
+  <line x1="30" y1="85" x2="470" y2="85" stroke="#64748b" stroke-width="1.5"/>
+  <line x1="50" y1="145" x2="50" y2="25" stroke="#64748b" stroke-width="1.5"/>
+  <text x="42" y="30" fill="#94a3b8" font-size="10">y</text>
+  <text x="465" y="98" fill="#94a3b8" font-size="10">x</text>
+  <path d="M 50,85 Q 95,25 140,85 T 230,85 T 320,85 T 410,85" fill="none" stroke="#38bdf8" stroke-width="2.5"/>
+  <line x1="50" y1="45" x2="230" y2="45" stroke="#fbbf24" stroke-width="1.5"/>
+  <line x1="50" y1="40" x2="50" y2="50" stroke="#fbbf24" stroke-width="1.5"/>
+  <line x1="230" y1="40" x2="230" y2="50" stroke="#fbbf24" stroke-width="1.5"/>
+  <rect x="120" y="35" width="45" height="16" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
+  <text x="142" y="47" fill="#fbbf24" font-size="10" font-weight="700" text-anchor="middle">波長 λ</text>
+  <line x1="95" y1="85" x2="95" y2="55" stroke="#f43f5e" stroke-width="1.5"/>
+  <rect x="100" y="65" width="40" height="15" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
+  <text x="120" y="76" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">振幅 A</text>
+  <line x1="330" y1="35" x2="390" y2="35" stroke="#34d399" stroke-width="2" marker-end="url(#arr-w-cyan)"/>
+  <rect x="340" y="18" width="55" height="15" rx="3" fill="#0f172a" stroke="#34d399" stroke-width="1"/>
+  <text x="367" y="29" fill="#34d399" font-size="9" font-weight="700" text-anchor="middle">進行方向 v</text>
+  <rect x="290" y="115" width="180" height="24" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="380" y="131" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">基本式: v ＝ fλ ＝ λ/T</text>
+</svg>
+  <div class="graph-caption">振幅 A、波長 λ、周期 T と波の速さ v = fλ の関係をグラフから読み取ります。</div>
+</div>
 
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
@@ -220,6 +332,34 @@ $$
 
 同じ時刻に、波の進行方向に 0.50 m 離れた2点の位相差を求めなさい。
 
+<div class="vector-graph-card">
+  <div class="graph-title">📐 正弦波の波形（y-xグラフ）と波の基本式</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-w-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+  </defs>
+  <line x1="30" y1="85" x2="470" y2="85" stroke="#64748b" stroke-width="1.5"/>
+  <line x1="50" y1="145" x2="50" y2="25" stroke="#64748b" stroke-width="1.5"/>
+  <text x="42" y="30" fill="#94a3b8" font-size="10">y</text>
+  <text x="465" y="98" fill="#94a3b8" font-size="10">x</text>
+  <path d="M 50,85 Q 95,25 140,85 T 230,85 T 320,85 T 410,85" fill="none" stroke="#38bdf8" stroke-width="2.5"/>
+  <line x1="50" y1="45" x2="230" y2="45" stroke="#fbbf24" stroke-width="1.5"/>
+  <line x1="50" y1="40" x2="50" y2="50" stroke="#fbbf24" stroke-width="1.5"/>
+  <line x1="230" y1="40" x2="230" y2="50" stroke="#fbbf24" stroke-width="1.5"/>
+  <rect x="120" y="35" width="45" height="16" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
+  <text x="142" y="47" fill="#fbbf24" font-size="10" font-weight="700" text-anchor="middle">波長 λ</text>
+  <line x1="95" y1="85" x2="95" y2="55" stroke="#f43f5e" stroke-width="1.5"/>
+  <rect x="100" y="65" width="40" height="15" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
+  <text x="120" y="76" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">振幅 A</text>
+  <line x1="330" y1="35" x2="390" y2="35" stroke="#34d399" stroke-width="2" marker-end="url(#arr-w-cyan)"/>
+  <rect x="340" y="18" width="55" height="15" rx="3" fill="#0f172a" stroke="#34d399" stroke-width="1"/>
+  <text x="367" y="29" fill="#34d399" font-size="9" font-weight="700" text-anchor="middle">進行方向 v</text>
+  <rect x="290" y="115" width="180" height="24" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="380" y="131" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">基本式: v ＝ fλ ＝ λ/T</text>
+</svg>
+  <div class="graph-caption">振幅 A、波長 λ、周期 T と波の速さ v = fλ の関係をグラフから読み取ります。</div>
+</div>
+
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
 
@@ -269,6 +409,34 @@ $$
 **【問題】**  
 振動数5.0 Hz、波長0.40 mの波の速さを求めなさい。
 
+<div class="vector-graph-card">
+  <div class="graph-title">📐 正弦波の波形（y-xグラフ）と波の基本式</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-w-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+  </defs>
+  <line x1="30" y1="85" x2="470" y2="85" stroke="#64748b" stroke-width="1.5"/>
+  <line x1="50" y1="145" x2="50" y2="25" stroke="#64748b" stroke-width="1.5"/>
+  <text x="42" y="30" fill="#94a3b8" font-size="10">y</text>
+  <text x="465" y="98" fill="#94a3b8" font-size="10">x</text>
+  <path d="M 50,85 Q 95,25 140,85 T 230,85 T 320,85 T 410,85" fill="none" stroke="#38bdf8" stroke-width="2.5"/>
+  <line x1="50" y1="45" x2="230" y2="45" stroke="#fbbf24" stroke-width="1.5"/>
+  <line x1="50" y1="40" x2="50" y2="50" stroke="#fbbf24" stroke-width="1.5"/>
+  <line x1="230" y1="40" x2="230" y2="50" stroke="#fbbf24" stroke-width="1.5"/>
+  <rect x="120" y="35" width="45" height="16" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
+  <text x="142" y="47" fill="#fbbf24" font-size="10" font-weight="700" text-anchor="middle">波長 λ</text>
+  <line x1="95" y1="85" x2="95" y2="55" stroke="#f43f5e" stroke-width="1.5"/>
+  <rect x="100" y="65" width="40" height="15" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
+  <text x="120" y="76" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">振幅 A</text>
+  <line x1="330" y1="35" x2="390" y2="35" stroke="#34d399" stroke-width="2" marker-end="url(#arr-w-cyan)"/>
+  <rect x="340" y="18" width="55" height="15" rx="3" fill="#0f172a" stroke="#34d399" stroke-width="1"/>
+  <text x="367" y="29" fill="#34d399" font-size="9" font-weight="700" text-anchor="middle">進行方向 v</text>
+  <rect x="290" y="115" width="180" height="24" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="380" y="131" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">基本式: v ＝ fλ ＝ λ/T</text>
+</svg>
+  <div class="graph-caption">振幅 A、波長 λ、周期 T と波の速さ v = fλ の関係をグラフから読み取ります。</div>
+</div>
+
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
 
@@ -311,6 +479,34 @@ $$
 
 **【問題】**  
 同じ媒質中を進む波の振動数を2倍にした。波の速さが変化しないとき、波長は元の何倍になるか。
+
+<div class="vector-graph-card">
+  <div class="graph-title">📐 正弦波の波形（y-xグラフ）と波の基本式</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-w-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+  </defs>
+  <line x1="30" y1="85" x2="470" y2="85" stroke="#64748b" stroke-width="1.5"/>
+  <line x1="50" y1="145" x2="50" y2="25" stroke="#64748b" stroke-width="1.5"/>
+  <text x="42" y="30" fill="#94a3b8" font-size="10">y</text>
+  <text x="465" y="98" fill="#94a3b8" font-size="10">x</text>
+  <path d="M 50,85 Q 95,25 140,85 T 230,85 T 320,85 T 410,85" fill="none" stroke="#38bdf8" stroke-width="2.5"/>
+  <line x1="50" y1="45" x2="230" y2="45" stroke="#fbbf24" stroke-width="1.5"/>
+  <line x1="50" y1="40" x2="50" y2="50" stroke="#fbbf24" stroke-width="1.5"/>
+  <line x1="230" y1="40" x2="230" y2="50" stroke="#fbbf24" stroke-width="1.5"/>
+  <rect x="120" y="35" width="45" height="16" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
+  <text x="142" y="47" fill="#fbbf24" font-size="10" font-weight="700" text-anchor="middle">波長 λ</text>
+  <line x1="95" y1="85" x2="95" y2="55" stroke="#f43f5e" stroke-width="1.5"/>
+  <rect x="100" y="65" width="40" height="15" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
+  <text x="120" y="76" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">振幅 A</text>
+  <line x1="330" y1="35" x2="390" y2="35" stroke="#34d399" stroke-width="2" marker-end="url(#arr-w-cyan)"/>
+  <rect x="340" y="18" width="55" height="15" rx="3" fill="#0f172a" stroke="#34d399" stroke-width="1"/>
+  <text x="367" y="29" fill="#34d399" font-size="9" font-weight="700" text-anchor="middle">進行方向 v</text>
+  <rect x="290" y="115" width="180" height="24" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="380" y="131" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">基本式: v ＝ fλ ＝ λ/T</text>
+</svg>
+  <div class="graph-caption">振幅 A、波長 λ、周期 T と波の速さ v = fλ の関係をグラフから読み取ります。</div>
+</div>
 
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
@@ -358,6 +554,34 @@ $$
 
 **【問題】**  
 長さ 1.2 m の弦の両端を固定した。弦を伝わる波の速さが 240 m/s のとき、基本振動の振動数を求めなさい。
+
+<div class="vector-graph-card">
+  <div class="graph-title">📐 正弦波の波形（y-xグラフ）と波の基本式</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-w-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+  </defs>
+  <line x1="30" y1="85" x2="470" y2="85" stroke="#64748b" stroke-width="1.5"/>
+  <line x1="50" y1="145" x2="50" y2="25" stroke="#64748b" stroke-width="1.5"/>
+  <text x="42" y="30" fill="#94a3b8" font-size="10">y</text>
+  <text x="465" y="98" fill="#94a3b8" font-size="10">x</text>
+  <path d="M 50,85 Q 95,25 140,85 T 230,85 T 320,85 T 410,85" fill="none" stroke="#38bdf8" stroke-width="2.5"/>
+  <line x1="50" y1="45" x2="230" y2="45" stroke="#fbbf24" stroke-width="1.5"/>
+  <line x1="50" y1="40" x2="50" y2="50" stroke="#fbbf24" stroke-width="1.5"/>
+  <line x1="230" y1="40" x2="230" y2="50" stroke="#fbbf24" stroke-width="1.5"/>
+  <rect x="120" y="35" width="45" height="16" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
+  <text x="142" y="47" fill="#fbbf24" font-size="10" font-weight="700" text-anchor="middle">波長 λ</text>
+  <line x1="95" y1="85" x2="95" y2="55" stroke="#f43f5e" stroke-width="1.5"/>
+  <rect x="100" y="65" width="40" height="15" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
+  <text x="120" y="76" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">振幅 A</text>
+  <line x1="330" y1="35" x2="390" y2="35" stroke="#34d399" stroke-width="2" marker-end="url(#arr-w-cyan)"/>
+  <rect x="340" y="18" width="55" height="15" rx="3" fill="#0f172a" stroke="#34d399" stroke-width="1"/>
+  <text x="367" y="29" fill="#34d399" font-size="9" font-weight="700" text-anchor="middle">進行方向 v</text>
+  <rect x="290" y="115" width="180" height="24" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="380" y="131" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">基本式: v ＝ fλ ＝ λ/T</text>
+</svg>
+  <div class="graph-caption">振幅 A、波長 λ、周期 T と波の速さ v = fλ の関係をグラフから読み取ります。</div>
+</div>
 
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
@@ -420,6 +644,26 @@ $$
 **【問題】**  
 長さ 0.85 m の閉管で基本振動が起きている。音速を 340 m/s として、振動数を求めなさい。
 
+<div class="vector-graph-card">
+  <div class="graph-title">📐 気柱の共鳴（閉管・開管の固有振動）</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <rect x="60" y="50" width="180" height="60" fill="none" stroke="#64748b" stroke-width="2"/>
+  <line x1="240" y1="50" x2="240" y2="110" stroke="#f43f5e" stroke-width="4"/>
+  <text x="245" y="45" fill="#f43f5e" font-size="9">閉口端(節)</text>
+  <path d="M 60,50 Q 150,80 240,80" fill="none" stroke="#38bdf8" stroke-width="2"/>
+  <path d="M 60,110 Q 150,80 240,80" fill="none" stroke="#38bdf8" stroke-width="2"/>
+  <text x="45" y="45" fill="#38bdf8" font-size="9">開口端(腹)</text>
+  <line x1="60" y1="125" x2="240" y2="125" stroke="#fbbf24" stroke-width="1.5"/>
+  <rect x="130" y="130" width="45" height="16" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
+  <text x="152" y="142" fill="#fbbf24" font-size="9" text-anchor="middle">管長 L</text>
+  <rect x="280" y="40" width="195" height="55" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="377" y="58" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">閉管の基本振動: L ＝ λ/4</text>
+  <text x="377" y="74" fill="#cbd5e1" font-size="9" text-anchor="middle">m倍振動: L ＝ (2m−1)λ/4</text>
+  <text x="377" y="88" fill="#fbbf24" font-size="9" text-anchor="middle">開口端補正 Δl: 実効長 ＝ L ＋ Δl</text>
+</svg>
+  <div class="graph-caption">閉口端は定常波の「節」、開口端は定常波の「腹」となり、管長 L と波長 λ の条件が決まります。</div>
+</div>
+
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
 
@@ -479,6 +723,29 @@ $$
 
 物質の絶対屈折率を求めなさい。
 
+<div class="vector-graph-card">
+  <div class="graph-title">📐 光の屈折とスネルの法則・全反射</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-sn-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+  </defs>
+  <line x1="40" y1="80" x2="460" y2="80" stroke="#64748b" stroke-width="2"/>
+  <line x1="200" y1="20" x2="200" y2="140" stroke="#64748b" stroke-width="1.5" stroke-dasharray="3,3"/>
+  <text x="280" y="60" fill="#94a3b8" font-size="9">媒質1 (屈折率 n₁)</text>
+  <text x="280" y="110" fill="#94a3b8" font-size="9">媒質2 (屈折率 n₂)</text>
+  <line x1="120" y1="30" x2="200" y2="80" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-sn-cyan)"/>
+  <line x1="200" y1="80" x2="250" y2="140" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-sn-cyan)"/>
+  <rect x="140" y="45" width="45" height="15" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="162" y="56" fill="#38bdf8" font-size="9" text-anchor="middle">入射角 θ₁</text>
+  <rect x="215" y="105" width="45" height="15" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="237" y="116" fill="#38bdf8" font-size="9" text-anchor="middle">屈折角 θ₂</text>
+  <rect x="310" y="30" width="165" height="42" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="392" y="48" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">スネルの法則: n₁sinθ₁ ＝ n₂sinθ₂</text>
+  <text x="392" y="64" fill="#fbbf24" font-size="9" text-anchor="middle">臨界角: sinθ_c ＝ n₂ / n₁</text>
+</svg>
+  <div class="graph-caption">境界面に入射した光は屈折率の違いによって曲がり、臨界角以上では全反射が起こります。</div>
+</div>
+
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
 
@@ -531,6 +798,34 @@ $$
 その点までの経路差が 1.2 m、波長が 0.40 m である。
 
 この点では波は強め合うか、弱め合うか。
+
+<div class="vector-graph-card">
+  <div class="graph-title">📐 正弦波の波形（y-xグラフ）と波の基本式</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-w-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+  </defs>
+  <line x1="30" y1="85" x2="470" y2="85" stroke="#64748b" stroke-width="1.5"/>
+  <line x1="50" y1="145" x2="50" y2="25" stroke="#64748b" stroke-width="1.5"/>
+  <text x="42" y="30" fill="#94a3b8" font-size="10">y</text>
+  <text x="465" y="98" fill="#94a3b8" font-size="10">x</text>
+  <path d="M 50,85 Q 95,25 140,85 T 230,85 T 320,85 T 410,85" fill="none" stroke="#38bdf8" stroke-width="2.5"/>
+  <line x1="50" y1="45" x2="230" y2="45" stroke="#fbbf24" stroke-width="1.5"/>
+  <line x1="50" y1="40" x2="50" y2="50" stroke="#fbbf24" stroke-width="1.5"/>
+  <line x1="230" y1="40" x2="230" y2="50" stroke="#fbbf24" stroke-width="1.5"/>
+  <rect x="120" y="35" width="45" height="16" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
+  <text x="142" y="47" fill="#fbbf24" font-size="10" font-weight="700" text-anchor="middle">波長 λ</text>
+  <line x1="95" y1="85" x2="95" y2="55" stroke="#f43f5e" stroke-width="1.5"/>
+  <rect x="100" y="65" width="40" height="15" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
+  <text x="120" y="76" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">振幅 A</text>
+  <line x1="330" y1="35" x2="390" y2="35" stroke="#34d399" stroke-width="2" marker-end="url(#arr-w-cyan)"/>
+  <rect x="340" y="18" width="55" height="15" rx="3" fill="#0f172a" stroke="#34d399" stroke-width="1"/>
+  <text x="367" y="29" fill="#34d399" font-size="9" font-weight="700" text-anchor="middle">進行方向 v</text>
+  <rect x="290" y="115" width="180" height="24" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="380" y="131" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">基本式: v ＝ fλ ＝ λ/T</text>
+</svg>
+  <div class="graph-caption">振幅 A、波長 λ、周期 T と波の速さ v = fλ の関係をグラフから読み取ります。</div>
+</div>
 
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
@@ -586,6 +881,30 @@ $$
 振動数 500 Hz の音を出す音源が、静止している観測者に向かって 20 m/s で近づいている。
 
 音速を 340 m/s として、観測者が聞く振動数を求めなさい。
+
+<div class="vector-graph-card">
+  <div class="graph-title">📐 ドップラー効果と波面の圧縮・観測振動数</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-dp-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+  </defs>
+  <line x1="30" y1="130" x2="470" y2="130" stroke="#475569" stroke-width="1.5"/>
+  <circle cx="160" cy="80" r="55" fill="none" stroke="#64748b" stroke-width="1.5"/>
+  <circle cx="180" cy="80" r="40" fill="none" stroke="#64748b" stroke-width="1.5"/>
+  <circle cx="200" cy="80" r="25" fill="none" stroke="#38bdf8" stroke-width="2"/>
+  <circle cx="210" cy="80" r="6" fill="#f43f5e"/>
+  <line x1="210" y1="80" x2="250" y2="80" stroke="#f43f5e" stroke-width="2" marker-end="url(#arr-dp-cyan)"/>
+  <rect x="205" y="55" width="60" height="16" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
+  <text x="235" y="67" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">音源 (v_s)</text>
+  <circle cx="360" cy="80" r="7" fill="#34d399"/>
+  <rect x="330" y="55" width="60" height="16" rx="3" fill="#0f172a" stroke="#34d399" stroke-width="1"/>
+  <text x="360" y="67" fill="#34d399" font-size="9" font-weight="700" text-anchor="middle">観測者 (v_o)</text>
+  <rect x="290" y="105" width="180" height="38" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="380" y="121" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">f′ ＝ (V − v_o) / (V − v_s) × f</text>
+  <text x="380" y="135" fill="#cbd5e1" font-size="9" text-anchor="middle">前方波長: λ′ ＝ (V − v_s) / f</text>
+</svg>
+  <div class="graph-caption">音源が前進すると前方の波面が圧縮され波長が短縮するため、観測者の受け取る振動数が高くなります。</div>
+</div>
 
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
@@ -644,6 +963,31 @@ $$
 
 レンズから像までの距離を求めなさい。
 
+<div class="vector-graph-card">
+  <div class="graph-title">📐 凸レンズの写像公式と光線追跡</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-op-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+  </defs>
+  <line x1="30" y1="80" x2="470" y2="80" stroke="#64748b" stroke-width="1.5"/>
+  <ellipse cx="250" cy="80" rx="8" ry="60" fill="rgba(56,189,248,0.2)" stroke="#38bdf8" stroke-width="2"/>
+  <line x1="100" y1="80" x2="100" y2="40" stroke="#fbbf24" stroke-width="3" marker-end="url(#arr-op-cyan)"/>
+  <rect x="75" y="45" width="22" height="14" rx="2" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
+  <text x="86" y="55" fill="#fbbf24" font-size="9" font-weight="700" text-anchor="middle">物</text>
+  <line x1="100" y1="40" x2="250" y2="40" stroke="#38bdf8" stroke-width="1.5"/>
+  <line x1="250" y1="40" x2="400" y2="120" stroke="#38bdf8" stroke-width="1.5"/>
+  <line x1="100" y1="40" x2="400" y2="120" stroke="#34d399" stroke-width="1.5"/>
+  <line x1="400" y1="80" x2="400" y2="120" stroke="#f43f5e" stroke-width="2.5"/>
+  <rect x="405" y="95" width="22" height="14" rx="2" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
+  <text x="416" y="105" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">像</text>
+  <circle cx="325" cy="80" r="3" fill="#38bdf8"/>
+  <text x="325" y="95" fill="#38bdf8" font-size="9" text-anchor="middle">焦点 F</text>
+  <rect x="80" y="130" width="340" height="22" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="250" y="145" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">レンズ公式: 1/a ＋ 1/b ＝ 1/f ,  倍率 m ＝ b/a</text>
+</svg>
+  <div class="graph-caption">軸平行光線は焦点 F を通り、レンズ中心を通る光線は直進して実像を結びます。</div>
+</div>
+
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
 
@@ -697,6 +1041,34 @@ $$
 **【問題】**  
 音を出してから1.0 s後に山から反射音が聞こえました。音速を340 m/sとして山までの距離を求めなさい。
 
+<div class="vector-graph-card">
+  <div class="graph-title">📐 正弦波の波形（y-xグラフ）と波の基本式</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-w-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+  </defs>
+  <line x1="30" y1="85" x2="470" y2="85" stroke="#64748b" stroke-width="1.5"/>
+  <line x1="50" y1="145" x2="50" y2="25" stroke="#64748b" stroke-width="1.5"/>
+  <text x="42" y="30" fill="#94a3b8" font-size="10">y</text>
+  <text x="465" y="98" fill="#94a3b8" font-size="10">x</text>
+  <path d="M 50,85 Q 95,25 140,85 T 230,85 T 320,85 T 410,85" fill="none" stroke="#38bdf8" stroke-width="2.5"/>
+  <line x1="50" y1="45" x2="230" y2="45" stroke="#fbbf24" stroke-width="1.5"/>
+  <line x1="50" y1="40" x2="50" y2="50" stroke="#fbbf24" stroke-width="1.5"/>
+  <line x1="230" y1="40" x2="230" y2="50" stroke="#fbbf24" stroke-width="1.5"/>
+  <rect x="120" y="35" width="45" height="16" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
+  <text x="142" y="47" fill="#fbbf24" font-size="10" font-weight="700" text-anchor="middle">波長 λ</text>
+  <line x1="95" y1="85" x2="95" y2="55" stroke="#f43f5e" stroke-width="1.5"/>
+  <rect x="100" y="65" width="40" height="15" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
+  <text x="120" y="76" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">振幅 A</text>
+  <line x1="330" y1="35" x2="390" y2="35" stroke="#34d399" stroke-width="2" marker-end="url(#arr-w-cyan)"/>
+  <rect x="340" y="18" width="55" height="15" rx="3" fill="#0f172a" stroke="#34d399" stroke-width="1"/>
+  <text x="367" y="29" fill="#34d399" font-size="9" font-weight="700" text-anchor="middle">進行方向 v</text>
+  <rect x="290" y="115" width="180" height="24" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="380" y="131" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">基本式: v ＝ fλ ＝ λ/T</text>
+</svg>
+  <div class="graph-caption">振幅 A、波長 λ、周期 T と波の速さ v = fλ の関係をグラフから読み取ります。</div>
+</div>
+
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
 
@@ -739,6 +1111,26 @@ $$
 
 **【問題】**  
 間隔0.50 mmの2つのスリットへ波長600 nmの単色光を当て、2.0 m先のスクリーンに干渉縞を作った。明線の間隔を求めなさい。
+
+<div class="vector-graph-card">
+  <div class="graph-title">📐 ヤングの実験と光路差による干渉条件</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <line x1="60" y1="20" x2="60" y2="60" stroke="#64748b" stroke-width="3"/>
+  <line x1="60" y1="75" x2="60" y2="95" stroke="#64748b" stroke-width="3"/>
+  <line x1="60" y1="110" x2="60" y2="150" stroke="#64748b" stroke-width="3"/>
+  <line x1="420" y1="20" x2="420" y2="150" stroke="#94a3b8" stroke-width="3"/>
+  <text x="425" y="35" fill="#94a3b8" font-size="9">スクリーン</text>
+  <line x1="60" y1="67" x2="420" y2="50" stroke="#38bdf8" stroke-width="1.5"/>
+  <line x1="60" y1="102" x2="420" y2="50" stroke="#38bdf8" stroke-width="1.5"/>
+  <circle cx="420" cy="50" r="4" fill="#f43f5e"/>
+  <rect x="425" y="42" width="45" height="15" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
+  <text x="447" y="53" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">点 P (明線)</text>
+  <rect x="150" y="20" width="220" height="38" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="260" y="35" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">明線条件: dx / L ＝ mλ</text>
+  <text x="260" y="49" fill="#fbbf24" font-size="9" text-anchor="middle">明線間隔: Δx ＝ Lλ / d</text>
+</svg>
+  <div class="graph-caption">スリット間隔 d、スクリーン距離 L における経路差 Δl = dx/L より明線間隔 Δx = Lλ/d が導かれます。</div>
+</div>
 
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
@@ -788,6 +1180,30 @@ $$
 
 **【問題】**  
 長さ0.60 mの両端固定の弦を、速さ120 m/sの波が伝わります。2倍振動の振動数を求めなさい。
+
+<div class="vector-graph-card">
+  <div class="graph-title">📐 定常波の腹と節の位置関係</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <line x1="40" y1="85" x2="460" y2="85" stroke="#475569" stroke-width="1.5"/>
+  <path d="M 60,85 Q 110,35 160,85 Q 210,135 260,85 Q 310,35 360,85 Q 410,135 460,85" fill="none" stroke="#38bdf8" stroke-width="2.5"/>
+  <path d="M 60,85 Q 110,135 160,85 Q 210,35 260,85 Q 310,135 360,85 Q 410,35 460,85" fill="none" stroke="#38bdf8" stroke-width="1.5" stroke-dasharray="3,3"/>
+  <circle cx="60" cy="85" r="5" fill="#f43f5e"/>
+  <circle cx="160" cy="85" r="5" fill="#f43f5e"/>
+  <circle cx="260" cy="85" r="5" fill="#f43f5e"/>
+  <circle cx="360" cy="85" r="5" fill="#f43f5e"/>
+  <rect x="145" y="95" width="30" height="16" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
+  <text x="160" y="107" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">節</text>
+  <rect x="95" y="15" width="30" height="16" rx="3" fill="#0f172a" stroke="#34d399" stroke-width="1"/>
+  <text x="110" y="27" fill="#34d399" font-size="9" font-weight="700" text-anchor="middle">腹</text>
+  <line x1="60" y1="125" x2="160" y2="125" stroke="#fbbf24" stroke-width="1.5"/>
+  <rect x="90" y="130" width="45" height="15" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
+  <text x="112" y="141" fill="#fbbf24" font-size="9" text-anchor="middle">λ / 2</text>
+  <rect x="290" y="20" width="180" height="38" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="380" y="36" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">節と節の間隔: λ / 2</text>
+  <text x="380" y="50" fill="#cbd5e1" font-size="9" text-anchor="middle">腹と節の間隔: λ / 4</text>
+</svg>
+  <div class="graph-caption">逆向きに進む同一波の合成により、振幅が常に 0 の節と、振幅が 2A となる腹が生じます。</div>
+</div>
 
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
@@ -840,6 +1256,30 @@ $$
 2. 基本振動の振動数を求めなさい。
 3. 3倍振動の振動数と節の位置を求めなさい。
 4. 振動数 200 Hz で弦を振動させたとき、何倍振動が生じるか答えなさい。
+
+<div class="vector-graph-card">
+  <div class="graph-title">📐 定常波の腹と節の位置関係</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <line x1="40" y1="85" x2="460" y2="85" stroke="#475569" stroke-width="1.5"/>
+  <path d="M 60,85 Q 110,35 160,85 Q 210,135 260,85 Q 310,35 360,85 Q 410,135 460,85" fill="none" stroke="#38bdf8" stroke-width="2.5"/>
+  <path d="M 60,85 Q 110,135 160,85 Q 210,35 260,85 Q 310,135 360,85 Q 410,35 460,85" fill="none" stroke="#38bdf8" stroke-width="1.5" stroke-dasharray="3,3"/>
+  <circle cx="60" cy="85" r="5" fill="#f43f5e"/>
+  <circle cx="160" cy="85" r="5" fill="#f43f5e"/>
+  <circle cx="260" cy="85" r="5" fill="#f43f5e"/>
+  <circle cx="360" cy="85" r="5" fill="#f43f5e"/>
+  <rect x="145" y="95" width="30" height="16" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
+  <text x="160" y="107" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">節</text>
+  <rect x="95" y="15" width="30" height="16" rx="3" fill="#0f172a" stroke="#34d399" stroke-width="1"/>
+  <text x="110" y="27" fill="#34d399" font-size="9" font-weight="700" text-anchor="middle">腹</text>
+  <line x1="60" y1="125" x2="160" y2="125" stroke="#fbbf24" stroke-width="1.5"/>
+  <rect x="90" y="130" width="45" height="15" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
+  <text x="112" y="141" fill="#fbbf24" font-size="9" text-anchor="middle">λ / 2</text>
+  <rect x="290" y="20" width="180" height="38" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="380" y="36" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">節と節の間隔: λ / 2</text>
+  <text x="380" y="50" fill="#cbd5e1" font-size="9" text-anchor="middle">腹と節の間隔: λ / 4</text>
+</svg>
+  <div class="graph-caption">逆向きに進む同一波の合成により、振幅が常に 0 の節と、振幅が 2A となる腹が生じます。</div>
+</div>
 
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
@@ -964,6 +1404,30 @@ $$
 4. 4倍振動で生じる腹と節の個数を求めなさい。
 5. 張力を 225 N に変えたときの基本振動数を求めなさい。
 
+<div class="vector-graph-card">
+  <div class="graph-title">📐 定常波の腹と節の位置関係</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <line x1="40" y1="85" x2="460" y2="85" stroke="#475569" stroke-width="1.5"/>
+  <path d="M 60,85 Q 110,35 160,85 Q 210,135 260,85 Q 310,35 360,85 Q 410,135 460,85" fill="none" stroke="#38bdf8" stroke-width="2.5"/>
+  <path d="M 60,85 Q 110,135 160,85 Q 210,35 260,85 Q 310,135 360,85 Q 410,35 460,85" fill="none" stroke="#38bdf8" stroke-width="1.5" stroke-dasharray="3,3"/>
+  <circle cx="60" cy="85" r="5" fill="#f43f5e"/>
+  <circle cx="160" cy="85" r="5" fill="#f43f5e"/>
+  <circle cx="260" cy="85" r="5" fill="#f43f5e"/>
+  <circle cx="360" cy="85" r="5" fill="#f43f5e"/>
+  <rect x="145" y="95" width="30" height="16" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
+  <text x="160" y="107" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">節</text>
+  <rect x="95" y="15" width="30" height="16" rx="3" fill="#0f172a" stroke="#34d399" stroke-width="1"/>
+  <text x="110" y="27" fill="#34d399" font-size="9" font-weight="700" text-anchor="middle">腹</text>
+  <line x1="60" y1="125" x2="160" y2="125" stroke="#fbbf24" stroke-width="1.5"/>
+  <rect x="90" y="130" width="45" height="15" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
+  <text x="112" y="141" fill="#fbbf24" font-size="9" text-anchor="middle">λ / 2</text>
+  <rect x="290" y="20" width="180" height="38" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="380" y="36" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">節と節の間隔: λ / 2</text>
+  <text x="380" y="50" fill="#cbd5e1" font-size="9" text-anchor="middle">腹と節の間隔: λ / 4</text>
+</svg>
+  <div class="graph-caption">逆向きに進む同一波の合成により、振幅が常に 0 の節と、振幅が 2A となる腹が生じます。</div>
+</div>
+
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
 
@@ -1060,6 +1524,31 @@ $$
 2. この像の倍率を求め、正立・倒立、実像・虚像を答えなさい。
 3. 物体をレンズの前方 8.0 cm の位置に移動した。像の位置を求めなさい。
 4. このときの倍率と像の性質を答えなさい。
+
+<div class="vector-graph-card">
+  <div class="graph-title">📐 凸レンズの写像公式と光線追跡</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-op-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+  </defs>
+  <line x1="30" y1="80" x2="470" y2="80" stroke="#64748b" stroke-width="1.5"/>
+  <ellipse cx="250" cy="80" rx="8" ry="60" fill="rgba(56,189,248,0.2)" stroke="#38bdf8" stroke-width="2"/>
+  <line x1="100" y1="80" x2="100" y2="40" stroke="#fbbf24" stroke-width="3" marker-end="url(#arr-op-cyan)"/>
+  <rect x="75" y="45" width="22" height="14" rx="2" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
+  <text x="86" y="55" fill="#fbbf24" font-size="9" font-weight="700" text-anchor="middle">物</text>
+  <line x1="100" y1="40" x2="250" y2="40" stroke="#38bdf8" stroke-width="1.5"/>
+  <line x1="250" y1="40" x2="400" y2="120" stroke="#38bdf8" stroke-width="1.5"/>
+  <line x1="100" y1="40" x2="400" y2="120" stroke="#34d399" stroke-width="1.5"/>
+  <line x1="400" y1="80" x2="400" y2="120" stroke="#f43f5e" stroke-width="2.5"/>
+  <rect x="405" y="95" width="22" height="14" rx="2" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
+  <text x="416" y="105" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">像</text>
+  <circle cx="325" cy="80" r="3" fill="#38bdf8"/>
+  <text x="325" y="95" fill="#38bdf8" font-size="9" text-anchor="middle">焦点 F</text>
+  <rect x="80" y="130" width="340" height="22" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="250" y="145" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">レンズ公式: 1/a ＋ 1/b ＝ 1/f ,  倍率 m ＝ b/a</text>
+</svg>
+  <div class="graph-caption">軸平行光線は焦点 F を通り、レンズ中心を通る光線は直進して実像を結びます。</div>
+</div>
 
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
@@ -1189,6 +1678,30 @@ $$
 4. その状態で2倍振動を起こしたときの振動数を f で表しなさい。
 5. 元の弦に振動数 3f の振動を与えた。弦にできる腹と節の個数を求めなさい。
 6. 張力だけを 9S に変えた。元と同じ基本振動数 f にするためには、弦の長さをいくらにすればよいか求めなさい。
+
+<div class="vector-graph-card">
+  <div class="graph-title">📐 定常波の腹と節の位置関係</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <line x1="40" y1="85" x2="460" y2="85" stroke="#475569" stroke-width="1.5"/>
+  <path d="M 60,85 Q 110,35 160,85 Q 210,135 260,85 Q 310,35 360,85 Q 410,135 460,85" fill="none" stroke="#38bdf8" stroke-width="2.5"/>
+  <path d="M 60,85 Q 110,135 160,85 Q 210,35 260,85 Q 310,135 360,85 Q 410,35 460,85" fill="none" stroke="#38bdf8" stroke-width="1.5" stroke-dasharray="3,3"/>
+  <circle cx="60" cy="85" r="5" fill="#f43f5e"/>
+  <circle cx="160" cy="85" r="5" fill="#f43f5e"/>
+  <circle cx="260" cy="85" r="5" fill="#f43f5e"/>
+  <circle cx="360" cy="85" r="5" fill="#f43f5e"/>
+  <rect x="145" y="95" width="30" height="16" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
+  <text x="160" y="107" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">節</text>
+  <rect x="95" y="15" width="30" height="16" rx="3" fill="#0f172a" stroke="#34d399" stroke-width="1"/>
+  <text x="110" y="27" fill="#34d399" font-size="9" font-weight="700" text-anchor="middle">腹</text>
+  <line x1="60" y1="125" x2="160" y2="125" stroke="#fbbf24" stroke-width="1.5"/>
+  <rect x="90" y="130" width="45" height="15" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
+  <text x="112" y="141" fill="#fbbf24" font-size="9" text-anchor="middle">λ / 2</text>
+  <rect x="290" y="20" width="180" height="38" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="380" y="36" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">節と節の間隔: λ / 2</text>
+  <text x="380" y="50" fill="#cbd5e1" font-size="9" text-anchor="middle">腹と節の間隔: λ / 4</text>
+</svg>
+  <div class="graph-caption">逆向きに進む同一波の合成により、振幅が常に 0 の節と、振幅が 2A となる腹が生じます。</div>
+</div>
 
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
@@ -1344,24 +1857,60 @@ $$
 <div class="level-tag">⭐⭐ 標準 (Level 4/9)</div>
 
 **【問題】**  
+振動数 $f = 500\text{ Hz}$ の音を出す音源が、静止している観測者に向かって速さ $v_s = 20\text{ m/s}$ で一直線上を近づいている。音速を $V = 340\text{ m/s}$ とするとき、観測者が聞く音の振動数 $f'$ を求めなさい（小数第1位を四捨五入して整数で答えよ）。
 
+<div class="vector-graph-card">
+  <div class="graph-title">📐 ドップラー効果と波面の圧縮・観測振動数</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-dp-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+  </defs>
+  <line x1="30" y1="130" x2="470" y2="130" stroke="#475569" stroke-width="1.5"/>
+  <circle cx="160" cy="80" r="55" fill="none" stroke="#64748b" stroke-width="1.5"/>
+  <circle cx="180" cy="80" r="40" fill="none" stroke="#64748b" stroke-width="1.5"/>
+  <circle cx="200" cy="80" r="25" fill="none" stroke="#38bdf8" stroke-width="2"/>
+  <circle cx="210" cy="80" r="6" fill="#f43f5e"/>
+  <line x1="210" y1="80" x2="250" y2="80" stroke="#f43f5e" stroke-width="2" marker-end="url(#arr-dp-cyan)"/>
+  <rect x="205" y="55" width="60" height="16" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
+  <text x="235" y="67" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">音源 (v_s)</text>
+  <circle cx="360" cy="80" r="7" fill="#34d399"/>
+  <rect x="330" y="55" width="60" height="16" rx="3" fill="#0f172a" stroke="#34d399" stroke-width="1"/>
+  <text x="360" y="67" fill="#34d399" font-size="9" font-weight="700" text-anchor="middle">観測者 (v_o)</text>
+  <rect x="290" y="105" width="180" height="38" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="380" y="121" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">f′ ＝ (V − v_o) / (V − v_s) × f</text>
+  <text x="380" y="135" fill="#cbd5e1" font-size="9" text-anchor="middle">前方波長: λ′ ＝ (V − v_s) / f</text>
+</svg>
+  <div class="graph-caption">音源が前進すると前方の波面が圧縮され波長が短縮するため、観測者の受け取る振動数が高くなります。</div>
+</div>
+
+<details class="hint-box">
+<summary>💡 考え方のヒントを見る</summary>
+
+音源が静止観測者に向かって近づく場合、前方で音波が圧縮され、見かけの振動数は $f' = \frac{V}{V - v_s} f$ となります。
+
+</details>
 
 <details class="solution-box">
 <summary>✅ 解答と丁寧な解説・計算プロセス</summary>
 
 **【正解】**  
-振動数は約531 Hzです。
+531 Hz
 
 **【詳しい解説】**  
+音源が観測者に近づく場合のドップラー効果の公式に各数値を代入します。
+$$
+f' = \frac{340}{340 - 20} \times 500 = \frac{340}{320} \times 500 = \frac{17}{16} \times 500 = 531.25 \fallingdotseq 531\ \mathrm{Hz}
+$$
 
+間違えやすいポイント: 音源が近づくときは分母が減算（マイナス）になることで、全体の振動数 $f'$ が元の振動数 $f$ よりも大きくなります。
 
 **【立式と計算ステップ】**
 
-**Step 1: ドップラー効果**
+**Step 1: ドップラー効果の基本式**
 $$
-f
+f' = \frac{V}{V - v_s} f
 $$
-*※ 音源が観測者へ近づく場合は分母がv-v_sです。*
+*※ 音源が観測者へ近づく場合は分母が V - v_s となります。*
 
 </details>
 
@@ -1399,6 +1948,26 @@ D=2.0 m
 3. 干渉縞は明線間隔の何個分移動するか求めなさい。
 4. スクリーン上での移動距離を求めなさい。
 5. 波長だけを 500 nm に変えた場合、縞の移動距離と、移動する縞の個数を求めなさい。
+
+<div class="vector-graph-card">
+  <div class="graph-title">📐 ヤングの実験と光路差による干渉条件</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <line x1="60" y1="20" x2="60" y2="60" stroke="#64748b" stroke-width="3"/>
+  <line x1="60" y1="75" x2="60" y2="95" stroke="#64748b" stroke-width="3"/>
+  <line x1="60" y1="110" x2="60" y2="150" stroke="#64748b" stroke-width="3"/>
+  <line x1="420" y1="20" x2="420" y2="150" stroke="#94a3b8" stroke-width="3"/>
+  <text x="425" y="35" fill="#94a3b8" font-size="9">スクリーン</text>
+  <line x1="60" y1="67" x2="420" y2="50" stroke="#38bdf8" stroke-width="1.5"/>
+  <line x1="60" y1="102" x2="420" y2="50" stroke="#38bdf8" stroke-width="1.5"/>
+  <circle cx="420" cy="50" r="4" fill="#f43f5e"/>
+  <rect x="425" y="42" width="45" height="15" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
+  <text x="447" y="53" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">点 P (明線)</text>
+  <rect x="150" y="20" width="220" height="38" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="260" y="35" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">明線条件: dx / L ＝ mλ</text>
+  <text x="260" y="49" fill="#fbbf24" font-size="9" text-anchor="middle">明線間隔: Δx ＝ Lλ / d</text>
+</svg>
+  <div class="graph-caption">スリット間隔 d、スクリーン距離 L における経路差 Δl = dx/L より明線間隔 Δx = Lλ/d が導かれます。</div>
+</div>
 
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
@@ -1554,6 +2123,30 @@ $$
 3. 音源が聞く反射音の振動数を求めなさい。
 4. 音源が自分の出す直接音と反射音を同時に聞いたときの、うなりの振動数を求めなさい。
 
+<div class="vector-graph-card">
+  <div class="graph-title">📐 ドップラー効果と波面の圧縮・観測振動数</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-dp-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+  </defs>
+  <line x1="30" y1="130" x2="470" y2="130" stroke="#475569" stroke-width="1.5"/>
+  <circle cx="160" cy="80" r="55" fill="none" stroke="#64748b" stroke-width="1.5"/>
+  <circle cx="180" cy="80" r="40" fill="none" stroke="#64748b" stroke-width="1.5"/>
+  <circle cx="200" cy="80" r="25" fill="none" stroke="#38bdf8" stroke-width="2"/>
+  <circle cx="210" cy="80" r="6" fill="#f43f5e"/>
+  <line x1="210" y1="80" x2="250" y2="80" stroke="#f43f5e" stroke-width="2" marker-end="url(#arr-dp-cyan)"/>
+  <rect x="205" y="55" width="60" height="16" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
+  <text x="235" y="67" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">音源 (v_s)</text>
+  <circle cx="360" cy="80" r="7" fill="#34d399"/>
+  <rect x="330" y="55" width="60" height="16" rx="3" fill="#0f172a" stroke="#34d399" stroke-width="1"/>
+  <text x="360" y="67" fill="#34d399" font-size="9" font-weight="700" text-anchor="middle">観測者 (v_o)</text>
+  <rect x="290" y="105" width="180" height="38" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="380" y="121" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">f′ ＝ (V − v_o) / (V − v_s) × f</text>
+  <text x="380" y="135" fill="#cbd5e1" font-size="9" text-anchor="middle">前方波長: λ′ ＝ (V − v_s) / f</text>
+</svg>
+  <div class="graph-caption">音源が前進すると前方の波面が圧縮され波長が短縮するため、観測者の受け取る振動数が高くなります。</div>
+</div>
+
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
 
@@ -1679,6 +2272,26 @@ D=2.0 m
 3. 干渉縞が明線間隔の何個分移動するか求めなさい。
 4. スクリーン上での移動距離を求めなさい。
 5. 光の波長を 625 nm に変えた場合、移動個数と移動距離を求めなさい。
+
+<div class="vector-graph-card">
+  <div class="graph-title">📐 ヤングの実験と光路差による干渉条件</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <line x1="60" y1="20" x2="60" y2="60" stroke="#64748b" stroke-width="3"/>
+  <line x1="60" y1="75" x2="60" y2="95" stroke="#64748b" stroke-width="3"/>
+  <line x1="60" y1="110" x2="60" y2="150" stroke="#64748b" stroke-width="3"/>
+  <line x1="420" y1="20" x2="420" y2="150" stroke="#94a3b8" stroke-width="3"/>
+  <text x="425" y="35" fill="#94a3b8" font-size="9">スクリーン</text>
+  <line x1="60" y1="67" x2="420" y2="50" stroke="#38bdf8" stroke-width="1.5"/>
+  <line x1="60" y1="102" x2="420" y2="50" stroke="#38bdf8" stroke-width="1.5"/>
+  <circle cx="420" cy="50" r="4" fill="#f43f5e"/>
+  <rect x="425" y="42" width="45" height="15" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
+  <text x="447" y="53" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">点 P (明線)</text>
+  <rect x="150" y="20" width="220" height="38" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="260" y="35" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">明線条件: dx / L ＝ mλ</text>
+  <text x="260" y="49" fill="#fbbf24" font-size="9" text-anchor="middle">明線間隔: Δx ＝ Lλ / d</text>
+</svg>
+  <div class="graph-caption">スリット間隔 d、スクリーン距離 L における経路差 Δl = dx/L より明線間隔 Δx = Lλ/d が導かれます。</div>
+</div>
 
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
@@ -1809,6 +2422,29 @@ $$
 **【問題】**  
 屈折率1.0の空気から屈折率1.5の物質へ、入射角sin i=0.60で光が進みます。屈折角を求めなさい。
 
+<div class="vector-graph-card">
+  <div class="graph-title">📐 光の屈折とスネルの法則・全反射</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-sn-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+  </defs>
+  <line x1="40" y1="80" x2="460" y2="80" stroke="#64748b" stroke-width="2"/>
+  <line x1="200" y1="20" x2="200" y2="140" stroke="#64748b" stroke-width="1.5" stroke-dasharray="3,3"/>
+  <text x="280" y="60" fill="#94a3b8" font-size="9">媒質1 (屈折率 n₁)</text>
+  <text x="280" y="110" fill="#94a3b8" font-size="9">媒質2 (屈折率 n₂)</text>
+  <line x1="120" y1="30" x2="200" y2="80" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-sn-cyan)"/>
+  <line x1="200" y1="80" x2="250" y2="140" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-sn-cyan)"/>
+  <rect x="140" y="45" width="45" height="15" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="162" y="56" fill="#38bdf8" font-size="9" text-anchor="middle">入射角 θ₁</text>
+  <rect x="215" y="105" width="45" height="15" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="237" y="116" fill="#38bdf8" font-size="9" text-anchor="middle">屈折角 θ₂</text>
+  <rect x="310" y="30" width="165" height="42" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="392" y="48" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">スネルの法則: n₁sinθ₁ ＝ n₂sinθ₂</text>
+  <text x="392" y="64" fill="#fbbf24" font-size="9" text-anchor="middle">臨界角: sinθ_c ＝ n₂ / n₁</text>
+</svg>
+  <div class="graph-caption">境界面に入射した光は屈折率の違いによって曲がり、臨界角以上では全反射が起こります。</div>
+</div>
+
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
 
@@ -1893,6 +2529,30 @@ g=9.8 m/s²
 5. 長さを L₂ に固定し、振動数も 120 Hz に保つ。3倍振動を生じさせるために必要なおもりの質量を求めなさい。
 6. 元のおもり 0.50 kg と長さ L₂ に戻し、振動数を 240 Hz にした。何倍振動が生じるか求めなさい。
 7. 問6の定常波について、Aから測った節の位置をすべて求めなさい。
+
+<div class="vector-graph-card">
+  <div class="graph-title">📐 定常波の腹と節の位置関係</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <line x1="40" y1="85" x2="460" y2="85" stroke="#475569" stroke-width="1.5"/>
+  <path d="M 60,85 Q 110,35 160,85 Q 210,135 260,85 Q 310,35 360,85 Q 410,135 460,85" fill="none" stroke="#38bdf8" stroke-width="2.5"/>
+  <path d="M 60,85 Q 110,135 160,85 Q 210,35 260,85 Q 310,135 360,85 Q 410,35 460,85" fill="none" stroke="#38bdf8" stroke-width="1.5" stroke-dasharray="3,3"/>
+  <circle cx="60" cy="85" r="5" fill="#f43f5e"/>
+  <circle cx="160" cy="85" r="5" fill="#f43f5e"/>
+  <circle cx="260" cy="85" r="5" fill="#f43f5e"/>
+  <circle cx="360" cy="85" r="5" fill="#f43f5e"/>
+  <rect x="145" y="95" width="30" height="16" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
+  <text x="160" y="107" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">節</text>
+  <rect x="95" y="15" width="30" height="16" rx="3" fill="#0f172a" stroke="#34d399" stroke-width="1"/>
+  <text x="110" y="27" fill="#34d399" font-size="9" font-weight="700" text-anchor="middle">腹</text>
+  <line x1="60" y1="125" x2="160" y2="125" stroke="#fbbf24" stroke-width="1.5"/>
+  <rect x="90" y="130" width="45" height="15" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
+  <text x="112" y="141" fill="#fbbf24" font-size="9" text-anchor="middle">λ / 2</text>
+  <rect x="290" y="20" width="180" height="38" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="380" y="36" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">節と節の間隔: λ / 2</text>
+  <text x="380" y="50" fill="#cbd5e1" font-size="9" text-anchor="middle">腹と節の間隔: λ / 4</text>
+</svg>
+  <div class="graph-caption">逆向きに進む同一波の合成により、振幅が常に 0 の節と、振幅が 2A となる腹が生じます。</div>
+</div>
 
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
@@ -2197,6 +2857,31 @@ $$
 **【問題】**  
 焦点距離0.20 mの凸レンズの前方0.30 mに物体を置きます。像の位置と倍率を求めなさい。
 
+<div class="vector-graph-card">
+  <div class="graph-title">📐 凸レンズの写像公式と光線追跡</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-op-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+  </defs>
+  <line x1="30" y1="80" x2="470" y2="80" stroke="#64748b" stroke-width="1.5"/>
+  <ellipse cx="250" cy="80" rx="8" ry="60" fill="rgba(56,189,248,0.2)" stroke="#38bdf8" stroke-width="2"/>
+  <line x1="100" y1="80" x2="100" y2="40" stroke="#fbbf24" stroke-width="3" marker-end="url(#arr-op-cyan)"/>
+  <rect x="75" y="45" width="22" height="14" rx="2" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
+  <text x="86" y="55" fill="#fbbf24" font-size="9" font-weight="700" text-anchor="middle">物</text>
+  <line x1="100" y1="40" x2="250" y2="40" stroke="#38bdf8" stroke-width="1.5"/>
+  <line x1="250" y1="40" x2="400" y2="120" stroke="#38bdf8" stroke-width="1.5"/>
+  <line x1="100" y1="40" x2="400" y2="120" stroke="#34d399" stroke-width="1.5"/>
+  <line x1="400" y1="80" x2="400" y2="120" stroke="#f43f5e" stroke-width="2.5"/>
+  <rect x="405" y="95" width="22" height="14" rx="2" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
+  <text x="416" y="105" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">像</text>
+  <circle cx="325" cy="80" r="3" fill="#38bdf8"/>
+  <text x="325" y="95" fill="#38bdf8" font-size="9" text-anchor="middle">焦点 F</text>
+  <rect x="80" y="130" width="340" height="22" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="250" y="145" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">レンズ公式: 1/a ＋ 1/b ＝ 1/f ,  倍率 m ＝ b/a</text>
+</svg>
+  <div class="graph-caption">軸平行光線は焦点 F を通り、レンズ中心を通る光線は直進して実像を結びます。</div>
+</div>
+
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
 
@@ -2245,6 +2930,34 @@ $$
 
 **【問題】**  
 波 y=A sin(4πt-2πx+π/3) がSI単位で表されている。振幅を除く角振動数、振動数、波数、波長、波の速さ、+x方向に0.25 m離れた2点の位相差を求めなさい。
+
+<div class="vector-graph-card">
+  <div class="graph-title">📐 正弦波の波形（y-xグラフ）と波の基本式</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-w-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+  </defs>
+  <line x1="30" y1="85" x2="470" y2="85" stroke="#64748b" stroke-width="1.5"/>
+  <line x1="50" y1="145" x2="50" y2="25" stroke="#64748b" stroke-width="1.5"/>
+  <text x="42" y="30" fill="#94a3b8" font-size="10">y</text>
+  <text x="465" y="98" fill="#94a3b8" font-size="10">x</text>
+  <path d="M 50,85 Q 95,25 140,85 T 230,85 T 320,85 T 410,85" fill="none" stroke="#38bdf8" stroke-width="2.5"/>
+  <line x1="50" y1="45" x2="230" y2="45" stroke="#fbbf24" stroke-width="1.5"/>
+  <line x1="50" y1="40" x2="50" y2="50" stroke="#fbbf24" stroke-width="1.5"/>
+  <line x1="230" y1="40" x2="230" y2="50" stroke="#fbbf24" stroke-width="1.5"/>
+  <rect x="120" y="35" width="45" height="16" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
+  <text x="142" y="47" fill="#fbbf24" font-size="10" font-weight="700" text-anchor="middle">波長 λ</text>
+  <line x1="95" y1="85" x2="95" y2="55" stroke="#f43f5e" stroke-width="1.5"/>
+  <rect x="100" y="65" width="40" height="15" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
+  <text x="120" y="76" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">振幅 A</text>
+  <line x1="330" y1="35" x2="390" y2="35" stroke="#34d399" stroke-width="2" marker-end="url(#arr-w-cyan)"/>
+  <rect x="340" y="18" width="55" height="15" rx="3" fill="#0f172a" stroke="#34d399" stroke-width="1"/>
+  <text x="367" y="29" fill="#34d399" font-size="9" font-weight="700" text-anchor="middle">進行方向 v</text>
+  <rect x="290" y="115" width="180" height="24" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="380" y="131" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">基本式: v ＝ fλ ＝ λ/T</text>
+</svg>
+  <div class="graph-caption">振幅 A、波長 λ、周期 T と波の速さ v = fλ の関係をグラフから読み取ります。</div>
+</div>
 
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>

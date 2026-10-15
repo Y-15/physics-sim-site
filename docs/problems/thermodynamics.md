@@ -24,6 +24,27 @@ description: 高校物理「熱力学（Thermodynamics）」の実践問題・�
 
 水の比熱を 4.2 J/(g· K) として、必要な熱量を求めなさい。
 
+<div class="vector-graph-card">
+  <div class="graph-title">📐 比熱・熱容量と熱量保存の法則</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-hc-rose" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#f43f5e"/></marker>
+  </defs>
+  <rect x="80" y="45" width="130" height="85" rx="4" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+  <text x="145" y="75" fill="#38bdf8" font-size="11" font-weight="700" text-anchor="middle">物質 (質量 m)</text>
+  <text x="145" y="95" fill="#94a3b8" font-size="9" text-anchor="middle">比熱 c [J/(g・K)]</text>
+  <text x="145" y="112" fill="#fbbf24" font-size="9" text-anchor="middle">熱容量 C ＝ mc</text>
+  <line x1="30" y1="87" x2="75" y2="87" stroke="#f43f5e" stroke-width="3" marker-end="url(#arr-hc-rose)"/>
+  <rect x="25" y="60" width="45" height="16" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
+  <text x="47" y="72" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">熱量 Q</text>
+  <rect x="250" y="35" width="225" height="60" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="362" y="53" fill="#38bdf8" font-size="11" font-weight="700" text-anchor="middle">熱量: Q ＝ mcΔT ＝ CΔT</text>
+  <text x="362" y="70" fill="#cbd5e1" font-size="9" text-anchor="middle">熱容量: C ＝ mc [J/K]</text>
+  <text x="362" y="85" fill="#fbbf24" font-size="9" text-anchor="middle">熱量保存: 高温側放熱 ＝ 低温側吸熱</text>
+</svg>
+  <div class="graph-caption">物体が得た熱量 Q は、質量 m、比熱 c、温度変化 ΔT に比例します（Q = mcΔT = CΔT）。</div>
+</div>
+
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
 
@@ -75,6 +96,22 @@ $$
 
 最初の圧力が 1.0×10⁵ Pa のとき、変化後の圧力を求めなさい。
 
+<div class="vector-graph-card">
+  <div class="graph-title">📐 気体の状態変化とP-V図のサイクル仕事</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <line x1="50" y1="135" x2="430" y2="135" stroke="#64748b" stroke-width="1.5"/>
+  <line x1="70" y1="145" x2="70" y2="25" stroke="#64748b" stroke-width="1.5"/>
+  <text x="60" y="30" fill="#94a3b8" font-size="10">P</text>
+  <text x="425" y="148" fill="#94a3b8" font-size="10">V</text>
+  <polygon points="120,110 300,110 260,45 120,45" fill="rgba(56,189,248,0.15)" stroke="#38bdf8" stroke-width="2"/>
+  <text x="195" y="82" fill="#38bdf8" font-size="11" font-weight="700" text-anchor="middle">仕事 W (面積)</text>
+  <rect x="310" y="45" width="165" height="45" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="392" y="63" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">第1法則: Q ＝ ΔU ＋ W</text>
+  <text x="392" y="80" fill="#fbbf24" font-size="9" text-anchor="middle">内部エネルギー: U ＝ 3/2 nRT</text>
+</svg>
+  <div class="graph-caption">P-Vグラフで囲まれた面積が、気体が外部にした正味の仕事 W に等しくなります。</div>
+</div>
+
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
 
@@ -124,6 +161,22 @@ $$
 **【問題】**  
 温度一定の気体を、圧力1.0×10^5 Pa、体積2.0×10^-2 m^3から体積1.0×10^-2 m^3へ圧縮します。圧力を求めなさい。
 
+<div class="vector-graph-card">
+  <div class="graph-title">📐 気体の状態変化とP-V図のサイクル仕事</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <line x1="50" y1="135" x2="430" y2="135" stroke="#64748b" stroke-width="1.5"/>
+  <line x1="70" y1="145" x2="70" y2="25" stroke="#64748b" stroke-width="1.5"/>
+  <text x="60" y="30" fill="#94a3b8" font-size="10">P</text>
+  <text x="425" y="148" fill="#94a3b8" font-size="10">V</text>
+  <polygon points="120,110 300,110 260,45 120,45" fill="rgba(56,189,248,0.15)" stroke="#38bdf8" stroke-width="2"/>
+  <text x="195" y="82" fill="#38bdf8" font-size="11" font-weight="700" text-anchor="middle">仕事 W (面積)</text>
+  <rect x="310" y="45" width="165" height="45" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="392" y="63" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">第1法則: Q ＝ ΔU ＋ W</text>
+  <text x="392" y="80" fill="#fbbf24" font-size="9" text-anchor="middle">内部エネルギー: U ＝ 3/2 nRT</text>
+</svg>
+  <div class="graph-caption">P-Vグラフで囲まれた面積が、気体が外部にした正味の仕事 W に等しくなります。</div>
+</div>
+
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
 
@@ -168,6 +221,27 @@ $$
 質量 300 g の金属に 3600 J の熱を与えたところ、温度が 30°C 上昇した。
 
 金属の比熱を求めなさい。
+
+<div class="vector-graph-card">
+  <div class="graph-title">📐 比熱・熱容量と熱量保存の法則</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-hc-rose" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#f43f5e"/></marker>
+  </defs>
+  <rect x="80" y="45" width="130" height="85" rx="4" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+  <text x="145" y="75" fill="#38bdf8" font-size="11" font-weight="700" text-anchor="middle">物質 (質量 m)</text>
+  <text x="145" y="95" fill="#94a3b8" font-size="9" text-anchor="middle">比熱 c [J/(g・K)]</text>
+  <text x="145" y="112" fill="#fbbf24" font-size="9" text-anchor="middle">熱容量 C ＝ mc</text>
+  <line x1="30" y1="87" x2="75" y2="87" stroke="#f43f5e" stroke-width="3" marker-end="url(#arr-hc-rose)"/>
+  <rect x="25" y="60" width="45" height="16" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
+  <text x="47" y="72" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">熱量 Q</text>
+  <rect x="250" y="35" width="225" height="60" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="362" y="53" fill="#38bdf8" font-size="11" font-weight="700" text-anchor="middle">熱量: Q ＝ mcΔT ＝ CΔT</text>
+  <text x="362" y="70" fill="#cbd5e1" font-size="9" text-anchor="middle">熱容量: C ＝ mc [J/K]</text>
+  <text x="362" y="85" fill="#fbbf24" font-size="9" text-anchor="middle">熱量保存: 高温側放熱 ＝ 低温側吸熱</text>
+</svg>
+  <div class="graph-caption">物体が得た熱量 Q は、質量 m、比熱 c、温度変化 ΔT に比例します（Q = mcΔT = CΔT）。</div>
+</div>
 
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
@@ -219,6 +293,22 @@ $$
 気体が外部から 700 J の熱を受け取り、外部に 250 J の仕事をした。
 
 気体の内部エネルギーの変化を求めなさい。
+
+<div class="vector-graph-card">
+  <div class="graph-title">📐 気体の状態変化とP-V図のサイクル仕事</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <line x1="50" y1="135" x2="430" y2="135" stroke="#64748b" stroke-width="1.5"/>
+  <line x1="70" y1="145" x2="70" y2="25" stroke="#64748b" stroke-width="1.5"/>
+  <text x="60" y="30" fill="#94a3b8" font-size="10">P</text>
+  <text x="425" y="148" fill="#94a3b8" font-size="10">V</text>
+  <polygon points="120,110 300,110 260,45 120,45" fill="rgba(56,189,248,0.15)" stroke="#38bdf8" stroke-width="2"/>
+  <text x="195" y="82" fill="#38bdf8" font-size="11" font-weight="700" text-anchor="middle">仕事 W (面積)</text>
+  <rect x="310" y="45" width="165" height="45" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="392" y="63" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">第1法則: Q ＝ ΔU ＋ W</text>
+  <text x="392" y="80" fill="#fbbf24" font-size="9" text-anchor="middle">内部エネルギー: U ＝ 3/2 nRT</text>
+</svg>
+  <div class="graph-caption">P-Vグラフで囲まれた面積が、気体が外部にした正味の仕事 W に等しくなります。</div>
+</div>
 
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
@@ -274,6 +364,22 @@ $$
 R=8.3 J/(mol· K)
 
 として、気体の圧力を求めなさい。
+
+<div class="vector-graph-card">
+  <div class="graph-title">📐 気体の状態変化とP-V図のサイクル仕事</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <line x1="50" y1="135" x2="430" y2="135" stroke="#64748b" stroke-width="1.5"/>
+  <line x1="70" y1="145" x2="70" y2="25" stroke="#64748b" stroke-width="1.5"/>
+  <text x="60" y="30" fill="#94a3b8" font-size="10">P</text>
+  <text x="425" y="148" fill="#94a3b8" font-size="10">V</text>
+  <polygon points="120,110 300,110 260,45 120,45" fill="rgba(56,189,248,0.15)" stroke="#38bdf8" stroke-width="2"/>
+  <text x="195" y="82" fill="#38bdf8" font-size="11" font-weight="700" text-anchor="middle">仕事 W (面積)</text>
+  <rect x="310" y="45" width="165" height="45" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="392" y="63" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">第1法則: Q ＝ ΔU ＋ W</text>
+  <text x="392" y="80" fill="#fbbf24" font-size="9" text-anchor="middle">内部エネルギー: U ＝ 3/2 nRT</text>
+</svg>
+  <div class="graph-caption">P-Vグラフで囲まれた面積が、気体が外部にした正味の仕事 W に等しくなります。</div>
+</div>
 
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
@@ -334,6 +440,27 @@ $$
 
 氷の融解熱を 334 J/g として、必要な熱量を求めなさい。
 
+<div class="vector-graph-card">
+  <div class="graph-title">📐 比熱・熱容量と熱量保存の法則</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-hc-rose" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#f43f5e"/></marker>
+  </defs>
+  <rect x="80" y="45" width="130" height="85" rx="4" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+  <text x="145" y="75" fill="#38bdf8" font-size="11" font-weight="700" text-anchor="middle">物質 (質量 m)</text>
+  <text x="145" y="95" fill="#94a3b8" font-size="9" text-anchor="middle">比熱 c [J/(g・K)]</text>
+  <text x="145" y="112" fill="#fbbf24" font-size="9" text-anchor="middle">熱容量 C ＝ mc</text>
+  <line x1="30" y1="87" x2="75" y2="87" stroke="#f43f5e" stroke-width="3" marker-end="url(#arr-hc-rose)"/>
+  <rect x="25" y="60" width="45" height="16" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
+  <text x="47" y="72" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">熱量 Q</text>
+  <rect x="250" y="35" width="225" height="60" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="362" y="53" fill="#38bdf8" font-size="11" font-weight="700" text-anchor="middle">熱量: Q ＝ mcΔT ＝ CΔT</text>
+  <text x="362" y="70" fill="#cbd5e1" font-size="9" text-anchor="middle">熱容量: C ＝ mc [J/K]</text>
+  <text x="362" y="85" fill="#fbbf24" font-size="9" text-anchor="middle">熱量保存: 高温側放熱 ＝ 低温側吸熱</text>
+</svg>
+  <div class="graph-caption">物体が得た熱量 Q は、質量 m、比熱 c、温度変化 ΔT に比例します（Q = mcΔT = CΔT）。</div>
+</div>
+
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
 
@@ -383,6 +510,26 @@ $$
 **【問題】**  
 温度300 Kの理想気体分子1個の平均運動エネルギーを求めなさい。ボルツマン定数を1.38×10^-23 J/Kとします。
 
+<div class="vector-graph-card">
+  <div class="graph-title">📐 気体分子運動論と圧力・平均運動エネルギー</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-g-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+  </defs>
+  <rect x="80" y="30" width="180" height="100" fill="rgba(30,41,59,0.4)" stroke="#64748b" stroke-width="2"/>
+  <circle cx="120" cy="65" r="5" fill="#38bdf8"/>
+  <line x1="120" y1="65" x2="150" y2="50" stroke="#38bdf8" stroke-width="1.5" marker-end="url(#arr-g-cyan)"/>
+  <circle cx="170" cy="100" r="5" fill="#38bdf8"/>
+  <line x1="170" y1="100" x2="200" y2="115" stroke="#38bdf8" stroke-width="1.5" marker-end="url(#arr-g-cyan)"/>
+  <circle cx="210" cy="60" r="5" fill="#f43f5e"/>
+  <line x1="210" y1="60" x2="255" y2="60" stroke="#f43f5e" stroke-width="2" marker-end="url(#arr-g-cyan)"/>
+  <rect x="290" y="45" width="180" height="48" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="380" y="64" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">平均運動E: ½ m(v²) ＝ 3/2 kT</text>
+  <text x="380" y="82" fill="#fbbf24" font-size="9" text-anchor="middle">二乗平均速度: v_rms ＝ √(3RT/M)</text>
+</svg>
+  <div class="graph-caption">立方体容器の壁への分子衝突から、気体分子の平均運動エネルギーが絶対温度 T に比例します。</div>
+</div>
+
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
 
@@ -427,6 +574,22 @@ $$
 80°C の水 100 g と、 20°C の水 200 g を混ぜた。
 
 外部との熱の出入りを無視して、混合後の温度を求めなさい。
+
+<div class="vector-graph-card">
+  <div class="graph-title">📐 気体の状態変化とP-V図のサイクル仕事</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <line x1="50" y1="135" x2="430" y2="135" stroke="#64748b" stroke-width="1.5"/>
+  <line x1="70" y1="145" x2="70" y2="25" stroke="#64748b" stroke-width="1.5"/>
+  <text x="60" y="30" fill="#94a3b8" font-size="10">P</text>
+  <text x="425" y="148" fill="#94a3b8" font-size="10">V</text>
+  <polygon points="120,110 300,110 260,45 120,45" fill="rgba(56,189,248,0.15)" stroke="#38bdf8" stroke-width="2"/>
+  <text x="195" y="82" fill="#38bdf8" font-size="11" font-weight="700" text-anchor="middle">仕事 W (面積)</text>
+  <rect x="310" y="45" width="165" height="45" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="392" y="63" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">第1法則: Q ＝ ΔU ＋ W</text>
+  <text x="392" y="80" fill="#fbbf24" font-size="9" text-anchor="middle">内部エネルギー: U ＝ 3/2 nRT</text>
+</svg>
+  <div class="graph-caption">P-Vグラフで囲まれた面積が、気体が外部にした正味の仕事 W に等しくなります。</div>
+</div>
 
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
@@ -486,6 +649,27 @@ $$
 抵抗 10 の電熱線に 2.0 A の電流を 100 s 流した。
 
 発生した熱がすべて質量 200 g の水に与えられたとする。水の比熱を 4.2 J/(g· K) として、水の温度上昇を求めなさい。
+
+<div class="vector-graph-card">
+  <div class="graph-title">📐 比熱・熱容量と熱量保存の法則</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-hc-rose" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#f43f5e"/></marker>
+  </defs>
+  <rect x="80" y="45" width="130" height="85" rx="4" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+  <text x="145" y="75" fill="#38bdf8" font-size="11" font-weight="700" text-anchor="middle">物質 (質量 m)</text>
+  <text x="145" y="95" fill="#94a3b8" font-size="9" text-anchor="middle">比熱 c [J/(g・K)]</text>
+  <text x="145" y="112" fill="#fbbf24" font-size="9" text-anchor="middle">熱容量 C ＝ mc</text>
+  <line x1="30" y1="87" x2="75" y2="87" stroke="#f43f5e" stroke-width="3" marker-end="url(#arr-hc-rose)"/>
+  <rect x="25" y="60" width="45" height="16" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
+  <text x="47" y="72" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">熱量 Q</text>
+  <rect x="250" y="35" width="225" height="60" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="362" y="53" fill="#38bdf8" font-size="11" font-weight="700" text-anchor="middle">熱量: Q ＝ mcΔT ＝ CΔT</text>
+  <text x="362" y="70" fill="#cbd5e1" font-size="9" text-anchor="middle">熱容量: C ＝ mc [J/K]</text>
+  <text x="362" y="85" fill="#fbbf24" font-size="9" text-anchor="middle">熱量保存: 高温側放熱 ＝ 低温側吸熱</text>
+</svg>
+  <div class="graph-caption">物体が得た熱量 Q は、質量 m、比熱 c、温度変化 ΔT に比例します（Q = mcΔT = CΔT）。</div>
+</div>
 
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
@@ -556,6 +740,22 @@ $$
 **【問題】**  
 気体が500 Jの熱を受け取り、外部に200 Jの仕事をしました。気体の内部エネルギーの変化を求めなさい。
 
+<div class="vector-graph-card">
+  <div class="graph-title">📐 気体の状態変化とP-V図のサイクル仕事</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <line x1="50" y1="135" x2="430" y2="135" stroke="#64748b" stroke-width="1.5"/>
+  <line x1="70" y1="145" x2="70" y2="25" stroke="#64748b" stroke-width="1.5"/>
+  <text x="60" y="30" fill="#94a3b8" font-size="10">P</text>
+  <text x="425" y="148" fill="#94a3b8" font-size="10">V</text>
+  <polygon points="120,110 300,110 260,45 120,45" fill="rgba(56,189,248,0.15)" stroke="#38bdf8" stroke-width="2"/>
+  <text x="195" y="82" fill="#38bdf8" font-size="11" font-weight="700" text-anchor="middle">仕事 W (面積)</text>
+  <rect x="310" y="45" width="165" height="45" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="392" y="63" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">第1法則: Q ＝ ΔU ＋ W</text>
+  <text x="392" y="80" fill="#fbbf24" font-size="9" text-anchor="middle">内部エネルギー: U ＝ 3/2 nRT</text>
+</svg>
+  <div class="graph-caption">P-Vグラフで囲まれた面積が、気体が外部にした正味の仕事 W に等しくなります。</div>
+</div>
+
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
 
@@ -615,6 +815,27 @@ V₀=2.0×10⁻² m³
 2. AからBで気体がした仕事、内部エネルギーの変化、気体が受け取った熱量を求めなさい。
 3. BからCでの内部エネルギーの変化と、気体が受け取った熱量を求めなさい。
 4. AからCまでの全過程で気体が受け取った熱量を求めなさい。
+
+<div class="vector-graph-card">
+  <div class="graph-title">📐 比熱・熱容量と熱量保存の法則</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-hc-rose" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#f43f5e"/></marker>
+  </defs>
+  <rect x="80" y="45" width="130" height="85" rx="4" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+  <text x="145" y="75" fill="#38bdf8" font-size="11" font-weight="700" text-anchor="middle">物質 (質量 m)</text>
+  <text x="145" y="95" fill="#94a3b8" font-size="9" text-anchor="middle">比熱 c [J/(g・K)]</text>
+  <text x="145" y="112" fill="#fbbf24" font-size="9" text-anchor="middle">熱容量 C ＝ mc</text>
+  <line x1="30" y1="87" x2="75" y2="87" stroke="#f43f5e" stroke-width="3" marker-end="url(#arr-hc-rose)"/>
+  <rect x="25" y="60" width="45" height="16" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
+  <text x="47" y="72" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">熱量 Q</text>
+  <rect x="250" y="35" width="225" height="60" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="362" y="53" fill="#38bdf8" font-size="11" font-weight="700" text-anchor="middle">熱量: Q ＝ mcΔT ＝ CΔT</text>
+  <text x="362" y="70" fill="#cbd5e1" font-size="9" text-anchor="middle">熱容量: C ＝ mc [J/K]</text>
+  <text x="362" y="85" fill="#fbbf24" font-size="9" text-anchor="middle">熱量保存: 高温側放熱 ＝ 低温側吸熱</text>
+</svg>
+  <div class="graph-caption">物体が得た熱量 Q は、質量 m、比熱 c、温度変化 ΔT に比例します（Q = mcΔT = CΔT）。</div>
+</div>
 
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
@@ -799,6 +1020,27 @@ P₀V₀=2.0×10³ J
 4. AからBで気体が受け取った熱量を求めなさい。
 5. BからCで気体が受け取った熱量を求めなさい。
 
+<div class="vector-graph-card">
+  <div class="graph-title">📐 比熱・熱容量と熱量保存の法則</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-hc-rose" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#f43f5e"/></marker>
+  </defs>
+  <rect x="80" y="45" width="130" height="85" rx="4" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+  <text x="145" y="75" fill="#38bdf8" font-size="11" font-weight="700" text-anchor="middle">物質 (質量 m)</text>
+  <text x="145" y="95" fill="#94a3b8" font-size="9" text-anchor="middle">比熱 c [J/(g・K)]</text>
+  <text x="145" y="112" fill="#fbbf24" font-size="9" text-anchor="middle">熱容量 C ＝ mc</text>
+  <line x1="30" y1="87" x2="75" y2="87" stroke="#f43f5e" stroke-width="3" marker-end="url(#arr-hc-rose)"/>
+  <rect x="25" y="60" width="45" height="16" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
+  <text x="47" y="72" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">熱量 Q</text>
+  <rect x="250" y="35" width="225" height="60" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="362" y="53" fill="#38bdf8" font-size="11" font-weight="700" text-anchor="middle">熱量: Q ＝ mcΔT ＝ CΔT</text>
+  <text x="362" y="70" fill="#cbd5e1" font-size="9" text-anchor="middle">熱容量: C ＝ mc [J/K]</text>
+  <text x="362" y="85" fill="#fbbf24" font-size="9" text-anchor="middle">熱量保存: 高温側放熱 ＝ 低温側吸熱</text>
+</svg>
+  <div class="graph-caption">物体が得た熱量 Q は、質量 m、比熱 c、温度変化 ΔT に比例します（Q = mcΔT = CΔT）。</div>
+</div>
+
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
 
@@ -940,6 +1182,33 @@ $$
 **【問題】**  
 熱機関が高温熱源から1000 Jを受け取り、低温熱源へ600 Jを捨てます。仕事と熱効率を求めなさい。
 
+<div class="vector-graph-card">
+  <div class="graph-title">📐 熱機関のエネルギーの流れと熱効率</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-he-rose" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#f43f5e"/></marker>
+    <marker id="arr-he-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+  </defs>
+  <rect x="80" y="15" width="120" height="24" rx="4" fill="#f43f5e"/>
+  <text x="140" y="31" fill="#fff" font-size="10" font-weight="700" text-anchor="middle">高温熱源 (T_H)</text>
+  <circle cx="140" cy="80" r="22" fill="#1e293b" stroke="#fbbf24" stroke-width="2"/>
+  <text x="140" y="84" fill="#fbbf24" font-size="10" font-weight="700" text-anchor="middle">機関</text>
+  <rect x="80" y="125" width="120" height="24" rx="4" fill="#0284c7"/>
+  <text x="140" y="141" fill="#fff" font-size="10" font-weight="700" text-anchor="middle">低温熱源 (T_L)</text>
+  <line x1="140" y1="39" x2="140" y2="58" stroke="#f43f5e" stroke-width="3" marker-end="url(#arr-he-rose)"/>
+  <text x="155" y="52" fill="#f43f5e" font-size="9" font-weight="700">Q₁</text>
+  <line x1="140" y1="102" x2="140" y2="125" stroke="#0284c7" stroke-width="3" marker-end="url(#arr-he-cyan)"/>
+  <text x="155" y="118" fill="#38bdf8" font-size="9" font-weight="700">Q₂</text>
+  <line x1="162" y1="80" x2="225" y2="80" stroke="#fbbf24" stroke-width="3" marker-end="url(#arr-he-cyan)"/>
+  <rect x="230" y="70" width="70" height="20" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
+  <text x="265" y="84" fill="#fbbf24" font-size="10" font-weight="700" text-anchor="middle">仕事 W ＝ Q₁−Q₂</text>
+  <rect x="315" y="50" width="160" height="42" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="395" y="68" fill="#38bdf8" font-size="11" font-weight="700" text-anchor="middle">熱効率: e ＝ W / Q₁</text>
+  <text x="395" y="84" fill="#cbd5e1" font-size="9" text-anchor="middle">e ＝ (Q₁ − Q₂) / Q₁</text>
+</svg>
+  <div class="graph-caption">高温熱源から受け取った熱 Q₁ の一部を仕事 W に変え、残りの熱 Q₂ を低温熱源へ放出します。</div>
+</div>
+
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
 
@@ -988,6 +1257,27 @@ $$
 
 **【問題】**  
 20 ℃の水0.20 kgを80 ℃まで温めるのに必要な熱量を求めなさい。水の比熱を4.2×10³ J/(kg·K)、容器の熱容量と熱損失は無視する。
+
+<div class="vector-graph-card">
+  <div class="graph-title">📐 比熱・熱容量と熱量保存の法則</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-hc-rose" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#f43f5e"/></marker>
+  </defs>
+  <rect x="80" y="45" width="130" height="85" rx="4" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+  <text x="145" y="75" fill="#38bdf8" font-size="11" font-weight="700" text-anchor="middle">物質 (質量 m)</text>
+  <text x="145" y="95" fill="#94a3b8" font-size="9" text-anchor="middle">比熱 c [J/(g・K)]</text>
+  <text x="145" y="112" fill="#fbbf24" font-size="9" text-anchor="middle">熱容量 C ＝ mc</text>
+  <line x1="30" y1="87" x2="75" y2="87" stroke="#f43f5e" stroke-width="3" marker-end="url(#arr-hc-rose)"/>
+  <rect x="25" y="60" width="45" height="16" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
+  <text x="47" y="72" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">熱量 Q</text>
+  <rect x="250" y="35" width="225" height="60" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="362" y="53" fill="#38bdf8" font-size="11" font-weight="700" text-anchor="middle">熱量: Q ＝ mcΔT ＝ CΔT</text>
+  <text x="362" y="70" fill="#cbd5e1" font-size="9" text-anchor="middle">熱容量: C ＝ mc [J/K]</text>
+  <text x="362" y="85" fill="#fbbf24" font-size="9" text-anchor="middle">熱量保存: 高温側放熱 ＝ 低温側吸熱</text>
+</svg>
+  <div class="graph-caption">物体が得た熱量 Q は、質量 m、比熱 c、温度変化 ΔT に比例します（Q = mcΔT = CΔT）。</div>
+</div>
 
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
@@ -1062,6 +1352,27 @@ PV^γ=一定
 2. T_B/T_A を求めなさい。
 3. AからBで気体が外部にした仕事を求めなさい。
 4. BからCで気体が受け取った熱量を求めなさい。
+
+<div class="vector-graph-card">
+  <div class="graph-title">📐 比熱・熱容量と熱量保存の法則</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-hc-rose" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#f43f5e"/></marker>
+  </defs>
+  <rect x="80" y="45" width="130" height="85" rx="4" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+  <text x="145" y="75" fill="#38bdf8" font-size="11" font-weight="700" text-anchor="middle">物質 (質量 m)</text>
+  <text x="145" y="95" fill="#94a3b8" font-size="9" text-anchor="middle">比熱 c [J/(g・K)]</text>
+  <text x="145" y="112" fill="#fbbf24" font-size="9" text-anchor="middle">熱容量 C ＝ mc</text>
+  <line x1="30" y1="87" x2="75" y2="87" stroke="#f43f5e" stroke-width="3" marker-end="url(#arr-hc-rose)"/>
+  <rect x="25" y="60" width="45" height="16" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
+  <text x="47" y="72" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">熱量 Q</text>
+  <rect x="250" y="35" width="225" height="60" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="362" y="53" fill="#38bdf8" font-size="11" font-weight="700" text-anchor="middle">熱量: Q ＝ mcΔT ＝ CΔT</text>
+  <text x="362" y="70" fill="#cbd5e1" font-size="9" text-anchor="middle">熱容量: C ＝ mc [J/K]</text>
+  <text x="362" y="85" fill="#fbbf24" font-size="9" text-anchor="middle">熱量保存: 高温側放熱 ＝ 低温側吸熱</text>
+</svg>
+  <div class="graph-caption">物体が得た熱量 Q は、質量 m、比熱 c、温度変化 ΔT に比例します（Q = mcΔT = CΔT）。</div>
+</div>
 
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
@@ -1267,6 +1578,27 @@ g=10 m/s²
 5. 気体が外部にした仕事を求めなさい。
 6. 気体が受け取った熱量を求めなさい。
 
+<div class="vector-graph-card">
+  <div class="graph-title">📐 比熱・熱容量と熱量保存の法則</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-hc-rose" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#f43f5e"/></marker>
+  </defs>
+  <rect x="80" y="45" width="130" height="85" rx="4" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+  <text x="145" y="75" fill="#38bdf8" font-size="11" font-weight="700" text-anchor="middle">物質 (質量 m)</text>
+  <text x="145" y="95" fill="#94a3b8" font-size="9" text-anchor="middle">比熱 c [J/(g・K)]</text>
+  <text x="145" y="112" fill="#fbbf24" font-size="9" text-anchor="middle">熱容量 C ＝ mc</text>
+  <line x1="30" y1="87" x2="75" y2="87" stroke="#f43f5e" stroke-width="3" marker-end="url(#arr-hc-rose)"/>
+  <rect x="25" y="60" width="45" height="16" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
+  <text x="47" y="72" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">熱量 Q</text>
+  <rect x="250" y="35" width="225" height="60" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="362" y="53" fill="#38bdf8" font-size="11" font-weight="700" text-anchor="middle">熱量: Q ＝ mcΔT ＝ CΔT</text>
+  <text x="362" y="70" fill="#cbd5e1" font-size="9" text-anchor="middle">熱容量: C ＝ mc [J/K]</text>
+  <text x="362" y="85" fill="#fbbf24" font-size="9" text-anchor="middle">熱量保存: 高温側放熱 ＝ 低温側吸熱</text>
+</svg>
+  <div class="graph-caption">物体が得た熱量 Q は、質量 m、比熱 c、温度変化 ΔT に比例します（Q = mcΔT = CΔT）。</div>
+</div>
+
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
 
@@ -1439,6 +1771,22 @@ Bは単原子分子理想気体であり、
 4. 圧縮後のBの温度 T_B2 を求めなさい。
 5. 圧縮後のAの体積 V_A2 を求めなさい。
 6. 圧縮後のAの温度 T_A2 を求めなさい。
+
+<div class="vector-graph-card">
+  <div class="graph-title">📐 気体の状態変化とP-V図のサイクル仕事</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <line x1="50" y1="135" x2="430" y2="135" stroke="#64748b" stroke-width="1.5"/>
+  <line x1="70" y1="145" x2="70" y2="25" stroke="#64748b" stroke-width="1.5"/>
+  <text x="60" y="30" fill="#94a3b8" font-size="10">P</text>
+  <text x="425" y="148" fill="#94a3b8" font-size="10">V</text>
+  <polygon points="120,110 300,110 260,45 120,45" fill="rgba(56,189,248,0.15)" stroke="#38bdf8" stroke-width="2"/>
+  <text x="195" y="82" fill="#38bdf8" font-size="11" font-weight="700" text-anchor="middle">仕事 W (面積)</text>
+  <rect x="310" y="45" width="165" height="45" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="392" y="63" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">第1法則: Q ＝ ΔU ＋ W</text>
+  <text x="392" y="80" fill="#fbbf24" font-size="9" text-anchor="middle">内部エネルギー: U ＝ 3/2 nRT</text>
+</svg>
+  <div class="graph-caption">P-Vグラフで囲まれた面積が、気体が外部にした正味の仕事 W に等しくなります。</div>
+</div>
 
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
@@ -1635,6 +1983,22 @@ $$
 **【問題】**  
 1.0 molの気体が300 K、体積0.0246 m^3にあります。気体定数R=8.31 J/(mol・K)として圧力を求めなさい。
 
+<div class="vector-graph-card">
+  <div class="graph-title">📐 気体の状態変化とP-V図のサイクル仕事</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <line x1="50" y1="135" x2="430" y2="135" stroke="#64748b" stroke-width="1.5"/>
+  <line x1="70" y1="145" x2="70" y2="25" stroke="#64748b" stroke-width="1.5"/>
+  <text x="60" y="30" fill="#94a3b8" font-size="10">P</text>
+  <text x="425" y="148" fill="#94a3b8" font-size="10">V</text>
+  <polygon points="120,110 300,110 260,45 120,45" fill="rgba(56,189,248,0.15)" stroke="#38bdf8" stroke-width="2"/>
+  <text x="195" y="82" fill="#38bdf8" font-size="11" font-weight="700" text-anchor="middle">仕事 W (面積)</text>
+  <rect x="310" y="45" width="165" height="45" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="392" y="63" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">第1法則: Q ＝ ΔU ＋ W</text>
+  <text x="392" y="80" fill="#fbbf24" font-size="9" text-anchor="middle">内部エネルギー: U ＝ 3/2 nRT</text>
+</svg>
+  <div class="graph-caption">P-Vグラフで囲まれた面積が、気体が外部にした正味の仕事 W に等しくなります。</div>
+</div>
+
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
 
@@ -1678,6 +2042,22 @@ $$
 **【問題】**  
 単原子分子理想気体2.0 molを300 Kから450 Kへ変化させます。内部エネルギーの変化を求めなさい。R=8.31 J/(mol・K)とします。
 
+<div class="vector-graph-card">
+  <div class="graph-title">📐 気体の状態変化とP-V図のサイクル仕事</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <line x1="50" y1="135" x2="430" y2="135" stroke="#64748b" stroke-width="1.5"/>
+  <line x1="70" y1="145" x2="70" y2="25" stroke="#64748b" stroke-width="1.5"/>
+  <text x="60" y="30" fill="#94a3b8" font-size="10">P</text>
+  <text x="425" y="148" fill="#94a3b8" font-size="10">V</text>
+  <polygon points="120,110 300,110 260,45 120,45" fill="rgba(56,189,248,0.15)" stroke="#38bdf8" stroke-width="2"/>
+  <text x="195" y="82" fill="#38bdf8" font-size="11" font-weight="700" text-anchor="middle">仕事 W (面積)</text>
+  <rect x="310" y="45" width="165" height="45" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="392" y="63" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">第1法則: Q ＝ ΔU ＋ W</text>
+  <text x="392" y="80" fill="#fbbf24" font-size="9" text-anchor="middle">内部エネルギー: U ＝ 3/2 nRT</text>
+</svg>
+  <div class="graph-caption">P-Vグラフで囲まれた面積が、気体が外部にした正味の仕事 W に等しくなります。</div>
+</div>
+
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
 
@@ -1720,6 +2100,22 @@ $$
 
 **【問題】**  
 単原子分子理想気体n molを、状態(P₀,V₀)から圧力2P₀まで定積加熱し、その後圧力2P₀のまま体積2V₀まで膨張させた。全過程で気体がした仕事、内部エネルギー変化、受け取った熱を求めなさい。
+
+<div class="vector-graph-card">
+  <div class="graph-title">📐 気体の状態変化とP-V図のサイクル仕事</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <line x1="50" y1="135" x2="430" y2="135" stroke="#64748b" stroke-width="1.5"/>
+  <line x1="70" y1="145" x2="70" y2="25" stroke="#64748b" stroke-width="1.5"/>
+  <text x="60" y="30" fill="#94a3b8" font-size="10">P</text>
+  <text x="425" y="148" fill="#94a3b8" font-size="10">V</text>
+  <polygon points="120,110 300,110 260,45 120,45" fill="rgba(56,189,248,0.15)" stroke="#38bdf8" stroke-width="2"/>
+  <text x="195" y="82" fill="#38bdf8" font-size="11" font-weight="700" text-anchor="middle">仕事 W (面積)</text>
+  <rect x="310" y="45" width="165" height="45" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="392" y="63" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">第1法則: Q ＝ ΔU ＋ W</text>
+  <text x="392" y="80" fill="#fbbf24" font-size="9" text-anchor="middle">内部エネルギー: U ＝ 3/2 nRT</text>
+</svg>
+  <div class="graph-caption">P-Vグラフで囲まれた面積が、気体が外部にした正味の仕事 W に等しくなります。</div>
+</div>
 
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>

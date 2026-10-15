@@ -22,6 +22,30 @@ description: 高校物理「力学（Mechanics）」の実践問題・オリジ�
 **【問題】**  
 物体が 180 m の道のりを 30 s で移動した。平均の速さを求めなさい。
 
+<div class="vector-graph-card">
+  <div class="graph-title">📐 等速直線運動と変位・速さの関係</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-um-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-um-slate" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#64748b"/></marker>
+  </defs>
+  <line x1="50" y1="130" x2="450" y2="130" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate)"/>
+  <line x1="70" y1="140" x2="70" y2="25" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate)"/>
+  <text x="60" y="30" fill="#94a3b8" font-size="10">x</text>
+  <text x="445" y="142" fill="#94a3b8" font-size="10">t</text>
+  <line x1="70" y1="130" x2="260" y2="40" stroke="#38bdf8" stroke-width="2.5"/>
+  <circle cx="165" cy="85" r="4" fill="#fbbf24"/>
+  <rect x="135" y="55" width="85" height="18" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
+  <text x="177" y="68" fill="#fbbf24" font-size="10" font-weight="700" text-anchor="middle">傾き ＝ 速さ v</text>
+  <line x1="165" y1="85" x2="165" y2="130" stroke="#64748b" stroke-width="1" stroke-dasharray="3,3"/>
+  <line x1="70" y1="85" x2="165" y2="85" stroke="#64748b" stroke-width="1" stroke-dasharray="3,3"/>
+  <rect x="290" y="35" width="185" height="52" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="382" y="53" fill="#38bdf8" font-size="11" font-weight="700" text-anchor="middle">距離: x ＝ vt</text>
+  <text x="382" y="70" fill="#cbd5e1" font-size="10" text-anchor="middle">速さ: v ＝ x / t (一定)</text>
+</svg>
+  <div class="graph-caption">一定の速さ v で直線上を進む運動では、移動距離 x は時間 t に正比例します（x = vt）。</div>
+</div>
+
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
 
@@ -71,6 +95,39 @@ $$
 **【問題】**  
 物体の速度が 4.0 m/s から 16 m/s まで、 3.0 s で変化した。加速度を求めなさい。
 
+<div class="vector-graph-card">
+  <div class="graph-title">📐 等加速度直線運動の v-t グラフ</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-vt-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-vt-slate" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#64748b"/></marker>
+  </defs>
+  <line x1="50" y1="135" x2="450" y2="135" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-vt-slate)"/>
+  <line x1="70" y1="145" x2="70" y2="20" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-vt-slate)"/>
+  <text x="60" y="25" fill="#94a3b8" font-size="10">v</text>
+  <text x="445" y="148" fill="#94a3b8" font-size="10">t</text>
+  <polygon points="70,105 270,45 270,135 70,135" fill="rgba(56,189,248,0.15)" stroke="none"/>
+  <line x1="70" y1="105" x2="270" y2="45" stroke="#38bdf8" stroke-width="2.5"/>
+  <line x1="270" y1="45" x2="270" y2="135" stroke="#64748b" stroke-width="1" stroke-dasharray="3,3"/>
+  <line x1="70" y1="45" x2="270" y2="45" stroke="#64748b" stroke-width="1" stroke-dasharray="3,3"/>
+  <rect x="35" y="97" width="30" height="16" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="50" y="109" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">v₀</text>
+  <rect x="35" y="37" width="30" height="16" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="50" y="49" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">v</text>
+  <rect x="255" y="140" width="30" height="16" rx="3" fill="#0f172a" stroke="#64748b" stroke-width="1"/>
+  <text x="270" y="152" fill="#cbd5e1" font-size="10" text-anchor="middle">t</text>
+  <rect x="135" y="95" width="85" height="18" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="177" y="108" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">面積 ＝ 変位 x</text>
+  <rect x="150" y="45" width="85" height="18" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
+  <text x="192" y="58" fill="#fbbf24" font-size="10" font-weight="700" text-anchor="middle">傾き ＝ 加速度 a</text>
+  <rect x="305" y="35" width="175" height="58" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="392" y="53" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">v ＝ v₀ ＋ at</text>
+  <text x="392" y="70" fill="#cbd5e1" font-size="10" text-anchor="middle">x ＝ v₀t ＋ ½ at²</text>
+  <text x="392" y="86" fill="#fbbf24" font-size="9" text-anchor="middle">v² − v₀² ＝ 2ax</text>
+</svg>
+  <div class="graph-caption">傾きが加速度 a、グラフ線と t 軸で囲まれた面積が移動距離 x（変位）を表します。</div>
+</div>
+
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
 
@@ -117,6 +174,39 @@ $$
 
 **【問題】**  
 初速度 2.0 m/s の物体が、加速度 3.0 m/s² で 4.0 s 運動した。4秒後の速度を求めなさい。
+
+<div class="vector-graph-card">
+  <div class="graph-title">📐 等加速度直線運動の v-t グラフ</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-vt-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-vt-slate" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#64748b"/></marker>
+  </defs>
+  <line x1="50" y1="135" x2="450" y2="135" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-vt-slate)"/>
+  <line x1="70" y1="145" x2="70" y2="20" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-vt-slate)"/>
+  <text x="60" y="25" fill="#94a3b8" font-size="10">v</text>
+  <text x="445" y="148" fill="#94a3b8" font-size="10">t</text>
+  <polygon points="70,105 270,45 270,135 70,135" fill="rgba(56,189,248,0.15)" stroke="none"/>
+  <line x1="70" y1="105" x2="270" y2="45" stroke="#38bdf8" stroke-width="2.5"/>
+  <line x1="270" y1="45" x2="270" y2="135" stroke="#64748b" stroke-width="1" stroke-dasharray="3,3"/>
+  <line x1="70" y1="45" x2="270" y2="45" stroke="#64748b" stroke-width="1" stroke-dasharray="3,3"/>
+  <rect x="35" y="97" width="30" height="16" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="50" y="109" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">v₀</text>
+  <rect x="35" y="37" width="30" height="16" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="50" y="49" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">v</text>
+  <rect x="255" y="140" width="30" height="16" rx="3" fill="#0f172a" stroke="#64748b" stroke-width="1"/>
+  <text x="270" y="152" fill="#cbd5e1" font-size="10" text-anchor="middle">t</text>
+  <rect x="135" y="95" width="85" height="18" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="177" y="108" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">面積 ＝ 変位 x</text>
+  <rect x="150" y="45" width="85" height="18" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
+  <text x="192" y="58" fill="#fbbf24" font-size="10" font-weight="700" text-anchor="middle">傾き ＝ 加速度 a</text>
+  <rect x="305" y="35" width="175" height="58" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="392" y="53" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">v ＝ v₀ ＋ at</text>
+  <text x="392" y="70" fill="#cbd5e1" font-size="10" text-anchor="middle">x ＝ v₀t ＋ ½ at²</text>
+  <text x="392" y="86" fill="#fbbf24" font-size="9" text-anchor="middle">v² − v₀² ＝ 2ax</text>
+</svg>
+  <div class="graph-caption">傾きが加速度 a、グラフ線と t 軸で囲まれた面積が移動距離 x（変位）を表します。</div>
+</div>
 
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
@@ -167,6 +257,30 @@ $$
 **【問題】**  
 物体を静かに落下させた。空気抵抗を無視する。 2.5 s 後の速さを求めなさい。
 
+<div class="vector-graph-card">
+  <div class="graph-title">📐 等速直線運動と変位・速さの関係</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-um-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-um-slate" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#64748b"/></marker>
+  </defs>
+  <line x1="50" y1="130" x2="450" y2="130" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate)"/>
+  <line x1="70" y1="140" x2="70" y2="25" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate)"/>
+  <text x="60" y="30" fill="#94a3b8" font-size="10">x</text>
+  <text x="445" y="142" fill="#94a3b8" font-size="10">t</text>
+  <line x1="70" y1="130" x2="260" y2="40" stroke="#38bdf8" stroke-width="2.5"/>
+  <circle cx="165" cy="85" r="4" fill="#fbbf24"/>
+  <rect x="135" y="55" width="85" height="18" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
+  <text x="177" y="68" fill="#fbbf24" font-size="10" font-weight="700" text-anchor="middle">傾き ＝ 速さ v</text>
+  <line x1="165" y1="85" x2="165" y2="130" stroke="#64748b" stroke-width="1" stroke-dasharray="3,3"/>
+  <line x1="70" y1="85" x2="165" y2="85" stroke="#64748b" stroke-width="1" stroke-dasharray="3,3"/>
+  <rect x="290" y="35" width="185" height="52" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="382" y="53" fill="#38bdf8" font-size="11" font-weight="700" text-anchor="middle">距離: x ＝ vt</text>
+  <text x="382" y="70" fill="#cbd5e1" font-size="10" text-anchor="middle">速さ: v ＝ x / t (一定)</text>
+</svg>
+  <div class="graph-caption">一定の速さ v で直線上を進む運動では、移動距離 x は時間 t に正比例します（x = vt）。</div>
+</div>
+
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
 
@@ -216,6 +330,39 @@ $$
 **【問題】**  
 質量 4.0 kg の物体に 12 N の合力がはたらく。加速度を求めなさい。
 
+<div class="vector-graph-card">
+  <div class="graph-title">📐 等加速度直線運動の v-t グラフ</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-vt-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-vt-slate" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#64748b"/></marker>
+  </defs>
+  <line x1="50" y1="135" x2="450" y2="135" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-vt-slate)"/>
+  <line x1="70" y1="145" x2="70" y2="20" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-vt-slate)"/>
+  <text x="60" y="25" fill="#94a3b8" font-size="10">v</text>
+  <text x="445" y="148" fill="#94a3b8" font-size="10">t</text>
+  <polygon points="70,105 270,45 270,135 70,135" fill="rgba(56,189,248,0.15)" stroke="none"/>
+  <line x1="70" y1="105" x2="270" y2="45" stroke="#38bdf8" stroke-width="2.5"/>
+  <line x1="270" y1="45" x2="270" y2="135" stroke="#64748b" stroke-width="1" stroke-dasharray="3,3"/>
+  <line x1="70" y1="45" x2="270" y2="45" stroke="#64748b" stroke-width="1" stroke-dasharray="3,3"/>
+  <rect x="35" y="97" width="30" height="16" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="50" y="109" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">v₀</text>
+  <rect x="35" y="37" width="30" height="16" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="50" y="49" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">v</text>
+  <rect x="255" y="140" width="30" height="16" rx="3" fill="#0f172a" stroke="#64748b" stroke-width="1"/>
+  <text x="270" y="152" fill="#cbd5e1" font-size="10" text-anchor="middle">t</text>
+  <rect x="135" y="95" width="85" height="18" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="177" y="108" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">面積 ＝ 変位 x</text>
+  <rect x="150" y="45" width="85" height="18" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
+  <text x="192" y="58" fill="#fbbf24" font-size="10" font-weight="700" text-anchor="middle">傾き ＝ 加速度 a</text>
+  <rect x="305" y="35" width="175" height="58" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="392" y="53" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">v ＝ v₀ ＋ at</text>
+  <text x="392" y="70" fill="#cbd5e1" font-size="10" text-anchor="middle">x ＝ v₀t ＋ ½ at²</text>
+  <text x="392" y="86" fill="#fbbf24" font-size="9" text-anchor="middle">v² − v₀² ＝ 2ax</text>
+</svg>
+  <div class="graph-caption">傾きが加速度 a、グラフ線と t 軸で囲まれた面積が移動距離 x（変位）を表します。</div>
+</div>
+
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
 
@@ -264,6 +411,25 @@ $$
 
 **【問題】**  
 物体を進行方向に 20 N の力で 4.0 m 移動させた。力のした仕事を求めなさい。
+
+<div class="vector-graph-card">
+  <div class="graph-title">📐 力学的エネルギー保存則</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <path d="M 60,30 Q 180,140 440,80" fill="none" stroke="#475569" stroke-width="3"/>
+  <circle cx="80" cy="40" r="10" fill="#fbbf24" stroke="#f59e0b" stroke-width="2"/>
+  <rect x="40" y="60" width="80" height="30" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
+  <text x="80" y="73" fill="#fbbf24" font-size="9" font-weight="700" text-anchor="middle">位置E: mgh</text>
+  <text x="80" y="85" fill="#94a3b8" font-size="8" text-anchor="middle">運動E: 0</text>
+  <circle cx="220" cy="115" r="10" fill="#0284c7" stroke="#38bdf8" stroke-width="2"/>
+  <rect x="180" y="125" width="85" height="30" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="222" y="138" fill="#38bdf8" font-size="9" font-weight="700" text-anchor="middle">運動E: ½mv² (最大)</text>
+  <text x="222" y="150" fill="#94a3b8" font-size="8" text-anchor="middle">位置E: 0 (基準)</text>
+  <rect x="300" y="25" width="170" height="42" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="385" y="42" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">E ＝ ½mv² ＋ mgh ＝ 一定</text>
+  <text x="385" y="58" fill="#cbd5e1" font-size="9" text-anchor="middle">外力の仕事: ΔE ＝ W_外力</text>
+</svg>
+  <div class="graph-caption">保存力のみが仕事をする場合、運動エネルギー K と位置エネルギー U の和は常に一定です。</div>
+</div>
 
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
@@ -316,6 +482,39 @@ $$
 **【問題】**  
 質量 2.0 kg の物体が 5.0 m/s で運動している。運動エネルギーを求めなさい。
 
+<div class="vector-graph-card">
+  <div class="graph-title">📐 直線運動の位置・速度・加速度ベクトル</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-ka-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-ka-rose" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#f43f5e"/></marker>
+    <marker id="arr-ka-slate" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#94a3b8"/></marker>
+  </defs>
+  <line x1="30" y1="120" x2="470" y2="120" stroke="#475569" stroke-width="2"/>
+  <line x1="30" y1="135" x2="470" y2="135" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arr-ka-slate)"/>
+  <rect x="220" y="140" width="60" height="16" rx="3" fill="#0f172a" stroke="#64748b" stroke-width="1"/>
+  <text x="250" y="152" fill="#cbd5e1" font-size="10" text-anchor="middle">x 正方向</text>
+  <circle cx="90" cy="100" r="14" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+  <rect x="75" y="70" width="30" height="15" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="90" y="81" fill="#38bdf8" font-size="9" font-weight="700" text-anchor="middle">t = 0</text>
+  <circle cx="210" cy="100" r="14" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+  <rect x="195" y="70" width="30" height="15" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="210" y="81" fill="#38bdf8" font-size="9" font-weight="700" text-anchor="middle">t₁</text>
+  <circle cx="360" cy="100" r="14" fill="#0284c7" stroke="#38bdf8" stroke-width="2.5"/>
+  <rect x="345" y="70" width="30" height="15" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="360" y="81" fill="#38bdf8" font-size="9" font-weight="700" text-anchor="middle">t₂</text>
+  <line x1="374" y1="95" x2="450" y2="95" stroke="#38bdf8" stroke-width="3" marker-end="url(#arr-ka-cyan)"/>
+  <rect x="400" y="75" width="45" height="16" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="422" y="87" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">速度 v</text>
+  <line x1="374" y1="108" x2="430" y2="108" stroke="#f43f5e" stroke-width="2" marker-end="url(#arr-ka-rose)"/>
+  <rect x="385" y="115" width="55" height="16" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
+  <text x="412" y="127" fill="#f43f5e" font-size="10" font-weight="700" text-anchor="middle">加速度 a</text>
+  <rect x="50" y="15" width="400" height="24" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="250" y="31" fill="#38bdf8" font-size="11" font-weight="700" text-anchor="middle">平均の速度: v ＝ Δx / Δt ,  平均の加速度: a ＝ Δv / Δt</text>
+</svg>
+  <div class="graph-caption">基準点 O と座標軸（正の向き）を定め、速度ベクトルと加速度ベクトルの符号を明確にします。</div>
+</div>
+
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
 
@@ -362,6 +561,31 @@ $$
 
 **【問題】**  
 質量 3.0 kg の物体が右向きに 4.0 m/s で運動している。運動量を求めなさい。
+
+<div class="vector-graph-card">
+  <div class="graph-title">📐 台車の衝突と運動量保存則・反発係数</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-mo-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-mo-amber" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#fbbf24"/></marker>
+  </defs>
+  <line x1="30" y1="130" x2="470" y2="130" stroke="#475569" stroke-width="2"/>
+  <rect x="100" y="90" width="60" height="32" rx="4" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+  <text x="130" y="110" fill="#38bdf8" font-size="11" font-weight="700" text-anchor="middle">台車A (m₁)</text>
+  <line x1="165" y1="106" x2="220" y2="106" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-mo-cyan)"/>
+  <rect x="175" y="85" width="45" height="16" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="197" y="97" fill="#38bdf8" font-size="9" font-weight="700" text-anchor="middle">速度 v₁</text>
+  <rect x="290" y="90" width="60" height="32" rx="4" fill="#1e293b" stroke="#fbbf24" stroke-width="2"/>
+  <text x="320" y="110" fill="#fbbf24" font-size="11" font-weight="700" text-anchor="middle">台車B (m₂)</text>
+  <line x1="355" y1="106" x2="395" y2="106" stroke="#fbbf24" stroke-width="2" marker-end="url(#arr-mo-amber)"/>
+  <rect x="360" y="85" width="45" height="16" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
+  <text x="382" y="97" fill="#fbbf24" font-size="9" text-anchor="middle">速度 v₂</text>
+  <rect x="60" y="20" width="380" height="42" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="250" y="38" fill="#38bdf8" font-size="11" font-weight="700" text-anchor="middle">運動量保存: m₁v₁ ＋ m₂v₂ ＝ m₁v₁′ ＋ m₂v₂′</text>
+  <text x="250" y="53" fill="#fbbf24" font-size="10" text-anchor="middle">反発係数: e ＝ − (v₁′ − v₂′) / (v₁ − v₂)</text>
+</svg>
+  <div class="graph-caption">外力が働かない系では、衝突前後で全運動量が一定に保たれます（m₁v₁ + m₂v₂ = 一定）。</div>
+</div>
 
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
@@ -413,6 +637,39 @@ $$
 物体が半径 2.0 m の円周上を、速さ 6.0 m/s で等速円運動している。
 
 向心加速度を求めなさい。
+
+<div class="vector-graph-card">
+  <div class="graph-title">📐 等加速度直線運動の v-t グラフ</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-vt-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-vt-slate" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#64748b"/></marker>
+  </defs>
+  <line x1="50" y1="135" x2="450" y2="135" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-vt-slate)"/>
+  <line x1="70" y1="145" x2="70" y2="20" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-vt-slate)"/>
+  <text x="60" y="25" fill="#94a3b8" font-size="10">v</text>
+  <text x="445" y="148" fill="#94a3b8" font-size="10">t</text>
+  <polygon points="70,105 270,45 270,135 70,135" fill="rgba(56,189,248,0.15)" stroke="none"/>
+  <line x1="70" y1="105" x2="270" y2="45" stroke="#38bdf8" stroke-width="2.5"/>
+  <line x1="270" y1="45" x2="270" y2="135" stroke="#64748b" stroke-width="1" stroke-dasharray="3,3"/>
+  <line x1="70" y1="45" x2="270" y2="45" stroke="#64748b" stroke-width="1" stroke-dasharray="3,3"/>
+  <rect x="35" y="97" width="30" height="16" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="50" y="109" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">v₀</text>
+  <rect x="35" y="37" width="30" height="16" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="50" y="49" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">v</text>
+  <rect x="255" y="140" width="30" height="16" rx="3" fill="#0f172a" stroke="#64748b" stroke-width="1"/>
+  <text x="270" y="152" fill="#cbd5e1" font-size="10" text-anchor="middle">t</text>
+  <rect x="135" y="95" width="85" height="18" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="177" y="108" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">面積 ＝ 変位 x</text>
+  <rect x="150" y="45" width="85" height="18" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
+  <text x="192" y="58" fill="#fbbf24" font-size="10" font-weight="700" text-anchor="middle">傾き ＝ 加速度 a</text>
+  <rect x="305" y="35" width="175" height="58" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="392" y="53" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">v ＝ v₀ ＋ at</text>
+  <text x="392" y="70" fill="#cbd5e1" font-size="10" text-anchor="middle">x ＝ v₀t ＋ ½ at²</text>
+  <text x="392" y="86" fill="#fbbf24" font-size="9" text-anchor="middle">v² − v₀² ＝ 2ax</text>
+</svg>
+  <div class="graph-caption">傾きが加速度 a、グラフ線と t 軸で囲まれた面積が移動距離 x（変位）を表します。</div>
+</div>
 
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
@@ -471,6 +728,34 @@ $$
 
 ばねの弾性力の大きさを求めなさい。
 
+<div class="vector-graph-card">
+  <div class="graph-title">📐 ばねの弾性力と単振動モデル</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-sp-rose" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#f43f5e"/></marker>
+    <marker id="arr-sp-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+  </defs>
+  <line x1="50" y1="30" x2="50" y2="130" stroke="#94a3b8" stroke-width="3"/>
+  <line x1="50" y1="120" x2="450" y2="120" stroke="#475569" stroke-width="2"/>
+  <path d="M 50,80 L 80,80 L 95,65 L 115,95 L 135,65 L 155,95 L 175,65 L 195,95 L 215,65 L 235,95 L 250,80 L 270,80" fill="none" stroke="#38bdf8" stroke-width="3"/>
+  <rect x="270" y="60" width="45" height="40" rx="3" fill="#1e293b" stroke="#fbbf24" stroke-width="2"/>
+  <text x="292" y="84" fill="#fbbf24" font-size="11" font-weight="700" text-anchor="middle">質量 m</text>
+  <line x1="220" y1="45" x2="220" y2="120" stroke="#64748b" stroke-width="1.5" stroke-dasharray="3,3"/>
+  <rect x="185" y="25" width="70" height="16" rx="3" fill="#0f172a" stroke="#64748b" stroke-width="1"/>
+  <text x="220" y="37" fill="#cbd5e1" font-size="9" text-anchor="middle">自然長位置</text>
+  <line x1="220" y1="110" x2="270" y2="110" stroke="#38bdf8" stroke-width="2" marker-end="url(#arr-sp-cyan)"/>
+  <rect x="235" y="125" width="40" height="15" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="255" y="136" fill="#38bdf8" font-size="9" font-weight="700" text-anchor="middle">変位 x</text>
+  <line x1="270" y1="75" x2="210" y2="75" stroke="#f43f5e" stroke-width="2.5" marker-end="url(#arr-sp-rose)"/>
+  <rect x="175" y="55" width="80" height="16" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
+  <text x="215" y="67" fill="#f43f5e" font-size="10" font-weight="700" text-anchor="middle">復元力 F ＝ -kx</text>
+  <rect x="330" y="35" width="140" height="42" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="400" y="52" fill="#38bdf8" font-size="9" font-weight="700" text-anchor="middle">周期 T ＝ 2π√(m/k)</text>
+  <text x="400" y="68" fill="#cbd5e1" font-size="9" text-anchor="middle">エネルギー E ＝ ½mv² ＋ ½kx²</text>
+</svg>
+  <div class="graph-caption">自然長からの変位 x に対して、常に平衡点へ引き戻す復元力 F = -kx が働きます。</div>
+</div>
+
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
 
@@ -521,6 +806,39 @@ $$
 長さ 1.0 m の単振り子が小さく振動している。
 
 重力加速度を 9.8 m/s²、円周率を π=3.14 として、周期を求めなさい。
+
+<div class="vector-graph-card">
+  <div class="graph-title">📐 等加速度直線運動の v-t グラフ</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-vt-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-vt-slate" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#64748b"/></marker>
+  </defs>
+  <line x1="50" y1="135" x2="450" y2="135" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-vt-slate)"/>
+  <line x1="70" y1="145" x2="70" y2="20" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-vt-slate)"/>
+  <text x="60" y="25" fill="#94a3b8" font-size="10">v</text>
+  <text x="445" y="148" fill="#94a3b8" font-size="10">t</text>
+  <polygon points="70,105 270,45 270,135 70,135" fill="rgba(56,189,248,0.15)" stroke="none"/>
+  <line x1="70" y1="105" x2="270" y2="45" stroke="#38bdf8" stroke-width="2.5"/>
+  <line x1="270" y1="45" x2="270" y2="135" stroke="#64748b" stroke-width="1" stroke-dasharray="3,3"/>
+  <line x1="70" y1="45" x2="270" y2="45" stroke="#64748b" stroke-width="1" stroke-dasharray="3,3"/>
+  <rect x="35" y="97" width="30" height="16" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="50" y="109" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">v₀</text>
+  <rect x="35" y="37" width="30" height="16" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="50" y="49" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">v</text>
+  <rect x="255" y="140" width="30" height="16" rx="3" fill="#0f172a" stroke="#64748b" stroke-width="1"/>
+  <text x="270" y="152" fill="#cbd5e1" font-size="10" text-anchor="middle">t</text>
+  <rect x="135" y="95" width="85" height="18" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="177" y="108" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">面積 ＝ 変位 x</text>
+  <rect x="150" y="45" width="85" height="18" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
+  <text x="192" y="58" fill="#fbbf24" font-size="10" font-weight="700" text-anchor="middle">傾き ＝ 加速度 a</text>
+  <rect x="305" y="35" width="175" height="58" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="392" y="53" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">v ＝ v₀ ＋ at</text>
+  <text x="392" y="70" fill="#cbd5e1" font-size="10" text-anchor="middle">x ＝ v₀t ＋ ½ at²</text>
+  <text x="392" y="86" fill="#fbbf24" font-size="9" text-anchor="middle">v² − v₀² ＝ 2ax</text>
+</svg>
+  <div class="graph-caption">傾きが加速度 a、グラフ線と t 軸で囲まれた面積が移動距離 x（変位）を表します。</div>
+</div>
 
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
@@ -573,6 +891,39 @@ $$
 **【問題】**  
 初速度2.0 m/s、加速度3.0 m/s^2で4.0 s運動する物体の速度を求めなさい。
 
+<div class="vector-graph-card">
+  <div class="graph-title">📐 等加速度直線運動の v-t グラフ</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-vt-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-vt-slate" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#64748b"/></marker>
+  </defs>
+  <line x1="50" y1="135" x2="450" y2="135" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-vt-slate)"/>
+  <line x1="70" y1="145" x2="70" y2="20" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-vt-slate)"/>
+  <text x="60" y="25" fill="#94a3b8" font-size="10">v</text>
+  <text x="445" y="148" fill="#94a3b8" font-size="10">t</text>
+  <polygon points="70,105 270,45 270,135 70,135" fill="rgba(56,189,248,0.15)" stroke="none"/>
+  <line x1="70" y1="105" x2="270" y2="45" stroke="#38bdf8" stroke-width="2.5"/>
+  <line x1="270" y1="45" x2="270" y2="135" stroke="#64748b" stroke-width="1" stroke-dasharray="3,3"/>
+  <line x1="70" y1="45" x2="270" y2="45" stroke="#64748b" stroke-width="1" stroke-dasharray="3,3"/>
+  <rect x="35" y="97" width="30" height="16" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="50" y="109" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">v₀</text>
+  <rect x="35" y="37" width="30" height="16" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="50" y="49" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">v</text>
+  <rect x="255" y="140" width="30" height="16" rx="3" fill="#0f172a" stroke="#64748b" stroke-width="1"/>
+  <text x="270" y="152" fill="#cbd5e1" font-size="10" text-anchor="middle">t</text>
+  <rect x="135" y="95" width="85" height="18" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="177" y="108" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">面積 ＝ 変位 x</text>
+  <rect x="150" y="45" width="85" height="18" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
+  <text x="192" y="58" fill="#fbbf24" font-size="10" font-weight="700" text-anchor="middle">傾き ＝ 加速度 a</text>
+  <rect x="305" y="35" width="175" height="58" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="392" y="53" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">v ＝ v₀ ＋ at</text>
+  <text x="392" y="70" fill="#cbd5e1" font-size="10" text-anchor="middle">x ＝ v₀t ＋ ½ at²</text>
+  <text x="392" y="86" fill="#fbbf24" font-size="9" text-anchor="middle">v² − v₀² ＝ 2ax</text>
+</svg>
+  <div class="graph-caption">傾きが加速度 a、グラフ線と t 軸で囲まれた面積が移動距離 x（変位）を表します。</div>
+</div>
+
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
 
@@ -607,19 +958,52 @@ $$
 
 ---
 
-### 第13問: 問題タイトル
+### 第13問: 等加速度直線運動の変位と移動距離
 
 <div class="problem-card">
 
 <div class="level-tag">⭐ 基礎 (Level 1/9)</div>
 
 **【問題】**  
-問題文
+初速度 4.0 m/s で直線上を運動していた物体が、一定の加速度 2.0 m/s² で加速しながら 5.0 s 間進んだ。この 5.0 s 間に物体が進んだ距離（変位）を求めなさい。
+
+<div class="vector-graph-card">
+  <div class="graph-title">📐 等加速度直線運動の v-t グラフ</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-vt-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-vt-slate" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#64748b"/></marker>
+  </defs>
+  <line x1="50" y1="135" x2="450" y2="135" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-vt-slate)"/>
+  <line x1="70" y1="145" x2="70" y2="20" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-vt-slate)"/>
+  <text x="60" y="25" fill="#94a3b8" font-size="10">v</text>
+  <text x="445" y="148" fill="#94a3b8" font-size="10">t</text>
+  <polygon points="70,105 270,45 270,135 70,135" fill="rgba(56,189,248,0.15)" stroke="none"/>
+  <line x1="70" y1="105" x2="270" y2="45" stroke="#38bdf8" stroke-width="2.5"/>
+  <line x1="270" y1="45" x2="270" y2="135" stroke="#64748b" stroke-width="1" stroke-dasharray="3,3"/>
+  <line x1="70" y1="45" x2="270" y2="45" stroke="#64748b" stroke-width="1" stroke-dasharray="3,3"/>
+  <rect x="35" y="97" width="30" height="16" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="50" y="109" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">v₀</text>
+  <rect x="35" y="37" width="30" height="16" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="50" y="49" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">v</text>
+  <rect x="255" y="140" width="30" height="16" rx="3" fill="#0f172a" stroke="#64748b" stroke-width="1"/>
+  <text x="270" y="152" fill="#cbd5e1" font-size="10" text-anchor="middle">t</text>
+  <rect x="135" y="95" width="85" height="18" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="177" y="108" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">面積 ＝ 変位 x</text>
+  <rect x="150" y="45" width="85" height="18" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
+  <text x="192" y="58" fill="#fbbf24" font-size="10" font-weight="700" text-anchor="middle">傾き ＝ 加速度 a</text>
+  <rect x="305" y="35" width="175" height="58" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="392" y="53" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">v ＝ v₀ ＋ at</text>
+  <text x="392" y="70" fill="#cbd5e1" font-size="10" text-anchor="middle">x ＝ v₀t ＋ ½ at²</text>
+  <text x="392" y="86" fill="#fbbf24" font-size="9" text-anchor="middle">v² − v₀² ＝ 2ax</text>
+</svg>
+  <div class="graph-caption">傾きが加速度 a、グラフ線と t 軸で囲まれた面積が移動距離 x（変位）を表します。</div>
+</div>
 
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
 
-公式を選ぶためのヒント。答えを直接書かない。
+初速度 v₀、加速度 a、時間 t から変位 x を求める等加速度直線運動の公式 x = v₀t + ½at² を用います。
 
 </details>
 
@@ -627,18 +1011,23 @@ $$
 <summary>✅ 解答と丁寧な解説・計算プロセス</summary>
 
 **【正解】**  
-最終的な答え
+45 m
 
 **【詳しい解説】**  
-代入、計算、単位の確認を含む解説
+等加速度直線運動の変位の式に各数値を代入します。
+x = v₀t + ½at²
+x = (4.0 × 5.0) + ½ × 2.0 × (5.0)²
+x = 20 + 25 = 45 m
+
+間違えやすいポイント: ½ at² の t² を計算し忘れないように注意しましょう。
 
 **【立式と計算ステップ】**
 
-**Step 1: 使用した公式**
-$$
-画面に表示する短い式
-$$
-*※ 式の意味や使う条件*
+**Step 1: 変位の使用公式**
+$
+x = v_0 t + \frac{1}{2} a t^2
+$
+*※ 初速度による進み（v₀t）と加速度による進み（½at²）の和です。*
 
 </details>
 
@@ -658,6 +1047,31 @@ $$
 
 **【問題】**  
 質量2.0 kgの台車Aが右向きに3.0 m/sで進み、静止していた質量1.0 kgの台車Bと衝突して一体になった。衝突後の速度を求めなさい。摩擦は無視する。
+
+<div class="vector-graph-card">
+  <div class="graph-title">📐 台車の衝突と運動量保存則・反発係数</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-mo-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-mo-amber" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#fbbf24"/></marker>
+  </defs>
+  <line x1="30" y1="130" x2="470" y2="130" stroke="#475569" stroke-width="2"/>
+  <rect x="100" y="90" width="60" height="32" rx="4" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+  <text x="130" y="110" fill="#38bdf8" font-size="11" font-weight="700" text-anchor="middle">台車A (m₁)</text>
+  <line x1="165" y1="106" x2="220" y2="106" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-mo-cyan)"/>
+  <rect x="175" y="85" width="45" height="16" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="197" y="97" fill="#38bdf8" font-size="9" font-weight="700" text-anchor="middle">速度 v₁</text>
+  <rect x="290" y="90" width="60" height="32" rx="4" fill="#1e293b" stroke="#fbbf24" stroke-width="2"/>
+  <text x="320" y="110" fill="#fbbf24" font-size="11" font-weight="700" text-anchor="middle">台車B (m₂)</text>
+  <line x1="355" y1="106" x2="395" y2="106" stroke="#fbbf24" stroke-width="2" marker-end="url(#arr-mo-amber)"/>
+  <rect x="360" y="85" width="45" height="16" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
+  <text x="382" y="97" fill="#fbbf24" font-size="9" text-anchor="middle">速度 v₂</text>
+  <rect x="60" y="20" width="380" height="42" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="250" y="38" fill="#38bdf8" font-size="11" font-weight="700" text-anchor="middle">運動量保存: m₁v₁ ＋ m₂v₂ ＝ m₁v₁′ ＋ m₂v₂′</text>
+  <text x="250" y="53" fill="#fbbf24" font-size="10" text-anchor="middle">反発係数: e ＝ − (v₁′ − v₂′) / (v₁ − v₂)</text>
+</svg>
+  <div class="graph-caption">外力が働かない系では、衝突前後で全運動量が一定に保たれます（m₁v₁ + m₂v₂ = 一定）。</div>
+</div>
 
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
@@ -709,6 +1123,39 @@ $$
 物体が東向きに 60 m 進んだ後、西向きに 20 m 戻った。全体に 10 s かかった。
 
 東向きを正として、平均速度を求めなさい。
+
+<div class="vector-graph-card">
+  <div class="graph-title">📐 直線運動の位置・速度・加速度ベクトル</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-ka-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-ka-rose" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#f43f5e"/></marker>
+    <marker id="arr-ka-slate" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#94a3b8"/></marker>
+  </defs>
+  <line x1="30" y1="120" x2="470" y2="120" stroke="#475569" stroke-width="2"/>
+  <line x1="30" y1="135" x2="470" y2="135" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arr-ka-slate)"/>
+  <rect x="220" y="140" width="60" height="16" rx="3" fill="#0f172a" stroke="#64748b" stroke-width="1"/>
+  <text x="250" y="152" fill="#cbd5e1" font-size="10" text-anchor="middle">x 正方向</text>
+  <circle cx="90" cy="100" r="14" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+  <rect x="75" y="70" width="30" height="15" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="90" y="81" fill="#38bdf8" font-size="9" font-weight="700" text-anchor="middle">t = 0</text>
+  <circle cx="210" cy="100" r="14" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+  <rect x="195" y="70" width="30" height="15" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="210" y="81" fill="#38bdf8" font-size="9" font-weight="700" text-anchor="middle">t₁</text>
+  <circle cx="360" cy="100" r="14" fill="#0284c7" stroke="#38bdf8" stroke-width="2.5"/>
+  <rect x="345" y="70" width="30" height="15" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="360" y="81" fill="#38bdf8" font-size="9" font-weight="700" text-anchor="middle">t₂</text>
+  <line x1="374" y1="95" x2="450" y2="95" stroke="#38bdf8" stroke-width="3" marker-end="url(#arr-ka-cyan)"/>
+  <rect x="400" y="75" width="45" height="16" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="422" y="87" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">速度 v</text>
+  <line x1="374" y1="108" x2="430" y2="108" stroke="#f43f5e" stroke-width="2" marker-end="url(#arr-ka-rose)"/>
+  <rect x="385" y="115" width="55" height="16" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
+  <text x="412" y="127" fill="#f43f5e" font-size="10" font-weight="700" text-anchor="middle">加速度 a</text>
+  <rect x="50" y="15" width="400" height="24" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="250" y="31" fill="#38bdf8" font-size="11" font-weight="700" text-anchor="middle">平均の速度: v ＝ Δx / Δt ,  平均の加速度: a ＝ Δv / Δt</text>
+</svg>
+  <div class="graph-caption">基準点 O と座標軸（正の向き）を定め、速度ベクトルと加速度ベクトルの符号を明確にします。</div>
+</div>
 
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
@@ -765,6 +1212,39 @@ $$
 **【問題】**  
 初速度 5.0 m/s の物体が、加速度 2.0 m/s² で 3.0 s 運動した。この間の変位を求めなさい。
 
+<div class="vector-graph-card">
+  <div class="graph-title">📐 等加速度直線運動の v-t グラフ</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-vt-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-vt-slate" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#64748b"/></marker>
+  </defs>
+  <line x1="50" y1="135" x2="450" y2="135" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-vt-slate)"/>
+  <line x1="70" y1="145" x2="70" y2="20" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-vt-slate)"/>
+  <text x="60" y="25" fill="#94a3b8" font-size="10">v</text>
+  <text x="445" y="148" fill="#94a3b8" font-size="10">t</text>
+  <polygon points="70,105 270,45 270,135 70,135" fill="rgba(56,189,248,0.15)" stroke="none"/>
+  <line x1="70" y1="105" x2="270" y2="45" stroke="#38bdf8" stroke-width="2.5"/>
+  <line x1="270" y1="45" x2="270" y2="135" stroke="#64748b" stroke-width="1" stroke-dasharray="3,3"/>
+  <line x1="70" y1="45" x2="270" y2="45" stroke="#64748b" stroke-width="1" stroke-dasharray="3,3"/>
+  <rect x="35" y="97" width="30" height="16" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="50" y="109" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">v₀</text>
+  <rect x="35" y="37" width="30" height="16" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="50" y="49" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">v</text>
+  <rect x="255" y="140" width="30" height="16" rx="3" fill="#0f172a" stroke="#64748b" stroke-width="1"/>
+  <text x="270" y="152" fill="#cbd5e1" font-size="10" text-anchor="middle">t</text>
+  <rect x="135" y="95" width="85" height="18" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="177" y="108" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">面積 ＝ 変位 x</text>
+  <rect x="150" y="45" width="85" height="18" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
+  <text x="192" y="58" fill="#fbbf24" font-size="10" font-weight="700" text-anchor="middle">傾き ＝ 加速度 a</text>
+  <rect x="305" y="35" width="175" height="58" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="392" y="53" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">v ＝ v₀ ＋ at</text>
+  <text x="392" y="70" fill="#cbd5e1" font-size="10" text-anchor="middle">x ＝ v₀t ＋ ½ at²</text>
+  <text x="392" y="86" fill="#fbbf24" font-size="9" text-anchor="middle">v² − v₀² ＝ 2ax</text>
+</svg>
+  <div class="graph-caption">傾きが加速度 a、グラフ線と t 軸で囲まれた面積が移動距離 x（変位）を表します。</div>
+</div>
+
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
 
@@ -817,6 +1297,39 @@ $$
 自動車が 24 m/s で進んでいる。ブレーキをかけると、一定の加速度 -6.0 m/s² で減速した。
 
 停止するまでに進む距離を求めなさい。
+
+<div class="vector-graph-card">
+  <div class="graph-title">📐 等加速度直線運動の v-t グラフ</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-vt-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-vt-slate" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#64748b"/></marker>
+  </defs>
+  <line x1="50" y1="135" x2="450" y2="135" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-vt-slate)"/>
+  <line x1="70" y1="145" x2="70" y2="20" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-vt-slate)"/>
+  <text x="60" y="25" fill="#94a3b8" font-size="10">v</text>
+  <text x="445" y="148" fill="#94a3b8" font-size="10">t</text>
+  <polygon points="70,105 270,45 270,135 70,135" fill="rgba(56,189,248,0.15)" stroke="none"/>
+  <line x1="70" y1="105" x2="270" y2="45" stroke="#38bdf8" stroke-width="2.5"/>
+  <line x1="270" y1="45" x2="270" y2="135" stroke="#64748b" stroke-width="1" stroke-dasharray="3,3"/>
+  <line x1="70" y1="45" x2="270" y2="45" stroke="#64748b" stroke-width="1" stroke-dasharray="3,3"/>
+  <rect x="35" y="97" width="30" height="16" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="50" y="109" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">v₀</text>
+  <rect x="35" y="37" width="30" height="16" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="50" y="49" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">v</text>
+  <rect x="255" y="140" width="30" height="16" rx="3" fill="#0f172a" stroke="#64748b" stroke-width="1"/>
+  <text x="270" y="152" fill="#cbd5e1" font-size="10" text-anchor="middle">t</text>
+  <rect x="135" y="95" width="85" height="18" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="177" y="108" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">面積 ＝ 変位 x</text>
+  <rect x="150" y="45" width="85" height="18" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
+  <text x="192" y="58" fill="#fbbf24" font-size="10" font-weight="700" text-anchor="middle">傾き ＝ 加速度 a</text>
+  <rect x="305" y="35" width="175" height="58" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="392" y="53" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">v ＝ v₀ ＋ at</text>
+  <text x="392" y="70" fill="#cbd5e1" font-size="10" text-anchor="middle">x ＝ v₀t ＋ ½ at²</text>
+  <text x="392" y="86" fill="#fbbf24" font-size="9" text-anchor="middle">v² − v₀² ＝ 2ax</text>
+</svg>
+  <div class="graph-caption">傾きが加速度 a、グラフ線と t 軸で囲まれた面積が移動距離 x（変位）を表します。</div>
+</div>
 
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
@@ -871,6 +1384,33 @@ $$
 **【問題】**  
 物体を鉛直上向きに 29.4 m/s で投げ上げた。最高点に達するまでの時間を求めなさい。
 
+<div class="vector-graph-card">
+  <div class="graph-title">📐 鉛直投げ上げ・自由落下の運動と最高点</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-ff-rose" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#f43f5e"/></marker>
+    <marker id="arr-ff-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+  </defs>
+  <line x1="40" y1="140" x2="460" y2="140" stroke="#475569" stroke-width="2"/>
+  <line x1="120" y1="140" x2="120" y2="25" stroke="#38bdf8" stroke-width="2" stroke-dasharray="3,3"/>
+  <circle cx="120" cy="130" r="10" fill="#0284c7" stroke="#38bdf8" stroke-width="2"/>
+  <line x1="120" y1="120" x2="120" y2="70" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-ff-cyan)"/>
+  <rect x="70" y="85" width="45" height="16" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="92" y="97" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">初速 v₀</text>
+  <circle cx="120" cy="30" r="10" fill="#fbbf24" stroke="#f59e0b" stroke-width="2"/>
+  <rect x="140" y="22" width="75" height="16" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
+  <text x="177" y="34" fill="#fbbf24" font-size="10" font-weight="700" text-anchor="middle">最高点 (v＝0)</text>
+  <line x1="220" y1="40" x2="220" y2="85" stroke="#f43f5e" stroke-width="2" marker-end="url(#arr-ff-rose)"/>
+  <rect x="230" y="55" width="80" height="16" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
+  <text x="270" y="67" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">重力加速度 g</text>
+  <rect x="300" y="25" width="180" height="58" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="390" y="43" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">最高点到達時刻: t ＝ v₀/g</text>
+  <text x="390" y="60" fill="#cbd5e1" font-size="10" text-anchor="middle">最高点の高さ: h ＝ v₀²/(2g)</text>
+  <text x="390" y="75" fill="#fbbf24" font-size="9" text-anchor="middle">落下時刻: t ＝ 2v₀/g</text>
+</svg>
+  <div class="graph-caption">鉛直上向きを正とすると加速度は -g となり、最高点では鉛直速度が v = 0 となります。</div>
+</div>
+
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
 
@@ -920,6 +1460,33 @@ $$
 **【問題】**  
 物体を地面から鉛直上向きに 19.6 m/s で投げ上げた。最高点の地面からの高さを求めなさい。
 
+<div class="vector-graph-card">
+  <div class="graph-title">📐 鉛直投げ上げ・自由落下の運動と最高点</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-ff-rose" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#f43f5e"/></marker>
+    <marker id="arr-ff-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+  </defs>
+  <line x1="40" y1="140" x2="460" y2="140" stroke="#475569" stroke-width="2"/>
+  <line x1="120" y1="140" x2="120" y2="25" stroke="#38bdf8" stroke-width="2" stroke-dasharray="3,3"/>
+  <circle cx="120" cy="130" r="10" fill="#0284c7" stroke="#38bdf8" stroke-width="2"/>
+  <line x1="120" y1="120" x2="120" y2="70" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-ff-cyan)"/>
+  <rect x="70" y="85" width="45" height="16" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="92" y="97" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">初速 v₀</text>
+  <circle cx="120" cy="30" r="10" fill="#fbbf24" stroke="#f59e0b" stroke-width="2"/>
+  <rect x="140" y="22" width="75" height="16" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
+  <text x="177" y="34" fill="#fbbf24" font-size="10" font-weight="700" text-anchor="middle">最高点 (v＝0)</text>
+  <line x1="220" y1="40" x2="220" y2="85" stroke="#f43f5e" stroke-width="2" marker-end="url(#arr-ff-rose)"/>
+  <rect x="230" y="55" width="80" height="16" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
+  <text x="270" y="67" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">重力加速度 g</text>
+  <rect x="300" y="25" width="180" height="58" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="390" y="43" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">最高点到達時刻: t ＝ v₀/g</text>
+  <text x="390" y="60" fill="#cbd5e1" font-size="10" text-anchor="middle">最高点の高さ: h ＝ v₀²/(2g)</text>
+  <text x="390" y="75" fill="#fbbf24" font-size="9" text-anchor="middle">落下時刻: t ＝ 2v₀/g</text>
+</svg>
+  <div class="graph-caption">鉛直上向きを正とすると加速度は -g となり、最高点では鉛直速度が v = 0 となります。</div>
+</div>
+
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
 
@@ -968,6 +1535,39 @@ $$
 質量 3.0 kg の物体を右向きに 15 N で引いた。物体には左向きに 6.0 N の摩擦力がはたらいた。
 
 加速度を求めなさい。
+
+<div class="vector-graph-card">
+  <div class="graph-title">📐 等加速度直線運動の v-t グラフ</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-vt-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-vt-slate" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#64748b"/></marker>
+  </defs>
+  <line x1="50" y1="135" x2="450" y2="135" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-vt-slate)"/>
+  <line x1="70" y1="145" x2="70" y2="20" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-vt-slate)"/>
+  <text x="60" y="25" fill="#94a3b8" font-size="10">v</text>
+  <text x="445" y="148" fill="#94a3b8" font-size="10">t</text>
+  <polygon points="70,105 270,45 270,135 70,135" fill="rgba(56,189,248,0.15)" stroke="none"/>
+  <line x1="70" y1="105" x2="270" y2="45" stroke="#38bdf8" stroke-width="2.5"/>
+  <line x1="270" y1="45" x2="270" y2="135" stroke="#64748b" stroke-width="1" stroke-dasharray="3,3"/>
+  <line x1="70" y1="45" x2="270" y2="45" stroke="#64748b" stroke-width="1" stroke-dasharray="3,3"/>
+  <rect x="35" y="97" width="30" height="16" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="50" y="109" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">v₀</text>
+  <rect x="35" y="37" width="30" height="16" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="50" y="49" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">v</text>
+  <rect x="255" y="140" width="30" height="16" rx="3" fill="#0f172a" stroke="#64748b" stroke-width="1"/>
+  <text x="270" y="152" fill="#cbd5e1" font-size="10" text-anchor="middle">t</text>
+  <rect x="135" y="95" width="85" height="18" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="177" y="108" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">面積 ＝ 変位 x</text>
+  <rect x="150" y="45" width="85" height="18" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
+  <text x="192" y="58" fill="#fbbf24" font-size="10" font-weight="700" text-anchor="middle">傾き ＝ 加速度 a</text>
+  <rect x="305" y="35" width="175" height="58" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="392" y="53" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">v ＝ v₀ ＋ at</text>
+  <text x="392" y="70" fill="#cbd5e1" font-size="10" text-anchor="middle">x ＝ v₀t ＋ ½ at²</text>
+  <text x="392" y="86" fill="#fbbf24" font-size="9" text-anchor="middle">v² − v₀² ＝ 2ax</text>
+</svg>
+  <div class="graph-caption">傾きが加速度 a、グラフ線と t 軸で囲まれた面積が移動距離 x（変位）を表します。</div>
+</div>
 
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
@@ -1024,6 +1624,39 @@ sin30°=0.50
 
 として、加速度を求めなさい。
 
+<div class="vector-graph-card">
+  <div class="graph-title">📐 等加速度直線運動の v-t グラフ</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-vt-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-vt-slate" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#64748b"/></marker>
+  </defs>
+  <line x1="50" y1="135" x2="450" y2="135" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-vt-slate)"/>
+  <line x1="70" y1="145" x2="70" y2="20" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-vt-slate)"/>
+  <text x="60" y="25" fill="#94a3b8" font-size="10">v</text>
+  <text x="445" y="148" fill="#94a3b8" font-size="10">t</text>
+  <polygon points="70,105 270,45 270,135 70,135" fill="rgba(56,189,248,0.15)" stroke="none"/>
+  <line x1="70" y1="105" x2="270" y2="45" stroke="#38bdf8" stroke-width="2.5"/>
+  <line x1="270" y1="45" x2="270" y2="135" stroke="#64748b" stroke-width="1" stroke-dasharray="3,3"/>
+  <line x1="70" y1="45" x2="270" y2="45" stroke="#64748b" stroke-width="1" stroke-dasharray="3,3"/>
+  <rect x="35" y="97" width="30" height="16" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="50" y="109" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">v₀</text>
+  <rect x="35" y="37" width="30" height="16" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="50" y="49" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">v</text>
+  <rect x="255" y="140" width="30" height="16" rx="3" fill="#0f172a" stroke="#64748b" stroke-width="1"/>
+  <text x="270" y="152" fill="#cbd5e1" font-size="10" text-anchor="middle">t</text>
+  <rect x="135" y="95" width="85" height="18" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="177" y="108" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">面積 ＝ 変位 x</text>
+  <rect x="150" y="45" width="85" height="18" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
+  <text x="192" y="58" fill="#fbbf24" font-size="10" font-weight="700" text-anchor="middle">傾き ＝ 加速度 a</text>
+  <rect x="305" y="35" width="175" height="58" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="392" y="53" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">v ＝ v₀ ＋ at</text>
+  <text x="392" y="70" fill="#cbd5e1" font-size="10" text-anchor="middle">x ＝ v₀t ＋ ½ at²</text>
+  <text x="392" y="86" fill="#fbbf24" font-size="9" text-anchor="middle">v² − v₀² ＝ 2ax</text>
+</svg>
+  <div class="graph-caption">傾きが加速度 a、グラフ線と t 軸で囲まれた面積が移動距離 x（変位）を表します。</div>
+</div>
+
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
 
@@ -1078,6 +1711,30 @@ $$
 
 **【問題】**  
 物体を高さ 20 m から静かに落下させた。空気抵抗を無視する。地面に達する直前の速さを求めなさい。
+
+<div class="vector-graph-card">
+  <div class="graph-title">📐 等速直線運動と変位・速さの関係</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-um-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-um-slate" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#64748b"/></marker>
+  </defs>
+  <line x1="50" y1="130" x2="450" y2="130" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate)"/>
+  <line x1="70" y1="140" x2="70" y2="25" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate)"/>
+  <text x="60" y="30" fill="#94a3b8" font-size="10">x</text>
+  <text x="445" y="142" fill="#94a3b8" font-size="10">t</text>
+  <line x1="70" y1="130" x2="260" y2="40" stroke="#38bdf8" stroke-width="2.5"/>
+  <circle cx="165" cy="85" r="4" fill="#fbbf24"/>
+  <rect x="135" y="55" width="85" height="18" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
+  <text x="177" y="68" fill="#fbbf24" font-size="10" font-weight="700" text-anchor="middle">傾き ＝ 速さ v</text>
+  <line x1="165" y1="85" x2="165" y2="130" stroke="#64748b" stroke-width="1" stroke-dasharray="3,3"/>
+  <line x1="70" y1="85" x2="165" y2="85" stroke="#64748b" stroke-width="1" stroke-dasharray="3,3"/>
+  <rect x="290" y="35" width="185" height="52" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="382" y="53" fill="#38bdf8" font-size="11" font-weight="700" text-anchor="middle">距離: x ＝ vt</text>
+  <text x="382" y="70" fill="#cbd5e1" font-size="10" text-anchor="middle">速さ: v ＝ x / t (一定)</text>
+</svg>
+  <div class="graph-caption">一定の速さ v で直線上を進む運動では、移動距離 x は時間 t に正比例します（x = vt）。</div>
+</div>
 
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
@@ -1134,6 +1791,30 @@ $$
 
 物体にはたらく向心力を求めなさい。
 
+<div class="vector-graph-card">
+  <div class="graph-title">📐 等速直線運動と変位・速さの関係</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-um-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-um-slate" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#64748b"/></marker>
+  </defs>
+  <line x1="50" y1="130" x2="450" y2="130" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate)"/>
+  <line x1="70" y1="140" x2="70" y2="25" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate)"/>
+  <text x="60" y="30" fill="#94a3b8" font-size="10">x</text>
+  <text x="445" y="142" fill="#94a3b8" font-size="10">t</text>
+  <line x1="70" y1="130" x2="260" y2="40" stroke="#38bdf8" stroke-width="2.5"/>
+  <circle cx="165" cy="85" r="4" fill="#fbbf24"/>
+  <rect x="135" y="55" width="85" height="18" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
+  <text x="177" y="68" fill="#fbbf24" font-size="10" font-weight="700" text-anchor="middle">傾き ＝ 速さ v</text>
+  <line x1="165" y1="85" x2="165" y2="130" stroke="#64748b" stroke-width="1" stroke-dasharray="3,3"/>
+  <line x1="70" y1="85" x2="165" y2="85" stroke="#64748b" stroke-width="1" stroke-dasharray="3,3"/>
+  <rect x="290" y="35" width="185" height="52" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="382" y="53" fill="#38bdf8" font-size="11" font-weight="700" text-anchor="middle">距離: x ＝ vt</text>
+  <text x="382" y="70" fill="#cbd5e1" font-size="10" text-anchor="middle">速さ: v ＝ x / t (一定)</text>
+</svg>
+  <div class="graph-caption">一定の速さ v で直線上を進む運動では、移動距離 x は時間 t に正比例します（x = vt）。</div>
+</div>
+
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
 
@@ -1189,6 +1870,34 @@ $$
 
 ばねに蓄えられる弾性エネルギーを求めなさい。
 
+<div class="vector-graph-card">
+  <div class="graph-title">📐 ばねの弾性力と単振動モデル</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-sp-rose" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#f43f5e"/></marker>
+    <marker id="arr-sp-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+  </defs>
+  <line x1="50" y1="30" x2="50" y2="130" stroke="#94a3b8" stroke-width="3"/>
+  <line x1="50" y1="120" x2="450" y2="120" stroke="#475569" stroke-width="2"/>
+  <path d="M 50,80 L 80,80 L 95,65 L 115,95 L 135,65 L 155,95 L 175,65 L 195,95 L 215,65 L 235,95 L 250,80 L 270,80" fill="none" stroke="#38bdf8" stroke-width="3"/>
+  <rect x="270" y="60" width="45" height="40" rx="3" fill="#1e293b" stroke="#fbbf24" stroke-width="2"/>
+  <text x="292" y="84" fill="#fbbf24" font-size="11" font-weight="700" text-anchor="middle">質量 m</text>
+  <line x1="220" y1="45" x2="220" y2="120" stroke="#64748b" stroke-width="1.5" stroke-dasharray="3,3"/>
+  <rect x="185" y="25" width="70" height="16" rx="3" fill="#0f172a" stroke="#64748b" stroke-width="1"/>
+  <text x="220" y="37" fill="#cbd5e1" font-size="9" text-anchor="middle">自然長位置</text>
+  <line x1="220" y1="110" x2="270" y2="110" stroke="#38bdf8" stroke-width="2" marker-end="url(#arr-sp-cyan)"/>
+  <rect x="235" y="125" width="40" height="15" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="255" y="136" fill="#38bdf8" font-size="9" font-weight="700" text-anchor="middle">変位 x</text>
+  <line x1="270" y1="75" x2="210" y2="75" stroke="#f43f5e" stroke-width="2.5" marker-end="url(#arr-sp-rose)"/>
+  <rect x="175" y="55" width="80" height="16" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
+  <text x="215" y="67" fill="#f43f5e" font-size="10" font-weight="700" text-anchor="middle">復元力 F ＝ -kx</text>
+  <rect x="330" y="35" width="140" height="42" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="400" y="52" fill="#38bdf8" font-size="9" font-weight="700" text-anchor="middle">周期 T ＝ 2π√(m/k)</text>
+  <text x="400" y="68" fill="#cbd5e1" font-size="9" text-anchor="middle">エネルギー E ＝ ½mv² ＋ ½kx²</text>
+</svg>
+  <div class="graph-caption">自然長からの変位 x に対して、常に平衡点へ引き戻す復元力 F = -kx が働きます。</div>
+</div>
+
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
 
@@ -1242,6 +1951,39 @@ $$
 **【問題】**  
 物体を初速度20 m/sで鉛直上向きに投げます。g=10 m/s^2として、1.0 s後の高さを求めなさい。
 
+<div class="vector-graph-card">
+  <div class="graph-title">📐 等加速度直線運動の v-t グラフ</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-vt-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-vt-slate" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#64748b"/></marker>
+  </defs>
+  <line x1="50" y1="135" x2="450" y2="135" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-vt-slate)"/>
+  <line x1="70" y1="145" x2="70" y2="20" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-vt-slate)"/>
+  <text x="60" y="25" fill="#94a3b8" font-size="10">v</text>
+  <text x="445" y="148" fill="#94a3b8" font-size="10">t</text>
+  <polygon points="70,105 270,45 270,135 70,135" fill="rgba(56,189,248,0.15)" stroke="none"/>
+  <line x1="70" y1="105" x2="270" y2="45" stroke="#38bdf8" stroke-width="2.5"/>
+  <line x1="270" y1="45" x2="270" y2="135" stroke="#64748b" stroke-width="1" stroke-dasharray="3,3"/>
+  <line x1="70" y1="45" x2="270" y2="45" stroke="#64748b" stroke-width="1" stroke-dasharray="3,3"/>
+  <rect x="35" y="97" width="30" height="16" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="50" y="109" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">v₀</text>
+  <rect x="35" y="37" width="30" height="16" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="50" y="49" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">v</text>
+  <rect x="255" y="140" width="30" height="16" rx="3" fill="#0f172a" stroke="#64748b" stroke-width="1"/>
+  <text x="270" y="152" fill="#cbd5e1" font-size="10" text-anchor="middle">t</text>
+  <rect x="135" y="95" width="85" height="18" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="177" y="108" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">面積 ＝ 変位 x</text>
+  <rect x="150" y="45" width="85" height="18" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
+  <text x="192" y="58" fill="#fbbf24" font-size="10" font-weight="700" text-anchor="middle">傾き ＝ 加速度 a</text>
+  <rect x="305" y="35" width="175" height="58" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="392" y="53" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">v ＝ v₀ ＋ at</text>
+  <text x="392" y="70" fill="#cbd5e1" font-size="10" text-anchor="middle">x ＝ v₀t ＋ ½ at²</text>
+  <text x="392" y="86" fill="#fbbf24" font-size="9" text-anchor="middle">v² − v₀² ＝ 2ax</text>
+</svg>
+  <div class="graph-caption">傾きが加速度 a、グラフ線と t 軸で囲まれた面積が移動距離 x（変位）を表します。</div>
+</div>
+
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
 
@@ -1286,6 +2028,30 @@ $$
 物体Aが一定の速さ 3.0 m/s で原点を通過した。その 4.0 s 後、物体Bが同じ原点から同じ向きに 5.0 m/s で出発した。
 
 BがAに追いつくのは、Bの出発から何秒後か。
+
+<div class="vector-graph-card">
+  <div class="graph-title">📐 等速直線運動と変位・速さの関係</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-um-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-um-slate" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#64748b"/></marker>
+  </defs>
+  <line x1="50" y1="130" x2="450" y2="130" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate)"/>
+  <line x1="70" y1="140" x2="70" y2="25" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate)"/>
+  <text x="60" y="30" fill="#94a3b8" font-size="10">x</text>
+  <text x="445" y="142" fill="#94a3b8" font-size="10">t</text>
+  <line x1="70" y1="130" x2="260" y2="40" stroke="#38bdf8" stroke-width="2.5"/>
+  <circle cx="165" cy="85" r="4" fill="#fbbf24"/>
+  <rect x="135" y="55" width="85" height="18" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
+  <text x="177" y="68" fill="#fbbf24" font-size="10" font-weight="700" text-anchor="middle">傾き ＝ 速さ v</text>
+  <line x1="165" y1="85" x2="165" y2="130" stroke="#64748b" stroke-width="1" stroke-dasharray="3,3"/>
+  <line x1="70" y1="85" x2="165" y2="85" stroke="#64748b" stroke-width="1" stroke-dasharray="3,3"/>
+  <rect x="290" y="35" width="185" height="52" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="382" y="53" fill="#38bdf8" font-size="11" font-weight="700" text-anchor="middle">距離: x ＝ vt</text>
+  <text x="382" y="70" fill="#cbd5e1" font-size="10" text-anchor="middle">速さ: v ＝ x / t (一定)</text>
+</svg>
+  <div class="graph-caption">一定の速さ v で直線上を進む運動では、移動距離 x は時間 t に正比例します（x = vt）。</div>
+</div>
 
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
@@ -1343,6 +2109,39 @@ $$
 自動車が 15 m/s で走っている。運転手が危険に気づいてからブレーキを踏むまでに 0.80 s かかった。
 
 ブレーキが効き始めた後は、一定の加速度 -5.0 m/s² で減速した。危険に気づいてから停止するまでに進む距離を求めなさい。
+
+<div class="vector-graph-card">
+  <div class="graph-title">📐 等加速度直線運動の v-t グラフ</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-vt-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-vt-slate" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#64748b"/></marker>
+  </defs>
+  <line x1="50" y1="135" x2="450" y2="135" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-vt-slate)"/>
+  <line x1="70" y1="145" x2="70" y2="20" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-vt-slate)"/>
+  <text x="60" y="25" fill="#94a3b8" font-size="10">v</text>
+  <text x="445" y="148" fill="#94a3b8" font-size="10">t</text>
+  <polygon points="70,105 270,45 270,135 70,135" fill="rgba(56,189,248,0.15)" stroke="none"/>
+  <line x1="70" y1="105" x2="270" y2="45" stroke="#38bdf8" stroke-width="2.5"/>
+  <line x1="270" y1="45" x2="270" y2="135" stroke="#64748b" stroke-width="1" stroke-dasharray="3,3"/>
+  <line x1="70" y1="45" x2="270" y2="45" stroke="#64748b" stroke-width="1" stroke-dasharray="3,3"/>
+  <rect x="35" y="97" width="30" height="16" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="50" y="109" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">v₀</text>
+  <rect x="35" y="37" width="30" height="16" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="50" y="49" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">v</text>
+  <rect x="255" y="140" width="30" height="16" rx="3" fill="#0f172a" stroke="#64748b" stroke-width="1"/>
+  <text x="270" y="152" fill="#cbd5e1" font-size="10" text-anchor="middle">t</text>
+  <rect x="135" y="95" width="85" height="18" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="177" y="108" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">面積 ＝ 変位 x</text>
+  <rect x="150" y="45" width="85" height="18" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
+  <text x="192" y="58" fill="#fbbf24" font-size="10" font-weight="700" text-anchor="middle">傾き ＝ 加速度 a</text>
+  <rect x="305" y="35" width="175" height="58" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="392" y="53" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">v ＝ v₀ ＋ at</text>
+  <text x="392" y="70" fill="#cbd5e1" font-size="10" text-anchor="middle">x ＝ v₀t ＋ ½ at²</text>
+  <text x="392" y="86" fill="#fbbf24" font-size="9" text-anchor="middle">v² − v₀² ＝ 2ax</text>
+</svg>
+  <div class="graph-caption">傾きが加速度 a、グラフ線と t 軸で囲まれた面積が移動距離 x（変位）を表します。</div>
+</div>
 
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
@@ -1418,6 +2217,31 @@ $$
 
 衝突後、2台は一体となった。衝突後の速度を求めなさい。
 
+<div class="vector-graph-card">
+  <div class="graph-title">📐 台車の衝突と運動量保存則・反発係数</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-mo-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-mo-amber" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#fbbf24"/></marker>
+  </defs>
+  <line x1="30" y1="130" x2="470" y2="130" stroke="#475569" stroke-width="2"/>
+  <rect x="100" y="90" width="60" height="32" rx="4" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+  <text x="130" y="110" fill="#38bdf8" font-size="11" font-weight="700" text-anchor="middle">台車A (m₁)</text>
+  <line x1="165" y1="106" x2="220" y2="106" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-mo-cyan)"/>
+  <rect x="175" y="85" width="45" height="16" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="197" y="97" fill="#38bdf8" font-size="9" font-weight="700" text-anchor="middle">速度 v₁</text>
+  <rect x="290" y="90" width="60" height="32" rx="4" fill="#1e293b" stroke="#fbbf24" stroke-width="2"/>
+  <text x="320" y="110" fill="#fbbf24" font-size="11" font-weight="700" text-anchor="middle">台車B (m₂)</text>
+  <line x1="355" y1="106" x2="395" y2="106" stroke="#fbbf24" stroke-width="2" marker-end="url(#arr-mo-amber)"/>
+  <rect x="360" y="85" width="45" height="16" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
+  <text x="382" y="97" fill="#fbbf24" font-size="9" text-anchor="middle">速度 v₂</text>
+  <rect x="60" y="20" width="380" height="42" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="250" y="38" fill="#38bdf8" font-size="11" font-weight="700" text-anchor="middle">運動量保存: m₁v₁ ＋ m₂v₂ ＝ m₁v₁′ ＋ m₂v₂′</text>
+  <text x="250" y="53" fill="#fbbf24" font-size="10" text-anchor="middle">反発係数: e ＝ − (v₁′ − v₂′) / (v₁ − v₂)</text>
+</svg>
+  <div class="graph-caption">外力が働かない系では、衝突前後で全運動量が一定に保たれます（m₁v₁ + m₂v₂ = 一定）。</div>
+</div>
+
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
 
@@ -1468,6 +2292,30 @@ $$
 質量 2.0 kg の物体を、水平な床の上で静止状態から右向きに 10 N の力で 5.0 m 引いた。
 
 物体には左向きに 2.0 N の摩擦力がはたらいている。物体の最終的な速さを求めなさい。
+
+<div class="vector-graph-card">
+  <div class="graph-title">📐 等速直線運動と変位・速さの関係</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-um-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-um-slate" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#64748b"/></marker>
+  </defs>
+  <line x1="50" y1="130" x2="450" y2="130" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate)"/>
+  <line x1="70" y1="140" x2="70" y2="25" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate)"/>
+  <text x="60" y="30" fill="#94a3b8" font-size="10">x</text>
+  <text x="445" y="142" fill="#94a3b8" font-size="10">t</text>
+  <line x1="70" y1="130" x2="260" y2="40" stroke="#38bdf8" stroke-width="2.5"/>
+  <circle cx="165" cy="85" r="4" fill="#fbbf24"/>
+  <rect x="135" y="55" width="85" height="18" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
+  <text x="177" y="68" fill="#fbbf24" font-size="10" font-weight="700" text-anchor="middle">傾き ＝ 速さ v</text>
+  <line x1="165" y1="85" x2="165" y2="130" stroke="#64748b" stroke-width="1" stroke-dasharray="3,3"/>
+  <line x1="70" y1="85" x2="165" y2="85" stroke="#64748b" stroke-width="1" stroke-dasharray="3,3"/>
+  <rect x="290" y="35" width="185" height="52" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="382" y="53" fill="#38bdf8" font-size="11" font-weight="700" text-anchor="middle">距離: x ＝ vt</text>
+  <text x="382" y="70" fill="#cbd5e1" font-size="10" text-anchor="middle">速さ: v ＝ x / t (一定)</text>
+</svg>
+  <div class="graph-caption">一定の速さ v で直線上を進む運動では、移動距離 x は時間 t に正比例します（x = vt）。</div>
+</div>
 
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
@@ -1533,6 +2381,30 @@ $$
 物体が半径 0.80 m の円周上を、周期 2.0 s で等速円運動している。
 
 物体の速さを求めなさい。円周率を π=3.14 とする。
+
+<div class="vector-graph-card">
+  <div class="graph-title">📐 等速直線運動と変位・速さの関係</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-um-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-um-slate" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#64748b"/></marker>
+  </defs>
+  <line x1="50" y1="130" x2="450" y2="130" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate)"/>
+  <line x1="70" y1="140" x2="70" y2="25" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate)"/>
+  <text x="60" y="30" fill="#94a3b8" font-size="10">x</text>
+  <text x="445" y="142" fill="#94a3b8" font-size="10">t</text>
+  <line x1="70" y1="130" x2="260" y2="40" stroke="#38bdf8" stroke-width="2.5"/>
+  <circle cx="165" cy="85" r="4" fill="#fbbf24"/>
+  <rect x="135" y="55" width="85" height="18" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
+  <text x="177" y="68" fill="#fbbf24" font-size="10" font-weight="700" text-anchor="middle">傾き ＝ 速さ v</text>
+  <line x1="165" y1="85" x2="165" y2="130" stroke="#64748b" stroke-width="1" stroke-dasharray="3,3"/>
+  <line x1="70" y1="85" x2="165" y2="85" stroke="#64748b" stroke-width="1" stroke-dasharray="3,3"/>
+  <rect x="290" y="35" width="185" height="52" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="382" y="53" fill="#38bdf8" font-size="11" font-weight="700" text-anchor="middle">距離: x ＝ vt</text>
+  <text x="382" y="70" fill="#cbd5e1" font-size="10" text-anchor="middle">速さ: v ＝ x / t (一定)</text>
+</svg>
+  <div class="graph-caption">一定の速さ v で直線上を進む運動では、移動距離 x は時間 t に正比例します（x = vt）。</div>
+</div>
 
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
@@ -1601,6 +2473,30 @@ $$
 
 ばねを自然長から 0.20 m 縮めて静かに放した。物体がばねの自然長の位置を通過するときの速さを求めなさい。
 
+<div class="vector-graph-card">
+  <div class="graph-title">📐 等速直線運動と変位・速さの関係</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-um-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-um-slate" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#64748b"/></marker>
+  </defs>
+  <line x1="50" y1="130" x2="450" y2="130" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate)"/>
+  <line x1="70" y1="140" x2="70" y2="25" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate)"/>
+  <text x="60" y="30" fill="#94a3b8" font-size="10">x</text>
+  <text x="445" y="142" fill="#94a3b8" font-size="10">t</text>
+  <line x1="70" y1="130" x2="260" y2="40" stroke="#38bdf8" stroke-width="2.5"/>
+  <circle cx="165" cy="85" r="4" fill="#fbbf24"/>
+  <rect x="135" y="55" width="85" height="18" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
+  <text x="177" y="68" fill="#fbbf24" font-size="10" font-weight="700" text-anchor="middle">傾き ＝ 速さ v</text>
+  <line x1="165" y1="85" x2="165" y2="130" stroke="#64748b" stroke-width="1" stroke-dasharray="3,3"/>
+  <line x1="70" y1="85" x2="165" y2="85" stroke="#64748b" stroke-width="1" stroke-dasharray="3,3"/>
+  <rect x="290" y="35" width="185" height="52" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="382" y="53" fill="#38bdf8" font-size="11" font-weight="700" text-anchor="middle">距離: x ＝ vt</text>
+  <text x="382" y="70" fill="#cbd5e1" font-size="10" text-anchor="middle">速さ: v ＝ x / t (一定)</text>
+</svg>
+  <div class="graph-caption">一定の速さ v で直線上を進む運動では、移動距離 x は時間 t に正比例します（x = vt）。</div>
+</div>
+
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
 
@@ -1662,6 +2558,39 @@ $$
 **【問題】**  
 質量2.0 kgの物体を水平方向に6.0 Nの合力で押します。加速度を求めなさい。
 
+<div class="vector-graph-card">
+  <div class="graph-title">📐 等加速度直線運動の v-t グラフ</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-vt-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-vt-slate" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#64748b"/></marker>
+  </defs>
+  <line x1="50" y1="135" x2="450" y2="135" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-vt-slate)"/>
+  <line x1="70" y1="145" x2="70" y2="20" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-vt-slate)"/>
+  <text x="60" y="25" fill="#94a3b8" font-size="10">v</text>
+  <text x="445" y="148" fill="#94a3b8" font-size="10">t</text>
+  <polygon points="70,105 270,45 270,135 70,135" fill="rgba(56,189,248,0.15)" stroke="none"/>
+  <line x1="70" y1="105" x2="270" y2="45" stroke="#38bdf8" stroke-width="2.5"/>
+  <line x1="270" y1="45" x2="270" y2="135" stroke="#64748b" stroke-width="1" stroke-dasharray="3,3"/>
+  <line x1="70" y1="45" x2="270" y2="45" stroke="#64748b" stroke-width="1" stroke-dasharray="3,3"/>
+  <rect x="35" y="97" width="30" height="16" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="50" y="109" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">v₀</text>
+  <rect x="35" y="37" width="30" height="16" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="50" y="49" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">v</text>
+  <rect x="255" y="140" width="30" height="16" rx="3" fill="#0f172a" stroke="#64748b" stroke-width="1"/>
+  <text x="270" y="152" fill="#cbd5e1" font-size="10" text-anchor="middle">t</text>
+  <rect x="135" y="95" width="85" height="18" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="177" y="108" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">面積 ＝ 変位 x</text>
+  <rect x="150" y="45" width="85" height="18" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
+  <text x="192" y="58" fill="#fbbf24" font-size="10" font-weight="700" text-anchor="middle">傾き ＝ 加速度 a</text>
+  <rect x="305" y="35" width="175" height="58" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="392" y="53" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">v ＝ v₀ ＋ at</text>
+  <text x="392" y="70" fill="#cbd5e1" font-size="10" text-anchor="middle">x ＝ v₀t ＋ ½ at²</text>
+  <text x="392" y="86" fill="#fbbf24" font-size="9" text-anchor="middle">v² − v₀² ＝ 2ax</text>
+</svg>
+  <div class="graph-caption">傾きが加速度 a、グラフ線と t 軸で囲まれた面積が移動距離 x（変位）を表します。</div>
+</div>
+
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
 
@@ -1714,6 +2643,39 @@ g=9.8 m/s², sin30°=0.500, cos30°=0.866
 1. 物体AとBの加速度の大きさを求めなさい。
 2. 糸の張力を求めなさい。
 3. 静止状態から運動を始めたとき、 2.0 s 後の速さと、それまでの移動距離を求めなさい。
+
+<div class="vector-graph-card">
+  <div class="graph-title">📐 等加速度直線運動の v-t グラフ</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-vt-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-vt-slate" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#64748b"/></marker>
+  </defs>
+  <line x1="50" y1="135" x2="450" y2="135" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-vt-slate)"/>
+  <line x1="70" y1="145" x2="70" y2="20" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-vt-slate)"/>
+  <text x="60" y="25" fill="#94a3b8" font-size="10">v</text>
+  <text x="445" y="148" fill="#94a3b8" font-size="10">t</text>
+  <polygon points="70,105 270,45 270,135 70,135" fill="rgba(56,189,248,0.15)" stroke="none"/>
+  <line x1="70" y1="105" x2="270" y2="45" stroke="#38bdf8" stroke-width="2.5"/>
+  <line x1="270" y1="45" x2="270" y2="135" stroke="#64748b" stroke-width="1" stroke-dasharray="3,3"/>
+  <line x1="70" y1="45" x2="270" y2="45" stroke="#64748b" stroke-width="1" stroke-dasharray="3,3"/>
+  <rect x="35" y="97" width="30" height="16" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="50" y="109" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">v₀</text>
+  <rect x="35" y="37" width="30" height="16" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="50" y="49" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">v</text>
+  <rect x="255" y="140" width="30" height="16" rx="3" fill="#0f172a" stroke="#64748b" stroke-width="1"/>
+  <text x="270" y="152" fill="#cbd5e1" font-size="10" text-anchor="middle">t</text>
+  <rect x="135" y="95" width="85" height="18" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="177" y="108" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">面積 ＝ 変位 x</text>
+  <rect x="150" y="45" width="85" height="18" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
+  <text x="192" y="58" fill="#fbbf24" font-size="10" font-weight="700" text-anchor="middle">傾き ＝ 加速度 a</text>
+  <rect x="305" y="35" width="175" height="58" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="392" y="53" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">v ＝ v₀ ＋ at</text>
+  <text x="392" y="70" fill="#cbd5e1" font-size="10" text-anchor="middle">x ＝ v₀t ＋ ½ at²</text>
+  <text x="392" y="86" fill="#fbbf24" font-size="9" text-anchor="middle">v² − v₀² ＝ 2ax</text>
+</svg>
+  <div class="graph-caption">傾きが加速度 a、グラフ線と t 軸で囲まれた面積が移動距離 x（変位）を表します。</div>
+</div>
 
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
@@ -1867,6 +2829,30 @@ g=9.8 m/s²
 3. 地面に到達する直前の速さを求めなさい。
 4. 到達直前の速度が水平面となす角を求めなさい。
 
+<div class="vector-graph-card">
+  <div class="graph-title">📐 等速直線運動と変位・速さの関係</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-um-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-um-slate" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#64748b"/></marker>
+  </defs>
+  <line x1="50" y1="130" x2="450" y2="130" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate)"/>
+  <line x1="70" y1="140" x2="70" y2="25" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate)"/>
+  <text x="60" y="30" fill="#94a3b8" font-size="10">x</text>
+  <text x="445" y="142" fill="#94a3b8" font-size="10">t</text>
+  <line x1="70" y1="130" x2="260" y2="40" stroke="#38bdf8" stroke-width="2.5"/>
+  <circle cx="165" cy="85" r="4" fill="#fbbf24"/>
+  <rect x="135" y="55" width="85" height="18" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
+  <text x="177" y="68" fill="#fbbf24" font-size="10" font-weight="700" text-anchor="middle">傾き ＝ 速さ v</text>
+  <line x1="165" y1="85" x2="165" y2="130" stroke="#64748b" stroke-width="1" stroke-dasharray="3,3"/>
+  <line x1="70" y1="85" x2="165" y2="85" stroke="#64748b" stroke-width="1" stroke-dasharray="3,3"/>
+  <rect x="290" y="35" width="185" height="52" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="382" y="53" fill="#38bdf8" font-size="11" font-weight="700" text-anchor="middle">距離: x ＝ vt</text>
+  <text x="382" y="70" fill="#cbd5e1" font-size="10" text-anchor="middle">速さ: v ＝ x / t (一定)</text>
+</svg>
+  <div class="graph-caption">一定の速さ v で直線上を進む運動では、移動距離 x は時間 t に正比例します（x = vt）。</div>
+</div>
+
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
 
@@ -2006,6 +2992,30 @@ $$
 3. 12秒間の変位を求めなさい。
 4. 12秒間の平均の速さを求めなさい。
 
+<div class="vector-graph-card">
+  <div class="graph-title">📐 等速直線運動と変位・速さの関係</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-um-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-um-slate" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#64748b"/></marker>
+  </defs>
+  <line x1="50" y1="130" x2="450" y2="130" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate)"/>
+  <line x1="70" y1="140" x2="70" y2="25" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate)"/>
+  <text x="60" y="30" fill="#94a3b8" font-size="10">x</text>
+  <text x="445" y="142" fill="#94a3b8" font-size="10">t</text>
+  <line x1="70" y1="130" x2="260" y2="40" stroke="#38bdf8" stroke-width="2.5"/>
+  <circle cx="165" cy="85" r="4" fill="#fbbf24"/>
+  <rect x="135" y="55" width="85" height="18" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
+  <text x="177" y="68" fill="#fbbf24" font-size="10" font-weight="700" text-anchor="middle">傾き ＝ 速さ v</text>
+  <line x1="165" y1="85" x2="165" y2="130" stroke="#64748b" stroke-width="1" stroke-dasharray="3,3"/>
+  <line x1="70" y1="85" x2="165" y2="85" stroke="#64748b" stroke-width="1" stroke-dasharray="3,3"/>
+  <rect x="290" y="35" width="185" height="52" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="382" y="53" fill="#38bdf8" font-size="11" font-weight="700" text-anchor="middle">距離: x ＝ vt</text>
+  <text x="382" y="70" fill="#cbd5e1" font-size="10" text-anchor="middle">速さ: v ＝ x / t (一定)</text>
+</svg>
+  <div class="graph-caption">一定の速さ v で直線上を進む運動では、移動距離 x は時間 t に正比例します（x = vt）。</div>
+</div>
+
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
 
@@ -2125,6 +3135,30 @@ g=10 m/s²
 3. 地面に到達する直前の鉛直方向の速度を求めなさい。
 4. 地面に到達する直前の速さを求めなさい。
 5. 到達直前の速度が水平面となす角を求めなさい。
+
+<div class="vector-graph-card">
+  <div class="graph-title">📐 等速直線運動と変位・速さの関係</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-um-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-um-slate" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#64748b"/></marker>
+  </defs>
+  <line x1="50" y1="130" x2="450" y2="130" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate)"/>
+  <line x1="70" y1="140" x2="70" y2="25" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate)"/>
+  <text x="60" y="30" fill="#94a3b8" font-size="10">x</text>
+  <text x="445" y="142" fill="#94a3b8" font-size="10">t</text>
+  <line x1="70" y1="130" x2="260" y2="40" stroke="#38bdf8" stroke-width="2.5"/>
+  <circle cx="165" cy="85" r="4" fill="#fbbf24"/>
+  <rect x="135" y="55" width="85" height="18" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
+  <text x="177" y="68" fill="#fbbf24" font-size="10" font-weight="700" text-anchor="middle">傾き ＝ 速さ v</text>
+  <line x1="165" y1="85" x2="165" y2="130" stroke="#64748b" stroke-width="1" stroke-dasharray="3,3"/>
+  <line x1="70" y1="85" x2="165" y2="85" stroke="#64748b" stroke-width="1" stroke-dasharray="3,3"/>
+  <rect x="290" y="35" width="185" height="52" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="382" y="53" fill="#38bdf8" font-size="11" font-weight="700" text-anchor="middle">距離: x ＝ vt</text>
+  <text x="382" y="70" fill="#cbd5e1" font-size="10" text-anchor="middle">速さ: v ＝ x / t (一定)</text>
+</svg>
+  <div class="graph-caption">一定の速さ v で直線上を進む運動では、移動距離 x は時間 t に正比例します（x = vt）。</div>
+</div>
 
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
@@ -2250,6 +3284,39 @@ g=10 m/s²
 4. 静止状態から運動を始めて 1.4 s 後の速さを求めなさい。
 5. その間に進む距離を求めなさい。
 
+<div class="vector-graph-card">
+  <div class="graph-title">📐 等加速度直線運動の v-t グラフ</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-vt-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-vt-slate" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#64748b"/></marker>
+  </defs>
+  <line x1="50" y1="135" x2="450" y2="135" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-vt-slate)"/>
+  <line x1="70" y1="145" x2="70" y2="20" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-vt-slate)"/>
+  <text x="60" y="25" fill="#94a3b8" font-size="10">v</text>
+  <text x="445" y="148" fill="#94a3b8" font-size="10">t</text>
+  <polygon points="70,105 270,45 270,135 70,135" fill="rgba(56,189,248,0.15)" stroke="none"/>
+  <line x1="70" y1="105" x2="270" y2="45" stroke="#38bdf8" stroke-width="2.5"/>
+  <line x1="270" y1="45" x2="270" y2="135" stroke="#64748b" stroke-width="1" stroke-dasharray="3,3"/>
+  <line x1="70" y1="45" x2="270" y2="45" stroke="#64748b" stroke-width="1" stroke-dasharray="3,3"/>
+  <rect x="35" y="97" width="30" height="16" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="50" y="109" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">v₀</text>
+  <rect x="35" y="37" width="30" height="16" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="50" y="49" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">v</text>
+  <rect x="255" y="140" width="30" height="16" rx="3" fill="#0f172a" stroke="#64748b" stroke-width="1"/>
+  <text x="270" y="152" fill="#cbd5e1" font-size="10" text-anchor="middle">t</text>
+  <rect x="135" y="95" width="85" height="18" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="177" y="108" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">面積 ＝ 変位 x</text>
+  <rect x="150" y="45" width="85" height="18" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
+  <text x="192" y="58" fill="#fbbf24" font-size="10" font-weight="700" text-anchor="middle">傾き ＝ 加速度 a</text>
+  <rect x="305" y="35" width="175" height="58" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="392" y="53" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">v ＝ v₀ ＋ at</text>
+  <text x="392" y="70" fill="#cbd5e1" font-size="10" text-anchor="middle">x ＝ v₀t ＋ ½ at²</text>
+  <text x="392" y="86" fill="#fbbf24" font-size="9" text-anchor="middle">v² − v₀² ＝ 2ax</text>
+</svg>
+  <div class="graph-caption">傾きが加速度 a、グラフ線と t 軸で囲まれた面積が移動距離 x（変位）を表します。</div>
+</div>
+
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
 
@@ -2365,6 +3432,30 @@ g=10 m/s²
 2. 糸の張力を求めなさい。
 3. 小球の速さを求めなさい。
 4. 円運動の周期を求めなさい。
+
+<div class="vector-graph-card">
+  <div class="graph-title">📐 等速直線運動と変位・速さの関係</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-um-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-um-slate" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#64748b"/></marker>
+  </defs>
+  <line x1="50" y1="130" x2="450" y2="130" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate)"/>
+  <line x1="70" y1="140" x2="70" y2="25" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate)"/>
+  <text x="60" y="30" fill="#94a3b8" font-size="10">x</text>
+  <text x="445" y="142" fill="#94a3b8" font-size="10">t</text>
+  <line x1="70" y1="130" x2="260" y2="40" stroke="#38bdf8" stroke-width="2.5"/>
+  <circle cx="165" cy="85" r="4" fill="#fbbf24"/>
+  <rect x="135" y="55" width="85" height="18" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
+  <text x="177" y="68" fill="#fbbf24" font-size="10" font-weight="700" text-anchor="middle">傾き ＝ 速さ v</text>
+  <line x1="165" y1="85" x2="165" y2="130" stroke="#64748b" stroke-width="1" stroke-dasharray="3,3"/>
+  <line x1="70" y1="85" x2="165" y2="85" stroke="#64748b" stroke-width="1" stroke-dasharray="3,3"/>
+  <rect x="290" y="35" width="185" height="52" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="382" y="53" fill="#38bdf8" font-size="11" font-weight="700" text-anchor="middle">距離: x ＝ vt</text>
+  <text x="382" y="70" fill="#cbd5e1" font-size="10" text-anchor="middle">速さ: v ＝ x / t (一定)</text>
+</svg>
+  <div class="graph-caption">一定の速さ v で直線上を進む運動では、移動距離 x は時間 t に正比例します（x = vt）。</div>
+</div>
 
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
@@ -2511,6 +3602,30 @@ g=10 m/s²
 3. 物体がばねから離れる瞬間の速さを求めなさい。
 4. ばねから離れた後、停止するまでに進む距離を求めなさい。
 5. 放した位置から停止位置までの全移動距離を求めなさい。
+
+<div class="vector-graph-card">
+  <div class="graph-title">📐 等速直線運動と変位・速さの関係</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-um-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-um-slate" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#64748b"/></marker>
+  </defs>
+  <line x1="50" y1="130" x2="450" y2="130" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate)"/>
+  <line x1="70" y1="140" x2="70" y2="25" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate)"/>
+  <text x="60" y="30" fill="#94a3b8" font-size="10">x</text>
+  <text x="445" y="142" fill="#94a3b8" font-size="10">t</text>
+  <line x1="70" y1="130" x2="260" y2="40" stroke="#38bdf8" stroke-width="2.5"/>
+  <circle cx="165" cy="85" r="4" fill="#fbbf24"/>
+  <rect x="135" y="55" width="85" height="18" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
+  <text x="177" y="68" fill="#fbbf24" font-size="10" font-weight="700" text-anchor="middle">傾き ＝ 速さ v</text>
+  <line x1="165" y1="85" x2="165" y2="130" stroke="#64748b" stroke-width="1" stroke-dasharray="3,3"/>
+  <line x1="70" y1="85" x2="165" y2="85" stroke="#64748b" stroke-width="1" stroke-dasharray="3,3"/>
+  <rect x="290" y="35" width="185" height="52" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="382" y="53" fill="#38bdf8" font-size="11" font-weight="700" text-anchor="middle">距離: x ＝ vt</text>
+  <text x="382" y="70" fill="#cbd5e1" font-size="10" text-anchor="middle">速さ: v ＝ x / t (一定)</text>
+</svg>
+  <div class="graph-caption">一定の速さ v で直線上を進む運動では、移動距離 x は時間 t に正比例します（x = vt）。</div>
+</div>
 
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
@@ -2659,6 +3774,39 @@ sin30°=(1)/(2), cos30°=(√3)/(2)
 2. 床から見た三角台Aの加速度を求めなさい。
 3. 床から見た小物体Bの水平方向および鉛直方向の加速度を求めなさい。
 4. 小物体Bが斜面から受ける垂直抗力を求めなさい。
+
+<div class="vector-graph-card">
+  <div class="graph-title">📐 等加速度直線運動の v-t グラフ</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-vt-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-vt-slate" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#64748b"/></marker>
+  </defs>
+  <line x1="50" y1="135" x2="450" y2="135" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-vt-slate)"/>
+  <line x1="70" y1="145" x2="70" y2="20" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-vt-slate)"/>
+  <text x="60" y="25" fill="#94a3b8" font-size="10">v</text>
+  <text x="445" y="148" fill="#94a3b8" font-size="10">t</text>
+  <polygon points="70,105 270,45 270,135 70,135" fill="rgba(56,189,248,0.15)" stroke="none"/>
+  <line x1="70" y1="105" x2="270" y2="45" stroke="#38bdf8" stroke-width="2.5"/>
+  <line x1="270" y1="45" x2="270" y2="135" stroke="#64748b" stroke-width="1" stroke-dasharray="3,3"/>
+  <line x1="70" y1="45" x2="270" y2="45" stroke="#64748b" stroke-width="1" stroke-dasharray="3,3"/>
+  <rect x="35" y="97" width="30" height="16" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="50" y="109" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">v₀</text>
+  <rect x="35" y="37" width="30" height="16" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="50" y="49" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">v</text>
+  <rect x="255" y="140" width="30" height="16" rx="3" fill="#0f172a" stroke="#64748b" stroke-width="1"/>
+  <text x="270" y="152" fill="#cbd5e1" font-size="10" text-anchor="middle">t</text>
+  <rect x="135" y="95" width="85" height="18" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="177" y="108" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">面積 ＝ 変位 x</text>
+  <rect x="150" y="45" width="85" height="18" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
+  <text x="192" y="58" fill="#fbbf24" font-size="10" font-weight="700" text-anchor="middle">傾き ＝ 加速度 a</text>
+  <rect x="305" y="35" width="175" height="58" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="392" y="53" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">v ＝ v₀ ＋ at</text>
+  <text x="392" y="70" fill="#cbd5e1" font-size="10" text-anchor="middle">x ＝ v₀t ＋ ½ at²</text>
+  <text x="392" y="86" fill="#fbbf24" font-size="9" text-anchor="middle">v² − v₀² ＝ 2ax</text>
+</svg>
+  <div class="graph-caption">傾きが加速度 a、グラフ線と t 軸で囲まれた面積が移動距離 x（変位）を表します。</div>
+</div>
 
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
@@ -2831,6 +3979,39 @@ g=10 m/s²
 3. ボールがコートの奥の線を越えずに落下するための初速度の条件を求めなさい。
 4. ネットを越え、かつコート内に落下する初速度の範囲を求めなさい。
 5. v₀=24 m/s のとき、ネット上でのボールの高さと落下地点を求めなさい。
+
+<div class="vector-graph-card">
+  <div class="graph-title">📐 等加速度直線運動の v-t グラフ</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-vt-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-vt-slate" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#64748b"/></marker>
+  </defs>
+  <line x1="50" y1="135" x2="450" y2="135" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-vt-slate)"/>
+  <line x1="70" y1="145" x2="70" y2="20" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-vt-slate)"/>
+  <text x="60" y="25" fill="#94a3b8" font-size="10">v</text>
+  <text x="445" y="148" fill="#94a3b8" font-size="10">t</text>
+  <polygon points="70,105 270,45 270,135 70,135" fill="rgba(56,189,248,0.15)" stroke="none"/>
+  <line x1="70" y1="105" x2="270" y2="45" stroke="#38bdf8" stroke-width="2.5"/>
+  <line x1="270" y1="45" x2="270" y2="135" stroke="#64748b" stroke-width="1" stroke-dasharray="3,3"/>
+  <line x1="70" y1="45" x2="270" y2="45" stroke="#64748b" stroke-width="1" stroke-dasharray="3,3"/>
+  <rect x="35" y="97" width="30" height="16" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="50" y="109" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">v₀</text>
+  <rect x="35" y="37" width="30" height="16" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="50" y="49" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">v</text>
+  <rect x="255" y="140" width="30" height="16" rx="3" fill="#0f172a" stroke="#64748b" stroke-width="1"/>
+  <text x="270" y="152" fill="#cbd5e1" font-size="10" text-anchor="middle">t</text>
+  <rect x="135" y="95" width="85" height="18" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="177" y="108" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">面積 ＝ 変位 x</text>
+  <rect x="150" y="45" width="85" height="18" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
+  <text x="192" y="58" fill="#fbbf24" font-size="10" font-weight="700" text-anchor="middle">傾き ＝ 加速度 a</text>
+  <rect x="305" y="35" width="175" height="58" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="392" y="53" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">v ＝ v₀ ＋ at</text>
+  <text x="392" y="70" fill="#cbd5e1" font-size="10" text-anchor="middle">x ＝ v₀t ＋ ½ at²</text>
+  <text x="392" y="86" fill="#fbbf24" font-size="9" text-anchor="middle">v² − v₀² ＝ 2ax</text>
+</svg>
+  <div class="graph-caption">傾きが加速度 a、グラフ線と t 軸で囲まれた面積が移動距離 x（変位）を表します。</div>
+</div>
 
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
@@ -3013,6 +4194,30 @@ $$
 4. 小球がレールから離れずに1周するために必要な、最小の高さ h を求めなさい。
 5. h=3r のとき、最下点と頂点で小球がレールから受ける垂直抗力を求めなさい。
 
+<div class="vector-graph-card">
+  <div class="graph-title">📐 等速直線運動と変位・速さの関係</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-um-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-um-slate" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#64748b"/></marker>
+  </defs>
+  <line x1="50" y1="130" x2="450" y2="130" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate)"/>
+  <line x1="70" y1="140" x2="70" y2="25" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate)"/>
+  <text x="60" y="30" fill="#94a3b8" font-size="10">x</text>
+  <text x="445" y="142" fill="#94a3b8" font-size="10">t</text>
+  <line x1="70" y1="130" x2="260" y2="40" stroke="#38bdf8" stroke-width="2.5"/>
+  <circle cx="165" cy="85" r="4" fill="#fbbf24"/>
+  <rect x="135" y="55" width="85" height="18" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
+  <text x="177" y="68" fill="#fbbf24" font-size="10" font-weight="700" text-anchor="middle">傾き ＝ 速さ v</text>
+  <line x1="165" y1="85" x2="165" y2="130" stroke="#64748b" stroke-width="1" stroke-dasharray="3,3"/>
+  <line x1="70" y1="85" x2="165" y2="85" stroke="#64748b" stroke-width="1" stroke-dasharray="3,3"/>
+  <rect x="290" y="35" width="185" height="52" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="382" y="53" fill="#38bdf8" font-size="11" font-weight="700" text-anchor="middle">距離: x ＝ vt</text>
+  <text x="382" y="70" fill="#cbd5e1" font-size="10" text-anchor="middle">速さ: v ＝ x / t (一定)</text>
+</svg>
+  <div class="graph-caption">一定の速さ v で直線上を進む運動では、移動距離 x は時間 t に正比例します（x = vt）。</div>
+</div>
+
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
 
@@ -3188,6 +4393,34 @@ $$
 **【問題】**  
 質量2.0 kgの物体を基準面から5.0 mの高さに置きます。g=10 m/s^2として位置エネルギーを求めなさい。
 
+<div class="vector-graph-card">
+  <div class="graph-title">📐 斜面上の物体の力の分解と運動方程式</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-fi-rose" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#f43f5e"/></marker>
+    <marker id="arr-fi-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-fi-amber" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#fbbf24"/></marker>
+  </defs>
+  <polygon points="40,140 440,140 440,40" fill="rgba(30,41,59,0.5)" stroke="#64748b" stroke-width="2"/>
+  <g transform="translate(240, 90) rotate(-14)">
+    <rect x="-25" y="-20" width="50" height="30" rx="3" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+    <line x1="0" y1="-5" x2="0" y2="-45" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-fi-cyan)"/>
+    <rect x="-35" y="-60" width="70" height="15" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+    <text x="0" y="-49" fill="#38bdf8" font-size="9" font-weight="700" text-anchor="middle">垂直抗力 N</text>
+    <line x1="0" y1="-5" x2="-45" y2="-5" stroke="#fbbf24" stroke-width="2" marker-end="url(#arr-fi-amber)"/>
+    <rect x="-75" y="-12" width="40" height="15" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
+    <text x="-55" y="-1" fill="#fbbf24" font-size="9" text-anchor="middle">摩擦力 f</text>
+  </g>
+  <line x1="240" y1="90" x2="240" y2="145" stroke="#f43f5e" stroke-width="2.5" marker-end="url(#arr-fi-rose)"/>
+  <rect x="245" y="125" width="50" height="16" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
+  <text x="270" y="137" fill="#f43f5e" font-size="10" font-weight="700" text-anchor="middle">重力 mg</text>
+  <rect x="60" y="30" width="130" height="38" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="125" y="46" fill="#38bdf8" font-size="9" font-weight="700" text-anchor="middle">垂直: N ＝ mg cosθ</text>
+  <text x="125" y="60" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">斜面: ma ＝ mg sinθ − f</text>
+</svg>
+  <div class="graph-caption">重力 mg を斜面平行成分（mg sinθ）と垂直成分（mg cosθ）に分解し、垂直抗力 N と摩擦力を立式します。</div>
+</div>
+
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
 
@@ -3240,6 +4473,30 @@ $$
 3. 最下点の先で小球が台から水平に飛び出すものとする。飛び出す位置の地面からの高さが H であるとき、小球の水平到達距離を求めなさい。
 
 空気抵抗は無視する。
+
+<div class="vector-graph-card">
+  <div class="graph-title">📐 等速直線運動と変位・速さの関係</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-um-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-um-slate" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#64748b"/></marker>
+  </defs>
+  <line x1="50" y1="130" x2="450" y2="130" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate)"/>
+  <line x1="70" y1="140" x2="70" y2="25" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate)"/>
+  <text x="60" y="30" fill="#94a3b8" font-size="10">x</text>
+  <text x="445" y="142" fill="#94a3b8" font-size="10">t</text>
+  <line x1="70" y1="130" x2="260" y2="40" stroke="#38bdf8" stroke-width="2.5"/>
+  <circle cx="165" cy="85" r="4" fill="#fbbf24"/>
+  <rect x="135" y="55" width="85" height="18" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
+  <text x="177" y="68" fill="#fbbf24" font-size="10" font-weight="700" text-anchor="middle">傾き ＝ 速さ v</text>
+  <line x1="165" y1="85" x2="165" y2="130" stroke="#64748b" stroke-width="1" stroke-dasharray="3,3"/>
+  <line x1="70" y1="85" x2="165" y2="85" stroke="#64748b" stroke-width="1" stroke-dasharray="3,3"/>
+  <rect x="290" y="35" width="185" height="52" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="382" y="53" fill="#38bdf8" font-size="11" font-weight="700" text-anchor="middle">距離: x ＝ vt</text>
+  <text x="382" y="70" fill="#cbd5e1" font-size="10" text-anchor="middle">速さ: v ＝ x / t (一定)</text>
+</svg>
+  <div class="graph-caption">一定の速さ v で直線上を進む運動では、移動距離 x は時間 t に正比例します（x = vt）。</div>
+</div>
 
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
@@ -3404,6 +4661,34 @@ $$
 2. 衝突によってAが受けた力積を求めなさい。
 3. Bがばねを最大まで縮める長さを求めなさい。
 
+<div class="vector-graph-card">
+  <div class="graph-title">📐 ばねの弾性力と単振動モデル</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-sp-rose" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#f43f5e"/></marker>
+    <marker id="arr-sp-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+  </defs>
+  <line x1="50" y1="30" x2="50" y2="130" stroke="#94a3b8" stroke-width="3"/>
+  <line x1="50" y1="120" x2="450" y2="120" stroke="#475569" stroke-width="2"/>
+  <path d="M 50,80 L 80,80 L 95,65 L 115,95 L 135,65 L 155,95 L 175,65 L 195,95 L 215,65 L 235,95 L 250,80 L 270,80" fill="none" stroke="#38bdf8" stroke-width="3"/>
+  <rect x="270" y="60" width="45" height="40" rx="3" fill="#1e293b" stroke="#fbbf24" stroke-width="2"/>
+  <text x="292" y="84" fill="#fbbf24" font-size="11" font-weight="700" text-anchor="middle">質量 m</text>
+  <line x1="220" y1="45" x2="220" y2="120" stroke="#64748b" stroke-width="1.5" stroke-dasharray="3,3"/>
+  <rect x="185" y="25" width="70" height="16" rx="3" fill="#0f172a" stroke="#64748b" stroke-width="1"/>
+  <text x="220" y="37" fill="#cbd5e1" font-size="9" text-anchor="middle">自然長位置</text>
+  <line x1="220" y1="110" x2="270" y2="110" stroke="#38bdf8" stroke-width="2" marker-end="url(#arr-sp-cyan)"/>
+  <rect x="235" y="125" width="40" height="15" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="255" y="136" fill="#38bdf8" font-size="9" font-weight="700" text-anchor="middle">変位 x</text>
+  <line x1="270" y1="75" x2="210" y2="75" stroke="#f43f5e" stroke-width="2.5" marker-end="url(#arr-sp-rose)"/>
+  <rect x="175" y="55" width="80" height="16" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
+  <text x="215" y="67" fill="#f43f5e" font-size="10" font-weight="700" text-anchor="middle">復元力 F ＝ -kx</text>
+  <rect x="330" y="35" width="140" height="42" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="400" y="52" fill="#38bdf8" font-size="9" font-weight="700" text-anchor="middle">周期 T ＝ 2π√(m/k)</text>
+  <text x="400" y="68" fill="#cbd5e1" font-size="9" text-anchor="middle">エネルギー E ＝ ½mv² ＋ ½kx²</text>
+</svg>
+  <div class="graph-caption">自然長からの変位 x に対して、常に平衡点へ引き戻す復元力 F = -kx が働きます。</div>
+</div>
+
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
 
@@ -3541,6 +4826,30 @@ $$
 3. 人が右端まで移動する時間を求めなさい。
 4. その間のボートの移動距離を求めなさい。
 5. 水面から見た人の移動距離を求めなさい。
+
+<div class="vector-graph-card">
+  <div class="graph-title">📐 等速直線運動と変位・速さの関係</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-um-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-um-slate" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#64748b"/></marker>
+  </defs>
+  <line x1="50" y1="130" x2="450" y2="130" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate)"/>
+  <line x1="70" y1="140" x2="70" y2="25" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate)"/>
+  <text x="60" y="30" fill="#94a3b8" font-size="10">x</text>
+  <text x="445" y="142" fill="#94a3b8" font-size="10">t</text>
+  <line x1="70" y1="130" x2="260" y2="40" stroke="#38bdf8" stroke-width="2.5"/>
+  <circle cx="165" cy="85" r="4" fill="#fbbf24"/>
+  <rect x="135" y="55" width="85" height="18" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
+  <text x="177" y="68" fill="#fbbf24" font-size="10" font-weight="700" text-anchor="middle">傾き ＝ 速さ v</text>
+  <line x1="165" y1="85" x2="165" y2="130" stroke="#64748b" stroke-width="1" stroke-dasharray="3,3"/>
+  <line x1="70" y1="85" x2="165" y2="85" stroke="#64748b" stroke-width="1" stroke-dasharray="3,3"/>
+  <rect x="290" y="35" width="185" height="52" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="382" y="53" fill="#38bdf8" font-size="11" font-weight="700" text-anchor="middle">距離: x ＝ vt</text>
+  <text x="382" y="70" fill="#cbd5e1" font-size="10" text-anchor="middle">速さ: v ＝ x / t (一定)</text>
+</svg>
+  <div class="graph-caption">一定の速さ v で直線上を進む運動では、移動距離 x は時間 t に正比例します（x = vt）。</div>
+</div>
 
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
@@ -3685,6 +4994,30 @@ $$
 4. Aが壁で反射し、最初の衝突位置へ戻るまでの時間を求めなさい。
 5. AとBが最初の衝突位置で再び同時に出会うための L を求めなさい。
 6. その条件のもとで、2回目の完全弾性衝突直後のAとBの速度を求めなさい。
+
+<div class="vector-graph-card">
+  <div class="graph-title">📐 等速直線運動と変位・速さの関係</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-um-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-um-slate" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#64748b"/></marker>
+  </defs>
+  <line x1="50" y1="130" x2="450" y2="130" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate)"/>
+  <line x1="70" y1="140" x2="70" y2="25" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate)"/>
+  <text x="60" y="30" fill="#94a3b8" font-size="10">x</text>
+  <text x="445" y="142" fill="#94a3b8" font-size="10">t</text>
+  <line x1="70" y1="130" x2="260" y2="40" stroke="#38bdf8" stroke-width="2.5"/>
+  <circle cx="165" cy="85" r="4" fill="#fbbf24"/>
+  <rect x="135" y="55" width="85" height="18" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
+  <text x="177" y="68" fill="#fbbf24" font-size="10" font-weight="700" text-anchor="middle">傾き ＝ 速さ v</text>
+  <line x1="165" y1="85" x2="165" y2="130" stroke="#64748b" stroke-width="1" stroke-dasharray="3,3"/>
+  <line x1="70" y1="85" x2="165" y2="85" stroke="#64748b" stroke-width="1" stroke-dasharray="3,3"/>
+  <rect x="290" y="35" width="185" height="52" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="382" y="53" fill="#38bdf8" font-size="11" font-weight="700" text-anchor="middle">距離: x ＝ vt</text>
+  <text x="382" y="70" fill="#cbd5e1" font-size="10" text-anchor="middle">速さ: v ＝ x / t (一定)</text>
+</svg>
+  <div class="graph-caption">一定の速さ v で直線上を進む運動では、移動距離 x は時間 t に正比例します（x = vt）。</div>
+</div>
 
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
@@ -3858,6 +5191,39 @@ $$
 **【問題】**  
 質量5.0 kgの物体を水平に20 Nで引きます。動摩擦係数を0.20、g=10 m/s^2として加速度を求めなさい。
 
+<div class="vector-graph-card">
+  <div class="graph-title">📐 等加速度直線運動の v-t グラフ</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-vt-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-vt-slate" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#64748b"/></marker>
+  </defs>
+  <line x1="50" y1="135" x2="450" y2="135" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-vt-slate)"/>
+  <line x1="70" y1="145" x2="70" y2="20" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-vt-slate)"/>
+  <text x="60" y="25" fill="#94a3b8" font-size="10">v</text>
+  <text x="445" y="148" fill="#94a3b8" font-size="10">t</text>
+  <polygon points="70,105 270,45 270,135 70,135" fill="rgba(56,189,248,0.15)" stroke="none"/>
+  <line x1="70" y1="105" x2="270" y2="45" stroke="#38bdf8" stroke-width="2.5"/>
+  <line x1="270" y1="45" x2="270" y2="135" stroke="#64748b" stroke-width="1" stroke-dasharray="3,3"/>
+  <line x1="70" y1="45" x2="270" y2="45" stroke="#64748b" stroke-width="1" stroke-dasharray="3,3"/>
+  <rect x="35" y="97" width="30" height="16" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="50" y="109" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">v₀</text>
+  <rect x="35" y="37" width="30" height="16" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="50" y="49" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">v</text>
+  <rect x="255" y="140" width="30" height="16" rx="3" fill="#0f172a" stroke="#64748b" stroke-width="1"/>
+  <text x="270" y="152" fill="#cbd5e1" font-size="10" text-anchor="middle">t</text>
+  <rect x="135" y="95" width="85" height="18" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="177" y="108" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">面積 ＝ 変位 x</text>
+  <rect x="150" y="45" width="85" height="18" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
+  <text x="192" y="58" fill="#fbbf24" font-size="10" font-weight="700" text-anchor="middle">傾き ＝ 加速度 a</text>
+  <rect x="305" y="35" width="175" height="58" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="392" y="53" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">v ＝ v₀ ＋ at</text>
+  <text x="392" y="70" fill="#cbd5e1" font-size="10" text-anchor="middle">x ＝ v₀t ＋ ½ at²</text>
+  <text x="392" y="86" fill="#fbbf24" font-size="9" text-anchor="middle">v² − v₀² ＝ 2ax</text>
+</svg>
+  <div class="graph-caption">傾きが加速度 a、グラフ線と t 軸で囲まれた面積が移動距離 x（変位）を表します。</div>
+</div>
+
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
 
@@ -3934,6 +5300,30 @@ x=0
 7. 2回目の衝突直前のA、Bの速度を求めなさい。
 8. 2回目の完全弾性衝突直後のA、Bの速度を求めなさい。
 9. 2回目の衝突直後の状態が、最初の状態とどのような関係にあるか説明しなさい。
+
+<div class="vector-graph-card">
+  <div class="graph-title">📐 等速直線運動と変位・速さの関係</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-um-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-um-slate" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#64748b"/></marker>
+  </defs>
+  <line x1="50" y1="130" x2="450" y2="130" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate)"/>
+  <line x1="70" y1="140" x2="70" y2="25" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate)"/>
+  <text x="60" y="30" fill="#94a3b8" font-size="10">x</text>
+  <text x="445" y="142" fill="#94a3b8" font-size="10">t</text>
+  <line x1="70" y1="130" x2="260" y2="40" stroke="#38bdf8" stroke-width="2.5"/>
+  <circle cx="165" cy="85" r="4" fill="#fbbf24"/>
+  <rect x="135" y="55" width="85" height="18" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
+  <text x="177" y="68" fill="#fbbf24" font-size="10" font-weight="700" text-anchor="middle">傾き ＝ 速さ v</text>
+  <line x1="165" y1="85" x2="165" y2="130" stroke="#64748b" stroke-width="1" stroke-dasharray="3,3"/>
+  <line x1="70" y1="85" x2="165" y2="85" stroke="#64748b" stroke-width="1" stroke-dasharray="3,3"/>
+  <rect x="290" y="35" width="185" height="52" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="382" y="53" fill="#38bdf8" font-size="11" font-weight="700" text-anchor="middle">距離: x ＝ vt</text>
+  <text x="382" y="70" fill="#cbd5e1" font-size="10" text-anchor="middle">速さ: v ＝ x / t (一定)</text>
+</svg>
+  <div class="graph-caption">一定の速さ v で直線上を進む運動では、移動距離 x は時間 t に正比例します（x = vt）。</div>
+</div>
 
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
@@ -4279,6 +5669,39 @@ $$
 **【問題】**  
 地球の中心から2Rの距離にある場所での重力加速度を、地表のgを使って表しなさい。
 
+<div class="vector-graph-card">
+  <div class="graph-title">📐 等加速度直線運動の v-t グラフ</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-vt-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-vt-slate" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#64748b"/></marker>
+  </defs>
+  <line x1="50" y1="135" x2="450" y2="135" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-vt-slate)"/>
+  <line x1="70" y1="145" x2="70" y2="20" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-vt-slate)"/>
+  <text x="60" y="25" fill="#94a3b8" font-size="10">v</text>
+  <text x="445" y="148" fill="#94a3b8" font-size="10">t</text>
+  <polygon points="70,105 270,45 270,135 70,135" fill="rgba(56,189,248,0.15)" stroke="none"/>
+  <line x1="70" y1="105" x2="270" y2="45" stroke="#38bdf8" stroke-width="2.5"/>
+  <line x1="270" y1="45" x2="270" y2="135" stroke="#64748b" stroke-width="1" stroke-dasharray="3,3"/>
+  <line x1="70" y1="45" x2="270" y2="45" stroke="#64748b" stroke-width="1" stroke-dasharray="3,3"/>
+  <rect x="35" y="97" width="30" height="16" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="50" y="109" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">v₀</text>
+  <rect x="35" y="37" width="30" height="16" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="50" y="49" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">v</text>
+  <rect x="255" y="140" width="30" height="16" rx="3" fill="#0f172a" stroke="#64748b" stroke-width="1"/>
+  <text x="270" y="152" fill="#cbd5e1" font-size="10" text-anchor="middle">t</text>
+  <rect x="135" y="95" width="85" height="18" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="177" y="108" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">面積 ＝ 変位 x</text>
+  <rect x="150" y="45" width="85" height="18" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
+  <text x="192" y="58" fill="#fbbf24" font-size="10" font-weight="700" text-anchor="middle">傾き ＝ 加速度 a</text>
+  <rect x="305" y="35" width="175" height="58" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="392" y="53" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">v ＝ v₀ ＋ at</text>
+  <text x="392" y="70" fill="#cbd5e1" font-size="10" text-anchor="middle">x ＝ v₀t ＋ ½ at²</text>
+  <text x="392" y="86" fill="#fbbf24" font-size="9" text-anchor="middle">v² − v₀² ＝ 2ax</text>
+</svg>
+  <div class="graph-caption">傾きが加速度 a、グラフ線と t 軸で囲まれた面積が移動距離 x（変位）を表します。</div>
+</div>
+
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
 
@@ -4321,6 +5744,30 @@ $$
 
 **【問題】**  
 水平面上で質量mの小球が速さv₀で進み、静止した質量2mの物体へ完全非弾性衝突した。衝突後、2物体は一体となってばね定数kのばねを縮める。最大圧縮量を求めなさい。摩擦はない。
+
+<div class="vector-graph-card">
+  <div class="graph-title">📐 等速直線運動と変位・速さの関係</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-um-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-um-slate" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#64748b"/></marker>
+  </defs>
+  <line x1="50" y1="130" x2="450" y2="130" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate)"/>
+  <line x1="70" y1="140" x2="70" y2="25" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate)"/>
+  <text x="60" y="30" fill="#94a3b8" font-size="10">x</text>
+  <text x="445" y="142" fill="#94a3b8" font-size="10">t</text>
+  <line x1="70" y1="130" x2="260" y2="40" stroke="#38bdf8" stroke-width="2.5"/>
+  <circle cx="165" cy="85" r="4" fill="#fbbf24"/>
+  <rect x="135" y="55" width="85" height="18" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
+  <text x="177" y="68" fill="#fbbf24" font-size="10" font-weight="700" text-anchor="middle">傾き ＝ 速さ v</text>
+  <line x1="165" y1="85" x2="165" y2="130" stroke="#64748b" stroke-width="1" stroke-dasharray="3,3"/>
+  <line x1="70" y1="85" x2="165" y2="85" stroke="#64748b" stroke-width="1" stroke-dasharray="3,3"/>
+  <rect x="290" y="35" width="185" height="52" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="382" y="53" fill="#38bdf8" font-size="11" font-weight="700" text-anchor="middle">距離: x ＝ vt</text>
+  <text x="382" y="70" fill="#cbd5e1" font-size="10" text-anchor="middle">速さ: v ＝ x / t (一定)</text>
+</svg>
+  <div class="graph-caption">一定の速さ v で直線上を進む運動では、移動距離 x は時間 t に正比例します（x = vt）。</div>
+</div>
 
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
@@ -4395,6 +5842,30 @@ Pは、台に固定された水平な床面より高さ H の位置にある。�
 8. 飛行中に、床から見て台と小球がそれぞれ移動する水平距離を求めなさい。
 9. 小球が受け皿に入った直後の台と小球の水平速度を求めなさい。
 10. 衝突によって失われる力学的エネルギーを求めなさい。
+
+<div class="vector-graph-card">
+  <div class="graph-title">📐 等速直線運動と変位・速さの関係</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-um-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-um-slate" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#64748b"/></marker>
+  </defs>
+  <line x1="50" y1="130" x2="450" y2="130" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate)"/>
+  <line x1="70" y1="140" x2="70" y2="25" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate)"/>
+  <text x="60" y="30" fill="#94a3b8" font-size="10">x</text>
+  <text x="445" y="142" fill="#94a3b8" font-size="10">t</text>
+  <line x1="70" y1="130" x2="260" y2="40" stroke="#38bdf8" stroke-width="2.5"/>
+  <circle cx="165" cy="85" r="4" fill="#fbbf24"/>
+  <rect x="135" y="55" width="85" height="18" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
+  <text x="177" y="68" fill="#fbbf24" font-size="10" font-weight="700" text-anchor="middle">傾き ＝ 速さ v</text>
+  <line x1="165" y1="85" x2="165" y2="130" stroke="#64748b" stroke-width="1" stroke-dasharray="3,3"/>
+  <line x1="70" y1="85" x2="165" y2="85" stroke="#64748b" stroke-width="1" stroke-dasharray="3,3"/>
+  <rect x="290" y="35" width="185" height="52" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="382" y="53" fill="#38bdf8" font-size="11" font-weight="700" text-anchor="middle">距離: x ＝ vt</text>
+  <text x="382" y="70" fill="#cbd5e1" font-size="10" text-anchor="middle">速さ: v ＝ x / t (一定)</text>
+</svg>
+  <div class="graph-caption">一定の速さ v で直線上を進む運動では、移動距離 x は時間 t に正比例します（x = vt）。</div>
+</div>
 
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
@@ -4732,6 +6203,30 @@ $$
 
 **【問題】**  
 長さlの軽い糸につけた質量mの小球を鉛直面内で回す。円の最高点で糸がたるまないために必要な最小の速さと、そのとき最低点で必要な速さを求めなさい。
+
+<div class="vector-graph-card">
+  <div class="graph-title">📐 等速直線運動と変位・速さの関係</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-um-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-um-slate" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#64748b"/></marker>
+  </defs>
+  <line x1="50" y1="130" x2="450" y2="130" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate)"/>
+  <line x1="70" y1="140" x2="70" y2="25" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate)"/>
+  <text x="60" y="30" fill="#94a3b8" font-size="10">x</text>
+  <text x="445" y="142" fill="#94a3b8" font-size="10">t</text>
+  <line x1="70" y1="130" x2="260" y2="40" stroke="#38bdf8" stroke-width="2.5"/>
+  <circle cx="165" cy="85" r="4" fill="#fbbf24"/>
+  <rect x="135" y="55" width="85" height="18" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
+  <text x="177" y="68" fill="#fbbf24" font-size="10" font-weight="700" text-anchor="middle">傾き ＝ 速さ v</text>
+  <line x1="165" y1="85" x2="165" y2="130" stroke="#64748b" stroke-width="1" stroke-dasharray="3,3"/>
+  <line x1="70" y1="85" x2="165" y2="85" stroke="#64748b" stroke-width="1" stroke-dasharray="3,3"/>
+  <rect x="290" y="35" width="185" height="52" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="382" y="53" fill="#38bdf8" font-size="11" font-weight="700" text-anchor="middle">距離: x ＝ vt</text>
+  <text x="382" y="70" fill="#cbd5e1" font-size="10" text-anchor="middle">速さ: v ＝ x / t (一定)</text>
+</svg>
+  <div class="graph-caption">一定の速さ v で直線上を進む運動では、移動距離 x は時間 t に正比例します（x = vt）。</div>
+</div>
 
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>

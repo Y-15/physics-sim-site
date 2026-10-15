@@ -24,6 +24,33 @@ description: 高校物理「電磁気（Electromagnetism）」の実践問題・
 
 電荷間の距離を2倍にすると、クーロン力はいくらになるか。
 
+<div class="vector-graph-card">
+  <div class="graph-title">📐 クーロンの法則と点電荷間の静電気力</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-cl-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-cl-rose" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#f43f5e"/></marker>
+  </defs>
+  <circle cx="100" cy="80" r="16" fill="#f43f5e"/>
+  <text x="100" y="85" fill="#fff" font-size="11" font-weight="700" text-anchor="middle">＋q₁</text>
+  <line x1="100" y1="80" x2="50" y2="80" stroke="#f43f5e" stroke-width="2.5" marker-end="url(#arr-cl-rose)"/>
+  <rect x="45" y="55" width="45" height="15" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
+  <text x="67" y="66" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">力 F</text>
+  <circle cx="230" cy="80" r="16" fill="#f43f5e"/>
+  <text x="230" y="85" fill="#fff" font-size="11" font-weight="700" text-anchor="middle">＋q₂</text>
+  <line x1="230" y1="80" x2="280" y2="80" stroke="#f43f5e" stroke-width="2.5" marker-end="url(#arr-cl-rose)"/>
+  <rect x="245" y="55" width="45" height="15" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
+  <text x="267" y="66" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">力 F</text>
+  <line x1="100" y1="120" x2="230" y2="120" stroke="#fbbf24" stroke-width="1.5"/>
+  <rect x="145" y="125" width="40" height="15" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
+  <text x="165" y="136" fill="#fbbf24" font-size="9" font-weight="700" text-anchor="middle">距離 r</text>
+  <rect x="300" y="40" width="180" height="52" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="390" y="58" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">クーロン力: F ＝ k |q₁q₂| / r²</text>
+  <text x="390" y="74" fill="#fbbf24" font-size="9" text-anchor="middle">同種電荷: 斥力 ／ 異種電荷: 引力</text>
+</svg>
+  <div class="graph-caption">同種の電荷は退け合い（斥力）、異種の電荷は引き合います（引力）。力は距離の2乗に反比例します。</div>
+</div>
+
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
 
@@ -75,6 +102,27 @@ $$
 **【問題】**  
 0.020 C の正電荷に 6.0 N の力がはたらいた。この場所の電場の強さを求めなさい。
 
+<div class="vector-graph-card">
+  <div class="graph-title">📐 点電荷の周囲の電場と電位・電気力線</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-ef-rose" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#f43f5e"/></marker>
+  </defs>
+  <circle cx="160" cy="80" r="16" fill="#f43f5e"/>
+  <text x="160" y="85" fill="#fff" font-size="11" font-weight="700" text-anchor="middle">＋Q</text>
+  <circle cx="160" cy="80" r="45" fill="none" stroke="#64748b" stroke-width="1" stroke-dasharray="3,3"/>
+  <circle cx="160" cy="80" r="75" fill="none" stroke="#64748b" stroke-width="1" stroke-dasharray="3,3"/>
+  <line x1="178" y1="80" x2="250" y2="80" stroke="#f43f5e" stroke-width="2" marker-end="url(#arr-ef-rose)"/>
+  <rect x="200" y="60" width="45" height="15" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
+  <text x="222" y="71" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">電場 E</text>
+  <rect x="300" y="40" width="175" height="55" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="387" y="58" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">クーロン力: F ＝ k(q₁q₂/r²)</text>
+  <text x="387" y="74" fill="#cbd5e1" font-size="9" text-anchor="middle">電位: V ＝ k(Q/r)</text>
+  <text x="387" y="88" fill="#fbbf24" font-size="9" text-anchor="middle">一様電場: V ＝ Ed</text>
+</svg>
+  <div class="graph-caption">電場 E は単位正電荷が受けるクーロン力、電位 V は無限遠を基準とした単位正電荷の位置エネルギーです。</div>
+</div>
+
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
 
@@ -124,6 +172,31 @@ $$
 **【問題】**  
 導線の断面を 5.0 s 間に 20 C の電気量が通過した。電流を求めなさい。
 
+<div class="vector-graph-card">
+  <div class="graph-title">📐 直流回路とオームの法則・キルヒホッフ則</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-c-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+  </defs>
+  <rect x="70" y="30" width="360" height="100" fill="none" stroke="#64748b" stroke-width="2"/>
+  <line x1="60" y1="75" x2="80" y2="75" stroke="#f43f5e" stroke-width="3"/>
+  <line x1="65" y1="85" x2="75" y2="85" stroke="#f43f5e" stroke-width="2"/>
+  <rect x="25" y="72" width="30" height="16" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
+  <text x="40" y="84" fill="#f43f5e" font-size="10" font-weight="700" text-anchor="middle">起電力 E</text>
+  <rect x="200" y="20" width="60" height="20" rx="3" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+  <text x="230" y="34" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">抵抗 R₁</text>
+  <rect x="200" y="120" width="60" height="20" rx="3" fill="#1e293b" stroke="#fbbf24" stroke-width="2"/>
+  <text x="230" y="134" fill="#fbbf24" font-size="10" font-weight="700" text-anchor="middle">抵抗 R₂</text>
+  <line x1="120" y1="30" x2="160" y2="30" stroke="#38bdf8" stroke-width="2" marker-end="url(#arr-c-cyan)"/>
+  <rect x="130" y="10" width="40" height="15" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="150" y="21" fill="#38bdf8" font-size="9" font-weight="700" text-anchor="middle">電流 I</text>
+  <rect x="300" y="60" width="160" height="38" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="380" y="76" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">オーム則: V ＝ RI</text>
+  <text x="380" y="90" fill="#cbd5e1" font-size="9" text-anchor="middle">キルヒホッフ第2則: E ＝ RI</text>
+</svg>
+  <div class="graph-caption">各素子の両端電位差 V = RI と、回路の任意の閉路で起電力の和＝電圧降下の和が成り立ちます。</div>
+</div>
+
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
 
@@ -172,6 +245,31 @@ $$
 
 **【問題】**  
 抵抗 8.0 に 24 V の電圧を加えた。流れる電流を求めなさい。
+
+<div class="vector-graph-card">
+  <div class="graph-title">📐 直流回路とオームの法則・キルヒホッフ則</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-c-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+  </defs>
+  <rect x="70" y="30" width="360" height="100" fill="none" stroke="#64748b" stroke-width="2"/>
+  <line x1="60" y1="75" x2="80" y2="75" stroke="#f43f5e" stroke-width="3"/>
+  <line x1="65" y1="85" x2="75" y2="85" stroke="#f43f5e" stroke-width="2"/>
+  <rect x="25" y="72" width="30" height="16" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
+  <text x="40" y="84" fill="#f43f5e" font-size="10" font-weight="700" text-anchor="middle">起電力 E</text>
+  <rect x="200" y="20" width="60" height="20" rx="3" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+  <text x="230" y="34" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">抵抗 R₁</text>
+  <rect x="200" y="120" width="60" height="20" rx="3" fill="#1e293b" stroke="#fbbf24" stroke-width="2"/>
+  <text x="230" y="134" fill="#fbbf24" font-size="10" font-weight="700" text-anchor="middle">抵抗 R₂</text>
+  <line x1="120" y1="30" x2="160" y2="30" stroke="#38bdf8" stroke-width="2" marker-end="url(#arr-c-cyan)"/>
+  <rect x="130" y="10" width="40" height="15" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="150" y="21" fill="#38bdf8" font-size="9" font-weight="700" text-anchor="middle">電流 I</text>
+  <rect x="300" y="60" width="160" height="38" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="380" y="76" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">オーム則: V ＝ RI</text>
+  <text x="380" y="90" fill="#cbd5e1" font-size="9" text-anchor="middle">キルヒホッフ第2則: E ＝ RI</text>
+</svg>
+  <div class="graph-caption">各素子の両端電位差 V = RI と、回路の任意の閉路で起電力の和＝電圧降下の和が成り立ちます。</div>
+</div>
 
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
@@ -224,6 +322,31 @@ $$
 
 導線に 3.0 A の電流を流したとき、導線が受ける力を求めなさい。
 
+<div class="vector-graph-card">
+  <div class="graph-title">📐 直流回路とオームの法則・キルヒホッフ則</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-c-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+  </defs>
+  <rect x="70" y="30" width="360" height="100" fill="none" stroke="#64748b" stroke-width="2"/>
+  <line x1="60" y1="75" x2="80" y2="75" stroke="#f43f5e" stroke-width="3"/>
+  <line x1="65" y1="85" x2="75" y2="85" stroke="#f43f5e" stroke-width="2"/>
+  <rect x="25" y="72" width="30" height="16" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
+  <text x="40" y="84" fill="#f43f5e" font-size="10" font-weight="700" text-anchor="middle">起電力 E</text>
+  <rect x="200" y="20" width="60" height="20" rx="3" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+  <text x="230" y="34" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">抵抗 R₁</text>
+  <rect x="200" y="120" width="60" height="20" rx="3" fill="#1e293b" stroke="#fbbf24" stroke-width="2"/>
+  <text x="230" y="134" fill="#fbbf24" font-size="10" font-weight="700" text-anchor="middle">抵抗 R₂</text>
+  <line x1="120" y1="30" x2="160" y2="30" stroke="#38bdf8" stroke-width="2" marker-end="url(#arr-c-cyan)"/>
+  <rect x="130" y="10" width="40" height="15" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="150" y="21" fill="#38bdf8" font-size="9" font-weight="700" text-anchor="middle">電流 I</text>
+  <rect x="300" y="60" width="160" height="38" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="380" y="76" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">オーム則: V ＝ RI</text>
+  <text x="380" y="90" fill="#cbd5e1" font-size="9" text-anchor="middle">キルヒホッフ第2則: E ＝ RI</text>
+</svg>
+  <div class="graph-caption">各素子の両端電位差 V = RI と、回路の任意の閉路で起電力の和＝電圧降下の和が成り立ちます。</div>
+</div>
+
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
 
@@ -274,6 +397,30 @@ $$
 1巻きのコイルを貫く磁束が、 0.20 Wb から 0.50 Wb まで 0.10 s で変化した。
 
 誘導起電力の大きさを求めなさい。
+
+<div class="vector-graph-card">
+  <div class="graph-title">📐 電磁誘導の法則と導線棒の誘導起電力</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-ind-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+  </defs>
+  <line x1="60" y1="50" x2="350" y2="50" stroke="#64748b" stroke-width="3"/>
+  <line x1="60" y1="120" x2="350" y2="120" stroke="#64748b" stroke-width="3"/>
+  <rect x="50" y="70" width="20" height="30" rx="2" fill="#1e293b" stroke="#fbbf24" stroke-width="1.5"/>
+  <text x="60" y="89" fill="#fbbf24" font-size="9" font-weight="700" text-anchor="middle">R</text>
+  <line x1="60" y1="50" x2="60" y2="70" stroke="#64748b" stroke-width="3"/>
+  <line x1="60" y1="100" x2="60" y2="120" stroke="#64748b" stroke-width="3"/>
+  <line x1="220" y1="40" x2="220" y2="130" stroke="#38bdf8" stroke-width="5"/>
+  <text x="235" y="60" fill="#38bdf8" font-size="9" font-weight="700">棒 L</text>
+  <line x1="220" y1="85" x2="275" y2="85" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-ind-cyan)"/>
+  <rect x="235" y="93" width="45" height="15" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="257" y="104" fill="#38bdf8" font-size="9" font-weight="700" text-anchor="middle">速度 v</text>
+  <rect x="340" y="55" width="135" height="38" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="407" y="72" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">誘導起電力: V ＝ vBL</text>
+  <text x="407" y="86" fill="#f43f5e" font-size="9" text-anchor="middle">誘導電流: I ＝ V/R</text>
+</svg>
+  <div class="graph-caption">磁場 B 中を速さ v で横切る長さ L の導線棒には、起電力 V = vBL が生じます。</div>
+</div>
 
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
@@ -332,6 +479,27 @@ $$
 **【問題】**  
 電位12 Vの点に電気量3.0 Cの電荷を置きます。電気的位置エネルギーを求めなさい。
 
+<div class="vector-graph-card">
+  <div class="graph-title">📐 点電荷の周囲の電場と電位・電気力線</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-ef-rose" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#f43f5e"/></marker>
+  </defs>
+  <circle cx="160" cy="80" r="16" fill="#f43f5e"/>
+  <text x="160" y="85" fill="#fff" font-size="11" font-weight="700" text-anchor="middle">＋Q</text>
+  <circle cx="160" cy="80" r="45" fill="none" stroke="#64748b" stroke-width="1" stroke-dasharray="3,3"/>
+  <circle cx="160" cy="80" r="75" fill="none" stroke="#64748b" stroke-width="1" stroke-dasharray="3,3"/>
+  <line x1="178" y1="80" x2="250" y2="80" stroke="#f43f5e" stroke-width="2" marker-end="url(#arr-ef-rose)"/>
+  <rect x="200" y="60" width="45" height="15" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
+  <text x="222" y="71" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">電場 E</text>
+  <rect x="300" y="40" width="175" height="55" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="387" y="58" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">クーロン力: F ＝ k(q₁q₂/r²)</text>
+  <text x="387" y="74" fill="#cbd5e1" font-size="9" text-anchor="middle">電位: V ＝ k(Q/r)</text>
+  <text x="387" y="88" fill="#fbbf24" font-size="9" text-anchor="middle">一様電場: V ＝ Ed</text>
+</svg>
+  <div class="graph-caption">電場 E は単位正電荷が受けるクーロン力、電位 V は無限遠を基準とした単位正電荷の位置エネルギーです。</div>
+</div>
+
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
 
@@ -376,6 +544,27 @@ $$
 電気量 3.0 C の電荷を、電位差 12 V の間で移動させた。
 
 電気力がする仕事の大きさを求めなさい。
+
+<div class="vector-graph-card">
+  <div class="graph-title">📐 点電荷の周囲の電場と電位・電気力線</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-ef-rose" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#f43f5e"/></marker>
+  </defs>
+  <circle cx="160" cy="80" r="16" fill="#f43f5e"/>
+  <text x="160" y="85" fill="#fff" font-size="11" font-weight="700" text-anchor="middle">＋Q</text>
+  <circle cx="160" cy="80" r="45" fill="none" stroke="#64748b" stroke-width="1" stroke-dasharray="3,3"/>
+  <circle cx="160" cy="80" r="75" fill="none" stroke="#64748b" stroke-width="1" stroke-dasharray="3,3"/>
+  <line x1="178" y1="80" x2="250" y2="80" stroke="#f43f5e" stroke-width="2" marker-end="url(#arr-ef-rose)"/>
+  <rect x="200" y="60" width="45" height="15" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
+  <text x="222" y="71" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">電場 E</text>
+  <rect x="300" y="40" width="175" height="55" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="387" y="58" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">クーロン力: F ＝ k(q₁q₂/r²)</text>
+  <text x="387" y="74" fill="#cbd5e1" font-size="9" text-anchor="middle">電位: V ＝ k(Q/r)</text>
+  <text x="387" y="88" fill="#fbbf24" font-size="9" text-anchor="middle">一様電場: V ＝ Ed</text>
+</svg>
+  <div class="graph-caption">電場 E は単位正電荷が受けるクーロン力、電位 V は無限遠を基準とした単位正電荷の位置エネルギーです。</div>
+</div>
 
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
@@ -427,6 +616,31 @@ $$
 4.0 と 8.0 の抵抗を直列につなぎ、全体に 24 V の電圧を加えた。
 
 回路を流れる電流を求めなさい。
+
+<div class="vector-graph-card">
+  <div class="graph-title">📐 直流回路とオームの法則・キルヒホッフ則</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-c-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+  </defs>
+  <rect x="70" y="30" width="360" height="100" fill="none" stroke="#64748b" stroke-width="2"/>
+  <line x1="60" y1="75" x2="80" y2="75" stroke="#f43f5e" stroke-width="3"/>
+  <line x1="65" y1="85" x2="75" y2="85" stroke="#f43f5e" stroke-width="2"/>
+  <rect x="25" y="72" width="30" height="16" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
+  <text x="40" y="84" fill="#f43f5e" font-size="10" font-weight="700" text-anchor="middle">起電力 E</text>
+  <rect x="200" y="20" width="60" height="20" rx="3" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+  <text x="230" y="34" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">抵抗 R₁</text>
+  <rect x="200" y="120" width="60" height="20" rx="3" fill="#1e293b" stroke="#fbbf24" stroke-width="2"/>
+  <text x="230" y="134" fill="#fbbf24" font-size="10" font-weight="700" text-anchor="middle">抵抗 R₂</text>
+  <line x1="120" y1="30" x2="160" y2="30" stroke="#38bdf8" stroke-width="2" marker-end="url(#arr-c-cyan)"/>
+  <rect x="130" y="10" width="40" height="15" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="150" y="21" fill="#38bdf8" font-size="9" font-weight="700" text-anchor="middle">電流 I</text>
+  <rect x="300" y="60" width="160" height="38" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="380" y="76" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">オーム則: V ＝ RI</text>
+  <text x="380" y="90" fill="#cbd5e1" font-size="9" text-anchor="middle">キルヒホッフ第2則: E ＝ RI</text>
+</svg>
+  <div class="graph-caption">各素子の両端電位差 V = RI と、回路の任意の閉路で起電力の和＝電圧降下の和が成り立ちます。</div>
+</div>
 
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
@@ -487,6 +701,31 @@ $$
 
 回路全体を流れる電流を求めなさい。
 
+<div class="vector-graph-card">
+  <div class="graph-title">📐 直流回路とオームの法則・キルヒホッフ則</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-c-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+  </defs>
+  <rect x="70" y="30" width="360" height="100" fill="none" stroke="#64748b" stroke-width="2"/>
+  <line x1="60" y1="75" x2="80" y2="75" stroke="#f43f5e" stroke-width="3"/>
+  <line x1="65" y1="85" x2="75" y2="85" stroke="#f43f5e" stroke-width="2"/>
+  <rect x="25" y="72" width="30" height="16" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
+  <text x="40" y="84" fill="#f43f5e" font-size="10" font-weight="700" text-anchor="middle">起電力 E</text>
+  <rect x="200" y="20" width="60" height="20" rx="3" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+  <text x="230" y="34" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">抵抗 R₁</text>
+  <rect x="200" y="120" width="60" height="20" rx="3" fill="#1e293b" stroke="#fbbf24" stroke-width="2"/>
+  <text x="230" y="134" fill="#fbbf24" font-size="10" font-weight="700" text-anchor="middle">抵抗 R₂</text>
+  <line x1="120" y1="30" x2="160" y2="30" stroke="#38bdf8" stroke-width="2" marker-end="url(#arr-c-cyan)"/>
+  <rect x="130" y="10" width="40" height="15" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="150" y="21" fill="#38bdf8" font-size="9" font-weight="700" text-anchor="middle">電流 I</text>
+  <rect x="300" y="60" width="160" height="38" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="380" y="76" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">オーム則: V ＝ RI</text>
+  <text x="380" y="90" fill="#cbd5e1" font-size="9" text-anchor="middle">キルヒホッフ第2則: E ＝ RI</text>
+</svg>
+  <div class="graph-caption">各素子の両端電位差 V = RI と、回路の任意の閉路で起電力の和＝電圧降下の和が成り立ちます。</div>
+</div>
+
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
 
@@ -545,6 +784,31 @@ $$
 電圧 100 V、電流 5.0 A で動く電気器具を 10 min 使用した。
 
 消費電力と消費した電気エネルギーを求めなさい。
+
+<div class="vector-graph-card">
+  <div class="graph-title">📐 直流回路とオームの法則・キルヒホッフ則</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-c-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+  </defs>
+  <rect x="70" y="30" width="360" height="100" fill="none" stroke="#64748b" stroke-width="2"/>
+  <line x1="60" y1="75" x2="80" y2="75" stroke="#f43f5e" stroke-width="3"/>
+  <line x1="65" y1="85" x2="75" y2="85" stroke="#f43f5e" stroke-width="2"/>
+  <rect x="25" y="72" width="30" height="16" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
+  <text x="40" y="84" fill="#f43f5e" font-size="10" font-weight="700" text-anchor="middle">起電力 E</text>
+  <rect x="200" y="20" width="60" height="20" rx="3" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+  <text x="230" y="34" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">抵抗 R₁</text>
+  <rect x="200" y="120" width="60" height="20" rx="3" fill="#1e293b" stroke="#fbbf24" stroke-width="2"/>
+  <text x="230" y="134" fill="#fbbf24" font-size="10" font-weight="700" text-anchor="middle">抵抗 R₂</text>
+  <line x1="120" y1="30" x2="160" y2="30" stroke="#38bdf8" stroke-width="2" marker-end="url(#arr-c-cyan)"/>
+  <rect x="130" y="10" width="40" height="15" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="150" y="21" fill="#38bdf8" font-size="9" font-weight="700" text-anchor="middle">電流 I</text>
+  <rect x="300" y="60" width="160" height="38" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="380" y="76" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">オーム則: V ＝ RI</text>
+  <text x="380" y="90" fill="#cbd5e1" font-size="9" text-anchor="middle">キルヒホッフ第2則: E ＝ RI</text>
+</svg>
+  <div class="graph-caption">各素子の両端電位差 V = RI と、回路の任意の閉路で起電力の和＝電圧降下の和が成り立ちます。</div>
+</div>
 
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
@@ -617,6 +881,30 @@ $$
 
 蓄えられる電気量を求めなさい。
 
+<div class="vector-graph-card">
+  <div class="graph-title">📐 平行板コンデンサーの電気量と静電エネルギー</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-cap-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+  </defs>
+  <line x1="180" y1="30" x2="180" y2="130" stroke="#f43f5e" stroke-width="4"/>
+  <line x1="260" y1="30" x2="260" y2="130" stroke="#38bdf8" stroke-width="4"/>
+  <rect x="130" y="70" width="45" height="18" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
+  <text x="152" y="83" fill="#f43f5e" font-size="10" font-weight="700" text-anchor="middle">＋Q (正)</text>
+  <rect x="268" y="70" width="45" height="18" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="290" y="83" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">−Q (負)</text>
+  <line x1="184" y1="50" x2="256" y2="50" stroke="#fbbf24" stroke-width="2" marker-end="url(#arr-cap-cyan)"/>
+  <line x1="184" y1="80" x2="256" y2="80" stroke="#fbbf24" stroke-width="2" marker-end="url(#arr-cap-cyan)"/>
+  <line x1="184" y1="110" x2="256" y2="110" stroke="#fbbf24" stroke-width="2" marker-end="url(#arr-cap-cyan)"/>
+  <rect x="200" y="85" width="45" height="16" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
+  <text x="222" y="97" fill="#fbbf24" font-size="9" font-weight="700" text-anchor="middle">電場 E</text>
+  <rect x="330" y="50" width="140" height="48" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="400" y="68" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">Q ＝ CV ,  C ＝ ε S/d</text>
+  <text x="400" y="85" fill="#f43f5e" font-size="9" text-anchor="middle">エネルギー U ＝ ½ CV²</text>
+</svg>
+  <div class="graph-caption">極板間の電位差 V に対し Q = CV の電荷が蓄えられ、静電エネルギー U = ½CV² が蓄積されます。</div>
+</div>
+
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
 
@@ -670,6 +958,34 @@ $$
 
 粒子が受ける磁気力の大きさを求めなさい。
 
+<div class="vector-graph-card">
+  <div class="graph-title">📐 磁場中の荷電粒子の運動・ローレンツ力</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-mf-rose" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#f43f5e"/></marker>
+    <marker id="arr-mf-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+  </defs>
+  <g fill="#475569" font-size="14">
+    <text x="80" y="50">⊗</text><text x="140" y="50">⊗</text><text x="200" y="50">⊗</text>
+    <text x="80" y="100">⊗</text><text x="140" y="100">⊗</text><text x="200" y="100">⊗</text>
+  </g>
+  <rect x="100" y="15" width="105" height="18" rx="3" fill="#0f172a" stroke="#64748b" stroke-width="1"/>
+  <text x="152" y="28" fill="#94a3b8" font-size="9" text-anchor="middle">磁場 B (画面奥向き)</text>
+  <circle cx="200" cy="85" r="9" fill="#f43f5e"/>
+  <text x="200" y="89" fill="#fff" font-size="10" font-weight="700" text-anchor="middle">＋</text>
+  <line x1="200" y1="85" x2="260" y2="85" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-mf-cyan)"/>
+  <rect x="220" y="65" width="45" height="16" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="242" y="77" fill="#38bdf8" font-size="9" font-weight="700" text-anchor="middle">速度 v</text>
+  <line x1="200" y1="85" x2="200" y2="35" stroke="#f43f5e" stroke-width="2.5" marker-end="url(#arr-mf-rose)"/>
+  <rect x="145" y="40" width="50" height="16" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
+  <text x="170" y="52" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">力 F＝qvB</text>
+  <rect x="300" y="45" width="165" height="42" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="382" y="62" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">円軌道半径: r ＝ mv / (qB)</text>
+  <text x="382" y="78" fill="#fbbf24" font-size="9" text-anchor="middle">周期: T ＝ 2πm / (qB)</text>
+</svg>
+  <div class="graph-caption">磁場 B 中を速度 v で動く電荷 q には、速度と磁場に直交するローレンツ力 F = qvB が働きます。</div>
+</div>
+
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
 
@@ -720,6 +1036,31 @@ $$
 理想的な変圧器の一次コイルの巻数が 500 回、二次コイルの巻数が 100 回である。
 
 一次電圧が 100 V のとき、二次電圧を求めなさい。
+
+<div class="vector-graph-card">
+  <div class="graph-title">📐 直流回路とオームの法則・キルヒホッフ則</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-c-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+  </defs>
+  <rect x="70" y="30" width="360" height="100" fill="none" stroke="#64748b" stroke-width="2"/>
+  <line x1="60" y1="75" x2="80" y2="75" stroke="#f43f5e" stroke-width="3"/>
+  <line x1="65" y1="85" x2="75" y2="85" stroke="#f43f5e" stroke-width="2"/>
+  <rect x="25" y="72" width="30" height="16" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
+  <text x="40" y="84" fill="#f43f5e" font-size="10" font-weight="700" text-anchor="middle">起電力 E</text>
+  <rect x="200" y="20" width="60" height="20" rx="3" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+  <text x="230" y="34" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">抵抗 R₁</text>
+  <rect x="200" y="120" width="60" height="20" rx="3" fill="#1e293b" stroke="#fbbf24" stroke-width="2"/>
+  <text x="230" y="134" fill="#fbbf24" font-size="10" font-weight="700" text-anchor="middle">抵抗 R₂</text>
+  <line x1="120" y1="30" x2="160" y2="30" stroke="#38bdf8" stroke-width="2" marker-end="url(#arr-c-cyan)"/>
+  <rect x="130" y="10" width="40" height="15" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="150" y="21" fill="#38bdf8" font-size="9" font-weight="700" text-anchor="middle">電流 I</text>
+  <rect x="300" y="60" width="160" height="38" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="380" y="76" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">オーム則: V ＝ RI</text>
+  <text x="380" y="90" fill="#cbd5e1" font-size="9" text-anchor="middle">キルヒホッフ第2則: E ＝ RI</text>
+</svg>
+  <div class="graph-caption">各素子の両端電位差 V = RI と、回路の任意の閉路で起電力の和＝電圧降下の和が成り立ちます。</div>
+</div>
 
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
@@ -772,6 +1113,31 @@ $$
 
 導線の抵抗率が 1.7×10⁻⁸ のとき、抵抗を求めなさい。
 
+<div class="vector-graph-card">
+  <div class="graph-title">📐 直流回路とオームの法則・キルヒホッフ則</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-c-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+  </defs>
+  <rect x="70" y="30" width="360" height="100" fill="none" stroke="#64748b" stroke-width="2"/>
+  <line x1="60" y1="75" x2="80" y2="75" stroke="#f43f5e" stroke-width="3"/>
+  <line x1="65" y1="85" x2="75" y2="85" stroke="#f43f5e" stroke-width="2"/>
+  <rect x="25" y="72" width="30" height="16" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
+  <text x="40" y="84" fill="#f43f5e" font-size="10" font-weight="700" text-anchor="middle">起電力 E</text>
+  <rect x="200" y="20" width="60" height="20" rx="3" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+  <text x="230" y="34" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">抵抗 R₁</text>
+  <rect x="200" y="120" width="60" height="20" rx="3" fill="#1e293b" stroke="#fbbf24" stroke-width="2"/>
+  <text x="230" y="134" fill="#fbbf24" font-size="10" font-weight="700" text-anchor="middle">抵抗 R₂</text>
+  <line x1="120" y1="30" x2="160" y2="30" stroke="#38bdf8" stroke-width="2" marker-end="url(#arr-c-cyan)"/>
+  <rect x="130" y="10" width="40" height="15" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="150" y="21" fill="#38bdf8" font-size="9" font-weight="700" text-anchor="middle">電流 I</text>
+  <rect x="300" y="60" width="160" height="38" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="380" y="76" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">オーム則: V ＝ RI</text>
+  <text x="380" y="90" fill="#cbd5e1" font-size="9" text-anchor="middle">キルヒホッフ第2則: E ＝ RI</text>
+</svg>
+  <div class="graph-caption">各素子の両端電位差 V = RI と、回路の任意の閉路で起電力の和＝電圧降下の和が成り立ちます。</div>
+</div>
+
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
 
@@ -822,6 +1188,30 @@ $$
 電気容量 5.0 μF のコンデンサーに 20 V の電圧を加えた。
 
 コンデンサーに蓄えられるエネルギーを求めなさい。
+
+<div class="vector-graph-card">
+  <div class="graph-title">📐 平行板コンデンサーの電気量と静電エネルギー</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-cap-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+  </defs>
+  <line x1="180" y1="30" x2="180" y2="130" stroke="#f43f5e" stroke-width="4"/>
+  <line x1="260" y1="30" x2="260" y2="130" stroke="#38bdf8" stroke-width="4"/>
+  <rect x="130" y="70" width="45" height="18" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
+  <text x="152" y="83" fill="#f43f5e" font-size="10" font-weight="700" text-anchor="middle">＋Q (正)</text>
+  <rect x="268" y="70" width="45" height="18" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="290" y="83" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">−Q (負)</text>
+  <line x1="184" y1="50" x2="256" y2="50" stroke="#fbbf24" stroke-width="2" marker-end="url(#arr-cap-cyan)"/>
+  <line x1="184" y1="80" x2="256" y2="80" stroke="#fbbf24" stroke-width="2" marker-end="url(#arr-cap-cyan)"/>
+  <line x1="184" y1="110" x2="256" y2="110" stroke="#fbbf24" stroke-width="2" marker-end="url(#arr-cap-cyan)"/>
+  <rect x="200" y="85" width="45" height="16" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
+  <text x="222" y="97" fill="#fbbf24" font-size="9" font-weight="700" text-anchor="middle">電場 E</text>
+  <rect x="330" y="50" width="140" height="48" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="400" y="68" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">Q ＝ CV ,  C ＝ ε S/d</text>
+  <text x="400" y="85" fill="#f43f5e" font-size="9" text-anchor="middle">エネルギー U ＝ ½ CV²</text>
+</svg>
+  <div class="graph-caption">極板間の電位差 V に対し Q = CV の電荷が蓄えられ、静電エネルギー U = ½CV² が蓄積されます。</div>
+</div>
 
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
@@ -875,6 +1265,30 @@ $$
 200回巻きのコイルを貫く磁束が、 0.010 Wb から 0.0040 Wb まで 0.020 s で変化した。
 
 コイルに生じる誘導起電力の大きさを求めなさい。
+
+<div class="vector-graph-card">
+  <div class="graph-title">📐 電磁誘導の法則と導線棒の誘導起電力</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-ind-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+  </defs>
+  <line x1="60" y1="50" x2="350" y2="50" stroke="#64748b" stroke-width="3"/>
+  <line x1="60" y1="120" x2="350" y2="120" stroke="#64748b" stroke-width="3"/>
+  <rect x="50" y="70" width="20" height="30" rx="2" fill="#1e293b" stroke="#fbbf24" stroke-width="1.5"/>
+  <text x="60" y="89" fill="#fbbf24" font-size="9" font-weight="700" text-anchor="middle">R</text>
+  <line x1="60" y1="50" x2="60" y2="70" stroke="#64748b" stroke-width="3"/>
+  <line x1="60" y1="100" x2="60" y2="120" stroke="#64748b" stroke-width="3"/>
+  <line x1="220" y1="40" x2="220" y2="130" stroke="#38bdf8" stroke-width="5"/>
+  <text x="235" y="60" fill="#38bdf8" font-size="9" font-weight="700">棒 L</text>
+  <line x1="220" y1="85" x2="275" y2="85" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-ind-cyan)"/>
+  <rect x="235" y="93" width="45" height="15" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="257" y="104" fill="#38bdf8" font-size="9" font-weight="700" text-anchor="middle">速度 v</text>
+  <rect x="340" y="55" width="135" height="38" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="407" y="72" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">誘導起電力: V ＝ vBL</text>
+  <text x="407" y="86" fill="#f43f5e" font-size="9" text-anchor="middle">誘導電流: I ＝ V/R</text>
+</svg>
+  <div class="graph-caption">磁場 B 中を速さ v で横切る長さ L の導線棒には、起電力 V = vBL が生じます。</div>
+</div>
 
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
@@ -933,6 +1347,30 @@ $$
 **【問題】**  
 容量4.0 μFのコンデンサーに12 Vを加えます。蓄えられる電気量とエネルギーを求めなさい。
 
+<div class="vector-graph-card">
+  <div class="graph-title">📐 平行板コンデンサーの電気量と静電エネルギー</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-cap-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+  </defs>
+  <line x1="180" y1="30" x2="180" y2="130" stroke="#f43f5e" stroke-width="4"/>
+  <line x1="260" y1="30" x2="260" y2="130" stroke="#38bdf8" stroke-width="4"/>
+  <rect x="130" y="70" width="45" height="18" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
+  <text x="152" y="83" fill="#f43f5e" font-size="10" font-weight="700" text-anchor="middle">＋Q (正)</text>
+  <rect x="268" y="70" width="45" height="18" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="290" y="83" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">−Q (負)</text>
+  <line x1="184" y1="50" x2="256" y2="50" stroke="#fbbf24" stroke-width="2" marker-end="url(#arr-cap-cyan)"/>
+  <line x1="184" y1="80" x2="256" y2="80" stroke="#fbbf24" stroke-width="2" marker-end="url(#arr-cap-cyan)"/>
+  <line x1="184" y1="110" x2="256" y2="110" stroke="#fbbf24" stroke-width="2" marker-end="url(#arr-cap-cyan)"/>
+  <rect x="200" y="85" width="45" height="16" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
+  <text x="222" y="97" fill="#fbbf24" font-size="9" font-weight="700" text-anchor="middle">電場 E</text>
+  <rect x="330" y="50" width="140" height="48" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="400" y="68" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">Q ＝ CV ,  C ＝ ε S/d</text>
+  <text x="400" y="85" fill="#f43f5e" font-size="9" text-anchor="middle">エネルギー U ＝ ½ CV²</text>
+</svg>
+  <div class="graph-caption">極板間の電位差 V に対し Q = CV の電荷が蓄えられ、静電エネルギー U = ½CV² が蓄積されます。</div>
+</div>
+
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
 
@@ -983,6 +1421,31 @@ $$
 起電力 12 V の電池に、抵抗 2.0 と 4.0 を直列につないだ。
 
 回路を流れる電流と、それぞれの抵抗にかかる電圧を求めなさい。電池の内部抵抗は無視する。
+
+<div class="vector-graph-card">
+  <div class="graph-title">📐 直流回路とオームの法則・キルヒホッフ則</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-c-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+  </defs>
+  <rect x="70" y="30" width="360" height="100" fill="none" stroke="#64748b" stroke-width="2"/>
+  <line x1="60" y1="75" x2="80" y2="75" stroke="#f43f5e" stroke-width="3"/>
+  <line x1="65" y1="85" x2="75" y2="85" stroke="#f43f5e" stroke-width="2"/>
+  <rect x="25" y="72" width="30" height="16" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
+  <text x="40" y="84" fill="#f43f5e" font-size="10" font-weight="700" text-anchor="middle">起電力 E</text>
+  <rect x="200" y="20" width="60" height="20" rx="3" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+  <text x="230" y="34" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">抵抗 R₁</text>
+  <rect x="200" y="120" width="60" height="20" rx="3" fill="#1e293b" stroke="#fbbf24" stroke-width="2"/>
+  <text x="230" y="134" fill="#fbbf24" font-size="10" font-weight="700" text-anchor="middle">抵抗 R₂</text>
+  <line x1="120" y1="30" x2="160" y2="30" stroke="#38bdf8" stroke-width="2" marker-end="url(#arr-c-cyan)"/>
+  <rect x="130" y="10" width="40" height="15" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="150" y="21" fill="#38bdf8" font-size="9" font-weight="700" text-anchor="middle">電流 I</text>
+  <rect x="300" y="60" width="160" height="38" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="380" y="76" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">オーム則: V ＝ RI</text>
+  <text x="380" y="90" fill="#cbd5e1" font-size="9" text-anchor="middle">キルヒホッフ第2則: E ＝ RI</text>
+</svg>
+  <div class="graph-caption">各素子の両端電位差 V = RI と、回路の任意の閉路で起電力の和＝電圧降下の和が成り立ちます。</div>
+</div>
 
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
@@ -1067,6 +1530,34 @@ $$
 
 粒子が描く円運動の半径を求めなさい。
 
+<div class="vector-graph-card">
+  <div class="graph-title">📐 磁場中の荷電粒子の運動・ローレンツ力</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-mf-rose" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#f43f5e"/></marker>
+    <marker id="arr-mf-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+  </defs>
+  <g fill="#475569" font-size="14">
+    <text x="80" y="50">⊗</text><text x="140" y="50">⊗</text><text x="200" y="50">⊗</text>
+    <text x="80" y="100">⊗</text><text x="140" y="100">⊗</text><text x="200" y="100">⊗</text>
+  </g>
+  <rect x="100" y="15" width="105" height="18" rx="3" fill="#0f172a" stroke="#64748b" stroke-width="1"/>
+  <text x="152" y="28" fill="#94a3b8" font-size="9" text-anchor="middle">磁場 B (画面奥向き)</text>
+  <circle cx="200" cy="85" r="9" fill="#f43f5e"/>
+  <text x="200" y="89" fill="#fff" font-size="10" font-weight="700" text-anchor="middle">＋</text>
+  <line x1="200" y1="85" x2="260" y2="85" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-mf-cyan)"/>
+  <rect x="220" y="65" width="45" height="16" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="242" y="77" fill="#38bdf8" font-size="9" font-weight="700" text-anchor="middle">速度 v</text>
+  <line x1="200" y1="85" x2="200" y2="35" stroke="#f43f5e" stroke-width="2.5" marker-end="url(#arr-mf-rose)"/>
+  <rect x="145" y="40" width="50" height="16" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
+  <text x="170" y="52" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">力 F＝qvB</text>
+  <rect x="300" y="45" width="165" height="42" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="382" y="62" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">円軌道半径: r ＝ mv / (qB)</text>
+  <text x="382" y="78" fill="#fbbf24" font-size="9" text-anchor="middle">周期: T ＝ 2πm / (qB)</text>
+</svg>
+  <div class="graph-caption">磁場 B 中を速度 v で動く電荷 q には、速度と磁場に直交するローレンツ力 F = qvB が働きます。</div>
+</div>
+
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
 
@@ -1124,6 +1615,31 @@ $$
 **【問題】**  
 6.0 Ωと3.0 Ωの抵抗を並列につなぎ、両端へ12 Vを加えた。各抵抗を流れる電流と回路全体の電流を求めなさい。
 
+<div class="vector-graph-card">
+  <div class="graph-title">📐 直流回路とオームの法則・キルヒホッフ則</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-c-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+  </defs>
+  <rect x="70" y="30" width="360" height="100" fill="none" stroke="#64748b" stroke-width="2"/>
+  <line x1="60" y1="75" x2="80" y2="75" stroke="#f43f5e" stroke-width="3"/>
+  <line x1="65" y1="85" x2="75" y2="85" stroke="#f43f5e" stroke-width="2"/>
+  <rect x="25" y="72" width="30" height="16" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
+  <text x="40" y="84" fill="#f43f5e" font-size="10" font-weight="700" text-anchor="middle">起電力 E</text>
+  <rect x="200" y="20" width="60" height="20" rx="3" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+  <text x="230" y="34" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">抵抗 R₁</text>
+  <rect x="200" y="120" width="60" height="20" rx="3" fill="#1e293b" stroke="#fbbf24" stroke-width="2"/>
+  <text x="230" y="134" fill="#fbbf24" font-size="10" font-weight="700" text-anchor="middle">抵抗 R₂</text>
+  <line x1="120" y1="30" x2="160" y2="30" stroke="#38bdf8" stroke-width="2" marker-end="url(#arr-c-cyan)"/>
+  <rect x="130" y="10" width="40" height="15" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="150" y="21" fill="#38bdf8" font-size="9" font-weight="700" text-anchor="middle">電流 I</text>
+  <rect x="300" y="60" width="160" height="38" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="380" y="76" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">オーム則: V ＝ RI</text>
+  <text x="380" y="90" fill="#cbd5e1" font-size="9" text-anchor="middle">キルヒホッフ第2則: E ＝ RI</text>
+</svg>
+  <div class="graph-caption">各素子の両端電位差 V = RI と、回路の任意の閉路で起電力の和＝電圧降下の和が成り立ちます。</div>
+</div>
+
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
 
@@ -1180,6 +1696,31 @@ $$
 3. 電池の端子電圧を求めなさい。
 4. R₂ と R₃ を流れる電流をそれぞれ求めなさい。
 5. R₃ で消費される電力を求めなさい。
+
+<div class="vector-graph-card">
+  <div class="graph-title">📐 直流回路とオームの法則・キルヒホッフ則</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-c-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+  </defs>
+  <rect x="70" y="30" width="360" height="100" fill="none" stroke="#64748b" stroke-width="2"/>
+  <line x1="60" y1="75" x2="80" y2="75" stroke="#f43f5e" stroke-width="3"/>
+  <line x1="65" y1="85" x2="75" y2="85" stroke="#f43f5e" stroke-width="2"/>
+  <rect x="25" y="72" width="30" height="16" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
+  <text x="40" y="84" fill="#f43f5e" font-size="10" font-weight="700" text-anchor="middle">起電力 E</text>
+  <rect x="200" y="20" width="60" height="20" rx="3" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+  <text x="230" y="34" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">抵抗 R₁</text>
+  <rect x="200" y="120" width="60" height="20" rx="3" fill="#1e293b" stroke="#fbbf24" stroke-width="2"/>
+  <text x="230" y="134" fill="#fbbf24" font-size="10" font-weight="700" text-anchor="middle">抵抗 R₂</text>
+  <line x1="120" y1="30" x2="160" y2="30" stroke="#38bdf8" stroke-width="2" marker-end="url(#arr-c-cyan)"/>
+  <rect x="130" y="10" width="40" height="15" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="150" y="21" fill="#38bdf8" font-size="9" font-weight="700" text-anchor="middle">電流 I</text>
+  <rect x="300" y="60" width="160" height="38" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="380" y="76" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">オーム則: V ＝ RI</text>
+  <text x="380" y="90" fill="#cbd5e1" font-size="9" text-anchor="middle">キルヒホッフ第2則: E ＝ RI</text>
+</svg>
+  <div class="graph-caption">各素子の両端電位差 V = RI と、回路の任意の閉路で起電力の和＝電圧降下の和が成り立ちます。</div>
+</div>
 
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
@@ -1322,6 +1863,31 @@ $$
 4. 並列部分にかかる電圧を求めなさい。
 5. 並列部分の各抵抗を流れる電流を求めなさい。
 6. 3.0 の抵抗で消費される電力を求めなさい。
+
+<div class="vector-graph-card">
+  <div class="graph-title">📐 直流回路とオームの法則・キルヒホッフ則</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-c-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+  </defs>
+  <rect x="70" y="30" width="360" height="100" fill="none" stroke="#64748b" stroke-width="2"/>
+  <line x1="60" y1="75" x2="80" y2="75" stroke="#f43f5e" stroke-width="3"/>
+  <line x1="65" y1="85" x2="75" y2="85" stroke="#f43f5e" stroke-width="2"/>
+  <rect x="25" y="72" width="30" height="16" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
+  <text x="40" y="84" fill="#f43f5e" font-size="10" font-weight="700" text-anchor="middle">起電力 E</text>
+  <rect x="200" y="20" width="60" height="20" rx="3" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+  <text x="230" y="34" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">抵抗 R₁</text>
+  <rect x="200" y="120" width="60" height="20" rx="3" fill="#1e293b" stroke="#fbbf24" stroke-width="2"/>
+  <text x="230" y="134" fill="#fbbf24" font-size="10" font-weight="700" text-anchor="middle">抵抗 R₂</text>
+  <line x1="120" y1="30" x2="160" y2="30" stroke="#38bdf8" stroke-width="2" marker-end="url(#arr-c-cyan)"/>
+  <rect x="130" y="10" width="40" height="15" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="150" y="21" fill="#38bdf8" font-size="9" font-weight="700" text-anchor="middle">電流 I</text>
+  <rect x="300" y="60" width="160" height="38" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="380" y="76" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">オーム則: V ＝ RI</text>
+  <text x="380" y="90" fill="#cbd5e1" font-size="9" text-anchor="middle">キルヒホッフ第2則: E ＝ RI</text>
+</svg>
+  <div class="graph-caption">各素子の両端電位差 V = RI と、回路の任意の閉路で起電力の和＝電圧降下の和が成り立ちます。</div>
+</div>
 
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
@@ -1471,6 +2037,33 @@ P(x,0) (x>0)
 4. Pにおける電位を求めなさい。
 5. x=a のときの電場の大きさを求めなさい。
 6. 正の試験電荷 Q を x=a から x=2a まで、 x 軸に沿ってゆっくり移動させる。このとき、電気力がする仕事を求めなさい。
+
+<div class="vector-graph-card">
+  <div class="graph-title">📐 クーロンの法則と点電荷間の静電気力</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-cl-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-cl-rose" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#f43f5e"/></marker>
+  </defs>
+  <circle cx="100" cy="80" r="16" fill="#f43f5e"/>
+  <text x="100" y="85" fill="#fff" font-size="11" font-weight="700" text-anchor="middle">＋q₁</text>
+  <line x1="100" y1="80" x2="50" y2="80" stroke="#f43f5e" stroke-width="2.5" marker-end="url(#arr-cl-rose)"/>
+  <rect x="45" y="55" width="45" height="15" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
+  <text x="67" y="66" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">力 F</text>
+  <circle cx="230" cy="80" r="16" fill="#f43f5e"/>
+  <text x="230" y="85" fill="#fff" font-size="11" font-weight="700" text-anchor="middle">＋q₂</text>
+  <line x1="230" y1="80" x2="280" y2="80" stroke="#f43f5e" stroke-width="2.5" marker-end="url(#arr-cl-rose)"/>
+  <rect x="245" y="55" width="45" height="15" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
+  <text x="267" y="66" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">力 F</text>
+  <line x1="100" y1="120" x2="230" y2="120" stroke="#fbbf24" stroke-width="1.5"/>
+  <rect x="145" y="125" width="40" height="15" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
+  <text x="165" y="136" fill="#fbbf24" font-size="9" font-weight="700" text-anchor="middle">距離 r</text>
+  <rect x="300" y="40" width="180" height="52" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="390" y="58" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">クーロン力: F ＝ k |q₁q₂| / r²</text>
+  <text x="390" y="74" fill="#fbbf24" font-size="9" text-anchor="middle">同種電荷: 斥力 ／ 異種電荷: 引力</text>
+</svg>
+  <div class="graph-caption">同種の電荷は退け合い（斥力）、異種の電荷は引き合います（引力）。力は距離の2乗に反比例します。</div>
+</div>
 
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
@@ -1623,6 +2216,31 @@ $$
 **【問題】**  
 長い直線導線に2.0 Aの電流が流れています。導線から0.10 mの点の磁束密度を求めなさい。μ_0=4π×10^-7 T m/Aとします。
 
+<div class="vector-graph-card">
+  <div class="graph-title">📐 直流回路とオームの法則・キルヒホッフ則</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-c-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+  </defs>
+  <rect x="70" y="30" width="360" height="100" fill="none" stroke="#64748b" stroke-width="2"/>
+  <line x1="60" y1="75" x2="80" y2="75" stroke="#f43f5e" stroke-width="3"/>
+  <line x1="65" y1="85" x2="75" y2="85" stroke="#f43f5e" stroke-width="2"/>
+  <rect x="25" y="72" width="30" height="16" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
+  <text x="40" y="84" fill="#f43f5e" font-size="10" font-weight="700" text-anchor="middle">起電力 E</text>
+  <rect x="200" y="20" width="60" height="20" rx="3" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+  <text x="230" y="34" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">抵抗 R₁</text>
+  <rect x="200" y="120" width="60" height="20" rx="3" fill="#1e293b" stroke="#fbbf24" stroke-width="2"/>
+  <text x="230" y="134" fill="#fbbf24" font-size="10" font-weight="700" text-anchor="middle">抵抗 R₂</text>
+  <line x1="120" y1="30" x2="160" y2="30" stroke="#38bdf8" stroke-width="2" marker-end="url(#arr-c-cyan)"/>
+  <rect x="130" y="10" width="40" height="15" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="150" y="21" fill="#38bdf8" font-size="9" font-weight="700" text-anchor="middle">電流 I</text>
+  <rect x="300" y="60" width="160" height="38" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="380" y="76" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">オーム則: V ＝ RI</text>
+  <text x="380" y="90" fill="#cbd5e1" font-size="9" text-anchor="middle">キルヒホッフ第2則: E ＝ RI</text>
+</svg>
+  <div class="graph-caption">各素子の両端電位差 V = RI と、回路の任意の閉路で起電力の和＝電圧降下の和が成り立ちます。</div>
+</div>
+
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
 
@@ -1680,6 +2298,30 @@ g=9.8 m/s², sin30°=0.500
 2. 導体棒の速さが v のとき、回路を流れる電流を求めなさい。
 3. 十分時間が経過して一定速度になったときの速さを求めなさい。
 4. このとき回路を流れる電流と、抵抗で単位時間あたりに発生するジュール熱を求めなさい。
+
+<div class="vector-graph-card">
+  <div class="graph-title">📐 電磁誘導の法則と導線棒の誘導起電力</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-ind-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+  </defs>
+  <line x1="60" y1="50" x2="350" y2="50" stroke="#64748b" stroke-width="3"/>
+  <line x1="60" y1="120" x2="350" y2="120" stroke="#64748b" stroke-width="3"/>
+  <rect x="50" y="70" width="20" height="30" rx="2" fill="#1e293b" stroke="#fbbf24" stroke-width="1.5"/>
+  <text x="60" y="89" fill="#fbbf24" font-size="9" font-weight="700" text-anchor="middle">R</text>
+  <line x1="60" y1="50" x2="60" y2="70" stroke="#64748b" stroke-width="3"/>
+  <line x1="60" y1="100" x2="60" y2="120" stroke="#64748b" stroke-width="3"/>
+  <line x1="220" y1="40" x2="220" y2="130" stroke="#38bdf8" stroke-width="5"/>
+  <text x="235" y="60" fill="#38bdf8" font-size="9" font-weight="700">棒 L</text>
+  <line x1="220" y1="85" x2="275" y2="85" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-ind-cyan)"/>
+  <rect x="235" y="93" width="45" height="15" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="257" y="104" fill="#38bdf8" font-size="9" font-weight="700" text-anchor="middle">速度 v</text>
+  <rect x="340" y="55" width="135" height="38" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="407" y="72" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">誘導起電力: V ＝ vBL</text>
+  <text x="407" y="86" fill="#f43f5e" font-size="9" text-anchor="middle">誘導電流: I ＝ V/R</text>
+</svg>
+  <div class="graph-caption">磁場 B 中を速さ v で横切る長さ L の導線棒には、起電力 V = vBL が生じます。</div>
+</div>
 
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
@@ -1874,6 +2516,30 @@ C₂=3.0 μF
 5. 接続中に導線の抵抗で発生したジュール熱を求めなさい。
 6. 導線の抵抗値を変えると、発生するジュール熱の総量は変化するか答えなさい。
 
+<div class="vector-graph-card">
+  <div class="graph-title">📐 平行板コンデンサーの電気量と静電エネルギー</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-cap-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+  </defs>
+  <line x1="180" y1="30" x2="180" y2="130" stroke="#f43f5e" stroke-width="4"/>
+  <line x1="260" y1="30" x2="260" y2="130" stroke="#38bdf8" stroke-width="4"/>
+  <rect x="130" y="70" width="45" height="18" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
+  <text x="152" y="83" fill="#f43f5e" font-size="10" font-weight="700" text-anchor="middle">＋Q (正)</text>
+  <rect x="268" y="70" width="45" height="18" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="290" y="83" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">−Q (負)</text>
+  <line x1="184" y1="50" x2="256" y2="50" stroke="#fbbf24" stroke-width="2" marker-end="url(#arr-cap-cyan)"/>
+  <line x1="184" y1="80" x2="256" y2="80" stroke="#fbbf24" stroke-width="2" marker-end="url(#arr-cap-cyan)"/>
+  <line x1="184" y1="110" x2="256" y2="110" stroke="#fbbf24" stroke-width="2" marker-end="url(#arr-cap-cyan)"/>
+  <rect x="200" y="85" width="45" height="16" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
+  <text x="222" y="97" fill="#fbbf24" font-size="9" font-weight="700" text-anchor="middle">電場 E</text>
+  <rect x="330" y="50" width="140" height="48" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="400" y="68" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">Q ＝ CV ,  C ＝ ε S/d</text>
+  <text x="400" y="85" fill="#f43f5e" font-size="9" text-anchor="middle">エネルギー U ＝ ½ CV²</text>
+</svg>
+  <div class="graph-caption">極板間の電位差 V に対し Q = CV の電荷が蓄えられ、静電エネルギー U = ½CV² が蓄積されます。</div>
+</div>
+
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
 
@@ -2042,6 +2708,30 @@ $$
 5. 接続前後の静電エネルギーを求めなさい。
 6. 抵抗で発生したジュール熱を求めなさい。
 
+<div class="vector-graph-card">
+  <div class="graph-title">📐 平行板コンデンサーの電気量と静電エネルギー</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-cap-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+  </defs>
+  <line x1="180" y1="30" x2="180" y2="130" stroke="#f43f5e" stroke-width="4"/>
+  <line x1="260" y1="30" x2="260" y2="130" stroke="#38bdf8" stroke-width="4"/>
+  <rect x="130" y="70" width="45" height="18" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
+  <text x="152" y="83" fill="#f43f5e" font-size="10" font-weight="700" text-anchor="middle">＋Q (正)</text>
+  <rect x="268" y="70" width="45" height="18" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="290" y="83" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">−Q (負)</text>
+  <line x1="184" y1="50" x2="256" y2="50" stroke="#fbbf24" stroke-width="2" marker-end="url(#arr-cap-cyan)"/>
+  <line x1="184" y1="80" x2="256" y2="80" stroke="#fbbf24" stroke-width="2" marker-end="url(#arr-cap-cyan)"/>
+  <line x1="184" y1="110" x2="256" y2="110" stroke="#fbbf24" stroke-width="2" marker-end="url(#arr-cap-cyan)"/>
+  <rect x="200" y="85" width="45" height="16" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
+  <text x="222" y="97" fill="#fbbf24" font-size="9" font-weight="700" text-anchor="middle">電場 E</text>
+  <rect x="330" y="50" width="140" height="48" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="400" y="68" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">Q ＝ CV ,  C ＝ ε S/d</text>
+  <text x="400" y="85" fill="#f43f5e" font-size="9" text-anchor="middle">エネルギー U ＝ ½ CV²</text>
+</svg>
+  <div class="graph-caption">極板間の電位差 V に対し Q = CV の電荷が蓄えられ、静電エネルギー U = ½CV² が蓄積されます。</div>
+</div>
+
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
 
@@ -2205,6 +2895,27 @@ B₂=0.20 T
 3. 円運動の周期を求めなさい。
 4. 粒子の速さを2倍にすると、半径と周期がどう変化するか答えなさい。
 
+<div class="vector-graph-card">
+  <div class="graph-title">📐 点電荷の周囲の電場と電位・電気力線</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-ef-rose" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#f43f5e"/></marker>
+  </defs>
+  <circle cx="160" cy="80" r="16" fill="#f43f5e"/>
+  <text x="160" y="85" fill="#fff" font-size="11" font-weight="700" text-anchor="middle">＋Q</text>
+  <circle cx="160" cy="80" r="45" fill="none" stroke="#64748b" stroke-width="1" stroke-dasharray="3,3"/>
+  <circle cx="160" cy="80" r="75" fill="none" stroke="#64748b" stroke-width="1" stroke-dasharray="3,3"/>
+  <line x1="178" y1="80" x2="250" y2="80" stroke="#f43f5e" stroke-width="2" marker-end="url(#arr-ef-rose)"/>
+  <rect x="200" y="60" width="45" height="15" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
+  <text x="222" y="71" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">電場 E</text>
+  <rect x="300" y="40" width="175" height="55" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="387" y="58" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">クーロン力: F ＝ k(q₁q₂/r²)</text>
+  <text x="387" y="74" fill="#cbd5e1" font-size="9" text-anchor="middle">電位: V ＝ k(Q/r)</text>
+  <text x="387" y="88" fill="#fbbf24" font-size="9" text-anchor="middle">一様電場: V ＝ Ed</text>
+</svg>
+  <div class="graph-caption">電場 E は単位正電荷が受けるクーロン力、電位 V は無限遠を基準とした単位正電荷の位置エネルギーです。</div>
+</div>
+
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
 
@@ -2331,6 +3042,30 @@ $$
 4. 棒の速さが 1.0 m/s のときの加速度を求めなさい。
 5. 十分時間が経過した後の一定速度を求めなさい。
 6. 一定速度になったときの電流とジュール熱の発生率を求めなさい。
+
+<div class="vector-graph-card">
+  <div class="graph-title">📐 電磁誘導の法則と導線棒の誘導起電力</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-ind-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+  </defs>
+  <line x1="60" y1="50" x2="350" y2="50" stroke="#64748b" stroke-width="3"/>
+  <line x1="60" y1="120" x2="350" y2="120" stroke="#64748b" stroke-width="3"/>
+  <rect x="50" y="70" width="20" height="30" rx="2" fill="#1e293b" stroke="#fbbf24" stroke-width="1.5"/>
+  <text x="60" y="89" fill="#fbbf24" font-size="9" font-weight="700" text-anchor="middle">R</text>
+  <line x1="60" y1="50" x2="60" y2="70" stroke="#64748b" stroke-width="3"/>
+  <line x1="60" y1="100" x2="60" y2="120" stroke="#64748b" stroke-width="3"/>
+  <line x1="220" y1="40" x2="220" y2="130" stroke="#38bdf8" stroke-width="5"/>
+  <text x="235" y="60" fill="#38bdf8" font-size="9" font-weight="700">棒 L</text>
+  <line x1="220" y1="85" x2="275" y2="85" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-ind-cyan)"/>
+  <rect x="235" y="93" width="45" height="15" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="257" y="104" fill="#38bdf8" font-size="9" font-weight="700" text-anchor="middle">速度 v</text>
+  <rect x="340" y="55" width="135" height="38" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="407" y="72" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">誘導起電力: V ＝ vBL</text>
+  <text x="407" y="86" fill="#f43f5e" font-size="9" text-anchor="middle">誘導電流: I ＝ V/R</text>
+</svg>
+  <div class="graph-caption">磁場 B 中を速さ v で横切る長さ L の導線棒には、起電力 V = vBL が生じます。</div>
+</div>
 
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
@@ -2501,6 +3236,30 @@ g=9.8 m/s²
 5. 導体棒の終端速度を求めなさい。
 6. 終端速度での電流と、抵抗で発生する電力を求めなさい。
 7. 終端速度では、重力のする仕事率とジュール熱の発生率が等しいことを確認しなさい。
+
+<div class="vector-graph-card">
+  <div class="graph-title">📐 電磁誘導の法則と導線棒の誘導起電力</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-ind-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+  </defs>
+  <line x1="60" y1="50" x2="350" y2="50" stroke="#64748b" stroke-width="3"/>
+  <line x1="60" y1="120" x2="350" y2="120" stroke="#64748b" stroke-width="3"/>
+  <rect x="50" y="70" width="20" height="30" rx="2" fill="#1e293b" stroke="#fbbf24" stroke-width="1.5"/>
+  <text x="60" y="89" fill="#fbbf24" font-size="9" font-weight="700" text-anchor="middle">R</text>
+  <line x1="60" y1="50" x2="60" y2="70" stroke="#64748b" stroke-width="3"/>
+  <line x1="60" y1="100" x2="60" y2="120" stroke="#64748b" stroke-width="3"/>
+  <line x1="220" y1="40" x2="220" y2="130" stroke="#38bdf8" stroke-width="5"/>
+  <text x="235" y="60" fill="#38bdf8" font-size="9" font-weight="700">棒 L</text>
+  <line x1="220" y1="85" x2="275" y2="85" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-ind-cyan)"/>
+  <rect x="235" y="93" width="45" height="15" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="257" y="104" fill="#38bdf8" font-size="9" font-weight="700" text-anchor="middle">速度 v</text>
+  <rect x="340" y="55" width="135" height="38" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="407" y="72" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">誘導起電力: V ＝ vBL</text>
+  <text x="407" y="86" fill="#f43f5e" font-size="9" text-anchor="middle">誘導電流: I ＝ V/R</text>
+</svg>
+  <div class="graph-caption">磁場 B 中を速さ v で横切る長さ L の導線棒には、起電力 V = vBL が生じます。</div>
+</div>
 
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
@@ -2748,6 +3507,30 @@ k=0.10 N/m
 
 5. 誘電体板が完全に引き込まれる電圧の最小値を求めなさい。
 
+<div class="vector-graph-card">
+  <div class="graph-title">📐 平行板コンデンサーの電気量と静電エネルギー</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-cap-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+  </defs>
+  <line x1="180" y1="30" x2="180" y2="130" stroke="#f43f5e" stroke-width="4"/>
+  <line x1="260" y1="30" x2="260" y2="130" stroke="#38bdf8" stroke-width="4"/>
+  <rect x="130" y="70" width="45" height="18" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
+  <text x="152" y="83" fill="#f43f5e" font-size="10" font-weight="700" text-anchor="middle">＋Q (正)</text>
+  <rect x="268" y="70" width="45" height="18" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="290" y="83" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">−Q (負)</text>
+  <line x1="184" y1="50" x2="256" y2="50" stroke="#fbbf24" stroke-width="2" marker-end="url(#arr-cap-cyan)"/>
+  <line x1="184" y1="80" x2="256" y2="80" stroke="#fbbf24" stroke-width="2" marker-end="url(#arr-cap-cyan)"/>
+  <line x1="184" y1="110" x2="256" y2="110" stroke="#fbbf24" stroke-width="2" marker-end="url(#arr-cap-cyan)"/>
+  <rect x="200" y="85" width="45" height="16" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
+  <text x="222" y="97" fill="#fbbf24" font-size="9" font-weight="700" text-anchor="middle">電場 E</text>
+  <rect x="330" y="50" width="140" height="48" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="400" y="68" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">Q ＝ CV ,  C ＝ ε S/d</text>
+  <text x="400" y="85" fill="#f43f5e" font-size="9" text-anchor="middle">エネルギー U ＝ ½ CV²</text>
+</svg>
+  <div class="graph-caption">極板間の電位差 V に対し Q = CV の電荷が蓄えられ、静電エネルギー U = ½CV² が蓄積されます。</div>
+</div>
+
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
 
@@ -2962,6 +3745,27 @@ e=1.6×10⁻¹⁹ C
 4. 磁場領域内での鉛直方向の変位を求めなさい。
 5. スクリーン上での全偏向距離を求めなさい。
 
+<div class="vector-graph-card">
+  <div class="graph-title">📐 点電荷の周囲の電場と電位・電気力線</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-ef-rose" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#f43f5e"/></marker>
+  </defs>
+  <circle cx="160" cy="80" r="16" fill="#f43f5e"/>
+  <text x="160" y="85" fill="#fff" font-size="11" font-weight="700" text-anchor="middle">＋Q</text>
+  <circle cx="160" cy="80" r="45" fill="none" stroke="#64748b" stroke-width="1" stroke-dasharray="3,3"/>
+  <circle cx="160" cy="80" r="75" fill="none" stroke="#64748b" stroke-width="1" stroke-dasharray="3,3"/>
+  <line x1="178" y1="80" x2="250" y2="80" stroke="#f43f5e" stroke-width="2" marker-end="url(#arr-ef-rose)"/>
+  <rect x="200" y="60" width="45" height="15" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
+  <text x="222" y="71" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">電場 E</text>
+  <rect x="300" y="40" width="175" height="55" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="387" y="58" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">クーロン力: F ＝ k(q₁q₂/r²)</text>
+  <text x="387" y="74" fill="#cbd5e1" font-size="9" text-anchor="middle">電位: V ＝ k(Q/r)</text>
+  <text x="387" y="88" fill="#fbbf24" font-size="9" text-anchor="middle">一様電場: V ＝ Ed</text>
+</svg>
+  <div class="graph-caption">電場 E は単位正電荷が受けるクーロン力、電位 V は無限遠を基準とした単位正電荷の位置エネルギーです。</div>
+</div>
+
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
 
@@ -3122,6 +3926,34 @@ $$
 **【問題】**  
 電気量2.0 μCの粒子が3.0×10^5 m/sで、磁束密度0.20 Tの磁場に垂直に入ります。磁気力の大きさを求めなさい。
 
+<div class="vector-graph-card">
+  <div class="graph-title">📐 磁場中の荷電粒子の運動・ローレンツ力</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-mf-rose" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#f43f5e"/></marker>
+    <marker id="arr-mf-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+  </defs>
+  <g fill="#475569" font-size="14">
+    <text x="80" y="50">⊗</text><text x="140" y="50">⊗</text><text x="200" y="50">⊗</text>
+    <text x="80" y="100">⊗</text><text x="140" y="100">⊗</text><text x="200" y="100">⊗</text>
+  </g>
+  <rect x="100" y="15" width="105" height="18" rx="3" fill="#0f172a" stroke="#64748b" stroke-width="1"/>
+  <text x="152" y="28" fill="#94a3b8" font-size="9" text-anchor="middle">磁場 B (画面奥向き)</text>
+  <circle cx="200" cy="85" r="9" fill="#f43f5e"/>
+  <text x="200" y="89" fill="#fff" font-size="10" font-weight="700" text-anchor="middle">＋</text>
+  <line x1="200" y1="85" x2="260" y2="85" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-mf-cyan)"/>
+  <rect x="220" y="65" width="45" height="16" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="242" y="77" fill="#38bdf8" font-size="9" font-weight="700" text-anchor="middle">速度 v</text>
+  <line x1="200" y1="85" x2="200" y2="35" stroke="#f43f5e" stroke-width="2.5" marker-end="url(#arr-mf-rose)"/>
+  <rect x="145" y="40" width="50" height="16" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
+  <text x="170" y="52" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">力 F＝qvB</text>
+  <rect x="300" y="45" width="165" height="42" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="382" y="62" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">円軌道半径: r ＝ mv / (qB)</text>
+  <text x="382" y="78" fill="#fbbf24" font-size="9" text-anchor="middle">周期: T ＝ 2πm / (qB)</text>
+</svg>
+  <div class="graph-caption">磁場 B 中を速度 v で動く電荷 q には、速度と磁場に直交するローレンツ力 F = qvB が働きます。</div>
+</div>
+
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
 
@@ -3165,6 +3997,30 @@ $$
 **【問題】**  
 100回巻きコイルを通る磁束が0.020 Wbから0 Wbへ0.10 sで変化します。誘導起電力の大きさを求めなさい。
 
+<div class="vector-graph-card">
+  <div class="graph-title">📐 電磁誘導の法則と導線棒の誘導起電力</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-ind-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+  </defs>
+  <line x1="60" y1="50" x2="350" y2="50" stroke="#64748b" stroke-width="3"/>
+  <line x1="60" y1="120" x2="350" y2="120" stroke="#64748b" stroke-width="3"/>
+  <rect x="50" y="70" width="20" height="30" rx="2" fill="#1e293b" stroke="#fbbf24" stroke-width="1.5"/>
+  <text x="60" y="89" fill="#fbbf24" font-size="9" font-weight="700" text-anchor="middle">R</text>
+  <line x1="60" y1="50" x2="60" y2="70" stroke="#64748b" stroke-width="3"/>
+  <line x1="60" y1="100" x2="60" y2="120" stroke="#64748b" stroke-width="3"/>
+  <line x1="220" y1="40" x2="220" y2="130" stroke="#38bdf8" stroke-width="5"/>
+  <text x="235" y="60" fill="#38bdf8" font-size="9" font-weight="700">棒 L</text>
+  <line x1="220" y1="85" x2="275" y2="85" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-ind-cyan)"/>
+  <rect x="235" y="93" width="45" height="15" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="257" y="104" fill="#38bdf8" font-size="9" font-weight="700" text-anchor="middle">速度 v</text>
+  <rect x="340" y="55" width="135" height="38" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="407" y="72" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">誘導起電力: V ＝ vBL</text>
+  <text x="407" y="86" fill="#f43f5e" font-size="9" text-anchor="middle">誘導電流: I ＝ V/R</text>
+</svg>
+  <div class="graph-caption">磁場 B 中を速さ v で横切る長さ L の導線棒には、起電力 V = vBL が生じます。</div>
+</div>
+
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
 
@@ -3207,6 +4063,27 @@ $$
 
 **【問題】**  
 x軸上のx=-aに+Q、x=+aに-Qを固定した。原点の電位と電場を求め、電位が0でも電場が0とは限らない理由を説明しなさい。
+
+<div class="vector-graph-card">
+  <div class="graph-title">📐 点電荷の周囲の電場と電位・電気力線</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-ef-rose" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#f43f5e"/></marker>
+  </defs>
+  <circle cx="160" cy="80" r="16" fill="#f43f5e"/>
+  <text x="160" y="85" fill="#fff" font-size="11" font-weight="700" text-anchor="middle">＋Q</text>
+  <circle cx="160" cy="80" r="45" fill="none" stroke="#64748b" stroke-width="1" stroke-dasharray="3,3"/>
+  <circle cx="160" cy="80" r="75" fill="none" stroke="#64748b" stroke-width="1" stroke-dasharray="3,3"/>
+  <line x1="178" y1="80" x2="250" y2="80" stroke="#f43f5e" stroke-width="2" marker-end="url(#arr-ef-rose)"/>
+  <rect x="200" y="60" width="45" height="15" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
+  <text x="222" y="71" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">電場 E</text>
+  <rect x="300" y="40" width="175" height="55" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="387" y="58" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">クーロン力: F ＝ k(q₁q₂/r²)</text>
+  <text x="387" y="74" fill="#cbd5e1" font-size="9" text-anchor="middle">電位: V ＝ k(Q/r)</text>
+  <text x="387" y="88" fill="#fbbf24" font-size="9" text-anchor="middle">一様電場: V ＝ Ed</text>
+</svg>
+  <div class="graph-caption">電場 E は単位正電荷が受けるクーロン力、電位 V は無限遠を基準とした単位正電荷の位置エネルギーです。</div>
+</div>
 
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
@@ -3301,6 +4178,30 @@ Mg>mgsinθ
 11. 静止状態から距離 x だけ移動したときの速さと、コンデンサーの電気量を求めなさい。
 12. 重力による位置エネルギーの変化が、運動エネルギーとコンデンサーの静電エネルギーへ変換されることを示しなさい。
 13. コンデンサーが運動に与える効果を、「有効質量」という観点から説明しなさい。
+
+<div class="vector-graph-card">
+  <div class="graph-title">📐 平行板コンデンサーの電気量と静電エネルギー</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-cap-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+  </defs>
+  <line x1="180" y1="30" x2="180" y2="130" stroke="#f43f5e" stroke-width="4"/>
+  <line x1="260" y1="30" x2="260" y2="130" stroke="#38bdf8" stroke-width="4"/>
+  <rect x="130" y="70" width="45" height="18" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
+  <text x="152" y="83" fill="#f43f5e" font-size="10" font-weight="700" text-anchor="middle">＋Q (正)</text>
+  <rect x="268" y="70" width="45" height="18" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="290" y="83" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">−Q (負)</text>
+  <line x1="184" y1="50" x2="256" y2="50" stroke="#fbbf24" stroke-width="2" marker-end="url(#arr-cap-cyan)"/>
+  <line x1="184" y1="80" x2="256" y2="80" stroke="#fbbf24" stroke-width="2" marker-end="url(#arr-cap-cyan)"/>
+  <line x1="184" y1="110" x2="256" y2="110" stroke="#fbbf24" stroke-width="2" marker-end="url(#arr-cap-cyan)"/>
+  <rect x="200" y="85" width="45" height="16" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
+  <text x="222" y="97" fill="#fbbf24" font-size="9" font-weight="700" text-anchor="middle">電場 E</text>
+  <rect x="330" y="50" width="140" height="48" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="400" y="68" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">Q ＝ CV ,  C ＝ ε S/d</text>
+  <text x="400" y="85" fill="#f43f5e" font-size="9" text-anchor="middle">エネルギー U ＝ ½ CV²</text>
+</svg>
+  <div class="graph-caption">極板間の電位差 V に対し Q = CV の電荷が蓄えられ、静電エネルギー U = ½CV² が蓄積されます。</div>
+</div>
 
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
@@ -3777,6 +4678,25 @@ $$
 
 **【問題】**  
 抵抗50 Ωに実効値100 Vの交流電圧を加えます。実効電流と平均消費電力を求めなさい。
+
+<div class="vector-graph-card">
+  <div class="graph-title">📐 交流回路の正弦波電圧と実効値</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <line x1="40" y1="85" x2="450" y2="85" stroke="#64748b" stroke-width="1.5"/>
+  <line x1="60" y1="140" x2="60" y2="25" stroke="#64748b" stroke-width="1.5"/>
+  <path d="M 60,85 Q 115,25 170,85 T 280,85 T 390,85" fill="none" stroke="#38bdf8" stroke-width="2.5"/>
+  <line x1="60" y1="42" x2="170" y2="42" stroke="#fbbf24" stroke-width="1" stroke-dasharray="3,3"/>
+  <rect x="20" y="34" width="35" height="16" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
+  <text x="37" y="46" fill="#fbbf24" font-size="9" font-weight="700" text-anchor="middle">V₀</text>
+  <line x1="60" y1="55" x2="280" y2="55" stroke="#f43f5e" stroke-width="1.5"/>
+  <rect x="180" y="47" width="55" height="15" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
+  <text x="207" y="58" fill="#f43f5e" font-size="8" font-weight="700" text-anchor="middle">実効値 V_e</text>
+  <rect x="300" y="30" width="165" height="42" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="382" y="48" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">実効値: V_e ＝ V₀ / √2</text>
+  <text x="382" y="64" fill="#cbd5e1" font-size="9" text-anchor="middle">平均消費電力: P ＝ V_e I_e</text>
+</svg>
+  <div class="graph-caption">交流電圧 V(t) = V₀ sin(ωt) において、電力を生み出す実効値は Ve = V₀ / √2 となります。</div>
+</div>
 
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>

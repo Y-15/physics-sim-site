@@ -28,6 +28,26 @@ h=6.6×10⁻³⁴ J· s
 
 とする。
 
+<div class="vector-graph-card">
+  <div class="graph-title">📐 光量子仮説と光子のエネルギー・運動量</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-pe-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+  </defs>
+  <path d="M 50,80 Q 75,45 100,80 T 150,80 T 200,80 L 235,80" fill="none" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-pe-cyan)"/>
+  <circle cx="100" cy="80" r="5" fill="#fbbf24"/>
+  <circle cx="150" cy="80" r="5" fill="#fbbf24"/>
+  <circle cx="200" cy="80" r="5" fill="#fbbf24"/>
+  <rect x="90" y="40" width="70" height="16" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
+  <text x="125" y="52" fill="#fbbf24" font-size="9" font-weight="700" text-anchor="middle">光子 (hν)</text>
+  <rect x="270" y="35" width="205" height="58" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="372" y="53" fill="#38bdf8" font-size="11" font-weight="700" text-anchor="middle">エネルギー: E ＝ hν ＝ hc / λ</text>
+  <text x="372" y="70" fill="#cbd5e1" font-size="10" text-anchor="middle">運動量: p ＝ h / λ ＝ E / c</text>
+  <text x="372" y="85" fill="#fbbf24" font-size="9" text-anchor="middle">プランク定数 h ≒ 6.63×10⁻³⁴ J・s</text>
+</svg>
+  <div class="graph-caption">振動数 ν、波長 λ の光は、エネルギー E = hν = hc/λ、運動量 p = h/λ を持つ粒子（光子）です。</div>
+</div>
+
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
 
@@ -80,6 +100,24 @@ $$
 
 **【問題】**  
 原子番号が 8、質量数が 18 の中性原子について、陽子数、中性子数、電子数を求めなさい。
+
+<div class="vector-graph-card">
+  <div class="graph-title">📐 原子の構成と原子核（陽子・中性子・電子）</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="150" cy="80" r="50" fill="none" stroke="#475569" stroke-width="1.5" stroke-dasharray="3,3"/>
+  <circle cx="185" cy="45" r="5" fill="#38bdf8"/>
+  <rect x="195" y="35" width="45" height="15" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="217" y="46" fill="#38bdf8" font-size="9" font-weight="700" text-anchor="middle">電子 (e⁻)</text>
+  <circle cx="150" cy="80" r="22" fill="#1e293b" stroke="#f43f5e" stroke-width="2"/>
+  <text x="150" y="77" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">原子核</text>
+  <text x="150" y="90" fill="#fbbf24" font-size="8" text-anchor="middle">陽子＋中性子</text>
+  <rect x="270" y="35" width="205" height="60" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="372" y="53" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">質量数 A ＝ 陽子数 Z ＋ 中性子数 N</text>
+  <text x="372" y="70" fill="#cbd5e1" font-size="9" text-anchor="middle">中性原子: 電子数 ＝ 陽子数 Z</text>
+  <text x="372" y="85" fill="#fbbf24" font-size="9" text-anchor="middle">同位体: Z が同じで A が異なる原子</text>
+</svg>
+  <div class="graph-caption">原子番号 Z（陽子の数＝中性原子の電子の数）と質量数 A（陽子＋中性子の総数）から構成が決まります。</div>
+</div>
 
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
@@ -148,6 +186,26 @@ $$
 
 12日後に残っている質量を求めなさい。
 
+<div class="vector-graph-card">
+  <div class="graph-title">📐 原子核の崩壊・半減期と質量エネルギー</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-nu-rose" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#f43f5e"/></marker>
+  </defs>
+  <circle cx="100" cy="80" r="22" fill="#1e293b" stroke="#f43f5e" stroke-width="2"/>
+  <text x="100" y="84" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">親核 (N₀)</text>
+  <line x1="125" y1="80" x2="185" y2="80" stroke="#f43f5e" stroke-width="2.5" marker-end="url(#arr-nu-rose)"/>
+  <circle cx="215" cy="65" r="15" fill="#1e293b" stroke="#38bdf8" stroke-width="1.5"/>
+  <text x="215" y="69" fill="#38bdf8" font-size="8" text-anchor="middle">娘核</text>
+  <circle cx="240" cy="105" r="8" fill="#fbbf24"/>
+  <text x="240" y="108" fill="#0f172a" font-size="8" font-weight="700" text-anchor="middle">α/β</text>
+  <rect x="290" y="45" width="190" height="48" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="385" y="64" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">半減期: N ＝ N₀ (½)^(t/T)</text>
+  <text x="385" y="82" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">質量欠損: E ＝ Δm c²</text>
+</svg>
+  <div class="graph-caption">放射性原子核の個数は指数関数的に減少し、質量欠損 Δm により E = Δm c² の莫大な核エネルギーが解放されます。</div>
+</div>
+
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
 
@@ -209,6 +267,24 @@ $$
 **【問題】**  
 ナトリウム23（原子番号11）の原子核に含まれる陽子数と中性子数を求めなさい。
 
+<div class="vector-graph-card">
+  <div class="graph-title">📐 原子の構成と原子核（陽子・中性子・電子）</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="150" cy="80" r="50" fill="none" stroke="#475569" stroke-width="1.5" stroke-dasharray="3,3"/>
+  <circle cx="185" cy="45" r="5" fill="#38bdf8"/>
+  <rect x="195" y="35" width="45" height="15" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="217" y="46" fill="#38bdf8" font-size="9" font-weight="700" text-anchor="middle">電子 (e⁻)</text>
+  <circle cx="150" cy="80" r="22" fill="#1e293b" stroke="#f43f5e" stroke-width="2"/>
+  <text x="150" y="77" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">原子核</text>
+  <text x="150" y="90" fill="#fbbf24" font-size="8" text-anchor="middle">陽子＋中性子</text>
+  <rect x="270" y="35" width="205" height="60" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="372" y="53" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">質量数 A ＝ 陽子数 Z ＋ 中性子数 N</text>
+  <text x="372" y="70" fill="#cbd5e1" font-size="9" text-anchor="middle">中性原子: 電子数 ＝ 陽子数 Z</text>
+  <text x="372" y="85" fill="#fbbf24" font-size="9" text-anchor="middle">同位体: Z が同じで A が異なる原子</text>
+</svg>
+  <div class="graph-caption">原子番号 Z（陽子の数＝中性原子の電子の数）と質量数 A（陽子＋中性子の総数）から構成が決まります。</div>
+</div>
+
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
 
@@ -253,6 +329,30 @@ $$
 真空中を進む光の振動数が 5.0×10¹⁴ Hz である。
 
 光速を 3.0×10⁸ m/s として、波長を求めなさい。
+
+<div class="vector-graph-card">
+  <div class="graph-title">📐 光電効果とアインシュタインの光電方程式</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-pe-rose" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#f43f5e"/></marker>
+    <marker id="arr-pe-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+  </defs>
+  <rect x="180" y="50" width="130" height="80" rx="4" fill="#1e293b" stroke="#64748b" stroke-width="2"/>
+  <text x="245" y="70" fill="#94a3b8" font-size="10" text-anchor="middle">金属内部</text>
+  <text x="245" y="115" fill="#fbbf24" font-size="9" text-anchor="middle">仕事関数 W</text>
+  <path d="M 60,60 Q 80,45 100,60 T 140,60 L 175,75" fill="none" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-pe-cyan)"/>
+  <rect x="65" y="25" width="85" height="18" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="107" y="38" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">光子 E ＝ hν</text>
+  <circle cx="180" cy="75" r="5" fill="#f43f5e"/>
+  <line x1="180" y1="75" x2="120" y2="120" stroke="#f43f5e" stroke-width="2.5" marker-end="url(#arr-pe-rose)"/>
+  <rect x="65" y="125" width="105" height="18" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
+  <text x="117" y="138" fill="#f43f5e" font-size="10" font-weight="700" text-anchor="middle">光電子 K_max</text>
+  <rect x="325" y="45" width="160" height="48" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="405" y="64" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">hν ＝ W ＋ K_max</text>
+  <text x="405" y="82" fill="#fbbf24" font-size="9" text-anchor="middle">阻止電圧: eV₀ ＝ K_max</text>
+</svg>
+  <div class="graph-caption">入射光子のエネルギー hν が金属の仕事関数 W を超えると、余剰が光電子の最大運動エネルギーになります。</div>
+</div>
 
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
@@ -307,6 +407,26 @@ $$
 
 この金属に、エネルギー 5.0×10⁻¹⁹ J の光子を当てた。飛び出した光電子の最大運動エネルギーを求めなさい。
 
+<div class="vector-graph-card">
+  <div class="graph-title">📐 光量子仮説と光子のエネルギー・運動量</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-pe-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+  </defs>
+  <path d="M 50,80 Q 75,45 100,80 T 150,80 T 200,80 L 235,80" fill="none" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-pe-cyan)"/>
+  <circle cx="100" cy="80" r="5" fill="#fbbf24"/>
+  <circle cx="150" cy="80" r="5" fill="#fbbf24"/>
+  <circle cx="200" cy="80" r="5" fill="#fbbf24"/>
+  <rect x="90" y="40" width="70" height="16" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
+  <text x="125" y="52" fill="#fbbf24" font-size="9" font-weight="700" text-anchor="middle">光子 (hν)</text>
+  <rect x="270" y="35" width="205" height="58" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="372" y="53" fill="#38bdf8" font-size="11" font-weight="700" text-anchor="middle">エネルギー: E ＝ hν ＝ hc / λ</text>
+  <text x="372" y="70" fill="#cbd5e1" font-size="10" text-anchor="middle">運動量: p ＝ h / λ ＝ E / c</text>
+  <text x="372" y="85" fill="#fbbf24" font-size="9" text-anchor="middle">プランク定数 h ≒ 6.63×10⁻³⁴ J・s</text>
+</svg>
+  <div class="graph-caption">振動数 ν、波長 λ の光は、エネルギー E = hν = hc/λ、運動量 p = h/λ を持つ粒子（光子）です。</div>
+</div>
+
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
 
@@ -357,6 +477,30 @@ $$
 核反応によって 2.0×10⁻⁹ kg の質量が失われた。
 
 光速を 3.0×10⁸ m/s として、放出されたエネルギーを求めなさい。
+
+<div class="vector-graph-card">
+  <div class="graph-title">📐 光電効果とアインシュタインの光電方程式</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-pe-rose" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#f43f5e"/></marker>
+    <marker id="arr-pe-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+  </defs>
+  <rect x="180" y="50" width="130" height="80" rx="4" fill="#1e293b" stroke="#64748b" stroke-width="2"/>
+  <text x="245" y="70" fill="#94a3b8" font-size="10" text-anchor="middle">金属内部</text>
+  <text x="245" y="115" fill="#fbbf24" font-size="9" text-anchor="middle">仕事関数 W</text>
+  <path d="M 60,60 Q 80,45 100,60 T 140,60 L 175,75" fill="none" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-pe-cyan)"/>
+  <rect x="65" y="25" width="85" height="18" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="107" y="38" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">光子 E ＝ hν</text>
+  <circle cx="180" cy="75" r="5" fill="#f43f5e"/>
+  <line x1="180" y1="75" x2="120" y2="120" stroke="#f43f5e" stroke-width="2.5" marker-end="url(#arr-pe-rose)"/>
+  <rect x="65" y="125" width="105" height="18" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
+  <text x="117" y="138" fill="#f43f5e" font-size="10" font-weight="700" text-anchor="middle">光電子 K_max</text>
+  <rect x="325" y="45" width="160" height="48" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="405" y="64" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">hν ＝ W ＋ K_max</text>
+  <text x="405" y="82" fill="#fbbf24" font-size="9" text-anchor="middle">阻止電圧: eV₀ ＝ K_max</text>
+</svg>
+  <div class="graph-caption">入射光子のエネルギー hν が金属の仕事関数 W を超えると、余剰が光電子の最大運動エネルギーになります。</div>
+</div>
 
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
@@ -411,6 +555,26 @@ $$
 
 放出される光子のエネルギーを求めなさい。
 
+<div class="vector-graph-card">
+  <div class="graph-title">📐 光量子仮説と光子のエネルギー・運動量</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-pe-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+  </defs>
+  <path d="M 50,80 Q 75,45 100,80 T 150,80 T 200,80 L 235,80" fill="none" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-pe-cyan)"/>
+  <circle cx="100" cy="80" r="5" fill="#fbbf24"/>
+  <circle cx="150" cy="80" r="5" fill="#fbbf24"/>
+  <circle cx="200" cy="80" r="5" fill="#fbbf24"/>
+  <rect x="90" y="40" width="70" height="16" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
+  <text x="125" y="52" fill="#fbbf24" font-size="9" font-weight="700" text-anchor="middle">光子 (hν)</text>
+  <rect x="270" y="35" width="205" height="58" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="372" y="53" fill="#38bdf8" font-size="11" font-weight="700" text-anchor="middle">エネルギー: E ＝ hν ＝ hc / λ</text>
+  <text x="372" y="70" fill="#cbd5e1" font-size="10" text-anchor="middle">運動量: p ＝ h / λ ＝ E / c</text>
+  <text x="372" y="85" fill="#fbbf24" font-size="9" text-anchor="middle">プランク定数 h ≒ 6.63×10⁻³⁴ J・s</text>
+</svg>
+  <div class="graph-caption">振動数 ν、波長 λ の光は、エネルギー E = hν = hc/λ、運動量 p = h/λ を持つ粒子（光子）です。</div>
+</div>
+
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
 
@@ -458,6 +622,26 @@ $$
 **【問題】**  
 半減期が8日で、はじめに80 gあった放射性物質があります。24日後の質量を求めなさい。
 
+<div class="vector-graph-card">
+  <div class="graph-title">📐 原子核の崩壊・半減期と質量エネルギー</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-nu-rose" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#f43f5e"/></marker>
+  </defs>
+  <circle cx="100" cy="80" r="22" fill="#1e293b" stroke="#f43f5e" stroke-width="2"/>
+  <text x="100" y="84" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">親核 (N₀)</text>
+  <line x1="125" y1="80" x2="185" y2="80" stroke="#f43f5e" stroke-width="2.5" marker-end="url(#arr-nu-rose)"/>
+  <circle cx="215" cy="65" r="15" fill="#1e293b" stroke="#38bdf8" stroke-width="1.5"/>
+  <text x="215" y="69" fill="#38bdf8" font-size="8" text-anchor="middle">娘核</text>
+  <circle cx="240" cy="105" r="8" fill="#fbbf24"/>
+  <text x="240" y="108" fill="#0f172a" font-size="8" font-weight="700" text-anchor="middle">α/β</text>
+  <rect x="290" y="45" width="190" height="48" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="385" y="64" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">半減期: N ＝ N₀ (½)^(t/T)</text>
+  <text x="385" y="82" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">質量欠損: E ＝ Δm c²</text>
+</svg>
+  <div class="graph-caption">放射性原子核の個数は指数関数的に減少し、質量欠損 Δm により E = Δm c² の莫大な核エネルギーが解放されます。</div>
+</div>
+
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
 
@@ -502,6 +686,26 @@ $$
 振動数 8.0×10¹⁴ Hz の光を、仕事関数 3.0×10⁻¹⁹ J の金属に当てた。
 
 プランク定数を 6.6×10⁻³⁴ J· s として、飛び出す光電子の最大運動エネルギーを求めなさい。
+
+<div class="vector-graph-card">
+  <div class="graph-title">📐 光量子仮説と光子のエネルギー・運動量</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-pe-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+  </defs>
+  <path d="M 50,80 Q 75,45 100,80 T 150,80 T 200,80 L 235,80" fill="none" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-pe-cyan)"/>
+  <circle cx="100" cy="80" r="5" fill="#fbbf24"/>
+  <circle cx="150" cy="80" r="5" fill="#fbbf24"/>
+  <circle cx="200" cy="80" r="5" fill="#fbbf24"/>
+  <rect x="90" y="40" width="70" height="16" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
+  <text x="125" y="52" fill="#fbbf24" font-size="9" font-weight="700" text-anchor="middle">光子 (hν)</text>
+  <rect x="270" y="35" width="205" height="58" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="372" y="53" fill="#38bdf8" font-size="11" font-weight="700" text-anchor="middle">エネルギー: E ＝ hν ＝ hc / λ</text>
+  <text x="372" y="70" fill="#cbd5e1" font-size="10" text-anchor="middle">運動量: p ＝ h / λ ＝ E / c</text>
+  <text x="372" y="85" fill="#fbbf24" font-size="9" text-anchor="middle">プランク定数 h ≒ 6.63×10⁻³⁴ J・s</text>
+</svg>
+  <div class="graph-caption">振動数 ν、波長 λ の光は、エネルギー E = hν = hc/λ、運動量 p = h/λ を持つ粒子（光子）です。</div>
+</div>
 
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
@@ -574,6 +778,26 @@ $$
 
 最初に 3200 個の放射性原子核があったとき、18時間後に崩壊せずに残っている原子核の個数を求めなさい。
 
+<div class="vector-graph-card">
+  <div class="graph-title">📐 原子核の崩壊・半減期と質量エネルギー</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-nu-rose" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#f43f5e"/></marker>
+  </defs>
+  <circle cx="100" cy="80" r="22" fill="#1e293b" stroke="#f43f5e" stroke-width="2"/>
+  <text x="100" y="84" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">親核 (N₀)</text>
+  <line x1="125" y1="80" x2="185" y2="80" stroke="#f43f5e" stroke-width="2.5" marker-end="url(#arr-nu-rose)"/>
+  <circle cx="215" cy="65" r="15" fill="#1e293b" stroke="#38bdf8" stroke-width="1.5"/>
+  <text x="215" y="69" fill="#38bdf8" font-size="8" text-anchor="middle">娘核</text>
+  <circle cx="240" cy="105" r="8" fill="#fbbf24"/>
+  <text x="240" y="108" fill="#0f172a" font-size="8" font-weight="700" text-anchor="middle">α/β</text>
+  <rect x="290" y="45" width="190" height="48" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="385" y="64" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">半減期: N ＝ N₀ (½)^(t/T)</text>
+  <text x="385" y="82" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">質量欠損: E ＝ Δm c²</text>
+</svg>
+  <div class="graph-caption">放射性原子核の個数は指数関数的に減少し、質量欠損 Δm により E = Δm c² の莫大な核エネルギーが解放されます。</div>
+</div>
+
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
 
@@ -627,6 +851,26 @@ $$
 **【問題】**  
 核反応で質量欠損が0.0010 u生じました。1 u=931.5 MeV/c^2として、発生するエネルギーを求めなさい。
 
+<div class="vector-graph-card">
+  <div class="graph-title">📐 原子核の崩壊・半減期と質量エネルギー</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-nu-rose" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#f43f5e"/></marker>
+  </defs>
+  <circle cx="100" cy="80" r="22" fill="#1e293b" stroke="#f43f5e" stroke-width="2"/>
+  <text x="100" y="84" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">親核 (N₀)</text>
+  <line x1="125" y1="80" x2="185" y2="80" stroke="#f43f5e" stroke-width="2.5" marker-end="url(#arr-nu-rose)"/>
+  <circle cx="215" cy="65" r="15" fill="#1e293b" stroke="#38bdf8" stroke-width="1.5"/>
+  <text x="215" y="69" fill="#38bdf8" font-size="8" text-anchor="middle">娘核</text>
+  <circle cx="240" cy="105" r="8" fill="#fbbf24"/>
+  <text x="240" y="108" fill="#0f172a" font-size="8" font-weight="700" text-anchor="middle">α/β</text>
+  <rect x="290" y="45" width="190" height="48" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="385" y="64" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">半減期: N ＝ N₀ (½)^(t/T)</text>
+  <text x="385" y="82" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">質量欠損: E ＝ Δm c²</text>
+</svg>
+  <div class="graph-caption">放射性原子核の個数は指数関数的に減少し、質量欠損 Δm により E = Δm c² の莫大な核エネルギーが解放されます。</div>
+</div>
+
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
 
@@ -679,6 +923,26 @@ hc=1240 eV· nm
 3. 光電子を止めるために必要な阻止電圧を求めなさい。
 4. この金属から光電子を放出させることのできる限界波長を求めなさい。
 5. 光の波長を変えずに強度だけを2倍にしたとき、最大運動エネルギーと単位時間あたりの光電子数がどう変化するか答えなさい。
+
+<div class="vector-graph-card">
+  <div class="graph-title">📐 光量子仮説と光子のエネルギー・運動量</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-pe-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+  </defs>
+  <path d="M 50,80 Q 75,45 100,80 T 150,80 T 200,80 L 235,80" fill="none" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-pe-cyan)"/>
+  <circle cx="100" cy="80" r="5" fill="#fbbf24"/>
+  <circle cx="150" cy="80" r="5" fill="#fbbf24"/>
+  <circle cx="200" cy="80" r="5" fill="#fbbf24"/>
+  <rect x="90" y="40" width="70" height="16" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
+  <text x="125" y="52" fill="#fbbf24" font-size="9" font-weight="700" text-anchor="middle">光子 (hν)</text>
+  <rect x="270" y="35" width="205" height="58" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="372" y="53" fill="#38bdf8" font-size="11" font-weight="700" text-anchor="middle">エネルギー: E ＝ hν ＝ hc / λ</text>
+  <text x="372" y="70" fill="#cbd5e1" font-size="10" text-anchor="middle">運動量: p ＝ h / λ ＝ E / c</text>
+  <text x="372" y="85" fill="#fbbf24" font-size="9" text-anchor="middle">プランク定数 h ≒ 6.63×10⁻³⁴ J・s</text>
+</svg>
+  <div class="graph-caption">振動数 ν、波長 λ の光は、エネルギー E = hν = hc/λ、運動量 p = h/λ を持つ粒子（光子）です。</div>
+</div>
 
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
@@ -795,6 +1059,26 @@ hc=1240 eV· nm
 4. 限界波長を求めなさい。
 5. 波長を変えずに光の強度を3倍にすると、最大運動エネルギーと光電流はどのように変化するか。
 
+<div class="vector-graph-card">
+  <div class="graph-title">📐 光量子仮説と光子のエネルギー・運動量</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-pe-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+  </defs>
+  <path d="M 50,80 Q 75,45 100,80 T 150,80 T 200,80 L 235,80" fill="none" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-pe-cyan)"/>
+  <circle cx="100" cy="80" r="5" fill="#fbbf24"/>
+  <circle cx="150" cy="80" r="5" fill="#fbbf24"/>
+  <circle cx="200" cy="80" r="5" fill="#fbbf24"/>
+  <rect x="90" y="40" width="70" height="16" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
+  <text x="125" y="52" fill="#fbbf24" font-size="9" font-weight="700" text-anchor="middle">光子 (hν)</text>
+  <rect x="270" y="35" width="205" height="58" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="372" y="53" fill="#38bdf8" font-size="11" font-weight="700" text-anchor="middle">エネルギー: E ＝ hν ＝ hc / λ</text>
+  <text x="372" y="70" fill="#cbd5e1" font-size="10" text-anchor="middle">運動量: p ＝ h / λ ＝ E / c</text>
+  <text x="372" y="85" fill="#fbbf24" font-size="9" text-anchor="middle">プランク定数 h ≒ 6.63×10⁻³⁴ J・s</text>
+</svg>
+  <div class="graph-caption">振動数 ν、波長 λ の光は、エネルギー E = hν = hc/λ、運動量 p = h/λ を持つ粒子（光子）です。</div>
+</div>
+
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
 
@@ -902,6 +1186,26 @@ $$
 **【問題】**  
 運動量6.63×10^-24 kg m/sの電子の物質波の波長を求めなさい。プランク定数h=6.63×10^-34 J sとします。
 
+<div class="vector-graph-card">
+  <div class="graph-title">📐 光量子仮説と光子のエネルギー・運動量</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-pe-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+  </defs>
+  <path d="M 50,80 Q 75,45 100,80 T 150,80 T 200,80 L 235,80" fill="none" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-pe-cyan)"/>
+  <circle cx="100" cy="80" r="5" fill="#fbbf24"/>
+  <circle cx="150" cy="80" r="5" fill="#fbbf24"/>
+  <circle cx="200" cy="80" r="5" fill="#fbbf24"/>
+  <rect x="90" y="40" width="70" height="16" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
+  <text x="125" y="52" fill="#fbbf24" font-size="9" font-weight="700" text-anchor="middle">光子 (hν)</text>
+  <rect x="270" y="35" width="205" height="58" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="372" y="53" fill="#38bdf8" font-size="11" font-weight="700" text-anchor="middle">エネルギー: E ＝ hν ＝ hc / λ</text>
+  <text x="372" y="70" fill="#cbd5e1" font-size="10" text-anchor="middle">運動量: p ＝ h / λ ＝ E / c</text>
+  <text x="372" y="85" fill="#fbbf24" font-size="9" text-anchor="middle">プランク定数 h ≒ 6.63×10⁻³⁴ J・s</text>
+</svg>
+  <div class="graph-caption">振動数 ν、波長 λ の光は、エネルギー E = hν = hc/λ、運動量 p = h/λ を持つ粒子（光子）です。</div>
+</div>
+
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
 
@@ -960,6 +1264,26 @@ hc=1240 eV· nm
 3. この光を仕事関数 1.50 eV の金属に当てたとき、光電子の最大運動エネルギーを求めなさい。
 4. 阻止電圧を求めなさい。
 5. n=2 から n=1 への遷移で放出される光子は、基底状態の水素原子を電離できるか答えなさい。
+
+<div class="vector-graph-card">
+  <div class="graph-title">📐 光量子仮説と光子のエネルギー・運動量</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-pe-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+  </defs>
+  <path d="M 50,80 Q 75,45 100,80 T 150,80 T 200,80 L 235,80" fill="none" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-pe-cyan)"/>
+  <circle cx="100" cy="80" r="5" fill="#fbbf24"/>
+  <circle cx="150" cy="80" r="5" fill="#fbbf24"/>
+  <circle cx="200" cy="80" r="5" fill="#fbbf24"/>
+  <rect x="90" y="40" width="70" height="16" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
+  <text x="125" y="52" fill="#fbbf24" font-size="9" font-weight="700" text-anchor="middle">光子 (hν)</text>
+  <rect x="270" y="35" width="205" height="58" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="372" y="53" fill="#38bdf8" font-size="11" font-weight="700" text-anchor="middle">エネルギー: E ＝ hν ＝ hc / λ</text>
+  <text x="372" y="70" fill="#cbd5e1" font-size="10" text-anchor="middle">運動量: p ＝ h / λ ＝ E / c</text>
+  <text x="372" y="85" fill="#fbbf24" font-size="9" text-anchor="middle">プランク定数 h ≒ 6.63×10⁻³⁴ J・s</text>
+</svg>
+  <div class="graph-caption">振動数 ν、波長 λ の光は、エネルギー E = hν = hc/λ、運動量 p = h/λ を持つ粒子（光子）です。</div>
+</div>
 
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
@@ -1106,6 +1430,26 @@ ln2=0.693
 
 とする。
 
+<div class="vector-graph-card">
+  <div class="graph-title">📐 原子核の崩壊・半減期と質量エネルギー</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-nu-rose" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#f43f5e"/></marker>
+  </defs>
+  <circle cx="100" cy="80" r="22" fill="#1e293b" stroke="#f43f5e" stroke-width="2"/>
+  <text x="100" y="84" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">親核 (N₀)</text>
+  <line x1="125" y1="80" x2="185" y2="80" stroke="#f43f5e" stroke-width="2.5" marker-end="url(#arr-nu-rose)"/>
+  <circle cx="215" cy="65" r="15" fill="#1e293b" stroke="#38bdf8" stroke-width="1.5"/>
+  <text x="215" y="69" fill="#38bdf8" font-size="8" text-anchor="middle">娘核</text>
+  <circle cx="240" cy="105" r="8" fill="#fbbf24"/>
+  <text x="240" y="108" fill="#0f172a" font-size="8" font-weight="700" text-anchor="middle">α/β</text>
+  <rect x="290" y="45" width="190" height="48" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="385" y="64" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">半減期: N ＝ N₀ (½)^(t/T)</text>
+  <text x="385" y="82" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">質量欠損: E ＝ Δm c²</text>
+</svg>
+  <div class="graph-caption">放射性原子核の個数は指数関数的に減少し、質量欠損 Δm により E = Δm c² の莫大な核エネルギーが解放されます。</div>
+</div>
+
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
 
@@ -1249,6 +1593,26 @@ $$
 **【問題】**  
 仕事関数2.2 eVの金属へ、光子エネルギー3.0 eVの光を当てた。光電子の最大運動エネルギーと阻止電圧を求めなさい。
 
+<div class="vector-graph-card">
+  <div class="graph-title">📐 光量子仮説と光子のエネルギー・運動量</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-pe-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+  </defs>
+  <path d="M 50,80 Q 75,45 100,80 T 150,80 T 200,80 L 235,80" fill="none" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-pe-cyan)"/>
+  <circle cx="100" cy="80" r="5" fill="#fbbf24"/>
+  <circle cx="150" cy="80" r="5" fill="#fbbf24"/>
+  <circle cx="200" cy="80" r="5" fill="#fbbf24"/>
+  <rect x="90" y="40" width="70" height="16" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
+  <text x="125" y="52" fill="#fbbf24" font-size="9" font-weight="700" text-anchor="middle">光子 (hν)</text>
+  <rect x="270" y="35" width="205" height="58" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="372" y="53" fill="#38bdf8" font-size="11" font-weight="700" text-anchor="middle">エネルギー: E ＝ hν ＝ hc / λ</text>
+  <text x="372" y="70" fill="#cbd5e1" font-size="10" text-anchor="middle">運動量: p ＝ h / λ ＝ E / c</text>
+  <text x="372" y="85" fill="#fbbf24" font-size="9" text-anchor="middle">プランク定数 h ≒ 6.63×10⁻³⁴ J・s</text>
+</svg>
+  <div class="graph-caption">振動数 ν、波長 λ の光は、エネルギー E = hν = hc/λ、運動量 p = h/λ を持つ粒子（光子）です。</div>
+</div>
+
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
 
@@ -1297,6 +1661,26 @@ $$
 
 **【問題】**  
 仕事関数2.0 eVの金属に、光子エネルギー3.5 eVの光を当てます。光電子の最大運動エネルギーと阻止電圧を求めなさい。
+
+<div class="vector-graph-card">
+  <div class="graph-title">📐 光量子仮説と光子のエネルギー・運動量</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-pe-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+  </defs>
+  <path d="M 50,80 Q 75,45 100,80 T 150,80 T 200,80 L 235,80" fill="none" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-pe-cyan)"/>
+  <circle cx="100" cy="80" r="5" fill="#fbbf24"/>
+  <circle cx="150" cy="80" r="5" fill="#fbbf24"/>
+  <circle cx="200" cy="80" r="5" fill="#fbbf24"/>
+  <rect x="90" y="40" width="70" height="16" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
+  <text x="125" y="52" fill="#fbbf24" font-size="9" font-weight="700" text-anchor="middle">光子 (hν)</text>
+  <rect x="270" y="35" width="205" height="58" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="372" y="53" fill="#38bdf8" font-size="11" font-weight="700" text-anchor="middle">エネルギー: E ＝ hν ＝ hc / λ</text>
+  <text x="372" y="70" fill="#cbd5e1" font-size="10" text-anchor="middle">運動量: p ＝ h / λ ＝ E / c</text>
+  <text x="372" y="85" fill="#fbbf24" font-size="9" text-anchor="middle">プランク定数 h ≒ 6.63×10⁻³⁴ J・s</text>
+</svg>
+  <div class="graph-caption">振動数 ν、波長 λ の光は、エネルギー E = hν = hc/λ、運動量 p = h/λ を持つ粒子（光子）です。</div>
+</div>
 
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
@@ -1347,6 +1731,29 @@ $$
 **【問題】**  
 水素原子の電子がn=2からn=1へ遷移するときに放出する光のエネルギーと波長を求めなさい。hc=1240 eV nmとします。
 
+<div class="vector-graph-card">
+  <div class="graph-title">📐 ボーアの水素原子模型とエネルギー準位</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-bo-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+  </defs>
+  <circle cx="180" cy="80" r="10" fill="#f43f5e"/>
+  <text x="180" y="84" fill="#fff" font-size="10" font-weight="700" text-anchor="middle">＋e</text>
+  <circle cx="180" cy="80" r="35" fill="none" stroke="#475569" stroke-width="1.5" stroke-dasharray="3,3"/>
+  <circle cx="180" cy="80" r="60" fill="none" stroke="#475569" stroke-width="1.5" stroke-dasharray="3,3"/>
+  <circle cx="215" cy="80" r="5" fill="#38bdf8"/>
+  <circle cx="240" cy="80" r="5" fill="#fbbf24"/>
+  <line x1="240" y1="80" x2="218" y2="80" stroke="#f43f5e" stroke-width="2"/>
+  <path d="M 230,80 Q 245,60 260,80 T 290,80" fill="none" stroke="#38bdf8" stroke-width="2" marker-end="url(#arr-bo-cyan)"/>
+  <rect x="250" y="55" width="85" height="16" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="292" y="67" fill="#38bdf8" font-size="9" font-weight="700" text-anchor="middle">放出光子 hν</text>
+  <rect x="340" y="45" width="145" height="45" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="412" y="63" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">振動数条件: hν ＝ E₂ − E₁</text>
+  <text x="412" y="79" fill="#fbbf24" font-size="9" text-anchor="middle">量子条件: 2πr ＝ nλ</text>
+</svg>
+  <div class="graph-caption">電子は量子条件を満たす軌道のみを回り、軌道間の遷移に伴って光子 hν = E₂ - E₁ を放出します。</div>
+</div>
+
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
 
@@ -1395,6 +1802,26 @@ $$
 
 **【問題】**  
 水素原子の電子がn=3からn=2へ遷移するときに放出される光子のエネルギーと波長を求めなさい。また同じ運動量を持つ電子のド・ブロイ波長との比較方法を説明しなさい。
+
+<div class="vector-graph-card">
+  <div class="graph-title">📐 光量子仮説と光子のエネルギー・運動量</div>
+  <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-pe-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+  </defs>
+  <path d="M 50,80 Q 75,45 100,80 T 150,80 T 200,80 L 235,80" fill="none" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-pe-cyan)"/>
+  <circle cx="100" cy="80" r="5" fill="#fbbf24"/>
+  <circle cx="150" cy="80" r="5" fill="#fbbf24"/>
+  <circle cx="200" cy="80" r="5" fill="#fbbf24"/>
+  <rect x="90" y="40" width="70" height="16" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
+  <text x="125" y="52" fill="#fbbf24" font-size="9" font-weight="700" text-anchor="middle">光子 (hν)</text>
+  <rect x="270" y="35" width="205" height="58" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="372" y="53" fill="#38bdf8" font-size="11" font-weight="700" text-anchor="middle">エネルギー: E ＝ hν ＝ hc / λ</text>
+  <text x="372" y="70" fill="#cbd5e1" font-size="10" text-anchor="middle">運動量: p ＝ h / λ ＝ E / c</text>
+  <text x="372" y="85" fill="#fbbf24" font-size="9" text-anchor="middle">プランク定数 h ≒ 6.63×10⁻³⁴ J・s</text>
+</svg>
+  <div class="graph-caption">振動数 ν、波長 λ の光は、エネルギー E = hν = hc/λ、運動量 p = h/λ を持つ粒子（光子）です。</div>
+</div>
 
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
