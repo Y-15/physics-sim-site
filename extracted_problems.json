@@ -1,0 +1,800 @@
+[
+  {
+    "id": "momentum-free",
+    "unitId": "mechanics",
+    "topicId": "momentum",
+    "title": "運動量保存の基本",
+    "prompt": "質量2.0 kgの台車Aが右向きに3.0 m/sで進み、静止していた質量1.0 kgの台車Bと衝突して一体になった。衝突後の速度を求めなさい。摩擦は無視する。",
+    "hint": "右向きを正にし、衝突前後で 2.0×3.0+1.0×0=(2.0+1.0)v と立式します。",
+    "level": 1,
+    "answer": "衝突後の速度は右向きに2.0 m/sです。",
+    "explanation": "台車AとBを1つの系とみると、衝突中の外力の力積は無視できます。右向きを正として、衝突前後の全運動量を等しくします。最後に、速度が正なので右向きだと確認します。",
+    "solutionFormulas": [
+      {
+        "title": "運動量保存",
+        "expression": "2.0×3.0+1.0×0=(2.0+1.0)v",
+        "latex": "2.0\\times3.0+1.0\\times0=(2.0+1.0)v",
+        "note": "衝突前後で全運動量を等しくします。"
+      }
+    ]
+  },
+  {
+    "id": "interference-free",
+    "unitId": "waves",
+    "topicId": "interference",
+    "title": "ヤングの干渉",
+    "prompt": "間隔0.50 mmの2つのスリットへ波長600 nmの単色光を当て、2.0 m先のスクリーンに干渉縞を作った。明線の間隔を求めなさい。",
+    "hint": "すべてmに直し、縞間隔 Δx=Lλ/d を使います。答えはmm程度になります。",
+    "level": 2,
+    "answer": "明線の間隔は2.4 mmです。",
+    "explanation": "スリット間隔d、スクリーンまでの距離L、波長λをすべてSI単位へ直します。ヤングの干渉では、隣り合う明線の間隔はLλ/dで求められます。",
+    "solutionFormulas": [
+      {
+        "title": "単位の変換",
+        "expression": "d=5.0×10⁻⁴ m, λ=6.0×10⁻⁷ m, L=2.0 m",
+        "latex": "d=5.0\\times10^{-4}\\ \\mathrm{m},\\quad \\lambda=6.0\\times10^{-7}\\ \\mathrm{m},\\quad L=2.0\\ \\mathrm{m}",
+        "note": "0.50 mm=5.0×10⁻⁴ m、600 nm=6.0×10⁻⁷ mです。"
+      }
+    ]
+  },
+  {
+    "id": "circuit-free",
+    "unitId": "electromagnetism",
+    "topicId": "circuit",
+    "title": "並列回路の電流",
+    "prompt": "6.0 Ωと3.0 Ωの抵抗を並列につなぎ、両端へ12 Vを加えた。各抵抗を流れる電流と回路全体の電流を求めなさい。",
+    "hint": "並列回路では各抵抗の電圧が12 Vです。I=V/Rで各枝を求め、分岐電流を足します。",
+    "level": 3,
+    "answer": "6.0 Ωには2.0 A、3.0 Ωには4.0 A、全体には6.0 Aが流れます。",
+    "explanation": "並列回路では各抵抗にかかる電圧が等しく12 Vです。オームの法則で枝電流を求め、キルヒホッフの電流則から全体の電流を足し合わせます。",
+    "solutionFormulas": [
+      {
+        "title": "各枝の電流",
+        "expression": "I₆=12/6.0=2.0 A, I₃=12/3.0=4.0 A",
+        "latex": "I_{6}=\\frac{12}{6.0}=2.0\\ \\mathrm{A},\\quad I_{3}=\\frac{12}{3.0}=4.0\\ \\mathrm{A}",
+        "note": "各抵抗の両端電圧は12 Vです。"
+      }
+    ]
+  },
+  {
+    "id": "heat-free",
+    "unitId": "thermodynamics",
+    "topicId": "heat",
+    "title": "水を温める熱量",
+    "prompt": "20 ℃の水0.20 kgを80 ℃まで温めるのに必要な熱量を求めなさい。水の比熱を4.2×10³ J/(kg·K)、容器の熱容量と熱損失は無視する。",
+    "hint": "温度差は60 Kです。Q=mcΔTへ質量、比熱、温度差を代入します。",
+    "level": 4,
+    "answer": "必要な熱量は5.04×10⁴ Jです。",
+    "explanation": "温度差は80-20=60 Kです。水だけを考えるので、熱量の公式Q=mcΔTへ質量0.20 kg、比熱4.2×10³ J/(kg·K)、温度差60 Kを代入します。",
+    "solutionFormulas": [
+      {
+        "title": "温度差",
+        "expression": "ΔT=80-20=60 K",
+        "latex": "\\Delta T=80-20=60\\ \\mathrm{K}",
+        "note": "温度差は摂氏でもケルビンでも数値が同じです。"
+      }
+    ]
+  },
+  {
+    "id": "photoelectric-free",
+    "unitId": "atomic",
+    "topicId": "photoelectric",
+    "title": "光電子の最大運動エネルギー",
+    "prompt": "仕事関数2.2 eVの金属へ、光子エネルギー3.0 eVの光を当てた。光電子の最大運動エネルギーと阻止電圧を求めなさい。",
+    "hint": "hf=W+K_maxとK_max=eV_sを順に使います。eV単位で扱うと、数値的にK_max[eV]=V_s[V]です。",
+    "level": 5,
+    "answer": "最大運動エネルギーは0.8 eV、阻止電圧は0.8 Vです。",
+    "explanation": "光子のエネルギーから仕事関数を引いた残りが、光電子の最大運動エネルギーです。eV単位で計算すると、最大運動エネルギーの数値が阻止電圧の数値になります。",
+    "solutionFormulas": [
+      {
+        "title": "光電方程式",
+        "expression": "K_max=3.0-2.2=0.8 eV",
+        "latex": "K_{\\max}=3.0-2.2=0.8\\ \\mathrm{eV}",
+        "note": "光子エネルギーから仕事関数を引きます。"
+      }
+    ]
+  },
+  {
+    "id": "momentum-premium-1",
+    "unitId": "mechanics",
+    "topicId": "momentum",
+    "title": "衝突とばねの複合問題",
+    "prompt": "水平面上で質量mの小球が速さv₀で進み、静止した質量2mの物体へ完全非弾性衝突した。衝突後、2物体は一体となってばね定数kのばねを縮める。最大圧縮量を求めなさい。摩擦はない。",
+    "hint": "衝突中は運動量保存、衝突後から最大圧縮までは力学的エネルギー保存です。衝突で運動エネルギーが保存しない点に注意します。",
+    "level": 6,
+    "answer": "最大圧縮量は x=v₀√(m/(3k)) です。",
+    "explanation": "まず衝突中だけを考えて運動量を保存します。完全非弾性衝突なので、衝突後の一体化した物体の速さを求めた後、その運動エネルギーがばねの弾性エネルギーへ変わるとして最大圧縮量を求めます。",
+    "solutionFormulas": [
+      {
+        "title": "衝突直後の速度",
+        "expression": "mv₀=(m+2m)V → V=v₀/3",
+        "latex": "mv_0=(m+2m)V\\quad\\Longrightarrow\\quad V=\\frac{v_0}{3}",
+        "note": "衝突中は運動量保存を使います。"
+      }
+    ]
+  },
+  {
+    "id": "circular-premium-1",
+    "unitId": "mechanics",
+    "topicId": "circular-motion",
+    "title": "鉛直面内の円運動",
+    "prompt": "長さlの軽い糸につけた質量mの小球を鉛直面内で回す。円の最高点で糸がたるまないために必要な最小の速さと、そのとき最低点で必要な速さを求めなさい。",
+    "hint": "最高点で張力が0になる場合が限界です。その後、最高点と最低点の間で力学的エネルギー保存を使います。",
+    "level": 7,
+    "answer": "最高点の最小速度は√(gl)、最低点の速度は√(5gl)です。",
+    "explanation": "最高点で糸がたるまない限界では張力が0です。最高点では重力だけが向心力になる条件を使い、その後は最高点から最低点までの高さ2lの位置エネルギー変化を運動エネルギーへ変換します。",
+    "solutionFormulas": [
+      {
+        "title": "最高点の限界条件",
+        "expression": "mg=mv_top²/l → v_top=√(gl)",
+        "latex": "mg=\\frac{mv_{\\mathrm{top}}^2}{l}\\quad\\Longrightarrow\\quad v_{\\mathrm{top}}=\\sqrt{gl}",
+        "note": "最高点で張力T=0とします。"
+      }
+    ]
+  },
+  {
+    "id": "wave-premium-1",
+    "unitId": "waves",
+    "topicId": "sine-wave",
+    "title": "正弦波と位相差",
+    "prompt": "波 y=A sin(4πt-2πx+π/3) がSI単位で表されている。振幅を除く角振動数、振動数、波数、波長、波の速さ、+x方向に0.25 m離れた2点の位相差を求めなさい。",
+    "hint": "y=A sin(ωt-kx+φ)と係数を比較し、f=ω/(2π)、λ=2π/k、v=ω/kを使います。",
+    "level": 8,
+    "answer": "ω=4π rad/s、f=2.0 Hz、k=2π rad/m、λ=1.0 m、波の速さは2.0 m/s、位相差の大きさはπ/2です。",
+    "explanation": "与えられた波の式を標準形y=A sin(ωt-kx+φ)と比較します。x方向に0.25 m離れた点の位相差はkΔxで求めます。",
+    "solutionFormulas": [
+      {
+        "title": "係数の比較",
+        "expression": "ω=4π, k=2π",
+        "latex": "\\omega=4\\pi\\ \\mathrm{rad/s},\\quad k=2\\pi\\ \\mathrm{rad/m}",
+        "note": "波の式のtとxの係数を読み取ります。"
+      }
+    ]
+  },
+  {
+    "id": "field-premium-1",
+    "unitId": "electromagnetism",
+    "topicId": "electric-field",
+    "title": "電場と電位の重ね合わせ",
+    "prompt": "x軸上のx=-aに+Q、x=+aに-Qを固定した。原点の電位と電場を求め、電位が0でも電場が0とは限らない理由を説明しなさい。",
+    "hint": "電位はスカラーとして符号付きで加え、電場は各電荷が原点に作る向きを図示してベクトル合成します。",
+    "level": 6,
+    "answer": "原点の電位は0、電場は+ x方向に2kQ/a²です。",
+    "explanation": "原点は2つの電荷から同じ距離aにあります。電位はスカラーなので+Qと-Qの寄与が打ち消し合います。一方、電場はどちらの電荷によるものも+x方向を向くため、強さが加わります。",
+    "solutionFormulas": [
+      {
+        "title": "原点の電位",
+        "expression": "V=kQ/a+k(-Q)/a=0",
+        "latex": "V=\\frac{kQ}{a}+\\frac{k(-Q)}{a}=0",
+        "note": "電位はスカラー量です。"
+      }
+    ]
+  },
+  {
+    "id": "thermo-premium-1",
+    "unitId": "thermodynamics",
+    "topicId": "first-law",
+    "title": "P-V図と熱力学第一法則",
+    "prompt": "単原子分子理想気体n molを、状態(P₀,V₀)から圧力2P₀まで定積加熱し、その後圧力2P₀のまま体積2V₀まで膨張させた。全過程で気体がした仕事、内部エネルギー変化、受け取った熱を求めなさい。",
+    "hint": "各状態の温度をPV=nRTで比較します。仕事はP-V図の面積、内部エネルギーはΔU=3nRΔT/2、最後にQ=ΔU+W_byです。",
+    "level": 8,
+    "answer": "気体がした仕事は2P₀V₀、内部エネルギー変化は(9/2)P₀V₀、受け取った熱は(13/2)P₀V₀です。",
+    "explanation": "初期状態をT₁とすると、定積加熱後は温度2T₁、膨張後は4T₁です。仕事は定圧膨張のP-V図の面積、内部エネルギー変化は単原子理想気体の公式から求め、熱力学第一法則Q=ΔU+Wで熱量を出します。",
+    "solutionFormulas": [
+      {
+        "title": "仕事",
+        "expression": "W=2P₀(2V₀-V₀)=2P₀V₀",
+        "latex": "W=2P_0(2V_0-V_0)=2P_0V_0",
+        "note": "定積過程の仕事は0です。"
+      }
+    ]
+  },
+  {
+    "id": "atomic-premium-1",
+    "unitId": "atomic",
+    "topicId": "bohr-model",
+    "title": "水素原子の遷移と物質波",
+    "prompt": "水素原子の電子がn=3からn=2へ遷移するときに放出される光子のエネルギーと波長を求めなさい。また同じ運動量を持つ電子のド・ブロイ波長との比較方法を説明しなさい。",
+    "hint": "E_n=-13.6/n² eVから準位差を求め、λ=hc/ΔEを使います。電子側はλ=h/pなので、比較には運動量pの情報が必要です。",
+    "level": 9,
+    "answer": "光子エネルギーは約1.89 eV、波長は約656 nmです。電子の波長はλ=h/pで、運動量pが分からないため数値比較はできません。",
+    "explanation": "水素原子のn=3とn=2のエネルギー準位を求め、その差が放出光子のエネルギーになります。波長はhc/ΔEで計算します。電子は同じエネルギーではなく「同じ運動量」と条件が指定されているので、比較式はド・ブロイの式を使います。",
+    "solutionFormulas": [
+      {
+        "title": "準位差",
+        "expression": "ΔE=|-13.6/2²-(-13.6/3²)|=1.89 eV",
+        "latex": "\\Delta E=\\left|-\\frac{13.6}{2^2}-\\left(-\\frac{13.6}{3^2}\\right)\\right|\\simeq1.89\\ \\mathrm{eV}",
+        "note": "放出される光子のエネルギーです。"
+      }
+    ]
+  },
+  {
+    "id": "mechanics-uniform-acceleration-basic-1",
+    "unitId": "mechanics",
+    "topicId": "uniform-acceleration",
+    "title": "等加速度運動の速度",
+    "prompt": "初速度2.0 m/s、加速度3.0 m/s^2で4.0 s運動する物体の速度を求めなさい。",
+    "hint": "速度の公式 v=v_0+at に、分かっている値を代入します。",
+    "level": 1,
+    "answer": "速度は14 m/sです。",
+    "explanation": "速度の公式に初速度、加速度、時間を代入すると、2.0+3.0×4.0=14となります。",
+    "solutionFormulas": [
+      {
+        "title": "速度の公式",
+        "expression": "v=v_0+at=2.0+3.0×4.0=14 m/s",
+        "latex": "v=v_0+at=2.0+3.0\\times4.0=14\\ \\mathrm{m/s}",
+        "note": "加速度と時間の積が速度の変化量です。"
+      }
+    ]
+  },
+  {
+    "id": "mechanics-projectile-basic-1",
+    "unitId": "mechanics",
+    "topicId": "projectile-motion",
+    "title": "鉛直投げ上げの位置",
+    "prompt": "物体を初速度20 m/sで鉛直上向きに投げます。g=10 m/s^2として、1.0 s後の高さを求めなさい。",
+    "hint": "上向きを正にして y=v_0t-1/2gt^2 を使います。",
+    "level": 2,
+    "answer": "投げた位置から15 mの高さです。",
+    "explanation": "上向きを正にすると加速度は-gです。y=20×1.0-1/2×10×(1.0)^2=15 mとなります。",
+    "solutionFormulas": [
+      {
+        "title": "位置の公式",
+        "expression": "y=v_0t-1/2gt^2=20×1.0-1/2×10×1.0^2=15 m",
+        "latex": "y=v_0t-\\frac{1}{2}gt^2=20\\times1.0-\\frac{1}{2}\\times10\\times(1.0)^2=15\\ \\mathrm{m}",
+        "note": "鉛直上向きを正にしたため、重力加速度の符号は負です。"
+      }
+    ]
+  },
+  {
+    "id": "mechanics-newton-law-basic-1",
+    "unitId": "mechanics",
+    "topicId": "newton-law",
+    "title": "運動方程式から加速度",
+    "prompt": "質量2.0 kgの物体を水平方向に6.0 Nの合力で押します。加速度を求めなさい。",
+    "hint": "運動方程式 F=ma を使い、aについて解きます。",
+    "level": 3,
+    "answer": "加速度は3.0 m/s^2です。",
+    "explanation": "物体には合力6.0 Nが働くので、6.0=2.0aです。したがってa=3.0 m/s^2となります。",
+    "solutionFormulas": [
+      {
+        "title": "運動方程式",
+        "expression": "F=ma  →  a=F/m=6.0/2.0=3.0 m/s^2",
+        "latex": "F=ma\\quad\\Longrightarrow\\quad a=\\frac{F}{m}=\\frac{6.0}{2.0}=3.0\\ \\mathrm{m/s^2}",
+        "note": "Fは物体に働く合力です。"
+      }
+    ]
+  },
+  {
+    "id": "mechanics-energy-basic-1",
+    "unitId": "mechanics",
+    "topicId": "energy",
+    "title": "重力による位置エネルギー",
+    "prompt": "質量2.0 kgの物体を基準面から5.0 mの高さに置きます。g=10 m/s^2として位置エネルギーを求めなさい。",
+    "hint": "重力による位置エネルギーはU=mghです。",
+    "level": 4,
+    "answer": "位置エネルギーは100 Jです。",
+    "explanation": "基準面を位置エネルギー0とすると、U=2.0×10×5.0=100 Jです。",
+    "solutionFormulas": [
+      {
+        "title": "位置エネルギー",
+        "expression": "U=mgh=2.0×10×5.0=100 J",
+        "latex": "U=mgh=2.0\\times10\\times5.0=100\\ \\mathrm{J}",
+        "note": "基準面の選び方で位置エネルギーの値は変わりますが、差は同じです。"
+      }
+    ]
+  },
+  {
+    "id": "mechanics-friction-standard-1",
+    "unitId": "mechanics",
+    "topicId": "friction",
+    "title": "水平面上の動摩擦力",
+    "prompt": "質量5.0 kgの物体を水平に20 Nで引きます。動摩擦係数を0.20、g=10 m/s^2として加速度を求めなさい。",
+    "hint": "垂直抗力N=mg、動摩擦力f=μNです。引く力から摩擦力を引きます。",
+    "level": 5,
+    "answer": "加速度は2.0 m/s^2です。",
+    "explanation": "N=50 N、f=0.20×50=10 Nです。合力は20-10=10 Nなので、a=10/5.0=2.0 m/s^2です。",
+    "solutionFormulas": [
+      {
+        "title": "摩擦力と合力",
+        "expression": "N=mg=50 N,  f=μN=10 N,  F_net=20-10=10 N",
+        "latex": "N=mg=50\\ \\mathrm{N},\\quad f=\\mu N=10\\ \\mathrm{N},\\quad F_{\\mathrm{net}}=20-10=10\\ \\mathrm{N}",
+        "note": "水平面上で鉛直方向に加速度がないため、N=mgです。"
+      }
+    ]
+  },
+  {
+    "id": "mechanics-gravitation-standard-1",
+    "unitId": "mechanics",
+    "topicId": "gravitation",
+    "title": "高度による重力加速度",
+    "prompt": "地球の中心から2Rの距離にある場所での重力加速度を、地表のgを使って表しなさい。",
+    "hint": "重力加速度は中心からの距離rの2乗に反比例します。",
+    "level": 6,
+    "answer": "重力加速度はg/4です。",
+    "explanation": "g(r)=GM/r^2より、r=Rのときのgと比べると、距離が2倍なので重力加速度は1/4になります。",
+    "solutionFormulas": [
+      {
+        "title": "重力加速度の比",
+        "expression": "g(2R)/g(R)=(R/2R)^2=1/4",
+        "latex": "\\frac{g(2R)}{g(R)}=\\left(\\frac{R}{2R}\\right)^2=\\frac{1}{4}",
+        "note": "地球の自転や空気抵抗は考えません。"
+      }
+    ]
+  },
+  {
+    "id": "waves-basics-basic-1",
+    "unitId": "waves",
+    "topicId": "wave-basics",
+    "title": "波の速さと波長",
+    "prompt": "振動数5.0 Hz、波長0.40 mの波の速さを求めなさい。",
+    "hint": "波の基本式v=fλを使います。",
+    "level": 1,
+    "answer": "波の速さは2.0 m/sです。",
+    "explanation": "1秒あたり5.0回振動し、1回の波長が0.40 mなので、5.0×0.40=2.0 m/sです。",
+    "solutionFormulas": [
+      {
+        "title": "波の基本式",
+        "expression": "v=fλ=5.0×0.40=2.0 m/s",
+        "latex": "v=f\\lambda=5.0\\times0.40=2.0\\ \\mathrm{m/s}",
+        "note": "振動数と波長の積が波の速さです。"
+      }
+    ]
+  },
+  {
+    "id": "waves-sound-basic-1",
+    "unitId": "waves",
+    "topicId": "sound",
+    "title": "反射音から距離を求める",
+    "prompt": "音を出してから1.0 s後に山から反射音が聞こえました。音速を340 m/sとして山までの距離を求めなさい。",
+    "hint": "音は往復するので、距離はvtを2で割ります。",
+    "level": 2,
+    "answer": "山までの距離は170 mです。",
+    "explanation": "音が進んだ全距離は340×1.0=340 mです。片道の距離はその半分なので170 mです。",
+    "solutionFormulas": [
+      {
+        "title": "往復距離",
+        "expression": "2L=vt  →  L=340×1.0/2=170 m",
+        "latex": "2L=vt\\quad\\Longrightarrow\\quad L=\\frac{340\\times1.0}{2}=170\\ \\mathrm{m}",
+        "note": "発した場所から山までを片道の距離Lとしています。"
+      }
+    ]
+  },
+  {
+    "id": "waves-standing-wave-basic-1",
+    "unitId": "waves",
+    "topicId": "standing-wave",
+    "title": "弦の定常波の振動数",
+    "prompt": "長さ0.60 mの両端固定の弦を、速さ120 m/sの波が伝わります。2倍振動の振動数を求めなさい。",
+    "hint": "両端固定の定常波ではf_n=nv/(2L)です。",
+    "level": 3,
+    "answer": "振動数は200 Hzです。",
+    "explanation": "n=2を公式に代入すると、f_2=2×120/(2×0.60)=200 Hzです。",
+    "solutionFormulas": [
+      {
+        "title": "定常波の条件",
+        "expression": "f_2=2v/(2L)=2×120/(2×0.60)=200 Hz",
+        "latex": "f_2=\\frac{2v}{2L}=\\frac{2\\times120}{2\\times0.60}=200\\ \\mathrm{Hz}",
+        "note": "2倍振動では弦の長さに半波長が2個入ります。"
+      }
+    ]
+  },
+  {
+    "id": "waves-doppler-basic-1",
+    "unitId": "waves",
+    "topicId": "doppler",
+    "title": "音源が近づくときのドップラー効果",
+    "prompt": "音速340 m/sの空気中で、500 Hzの音源が20 m/sで観測者に近づきます。観測される振動数を求めなさい。",
+    "hint": "観測者が静止し音源が近づくとき、f'=vf/(v-v_s)です。",
+    "level": 4,
+    "answer": "振動数は約531 Hzです。",
+    "explanation": "音源が近づくため波長が短くなります。f'=340×500/(340-20)=531.25 Hzです。",
+    "solutionFormulas": [
+      {
+        "title": "ドップラー効果",
+        "expression": "f'=vf/(v-v_s)=340×500/320=531.25 Hz",
+        "latex": "f^\\prime=\\frac{vf}{v-v_s}=\\frac{340\\times500}{340-20}\\simeq531\\ \\mathrm{Hz}",
+        "note": "音源が観測者へ近づく場合は分母がv-v_sです。"
+      }
+    ]
+  },
+  {
+    "id": "waves-refraction-standard-1",
+    "unitId": "waves",
+    "topicId": "reflection-refraction",
+    "title": "屈折角を求める",
+    "prompt": "屈折率1.0の空気から屈折率1.5の物質へ、入射角sin i=0.60で光が進みます。屈折角を求めなさい。",
+    "hint": "スネルの法則n_1 sin i=n_2 sin rを使います。",
+    "level": 5,
+    "answer": "屈折角は約23.6°です。",
+    "explanation": "sin r=(1.0/1.5)×0.60=0.40なので、r=arcsin0.40≈23.6°です。",
+    "solutionFormulas": [
+      {
+        "title": "スネルの法則",
+        "expression": "1.0×sin i=1.5×sin r  →  sin r=0.40",
+        "latex": "n_1\\sin i=n_2\\sin r\\quad\\Longrightarrow\\quad\\sin r=\\frac{1.0}{1.5}\\times0.60=0.40",
+        "note": "角度は法線から測ります。"
+      }
+    ]
+  },
+  {
+    "id": "waves-lens-standard-1",
+    "unitId": "waves",
+    "topicId": "lens",
+    "title": "凸レンズの像の位置",
+    "prompt": "焦点距離0.20 mの凸レンズの前方0.30 mに物体を置きます。像の位置と倍率を求めなさい。",
+    "hint": "レンズの公式1/f=1/u+1/vと倍率m=-v/uを使います。",
+    "level": 6,
+    "answer": "像はレンズの後方0.60 mにでき、倍率は-2.0です。",
+    "explanation": "1/v=1/0.20-1/0.30=1.667よりv=0.60 mです。倍率は-0.60/0.30=-2.0です。",
+    "solutionFormulas": [
+      {
+        "title": "レンズの公式",
+        "expression": "1/v=1/0.20-1/0.30  →  v=0.60 m",
+        "latex": "\\frac{1}{v}=\\frac{1}{0.20}-\\frac{1}{0.30}\\quad\\Longrightarrow\\quad v=0.60\\ \\mathrm{m}",
+        "note": "実像なので像はレンズの反対側にできます。"
+      }
+    ]
+  },
+  {
+    "id": "em-potential-basic-1",
+    "unitId": "electromagnetism",
+    "topicId": "electric-potential",
+    "title": "電位による位置エネルギー",
+    "prompt": "電位12 Vの点に電気量3.0 Cの電荷を置きます。電気的位置エネルギーを求めなさい。",
+    "hint": "電気的位置エネルギーはU=qVです。",
+    "level": 1,
+    "answer": "電気的位置エネルギーは36 Jです。",
+    "explanation": "U=qV=3.0×12=36 Jです。電荷と電位の符号にも注意します。",
+    "solutionFormulas": [
+      {
+        "title": "電位と位置エネルギー",
+        "expression": "U=qV=3.0×12=36 J",
+        "latex": "U=qV=3.0\\times12=36\\ \\mathrm{J}",
+        "note": "電位は単位電気量あたりの位置エネルギーです。"
+      }
+    ]
+  },
+  {
+    "id": "em-capacitor-basic-1",
+    "unitId": "electromagnetism",
+    "topicId": "capacitor",
+    "title": "コンデンサーの電気量とエネルギー",
+    "prompt": "容量4.0 μFのコンデンサーに12 Vを加えます。蓄えられる電気量とエネルギーを求めなさい。",
+    "hint": "Q=CV、U=1/2CV^2を使います。",
+    "level": 2,
+    "answer": "電気量は48 μC、エネルギーは288 μJです。",
+    "explanation": "Q=4.0×12=48 μC、U=1/2×4.0×12^2=288 μJです。",
+    "solutionFormulas": [
+      {
+        "title": "電気量",
+        "expression": "Q=CV=4.0 μF×12 V=48 μC",
+        "latex": "Q=CV=4.0\\times10^{-6}\\times12=48\\times10^{-6}\\ \\mathrm{C}",
+        "note": "μFとμCを使えば、値をそのまま計算できます。"
+      }
+    ]
+  },
+  {
+    "id": "em-magnetic-field-basic-1",
+    "unitId": "electromagnetism",
+    "topicId": "magnetic-field",
+    "title": "直線電流の磁場",
+    "prompt": "長い直線導線に2.0 Aの電流が流れています。導線から0.10 mの点の磁束密度を求めなさい。μ_0=4π×10^-7 T m/Aとします。",
+    "hint": "直線電流の磁場B=μ_0I/(2πr)を使います。",
+    "level": 4,
+    "answer": "磁束密度は4.0×10^-6 Tです。",
+    "explanation": "B=(4π×10^-7×2.0)/(2π×0.10)=4.0×10^-6 Tです。",
+    "solutionFormulas": [
+      {
+        "title": "直線電流の磁場",
+        "expression": "B=μ_0I/(2πr)=4.0×10^-6 T",
+        "latex": "B=\\frac{\\mu_0I}{2\\pi r}=\\frac{4\\pi\\times10^{-7}\\times2.0}{2\\pi\\times0.10}=4.0\\times10^{-6}\\ \\mathrm{T}",
+        "note": "磁場の向きは右ねじの法則で決まります。"
+      }
+    ]
+  },
+  {
+    "id": "em-lorentz-force-standard-1",
+    "unitId": "electromagnetism",
+    "topicId": "lorentz-force",
+    "title": "磁場中の荷電粒子",
+    "prompt": "電気量2.0 μCの粒子が3.0×10^5 m/sで、磁束密度0.20 Tの磁場に垂直に入ります。磁気力の大きさを求めなさい。",
+    "hint": "速度と磁場が垂直なのでF=qvBです。",
+    "level": 5,
+    "answer": "磁気力は0.12 Nです。",
+    "explanation": "F=qvB=2.0×10^-6×3.0×10^5×0.20=0.12 Nです。",
+    "solutionFormulas": [
+      {
+        "title": "ローレンツ力",
+        "expression": "F=qvB=2.0×10^-6×3.0×10^5×0.20=0.12 N",
+        "latex": "F=qvB=2.0\\times10^{-6}\\times3.0\\times10^5\\times0.20=0.12\\ \\mathrm{N}",
+        "note": "速度と磁場が垂直でない場合はsinθを掛けます。"
+      }
+    ]
+  },
+  {
+    "id": "em-induction-standard-1",
+    "unitId": "electromagnetism",
+    "topicId": "induction",
+    "title": "電磁誘導の誘導起電力",
+    "prompt": "100回巻きコイルを通る磁束が0.020 Wbから0 Wbへ0.10 sで変化します。誘導起電力の大きさを求めなさい。",
+    "hint": "ファラデーの法則E=N|ΔΦ/Δt|を使います。",
+    "level": 6,
+    "answer": "誘導起電力は20 Vです。",
+    "explanation": "磁束の変化量は0.020 Wbなので、E=100×0.020/0.10=20 Vです。",
+    "solutionFormulas": [
+      {
+        "title": "ファラデーの法則",
+        "expression": "E=N|ΔΦ/Δt|=100×0.020/0.10=20 V",
+        "latex": "E=N\\left|\\frac{\\Delta\\Phi}{\\Delta t}\\right|=100\\times\\frac{0.020}{0.10}=20\\ \\mathrm{V}",
+        "note": "ここでは大きさだけを求めています。向きはレンツの法則で決まります。"
+      }
+    ]
+  },
+  {
+    "id": "em-ac-basic-1",
+    "unitId": "electromagnetism",
+    "topicId": "alternating-current",
+    "title": "交流回路の実効値",
+    "prompt": "抵抗50 Ωに実効値100 Vの交流電圧を加えます。実効電流と平均消費電力を求めなさい。",
+    "hint": "オームの法則とP=V_rms^2/Rを使います。",
+    "level": 7,
+    "answer": "実効電流は2.0 A、平均消費電力は200 Wです。",
+    "explanation": "I_rms=100/50=2.0 A、P=100^2/50=200 Wです。",
+    "solutionFormulas": [
+      {
+        "title": "実効電流",
+        "expression": "I_rms=V_rms/R=100/50=2.0 A",
+        "latex": "I_{\\mathrm{rms}}=\\frac{V_{\\mathrm{rms}}}{R}=\\frac{100}{50}=2.0\\ \\mathrm{A}",
+        "note": "抵抗だけの交流回路では、実効値でもオームの法則が使えます。"
+      }
+    ]
+  },
+  {
+    "id": "thermo-gas-basic-1",
+    "unitId": "thermodynamics",
+    "topicId": "gas",
+    "title": "気体の圧力と体積",
+    "prompt": "温度一定の気体を、圧力1.0×10^5 Pa、体積2.0×10^-2 m^3から体積1.0×10^-2 m^3へ圧縮します。圧力を求めなさい。",
+    "hint": "温度一定ならボイルの法則P_1V_1=P_2V_2です。",
+    "level": 1,
+    "answer": "圧力は2.0×10^5 Paです。",
+    "explanation": "P_2=P_1V_1/V_2=1.0×10^5×2.0×10^-2/(1.0×10^-2)=2.0×10^5 Paです。",
+    "solutionFormulas": [
+      {
+        "title": "ボイルの法則",
+        "expression": "P_1V_1=P_2V_2  →  P_2=2.0×10^5 Pa",
+        "latex": "P_1V_1=P_2V_2\\quad\\Longrightarrow\\quad P_2=2.0\\times10^5\\ \\mathrm{Pa}",
+        "note": "温度と物質量が一定の変化です。"
+      }
+    ]
+  },
+  {
+    "id": "thermo-kinetic-theory-basic-1",
+    "unitId": "thermodynamics",
+    "topicId": "kinetic-theory",
+    "title": "分子の平均運動エネルギー",
+    "prompt": "温度300 Kの理想気体分子1個の平均運動エネルギーを求めなさい。ボルツマン定数を1.38×10^-23 J/Kとします。",
+    "hint": "平均運動エネルギーは3/2 kTです。",
+    "level": 2,
+    "answer": "平均運動エネルギーは6.21×10^-21 Jです。",
+    "explanation": "3/2×1.38×10^-23×300=6.21×10^-21 Jです。",
+    "solutionFormulas": [
+      {
+        "title": "平均運動エネルギー",
+        "expression": "K=3/2 kT=3/2×1.38×10^-23×300=6.21×10^-21 J",
+        "latex": "K=\\frac{3}{2}kT=\\frac{3}{2}\\times1.38\\times10^{-23}\\times300=6.21\\times10^{-21}\\ \\mathrm{J}",
+        "note": "温度が高いほど分子の平均運動エネルギーは大きくなります。"
+      }
+    ]
+  },
+  {
+    "id": "thermo-first-law-basic-1",
+    "unitId": "thermodynamics",
+    "topicId": "first-law",
+    "title": "熱力学第一法則",
+    "prompt": "気体が500 Jの熱を受け取り、外部に200 Jの仕事をしました。気体の内部エネルギーの変化を求めなさい。",
+    "hint": "気体が外部へした仕事をWとすると、Q=ΔU+Wです。",
+    "level": 3,
+    "answer": "内部エネルギーは300 J増加します。",
+    "explanation": "ΔU=Q-W=500-200=300 Jです。受け取った熱の一部が仕事に使われました。",
+    "solutionFormulas": [
+      {
+        "title": "熱力学第一法則",
+        "expression": "ΔU=Q-W=500-200=300 J",
+        "latex": "\\Delta U=Q-W=500-200=300\\ \\mathrm{J}",
+        "note": "Wは気体が外部へした仕事として正に取っています。"
+      }
+    ]
+  },
+  {
+    "id": "thermo-engine-basic-1",
+    "unitId": "thermodynamics",
+    "topicId": "heat-engine",
+    "title": "熱機関の効率",
+    "prompt": "熱機関が高温熱源から1000 Jを受け取り、低温熱源へ600 Jを捨てます。仕事と熱効率を求めなさい。",
+    "hint": "仕事W=Q_h-Q_c、熱効率e=W/Q_hです。",
+    "level": 4,
+    "answer": "仕事は400 J、熱効率は0.40です。",
+    "explanation": "W=1000-600=400 J、e=400/1000=0.40です。百分率では40%です。",
+    "solutionFormulas": [
+      {
+        "title": "仕事",
+        "expression": "W=Q_h-Q_c=1000-600=400 J",
+        "latex": "W=Q_h-Q_c=1000-600=400\\ \\mathrm{J}",
+        "note": "受け取った熱のうち、捨てなかった分が仕事になります。"
+      }
+    ]
+  },
+  {
+    "id": "thermo-gas-standard-1",
+    "unitId": "thermodynamics",
+    "topicId": "gas",
+    "title": "理想気体の状態方程式",
+    "prompt": "1.0 molの気体が300 K、体積0.0246 m^3にあります。気体定数R=8.31 J/(mol・K)として圧力を求めなさい。",
+    "hint": "PV=nRTからP=nRT/Vを作ります。",
+    "level": 5,
+    "answer": "圧力は約1.01×10^5 Paです。",
+    "explanation": "P=1.0×8.31×300/0.0246≈1.01×10^5 Paです。",
+    "solutionFormulas": [
+      {
+        "title": "理想気体の状態方程式",
+        "expression": "P=nRT/V=1.0×8.31×300/0.0246≈1.01×10^5 Pa",
+        "latex": "P=\\frac{nRT}{V}=\\frac{1.0\\times8.31\\times300}{0.0246}\\simeq1.01\\times10^5\\ \\mathrm{Pa}",
+        "note": "体積はm^3、温度はKで代入します。"
+      }
+    ]
+  },
+  {
+    "id": "thermo-kinetic-standard-1",
+    "unitId": "thermodynamics",
+    "topicId": "kinetic-theory",
+    "title": "単原子分子気体の内部エネルギー",
+    "prompt": "単原子分子理想気体2.0 molを300 Kから450 Kへ変化させます。内部エネルギーの変化を求めなさい。R=8.31 J/(mol・K)とします。",
+    "hint": "単原子分子気体ではΔU=3/2 nRΔTです。",
+    "level": 6,
+    "answer": "内部エネルギーは3.74×10^3 J増加します。",
+    "explanation": "ΔT=150 Kなので、ΔU=3/2×2.0×8.31×150=3.74×10^3 Jです。",
+    "solutionFormulas": [
+      {
+        "title": "内部エネルギーの変化",
+        "expression": "ΔU=3/2 nRΔT=3/2×2.0×8.31×150=3.74×10^3 J",
+        "latex": "\\Delta U=\\frac{3}{2}nR\\Delta T=\\frac{3}{2}\\times2.0\\times8.31\\times150\\simeq3.74\\times10^3\\ \\mathrm{J}",
+        "note": "理想気体の内部エネルギーは温度だけで決まります。"
+      }
+    ]
+  },
+  {
+    "id": "atomic-nucleus-basic-1",
+    "unitId": "atomic",
+    "topicId": "nucleus",
+    "title": "原子核の陽子数と中性子数",
+    "prompt": "ナトリウム23（原子番号11）の原子核に含まれる陽子数と中性子数を求めなさい。",
+    "hint": "原子番号は陽子数、質量数は陽子数と中性子数の合計です。",
+    "level": 1,
+    "answer": "陽子11個、中性子12個です。",
+    "explanation": "陽子数は原子番号11です。中性子数は23-11=12個です。",
+    "solutionFormulas": [
+      {
+        "title": "原子核の構成",
+        "expression": "N=A-Z=23-11=12",
+        "latex": "N=A-Z=23-11=12",
+        "note": "Aは質量数、Zは原子番号、中性子数をNとしています。"
+      }
+    ]
+  },
+  {
+    "id": "atomic-radiation-basic-1",
+    "unitId": "atomic",
+    "topicId": "radiation",
+    "title": "半減期と放射性物質",
+    "prompt": "半減期が8日で、はじめに80 gあった放射性物質があります。24日後の質量を求めなさい。",
+    "hint": "24日間には半減期が3回含まれます。",
+    "level": 2,
+    "answer": "質量は10 gです。",
+    "explanation": "3回半減するので、80×(1/2)^3=10 gです。",
+    "solutionFormulas": [
+      {
+        "title": "放射性物質の減少",
+        "expression": "m=80×(1/2)^(24/8)=10 g",
+        "latex": "m=80\\left(\\frac{1}{2}\\right)^{24/8}=10\\ \\mathrm{g}",
+        "note": "半減期は放射性物質の量が半分になる時間です。"
+      }
+    ]
+  },
+  {
+    "id": "atomic-reaction-basic-1",
+    "unitId": "atomic",
+    "topicId": "nuclear-reaction",
+    "title": "質量欠損と結合エネルギー",
+    "prompt": "核反応で質量欠損が0.0010 u生じました。1 u=931.5 MeV/c^2として、発生するエネルギーを求めなさい。",
+    "hint": "質量欠損をuで表したとき、931.5 MeVを掛けます。",
+    "level": 3,
+    "answer": "発生するエネルギーは0.932 MeVです。",
+    "explanation": "E=0.0010×931.5=0.9315 MeVなので、約0.932 MeVです。",
+    "solutionFormulas": [
+      {
+        "title": "質量とエネルギー",
+        "expression": "E=Δm c^2=0.0010×931.5=0.9315 MeV",
+        "latex": "E=\\Delta mc^2=0.0010\\times931.5=0.9315\\ \\mathrm{MeV}",
+        "note": "uを使うと、エネルギーをMeVで直接求められます。"
+      }
+    ]
+  },
+  {
+    "id": "atomic-matter-wave-basic-1",
+    "unitId": "atomic",
+    "topicId": "matter-wave",
+    "title": "電子のド・ブロイ波長",
+    "prompt": "運動量6.63×10^-24 kg m/sの電子の物質波の波長を求めなさい。プランク定数h=6.63×10^-34 J sとします。",
+    "hint": "ド・ブロイの式λ=h/pを使います。",
+    "level": 4,
+    "answer": "波長は1.0×10^-10 mです。",
+    "explanation": "λ=6.63×10^-34/(6.63×10^-24)=1.0×10^-10 mです。",
+    "solutionFormulas": [
+      {
+        "title": "ド・ブロイの式",
+        "expression": "λ=h/p=6.63×10^-34/(6.63×10^-24)=1.0×10^-10 m",
+        "latex": "\\lambda=\\frac{h}{p}=\\frac{6.63\\times10^{-34}}{6.63\\times10^{-24}}=1.0\\times10^{-10}\\ \\mathrm{m}",
+        "note": "運動量が大きいほど物質波の波長は短くなります。"
+      }
+    ]
+  },
+  {
+    "id": "atomic-photoelectric-standard-1",
+    "unitId": "atomic",
+    "topicId": "photoelectric",
+    "title": "光電効果の最大運動エネルギー",
+    "prompt": "仕事関数2.0 eVの金属に、光子エネルギー3.5 eVの光を当てます。光電子の最大運動エネルギーと阻止電圧を求めなさい。",
+    "hint": "アインシュタインの式K_max=hf-Wを使います。eV単位なら阻止電圧の数値と一致します。",
+    "level": 6,
+    "answer": "最大運動エネルギーは1.5 eV、阻止電圧は1.5 Vです。",
+    "explanation": "K_max=3.5-2.0=1.5 eVです。K_max=eV_sよりV_s=1.5 Vです。",
+    "solutionFormulas": [
+      {
+        "title": "光電効果の式",
+        "expression": "K_max=hf-W=3.5-2.0=1.5 eV",
+        "latex": "K_{\\max}=hf-W=3.5-2.0=1.5\\ \\mathrm{eV}",
+        "note": "仕事関数は電子を金属から取り出すための最低エネルギーです。"
+      }
+    ]
+  },
+  {
+    "id": "atomic-bohr-standard-1",
+    "unitId": "atomic",
+    "topicId": "bohr-model",
+    "title": "水素原子のスペクトル",
+    "prompt": "水素原子の電子がn=2からn=1へ遷移するときに放出する光のエネルギーと波長を求めなさい。hc=1240 eV nmとします。",
+    "hint": "E_n=-13.6/n^2 eV、λ=hc/ΔEを使います。",
+    "level": 7,
+    "answer": "光のエネルギーは10.2 eV、波長は約122 nmです。",
+    "explanation": "エネルギー差は|−13.6−(−3.40)|=10.2 eVです。λ=1240/10.2≈122 nmとなります。",
+    "solutionFormulas": [
+      {
+        "title": "エネルギー準位",
+        "expression": "ΔE=|-13.6-(-13.6/4)|=10.2 eV",
+        "latex": "\\Delta E=\\left|-13.6-\\left(-\\frac{13.6}{2^2}\\right)\\right|=10.2\\ \\mathrm{eV}",
+        "note": "放出される光子のエネルギーは準位差の大きさです。"
+      }
+    ]
+  },
+  {
+    "id": "unique-problem-id",
+    "unitId": "mechanics",
+    "topicId": "uniform-acceleration",
+    "title": "問題タイトル",
+    "prompt": "問題文",
+    "hint": "公式を選ぶためのヒント。答えを直接書かない。",
+    "level": 1,
+    "answer": "最終的な答え",
+    "explanation": "代入、計算、単位の確認を含む解説",
+    "solutionFormulas": [
+      {
+        "title": "使用した公式",
+        "expression": "画面に表示する短い式",
+        "latex": "v=v_0+at",
+        "note": "式の意味や使う条件"
+      }
+    ]
+  }
+]

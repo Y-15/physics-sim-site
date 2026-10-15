@@ -39,10 +39,24 @@ export default defineConfig({
       { text: '電磁気', link: '/electromagnetism/index' },
       { text: '熱力学', link: '/thermodynamics/index' },
       { text: '原子', link: '/atomic/index' },
+      { text: '演習問題', link: '/problems/index' },
       { text: '受験・学習ガイド', link: '/about' }
     ],
 
     sidebar: {
+      '/problems/': [
+        {
+          text: '厳選演習問題集（全41問）',
+          items: [
+            { text: '📝 問題集トップ', link: '/problems/index' },
+            { text: '🏎️ 力学 演習問題（9問）', link: '/problems/mechanics' },
+            { text: '🌊 波動 演習問題（8問）', link: '/problems/waves' },
+            { text: '⚡ 電磁気 演習問題（8問）', link: '/problems/electromagnetism' },
+            { text: '🔥 熱力学 演習問題（8問）', link: '/problems/thermodynamics' },
+            { text: '⚛️ 原子物理 演習問題（8問）', link: '/problems/atomic' }
+          ]
+        }
+      ],
       '/mechanics/': [
         {
           text: '力学（高校物理）',
