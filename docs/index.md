@@ -39,7 +39,11 @@ features:
     details: 通学電車やスキマ時間にスマホでサクサク操作可能。登録不要・完全無料でいつでもどこでも物理をマスターできます。
 ---
 
-<div style="max-width: 960px; margin: 40px auto 0; padding: 0 24px;">
+<div style="max-width: 960px; margin: 30px auto 10px; padding: 0 24px; text-align: center;">
+  <PhysicsIntroTrigger />
+</div>
+
+<div style="max-width: 960px; margin: 20px auto 0; padding: 0 24px;">
 
 ## 📚 公開中のシミュレーター・学習テーマ一覧
 

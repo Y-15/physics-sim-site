@@ -1,4 +1,5 @@
 import DefaultTheme from 'vitepress/theme'
+import Layout from './Layout.vue'
 import './sim.css'
 import './custom.css'
 
@@ -7,6 +8,7 @@ const modules = import.meta.glob('../components/*.vue', { eager: true })
 
 export default {
   extends: DefaultTheme,
+  Layout,
   enhanceApp({ app }) {
     // グローバルコンポーネントとして登録
     for (const path in modules) {
