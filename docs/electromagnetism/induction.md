@@ -81,7 +81,8 @@ description: 高校物理の電磁気学最頻出テーマ。ファラデーの�
 
     <!-- 移動矢印 (左向き) -->
     <line x1="95" y1="27" x2="65" y2="27" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-lenz-push)"/>
-    <text x="80" y="14" fill="#38bdf8" font-size="11" font-weight="700" text-anchor="middle">遠ざける</text>
+    <rect x="55" y="4" width="55" height="16" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+    <text x="82" y="16" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">遠ざける</text>
 
     <!-- コイル (楕円ループ) -->
     <ellipse cx="230" cy="27" rx="14" ry="26" fill="rgba(251, 191, 36, 0.15)" stroke="#fbbf24" stroke-width="3"/>
@@ -92,7 +93,8 @@ description: 高校物理の電磁気学最頻出テーマ。ファラデーの�
 
     <!-- 引力 (引き止めブレーキ) -->
     <line x1="145" y1="27" x2="165" y2="27" stroke="#38bdf8" stroke-width="2" marker-end="url(#arr-lenz-push)"/>
-    <text x="270" y="32" fill="#38bdf8" font-size="13" font-weight="700">引力（行かないで！と引き止める）</text>
+    <rect x="255" y="18" width="220" height="20" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+    <text x="365" y="32" fill="#38bdf8" font-size="11" font-weight="700" text-anchor="middle">引力（変化を妨げて引き止める）</text>
   </g>
 </svg>
 <div class="graph-caption">図: レンツの法則の直感理解（磁石の動きを妨げる向きに誘導磁極・誘導電流が発生する）</div>

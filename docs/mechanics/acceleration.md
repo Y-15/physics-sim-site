@@ -115,18 +115,22 @@ $$
   <circle cx="370" cy="60" r="5" fill="#38bdf8"/>
 
   <!-- 面積ラベル -->
-  <text x="220" y="155" fill="#38bdf8" font-size="14" font-weight="700" font-family="sans-serif" text-anchor="middle">台形の面積 ＝ 変位 x</text>
-  <text x="220" y="178" fill="#bae6fd" font-size="12" font-family="sans-serif" text-anchor="middle">x = v₀t + ½at²</text>
+  <rect x="130" y="140" width="180" height="46" rx="6" fill="#0f172a" stroke="#38bdf8" stroke-width="1.2"/>
+  <text x="220" y="158" fill="#38bdf8" font-size="13" font-weight="700" font-family="sans-serif" text-anchor="middle">台形の面積 ＝ 変位 x</text>
+  <text x="220" y="176" fill="#bae6fd" font-size="11" font-family="sans-serif" text-anchor="middle">x = v₀t + ½at²</text>
 
   <!-- 傾きラベルと三角ガイド -->
   <polygon points="260,150 370,150 370,60" fill="none" stroke="#fbbf24" stroke-width="1.5"/>
-  <text x="315" y="166" fill="#fbbf24" font-size="11" font-family="sans-serif" text-anchor="middle">Δt = t</text>
-  <text x="382" y="110" fill="#fbbf24" font-size="11" font-family="sans-serif">Δv = at</text>
-  <path d="M 330,85 Q 360,70 410,75" fill="none" stroke="#fbbf24" stroke-width="1.5" marker-end="url(#arrowCyan)"/>
-  <text x="420" y="80" fill="#fbbf24" font-size="12" font-weight="700" font-family="sans-serif">傾き ＝ 加速度 a</text>
-  <text x="420" y="96" fill="#a1a1aa" font-size="11" font-family="sans-serif">a = (v - v₀)/t</text>
+  <rect x="290" y="154" width="50" height="18" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
+  <text x="315" y="167" fill="#fbbf24" font-size="10" font-family="sans-serif" text-anchor="middle">Δt = t</text>
+  <rect x="376" y="98" width="54" height="18" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
+  <text x="403" y="111" fill="#fbbf24" font-size="10" font-family="sans-serif" text-anchor="middle">Δv = at</text>
+
+  <rect x="415" y="65" width="135" height="36" rx="5" fill="#0f172a" stroke="#fbbf24" stroke-width="1.2"/>
+  <text x="482" y="80" fill="#fbbf24" font-size="12" font-weight="700" font-family="sans-serif" text-anchor="middle">傾き ＝ 加速度 a</text>
+  <text x="482" y="95" fill="#cbd5e1" font-size="10" font-family="sans-serif" text-anchor="middle">a = (v − v₀) / t</text>
 </svg>
-<div class="graph-caption">図: 等加速度直線運動の <strong>v-t グラフ</strong>（傾き＝加速度 $a$、台形面積＝移動距離・変位 $x$）</div>
+<div class="graph-caption">図: 等加速度直線運動の <strong>v-t グラフ</strong>（傾き＝加速度 <i>a</i>、台形面積＝移動距離・変位 <i>x</i>）</div>
 </div>
 
 ### 原則①：直線の傾きは「加速度 $a$」を表す

@@ -85,16 +85,19 @@ $$
 
   <!-- 入射光子 (p0 = h / lambda0) -->
   <line x1="60" y1="140" x2="200" y2="140" stroke="#38bdf8" stroke-width="3" marker-end="url(#arr-cp-ray)"/>
-  <text x="70" y="125" fill="#38bdf8" font-size="13" font-weight="700">入射光子: p₀ ＝ h / λ₀</text>
+  <rect x="50" y="112" width="145" height="20" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="122" y="126" fill="#38bdf8" font-size="11" font-weight="700" text-anchor="middle">入射光子: p₀ ＝ h / λ₀</text>
 
   <!-- 衝突点 (電子 e-) cx = 210, cy = 140 -->
   <circle cx="210" cy="140" r="7" fill="#fbbf24"/>
-  <text x="210" y="165" fill="#fbbf24" font-size="12" font-weight="700" text-anchor="middle">電子 m_e (初速 0)</text>
+  <rect x="155" y="152" width="110" height="20" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
+  <text x="210" y="166" fill="#fbbf24" font-size="10" font-weight="700" text-anchor="middle">静止電子 m_e</text>
 
   <!-- 散乱光子 (角度 θ = 40度, 長さ 160) -->
   <line x1="210" y1="140" x2="332" y2="37" stroke="#22d3ee" stroke-width="2.5" marker-end="url(#arr-cp-scat)"/>
-  <text x="345" y="45" fill="#22d3ee" font-size="13" font-weight="700">散乱光子: p' ＝ h / λ'</text>
-  <text x="345" y="65" fill="#94a3b8" font-size="11">（エネルギーが減り波長が伸びる）</text>
+  <rect x="340" y="30" width="170" height="38" rx="4" fill="#0f172a" stroke="#22d3ee" stroke-width="1.2"/>
+  <text x="425" y="46" fill="#22d3ee" font-size="11" font-weight="700" text-anchor="middle">散乱光子: p' ＝ h / λ'</text>
+  <text x="425" y="60" fill="#cbd5e1" font-size="9" text-anchor="middle">波長が伸びる (λ' > λ₀)</text>
 
   <!-- 散乱角 θ の弧 -->
   <path d="M 270,140 A 60,60 0 0,0 256,101" fill="none" stroke="#22d3ee" stroke-width="1.5"/>
@@ -102,13 +105,14 @@ $$
 
   <!-- 反跳電子 (角度 φ = -30度, 長さ 140) -->
   <line x1="210" y1="140" x2="331" y2="210" stroke="#f43f5e" stroke-width="2.5" marker-end="url(#arr-cp-elec)"/>
-  <text x="345" y="215" fill="#f43f5e" font-size="13" font-weight="700">反跳電子: p_e ＝ m_e v</text>
+  <rect x="340" y="200" width="150" height="22" rx="4" fill="#0f172a" stroke="#f43f5e" stroke-width="1.2"/>
+  <text x="415" y="215" fill="#f43f5e" font-size="11" font-weight="700" text-anchor="middle">反跳電子: p_e ＝ m_e v</text>
 
   <!-- 反跳角 φ の弧 -->
   <path d="M 270,140 A 60,60 0 0,1 262,170" fill="none" stroke="#f43f5e" stroke-width="1.5"/>
   <text x="270" y="165" fill="#f43f5e" font-size="13" font-style="italic">φ</text>
 </svg>
-<div class="graph-caption">図: コンプトン散乱の運動量ベクトル分解（入射光子 $p_0$、散乱光子 $p'$、反跳電子 $p_e$ による2次元完全弾性衝突）</div>
+<div class="graph-caption">図: コンプトン散乱の運動量ベクトル分解（入射光子 <i>p</i>₀、散乱光子 <i>p</i>'、反跳電子 <i>p_e</i> による2次元完全弾性衝突）</div>
 </div>
 
 ### ステップ 1：運動量保存則を立てる

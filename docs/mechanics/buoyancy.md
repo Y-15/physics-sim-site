@@ -54,37 +54,46 @@ description: 高校物理の力学超頻出テーマ。水圧 P=P0+ρgh の導�
   </defs>
 
   <!-- 水槽背景 (y = 50..250) -->
-  <rect x="50" y="50" width="440" height="200" fill="rgba(14, 116, 144, 0.25)" stroke="#475569" stroke-width="2"/>
+  <rect x="50" y="50" width="440" height="200" rx="4" fill="rgba(14, 116, 144, 0.2)" stroke="#475569" stroke-width="2"/>
 
   <!-- 水面 (y = 50) -->
   <line x1="50" y1="50" x2="490" y2="50" stroke="#38bdf8" stroke-width="2.5"/>
-  <text x="60" y="42" fill="#38bdf8" font-size="12">水面（大気圧 P₀ が作用）</text>
+  <rect x="60" y="28" width="160" height="18" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="140" y="41" fill="#38bdf8" font-size="10" font-weight="600" text-anchor="middle">水面 (大気圧 P₀ が作用)</text>
 
-  <!-- 仮想水柱 (幅 80, 高さ h = 130: x = 230..310, y = 50..180) -->
-  <rect x="230" y="50" width="80" height="130" fill="rgba(56, 189, 248, 0.3)" stroke="#38bdf8" stroke-width="1.5" stroke-dasharray="4,4"/>
-  <text x="270" y="115" fill="#f8fafc" font-size="12" font-weight="700" text-anchor="middle">水柱</text>
-  <text x="270" y="132" fill="#94a3b8" font-size="11" text-anchor="middle">質量 m = ρ₀ S h</text>
+  <!-- 仮想水柱 (幅 90, 高さ h = 130: x = 200..290, y = 50..180) -->
+  <rect x="200" y="50" width="90" height="130" fill="rgba(56, 189, 248, 0.25)" stroke="#38bdf8" stroke-width="1.5" stroke-dasharray="4,4"/>
+  <rect x="210" y="80" width="70" height="34" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="245" y="94" fill="#f8fafc" font-size="11" font-weight="700" text-anchor="middle">仮想水柱</text>
+  <text x="245" y="108" fill="#94a3b8" font-size="9" text-anchor="middle">断面積 S</text>
 
-  <!-- 深さ h の寸法 -->
-  <line x1="200" y1="50" x2="200" y2="180" stroke="#fbbf24" stroke-width="1.5"/>
-  <line x1="195" y1="50" x2="205" y2="50" stroke="#fbbf24" stroke-width="1.5"/>
-  <line x1="195" y1="180" x2="205" y2="180" stroke="#fbbf24" stroke-width="1.5"/>
-  <text x="185" y="120" fill="#fbbf24" font-size="13" font-weight="700" text-anchor="end">深さ h</text>
+  <!-- 深さ h の寸法 (水柱の左側 x = 160) -->
+  <line x1="160" y1="50" x2="160" y2="180" stroke="#fbbf24" stroke-width="1.5"/>
+  <line x1="153" y1="50" x2="167" y2="50" stroke="#fbbf24" stroke-width="1.5"/>
+  <line x1="153" y1="180" x2="167" y2="180" stroke="#fbbf24" stroke-width="1.5"/>
+  <polygon points="160,50 157,58 163,58" fill="#fbbf24"/>
+  <polygon points="160,180 157,172 163,172" fill="#fbbf24"/>
+  <rect x="110" y="103" width="45" height="20" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
+  <text x="132" y="117" fill="#fbbf24" font-size="11" font-weight="700" text-anchor="middle">深さ h</text>
 
-  <!-- 水柱に働く力 -->
+  <!-- 水柱に働く3つの力 (水柱の右側 x = 320 に整然と配置して重なりを完全排除) -->
   <!-- 1. 上面を押す大気の力 P0 * S (下向き) -->
-  <line x1="270" y1="20" x2="270" y2="50" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-buoy-down)"/>
-  <text x="280" y="35" fill="#38bdf8" font-size="12">P₀ S (大気圧による力)</text>
+  <line x1="245" y1="20" x2="245" y2="50" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-buoy-down)"/>
+  <rect x="255" y="24" width="145" height="20" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="327" y="38" fill="#38bdf8" font-size="11" font-weight="700" text-anchor="middle">P₀ S (大気圧による下向きの力)</text>
 
-  <!-- 2. 水柱自身の重力 (下向き) -->
-  <line x1="270" y1="135" x2="270" y2="175" stroke="#fbbf24" stroke-width="2.5" marker-end="url(#arr-buoy-down)"/>
-  <text x="280" y="165" fill="#fbbf24" font-size="12">ρ₀ S h g (水柱の重力)</text>
+  <!-- 2. 水柱自身の重力 (重心から下向き) -->
+  <circle cx="245" cy="115" r="3.5" fill="#fbbf24"/>
+  <line x1="245" y1="115" x2="245" y2="165" stroke="#fbbf24" stroke-width="2.5" marker-end="url(#arr-buoy-down)"/>
+  <rect x="295" y="125" width="135" height="20" rx="4" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
+  <text x="362" y="139" fill="#fbbf24" font-size="11" font-weight="700" text-anchor="middle">ρ₀ S h g (水柱自身の重力)</text>
 
   <!-- 3. 底面を押し上げる水圧の力 P * S (上向き) -->
-  <line x1="270" y1="220" x2="270" y2="180" stroke="#22d3ee" stroke-width="3" marker-end="url(#arr-buoy-up)"/>
-  <text x="280" y="215" fill="#22d3ee" font-size="13" font-weight="700">P S (深さ h の水圧による力)</text>
+  <line x1="245" y1="225" x2="245" y2="180" stroke="#22d3ee" stroke-width="3" marker-end="url(#arr-buoy-up)"/>
+  <rect x="295" y="200" width="165" height="22" rx="4" fill="#0f172a" stroke="#22d3ee" stroke-width="1.2"/>
+  <text x="377" y="215" fill="#22d3ee" font-size="11" font-weight="700" text-anchor="middle">P S (深さ h での水圧による力)</text>
 </svg>
-<div class="graph-caption">図: 水柱の力のつり合いによる水圧公式の導出（$PS = P_0 S + \rho_0 S h g$）</div>
+<div class="graph-caption">図: 水柱の力のつり合いによる水圧公式の導出（<i>PS</i> = <i>P</i>₀<i>S</i> + <i>ρ</i>₀<i>Shg</i>）</div>
 </div>
 
 仮想水柱が静止しているため、鉛直方向の力のつり合いは：

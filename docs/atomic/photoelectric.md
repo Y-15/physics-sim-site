@@ -71,31 +71,31 @@ description: 光を当てると電子が飛び出す光電効果。古典波動�
   <circle cx="460" cy="190" r="5" fill="#475569"/>
 
   <!-- 入射光子 (Photon: 波束アニメーション調の正弦波) -->
-  <!-- 左から表面の電子(200, 150)へ入射 -->
   <path d="M 40,150 Q 55,135 70,150 T 100,150 T 130,150 T 160,150" fill="none" stroke="#38bdf8" stroke-width="2.5"/>
   <line x1="160" y1="150" x2="192" y2="150" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-pe-cyan)"/>
-  <text x="50" y="125" fill="#38bdf8" font-size="14" font-weight="700">光子 (Photon)</text>
-  <text x="50" y="175" fill="#38bdf8" font-size="13">E ＝ hν</text>
+  <rect x="35" y="112" width="105" height="42" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="87" y="128" fill="#38bdf8" font-size="12" font-weight="700" text-anchor="middle">光子 (Photon)</text>
+  <text x="87" y="146" fill="#cbd5e1" font-size="11" text-anchor="middle">E ＝ hν</text>
 
   <!-- 衝突・吸収点 (x=200, y=150) -->
   <circle cx="200" cy="150" r="8" fill="#fbbf24" stroke="#fff" stroke-width="1.5"/>
-  <text x="215" y="145" fill="#fbbf24" font-size="12" font-weight="700">電子が光子を吸収</text>
+  <rect x="215" y="138" width="115" height="20" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
+  <text x="272" y="152" fill="#fbbf24" font-size="10" font-weight="700" text-anchor="middle">電子が光子を吸収</text>
 
   <!-- エネルギー分配 1: 脱出エネルギー（仕事関数 W） -->
   <path d="M 200,150 L 250,195" fill="none" stroke="#f59e0b" stroke-width="2" stroke-dasharray="3,3" marker-end="url(#arr-pe-yellow)"/>
-  <rect x="255" y="180" width="160" height="42" rx="4" fill="rgba(245, 158, 11, 0.15)" stroke="#f59e0b" stroke-width="1"/>
+  <rect x="255" y="180" width="160" height="42" rx="4" fill="#0f172a" stroke="#f59e0b" stroke-width="1"/>
   <text x="265" y="198" fill="#f59e0b" font-size="12" font-weight="700">仕事関数 W (脱出コスト)</text>
-  <text x="265" y="214" fill="#94a3b8" font-size="11">束縛を断ち切るために消費</text>
+  <text x="265" y="214" fill="#cbd5e1" font-size="10">束縛を断ち切るために消費</text>
 
   <!-- エネルギー分配 2: 飛び出す光電子 (最大運動エネルギー K_max) -->
-  <!-- 左上へ飛び出す -->
   <line x1="200" y1="150" x2="110" y2="70" stroke="#f43f5e" stroke-width="3" marker-end="url(#arr-pe-rose)"/>
   <circle cx="110" cy="70" r="7" fill="#f43f5e"/>
-  <text x="110" y="55" fill="#f43f5e" font-size="14" font-weight="700">光電子 (Photoelectron)</text>
-  <text x="110" y="90" fill="#f43f5e" font-size="13" font-weight="700">K_max ＝ hν - W</text>
-  <text x="110" y="106" fill="#94a3b8" font-size="11">（余剰エネルギーが運動エネルギーに）</text>
+  <rect x="65" y="25" width="220" height="42" rx="4" fill="#0f172a" stroke="#f43f5e" stroke-width="1.2"/>
+  <text x="175" y="42" fill="#f43f5e" font-size="12" font-weight="700" text-anchor="middle">光電子 (Photoelectron)</text>
+  <text x="175" y="58" fill="#cbd5e1" font-size="10" text-anchor="middle">K_max ＝ hν − W （余剰エネルギー）</text>
 </svg>
-<div class="graph-caption">図: アインシュタインの光電効果モデル（光子 $E=h\nu$ のエネルギーが仕事関数 $W$ と光電子の運動エネルギー $K_{\max}$ に1対1で分配される）</div>
+<div class="graph-caption">図: アインシュタインの光電効果モデル（光子 <i>E</i> = <i>hν</i> のエネルギーが仕事関数 <i>W</i> と光電子の運動エネルギー <i>K</i>_max に1対1で分配される）</div>
 </div>
 
 ---

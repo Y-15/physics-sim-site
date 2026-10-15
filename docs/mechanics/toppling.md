@@ -48,8 +48,11 @@ description: 高校物理の剛体の力学最難関テーマ。水平面・斜�
 4. **静止摩擦力 $f$**（底面から水平左向き）
 
 <div class="vector-graph-card">
-<svg viewBox="0 0 540 280" xmlns="http://www.w3.org/2000/svg">
+<svg viewBox="0 0 580 300" xmlns="http://www.w3.org/2000/svg">
   <defs>
+    <pattern id="top-floor-hatch" width="8" height="8" patternTransform="rotate(45 0 0)" patternUnits="userSpaceOnUse">
+      <line x1="0" y1="0" x2="0" y2="8" stroke="#475569" stroke-width="1.2" />
+    </pattern>
     <marker id="arr-top-f" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
       <path d="M0,0 L0,6 L7,3 z" fill="#f43f5e" />
     </marker>
@@ -62,47 +65,59 @@ description: 高校物理の剛体の力学最難関テーマ。水平面・斜�
   </defs>
 
   <!-- 床 (y = 230) -->
-  <line x1="40" y1="230" x2="500" y2="230" stroke="#64748b" stroke-width="3"/>
+  <rect x="30" y="230" width="520" height="15" fill="url(#top-floor-hatch)"/>
+  <line x1="30" y1="230" x2="550" y2="230" stroke="#64748b" stroke-width="3"/>
 
-  <!-- 直方体 (幅 140, 高さ 180, 左下: x=180, 右下: x=320) -->
-  <rect x="180" y="50" width="140" height="180" rx="3" fill="#1e293b" stroke="#38bdf8" stroke-width="2.5"/>
+  <!-- 直方体 (幅 140, 高さ 180, 左下: x=190, 右下: x=330) -->
+  <rect x="190" y="50" width="140" height="180" rx="4" fill="#1e293b" stroke="#38bdf8" stroke-width="2.5"/>
 
   <!-- 寸法表示 w (幅) -->
-  <line x1="180" y1="245" x2="320" y2="245" stroke="#fbbf24" stroke-width="1.5"/>
-  <line x1="180" y1="240" x2="180" y2="250" stroke="#fbbf24" stroke-width="1.5"/>
-  <line x1="320" y1="240" x2="320" y2="250" stroke="#fbbf24" stroke-width="1.5"/>
-  <text x="250" y="260" fill="#fbbf24" font-size="12" font-weight="700" text-anchor="middle">幅 w</text>
+  <line x1="190" y1="255" x2="330" y2="255" stroke="#fbbf24" stroke-width="1.5"/>
+  <line x1="190" y1="250" x2="190" y2="260" stroke="#fbbf24" stroke-width="1.5"/>
+  <line x1="330" y1="250" x2="330" y2="260" stroke="#fbbf24" stroke-width="1.5"/>
+  <rect x="235" y="265" width="50" height="20" rx="4" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
+  <text x="260" y="279" fill="#fbbf24" font-size="11" font-weight="700" text-anchor="middle">幅 w</text>
 
-  <!-- 重心 G (x = 250, y = 140) -->
-  <circle cx="250" cy="140" r="5" fill="#fbbf24"/>
-  <text x="260" y="135" fill="#fbbf24" font-size="12" font-weight="700">重心 G</text>
-
-  <!-- 鉛直中心線 -->
-  <line x1="250" y1="50" x2="250" y2="230" stroke="#475569" stroke-width="1" stroke-dasharray="3,3"/>
+  <!-- 重心 G (x = 260, y = 140) -->
+  <line x1="260" y1="50" x2="260" y2="230" stroke="#475569" stroke-width="1" stroke-dasharray="3,3"/>
+  <circle cx="260" cy="140" r="5" fill="#fbbf24"/>
+  <rect x="270" y="125" width="60" height="20" rx="4" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
+  <text x="300" y="139" fill="#fbbf24" font-size="11" font-weight="700" text-anchor="middle">重心 G</text>
 
   <!-- 重力 Mg (真下) -->
-  <line x1="250" y1="140" x2="250" y2="220" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-top-g)"/>
-  <text x="258" y="195" fill="#38bdf8" font-size="12" font-weight="700">Mg</text>
+  <line x1="260" y1="140" x2="260" y2="215" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-top-g)"/>
+  <rect x="215" y="170" width="38" height="20" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="234" y="184" fill="#38bdf8" font-size="11" font-weight="700" text-anchor="middle">Mg</text>
 
-  <!-- 外力 F (高さ h_F = 80, y = 150) -->
-  <line x1="100" y1="100" x2="180" y2="100" stroke="#f43f5e" stroke-width="3" marker-end="url(#arr-top-f)"/>
-  <text x="90" y="95" fill="#f43f5e" font-size="13" font-weight="700">外力 F</text>
-  <text x="135" y="115" fill="#94a3b8" font-size="11">高さ h_F</text>
+  <!-- 外力 F (高さ h_F, y = 100) -->
+  <line x1="100" y1="100" x2="190" y2="100" stroke="#f43f5e" stroke-width="3" marker-end="url(#arr-top-f)"/>
+  <rect x="35" y="88" width="60" height="22" rx="4" fill="#0f172a" stroke="#f43f5e" stroke-width="1.2"/>
+  <text x="65" y="103" fill="#f43f5e" font-size="11" font-weight="700" text-anchor="middle">外力 F</text>
 
-  <!-- 垂直抗力 N (中心から x_N だけ右にシフト: x = 290) -->
-  <line x1="295" y1="230" x2="295" y2="160" stroke="#10b981" stroke-width="3" marker-end="url(#arr-top-n)"/>
-  <circle cx="295" cy="230" r="4" fill="#10b981"/>
-  <text x="305" y="175" fill="#10b981" font-size="13" font-weight="700">垂直抗力 N</text>
+  <!-- 外力の高さ h_F 寸法線 -->
+  <line x1="175" y1="100" x2="175" y2="230" stroke="#94a3b8" stroke-width="1" stroke-dasharray="3,2"/>
+  <line x1="170" y1="100" x2="180" y2="100" stroke="#94a3b8" stroke-width="1"/>
+  <line x1="170" y1="230" x2="180" y2="230" stroke="#94a3b8" stroke-width="1"/>
+  <rect x="135" y="155" width="55" height="18" rx="3" fill="#0f172a" stroke="#64748b" stroke-width="1"/>
+  <text x="162" y="168" fill="#cbd5e1" font-size="10" text-anchor="middle">高さ h_F</text>
+
+  <!-- 垂直抗力 N (中心から x_N だけ右にシフト: x = 305) -->
+  <circle cx="305" cy="230" r="4.5" fill="#10b981"/>
+  <line x1="305" y1="230" x2="305" y2="155" stroke="#10b981" stroke-width="3" marker-end="url(#arr-top-n)"/>
+  <rect x="315" y="165" width="85" height="22" rx="4" fill="#0f172a" stroke="#10b981" stroke-width="1.2"/>
+  <text x="357" y="180" fill="#10b981" font-size="11" font-weight="700" text-anchor="middle">垂直抗力 N</text>
 
   <!-- シフト量 x_N 表示 -->
-  <line x1="250" y1="215" x2="295" y2="215" stroke="#10b981" stroke-width="1.5"/>
-  <text x="272" y="210" fill="#10b981" font-size="11" font-weight="700" text-anchor="middle">x_N</text>
+  <line x1="260" y1="210" x2="305" y2="210" stroke="#10b981" stroke-width="1.5"/>
+  <rect x="270" y="196" width="28" height="16" rx="3" fill="#0f172a" stroke="#10b981" stroke-width="1"/>
+  <text x="284" y="208" fill="#10b981" font-size="10" font-weight="700" text-anchor="middle">x_N</text>
 
-  <!-- 右下端 A (転倒の回転軸: x = 320, y = 230) -->
-  <circle cx="320" cy="230" r="5" fill="#f43f5e"/>
-  <text x="330" y="235" fill="#f43f5e" font-size="13" font-weight="700">点 A（右下端）</text>
+  <!-- 右下端 A (転倒の回転軸: x = 330, y = 230) -->
+  <circle cx="330" cy="230" r="5" fill="#f43f5e"/>
+  <rect x="345" y="220" width="100" height="22" rx="4" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
+  <text x="395" y="235" fill="#f43f5e" font-size="11" font-weight="700" text-anchor="middle">支点 A (右下端)</text>
 </svg>
-<div class="graph-caption">図: 直方体に働く力と垂直抗力 $N$ の作用点シフト（外力 $F$ の時計回りモーメントに対抗するため、抗力 $N$ が中心から $x_N$ だけ右へ移動して反時計回りモーメントを作る）</div>
+<div class="graph-caption">図: 直方体に働く力と垂直抗力 <i>N</i> の作用点シフト（外力 <i>F</i> の時計回りモーメントに対抗するため、抗力 <i>N</i> が中心から <i>x_N</i> だけ右へ移動して反時計回りモーメントを作る）</div>
 </div>
 
 ### なぜ垂直抗力は右へずれるのか？

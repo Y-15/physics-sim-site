@@ -64,11 +64,13 @@ description: 高校物理の電磁気学最頻出テーマ。右ねじの法則�
 
   <!-- 磁場矢印 (反時計回り) -->
   <line x1="370" y1="120" x2="370" y2="105" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-mag-circ)"/>
-  <text x="380" y="115" fill="#38bdf8" font-size="13" font-weight="700">磁場 H ＝ I / 2πr</text>
+  <rect x="380" y="100" width="130" height="20" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="445" y="114" fill="#38bdf8" font-size="11" font-weight="700" text-anchor="middle">磁場 H ＝ I / (2πr)</text>
 
   <!-- 半径 r の寸法線 -->
   <line x1="270" y1="120" x2="370" y2="120" stroke="#fbbf24" stroke-width="1.5"/>
-  <text x="320" y="140" fill="#fbbf24" font-size="12" font-weight="700">距離 r</text>
+  <rect x="305" y="128" width="45" height="18" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
+  <text x="327" y="141" fill="#fbbf24" font-size="10" font-weight="700" text-anchor="middle">距離 r</text>
 </svg>
 <div class="graph-caption">図: 直線電流がつくる同心円状の磁場（右手の親指を電流に向けると、残り4本の指が磁場の向きを指す）</div>
 </div>
@@ -145,24 +147,29 @@ $$
 
   <!-- 距離 r -->
   <line x1="160" y1="120" x2="360" y2="120" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="3,3"/>
-  <text x="260" y="112" fill="#94a3b8" font-size="12" text-anchor="middle">距離 r</text>
+  <rect x="235" y="110" width="50" height="18" rx="3" fill="#0f172a" stroke="#64748b" stroke-width="1"/>
+  <text x="260" y="123" fill="#cbd5e1" font-size="10" text-anchor="middle">距離 r</text>
 
   <!-- 電流1が導線2の位置につくる磁場 B1 (奥向き ⊗) -->
   <circle cx="360" cy="120" r="14" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
   <text x="360" y="125" fill="#38bdf8" font-size="13" font-weight="700" text-anchor="middle">⊗</text>
-  <text x="385" y="125" fill="#38bdf8" font-size="11">B₁ ＝ μ₀ I₁ / 2πr</text>
+  <rect x="380" y="112" width="125" height="20" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="442" y="126" fill="#38bdf8" font-size="10" font-weight="600" text-anchor="middle">B₁ ＝ μ₀ I₁ / (2πr)</text>
 
   <!-- 導線2が受ける力 F (フレミング左手: 左向き引力) -->
   <line x1="360" y1="160" x2="280" y2="160" stroke="#f43f5e" stroke-width="3" marker-end="url(#arr-par-f)"/>
-  <text x="300" y="180" fill="#f43f5e" font-size="13" font-weight="700">引力 F</text>
+  <rect x="290" y="172" width="55" height="18" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
+  <text x="317" y="185" fill="#f43f5e" font-size="10" font-weight="700" text-anchor="middle">引力 F</text>
 
   <!-- 導線1が受ける反作用の力 F (右向き引力) -->
   <line x1="160" y1="160" x2="240" y2="160" stroke="#f43f5e" stroke-width="3" marker-end="url(#arr-par-f)"/>
-  <text x="185" y="180" fill="#f43f5e" font-size="13" font-weight="700">引力 F</text>
+  <rect x="180" y="172" width="55" height="18" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
+  <text x="207" y="185" fill="#f43f5e" font-size="10" font-weight="700" text-anchor="middle">引力 F</text>
 
-  <text x="260" y="240" fill="#f8fafc" font-size="13" font-weight="700" text-anchor="middle">【同方向の電流は互いに引き合う！】</text>
+  <rect x="140" y="228" width="240" height="24" rx="4" fill="#0f172a" stroke="#fbbf24" stroke-width="1.2"/>
+  <text x="260" y="244" fill="#fbbf24" font-size="12" font-weight="700" text-anchor="middle">【同方向の電流は互いに引き合う！】</text>
 </svg>
-<div class="graph-caption">図: 平行電流間に働く力（電流 $I_1$ がつくる磁場 $B_1$ の中を流れる電流 $I_2$ がフレミング左手の法則で引力を受ける）</div>
+<div class="graph-caption">図: 平行電流間に働く力（電流 <i>I</i>₁ がつくる磁場 <i>B</i>₁ の中を流れる電流 <i>I</i>₂ がフレミング左手の法則で引力を受ける）</div>
 </div>
 
 ### 単位長さあたりに働く力 $f$ の導出

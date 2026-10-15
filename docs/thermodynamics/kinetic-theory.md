@@ -93,21 +93,24 @@ description: 高校物理の熱力学。気体分子運動論の完全導出（�
   <text x="235" y="260" fill="#fbbf24" font-size="13" font-weight="700">長さ L</text>
 
   <!-- 分子と速度ベクトル -->
-  <!-- 分子球 (cx=220, cy=170) -->
+  <!-- 分子球 (cx=210, cy=170) -->
   <circle cx="210" cy="170" r="6" fill="#f43f5e"/>
-  <text x="180" y="165" fill="#f43f5e" font-size="12" font-weight="700">分子 m</text>
+  <rect x="150" y="152" width="55" height="18" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
+  <text x="177" y="165" fill="#f43f5e" font-size="10" font-weight="700" text-anchor="middle">分子 m</text>
 
   <!-- 速度ベクトル vx (x軸平行) -->
   <line x1="216" y1="170" x2="280" y2="170" stroke="#f43f5e" stroke-width="2.5" marker-end="url(#arr-vx)"/>
-  <text x="235" y="162" fill="#f43f5e" font-size="13" font-weight="700">v_x</text>
+  <rect x="235" y="148" width="30" height="18" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
+  <text x="250" y="161" fill="#f43f5e" font-size="11" font-weight="700" text-anchor="middle">v_x</text>
 
   <!-- 反射と往復の表現 -->
   <line x1="280" y1="170" x2="290" y2="170" stroke="#f43f5e" stroke-width="1.5" stroke-dasharray="2,2"/>
   <circle cx="290" cy="170" r="3" fill="#38bdf8"/>
-  <text x="250" y="200" fill="#94a3b8" font-size="11">衝突による力積: 2m v_x</text>
-  <text x="250" y="215" fill="#94a3b8" font-size="11">往復距離: 2L</text>
+  <rect x="220" y="188" width="165" height="34" rx="4" fill="#0f172a" stroke="#475569" stroke-width="1"/>
+  <text x="302" y="202" fill="#cbd5e1" font-size="10" text-anchor="middle">壁との衝突力積: 2m v_x</text>
+  <text x="302" y="216" fill="#94a3b8" font-size="10" text-anchor="middle">1往復の距離: 2L</text>
 </svg>
-<div class="graph-caption">図: 気体分子運動論の立方体容器モデル（一辺 $L$、体積 $V=L^3$、壁 $\text{S}$ に垂直衝突する分子の力積）</div>
+<div class="graph-caption">図: 気体分子運動論の立方体容器モデル（一辺 <i>L</i>、体積 <i>V</i> = <i>L</i>³、壁 S に垂直衝突する分子の力積）</div>
 </div>
 
 ---

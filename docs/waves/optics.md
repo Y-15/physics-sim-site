@@ -90,10 +90,12 @@ description: 高校物理の幾何光学。スネルの屈折の法則、臨界�
 
   <!-- 境界通過中の車輪バー: 左輪が先に突入して減速！ -->
   <circle cx="250" cy="125" r="4" fill="#f43f5e"/>
-  <text x="280" y="110" fill="#f43f5e" font-size="12" font-weight="700">左輪が先に減速！</text>
-  <text x="330" y="145" fill="#38bdf8" font-size="12">右輪が先行するため法線側に曲がる</text>
+  <rect x="260" y="98" width="120" height="20" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
+  <text x="320" y="112" fill="#f43f5e" font-size="10" font-weight="700" text-anchor="middle">左輪が先に進入し減速！</text>
+  <rect x="290" y="132" width="220" height="20" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="400" y="146" fill="#38bdf8" font-size="10" text-anchor="middle">右輪が先行するため法線側へ曲がる</text>
 </svg>
-<div class="graph-caption">図: 車輪アナロジーによる光の屈折メカニズム（遅い媒質に先に入った側が減速し、波面が法線側へ曲がる：$n_1 \sin\theta_1 = n_2 \sin\theta_2$）</div>
+<div class="graph-caption">図: 車輪アナロジーによる光の屈折メカニズム（遅い媒質に先に入った側が減速し、波面が法線側へ曲がる：<i>n</i>₁ sin <i>θ</i>₁ = <i>n</i>₂ sin <i>θ</i>₂）</div>
 </div>
 
 ---

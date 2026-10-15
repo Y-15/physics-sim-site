@@ -131,13 +131,16 @@ $$
 
   <!-- 動作点マーク -->
   <circle cx="220" cy="148" r="6" fill="#f43f5e" stroke="#fff" stroke-width="1.5" />
-  <text x="235" y="152" fill="#f43f5e" font-size="14" font-weight="700">動作点 (V_L, I_L)</text>
+  <rect x="230" y="138" width="130" height="22" rx="4" fill="#0f172a" stroke="#f43f5e" stroke-width="1.2"/>
+  <text x="295" y="153" fill="#f43f5e" font-size="12" font-weight="700" text-anchor="middle">動作点 (V_L, I_L)</text>
 
   <!-- 軸上の交点ラベル -->
-  <text x="210" y="290" fill="#f43f5e" font-size="13" font-weight="700">V_L</text>
-  <text x="25" y="152" fill="#f43f5e" font-size="13" font-weight="700">I_L</text>
+  <rect x="195" y="275" width="50" height="18" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
+  <text x="220" y="288" fill="#f43f5e" font-size="11" font-weight="700" text-anchor="middle">V_L</text>
+  <rect x="10" y="139" width="45" height="18" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
+  <text x="32" y="152" fill="#f43f5e" font-size="11" font-weight="700" text-anchor="middle">I_L</text>
 </svg>
-<div class="graph-caption">図: 電球の非線形特性曲線 $I=f(V)$ と外部回路の負荷線の交点作図法（動作点で実際の電圧 $V_L$・電流 $I_L$ が決定される）</div>
+<div class="graph-caption">図: 電球の非線形特性曲線 <i>I</i> = <i>f</i>(<i>V</i>) と外部回路の負荷線の交点作図法（動作点で実際の電圧 <i>V_L</i>・電流 <i>I_L</i> が決定される）</div>
 </div>
 
 ### (5) ホイートストンブリッジ
@@ -239,13 +242,16 @@ $$
 
   <!-- 電流の向きの矢印表示 (赤) -->
   <line x1="225" y1="65" x2="255" y2="65" stroke="#f43f5e" stroke-width="2" marker-end="url(#arr-current)" />
-  <text x="240" y="80" fill="#f43f5e" font-size="12" font-weight="700" text-anchor="middle">I₁ →</text>
+  <rect x="225" y="70" width="35" height="18" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
+  <text x="242" y="83" fill="#f43f5e" font-size="11" font-weight="700" text-anchor="middle">I₁ →</text>
 
   <line x1="325" y1="65" x2="295" y2="65" stroke="#f43f5e" stroke-width="2" marker-end="url(#arr-current)" />
-  <text x="310" y="80" fill="#f43f5e" font-size="12" font-weight="700" text-anchor="middle">← I₂</text>
+  <rect x="295" y="70" width="35" height="18" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
+  <text x="312" y="83" fill="#f43f5e" font-size="11" font-weight="700" text-anchor="middle">← I₂</text>
 
   <line x1="250" y1="165" x2="250" y2="190" stroke="#f43f5e" stroke-width="2" marker-end="url(#arr-current)" />
-  <text x="235" y="180" fill="#f43f5e" font-size="12" font-weight="700">↓ I₃</text>
+  <rect x="215" y="168" width="30" height="18" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
+  <text x="230" y="181" fill="#f43f5e" font-size="11" font-weight="700" text-anchor="middle">↓ I₃</text>
 </svg>
 <div class="graph-caption">回路図: 2電源・3抵抗の回路網（キルヒホッフの第1法則・第2法則の適用回路）</div>
 </div>

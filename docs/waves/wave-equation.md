@@ -78,10 +78,11 @@ description: 高校物理の波動分野。波の基本式（v=fλ）、波の�
   <line x1="220" y1="145" x2="220" y2="120" stroke="#10b981" stroke-width="2" marker-end="url(#arr-med-up)"/>
 
   <!-- 媒質の単振動説明 -->
-  <text x="60" y="205" fill="#f43f5e" font-size="13" font-weight="700">各媒質は x 地点に留まり、上下に単振動 ↕</text>
-  <text x="60" y="222" fill="#94a3b8" font-size="11">y(t) = A sin(ωt) （※媒質そのものは横へ移動しない！）</text>
+  <rect x="50" y="195" width="410" height="42" rx="5" fill="#0f172a" stroke="#f43f5e" stroke-width="1.2"/>
+  <text x="255" y="212" fill="#f43f5e" font-size="12" font-weight="700" text-anchor="middle">各媒質は x 地点に留まり、上下に単振動 ↕</text>
+  <text x="255" y="228" fill="#cbd5e1" font-size="11" text-anchor="middle">y(t) = A sin(ωt) （※媒質そのものは横へ進まない！）</text>
 </svg>
-<div class="graph-caption">図: 正弦波の伝播（波形パターンが速さ $v$ で進行）と媒質の上下単振動（その場に留まり $y=A\sin\omega t$ で振動）の対比</div>
+<div class="graph-caption">図: 正弦波の伝播（波形パターンが速さ <i>v</i> で進行）と媒質の上下単振動（その場に留まり <i>y</i> = <i>A</i> sin <i>ωt</i> で振動）の対比</div>
 </div>
 
 ### 波の式が $\left(\frac{t}{T} - \frac{x}{\lambda}\right)$ と「引き算」になる理由

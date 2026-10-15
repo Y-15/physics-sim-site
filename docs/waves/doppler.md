@@ -69,20 +69,23 @@ description: 高校物理の波動最頻出テーマ。音源移動による波�
   <line x1="120" y1="140" x2="440" y2="140" stroke="#38bdf8" stroke-width="1.5"/>
   <line x1="120" y1="135" x2="120" y2="145" stroke="#38bdf8" stroke-width="1.5"/>
   <line x1="440" y1="135" x2="440" y2="145" stroke="#38bdf8" stroke-width="1.5"/>
-  <text x="280" y="158" fill="#38bdf8" font-size="12" text-anchor="middle">音波が進んだ全距離: V T₀</text>
+  <rect x="200" y="146" width="160" height="20" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="280" y="160" fill="#38bdf8" font-size="11" text-anchor="middle">音波が進んだ全距離: V T₀</text>
 
   <!-- 1周期 T0 後の音源位置 (x = 220: 距離 vs*T0) -->
   <line x1="120" y1="70" x2="220" y2="70" stroke="#fbbf24" stroke-width="2" marker-end="url(#arr-dop-s)"/>
   <circle cx="220" cy="120" r="8" fill="#fbbf24"/>
-  <text x="220" y="55" fill="#fbbf24" font-size="12" font-weight="700" text-anchor="middle">音源の前進: v_s T₀</text>
+  <rect x="150" y="42" width="140" height="20" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
+  <text x="220" y="56" fill="#fbbf24" font-size="11" font-weight="700" text-anchor="middle">音源の前進: v_s T₀</text>
 
   <!-- 圧縮された前方波長 λ' (x = 220 から 440) -->
   <line x1="220" y1="185" x2="440" y2="185" stroke="#f43f5e" stroke-width="2.5"/>
   <line x1="220" y1="178" x2="220" y2="192" stroke="#f43f5e" stroke-width="2"/>
   <line x1="440" y1="178" x2="440" y2="192" stroke="#f43f5e" stroke-width="2"/>
-  <text x="330" y="205" fill="#f43f5e" font-size="13" font-weight="700" text-anchor="middle">圧縮された前方波長 λ' ＝ (V - v_s) T₀</text>
+  <rect x="205" y="196" width="250" height="22" rx="4" fill="#0f172a" stroke="#f43f5e" stroke-width="1.2"/>
+  <text x="330" y="211" fill="#f43f5e" font-size="11" font-weight="700" text-anchor="middle">圧縮された前方波長 λ' ＝ (V − v_s) T₀</text>
 </svg>
-<div class="graph-caption">図: 音源が動くときの波長短縮の幾何的導出（音波先頭 $VT_0$ から音源の前進距離 $v_s T_0$ を引いた残り幅に1波が収まる）</div>
+<div class="graph-caption">図: 音源が動くときの波長短縮の幾何的導出（音波先頭 <i>VT</i>₀ から音源の前進距離 <i>v_s T</i>₀ を引いた残り幅に1波が収まる）</div>
 </div>
 
 * **前方波長 $\lambda'$**:
@@ -174,30 +177,34 @@ $$f' = \frac{(V + w) - v_o}{(V + w) - v_s} f_0$$
 
   <!-- 音源 S (x = 180, y = 50) -->
   <circle cx="180" cy="50" r="7" fill="#fbbf24"/>
-  <text x="180" y="35" fill="#fbbf24" font-size="12" font-weight="700" text-anchor="middle">音源 S</text>
+  <rect x="150" y="22" width="60" height="18" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
+  <text x="180" y="35" fill="#fbbf24" font-size="10" font-weight="700" text-anchor="middle">音源 S</text>
 
   <!-- 音源の水平速度 vs (長さ 80) -->
   <line x1="180" y1="50" x2="260" y2="50" stroke="#fbbf24" stroke-width="2.5" marker-end="url(#arr-vs-diag)"/>
-  <text x="240" y="40" fill="#fbbf24" font-size="12" font-weight="700">速度 v_s</text>
+  <rect x="225" y="22" width="65" height="18" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
+  <text x="257" y="35" fill="#fbbf24" font-size="10" font-weight="700" text-anchor="middle">速度 v_s</text>
 
   <!-- 観測者 O (x = 340, y = 150) -->
   <circle cx="340" cy="150" r="7" fill="#22c55e"/>
-  <text x="355" y="155" fill="#22c55e" font-size="13" font-weight="700">観測者 O</text>
+  <rect x="355" y="140" width="75" height="20" rx="3" fill="#0f172a" stroke="#22c55e" stroke-width="1"/>
+  <text x="392" y="154" fill="#22c55e" font-size="11" font-weight="700" text-anchor="middle">観測者 O</text>
 
   <!-- 視線方向 (S と O を結ぶ線: 角度 θ) -->
-  <!-- dx = 160, dy = 100 -> 角度約 32度 -->
   <line x1="180" y1="50" x2="340" y2="150" stroke="#38bdf8" stroke-width="1.5" stroke-dasharray="4,4"/>
-  <text x="270" y="115" fill="#38bdf8" font-size="12">視線方向（音波の飛ぶ向き）</text>
+  <rect x="245" y="112" width="150" height="20" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="320" y="126" fill="#38bdf8" font-size="10" text-anchor="middle">視線方向 (音波の飛ぶ向き)</text>
 
   <!-- 視線成分 vs cos θ (投影ベクトル) -->
   <line x1="180" y1="50" x2="248" y2="92" stroke="#f43f5e" stroke-width="3" marker-end="url(#arr-diag)"/>
-  <text x="200" y="95" fill="#f43f5e" font-size="13" font-weight="700">v_s cos θ</text>
+  <rect x="180" y="85" width="80" height="20" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
+  <text x="220" y="99" fill="#f43f5e" font-size="11" font-weight="700" text-anchor="middle">v_s cos θ</text>
 
   <!-- 角度 θ の弧 -->
   <path d="M 220,50 A 40,40 0 0,1 214,71" fill="none" stroke="#fbbf24" stroke-width="1.5"/>
   <text x="228" y="65" fill="#fbbf24" font-size="12" font-style="italic">θ</text>
 </svg>
-<div class="graph-caption">図: 斜めドップラー効果の分解（音源速度 $v_s$ を「音波が観測者へ向かう視線方向」に正射影した成分 $v_s \cos\theta$ を用いる）</div>
+<div class="graph-caption">図: 斜めドップラー効果の分解（音源速度 <i>v_s</i> を「音波が観測者へ向かう視線方向」に正射影した成分 <i>v_s</i> cos <i>θ</i> を用いる）</div>
 </div>
 
 ドップラー効果を引き起こすのは、**「音源と観測者を結ぶ直線（視線方向）に沿った速度成分」だけ**です！

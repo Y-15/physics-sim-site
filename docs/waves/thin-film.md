@@ -105,13 +105,16 @@ description: 高校物理の光の干渉最頻出分野。固定端反射によ�
   <!-- 同波面垂線 (点 A から光線2の反射光へ下ろした垂線の足 点 D) -->
   <line x1="180" y1="90" x2="240" y2="45" stroke="#fbbf24" stroke-width="1.5" stroke-dasharray="3,3"/>
   <circle cx="240" cy="45" r="3" fill="#fbbf24"/>
-  <text x="245" y="40" fill="#fbbf24" font-size="11">点 D (等波面)</text>
+  <rect x="245" y="28" width="85" height="18" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
+  <text x="287" y="41" fill="#fbbf24" font-size="10" font-weight="600" text-anchor="middle">点 D (等波面)</text>
 
   <!-- 角度表示 -->
-  <text x="160" y="65" fill="#38bdf8" font-size="12">入射角 i</text>
-  <text x="190" y="125" fill="#38bdf8" font-size="12">屈折角 r</text>
+  <rect x="135" y="52" width="60" height="18" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="165" y="65" fill="#38bdf8" font-size="10" font-weight="600" text-anchor="middle">入射角 i</text>
+  <rect x="180" y="112" width="60" height="18" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="210" y="125" fill="#38bdf8" font-size="10" font-weight="600" text-anchor="middle">屈折角 r</text>
 </svg>
-<div class="graph-caption">図: 薄膜干渉の光路差作図（屈折率 $n$ の膜内を進む光学距離 $n(\text{AB} + \text{BC})$ と空気中を進む距離 $\text{AD}$ の差が $2nd\cos r$ となる）</div>
+<div class="graph-caption">図: 薄膜干渉の光路差作図（屈折率 <i>n</i> の膜内を進む光学距離 <i>n</i>(AB + BC) と空気中を進む距離 AD の差が 2<i>nd</i> cos <i>r</i> となる）</div>
 </div>
 
 空気中での幾何学的経路差に屈折率 $n$ を乗じた**光学距離（光路長）の差 $\Delta$** は、スネルの法則 $\sin i = n \sin r$ を用いて次のように極めて美しくまとまります：
@@ -159,21 +162,25 @@ $$2Rd \approx r^2 \implies \boxed{d \approx \frac{r^2}{2R}}$$
 
   <!-- 接触点 O (x = 270, y = 170) -->
   <circle cx="270" cy="170" r="5" fill="#f43f5e"/>
-  <text x="270" y="195" fill="#f43f5e" font-size="13" font-weight="700" text-anchor="middle">接触点 O (d = 0, 暗環)</text>
+  <rect x="185" y="185" width="170" height="22" rx="4" fill="#0f172a" stroke="#f43f5e" stroke-width="1.2"/>
+  <text x="270" y="200" fill="#f43f5e" font-size="11" font-weight="700" text-anchor="middle">接触点 O (d = 0, 中心暗斑)</text>
 
   <!-- 任意位置 r (x = 380, y = 170) -->
   <line x1="270" y1="170" x2="380" y2="170" stroke="#fbbf24" stroke-width="1.5"/>
-  <text x="325" y="185" fill="#fbbf24" font-size="12" font-weight="700" text-anchor="middle">半径 r</text>
+  <rect x="305" y="172" width="45" height="18" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
+  <text x="327" y="185" fill="#fbbf24" font-size="10" font-weight="700" text-anchor="middle">半径 r</text>
 
   <!-- 空気層厚さ d (x = 380 でのレンズと板の間隔) -->
   <line x1="380" y1="170" x2="380" y2="150" stroke="#10b981" stroke-width="2"/>
-  <text x="390" y="162" fill="#10b981" font-size="12" font-weight="700">d ＝ r² / 2R</text>
+  <rect x="390" y="150" width="100" height="20" rx="3" fill="#0f172a" stroke="#10b981" stroke-width="1"/>
+  <text x="440" y="164" fill="#10b981" font-size="11" font-weight="700" text-anchor="middle">d ≈ r² / (2R)</text>
 
   <!-- 反射光の位相判定 -->
-  <text x="110" y="60" fill="#38bdf8" font-size="12">① レンズ下面反射: ガラス→空気 (位相不変 0)</text>
-  <text x="110" y="80" fill="#f43f5e" font-size="12">② ガラス板上面反射: 空気→ガラス (位相 π 反転！)</text>
+  <rect x="80" y="38" width="380" height="52" rx="5" fill="#0f172a" stroke="#334155" stroke-width="1.2"/>
+  <text x="95" y="58" fill="#38bdf8" font-size="11" font-weight="600">① レンズ下面反射: ガラス → 空気（位相変化なし 0）</text>
+  <text x="95" y="78" fill="#f43f5e" font-size="11" font-weight="700">② 平板ガラス上面反射: 空気 → ガラス（位相 π 反転！）</text>
 </svg>
-<div class="graph-caption">図: ニュートンリングの空気層厚さ近似（$d \approx \frac{r^2}{2R}$）と2つの境界面での位相判定</div>
+<div class="graph-caption">図: ニュートンリングの空気層厚さ近似（<i>d</i> ≈ <i>r</i>² / 2<i>R</i>）と2つの境界面での位相判定</div>
 </div>
 
 ### (2) 干渉条件と明環・暗環の半径

@@ -85,10 +85,12 @@ description: 高校物理の波動分野。ヤングの二重スリット実験�
 
   <!-- 光路 l1, l2 -->
   <line x1="150" y1="102" x2="420" y2="60" stroke="#38bdf8" stroke-width="2"/>
-  <text x="270" y="75" fill="#38bdf8" font-size="12">光路 l₁</text>
+  <rect x="250" y="66" width="60" height="18" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="280" y="79" fill="#38bdf8" font-size="11" font-weight="600" text-anchor="middle">光路 l₁</text>
 
   <line x1="150" y1="138" x2="420" y2="60" stroke="#22d3ee" stroke-width="2"/>
-  <text x="270" y="112" fill="#22d3ee" font-size="12">光路 l₂</text>
+  <rect x="250" y="103" width="60" height="18" rx="3" fill="#0f172a" stroke="#22d3ee" stroke-width="1"/>
+  <text x="280" y="116" fill="#22d3ee" font-size="11" font-weight="600" text-anchor="middle">光路 l₂</text>
 
   <!-- スクリーン右側の明暗縞プレビュー (x = 470..500) -->
   <g transform="translate(470, 20)">
@@ -107,9 +109,10 @@ description: 高校物理の波動分野。ヤングの二重スリット実験�
   <line x1="150" y1="210" x2="420" y2="210" stroke="#94a3b8" stroke-width="1.5"/>
   <line x1="150" y1="205" x2="150" y2="215" stroke="#94a3b8" stroke-width="1.5"/>
   <line x1="420" y1="205" x2="420" y2="215" stroke="#94a3b8" stroke-width="1.5"/>
-  <text x="285" y="228" fill="#94a3b8" font-size="13" font-weight="700" text-anchor="middle">距離 L</text>
+  <rect x="255" y="200" width="60" height="20" rx="3" fill="#0f172a" stroke="#64748b" stroke-width="1"/>
+  <text x="285" y="214" fill="#cbd5e1" font-size="11" font-weight="600" text-anchor="middle">距離 L</text>
 </svg>
-<div class="graph-caption">図: ヤングの二重スリット実験（スリット間隔 $d$、スクリーン距離 $L$、経路差 $\Delta l = l_2 - l_1 \approx d\frac{x}{L}$ による明暗干渉縞の形成）</div>
+<div class="graph-caption">図: ヤングの二重スリット実験（スリット間隔 <i>d</i>、スクリーン距離 <i>L</i>、経路差 Δ<i>l</i> = <i>l</i>₂ − <i>l</i>₁ ≈ <i>dx</i>/<i>L</i> による明暗干渉縞の形成）</div>
 </div>
 
 ---

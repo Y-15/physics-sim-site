@@ -112,25 +112,30 @@ $$\frac{1.4924 \times 10^{-10}\,\text{J}}{1.6022 \times 10^{-13}\,\text{J/MeV}} 
 
   <!-- ピーク: 鉄56 (x = 170, y = 60) -->
   <circle cx="170" cy="60" r="6" fill="#f43f5e"/>
-  <text x="170" y="45" fill="#f43f5e" font-size="14" font-weight="700" text-anchor="middle">⁵⁶Fe (最安定！約 8.8 MeV)</text>
+  <rect x="75" y="30" width="190" height="22" rx="4" fill="#0f172a" stroke="#f43f5e" stroke-width="1.2"/>
+  <text x="170" y="45" fill="#f43f5e" font-size="12" font-weight="700" text-anchor="middle">⁵⁶Fe (最安定！約 8.8 MeV)</text>
 
   <!-- ヘリウム4の局所ピーク (x = 85, y = 105) -->
   <circle cx="85" cy="105" r="5" fill="#fbbf24"/>
-  <text x="95" y="115" fill="#fbbf24" font-size="11">⁴He (α粒子)</text>
+  <rect x="92" y="102" width="75" height="18" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
+  <text x="129" y="115" fill="#fbbf24" font-size="10" font-weight="600" text-anchor="middle">⁴He (α粒子)</text>
 
   <!-- ウラン235 (x = 460, y = 95) -->
   <circle cx="460" cy="95" r="5" fill="#10b981"/>
-  <text x="460" y="80" fill="#10b981" font-size="12" font-weight="700" text-anchor="middle">²³⁵U (約 7.6 MeV)</text>
+  <rect x="390" y="66" width="140" height="20" rx="3" fill="#0f172a" stroke="#10b981" stroke-width="1"/>
+  <text x="460" y="80" fill="#10b981" font-size="11" font-weight="700" text-anchor="middle">²³⁵U (約 7.6 MeV)</text>
 
   <!-- 領域矢印 1: 核融合 (左側から右へピークに向かう) -->
   <line x1="80" y1="170" x2="150" y2="100" stroke="#fbbf24" stroke-width="2"/>
-  <text x="70" y="190" fill="#fbbf24" font-size="12" font-weight="700">【核融合】軽核が結合</text>
+  <rect x="50" y="178" width="135" height="20" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
+  <text x="117" y="192" fill="#fbbf24" font-size="11" font-weight="700" text-anchor="middle">【核融合】軽核が結合</text>
 
   <!-- 領域矢印 2: 核分裂 (右側から左へピークに向かう) -->
   <line x1="440" y1="130" x2="340" y2="90" stroke="#10b981" stroke-width="2"/>
-  <text x="350" y="145" fill="#10b981" font-size="12" font-weight="700">【核分裂】重核が分裂</text>
+  <rect x="330" y="132" width="135" height="20" rx="3" fill="#0f172a" stroke="#10b981" stroke-width="1"/>
+  <text x="397" y="146" fill="#10b981" font-size="11" font-weight="700" text-anchor="middle">【核分裂】重核が分裂</text>
 </svg>
-<div class="graph-caption">図: 核子あたり結合エネルギー曲線（質量数 $A=56$ の鉄が最も結合が固く安定。すべての原子核は鉄を目指して融合・分裂しエネルギーを放出する）</div>
+<div class="graph-caption">図: 核子あたり結合エネルギー曲線（質量数 <i>A</i> = 56 の鉄が最も結合が固く安定。すべての原子核は鉄を目指して融合・分裂しエネルギーを放出する）</div>
 </div>
 
 1. **鉄 $^{56}\text{Fe}$ が宇宙で最も固く結合している**:
