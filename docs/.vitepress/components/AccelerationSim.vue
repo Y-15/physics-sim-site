@@ -5,6 +5,28 @@
       <span class="sim-badge">3公式・v-tグラフの傾きと面積</span>
     </div>
 
+    <!-- 再生速度・アニメーションコントロールバー -->
+    <div class="playback-bar">
+      <button class="btn btn-primary" @click="togglePlay" style="padding: 6px 16px; font-weight: 700; border-radius: 8px; cursor: pointer;">
+        {{ isPlaying ? '⏸ 一時停止' : (simT >= maxT ? '🔄 最初から再生' : '▶ 再生') }}
+      </button>
+      <div class="speed-control-group">
+        <span class="speed-label">⏱️ 再生速度:</span>
+        <div class="speed-btn-group">
+          <button :class="{ active: timeScale === 0.25 }" @click="timeScale = 0.25">🐢 0.25x (超スロー)</button>
+          <button :class="{ active: timeScale === 0.5 }" @click="timeScale = 0.5">🎯 0.5x (推奨・観察)</button>
+          <button :class="{ active: timeScale === 1.0 }" @click="timeScale = 1.0">1.0x (標準)</button>
+          <button :class="{ active: timeScale === 1.5 }" @click="timeScale = 1.5">1.5x (速め)</button>
+        </div>
+      </div>
+      <button class="btn btn-secondary" @click="stepForward(0.1)" style="padding: 6px 12px; border-radius: 8px; font-size: 0.85rem; cursor: pointer;">
+        ⏭ コマ送り (+0.1s)
+      </button>
+      <button class="btn btn-secondary" @click="reset" style="padding: 6px 12px; border-radius: 8px; font-size: 0.85rem; cursor: pointer;">
+        ⏮ リセット
+      </button>
+    </div>
+
     <div class="canvas-wrapper">
       <canvas ref="canvasRef" width="700" height="380"></canvas>
     </div>
@@ -66,6 +88,7 @@ import { ref, computed, onMounted, onUnmounted, watch } from 'vue'
 
 const canvasRef = ref(null)
 const isPlaying = ref(true)
+const timeScale = ref(0.5) // デフォルトで落ち着いて観察できる0.5xスロー再生
 
 const v0 = ref(2)
 const a = ref(2)
@@ -84,13 +107,17 @@ function setPreset(newV0, newA) {
   reset()
 }
 
+function stepForward(delta = 0.1) {
+  simT.value = Math.min(maxT, simT.value + delta)
+}
+
 function draw(timestamp) {
   if (!lastTime) lastTime = timestamp
   const dt = (timestamp - lastTime) / 1000
   lastTime = timestamp
 
   if (isPlaying.value) {
-    simT.value += dt * 0.9
+    simT.value += dt * timeScale.value
     if (simT.value > maxT) {
       simT.value = maxT
       isPlaying.value = false

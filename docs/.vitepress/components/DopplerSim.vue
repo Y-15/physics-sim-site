@@ -8,6 +8,28 @@
       </div>
     </div>
 
+    <!-- 再生速度・アニメーションコントロールバー -->
+    <div class="playback-bar">
+      <button class="sim-btn primary" @click="togglePlay" style="padding: 6px 16px; font-weight: 700; border-radius: 8px; cursor: pointer;">
+        {{ isRunning ? '⏸ 一時停止' : '▶ 再生' }}
+      </button>
+      <div class="speed-control-group">
+        <span class="speed-label">⏱️ 再生速度:</span>
+        <div class="speed-btn-group">
+          <button :class="{ active: timeScale === 0.2 }" @click="timeScale = 0.2">🐢 0.2x (超スロー)</button>
+          <button :class="{ active: timeScale === 0.4 }" @click="timeScale = 0.4">🎯 0.4x (推奨・観察)</button>
+          <button :class="{ active: timeScale === 0.8 }" @click="timeScale = 0.8">0.8x (標準)</button>
+          <button :class="{ active: timeScale === 1.2 }" @click="timeScale = 1.2">1.2x (速め)</button>
+        </div>
+      </div>
+      <button class="sim-btn secondary" @click="stepSim(0.05)" style="padding: 6px 12px; border-radius: 8px; font-size: 0.85rem; cursor: pointer;">
+        ⏭ コマ送り (+0.05s)
+      </button>
+      <button class="sim-btn secondary" @click="resetSim" style="padding: 6px 12px; border-radius: 8px; font-size: 0.85rem; cursor: pointer;">
+        🔄 リセット
+      </button>
+    </div>
+
     <!-- メインCanvas -->
     <div class="canvas-wrap">
       <canvas ref="canvasRef" width="700" height="380" class="sim-canvas"></canvas>
@@ -82,6 +104,7 @@ import { ref, computed, onMounted, onUnmounted } from 'vue'
 
 const canvasRef = ref(null)
 const isRunning = ref(true)
+const timeScale = ref(0.4) // デフォルトで波面がじっくり追える0.4xスロー再生
 
 // 物理パラメータ
 const V = ref(340) // 音速 [m/s]
@@ -129,47 +152,51 @@ function setPreset(type) {
   resetSim()
 }
 
+function advancePhysics(simDt) {
+  const canvas = canvasRef.value
+  const width = canvas ? canvas.width : 700
+  const pxPerMeter = 0.5
+  sourceX += vs.value * pxPerMeter * simDt
+  observerX += vo.value * pxPerMeter * simDt
+
+  if (sourceX > width + 100) {
+    sourceX = -50
+  }
+  if (observerX > width + 50) observerX = 50
+  if (observerX < 50) observerX = width - 50
+
+  lastEmitTime += simDt
+  const emitInterval = 1 / f0.value
+  if (lastEmitTime >= emitInterval) {
+    waves.push({
+      x: sourceX,
+      y: sourceY,
+      r: 0,
+      alpha: 1.0
+    })
+    lastEmitTime = 0
+  }
+
+  for (let i = waves.length - 1; i >= 0; i--) {
+    waves[i].r += V.value * pxPerMeter * simDt
+    waves[i].alpha -= 0.08 * simDt
+    if (waves[i].alpha <= 0 || waves[i].r > width * 1.5) {
+      waves.splice(i, 1)
+    }
+  }
+}
+
+function stepSim(dtSec = 0.05) {
+  advancePhysics(dtSec)
+}
+
 function updateAndDraw(timestamp) {
   if (!lastTime) lastTime = timestamp
   const dt = (timestamp - lastTime) / 1000
   lastTime = timestamp
 
-  const canvas = canvasRef.value
-  if (!canvas) return
-  const ctx = canvas.getContext('2d')
-  const width = canvas.width
-  const height = canvas.height
-
   if (isRunning.value) {
-    const pxPerMeter = 0.5
-    sourceX += vs.value * pxPerMeter * dt
-    observerX += vo.value * pxPerMeter * dt
-
-    if (sourceX > width + 100) {
-      sourceX = -50
-    }
-    if (observerX > width + 50) observerX = 50
-    if (observerX < 50) observerX = width - 50
-
-    lastEmitTime += dt
-    const emitInterval = 1 / f0.value
-    if (lastEmitTime >= emitInterval) {
-      waves.push({
-        x: sourceX,
-        y: sourceY,
-        r: 0,
-        alpha: 1.0
-      })
-      lastEmitTime = 0
-    }
-
-    for (let i = waves.length - 1; i >= 0; i--) {
-      waves[i].r += V.value * pxPerMeter * dt
-      waves[i].alpha -= 0.08 * dt
-      if (waves[i].alpha <= 0 || waves[i].r > width * 1.5) {
-        waves.splice(i, 1)
-      }
-    }
+    advancePhysics(dt * timeScale.value)
   }
 
   // --- 描画処理 ---

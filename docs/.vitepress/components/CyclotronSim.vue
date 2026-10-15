@@ -9,6 +9,7 @@ const voltage = ref(50) // 加速電圧 V [kV]
 const deeRadius = ref(140) // ディー半径 R [px]
 const particleType = ref('proton') // 'proton' or 'alpha'
 const isPlaying = ref(true)
+const timeScale = ref(0.4) // デフォルトでらせん加速が追える0.4xスロー再生
 
 // 粒子定数
 const particles = {
@@ -79,7 +80,7 @@ function updatePhysics() {
   const R = deeRadius.value
 
   const s = state.value
-  const dt = 0.5
+  const dt = 0.5 * timeScale.value
 
   // 現在の位置（原点からの距離）
   const distFromCenter = Math.hypot(s.x - centerX, s.y - centerY)
@@ -254,6 +255,10 @@ function handleParticleChange(type) {
   resetSim()
 }
 
+function stepSim() {
+  updatePhysics()
+}
+
 onMounted(() => {
   resetSim()
   animationFrameId = requestAnimationFrame(draw)
@@ -274,6 +279,28 @@ onUnmounted(() => {
         <span>サイクロトロン粒子加速器シミュレーター</span>
       </div>
       <div class="badge">ローレンツ力 × 高周波交流電場</div>
+    </div>
+
+    <!-- 再生速度・アニメーションコントロールバー -->
+    <div class="playback-bar">
+      <button class="btn btn-secondary" @click="isPlaying = !isPlaying" style="padding: 6px 16px; font-weight: 700; border-radius: 8px; cursor: pointer; color: #fff; background: rgba(56, 189, 248, 0.2); border: 1px solid #38bdf8;">
+        {{ isPlaying ? '⏸ 一時停止' : '▶ 加速再開' }}
+      </button>
+      <div class="speed-control-group">
+        <span class="speed-label">⏱️ 再生速度:</span>
+        <div class="speed-btn-group">
+          <button :class="{ active: timeScale === 0.2 }" @click="timeScale = 0.2">🐢 0.2x (超スロー)</button>
+          <button :class="{ active: timeScale === 0.4 }" @click="timeScale = 0.4">🎯 0.4x (推奨・観察)</button>
+          <button :class="{ active: timeScale === 0.8 }" @click="timeScale = 0.8">0.8x (標準)</button>
+          <button :class="{ active: timeScale === 1.5 }" @click="timeScale = 1.5">1.5x (速め)</button>
+        </div>
+      </div>
+      <button class="btn btn-secondary" @click="stepSim" style="padding: 6px 12px; border-radius: 8px; font-size: 0.85rem; cursor: pointer;">
+        ⏭ コマ送り
+      </button>
+      <button class="btn btn-secondary" @click="resetSim" style="padding: 6px 12px; border-radius: 8px; font-size: 0.85rem; cursor: pointer;">
+        ⏮ 最初から加速
+      </button>
     </div>
 
     <div class="canvas-wrapper">
@@ -335,13 +362,6 @@ onUnmounted(() => {
           >
             α粒子 ⁴He²⁺
           </button>
-        </div>
-
-        <div class="action-buttons">
-          <button class="btn btn-secondary" @click="isPlaying = !isPlaying">
-            {{ isPlaying ? '一時停止' : '再開' }}
-          </button>
-          <button class="btn btn-reset" @click="resetSim">最初から加速</button>
         </div>
       </div>
     </div>

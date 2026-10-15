@@ -5,6 +5,28 @@
       <span class="sim-badge">向心力・ベクトル直交・単振動への正射影</span>
     </div>
 
+    <!-- 再生速度・アニメーションコントロールバー -->
+    <div class="playback-bar">
+      <button class="btn btn-primary" @click="togglePlay" style="padding: 6px 16px; font-weight: 700; border-radius: 8px; cursor: pointer;">
+        {{ isPlaying ? '⏸ 一時停止' : '▶ 再生' }}
+      </button>
+      <div class="speed-control-group">
+        <span class="speed-label">⏱️ 再生速度:</span>
+        <div class="speed-btn-group">
+          <button :class="{ active: timeScale === 0.25 }" @click="timeScale = 0.25">🐢 0.25x (超スロー)</button>
+          <button :class="{ active: timeScale === 0.5 }" @click="timeScale = 0.5">🎯 0.5x (推奨・観察)</button>
+          <button :class="{ active: timeScale === 1.0 }" @click="timeScale = 1.0">1.0x (標準)</button>
+          <button :class="{ active: timeScale === 1.5 }" @click="timeScale = 1.5">1.5x (速め)</button>
+        </div>
+      </div>
+      <button class="btn btn-secondary" @click="stepForward" style="padding: 6px 12px; border-radius: 8px; font-size: 0.85rem; cursor: pointer;">
+        ⏭ コマ送り (+15°)
+      </button>
+      <button class="btn btn-secondary" @click="reset" style="padding: 6px 12px; border-radius: 8px; font-size: 0.85rem; cursor: pointer;">
+        ⏮ リセット
+      </button>
+    </div>
+
     <div class="canvas-wrapper">
       <canvas ref="canvasRef" width="700" height="380"></canvas>
     </div>
@@ -80,6 +102,7 @@ import { ref, computed, onMounted, onUnmounted, watch } from 'vue'
 
 const canvasRef = ref(null)
 const isPlaying = ref(true)
+const timeScale = ref(0.5) // デフォルトで観察しやすい0.5x速度
 
 const r = ref(1.6)
 const omega = ref(1.5)
@@ -104,7 +127,7 @@ function draw(timestamp) {
   lastTime = timestamp
 
   if (isPlaying.value) {
-    angle += omega.value * dt
+    angle += omega.value * dt * timeScale.value
   }
 
   const canvas = canvasRef.value
@@ -265,6 +288,10 @@ function draw(timestamp) {
 
 function togglePlay() {
   isPlaying.value = !isPlaying.value
+}
+
+function stepForward() {
+  angle += (15 * Math.PI) / 180
 }
 
 function reset() {

@@ -8,6 +8,31 @@
       <p class="subtitle">ジェットコースターの宙返りループ。力学的エネルギー保存則と向心力（垂直抗力・糸の張力 <i>N</i>）のつり合い。一周成功するか、途中で軌道離脱（落下）するかをリアルタイム検証できます。</p>
     </div>
 
+    <!-- 再生速度・アニメーションコントロールバー -->
+    <div class="playback-bar">
+      <button class="btn btn-primary" @click="togglePlay" style="padding: 6px 16px; font-weight: 700; border-radius: 8px; cursor: pointer;">
+        {{ isRunning ? '⏸ 一時停止' : '▶ スタート' }}
+      </button>
+      <div class="speed-control-group">
+        <span class="speed-label">⏱️ 再生速度:</span>
+        <div class="speed-btn-group">
+          <button :class="{ active: timeScale === 0.2 }" @click="timeScale = 0.2">🐢 0.2x (超スロー)</button>
+          <button :class="{ active: timeScale === 0.4 }" @click="timeScale = 0.4">🎯 0.4x (推奨・観察)</button>
+          <button :class="{ active: timeScale === 0.8 }" @click="timeScale = 0.8">0.8x (標準)</button>
+          <button :class="{ active: timeScale === 1.5 }" @click="timeScale = 1.5">1.5x (速め)</button>
+        </div>
+      </div>
+      <button class="btn btn-secondary" @click="stepSim(0.02)" style="padding: 6px 12px; border-radius: 8px; font-size: 0.85rem; cursor: pointer;">
+        ⏭ コマ送り (+0.02s)
+      </button>
+      <button class="btn btn-secondary" @click="resetSim" style="padding: 6px 12px; border-radius: 8px; font-size: 0.85rem; cursor: pointer;">
+        🔄 リセット
+      </button>
+      <button class="btn btn-accent" @click="setCriticalSpeed" style="padding: 6px 12px; border-radius: 8px; font-size: 0.82rem; cursor: pointer;">
+        🎯 一周限界速度 √(5gR)
+      </button>
+    </div>
+
     <div class="canvas-wrapper">
       <canvas ref="canvasRef" width="700" height="320"></canvas>
       <div class="status-badge" :class="loopStatus">
@@ -53,18 +78,6 @@
           </label>
         </div>
       </div>
-
-      <div class="button-row">
-        <button class="btn btn-primary" @click="togglePlay">
-          {{ isRunning ? '⏸️ 一時停止' : '▶️ 運動スタート' }}
-        </button>
-        <button class="btn btn-secondary" @click="resetSim">
-          🔄 最下点にリセット
-        </button>
-        <button class="btn btn-accent" @click="setCriticalSpeed">
-          🎯 一周限界速度（v₀ = √(5gR)）に設定
-        </button>
-      </div>
     </div>
 
     <!-- 物理量モニター -->
@@ -105,6 +118,7 @@ import { ref, onMounted, onUnmounted, computed } from 'vue'
 
 const canvasRef = ref(null)
 const isRunning = ref(true)
+const timeScale = ref(0.4) // デフォルトで宙返りの観察がしやすい0.4xスロー再生
 
 const v0 = ref(8.0) // m/s (初速度)
 const radius = ref(1.5) // m
@@ -354,13 +368,18 @@ const draw = () => {
   ctx.fillText('最高点 (N ≥ 0 必要)', centerX + 10, centerY - radPx - 8)
 }
 
+const stepSim = (dtSec = 0.02) => {
+  step(dtSec)
+  draw()
+}
+
 const animate = (timestamp) => {
   if (lastTime === 0) lastTime = timestamp
   const dt = Math.min((timestamp - lastTime) / 1000, 0.05)
   lastTime = timestamp
 
   if (isRunning.value) {
-    step(dt)
+    step(dt * timeScale.value)
   }
 
   draw()

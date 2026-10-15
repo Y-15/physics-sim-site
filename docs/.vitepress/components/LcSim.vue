@@ -8,6 +8,28 @@
       <p class="subtitle">コイル（L）とコンデンサー（C）をつないだ回路に生じる電気振動。静電エネルギーと磁気エネルギーが交互に入れ替わり、力学のばね振り子と完全同等の運動をします。</p>
     </div>
 
+    <!-- 再生速度・アニメーションコントロールバー -->
+    <div class="playback-bar">
+      <button class="btn btn-primary" @click="togglePlay" style="padding: 6px 16px; font-weight: 700; border-radius: 8px; cursor: pointer;">
+        {{ isRunning ? '⏸ 一時停止' : '▶ 再生' }}
+      </button>
+      <div class="speed-control-group">
+        <span class="speed-label">⏱️ 再生速度:</span>
+        <div class="speed-btn-group">
+          <button :class="{ active: timeScale === 0.2 }" @click="timeScale = 0.2">🐢 0.2x (超スロー)</button>
+          <button :class="{ active: timeScale === 0.5 }" @click="timeScale = 0.5">🎯 0.5x (推奨・観察)</button>
+          <button :class="{ active: timeScale === 1.0 }" @click="timeScale = 1.0">1.0x (標準)</button>
+          <button :class="{ active: timeScale === 1.8 }" @click="timeScale = 1.8">1.8x (速め)</button>
+        </div>
+      </div>
+      <button class="btn btn-secondary" @click="stepSim" style="padding: 6px 12px; border-radius: 8px; font-size: 0.85rem; cursor: pointer;">
+        ⏭ コマ送り (+15°)
+      </button>
+      <button class="btn btn-secondary" @click="resetSim" style="padding: 6px 12px; border-radius: 8px; font-size: 0.85rem; cursor: pointer;">
+        🔄 初期充電にリセット
+      </button>
+    </div>
+
     <div class="canvas-wrapper">
       <canvas ref="canvasRef" width="700" height="300"></canvas>
       <div class="phase-badge">
@@ -38,22 +60,6 @@
             <input type="range" v-model.number="V0" min="5" max="30" step="1" @input="resetSim" />
           </label>
         </div>
-
-        <div class="control-group">
-          <label>
-            <span>再生速度: <strong>{{ timeScale.toFixed(1) }}x</strong></span>
-            <input type="range" v-model.number="timeScale" min="0.2" max="2.0" step="0.2" />
-          </label>
-        </div>
-      </div>
-
-      <div class="button-row">
-        <button class="btn btn-primary" @click="togglePlay">
-          {{ isRunning ? '⏸️ 一時停止' : '▶️ 再生' }}
-        </button>
-        <button class="btn btn-secondary" @click="resetSim">
-          🔄 初期充電状態にリセット
-        </button>
       </div>
     </div>
 
@@ -110,7 +116,7 @@ const isRunning = ref(true)
 const L_mH = ref(50) // mH
 const C_uF = ref(40) // uF
 const V0 = ref(12) // V
-const timeScale = ref(1.0)
+const timeScale = ref(0.5) // デフォルトで観察しやすい0.5x速度
 
 // 実単位計算
 const L_val = computed(() => L_mH.value * 1e-3) // H
@@ -118,6 +124,9 @@ const C_val = computed(() => C_uF.value * 1e-6) // F
 const omega = computed(() => 1 / Math.sqrt(L_val.value * C_val.value))
 const freq = computed(() => omega.value / (2 * Math.PI))
 const period = computed(() => 1 / freq.value)
+
+// 人間の目が追える視覚用角周波数 (基準50mH, 40uF で約1.4 rad/s ＝ 1周約4.5秒)
+const visualOmega = computed(() => 1.4 * (omega.value / 707.1))
 
 // 初期最大電荷
 const Q_max = computed(() => C_val.value * V0.value) // C
@@ -149,6 +158,16 @@ const phaseDescription = computed(() => {
 const capEPercent = computed(() => totalE.value > 0 ? (UE.value / totalE.value) * 100 : 0)
 const coilEPercent = computed(() => totalE.value > 0 ? (UB.value / totalE.value) * 100 : 0)
 
+function updateStateFromPhase(phi) {
+  currentPhase.value = phi
+  const q = Q_max.value * Math.cos(phi)
+  const i = I_max.value * Math.sin(phi)
+  currentQ.value = q
+  currentI.value = i
+  UE.value = (q ** 2) / (2 * C_val.value)
+  UB.value = 0.5 * L_val.value * (i ** 2)
+}
+
 const togglePlay = () => {
   isRunning.value = !isRunning.value
 }
@@ -156,6 +175,22 @@ const togglePlay = () => {
 const resetSim = () => {
   time = 0
   currentPhase.value = 0
+  history.length = 0
+  updateStateFromPhase(0)
+  draw()
+}
+
+const stepSim = () => {
+  const dPhase = Math.PI / 12 // 15度進める
+  time += dPhase / (visualOmega.value || 1.4)
+  const phi = visualOmega.value * time
+  updateStateFromPhase(phi)
+  history.push({
+    q: currentQ.value / Q_max.value,
+    i: currentI.value / I_max.value
+  })
+  if (history.length > maxHistory) history.shift()
+  draw()
 }
 
 // 履歴プロット用データ
@@ -383,30 +418,17 @@ const animate = (timestamp) => {
   lastFrameTime = timestamp
 
   if (isRunning.value) {
-    // 物理時間の更新: ω*t
     const simDt = dt * timeScale.value
     time += simDt
 
-    // 位相 φ = ω t
-    const phi = omega.value * (time * 0.05) // スケール調整して人間の目で追える速度に
-    currentPhase.value = phi
-
-    // Q(t) = Q_max * cos(phi)
-    // I(t) = - dQ/dt = I_max * sin(phi)
-    const q = Q_max.value * Math.cos(phi)
-    const i = I_max.value * Math.sin(phi)
-
-    currentQ.value = q
-    currentI.value = i
-
-    // エネルギー計算
-    UE.value = (q ** 2) / (2 * C_val.value)
-    UB.value = 0.5 * L_val.value * (i ** 2)
+    // 人間の目で追える落ち着いた観察速度にスケーリング
+    const phi = visualOmega.value * time
+    updateStateFromPhase(phi)
 
     // 履歴更新
     history.push({
-      q: q / Q_max.value,
-      i: i / I_max.value
+      q: currentQ.value / Q_max.value,
+      i: currentI.value / I_max.value
     })
     if (history.length > maxHistory) {
       history.shift()

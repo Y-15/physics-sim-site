@@ -5,6 +5,28 @@
       <span class="sim-badge">リアルタイム計算</span>
     </div>
 
+    <!-- 再生速度・アニメーションコントロールバー -->
+    <div class="playback-bar">
+      <button class="btn btn-primary" @click="togglePlay" style="padding: 6px 16px; font-weight: 700; border-radius: 8px; cursor: pointer;">
+        {{ isPlaying ? '⏸ 一時停止' : (isFinished ? '🔄 もう一度発射' : '🚀 発射！') }}
+      </button>
+      <div class="speed-control-group">
+        <span class="speed-label">⏱️ 再生速度:</span>
+        <div class="speed-btn-group">
+          <button :class="{ active: timeScale === 0.25 }" @click="timeScale = 0.25">🐢 0.25x (超スロー)</button>
+          <button :class="{ active: timeScale === 0.5 }" @click="timeScale = 0.5">🎯 0.5x (推奨・観察)</button>
+          <button :class="{ active: timeScale === 1.0 }" @click="timeScale = 1.0">1.0x (標準)</button>
+          <button :class="{ active: timeScale === 1.5 }" @click="timeScale = 1.5">1.5x (速め)</button>
+        </div>
+      </div>
+      <button class="btn btn-secondary" @click="stepForward" style="padding: 6px 12px; border-radius: 8px; font-size: 0.85rem; cursor: pointer;">
+        ⏭ コマ送り (+0.05s)
+      </button>
+      <button class="btn btn-secondary" @click="resetSim" style="padding: 6px 12px; border-radius: 8px; font-size: 0.85rem; cursor: pointer;">
+        ⏮ リセット
+      </button>
+    </div>
+
     <!-- Canvas表示部 -->
     <div class="canvas-wrapper">
       <canvas ref="canvasRef" width="700" height="360"></canvas>
@@ -42,17 +64,11 @@
       <button :class="{ active: g === 3.72 }" @click="setGravity(3.72)">🔴 火星 (3.72)</button>
     </div>
 
-    <!-- アクションボタン -->
-    <div class="action-buttons">
-      <button class="btn btn-primary" @click="togglePlay">
-        {{ isPlaying ? '⏸ 一時停止' : (isFinished ? '🔄 もう一度発射' : '🚀 発射！') }}
-      </button>
-      <button class="btn btn-secondary" @click="resetSim">
-        ⏮ リセット
-      </button>
-      <label class="toggle-label">
+    <!-- 表示オプション -->
+    <div class="action-buttons" style="justify-content: flex-start; padding: 6px 0;">
+      <label class="toggle-label" style="display: flex; align-items: center; gap: 8px; cursor: pointer; color: #cbd5e1; font-size: 0.9rem;">
         <input type="checkbox" v-model="showVectors" @change="drawScene" />
-        速度ベクトルを表示
+        📐 速度ベクトル（水平・鉛直成分）を表示
       </label>
     </div>
 
@@ -81,6 +97,7 @@
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 
 const canvasRef = ref(null)
+const timeScale = ref(0.4) // デフォルトで放物軌道をじっくり追える0.4xスロー再生
 const v0 = ref(20)
 const angle = ref(45)
 const g = ref(9.8)
@@ -140,10 +157,8 @@ const togglePlay = () => {
   }
 }
 
-const animate = () => {
-  const dt = 0.025 // 時間刻み
+const advanceStep = (dt) => {
   t += dt
-
   const curX = vx0.value * t
   const curY = vy0.value * t - 0.5 * g.value * t * t
 
@@ -153,14 +168,25 @@ const animate = () => {
     isFinished.value = true
     trail.push({ x: maxDistance.value, y: 0 })
     drawScene(maxDistance.value, 0, vx0.value, -vy0.value)
-    return
+    return false
   }
 
   const curVy = vy0.value - g.value * t
   trail.push({ x: curX, y: curY })
   drawScene(curX, curY, vx0.value, curVy)
+  return true
+}
 
-  if (isPlaying.value) {
+const stepForward = () => {
+  if (isFinished.value) resetSim()
+  advanceStep(0.04)
+}
+
+const animate = () => {
+  const dt = 0.025 * timeScale.value // 時間刻み (可変速)
+  const cont = advanceStep(dt)
+
+  if (isPlaying.value && cont) {
     animId = requestAnimationFrame(animate)
   }
 }

@@ -1,9 +1,32 @@
-﻿<template>
+<template>
   <div class="sim-container">
     <div class="sim-header">
       <span class="sim-title">🔩 ばねの単振動 インタラクティブ実験室</span>
       <span class="sim-badge">復元力・単振動・エネルギー</span>
     </div>
+
+    <!-- 再生速度・アニメーションコントロールバー -->
+    <div class="playback-bar">
+      <button class="btn btn-primary" @click="togglePlay" style="padding: 6px 16px; font-weight: 700; border-radius: 8px; cursor: pointer;">
+        {{ isPlaying ? '⏸ 一時停止' : '▶ 再生' }}
+      </button>
+      <div class="speed-control-group">
+        <span class="speed-label">⏱️ 再生速度:</span>
+        <div class="speed-btn-group">
+          <button :class="{ active: timeScale === 0.2 }" @click="timeScale = 0.2">🐢 0.2x (超スロー)</button>
+          <button :class="{ active: timeScale === 0.4 }" @click="timeScale = 0.4">🎯 0.4x (推奨・観察)</button>
+          <button :class="{ active: timeScale === 0.8 }" @click="timeScale = 0.8">0.8x (標準)</button>
+          <button :class="{ active: timeScale === 1.2 }" @click="timeScale = 1.2">1.2x (速め)</button>
+        </div>
+      </div>
+      <button class="btn btn-secondary" @click="stepForward(0.05)" style="padding: 6px 12px; border-radius: 8px; font-size: 0.85rem; cursor: pointer;">
+        ⏭ コマ送り (+0.05s)
+      </button>
+      <button class="btn btn-secondary" @click="reset" style="padding: 6px 12px; border-radius: 8px; font-size: 0.85rem; cursor: pointer;">
+        ⏮ リセット
+      </button>
+    </div>
+
     <div class="canvas-wrapper">
       <canvas ref="canvasRef" width="700" height="340"></canvas>
     </div>
@@ -51,10 +74,6 @@
         <div class="stat-value">{{ pe.toFixed(2) }} <span class="unit">J</span></div>
       </div>
     </div>
-    <div class="action-buttons">
-      <button class="btn btn-primary" @click="togglePlay">{{ isPlaying ? "⏸ 一時停止" : "▶ 再生" }}</button>
-      <button class="btn btn-secondary" @click="reset">⏮ リセット</button>
-    </div>
   </div>
 </template>
 
@@ -63,6 +82,7 @@ import { ref, computed, onMounted, onUnmounted, watch } from "vue"
 
 const canvasRef = ref(null)
 const isPlaying = ref(true)
+const timeScale = ref(0.4) // デフォルトで落ち着いた低速再生（0.4x）
 const k = ref(20)
 const m = ref(1)
 const A = ref(1.5)
@@ -77,19 +97,15 @@ const ke = computed(() => Math.max(0, totalE.value - 0.5 * k.value * disp.value 
 const pe = computed(() => 0.5 * k.value * disp.value * disp.value)
 
 let animId = null
-let startTime = null
-
-function getT() {
-  if (!startTime) startTime = performance.now()
-  return (performance.now() - startTime) / 1000
-}
+let simTime = 0
+let lastTime = 0
 
 function draw() {
   const canvas = canvasRef.value
   if (!canvas) return
   const ctx = canvas.getContext("2d")
   const w = canvas.width, h = canvas.height
-  const t = getT()
+  const t = simTime
 
   const x = A.value * Math.cos(omega.value * t)
   disp.value = x
@@ -220,22 +236,48 @@ function draw() {
   ctx.fillText(`U = ${pe.value.toFixed(2)} J`, barLeft - 4, barTop + 34)
 }
 
-function animate() {
-  if (!isPlaying.value) return
+function animate(timestamp) {
+  if (!isPlaying.value) {
+    lastTime = 0
+    return
+  }
+  if (lastTime === 0) lastTime = timestamp
+  const dt = Math.min((timestamp - lastTime) / 1000, 0.05)
+  lastTime = timestamp
+
+  simTime += dt * timeScale.value
   draw()
   animId = requestAnimationFrame(animate)
 }
 
-function togglePlay() {
-  isPlaying.value = !isPlaying.value
-  if (isPlaying.value) animate()
+function stepForward(delta = 0.05) {
+  simTime += delta
+  draw()
 }
 
-function reset() { startTime = null; draw() }
+function togglePlay() {
+  isPlaying.value = !isPlaying.value
+  if (isPlaying.value) {
+    lastTime = 0
+    animId = requestAnimationFrame(animate)
+  }
+}
 
-watch([k, m, A], () => { startTime = null; if (!isPlaying.value) draw() })
+function reset() {
+  simTime = 0
+  lastTime = 0
+  draw()
+}
 
-onMounted(() => { draw(); animId = requestAnimationFrame(animate) })
+watch([k, m, A], () => {
+  if (!isPlaying.value) draw()
+})
+
+onMounted(() => {
+  draw()
+  lastTime = 0
+  animId = requestAnimationFrame(animate)
+})
 onUnmounted(() => { if (animId) cancelAnimationFrame(animId) })
 </script>
 

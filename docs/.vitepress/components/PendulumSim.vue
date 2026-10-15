@@ -5,6 +5,28 @@
       <span class="sim-badge">ルンゲ＝クッタ高精度解法</span>
     </div>
 
+    <!-- 再生速度・アニメーションコントロールバー -->
+    <div class="playback-bar">
+      <button class="btn btn-primary" @click="togglePlay" style="padding: 6px 16px; font-weight: 700; border-radius: 8px; cursor: pointer;">
+        {{ isPlaying ? '⏸ 一時停止' : '▶ 再生' }}
+      </button>
+      <div class="speed-control-group">
+        <span class="speed-label">⏱️ 再生速度:</span>
+        <div class="speed-btn-group">
+          <button :class="{ active: timeScale === 0.25 }" @click="timeScale = 0.25">🐢 0.25x (超スロー)</button>
+          <button :class="{ active: timeScale === 0.5 }" @click="timeScale = 0.5">🎯 0.5x (推奨・観察)</button>
+          <button :class="{ active: timeScale === 1.0 }" @click="timeScale = 1.0">1.0x (標準)</button>
+          <button :class="{ active: timeScale === 1.5 }" @click="timeScale = 1.5">1.5x (速め)</button>
+        </div>
+      </div>
+      <button class="btn btn-secondary" @click="stepSim(0.04)" style="padding: 6px 12px; border-radius: 8px; font-size: 0.85rem; cursor: pointer;">
+        ⏭ コマ送り (+0.04s)
+      </button>
+      <button class="btn btn-secondary" @click="resetSim" style="padding: 6px 12px; border-radius: 8px; font-size: 0.85rem; cursor: pointer;">
+        ⏮ 初期角度にリセット
+      </button>
+    </div>
+
     <!-- Canvas表示部 -->
     <div class="canvas-wrapper">
       <canvas 
@@ -153,6 +175,7 @@ const showTrail = ref(true)
 
 // シミュレーション状態
 const isPlaying = ref(true)
+const timeScale = ref(0.5) // デフォルトで観察しやすい0.5x速度
 const isDragging = ref(false)
 
 let theta = (initialAngleDeg.value * Math.PI) / 180
@@ -493,6 +516,15 @@ function drawScene() {
   omegaDisplay.value = omega
 }
 
+function stepSim(dtSec = 0.04) {
+  const subSteps = 8
+  const subDt = dtSec / subSteps
+  for (let i = 0; i < subSteps; i++) {
+    rk4Step(subDt)
+  }
+  drawScene()
+}
+
 let lastTime = 0
 function animate(currentTime) {
   if (!isPlaying.value) return
@@ -507,7 +539,7 @@ function animate(currentTime) {
   // 物理の小刻みサブステップ計算でさらに安定化
   if (!isDragging.value) {
     const subSteps = 8
-    const subDt = dt / subSteps
+    const subDt = (dt * timeScale.value) / subSteps
     for (let i = 0; i < subSteps; i++) {
       rk4Step(subDt)
     }

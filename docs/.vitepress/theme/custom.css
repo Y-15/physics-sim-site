@@ -373,6 +373,113 @@ input:focus-visible {
 }
 
 /* ==========================================================================
+   シミュレーター共通: 再生速度セレクター & 再生コントロールバー
+   ========================================================================== */
+.playback-bar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding: 10px 14px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  margin: 12px 0;
+}
+
+.playback-bar .btn,
+.playback-bar .sim-btn,
+.playback-bar .lab-btn {
+  font-family: inherit;
+}
+
+.playback-bar .btn-secondary,
+.playback-bar .sim-btn.secondary,
+.playback-bar .lab-btn:not(.primary) {
+  background: rgba(255, 255, 255, 0.09) !important;
+  color: #f4f4f5 !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+}
+
+.playback-bar .btn-secondary:hover,
+.playback-bar .sim-btn.secondary:hover,
+.playback-bar .lab-btn:not(.primary):hover {
+  background: rgba(255, 255, 255, 0.16) !important;
+  border-color: rgba(255, 255, 255, 0.35) !important;
+}
+
+.speed-control-group {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 4px 10px;
+  border-radius: 9999px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #e4e4e7;
+}
+
+.speed-control-group .speed-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: #38bdf8;
+}
+
+.speed-btn-group {
+  display: inline-flex;
+  gap: 4px;
+}
+
+.speed-btn-group button {
+  background: transparent;
+  border: 1px solid transparent;
+  color: #a1a1aa;
+  padding: 3px 10px;
+  border-radius: 9999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.speed-btn-group button:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.speed-btn-group button.active {
+  background: #0284c7;
+  color: #ffffff;
+  border-color: #38bdf8;
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.4);
+}
+
+.btn-speed-slow {
+  background: rgba(245, 158, 11, 0.12);
+  color: #d97706;
+  border: 1px solid rgba(245, 158, 11, 0.35);
+  padding: 5px 12px;
+  border-radius: 8px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-speed-slow:hover {
+  background: rgba(245, 158, 11, 0.22);
+}
+
+.dark .btn-speed-slow {
+  color: #fbbf24;
+  border-color: rgba(251, 191, 36, 0.4);
+}
+
+/* ==========================================================================
    印刷対応 (@media print) - 紙に印刷してじっくり自習・暗記できる最適化
    ========================================================================== */
 @media print {

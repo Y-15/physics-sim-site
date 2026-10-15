@@ -11,6 +11,28 @@
       </button>
     </div>
 
+    <!-- 再生速度・アニメーションコントロールバー -->
+    <div class="playback-bar">
+      <button class="lab-btn primary" @click="playing = !playing" style="padding: 6px 16px; font-weight: 700; border-radius: 8px; cursor: pointer;">
+        {{ playing ? '⏸ 一時停止' : '▶ 再生' }}
+      </button>
+      <div class="speed-control-group">
+        <span class="speed-label">⏱️ 再生速度:</span>
+        <div class="speed-btn-group">
+          <button :class="{ active: timeScale === 0.25 }" @click="timeScale = 0.25">🐢 0.25x (超スロー)</button>
+          <button :class="{ active: timeScale === 0.5 }" @click="timeScale = 0.5">🎯 0.5x (推奨・観察)</button>
+          <button :class="{ active: timeScale === 1.0 }" @click="timeScale = 1.0">1.0x (標準)</button>
+          <button :class="{ active: timeScale === 1.5 }" @click="timeScale = 1.5">1.5x (速め)</button>
+        </div>
+      </div>
+      <button class="lab-btn" @click="stepSim" style="padding: 6px 12px; border-radius: 8px; font-size: 0.85rem; cursor: pointer;">
+        ⏭ コマ送り (+0.05s)
+      </button>
+      <button class="lab-btn" @click="reset" style="padding: 6px 12px; border-radius: 8px; font-size: 0.85rem; cursor: pointer;">
+        ⏮ リセット
+      </button>
+    </div>
+
     <div class="lab-canvas"><canvas ref="canvasRef"></canvas></div>
 
     <!-- 定常波 -->
@@ -154,6 +176,7 @@ const W = 720, H = 320
 const canvasRef = ref(null)
 let ctx = null
 const playing = ref(true)
+const timeScale = ref(0.5) // デフォルトで波の伝播や振動がじっくり追える0.5xスロー再生
 let t = 0
 
 const modes = [
@@ -377,14 +400,20 @@ function drawDoppler() {
   }
 }
 
+function stepSim(delta = 0.05) {
+  t += delta
+  if (mode.value === 'doppler') stepDoppler(delta)
+}
+
 onMounted(() => {
   ctx = setupCanvas(canvasRef.value, W, H)
 })
 useLoop((dt) => {
   if (!ctx) return
   if (playing.value) {
-    t += dt
-    if (mode.value === 'doppler') stepDoppler(dt)
+    const simDt = dt * timeScale.value
+    t += simDt
+    if (mode.value === 'doppler') stepDoppler(simDt)
   }
   if (mode.value === 'standing') drawStanding()
   else if (mode.value === 'superposition') drawSuperposition()

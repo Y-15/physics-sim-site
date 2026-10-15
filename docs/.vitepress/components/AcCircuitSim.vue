@@ -26,6 +26,28 @@
       </button>
     </div>
 
+    <!-- 再生速度・アニメーションコントロールバー -->
+    <div class="playback-bar">
+      <button class="btn btn-primary" @click="togglePlay" style="padding: 6px 16px; font-weight: 700; border-radius: 8px; cursor: pointer;">
+        {{ isPlaying ? '⏸ 一時停止' : '▶ 再生' }}
+      </button>
+      <div class="speed-control-group">
+        <span class="speed-label">⏱️ 表示速度:</span>
+        <div class="speed-btn-group">
+          <button :class="{ active: timeScale === 0.15 }" @click="timeScale = 0.15">0.15x (超スロー)</button>
+          <button :class="{ active: timeScale === 0.35 }" @click="timeScale = 0.35">0.35x (推奨・観察)</button>
+          <button :class="{ active: timeScale === 0.7 }" @click="timeScale = 0.7">0.7x (標準)</button>
+          <button :class="{ active: timeScale === 1.2 }" @click="timeScale = 1.2">1.2x (速め)</button>
+        </div>
+      </div>
+      <button class="btn btn-secondary" @click="stepPhase" :disabled="isPlaying" style="padding: 6px 12px; border-radius: 8px; font-size: 0.8rem; cursor: pointer;">
+        ⏭ コマ送り
+      </button>
+      <button class="btn btn-secondary" @click="resetTime" style="padding: 6px 12px; border-radius: 8px; font-size: 0.8rem; cursor: pointer;">
+        ⏮ 初期位相へ
+      </button>
+    </div>
+
     <div class="canvas-wrap">
       <canvas ref="canvasRef"></canvas>
     </div>
@@ -159,12 +181,33 @@ function setResonance() {
   frequency.value = Math.round(f0.value)
 }
 
-// アニメーション用位相
+// 再生状態と速度制御
+const isPlaying = ref(true)
+const timeScale = ref(0.35) // デフォルトで落ち着いて観察できる 0.35x
+
+const togglePlay = () => {
+  isPlaying.value = !isPlaying.value
+}
+
+const resetTime = () => {
+  simTime = 0
+}
+
+// 観察用角速度: 1回転約2.5秒を基準とし、周波数に応じた微調整
+const visualOmega = computed(() => 2 * Math.PI * 0.4)
+
+const stepPhase = () => {
+  simTime += (Math.PI / 12) / visualOmega.value
+}
+
+// アニメーション用経過時間
 let simTime = 0
 
 // アニメーションループ
 useLoop((dt) => {
-  simTime += dt
+  if (isPlaying.value) {
+    simTime += dt * timeScale.value
+  }
   const canvas = canvasRef.value
   if (!canvas) return
   const w = 780
@@ -197,7 +240,8 @@ function drawPhasor(ctx, w, h) {
   line(ctx, cx - 140, cy, cx + 140, cy, '#3f3f46', 1)
   line(ctx, cx, cy - 140, cx, cy + 140, '#3f3f46', 1)
 
-  const currentAngle = (omega.value * simTime) % (Math.PI * 2)
+  // 落ち着いて観察できる回転角度（ラジアン）
+  const currentAngle = (visualOmega.value * simTime) % (Math.PI * 2)
 
   // 電流ベクトル I (基準または位相差 -phi)
   const iAngle = currentAngle - phaseRad.value
@@ -253,17 +297,18 @@ function drawWaveform(ctx, w, h) {
   line(ctx, gx0, gy0 + gh / 2, gx0 + gw, gy0 + gh / 2, 'rgba(63, 63, 70, 0.25)', 1)
   ctx.setLineDash([])
 
-  // 波形描画
-  // 時間窓: 2周期分表示
+  // 波形描画: フェーザー回転角 currentAngle と左端の位相を完全同期
   const period = 1 / frequency.value
   const timeWindow = period * 2.5
+  const currentAngle = (visualOmega.value * simTime) % (Math.PI * 2)
+  const phaseOffset = currentAngle / omega.value
 
   // 1. 電圧波形 v(t) = V0 sin(omega*t) (赤)
   ctx.strokeStyle = '#f43f5e'
   ctx.lineWidth = 2.5
   ctx.beginPath()
   for (let px = 0; px <= gw; px += 2) {
-    const t = simTime + (px / gw) * timeWindow
+    const t = phaseOffset + (px / gw) * timeWindow
     const valV = V0.value * Math.sin(omega.value * t)
     const y = gy0 - (valV / 35) * (gh * 0.8)
     if (px === 0) ctx.moveTo(gx0 + px, y)
@@ -276,7 +321,7 @@ function drawWaveform(ctx, w, h) {
   ctx.lineWidth = 2.5
   ctx.beginPath()
   for (let px = 0; px <= gw; px += 2) {
-    const t = simTime + (px / gw) * timeWindow
+    const t = phaseOffset + (px / gw) * timeWindow
     const valI = I0.value * Math.sin(omega.value * t - phaseRad.value)
     // 電流を見やすくスケーリング
     const maxIDisplay = 1.5
