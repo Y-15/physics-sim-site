@@ -73,7 +73,8 @@ export default defineConfig({
             { text: '🚀 慣性力・見かけの重力・遠心力', link: '/mechanics/inertia' },
             { text: '🪐 万有引力と人工衛星・ケプラー則', link: '/mechanics/gravitation' },
             { text: '⚖️ 剛体のつり合いと力のモーメント', link: '/mechanics/moment' },
-            { text: '🧱 剛体の転倒条件と滑り出し限界', link: '/mechanics/toppling' }
+            { text: '🧱 剛体の転倒条件と滑り出し限界', link: '/mechanics/toppling' },
+            { text: '🌊 浮力とアルキメデスの原理・水圧', link: '/mechanics/buoyancy' }
           ]
         }
       ],
@@ -100,6 +101,7 @@ export default defineConfig({
             { text: '💡 直流回路とキルヒホッフの法則・非オーム抵抗', link: '/electromagnetism/circuit' },
             { text: '🌀 磁場中の荷電粒子の運動・ローレンツ力', link: '/electromagnetism/lorentz' },
             { text: '🧲 電磁誘導の法則と導線棒の運動', link: '/electromagnetism/induction' },
+            { text: '🧲 電流がつくる磁場とアンペールの法則', link: '/electromagnetism/magnetic-field' },
             { text: '〰️ 交流回路とRLC直列回路・共振', link: '/electromagnetism/ac-circuit' }
           ]
         }
@@ -110,7 +112,8 @@ export default defineConfig({
           items: [
             { text: '📖 熱力学編トップ', link: '/thermodynamics/index' },
             { text: '🔥 気体の状態変化・P-V図と熱力学第1法則', link: '/thermodynamics/gas-law' },
-            { text: '🔬 気体分子運動論と二乗平均速度', link: '/thermodynamics/kinetic-theory' }
+            { text: '🔬 気体分子運動論と二乗平均速度', link: '/thermodynamics/kinetic-theory' },
+            { text: '🔥 カルノーサイクルと熱機関の熱効率', link: '/thermodynamics/carnot' }
           ]
         }
       ],
@@ -122,7 +125,8 @@ export default defineConfig({
             { text: '💡 光電効果とアインシュタインの光量子仮説', link: '/atomic/photoelectric' },
             { text: '🔬 ボーアの水素原子模型と量子条件', link: '/atomic/bohr' },
             { text: '☢️ 放射性崩壊・半減期と放射線の性質', link: '/atomic/decay' },
-            { text: '⚛️ コンプトン効果と光子の運動量', link: '/atomic/compton' }
+            { text: '⚛️ コンプトン効果と光子の運動量', link: '/atomic/compton' },
+            { text: '⚛️ 核反応・質量欠損と結合エネルギー', link: '/atomic/nuclear' }
           ]
         }
       ]
