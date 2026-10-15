@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://y-15.github.io/physics-sim-site/sitemap.xml

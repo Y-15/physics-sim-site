@@ -27,14 +27,51 @@ export default defineConfig({
   },
 
   head: [
-    // 将来 Google AdSense の広告コードを入れる場合はここに追加します
-    // ['script', { async: '', src: 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXX', crossorigin: 'anonymous' }]
+    // ファビコン
+    ['link', { rel: 'icon', type: 'image/svg+xml', href: `${base}favicon.svg` }],
+
+    // 基本SEOメタタグ
+    ['meta', { name: 'keywords', content: '高校物理, 物理シミュレーション, 共通テスト 物理, 大学受験 物理, 力学, 電磁気, 波動, 熱力学, 原子物理, 物理公式, 導出, 過去問, 例題, 物理 わかりやすい' }],
+    ['meta', { name: 'author', content: '高校物理シミュレーションラボ' }],
+    ['meta', { name: 'robots', content: 'index, follow' }],
+    ['meta', { name: 'theme-color', content: '#38bdf8' }],
+
+    // OGP (Open Graph Protocol) メタタグ
+    ['meta', { property: 'og:type', content: 'website' }],
+    ['meta', { property: 'og:locale', content: 'ja_JP' }],
+    ['meta', { property: 'og:site_name', content: '高校物理シミュレーションラボ' }],
+    ['meta', { property: 'og:title', content: '高校物理シミュレーションラボ | 動くシミュレーションで完全理解' }],
+    ['meta', { property: 'og:description', content: '高校物理・共通テスト・国公立大学受験対応。全67テーマの対話型シミュレーターとベクター図解、厳選例題で直感的に完全攻略できる無料学習サイト。' }],
+    ['meta', { property: 'og:url', content: 'https://y-15.github.io/physics-sim-site/' }],
+    ['meta', { property: 'og:image', content: 'https://y-15.github.io/physics-sim-site/og-image.svg' }],
+
+    // Twitter Card
+    ['meta', { name: 'twitter:card', content: 'summary_large_image' }],
+    ['meta', { name: 'twitter:title', content: '高校物理シミュレーションラボ' }],
+    ['meta', { name: 'twitter:description', content: '高校物理・共通テスト・大学受験対応。動くシミュレーションと厳選例題で直感理解！' }],
+    ['meta', { name: 'twitter:image', content: 'https://y-15.github.io/physics-sim-site/og-image.svg' }],
+
+    // 構造化データ (JSON-LD: Schema.org EducationalOrganization)
+    [
+      'script',
+      { type: 'application/ld+json' },
+      JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'EducationalOrganization',
+        name: '高校物理シミュレーションラボ',
+        alternateName: 'Physics Sim Lab',
+        url: 'https://y-15.github.io/physics-sim-site/',
+        logo: 'https://y-15.github.io/physics-sim-site/favicon.svg',
+        description: '高校物理・共通テスト・大学受験対応。動くシミュレーションと数式で直感的に完全理解できる無料学習サイト',
+        sameAs: ['https://github.com/Y-15/physics-sim-site']
+      })
+    ]
   ],
 
   themeConfig: {
     nav: [
       { text: 'ホーム', link: '/' },
-      { text: '力学', link: '/mechanics/projectile' },
+      { text: '力学', link: '/mechanics/index' },
       { text: '波動', link: '/waves/index' },
       { text: '電磁気', link: '/electromagnetism/index' },
       { text: '熱力学', link: '/thermodynamics/index' },
@@ -61,6 +98,7 @@ export default defineConfig({
         {
           text: '力学（高校物理）',
           items: [
+            { text: '📖 力学編トップ', link: '/mechanics/index' },
             { text: '🏎️ 等加速度直線運動とv-tグラフ', link: '/mechanics/acceleration' },
             { text: '🚀 斜方投射（放物運動の公式）', link: '/mechanics/projectile' },
             { text: '📐 摩擦力と斜面上の運動（摩擦角）', link: '/mechanics/friction' },

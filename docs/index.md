@@ -1,26 +1,31 @@
 ---
 layout: home
+title: 高校物理シミュレーションラボ | 動くシミュレーションと入試問題で完全理解
+description: 高校物理・共通テスト・国公立二次試験対応。力学・波動・電磁気・熱力学・原子物理の全67テーマを動く対話型シミュレーションと公式完全導出、厳選入試例題で直感的にマスターできる完全無料学習サイト。
 
 hero:
   name: "高校物理シミュレーションラボ"
   text: "動かして納得、見て解ける物理"
-  tagline: "共通テスト・定期テスト・大学入試対応。教科書の図や公式がリアルタイムに動く！完全無料の高校物理インタラクティブ学習サイト"
+  tagline: "共通テスト・定期テスト・大学入試対応。教科書の図や公式がリアルタイムに動く！完全無料の高校物理インタラクティブ学習サイト（全67テーマ・演習問題全41問完備）"
   actions:
     - theme: brand
-      text: 📝 演習問題41選
+      text: 📝 厳選演習問題集（全41問）
       link: /problems/index
     - theme: brand
-      text: 💡 光電効果・光量子説
-      link: /atomic/photoelectric
-    - theme: brand
-      text: 🚀 慣性力・見かけの重力
-      link: /mechanics/inertia
+      text: 🏎️ 力学（全17テーマ）
+      link: /mechanics/index
     - theme: alt
-      text: ⚡ 直流回路・非オーム抵抗
-      link: /electromagnetism/circuit
-    - theme: alt
-      text: 🌊 定常波・ドップラー効果
+      text: 🌊 波動（全10テーマ）
       link: /waves/index
+    - theme: alt
+      text: ⚡ 電磁気（全12テーマ）
+      link: /electromagnetism/index
+    - theme: alt
+      text: 🔥 熱力学（全8テーマ）
+      link: /thermodynamics/index
+    - theme: alt
+      text: ⚛️ 原子（全10テーマ）
+      link: /atomic/index
 
 features:
   - icon: 🎯

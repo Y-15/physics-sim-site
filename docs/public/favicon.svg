@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs>
+    <linearGradient id="orbit-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8"/>
+      <stop offset="100%" stop-color="#0284c7"/>
+    </linearGradient>
+    <radialGradient id="nucleus-grad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#f43f5e"/>
+      <stop offset="100%" stop-color="#be123c"/>
+    </radialGradient>
+  </defs>
+  <!-- 背景円 -->
+  <circle cx="50" cy="50" r="48" fill="#0f172a" stroke="#38bdf8" stroke-width="3"/>
+  <!-- 電子軌道1 -->
+  <ellipse cx="50" cy="50" rx="36" ry="14" fill="none" stroke="url(#orbit-grad)" stroke-width="2.5" transform="rotate(30 50 50)"/>
+  <!-- 電子軌道2 -->
+  <ellipse cx="50" cy="50" rx="36" ry="14" fill="none" stroke="url(#orbit-grad)" stroke-width="2.5" transform="rotate(-30 50 50)"/>
+  <!-- 電子軌道3 -->
+  <ellipse cx="50" cy="50" rx="36" ry="14" fill="none" stroke="url(#orbit-grad)" stroke-width="2.5" transform="rotate(90 50 50)"/>
+  <!-- 原子核 -->
+  <circle cx="50" cy="50" r="9" fill="url(#nucleus-grad)"/>
+  <!-- 電子粒子 -->
+  <circle cx="78" cy="34" r="3.5" fill="#38bdf8"/>
+  <circle cx="22" cy="66" r="3.5" fill="#38bdf8"/>
+</svg>
