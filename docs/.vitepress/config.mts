@@ -77,7 +77,8 @@ export default defineConfig({
             { text: '🌊 浮力とアルキメデスの原理・水圧', link: '/mechanics/buoyancy' },
             { text: '⚖️ 2体問題・重心運動と相対運動', link: '/mechanics/two-body' },
             { text: '🪂 空気抵抗と終端速度', link: '/mechanics/terminal-velocity' },
-            { text: '🎢 鉛直面内の円運動と宙返り・軌道離脱', link: '/mechanics/vertical-loop' }
+            { text: '🎢 鉛直面内の円運動と宙返り・軌道離脱', link: '/mechanics/vertical-loop' },
+            { text: '🪢 束縛運動と滑車・動く台上の運動', link: '/mechanics/constraint-motion' }
           ]
         }
       ],
@@ -93,7 +94,8 @@ export default defineConfig({
             { text: '✨ 薄膜干渉とニュートンリング', link: '/waves/thin-film' },
             { text: '📢 気柱の共鳴と開口端補正', link: '/waves/resonance' },
             { text: '🌈 回折格子とスペクトル分析', link: '/waves/diffraction-grating' },
-            { text: '🌊 2波源の波の干渉と双曲線縞', link: '/waves/interference-2d' }
+            { text: '🌊 2波源の波の干渉と双曲線縞', link: '/waves/interference-2d' },
+            { text: '🪞 凹面鏡・凸面鏡と球面反射', link: '/waves/spherical-mirror' }
           ]
         }
       ],
@@ -111,7 +113,8 @@ export default defineConfig({
             { text: '〰️ 交流回路とRLC直列回路・共振', link: '/electromagnetism/ac-circuit' },
             { text: '⚡ LC振動回路と電磁振動', link: '/electromagnetism/lc-oscillation' },
             { text: '🧲 ホール効果とキャリア判定', link: '/electromagnetism/hall-effect' },
-            { text: '⚡ サイクロトロン（粒子加速器）とローレンツ力', link: '/electromagnetism/cyclotron' }
+            { text: '⚡ サイクロトロン（粒子加速器）とローレンツ力', link: '/electromagnetism/cyclotron' },
+            { text: '🧲 ベータトロン（誘導加速器）と電磁誘導加速', link: '/electromagnetism/betatron' }
           ]
         }
       ],
@@ -125,7 +128,8 @@ export default defineConfig({
             { text: '🔥 カルノーサイクルと熱機関の熱効率', link: '/thermodynamics/carnot' },
             { text: '🔥 モル比熱とマイヤーの式・断熱変化', link: '/thermodynamics/heat-capacity' },
             { text: '🧪 気体の混合と可動ピストン', link: '/thermodynamics/gas-mixing' },
-            { text: '🌡️ 水銀柱と大気圧・トリチェリの真空', link: '/thermodynamics/torricelli' }
+            { text: '🌡️ 水銀柱と大気圧・トリチェリの真空', link: '/thermodynamics/torricelli' },
+            { text: '🎈 気球の浮力と熱気球の浮上条件', link: '/thermodynamics/hot-air-balloon' }
           ]
         }
       ],
@@ -141,7 +145,8 @@ export default defineConfig({
             { text: '⚛️ 核反応・質量欠損と結合エネルギー', link: '/atomic/nuclear' },
             { text: '⚛️ 物質波（ド・ブロイ波）と電子線回折', link: '/atomic/matter-wave' },
             { text: '⚡ X線の発生とX線スペクトル', link: '/atomic/xray' },
-            { text: '☢️ 放射平衡と壊変系列（過渡平衡・永続平衡）', link: '/atomic/equilibrium' }
+            { text: '☢️ 放射平衡と壊変系列（過渡平衡・永続平衡）', link: '/atomic/equilibrium' },
+            { text: '⚛️ 原子核分裂と連鎖反応（臨界条件）', link: '/atomic/chain-reaction' }
           ]
         }
       ]
