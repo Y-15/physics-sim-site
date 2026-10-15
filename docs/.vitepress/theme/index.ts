@@ -1,5 +1,6 @@
 import DefaultTheme from 'vitepress/theme'
 import './sim.css'
+import './custom.css'
 
 // components/ 以下の .vue をすべてグローバル登録（ファイル名 = コンポーネント名）
 const modules = import.meta.glob('../components/*.vue', { eager: true })

@@ -1,0 +1,321 @@
+/* ==========================================================================
+   高校物理シミュレーションラボ - 集中と可読性を極めたアカデミックデザインシステム
+   テーマ: "Scholar Slate & Deep Focus"
+   長時間の学習・受験勉強でも目が疲れず、数式・図解・解説がすっと頭に入る洗練美
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
+
+:root {
+  /* 品牌カラー（知的で静穏なセルリアンブルー） */
+  --vp-c-brand-1: #0284c7;
+  --vp-c-brand-2: #38bdf8;
+  --vp-c-brand-3: #0369a1;
+  --vp-c-brand-soft: rgba(56, 189, 248, 0.12);
+
+  /* タイポグラフィ */
+  --vp-font-family-base: 'Outfit', 'Noto Sans JP', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --vp-font-family-mono: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+
+  /* 行間・文字間隔（学習読解に最適化） */
+  --vp-line-height: 1.8;
+  --vp-letter-spacing: 0.02em;
+
+  /* カード・コンポーネントの基本形状 */
+  --academic-radius: 12px;
+  --academic-border: 1px solid rgba(226, 232, 240, 0.8);
+  --academic-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
+}
+
+/* ==========================================================================
+   ダークモード（夜間や暗い部屋での自習・集中に最適化したディープスレート）
+   ========================================================================== */
+.dark {
+  /* 真っ黒ではなく、瞳孔の疲労を抑える深紺色 */
+  --vp-c-bg: #090d16;
+  --vp-c-bg-alt: #0e1524;
+  --vp-c-bg-soft: #141e33;
+  --vp-c-bg-mute: #1a2742;
+
+  --vp-c-default-1: #f1f5f9;
+  --vp-c-default-2: #cbd5e1;
+  --vp-c-default-3: #94a3b8;
+  --vp-c-default-soft: rgba(148, 163, 184, 0.1);
+
+  --vp-c-border: rgba(255, 255, 255, 0.08);
+  --vp-c-divider: rgba(255, 255, 255, 0.06);
+  --vp-c-gutter: rgba(255, 255, 255, 0.03);
+
+  --academic-border: 1px solid rgba(255, 255, 255, 0.08);
+  --academic-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.6);
+}
+
+/* ==========================================================================
+   本文・見出しの視覚的リズム（Visual Hierarchy）
+   ========================================================================== */
+.VPDoc h1 {
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid var(--vp-c-divider);
+  margin-bottom: 1.5rem;
+}
+
+.VPDoc h2 {
+  font-weight: 700;
+  font-size: 1.45rem;
+  margin-top: 2.75rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid var(--vp-c-divider);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.VPDoc h3 {
+  font-weight: 600;
+  font-size: 1.18rem;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+  color: var(--vp-c-brand-2);
+}
+
+.VPDoc p {
+  line-height: var(--vp-line-height);
+  letter-spacing: var(--vp-letter-spacing);
+  margin-bottom: 1.25rem;
+  color: var(--vp-c-default-1);
+}
+
+.VPDoc strong {
+  color: var(--vp-c-brand-2);
+  font-weight: 700;
+}
+
+/* ==========================================================================
+   数式（MathJax）表示の最適化
+   行間が不自然に広がらず、スマホでもはみ出さず綺麗に横スクロール可能
+   ========================================================================== */
+mjx-container[display="true"] {
+  margin: 1.25rem 0 !important;
+  padding: 0.85rem 1.25rem !important;
+  background: rgba(15, 23, 42, 0.5) !important;
+  border: 1px solid rgba(56, 189, 248, 0.15) !important;
+  border-radius: 10px !important;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.dark mjx-container[display="true"] {
+  background: rgba(15, 23, 42, 0.7) !important;
+}
+
+/* インライン数式 */
+mjx-container:not([display="true"]) {
+  padding: 0 0.15em;
+  font-size: 105%;
+}
+
+/* ==========================================================================
+   大学入試例題カード (.problem-card) - 参考書のような品格ある設問枠
+   ========================================================================== */
+.problem-card {
+  background: linear-gradient(135deg, rgba(30, 41, 59, 0.5) 0%, rgba(15, 23, 42, 0.8) 100%);
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  border-left: 4px solid var(--vp-c-brand-2);
+  border-radius: var(--academic-radius);
+  padding: 1.25rem 1.5rem;
+  margin: 1.75rem 0;
+  box-shadow: var(--academic-shadow);
+  backdrop-filter: blur(8px);
+}
+
+.problem-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.85rem;
+  flex-wrap: wrap;
+}
+
+.problem-header strong {
+  font-size: 1.05rem;
+  color: #f8fafc;
+}
+
+.badge-exam {
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0.2rem 0.6rem;
+  border-radius: 9999px;
+  background: rgba(56, 189, 248, 0.15);
+  color: var(--vp-c-brand-2);
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  letter-spacing: 0.04em;
+}
+
+.problem-card p {
+  font-size: 0.95rem;
+  margin-bottom: 0.75rem;
+}
+
+.problem-card ol {
+  padding-left: 1.4rem;
+  margin: 0.5rem 0;
+}
+
+.problem-card li {
+  font-size: 0.94rem;
+  line-height: 1.7;
+  margin-bottom: 0.35rem;
+}
+
+/* ==========================================================================
+   ベクターグラフカード (.vector-graph-card) - レスポンシブSVGダイアグラム
+   ========================================================================== */
+.vector-graph-card {
+  background: #090d16;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--academic-radius);
+  padding: 1.25rem 1rem;
+  margin: 1.75rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: var(--academic-shadow);
+  overflow: hidden;
+}
+
+.graph-title {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--vp-c-brand-2);
+  margin-bottom: 0.85rem;
+  text-align: center;
+  letter-spacing: 0.03em;
+}
+
+.vector-svg {
+  width: 100%;
+  max-width: 580px;
+  height: auto;
+  display: block;
+  border-radius: 8px;
+}
+
+/* ==========================================================================
+   テーブル（表）の洗練スタイリング
+   ========================================================================== */
+.VPDoc table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin: 1.5rem 0;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid var(--vp-c-border);
+}
+
+.VPDoc th {
+  background: rgba(30, 41, 59, 0.8);
+  color: var(--vp-c-brand-2);
+  font-weight: 700;
+  font-size: 0.88rem;
+  padding: 0.75rem 1rem;
+  border-bottom: 2px solid rgba(56, 189, 248, 0.3);
+  text-align: left;
+}
+
+.VPDoc td {
+  padding: 0.7rem 1rem;
+  font-size: 0.9rem;
+  border-bottom: 1px solid var(--vp-c-border);
+  background: rgba(15, 23, 42, 0.4);
+}
+
+.VPDoc tr:last-child td {
+  border-bottom: none;
+}
+
+.VPDoc tr:hover td {
+  background: rgba(30, 41, 59, 0.3);
+}
+
+/* ==========================================================================
+   引用・メモ・ポイント枠 (Blockquote / Callouts)
+   ========================================================================== */
+.VPDoc blockquote {
+  margin: 1.5rem 0;
+  padding: 0.85rem 1.25rem;
+  background: rgba(15, 23, 42, 0.6);
+  border-left: 4px solid var(--vp-c-brand-2);
+  border-radius: 0 10px 10px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  border-right: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.VPDoc blockquote p {
+  margin-bottom: 0;
+  font-size: 0.92rem;
+}
+
+/* ==========================================================================
+   リンク・読書リズムの最適化
+   通常時は上品なシアン、ホバー時のみ自然な下線（文字の邪魔をしない）
+   ========================================================================== */
+.VPDoc a:not(.vp-button):not(.header-anchor) {
+  color: var(--vp-c-brand-2);
+  text-decoration: none;
+  border-bottom: 1px dashed rgba(56, 189, 248, 0.35);
+  transition: all 0.2s ease;
+  padding-bottom: 1px;
+}
+
+.VPDoc a:not(.vp-button):not(.header-anchor):hover {
+  color: #7dd3fc;
+  border-bottom-style: solid;
+  border-bottom-color: #38bdf8;
+}
+
+/* ==========================================================================
+   フォーカスリング（操作中のコントロールが上品に光る）
+   ========================================================================== */
+button:focus-visible,
+input:focus-visible {
+  outline: 2px solid var(--vp-c-brand-2);
+  outline-offset: 2px;
+}
+
+/* ==========================================================================
+   印刷対応 (@media print) - 紙に印刷してじっくり自習・暗記できる最適化
+   ========================================================================== */
+@media print {
+  .VPNav, .VPSidebar, .VPLocalNav, .VPDocFooter, .sim-container, .btn, button, input {
+    display: none !important;
+  }
+  body {
+    background: #ffffff !important;
+    color: #111827 !important;
+    font-size: 11pt !important;
+  }
+  .VPDoc {
+    padding: 0 !important;
+  }
+  .problem-card {
+    background: #f8fafc !important;
+    border: 1px solid #cbd5e1 !important;
+    border-left: 4px solid #0284c7 !important;
+    color: #0f172a !important;
+    box-shadow: none !important;
+    page-break-inside: avoid;
+  }
+  .vector-graph-card {
+    background: #ffffff !important;
+    border: 1px solid #e2e8f0 !important;
+    box-shadow: none !important;
+    page-break-inside: avoid;
+  }
+}
