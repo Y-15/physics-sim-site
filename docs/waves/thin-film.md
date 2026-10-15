@@ -141,29 +141,31 @@ $d \ll R$ なので微小量 $d^2 \approx 0$ と無視すると：
 $$2Rd \approx r^2 \implies \boxed{d \approx \frac{r^2}{2R}}$$
 
 <div class="vector-graph-card">
-<svg viewBox="0 0 540 220" xmlns="http://www.w3.org/2000/svg">
-  <!-- 平板ガラス (y = 170) -->
-  <line x1="50" y1="170" x2="490" y2="170" stroke="#94a3b8" stroke-width="3"/>
-  <text x="495" y="174" fill="#94a3b8" font-size="12">平面ガラス板</text>
-  <!-- 平凸レンズの球面 (中心 cx=270, R=300) -->
-  <path d="M 90,120 Q 270,170 450,120" fill="none" stroke="#38bdf8" stroke-width="3"/>
-  <text x="455" y="125" fill="#38bdf8" font-size="12">平凸レンズ (曲率半径 R)</text>
-  <!-- 接触点 O (x = 270, y = 170) -->
-  <circle cx="270" cy="170" r="5" fill="#f43f5e"/>
-  <rect x="185" y="185" width="170" height="22" rx="4" fill="#0f172a" stroke="#f43f5e" stroke-width="1.2"/>
-  <text x="270" y="200" fill="#f43f5e" font-size="11" font-weight="700" text-anchor="middle">接触点 O (d = 0, 中心暗斑)</text>
-  <!-- 任意位置 r (x = 380, y = 170) -->
-  <line x1="270" y1="170" x2="380" y2="170" stroke="#fbbf24" stroke-width="1.5"/>
-  <rect x="305" y="172" width="45" height="18" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
-  <text x="327" y="185" fill="#fbbf24" font-size="10" font-weight="700" text-anchor="middle">半径 r</text>
-  <!-- 空気層厚さ d (x = 380 でのレンズと板の間隔) -->
-  <line x1="380" y1="170" x2="380" y2="150" stroke="#10b981" stroke-width="2"/>
-  <rect x="390" y="150" width="100" height="20" rx="3" fill="#0f172a" stroke="#10b981" stroke-width="1"/>
-  <text x="440" y="164" fill="#10b981" font-size="11" font-weight="700" text-anchor="middle">d ≈ r² / (2R)</text>
+<svg viewBox="0 0 560 230" xmlns="http://www.w3.org/2000/svg">
+  <!-- 平板ガラス (y = 175) -->
+  <line x1="40" y1="175" x2="440" y2="175" stroke="#94a3b8" stroke-width="3"/>
+  <rect x="445" y="165" width="95" height="20" rx="3" fill="#0f172a" stroke="#94a3b8" stroke-width="1"/>
+  <text x="492" y="179" fill="#94a3b8" font-size="11" font-weight="600" text-anchor="middle">平面ガラス板</text>
+  <!-- 平凸レンズの球面 (中心 cx=240, y=175で接する) -->
+  <path d="M 60,115 Q 240,175 420,115" fill="none" stroke="#38bdf8" stroke-width="3"/>
+  <rect x="360" y="98" width="165" height="20" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="442" y="112" fill="#38bdf8" font-size="11" font-weight="600" text-anchor="middle">平凸レンズ (曲率半径 R)</text>
+  <!-- 接触点 O (x = 240, y = 175) -->
+  <circle cx="240" cy="175" r="5" fill="#f43f5e"/>
+  <rect x="155" y="192" width="170" height="22" rx="4" fill="#0f172a" stroke="#f43f5e" stroke-width="1.2"/>
+  <text x="240" y="207" fill="#f43f5e" font-size="11" font-weight="700" text-anchor="middle">接触点 O (d = 0, 中心暗斑)</text>
+  <!-- 任意位置 r (x = 340, y = 175) -->
+  <line x1="240" y1="175" x2="340" y2="175" stroke="#fbbf24" stroke-width="1.5"/>
+  <rect x="268" y="178" width="45" height="18" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
+  <text x="290" y="191" fill="#fbbf24" font-size="10" font-weight="700" text-anchor="middle">半径 r</text>
+  <!-- 空気層厚さ d (x = 340 でのレンズと板の間隔) -->
+  <line x1="340" y1="175" x2="340" y2="150" stroke="#10b981" stroke-width="2"/>
+  <rect x="345" y="145" width="95" height="20" rx="3" fill="#0f172a" stroke="#10b981" stroke-width="1"/>
+  <text x="392" y="159" fill="#10b981" font-size="11" font-weight="700" text-anchor="middle">d ≈ r² / (2R)</text>
   <!-- 反射光の位相判定 -->
-  <rect x="80" y="38" width="380" height="52" rx="5" fill="#0f172a" stroke="#334155" stroke-width="1.2"/>
-  <text x="95" y="58" fill="#38bdf8" font-size="11" font-weight="600">① レンズ下面反射: ガラス → 空気（位相変化なし 0）</text>
-  <text x="95" y="78" fill="#f43f5e" font-size="11" font-weight="700">② 平板ガラス上面反射: 空気 → ガラス（位相 π 反転！）</text>
+  <rect x="50" y="25" width="460" height="54" rx="5" fill="#0f172a" stroke="#334155" stroke-width="1.2"/>
+  <text x="65" y="47" fill="#38bdf8" font-size="11" font-weight="600">① レンズ下面反射: ガラス → 空気（屈折率 大→小：位相変化なし 0）</text>
+  <text x="65" y="67" fill="#f43f5e" font-size="11" font-weight="700">② 平板ガラス上面反射: 空気 → ガラス（屈折率 小→大：位相 π 反転！）</text>
 </svg>
 <div class="graph-caption">図: ニュートンリングの空気層厚さ近似（<i>d</i> ≈ <i>r</i>² / 2<i>R</i>）と2つの境界面での位相判定</div>
 </div>
