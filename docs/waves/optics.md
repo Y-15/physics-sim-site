@@ -40,11 +40,61 @@ description: 高校物理の幾何光学。スネルの屈折の法則、臨界�
 泥沼に先に突っ込んだ片側のタイヤだけが急減速するため、車全体が進行方向をグッと曲げられます。
 これと全く同じ原理で、光波の波面が遅い媒質に突入するときに進路が曲がるのです。
 
-```
-［空気（速い：屈折率小）］ ──── 車の左タイヤが先に泥沼へ入る
-──────────────────────── 境界面
-［水（遅い：屈折率大）］   ──── 左タイヤが遅れるため、垂線（法線）側に曲がる！
-```
+<div class="vector-graph-card">
+<svg viewBox="0 0 540 250" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-opt-ray" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L7,3 z" fill="#38bdf8" />
+    </marker>
+  </defs>
+
+  <!-- 上部媒質: 空気 (速い) -->
+  <rect x="20" y="20" width="500" height="105" fill="rgba(30, 41, 59, 0.4)"/>
+  <text x="35" y="45" fill="#38bdf8" font-size="13" font-weight="700">空気（屈折率 n₁ : 光速 c で速い）</text>
+
+  <!-- 下部媒質: 水・ガラス (遅い) -->
+  <rect x="20" y="125" width="500" height="105" fill="rgba(14, 116, 144, 0.25)"/>
+  <text x="35" y="215" fill="#22d3ee" font-size="13" font-weight="700">水・ガラス（屈折率 n₂ > n₁ : 光速 v で遅い）</text>
+
+  <!-- 境界面 -->
+  <line x1="20" y1="125" x2="520" y2="125" stroke="#94a3b8" stroke-width="2"/>
+  <text x="450" y="120" fill="#94a3b8" font-size="11">境界面</text>
+
+  <!-- 法線 (境界面に垂直な破線) -->
+  <line x1="270" y1="30" x2="270" y2="220" stroke="#64748b" stroke-width="1.5" stroke-dasharray="4,4"/>
+  <text x="275" y="42" fill="#64748b" font-size="11">法線</text>
+
+  <!-- 光線 (Ray) -->
+  <!-- 入射角 45度: (165, 20) -> (270, 125) -->
+  <line x1="165" y1="20" x2="270" y2="125" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-opt-ray)"/>
+  <!-- 屈折角 約28度: (270, 125) -> (320, 220) -->
+  <line x1="270" y1="125" x2="320" y2="220" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-opt-ray)"/>
+
+  <!-- 入射角 θ1 の円弧 -->
+  <path d="M 270,75 A 50,50 0 0,0 235,90" fill="none" stroke="#fbbf24" stroke-width="1.5"/>
+  <text x="238" y="75" fill="#fbbf24" font-size="12" font-weight="700">θ₁</text>
+
+  <!-- 屈折角 θ2 の円弧 -->
+  <path d="M 270,175 A 50,50 0 0,1 293,169" fill="none" stroke="#fbbf24" stroke-width="1.5"/>
+  <text x="282" y="190" fill="#fbbf24" font-size="12" font-weight="700">θ₂</text>
+
+  <!-- 波面 / 車輪アナロジーのバー -->
+  <!-- 入射側の車輪バー (進行方向に垂直: 傾き -45度) -->
+  <g transform="translate(210, 65) rotate(45)">
+    <line x1="-30" y1="0" x2="30" y2="0" stroke="#fbbf24" stroke-width="3"/>
+    <circle cx="-30" cy="0" r="4" fill="#f43f5e"/>
+    <circle cx="30" cy="0" r="4" fill="#38bdf8"/>
+    <text x="-40" y="-8" fill="#f43f5e" font-size="10">左輪</text>
+    <text x="15" y="-8" fill="#38bdf8" font-size="10">右輪</text>
+  </g>
+
+  <!-- 境界通過中の車輪バー: 左輪が先に突入して減速！ -->
+  <circle cx="250" cy="125" r="4" fill="#f43f5e"/>
+  <text x="280" y="110" fill="#f43f5e" font-size="12" font-weight="700">左輪が先に減速！</text>
+  <text x="330" y="145" fill="#38bdf8" font-size="12">右輪が先行するため法線側に曲がる</text>
+</svg>
+<div class="graph-caption">図: 車輪アナロジーによる光の屈折メカニズム（遅い媒質に先に入った側が減速し、波面が法線側へ曲がる：$n_1 \sin\theta_1 = n_2 \sin\theta_2$）</div>
+</div>
 
 ---
 
@@ -218,23 +268,22 @@ $$m = \frac{|b|}{a}$$
 
 ## 8. 要点まとめ
 
-```
-【スネルの屈折の法則】
-n₁ sinθ₁ = n₂ sinθ₂
-(₁n₂ = n₂/n₁ = v₁/v₂ = λ₁/λ₂)
-・振動数 f は不変！波長 λ は屈折率に反比例して縮む！
+::: tip 📌 幾何光学・波動光学の重要公式総まとめ
+* **スネルの屈折の法則**:
+  $$n_1 \sin\theta_1 = n_2 \sin\theta_2 \iff \frac{\sin\theta_1}{\sin\theta_2} = \frac{n_2}{n_1} = \frac{v_1}{v_2} = \frac{\lambda_1}{\lambda_2} = {}_1n_2$$
+  ・振動数 $f$ は不変！波長 $\lambda$ は屈折率に反比例して縮む（$\lambda' = \lambda / n$）
 
-【全反射の条件】
-① 屈折率大 → 屈折率小 (n₁ > n₂) の入射のみ！
-② 臨界角: sinθ_c = n₂ / n₁
-③ 入射角 θ₁ ≧ θ_c で100%全反射！
+* **全反射の条件**:
+  1. 屈折率大 $\to$ 屈折率小（$n_1 > n_2$）の入射のみ起こる
+  2. 臨界角 $\theta_c$: $\sin\theta_c = \dfrac{n_2}{n_1}$
+  3. 入射角 $\theta_1 \ge \theta_c$ で光線が境界面で100%全反射！
 
-【レンズの写像公式】
-1/a + 1/b = 1/f
-・倍率: m = |b| / a
-・実像 (b > 0, 倒立): スクリーンに映る
-・虚像 (b < 0, 正立): 虫眼鏡、肉眼でのぞく
-・凸レンズ: f > 0、凹レンズ: f < 0
-```
+* **レンズの写像公式**:
+  $$\frac{1}{a} + \frac{1}{b} = \frac{1}{f}$$
+  ・倍率: $m = \dfrac{|b|}{a}$  
+  ・実像 ($b > 0$, 倒立): スクリーンに映る  
+  ・虚像 ($b < 0$, 正立): 虫眼鏡、肉眼でのぞく  
+  ・凸レンズ: $f > 0$、凹レンズ: $f < 0$
+:::
 
 <!--@include: ../parts/notice.md-->

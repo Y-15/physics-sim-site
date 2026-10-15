@@ -32,21 +32,62 @@ description: 静止摩擦力と最大静止摩擦力の違い、動摩擦力、�
 
 摩擦力には、物体の状態に応じて **3つの異なる性質** があります。ここを区別することが力学克服の絶対条件です。
 
-```
-外力 F と 摩擦力 f の関係グラフ
+<div class="vector-graph-card">
+<svg viewBox="0 0 540 280" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arrowFr" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#a1a1aa"/>
+    </marker>
+  </defs>
 
-摩擦力 f
-  ^
-  |        最大静止摩擦力 (fₛ,max = μₛN)
-  |           /|
-  |          / |
-  |         /  +----------------- 動摩擦力 (fₖ = μₖN) [一定]
-  |        /   :
-  |  静止 /    :
-  |  fₛ=F/     :    動摩擦（滑っている）
-  |     /      :
-  O----+-------+------------------> 外力 F
-```
+  <!-- 領域背景 -->
+  <rect x="70" y="40" width="180" height="190" fill="rgba(34, 197, 94, 0.05)"/>
+  <rect x="250" y="40" width="240" height="190" fill="rgba(249, 115, 22, 0.05)"/>
+
+  <!-- 領域ラベル -->
+  <text x="160" y="65" fill="#4ade80" font-size="12" font-weight="700" font-family="sans-serif" text-anchor="middle">【静止領域】</text>
+  <text x="160" y="85" fill="#86efac" font-size="11" font-family="sans-serif" text-anchor="middle">動かない（つり合い）</text>
+
+  <text x="370" y="65" fill="#fb923c" font-size="12" font-weight="700" font-family="sans-serif" text-anchor="middle">【動摩擦領域】</text>
+  <text x="370" y="85" fill="#fdba74" font-size="11" font-family="sans-serif" text-anchor="middle">滑っている（一定）</text>
+
+  <!-- 補助点線 -->
+  <line x1="250" y1="40" x2="250" y2="230" stroke="#71717a" stroke-dasharray="3,3"/>
+  <line x1="70" y1="80" x2="250" y2="80" stroke="#71717a" stroke-dasharray="3,3"/>
+  <line x1="70" y1="120" x2="250" y2="120" stroke="#71717a" stroke-dasharray="3,3"/>
+
+  <!-- 座標軸 -->
+  <line x1="50" y1="230" x2="500" y2="230" stroke="#a1a1aa" stroke-width="2" marker-end="url(#arrowFr)"/>
+  <line x1="70" y1="250" x2="70" y2="25" stroke="#a1a1aa" stroke-width="2" marker-end="url(#arrowFr)"/>
+
+  <text x="510" y="234" fill="#f4f4f5" font-size="13" font-weight="600" font-family="sans-serif">外力 F [N]</text>
+  <text x="70" y="18" fill="#f4f4f5" font-size="13" font-weight="600" font-family="sans-serif" text-anchor="middle">摩擦力 f [N]</text>
+  <text x="58" y="246" fill="#71717a" font-size="12" font-family="sans-serif">O</text>
+
+  <!-- 目盛り値 -->
+  <text x="62" y="84" fill="#f43f5e" font-size="12" font-weight="700" font-family="sans-serif" text-anchor="end">f_(s,max)</text>
+  <text x="62" y="124" fill="#f59e0b" font-size="12" font-weight="700" font-family="sans-serif" text-anchor="end">f_k</text>
+  <text x="250" y="248" fill="#e4e4e7" font-size="12" font-family="sans-serif" text-anchor="middle">滑り出し限界 F₀</text>
+
+  <!-- グラフ線 -->
+  <!-- 1. 静止摩擦線 (45度傾き f_s = F) -->
+  <line x1="70" y1="230" x2="250" y2="80" stroke="#22c55e" stroke-width="3.5" stroke-linecap="round"/>
+  <text x="145" y="145" fill="#22c55e" font-size="12" font-weight="700" font-family="sans-serif" transform="rotate(-40 145 145)">f_s ＝ F (外力と一致)</text>
+
+  <!-- 2. 最大静止摩擦力ピーク -->
+  <circle cx="250" cy="80" r="5" fill="#f43f5e"/>
+  <text x="260" y="78" fill="#f43f5e" font-size="12" font-weight="700" font-family="sans-serif">最大静止摩擦力 f_(s,max) ＝ μ_s N</text>
+
+  <!-- 3. ドロップ -->
+  <line x1="250" y1="80" x2="250" y2="120" stroke="#f43f5e" stroke-width="2" stroke-dasharray="3,3"/>
+
+  <!-- 4. 動摩擦力線 (水平一定) -->
+  <line x1="250" y1="120" x2="480" y2="120" stroke="#f59e0b" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="250" cy="120" r="4" fill="#f59e0b"/>
+  <text x="310" y="112" fill="#f59e0b" font-size="12" font-weight="700" font-family="sans-serif">動摩擦力 f_k ＝ μ_k N (一定)</text>
+</svg>
+<div class="graph-caption">図: 外力 $F$ と摩擦力 $f$ の特性曲線（静止領域では $f_s = F$、最大値 $\mu_s N$ を超えると動摩擦力 $\mu_k N$ へ急降下）</div>
+</div>
 
 ### ① 静止摩擦力 $f_s$（動いていないとき）
 物体が静止しているとき、摩擦力は**「加えた外力とちょうど同じ大きさ」**で反対向きに働きます。
@@ -90,19 +131,66 @@ $$
 
 重力 $mg$ を、**「斜面に垂直な方向」**と**「斜面に平行な方向」**に分解します。
 
-```
-              垂直抗力 N
-                  ↑
-                  |   [物体 m]
-  摩擦力 f  ↖     |
-             ─────+───── 斜面
-             \    |    /
-              \   |   /  mg sin θ (滑り落とそうとする分力)
-mg cos θ (面に \  |  /
-押し付ける分力)  \| /
-                  ↓
-               重力 mg
-```
+<div class="vector-graph-card">
+<svg viewBox="0 0 540 330" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-blue" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L7,3 z" fill="#38bdf8" />
+    </marker>
+    <marker id="arr-green" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L7,3 z" fill="#10b981" />
+    </marker>
+    <marker id="arr-yellow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L7,3 z" fill="#fbbf24" />
+    </marker>
+    <marker id="arr-rose" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L7,3 z" fill="#f43f5e" />
+    </marker>
+  </defs>
+
+  <!-- 斜面の台 (傾斜 30度) -->
+  <polygon points="50,280 470,280 470,70" fill="rgba(30, 41, 59, 0.6)" stroke="#475569" stroke-width="2"/>
+  <path d="M 120,280 A 70,70 0 0,0 114,250" fill="none" stroke="#94a3b8" stroke-width="1.5"/>
+  <text x="128" y="272" fill="#94a3b8" font-size="14" font-style="italic">θ</text>
+
+  <!-- 物体 (斜面上、重心: cx=280, cy=145, 傾き-26.5度) -->
+  <!-- 斜面角度 tan θ = 210/420 = 0.5 (約26.56度) -->
+  <g transform="translate(280, 165) rotate(-26.56)">
+    <!-- 直方体 (幅 80, 高さ 50) -->
+    <rect x="-40" y="-50" width="80" height="50" rx="3" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+    <text x="0" y="-20" fill="#f8fafc" font-size="13" font-weight="700" text-anchor="middle">質量 m</text>
+  </g>
+
+  <!-- 重心 G = (260, 140) 付近 -->
+  <!-- 力のベクトル (絶対座標系で描画) -->
+  <!-- 1. 重力 mg (鉛直下向き, 長さ 110) -->
+  <line x1="260" y1="140" x2="260" y2="250" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-blue)"/>
+  <text x="268" y="240" fill="#38bdf8" font-size="13" font-weight="700">重力 mg</text>
+
+  <!-- 分解点線 -->
+  <!-- 斜面方向ベクトル: (cos -26.56°, sin -26.56°) = (0.894, -0.447) 下りは (-0.894, 0.447) -->
+  <!-- mg sin θ = 110 * sin(26.56°) = 49.2 -> ベクトル (-44, 22) -->
+  <!-- mg cos θ = 110 * cos(26.56°) = 98.4 -> 斜面に垂直下向き (0.447, 0.894) * 98.4 = (44, 88) -->
+  <line x1="260" y1="140" x2="304" y2="228" stroke="#fbbf24" stroke-width="2" marker-end="url(#arr-yellow)"/>
+  <text x="312" y="232" fill="#fbbf24" font-size="12" font-weight="700">mg cos θ (面に垂直)</text>
+
+  <line x1="260" y1="140" x2="216" y2="162" stroke="#fbbf24" stroke-width="2" marker-end="url(#arr-yellow)"/>
+  <text x="135" y="165" fill="#fbbf24" font-size="12" font-weight="700">mg sin θ (滑り落とす力)</text>
+
+  <!-- 平行四辺形の補助線 -->
+  <line x1="304" y1="228" x2="260" y2="250" stroke="#64748b" stroke-width="1.5" stroke-dasharray="3,3"/>
+  <line x1="216" y1="162" x2="260" y2="250" stroke="#64748b" stroke-width="1.5" stroke-dasharray="3,3"/>
+
+  <!-- 2. 垂直抗力 N (接触面より斜面に垂直上向き, ベクトル (-44, -88)) -->
+  <line x1="270" y1="160" x2="226" y2="72" stroke="#10b981" stroke-width="2.5" marker-end="url(#arr-green)"/>
+  <text x="215" y="65" fill="#10b981" font-size="13" font-weight="700">垂直抗力 N = mg cos θ</text>
+
+  <!-- 3. 静止摩擦力 f (接触面より斜面上向き, ベクトル (44, -22)) -->
+  <line x1="270" y1="160" x2="320" y2="135" stroke="#f43f5e" stroke-width="2.5" marker-end="url(#arr-rose)"/>
+  <text x="328" y="135" fill="#f43f5e" font-size="13" font-weight="700">摩擦力 f (斜面上向き)</text>
+</svg>
+<div class="graph-caption">図: 斜面上の物体に働く力と重力の直交成分分解（斜面垂直方向：$N = mg\cos\theta$、斜面平行方向：$f$ と $mg\sin\theta$）</div>
+</div>
 
 ### ① 斜面に垂直な方向（つり合い）
 物体は斜面から飛び上がったりめり込んだりしないので、合力は $0$ です：

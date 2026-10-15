@@ -41,17 +41,62 @@ description: 光を当てると電子が飛び出す光電効果。古典波動�
 | **③ 最大運動エネルギー $K_{\max}$ は振動数 $\nu$ に比例して増大** | 波のエネルギーは振幅の2乗で決まり、振動数には直接依存しないはず。 | 光子のエネルギー $E=h\nu$ が振動数に比例するため、余剰エネルギー $K_{\max} = h\nu - W$ も $\nu$ とともに一次関数で増加する。 |
 | **④ 光を当てた瞬間に電子が飛び出す（遅延時間なし）** | 微弱な光の場合、波が広がって金属表面の電子に十分なエネルギーが蓄積されるまで数時間〜数日かかるはず。 | 光子と電子の衝突は「1対1の瞬間的な弾性衝突」であるため、光が弱くても当たった瞬間に電子が飛び出す。 |
 
-```
-【光子と電子の1対1衝突モデル】
+<div class="vector-graph-card">
+<svg viewBox="0 0 540 280" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-pe-cyan" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L7,3 z" fill="#38bdf8" />
+    </marker>
+    <marker id="arr-pe-rose" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L7,3 z" fill="#f43f5e" />
+    </marker>
+    <marker id="arr-pe-yellow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L7,3 z" fill="#fbbf24" />
+    </marker>
+  </defs>
 
-    光子 (Photon)          金属表面
-   ~~~~> [ E = hν ] ───> ● 電子 (自由電子)
-                          │
-            ┌─────────────┴─────────────┐
-            ▼                           ▼
-      束縛を断ち切る           残りが運動エネルギーに
-     仕事関数 W (入場料)       K_max = hν - W
-```
+  <!-- 金属プレート (右側: x = 200..500, y = 80..240) -->
+  <rect x="200" y="80" width="300" height="160" rx="6" fill="#1e293b" stroke="#475569" stroke-width="2"/>
+  <text x="350" y="105" fill="#64748b" font-size="13" font-weight="700" text-anchor="middle">金属内部（原子核と自由電子群）</text>
+
+  <!-- 金属表面の境界線 (x = 200) -->
+  <line x1="200" y1="70" x2="200" y2="250" stroke="#94a3b8" stroke-width="3"/>
+  <text x="195" y="65" fill="#94a3b8" font-size="12" text-anchor="end">金属表面</text>
+
+  <!-- 他の自由電子 (薄い表示) -->
+  <circle cx="280" cy="140" r="5" fill="#475569"/>
+  <circle cx="340" cy="180" r="5" fill="#475569"/>
+  <circle cx="420" cy="130" r="5" fill="#475569"/>
+  <circle cx="380" cy="210" r="5" fill="#475569"/>
+  <circle cx="460" cy="190" r="5" fill="#475569"/>
+
+  <!-- 入射光子 (Photon: 波束アニメーション調の正弦波) -->
+  <!-- 左から表面の電子(200, 150)へ入射 -->
+  <path d="M 40,150 Q 55,135 70,150 T 100,150 T 130,150 T 160,150" fill="none" stroke="#38bdf8" stroke-width="2.5"/>
+  <line x1="160" y1="150" x2="192" y2="150" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-pe-cyan)"/>
+  <text x="50" y="125" fill="#38bdf8" font-size="14" font-weight="700">光子 (Photon)</text>
+  <text x="50" y="175" fill="#38bdf8" font-size="13">E ＝ hν</text>
+
+  <!-- 衝突・吸収点 (x=200, y=150) -->
+  <circle cx="200" cy="150" r="8" fill="#fbbf24" stroke="#fff" stroke-width="1.5"/>
+  <text x="215" y="145" fill="#fbbf24" font-size="12" font-weight="700">電子が光子を吸収</text>
+
+  <!-- エネルギー分配 1: 脱出エネルギー（仕事関数 W） -->
+  <path d="M 200,150 L 250,195" fill="none" stroke="#f59e0b" stroke-width="2" stroke-dasharray="3,3" marker-end="url(#arr-pe-yellow)"/>
+  <rect x="255" y="180" width="160" height="42" rx="4" fill="rgba(245, 158, 11, 0.15)" stroke="#f59e0b" stroke-width="1"/>
+  <text x="265" y="198" fill="#f59e0b" font-size="12" font-weight="700">仕事関数 W (脱出コスト)</text>
+  <text x="265" y="214" fill="#94a3b8" font-size="11">束縛を断ち切るために消費</text>
+
+  <!-- エネルギー分配 2: 飛び出す光電子 (最大運動エネルギー K_max) -->
+  <!-- 左上へ飛び出す -->
+  <line x1="200" y1="150" x2="110" y2="70" stroke="#f43f5e" stroke-width="3" marker-end="url(#arr-pe-rose)"/>
+  <circle cx="110" cy="70" r="7" fill="#f43f5e"/>
+  <text x="110" y="55" fill="#f43f5e" font-size="14" font-weight="700">光電子 (Photoelectron)</text>
+  <text x="110" y="90" fill="#f43f5e" font-size="13" font-weight="700">K_max ＝ hν - W</text>
+  <text x="110" y="106" fill="#94a3b8" font-size="11">（余剰エネルギーが運動エネルギーに）</text>
+</svg>
+<div class="graph-caption">図: アインシュタインの光電効果モデル（光子 $E=h\nu$ のエネルギーが仕事関数 $W$ と光電子の運動エネルギー $K_{\max}$ に1対1で分配される）</div>
+</div>
 
 ---
 

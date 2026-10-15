@@ -35,10 +35,54 @@ description: 高校物理の波動分野。波の基本式（v=fλ）、波の�
 * **伝わっていくもの**: 振動のエネルギーと状態（波形パターン）。
 * **その場に留まるもの**: 媒質粒子そのもの（媒質は上下または前後にその場で単振動しているだけです）。
 
-```
-［波の伝播］: 波形パターンが速さ v で +x 方向へ移動 ───>
-［各媒質］  : x 地点に留まり、上下に y = A sin(ωt) で単振動 ↕
-```
+<div class="vector-graph-card">
+<svg viewBox="0 0 540 230" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-wave-prop" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L7,3 z" fill="#38bdf8" />
+    </marker>
+    <marker id="arr-med-up" markerWidth="6" markerHeight="6" refX="3" refY="1" orient="auto">
+      <path d="M0,5 L3,0 L6,5 z" fill="#f43f5e" />
+    </marker>
+    <marker id="arr-med-dn" markerWidth="6" markerHeight="6" refX="3" refY="5" orient="auto">
+      <path d="M0,0 L3,5 L6,0 z" fill="#f43f5e" />
+    </marker>
+  </defs>
+
+  <!-- 中心軸 (y = 110) -->
+  <line x1="40" y1="110" x2="490" y2="110" stroke="#475569" stroke-width="1.5" stroke-dasharray="3,3"/>
+  <text x="495" y="114" fill="#94a3b8" font-size="12">x</text>
+
+  <!-- 正弦波形 (振幅 A = 50, 波長 λ = 240) -->
+  <!-- 40から480まで (1.8波長) -->
+  <path d="M 40,110 Q 100,20 160,110 T 280,110 T 400,110 T 480,110" fill="none" stroke="#38bdf8" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- 波の伝播矢印 (+x 方向) -->
+  <line x1="300" y1="40" x2="430" y2="40" stroke="#38bdf8" stroke-width="3" marker-end="url(#arr-wave-prop)"/>
+  <text x="320" y="30" fill="#38bdf8" font-size="13" font-weight="700">波形の移動速度 v (+x方向)</text>
+  <text x="320" y="58" fill="#94a3b8" font-size="11">パターン（エネルギー）が移動</text>
+
+  <!-- 媒質粒子1: 山の位置 (x = 100, y = 60) -->
+  <line x1="100" y1="40" x2="100" y2="180" stroke="#64748b" stroke-width="1" stroke-dasharray="2,2"/>
+  <circle cx="100" cy="65" r="7" fill="#f43f5e" stroke="#fff" stroke-width="1.5"/>
+  <line x1="100" y1="75" x2="100" y2="105" stroke="#f43f5e" stroke-width="2" marker-end="url(#arr-med-dn)"/>
+
+  <!-- 媒質粒子2: 節の位置 (x = 160, y = 110) -->
+  <line x1="160" y1="40" x2="160" y2="180" stroke="#64748b" stroke-width="1" stroke-dasharray="2,2"/>
+  <circle cx="160" cy="110" r="7" fill="#fbbf24" stroke="#fff" stroke-width="1.5"/>
+  <line x1="160" y1="100" x2="160" y2="75" stroke="#fbbf24" stroke-width="2" marker-end="url(#arr-med-up)"/>
+
+  <!-- 媒質粒子3: 谷の位置 (x = 220, y = 160) -->
+  <line x1="220" y1="40" x2="220" y2="180" stroke="#64748b" stroke-width="1" stroke-dasharray="2,2"/>
+  <circle cx="220" cy="155" r="7" fill="#10b981" stroke="#fff" stroke-width="1.5"/>
+  <line x1="220" y1="145" x2="220" y2="120" stroke="#10b981" stroke-width="2" marker-end="url(#arr-med-up)"/>
+
+  <!-- 媒質の単振動説明 -->
+  <text x="60" y="205" fill="#f43f5e" font-size="13" font-weight="700">各媒質は x 地点に留まり、上下に単振動 ↕</text>
+  <text x="60" y="222" fill="#94a3b8" font-size="11">y(t) = A sin(ωt) （※媒質そのものは横へ移動しない！）</text>
+</svg>
+<div class="graph-caption">図: 正弦波の伝播（波形パターンが速さ $v$ で進行）と媒質の上下単振動（その場に留まり $y=A\sin\omega t$ で振動）の対比</div>
+</div>
 
 ### 波の式が $\left(\frac{t}{T} - \frac{x}{\lambda}\right)$ と「引き算」になる理由
 原点 $\text{O}\,(x = 0)$ にある波源が、時刻 $t$ において次の単振動をしているとします：

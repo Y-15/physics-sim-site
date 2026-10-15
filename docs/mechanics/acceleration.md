@@ -65,21 +65,69 @@ $$
 
 高校物理・共通テストにおいて、$v$-$t$ グラフは計算を大幅に省略できる最強の解法ツールです。
 
-```
-v [m/s]
- ^
- |             /
-v|-----------/|
- |          / |
- | 梯形    /  |
- | 面積   /   |  ← 傾き = 加速度 a = (v - v₀)/t
- |       /    |
-v₀|-----/     |
- |     |      |
- |     |      |
- O-----+------+----> t [s]
-       0      t
-```
+<div class="vector-graph-card">
+<svg viewBox="0 0 540 300" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="vtGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#0284c7" stop-opacity="0.05"/>
+    </linearGradient>
+    <marker id="arrowVt" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#a1a1aa"/>
+    </marker>
+    <marker id="arrowCyan" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#38bdf8"/>
+    </marker>
+  </defs>
+
+  <!-- 背景方眼 -->
+  <line x1="70" y1="50" x2="490" y2="50" stroke="#27272a" stroke-dasharray="3,3"/>
+  <line x1="70" y1="110" x2="490" y2="110" stroke="#27272a" stroke-dasharray="3,3"/>
+  <line x1="70" y1="170" x2="490" y2="170" stroke="#27272a" stroke-dasharray="3,3"/>
+  <line x1="210" y1="30" x2="210" y2="230" stroke="#27272a" stroke-dasharray="3,3"/>
+  <line x1="350" y1="30" x2="350" y2="230" stroke="#27272a" stroke-dasharray="3,3"/>
+
+  <!-- 台形面積の塗りつぶし -->
+  <polygon points="70,230 70,150 370,60 370,230" fill="url(#vtGrad)"/>
+
+  <!-- 補助点線 -->
+  <line x1="70" y1="60" x2="370" y2="60" stroke="#71717a" stroke-width="1.5" stroke-dasharray="4,4"/>
+  <line x1="70" y1="150" x2="370" y2="150" stroke="#71717a" stroke-width="1.5" stroke-dasharray="4,4"/>
+  <line x1="370" y1="60" x2="370" y2="230" stroke="#71717a" stroke-width="1.5" stroke-dasharray="4,4"/>
+
+  <!-- 座標軸 -->
+  <line x1="50" y1="230" x2="500" y2="230" stroke="#a1a1aa" stroke-width="2" marker-end="url(#arrowVt)"/>
+  <line x1="70" y1="250" x2="70" y2="25" stroke="#a1a1aa" stroke-width="2" marker-end="url(#arrowVt)"/>
+
+  <!-- 軸ラベル -->
+  <text x="510" y="234" fill="#f4f4f5" font-size="13" font-weight="600" font-family="sans-serif">t [s]</text>
+  <text x="70" y="16" fill="#f4f4f5" font-size="13" font-weight="600" font-family="sans-serif" text-anchor="middle">v [m/s]</text>
+  <text x="58" y="246" fill="#71717a" font-size="12" font-family="sans-serif">O</text>
+  <text x="52" y="154" fill="#38bdf8" font-size="13" font-weight="600" font-family="sans-serif">v₀</text>
+  <text x="54" y="64" fill="#38bdf8" font-size="13" font-weight="600" font-family="sans-serif">v</text>
+  <text x="370" y="248" fill="#e4e4e7" font-size="13" font-weight="600" font-family="sans-serif" text-anchor="middle">t</text>
+
+  <!-- v-t グラフ直線 -->
+  <line x1="70" y1="150" x2="420" y2="45" stroke="#38bdf8" stroke-width="3.5" stroke-linecap="round"/>
+
+  <!-- 代表点マーカー -->
+  <circle cx="70" cy="150" r="5" fill="#38bdf8"/>
+  <circle cx="370" cy="60" r="5" fill="#38bdf8"/>
+
+  <!-- 面積ラベル -->
+  <text x="220" y="155" fill="#38bdf8" font-size="14" font-weight="700" font-family="sans-serif" text-anchor="middle">台形の面積 ＝ 変位 x</text>
+  <text x="220" y="178" fill="#bae6fd" font-size="12" font-family="sans-serif" text-anchor="middle">x = v₀t + ½at²</text>
+
+  <!-- 傾きラベルと三角ガイド -->
+  <polygon points="260,150 370,150 370,60" fill="none" stroke="#fbbf24" stroke-width="1.5"/>
+  <text x="315" y="166" fill="#fbbf24" font-size="11" font-family="sans-serif" text-anchor="middle">Δt = t</text>
+  <text x="382" y="110" fill="#fbbf24" font-size="11" font-family="sans-serif">Δv = at</text>
+  <path d="M 330,85 Q 360,70 410,75" fill="none" stroke="#fbbf24" stroke-width="1.5" marker-end="url(#arrowCyan)"/>
+  <text x="420" y="80" fill="#fbbf24" font-size="12" font-weight="700" font-family="sans-serif">傾き ＝ 加速度 a</text>
+  <text x="420" y="96" fill="#a1a1aa" font-size="11" font-family="sans-serif">a = (v - v₀)/t</text>
+</svg>
+<div class="graph-caption">図: 等加速度直線運動の <strong>v-t グラフ</strong>（傾き＝加速度 $a$、台形面積＝移動距離・変位 $x$）</div>
+</div>
 
 ### 原則①：直線の傾きは「加速度 $a$」を表す
 傾きの定義は「縦の変化量 $\div$ 横の変化量」なので：

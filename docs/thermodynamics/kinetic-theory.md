@@ -43,17 +43,72 @@ description: 高校物理の熱力学。気体分子運動論の完全導出（�
 一辺の長さが $L\,[\text{m}]$ の立方体容器に、質量 $m\,[\text{kg}]$ の同一の気体分子が $N$ 個入っているモデルを考える。
 容器の体積は $V = L^3\,[\text{m}^3]$ である。
 
-```
-       z ↑
-         |   ┌───────┐
-         |  /       /|
-         | ┌───────┐ | 壁S (x = L)
-         | |  ・→vx| |  ↑ 面積 S = L²
-         | |       |/
-         └─┼───────┴─────→ x
-          / L
-       y /
-```
+<div class="vector-graph-card">
+<svg viewBox="0 0 540 320" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-axis-cube" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L7,3 z" fill="#94a3b8" />
+    </marker>
+    <marker id="arr-vx" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L7,3 z" fill="#f43f5e" />
+    </marker>
+  </defs>
+
+  <!-- 3軸 (原点 O = 160, 230) -->
+  <!-- x 軸: 右方向 (160, 230) -> (480, 230) -->
+  <line x1="160" y1="230" x2="480" y2="230" stroke="#94a3b8" stroke-width="2" marker-end="url(#arr-axis-cube)"/>
+  <text x="485" y="235" fill="#94a3b8" font-size="14" font-weight="700">x</text>
+
+  <!-- z 軸: 上方向 (160, 230) -> (160, 40) -->
+  <line x1="160" y1="230" x2="160" y2="40" stroke="#94a3b8" stroke-width="2" marker-end="url(#arr-axis-cube)"/>
+  <text x="155" y="32" fill="#94a3b8" font-size="14" font-weight="700">z</text>
+
+  <!-- y 軸: 斜め手前方向 (160, 230) -> (70, 290) -->
+  <line x1="160" y1="230" x2="70" y2="290" stroke="#94a3b8" stroke-width="2" marker-end="url(#arr-axis-cube)"/>
+  <text x="55" y="300" fill="#94a3b8" font-size="14" font-weight="700">y</text>
+  <text x="145" y="245" fill="#94a3b8" font-size="13">O</text>
+
+  <!-- 立方体 (一辺 L = 160, 手前オフセット: dx = -60, dy = 45) -->
+  <!-- 奥の面 (x=0..160, z=0..160, y=0): (160, 230) から (320, 230), (320, 70), (160, 70) -->
+  <rect x="160" y="70" width="160" height="160" fill="none" stroke="#475569" stroke-width="1.5" stroke-dasharray="3,3"/>
+
+  <!-- 手前の面 (y=L): (100, 275) から (260, 275), (260, 115), (100, 115) -->
+  <polygon points="100,275 260,275 260,115 100,115" fill="rgba(30, 41, 59, 0.4)" stroke="#64748b" stroke-width="1.5"/>
+
+  <!-- 稜線 (手前と奥を結ぶ) -->
+  <line x1="160" y1="70" x2="100" y2="115" stroke="#64748b" stroke-width="1.5"/>
+  <line x1="160" y1="230" x2="100" y2="275" stroke="#64748b" stroke-width="1.5"/>
+  <line x1="320" y1="70" x2="260" y2="115" stroke="#64748b" stroke-width="1.5"/>
+  <line x1="320" y1="230" x2="260" y2="275" stroke="#64748b" stroke-width="1.5"/>
+
+  <!-- 右側の壁 S (x = L の平面): 奥(320, 70) -> 手前(260, 115) -> 手前下(260, 275) -> 奥下(320, 230) -->
+  <polygon points="320,70 260,115 260,275 320,230" fill="rgba(56, 189, 248, 0.25)" stroke="#38bdf8" stroke-width="2.5"/>
+  <text x="330" y="150" fill="#38bdf8" font-size="13" font-weight="700">壁 S (x = L)</text>
+  <text x="330" y="170" fill="#94a3b8" font-size="12">面積 S = L²</text>
+
+  <!-- 寸法表示 L -->
+  <line x1="160" y1="245" x2="320" y2="245" stroke="#fbbf24" stroke-width="1.5"/>
+  <line x1="160" y1="240" x2="160" y2="250" stroke="#fbbf24" stroke-width="1.5"/>
+  <line x1="320" y1="240" x2="320" y2="250" stroke="#fbbf24" stroke-width="1.5"/>
+  <text x="235" y="260" fill="#fbbf24" font-size="13" font-weight="700">長さ L</text>
+
+  <!-- 分子と速度ベクトル -->
+  <!-- 分子球 (cx=220, cy=170) -->
+  <circle cx="210" cy="170" r="6" fill="#f43f5e"/>
+  <text x="180" y="165" fill="#f43f5e" font-size="12" font-weight="700">分子 m</text>
+
+  <!-- 速度ベクトル vx (x軸平行) -->
+  <line x1="216" y1="170" x2="280" y2="170" stroke="#f43f5e" stroke-width="2.5" marker-end="url(#arr-vx)"/>
+  <text x="235" y="162" fill="#f43f5e" font-size="13" font-weight="700">v_x</text>
+
+  <!-- 反射と往復の表現 -->
+  <line x1="280" y1="170" x2="290" y2="170" stroke="#f43f5e" stroke-width="1.5" stroke-dasharray="2,2"/>
+  <circle cx="290" cy="170" r="3" fill="#38bdf8"/>
+  <text x="250" y="200" fill="#94a3b8" font-size="11">衝突による力積: 2m v_x</text>
+  <text x="250" y="215" fill="#94a3b8" font-size="11">往復距離: 2L</text>
+</svg>
+<div class="graph-caption">図: 気体分子運動論の立方体容器モデル（一辺 $L$、体積 $V=L^3$、壁 $\text{S}$ に垂直衝突する分子の力積）</div>
+</div>
 
 ---
 

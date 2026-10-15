@@ -35,10 +35,68 @@ description: 高校物理の電磁気学最頻出テーマ。ファラデーの�
 * 磁石のN極を近づけると $\to$ コイルは「入ってくるな！」と拒絶するため、**手前側にN極を作って反発**する。
 * 磁石のN極を遠ざけると $\to$ コイルは「行かないで！」と引き止めるため、**手前側にS極を作って引き合う**。
 
-```
-［N極を近づける］ ───> ［コイル手前がN極になる］（反発してブレーキをかける）
-［N極を遠ざける］ <─── ［コイル手前がS極になる］（引き合ってブレーキをかける）
-```
+<div class="vector-graph-card">
+<svg viewBox="0 0 540 190" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-lenz-push" markerWidth="7" markerHeight="7" refX="5" refY="2.5" orient="auto">
+      <path d="M0,0 L0,5 L6,2.5 z" fill="#38bdf8" />
+    </marker>
+    <marker id="arr-lenz-force" markerWidth="7" markerHeight="7" refX="5" refY="2.5" orient="auto">
+      <path d="M0,0 L0,5 L6,2.5 z" fill="#f43f5e" />
+    </marker>
+  </defs>
+
+  <!-- ケース1: N極を近づける (y = 20..90) -->
+  <g transform="translate(20, 20)">
+    <!-- 磁石: 左から右へ移動 -->
+    <rect x="10" y="15" width="40" height="24" rx="2" fill="#3b82f6"/>
+    <text x="30" y="32" fill="#fff" font-size="12" font-weight="700" text-anchor="middle">S</text>
+    <rect x="50" y="15" width="40" height="24" rx="2" fill="#ef4444"/>
+    <text x="70" y="32" fill="#fff" font-size="12" font-weight="700" text-anchor="middle">N</text>
+
+    <!-- 移動矢印 (右向き) -->
+    <line x1="95" y1="27" x2="135" y2="27" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-lenz-push)"/>
+    <text x="115" y="18" fill="#38bdf8" font-size="11" font-weight="700" text-anchor="middle">近づける</text>
+
+    <!-- コイル (楕円ループ) -->
+    <ellipse cx="230" cy="27" rx="14" ry="26" fill="rgba(251, 191, 36, 0.15)" stroke="#fbbf24" stroke-width="3"/>
+    <text x="230" y="70" fill="#fbbf24" font-size="11" font-weight="700" text-anchor="middle">コイル</text>
+
+    <!-- コイルに生じる磁極（手前がN極） -->
+    <rect x="175" y="18" width="30" height="18" rx="2" fill="#ef4444"/>
+    <text x="190" y="32" fill="#fff" font-size="11" font-weight="700" text-anchor="middle">N</text>
+
+    <!-- 反発力 (斥力ブレーキ) -->
+    <line x1="165" y1="27" x2="145" y2="27" stroke="#f43f5e" stroke-width="2" marker-end="url(#arr-lenz-force)"/>
+    <text x="270" y="32" fill="#f43f5e" font-size="13" font-weight="700">反発力（入ってくるな！とブレーキ）</text>
+  </g>
+
+  <!-- ケース2: N極を遠ざける (y = 105..175) -->
+  <g transform="translate(20, 105)">
+    <!-- 磁石: 左へ遠ざかる -->
+    <rect x="10" y="15" width="40" height="24" rx="2" fill="#3b82f6"/>
+    <text x="30" y="32" fill="#fff" font-size="12" font-weight="700" text-anchor="middle">S</text>
+    <rect x="50" y="15" width="40" height="24" rx="2" fill="#ef4444"/>
+    <text x="70" y="32" fill="#fff" font-size="12" font-weight="700" text-anchor="middle">N</text>
+
+    <!-- 移動矢印 (左向き) -->
+    <line x1="95" y1="27" x2="65" y2="27" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-lenz-push)"/>
+    <text x="80" y="14" fill="#38bdf8" font-size="11" font-weight="700" text-anchor="middle">遠ざける</text>
+
+    <!-- コイル (楕円ループ) -->
+    <ellipse cx="230" cy="27" rx="14" ry="26" fill="rgba(251, 191, 36, 0.15)" stroke="#fbbf24" stroke-width="3"/>
+
+    <!-- コイルに生じる磁極（手前がS極） -->
+    <rect x="175" y="18" width="30" height="18" rx="2" fill="#3b82f6"/>
+    <text x="190" y="32" fill="#fff" font-size="11" font-weight="700" text-anchor="middle">S</text>
+
+    <!-- 引力 (引き止めブレーキ) -->
+    <line x1="145" y1="27" x2="165" y2="27" stroke="#38bdf8" stroke-width="2" marker-end="url(#arr-lenz-push)"/>
+    <text x="270" y="32" fill="#38bdf8" font-size="13" font-weight="700">引力（行かないで！と引き止める）</text>
+  </g>
+</svg>
+<div class="graph-caption">図: レンツの法則の直感理解（磁石の動きを妨げる向きに誘導磁極・誘導電流が発生する）</div>
+</div>
 
 このように、**「外部から加えられた変化を打ち消す向き」に誘導起電力と誘導電流が生じる**という法則を**レンツの法則**と呼びます。
 

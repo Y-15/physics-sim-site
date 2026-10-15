@@ -123,16 +123,79 @@ $$
 
 天井から鉛直にばねをつるし、質量 $m$ のおもりを取り付けた「鉛直ばね振り子」は入試超頻出です。
 
-```
-天井 ━━━━━━━━━━━━━━
-       |
-       | 自然長
-       |
-     ───── つり合い位置 (mg = kx₀) ← ★ここが振動の中心！
-       |
-      (m) x
-       ↓
-```
+<div class="vector-graph-card">
+<svg viewBox="0 0 540 320" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-spr-blue" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L7,3 z" fill="#38bdf8" />
+    </marker>
+    <marker id="arr-spr-rose" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L7,3 z" fill="#f43f5e" />
+    </marker>
+    <marker id="arr-spr-green" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L7,3 z" fill="#10b981" />
+    </marker>
+  </defs>
+
+  <!-- 天井 (全幅) -->
+  <line x1="30" y1="35" x2="510" y2="35" stroke="#94a3b8" stroke-width="4"/>
+  <rect x="30" y="25" width="480" height="10" fill="#334155"/>
+  <text x="40" y="20" fill="#94a3b8" font-size="12">天井 (固定面)</text>
+
+  <!-- 3本の基準線 (横点線) -->
+  <!-- 1. 自然長位置 y = 110 -->
+  <line x1="30" y1="110" x2="510" y2="110" stroke="#64748b" stroke-width="1.5" stroke-dasharray="4,4"/>
+  <text x="420" y="105" fill="#94a3b8" font-size="12">自然長位置</text>
+
+  <!-- 2. つり合い位置 y = 180 -->
+  <line x1="30" y1="180" x2="510" y2="180" stroke="#fbbf24" stroke-width="2" stroke-dasharray="6,4"/>
+  <text x="360" y="175" fill="#fbbf24" font-size="13" font-weight="700">★ つり合い位置（振動中心 x=0）</text>
+
+  <!-- === 状態A: 自然長 (x = 100) === -->
+  <text x="100" y="55" fill="#94a3b8" font-size="12" font-weight="700" text-anchor="middle">① 自然長</text>
+  <path d="M 100,35 L 100,50 L 110,55 L 90,65 L 110,75 L 90,85 L 110,95 L 100,100 L 100,110" fill="none" stroke="#38bdf8" stroke-width="2" stroke-linecap="round"/>
+  <circle cx="100" cy="110" r="4" fill="#38bdf8"/>
+  <text x="100" y="130" fill="#94a3b8" font-size="11" text-anchor="middle">おもりなし</text>
+
+  <!-- === 状態B: つり合い状態 (x = 240) === -->
+  <text x="240" y="55" fill="#fbbf24" font-size="12" font-weight="700" text-anchor="middle">② つり合い状態</text>
+  <path d="M 240,35 L 240,48 L 252,56 L 228,70 L 252,84 L 228,98 L 252,112 L 228,126 L 252,140 L 228,154 L 240,162 L 240,170" fill="none" stroke="#38bdf8" stroke-width="2" stroke-linecap="round"/>
+  <!-- おもり (cx=240, cy=185, 幅34, 高さ30) -->
+  <rect x="223" y="170" width="34" height="30" rx="4" fill="#1e293b" stroke="#fbbf24" stroke-width="2"/>
+  <text x="240" y="190" fill="#f8fafc" font-size="12" font-weight="700" text-anchor="middle">m</text>
+  <!-- 力のつり合い矢印 -->
+  <line x1="240" y1="170" x2="240" y2="135" stroke="#10b981" stroke-width="2.5" marker-end="url(#arr-spr-green)"/>
+  <text x="250" y="145" fill="#10b981" font-size="11" font-weight="700">kx₀ (弾性力)</text>
+  <line x1="240" y1="200" x2="240" y2="235" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-spr-blue)"/>
+  <text x="250" y="230" fill="#38bdf8" font-size="11" font-weight="700">mg (重力)</text>
+  <text x="240" y="260" fill="#fbbf24" font-size="12" font-weight="700" text-anchor="middle">mg = kx₀</text>
+
+  <!-- 伸び x0 の寸法矢印 -->
+  <line x1="180" y1="110" x2="180" y2="180" stroke="#fbbf24" stroke-width="1.5"/>
+  <line x1="175" y1="110" x2="185" y2="110" stroke="#fbbf24" stroke-width="1.5"/>
+  <line x1="175" y1="180" x2="185" y2="180" stroke="#fbbf24" stroke-width="1.5"/>
+  <text x="165" y="150" fill="#fbbf24" font-size="12" font-weight="700" text-anchor="end">伸び x₀</text>
+
+  <!-- === 状態C: 任意変位 x (x = 380) === -->
+  <text x="380" y="55" fill="#f43f5e" font-size="12" font-weight="700" text-anchor="middle">③ つり合いから変位 x</text>
+  <path d="M 380,35 L 380,48 L 394,58 L 366,74 L 394,90 L 366,106 L 394,122 L 366,138 L 394,154 L 366,170 L 394,186 L 366,202 L 380,212 L 380,220" fill="none" stroke="#38bdf8" stroke-width="2" stroke-linecap="round"/>
+  <!-- おもり (cx=380, cy=235) -->
+  <rect x="363" y="220" width="34" height="30" rx="4" fill="#1e293b" stroke="#f43f5e" stroke-width="2"/>
+  <text x="380" y="240" fill="#f8fafc" font-size="12" font-weight="700" text-anchor="middle">m</text>
+
+  <!-- 変位 x の寸法矢印 -->
+  <line x1="430" y1="180" x2="430" y2="235" stroke="#f43f5e" stroke-width="1.5"/>
+  <line x1="425" y1="180" x2="435" y2="180" stroke="#f43f5e" stroke-width="1.5"/>
+  <line x1="425" y1="235" x2="435" y2="235" stroke="#f43f5e" stroke-width="1.5"/>
+  <text x="445" y="212" fill="#f43f5e" font-size="12" font-weight="700">変位 x</text>
+
+  <!-- 合力復元力 F = -kx -->
+  <line x1="380" y1="220" x2="380" y2="175" stroke="#f43f5e" stroke-width="2.5" marker-end="url(#arr-spr-rose)"/>
+  <text x="390" y="195" fill="#f43f5e" font-size="12" font-weight="700">合力 F = -kx (復元力)</text>
+  <text x="380" y="280" fill="#94a3b8" font-size="11" text-anchor="middle">F = mg - k(x₀ + x) = -kx</text>
+</svg>
+<div class="graph-caption">図: 鉛直ばね振り子の3状態（自然長・つり合い位置・任意変位 $x$）と合力 $F = -kx$ による単振動の成立メカニズム</div>
+</div>
 
 1. **つり合いの位置（自然長から $x_0$ 伸びた位置）**:
    $$kx_0 = mg \quad \implies \quad x_0 = \frac{mg}{k}$$

@@ -31,19 +31,73 @@ description: 糸の長さとおもりの関係、微小振動近似、力学的�
 1. **重力**: 鉛直下向きに $mg$
 2. **糸の張力**: 支点に向かう方向に $S$
 
-```
-          支点 (Pivot)
-           /|
-          / |
-         /  |
-      L /   |  θ
-       /    |
-      /     |
-    (m)おもり
-     | \
-     |  \ -mg sinθ (復元力)
-     ↓ mg
-```
+<div class="vector-graph-card">
+<svg viewBox="0 0 540 320" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-pend-blue" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L7,3 z" fill="#38bdf8" />
+    </marker>
+    <marker id="arr-pend-green" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L7,3 z" fill="#10b981" />
+    </marker>
+    <marker id="arr-pend-rose" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L7,3 z" fill="#f43f5e" />
+    </marker>
+    <marker id="arr-pend-yellow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L7,3 z" fill="#fbbf24" />
+    </marker>
+  </defs>
+
+  <!-- 天井と支点 -->
+  <line x1="220" y1="30" x2="320" y2="30" stroke="#64748b" stroke-width="3"/>
+  <circle cx="270" cy="30" r="4" fill="#94a3b8"/>
+  <text x="270" y="20" fill="#94a3b8" font-size="12" text-anchor="middle">支点 (Pivot)</text>
+
+  <!-- 鉛直中心線 (点線) -->
+  <line x1="270" y1="30" x2="270" y2="280" stroke="#475569" stroke-width="1.5" stroke-dasharray="4,4"/>
+
+  <!-- 角度 θ の円弧 (支点中心, 半径 60) -->
+  <!-- 支点(270, 30), 角度 25度: x = 270 - 60*sin(25°) = 270 - 25.3 = 244.7, y = 30 + 60*cos(25°) = 30 + 54.4 = 84.4 -->
+  <path d="M 270,90 A 60,60 0 0,1 245,84" fill="none" stroke="#fbbf24" stroke-width="1.5"/>
+  <text x="250" y="105" fill="#fbbf24" font-size="13" font-style="italic">θ</text>
+
+  <!-- 糸 (長さ L = 180, 角度 25度) -->
+  <!-- おもり中心: x = 270 - 180*sin(25°) = 270 - 76 = 194, y = 30 + 180*cos(25°) = 30 + 163 = 193 -->
+  <line x1="270" y1="30" x2="194" y2="193" stroke="#94a3b8" stroke-width="2"/>
+  <text x="215" y="105" fill="#94a3b8" font-size="13">糸の長さ L</text>
+
+  <!-- 軌道円弧 (点線) -->
+  <path d="M 130,220 A 180,180 0 0,0 270,210" fill="none" stroke="#334155" stroke-width="1.5" stroke-dasharray="3,3"/>
+
+  <!-- おもり (cx=194, cy=193, 半径 14) -->
+  <circle cx="194" cy="193" r="14" fill="#1e293b" stroke="#38bdf8" stroke-width="2.5"/>
+  <text x="194" y="198" fill="#f8fafc" font-size="12" font-weight="700" text-anchor="middle">m</text>
+
+  <!-- ベクトル描画 (おもり中心 194, 193 から) -->
+  <!-- 1. 糸の張力 S (支点方向、長さ 80) -->
+  <!-- 単位ベクトル: ( (270-194)/180, (30-193)/180 ) = ( 76/180, -163/180 ) = (0.422, -0.906) -->
+  <line x1="194" y1="193" x2="228" y2="120" stroke="#10b981" stroke-width="2.5" marker-end="url(#arr-pend-green)"/>
+  <text x="235" y="130" fill="#10b981" font-size="13" font-weight="700">張力 S</text>
+
+  <!-- 2. 重力 mg (真下、長さ 90) -> (194, 283) -->
+  <line x1="194" y1="193" x2="194" y2="283" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-pend-blue)"/>
+  <text x="202" y="275" fill="#38bdf8" font-size="13" font-weight="700">重力 mg</text>
+
+  <!-- 重力の分解成分: -->
+  <!-- 半径外向き成分 mg cos θ: ( -0.422, 0.906 ) * 90*cos(25°) = 81.5 * (-0.422, 0.906) = (-34.4, 73.8) -> (160, 267) -->
+  <line x1="194" y1="193" x2="160" y2="267" stroke="#fbbf24" stroke-width="2" marker-end="url(#arr-pend-yellow)"/>
+  <text x="80" y="275" fill="#fbbf24" font-size="12" font-weight="700">mg cos θ (張力とつり合う)</text>
+
+  <!-- 円弧接線成分（復元力） mg sin θ: (0.906, 0.422) * 90*sin(25°) = 38 * (0.906, 0.422) = (34.4, 16.0) -> (228.4, 209) -->
+  <line x1="194" y1="193" x2="228" y2="209" stroke="#f43f5e" stroke-width="2.5" marker-end="url(#arr-pend-rose)"/>
+  <text x="238" y="218" fill="#f43f5e" font-size="13" font-weight="700">復元力: -mg sin θ</text>
+
+  <!-- 分解平行四辺形の点線 -->
+  <line x1="160" y1="267" x2="194" y2="283" stroke="#64748b" stroke-width="1.5" stroke-dasharray="3,3"/>
+  <line x1="228" y1="209" x2="194" y2="283" stroke="#64748b" stroke-width="1.5" stroke-dasharray="3,3"/>
+</svg>
+<div class="graph-caption">図: 単振り子の力と重力分解（動径方向：張力 $S$ と $mg\cos\theta$、接線方向：復元力 $-mg\sin\theta$）</div>
+</div>
 
 おもりは半径 $L$ の円弧上を動くため、円の接線方向（運動方向）の運動方程式を立てます。
 

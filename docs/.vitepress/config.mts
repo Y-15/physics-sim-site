@@ -96,7 +96,8 @@ export default defineConfig({
             { text: '🔋 コンデンサー回路と静電エネルギー・誘電体', link: '/electromagnetism/capacitor' },
             { text: '💡 直流回路とキルヒホッフの法則・非オーム抵抗', link: '/electromagnetism/circuit' },
             { text: '🌀 磁場中の荷電粒子の運動・ローレンツ力', link: '/electromagnetism/lorentz' },
-            { text: '🧲 電磁誘導の法則と導線棒の運動', link: '/electromagnetism/induction' }
+            { text: '🧲 電磁誘導の法則と導線棒の運動', link: '/electromagnetism/induction' },
+            { text: '〰️ 交流回路とRLC直列回路・共振', link: '/electromagnetism/ac-circuit' }
           ]
         }
       ],
@@ -116,7 +117,8 @@ export default defineConfig({
           items: [
             { text: '📖 原子物理編トップ', link: '/atomic/index' },
             { text: '💡 光電効果とアインシュタインの光量子仮説', link: '/atomic/photoelectric' },
-            { text: '🔬 ボーアの水素原子模型と量子条件', link: '/atomic/bohr' }
+            { text: '🔬 ボーアの水素原子模型と量子条件', link: '/atomic/bohr' },
+            { text: '☢️ 放射性崩壊・半減期と放射線の性質', link: '/atomic/decay' }
           ]
         }
       ]

@@ -93,17 +93,52 @@ $$
 - $I = -\frac{1}{R}V + \frac{E}{R}$ は外部の電源・抵抗が決める直線（**負荷線：Load Line**）。
 - **両者の交点 $(V_L, I_L)$ が、実際に回路に現れる電圧と電流（動作点）** です。
 
-```
-I [A]
- ^
-E/R | \ 負荷線 (傾き -1/R)
-    |   \      特性曲線 I = f(V)
-    |     \    /
-    |       ● 動作点 (V_L, I_L)
-    |      /  \
-  0 +-----+----\------> V [V]
-    0    V_L    E
-```
+<div class="vector-graph-card">
+<svg viewBox="0 0 540 320" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-axis-circ" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L7,3 z" fill="#94a3b8" />
+    </marker>
+  </defs>
+
+  <!-- 軸 -->
+  <line x1="60" y1="270" x2="500" y2="270" stroke="#94a3b8" stroke-width="2" marker-end="url(#arr-axis-circ)" />
+  <text x="505" y="274" fill="#94a3b8" font-size="14" font-weight="700">V [V]</text>
+
+  <line x1="60" y1="270" x2="60" y2="30" stroke="#94a3b8" stroke-width="2" marker-end="url(#arr-axis-circ)" />
+  <text x="50" y="22" fill="#94a3b8" font-size="14" font-weight="700">I [A]</text>
+  <text x="44" y="286" fill="#94a3b8" font-size="13">O</text>
+
+  <!-- 負荷線: (60, 60) [I = E/R] から (440, 270) [V = E] への直線 -->
+  <line x1="60" y1="60" x2="440" y2="270" stroke="#38bdf8" stroke-width="2.5" />
+  <circle cx="60" cy="60" r="4" fill="#38bdf8" />
+  <text x="15" y="65" fill="#38bdf8" font-size="13" font-weight="700">E / R</text>
+  <circle cx="440" cy="270" r="4" fill="#38bdf8" />
+  <text x="435" y="292" fill="#38bdf8" font-size="13" font-weight="700">E</text>
+
+  <text x="280" y="80" fill="#38bdf8" font-size="13" font-weight="700">負荷線: I = - (1/R) V + E/R</text>
+  <text x="280" y="100" fill="#94a3b8" font-size="11">（傾き: -1/R）</text>
+
+  <!-- 電球の非線形特性曲線: 原点 (60, 270) から上に凸で伸びる曲線 -->
+  <!-- 曲線式例: y = 270 - 210 * sqrt((x - 60) / 400) -->
+  <path d="M 60,270 Q 140,195 240,165 T 460,130" fill="none" stroke="#10b981" stroke-width="3" stroke-linecap="round" />
+  <text x="350" y="120" fill="#10b981" font-size="13" font-weight="700">特性曲線 I = f(V)</text>
+
+  <!-- 交点（動作点） cx = 220, cy = 148 付近 -->
+  <!-- 動作点からの垂直・水平点線 -->
+  <line x1="220" y1="148" x2="220" y2="270" stroke="#f43f5e" stroke-width="1.5" stroke-dasharray="3,3" />
+  <line x1="60" y1="148" x2="220" y2="148" stroke="#f43f5e" stroke-width="1.5" stroke-dasharray="3,3" />
+
+  <!-- 動作点マーク -->
+  <circle cx="220" cy="148" r="6" fill="#f43f5e" stroke="#fff" stroke-width="1.5" />
+  <text x="235" y="152" fill="#f43f5e" font-size="14" font-weight="700">動作点 (V_L, I_L)</text>
+
+  <!-- 軸上の交点ラベル -->
+  <text x="210" y="290" fill="#f43f5e" font-size="13" font-weight="700">V_L</text>
+  <text x="25" y="152" fill="#f43f5e" font-size="13" font-weight="700">I_L</text>
+</svg>
+<div class="graph-caption">図: 電球の非線形特性曲線 $I=f(V)$ と外部回路の負荷線の交点作図法（動作点で実際の電圧 $V_L$・電流 $I_L$ が決定される）</div>
+</div>
 
 ### (5) ホイートストンブリッジ
 4本の抵抗 $R_1, R_2, R_3, R_4$ と検流計 G をひし形に配置した回路において、検流計に電流が流れない条件（平衡条件）：
@@ -140,18 +175,80 @@ $$
 
 ### 【完全オリジナル例題 1】2つの電源を含む回路網（キルヒホッフの法則）
 
-```
-下図のように、起電力 E₁ = 12.0 V, E₂ = 6.0 V の内部抵抗の無視できる電源と、
-抵抗 R₁ = 4.0 Ω, R₂ = 6.0 Ω, R₃ = 3.0 Ω を接続した。
+下図のように、起電力 $E_1 = 12.0\,\text{V}$, $E_2 = 6.0\,\text{V}$ の内部抵抗の無視できる電源と、抵抗 $R_1 = 4.0\,\Omega$, $R_2 = 6.0\,\Omega$, $R_3 = 3.0\,\Omega$ を接続した。
 
-      R₁ (4.0Ω)        P       R₂ (6.0Ω)
-  +---[      ]---------+-------[      ]---+
-  |                    |                  |
- (E₁) 12V             [R₃] 3.0Ω          (E₂) 6.0V
-  |                    |                  |
-  +--------------------+------------------+
-                       | 接地 0V
-```
+<div class="vector-graph-card">
+<svg viewBox="0 0 540 260" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-current" markerWidth="7" markerHeight="7" refX="5" refY="2.5" orient="auto">
+      <path d="M0,0 L0,5 L6,2.5 z" fill="#f43f5e" />
+    </marker>
+  </defs>
+
+  <!-- 回路導線 (上部: y=50, 下部: y=200, 左: x=80, 中央: x=270, 右: x=460) -->
+  <!-- 下部共通線 -->
+  <line x1="80" y1="200" x2="460" y2="200" stroke="#94a3b8" stroke-width="2.5" />
+
+  <!-- 接地 (アース) シンボル -->
+  <line x1="270" y1="200" x2="270" y2="225" stroke="#94a3b8" stroke-width="2" />
+  <line x1="250" y1="225" x2="290" y2="225" stroke="#94a3b8" stroke-width="2.5" />
+  <line x1="257" y1="231" x2="283" y2="231" stroke="#94a3b8" stroke-width="2" />
+  <line x1="264" y1="237" x2="276" y2="237" stroke="#94a3b8" stroke-width="1.5" />
+  <text x="296" y="235" fill="#94a3b8" font-size="12">接地 (0 V)</text>
+
+  <!-- 左ループ: 電源 E1 -->
+  <line x1="80" y1="200" x2="80" y2="140" stroke="#94a3b8" stroke-width="2.5" />
+  <!-- 電池 E1 (上が正極、下が負極) -->
+  <line x1="68" y1="140" x2="92" y2="140" stroke="#e2e8f0" stroke-width="3" /> <!-- 負極 -->
+  <line x1="60" y1="125" x2="100" y2="125" stroke="#38bdf8" stroke-width="3" /> <!-- 正極 -->
+  <line x1="80" y1="125" x2="80" y2="50" stroke="#94a3b8" stroke-width="2.5" />
+  <text x="18" y="135" fill="#38bdf8" font-size="13" font-weight="700">E₁ = 12V</text>
+  <text x="73" y="118" fill="#38bdf8" font-size="11">＋</text>
+  <text x="73" y="154" fill="#94a3b8" font-size="11">ー</text>
+
+  <!-- 上部左導線と R1 -->
+  <line x1="80" y1="50" x2="140" y2="50" stroke="#94a3b8" stroke-width="2.5" />
+  <rect x="140" y="38" width="60" height="24" rx="3" fill="#1e293b" stroke="#38bdf8" stroke-width="2" />
+  <text x="170" y="54" fill="#f8fafc" font-size="12" font-weight="700" text-anchor="middle">R₁ (4.0Ω)</text>
+  <line x1="200" y1="50" x2="270" y2="50" stroke="#94a3b8" stroke-width="2.5" />
+
+  <!-- 中央ノード P と R3 -->
+  <circle cx="270" cy="50" r="5" fill="#fbbf24" />
+  <text x="270" y="38" fill="#fbbf24" font-size="14" font-weight="700" text-anchor="middle">点 P (電位 V_P)</text>
+
+  <line x1="270" y1="50" x2="270" y2="90" stroke="#94a3b8" stroke-width="2.5" />
+  <rect x="258" y="90" width="24" height="60" rx="3" fill="#1e293b" stroke="#38bdf8" stroke-width="2" />
+  <text x="290" y="125" fill="#f8fafc" font-size="12" font-weight="700">R₃ (3.0Ω)</text>
+  <line x1="270" y1="150" x2="270" y2="200" stroke="#94a3b8" stroke-width="2.5" />
+
+  <!-- 右ループ: 電源 E2 -->
+  <line x1="460" y1="200" x2="460" y2="140" stroke="#94a3b8" stroke-width="2.5" />
+  <!-- 電池 E2 (上が正極、下が負極) -->
+  <line x1="448" y1="140" x2="472" y2="140" stroke="#e2e8f0" stroke-width="3" />
+  <line x1="440" y1="125" x2="480" y2="125" stroke="#38bdf8" stroke-width="3" />
+  <line x1="460" y1="125" x2="460" y2="50" stroke="#94a3b8" stroke-width="2.5" />
+  <text x="490" y="135" fill="#38bdf8" font-size="13" font-weight="700">E₂ = 6.0V</text>
+  <text x="453" y="118" fill="#38bdf8" font-size="11">＋</text>
+  <text x="453" y="154" fill="#94a3b8" font-size="11">ー</text>
+
+  <!-- 上部右導線と R2 -->
+  <line x1="270" y1="50" x2="340" y2="50" stroke="#94a3b8" stroke-width="2.5" />
+  <rect x="340" y="38" width="60" height="24" rx="3" fill="#1e293b" stroke="#38bdf8" stroke-width="2" />
+  <text x="370" y="54" fill="#f8fafc" font-size="12" font-weight="700" text-anchor="middle">R₂ (6.0Ω)</text>
+  <line x1="400" y1="50" x2="460" y2="50" stroke="#94a3b8" stroke-width="2.5" />
+
+  <!-- 電流の向きの矢印表示 (赤) -->
+  <line x1="225" y1="65" x2="255" y2="65" stroke="#f43f5e" stroke-width="2" marker-end="url(#arr-current)" />
+  <text x="240" y="80" fill="#f43f5e" font-size="12" font-weight="700" text-anchor="middle">I₁ →</text>
+
+  <line x1="325" y1="65" x2="295" y2="65" stroke="#f43f5e" stroke-width="2" marker-end="url(#arr-current)" />
+  <text x="310" y="80" fill="#f43f5e" font-size="12" font-weight="700" text-anchor="middle">← I₂</text>
+
+  <line x1="250" y1="165" x2="250" y2="190" stroke="#f43f5e" stroke-width="2" marker-end="url(#arr-current)" />
+  <text x="235" y="180" fill="#f43f5e" font-size="12" font-weight="700">↓ I₃</text>
+</svg>
+<div class="graph-caption">回路図: 2電源・3抵抗の回路網（キルヒホッフの第1法則・第2法則の適用回路）</div>
+</div>
 
 **(1) 各枝を流れる電流 $I_1, I_2, I_3$ の大きさと向きを求めよ。**  
 **(2) 接続点 P の電位 $V_P$ を求めよ（下部導線の電位を 0 V とする）。**
