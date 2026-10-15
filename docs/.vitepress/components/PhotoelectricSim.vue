@@ -6,7 +6,7 @@
         <span class="badge">Photoelectric Effect</span>
       </div>
       <p class="desc">
-        光の波長 $\lambda$（振動数 $\nu$）、光の強さ（光子数）、逆電圧 $V$、金属の仕事関数 $W$ を変え、光量子仮説 $E=h\nu$ とアインシュタインの光電方程式 $eV_0 = h\nu - W$ をインタラクティブに検証できます。
+        光の波長 λ（振動数 ν）、光の強さ（光子数）、逆電圧 <i>V</i>、金属の仕事関数 <i>W</i> を変え、光量子仮説 <i>E</i>=<i>h</i>ν とアインシュタインの光電方程式 eV<sub>0</sub> = <i>h</i>ν - <i>W</i> をインタラクティブに検証できます。
       </p>
     </div>
 
@@ -19,7 +19,7 @@
       <div class="controls-grid">
         <!-- 金属の種類 -->
         <div class="control-group">
-          <label>金属の種類 (仕事関数 $W$):</label>
+          <label>金属の種類 (仕事関数 <i>W</i>):</label>
           <select v-model="selectedMetal" class="metal-select">
             <option v-for="(m, idx) in metals" :key="idx" :value="idx">
               {{ m.name }} (W = {{ m.W.toFixed(2) }} eV)
@@ -30,11 +30,11 @@
         <!-- 波長 λ -->
         <div class="control-group">
           <label>
-            光の波長 $\lambda$: <strong>{{ wavelength }} nm</strong>
+            光の波長 λ: <strong>{{ wavelength }} nm</strong>
             <span class="color-chip" :style="{ backgroundColor: lightColor }"></span>
           </label>
           <input type="range" v-model.number="wavelength" min="200" max="750" step="5" />
-          <span class="sub-info">振動数 $\nu = {{ fmt(freq * 1e-14, 2) }}\times 10^{14}\,\text{Hz}$</span>
+          <span class="sub-info">振動数 ν = {{ fmt(freq * 1e-14, 2) }}× 10<sup>14</sup> Hz</span>
         </div>
 
         <!-- 光の強さ -->
@@ -45,7 +45,7 @@
 
         <!-- 電圧 V -->
         <div class="control-group">
-          <label>印加電圧 $V$: <strong>{{ fmt(voltage, 2) }} V</strong></label>
+          <label>印加電圧 <i>V</i>: <strong>{{ fmt(voltage, 2) }} V</strong></label>
           <input type="range" v-model.number="voltage" min="-4.0" max="4.0" step="0.05" />
           <span class="sub-info">負電圧: 減速・阻止方向 / 正電圧: 加速方向</span>
         </div>
@@ -60,7 +60,7 @@
           ① I-V 特性曲線（光電流 vs 電圧）
         </button>
         <button :class="{ active: graphMode === 'V0Nu' }" @click="graphMode = 'V0Nu'">
-          ② 阻止電圧 $V_0$ vs 振動数 $\nu$ グラフ（傾き $h/e$）
+          ② 阻止電圧 <i>V</i><sub>0</sub> vs 振動数 ν グラフ（傾き <i>h</i>/<i>e</i>）
         </button>
       </div>
     </div>
@@ -68,33 +68,33 @@
     <!-- ステータス値カード -->
     <div class="stats-panel">
       <div class="stat-card">
-        <span class="label">光子のエネルギー $h\nu$</span>
+        <span class="label">光子のエネルギー <i>h</i>ν</span>
         <span class="val highlight">{{ fmt(photonEnergyEV, 2) }} eV</span>
       </div>
       <div class="stat-card">
-        <span class="label">仕事関数 $W$</span>
+        <span class="label">仕事関数 <i>W</i></span>
         <span class="val">{{ fmt(currentMetal.W, 2) }} eV</span>
       </div>
       <div class="stat-card">
-        <span class="label">最大運動エネルギー $K_{\max}$</span>
+        <span class="label">最大運動エネルギー <i>K</i><sub>\max</sub></span>
         <span class="val" :class="{ 'zero-k': KmaxEV <= 0 }">
           {{ KmaxEV > 0 ? fmt(KmaxEV, 2) + ' eV' : '0 eV (電子放出なし)' }}
         </span>
       </div>
       <div class="stat-card">
-        <span class="label">阻止電圧 $V_0$</span>
+        <span class="label">阻止電圧 <i>V</i><sub>0</sub></span>
         <span class="val highlight-alt">
           {{ KmaxEV > 0 ? fmt(V0, 2) + ' V' : '—' }}
         </span>
       </div>
       <div class="stat-card">
-        <span class="label">限界波長 $\lambda_0 = hc/W$</span>
+        <span class="label">限界波長 λ<sub>0</sub> = hc/<i>W</i></span>
         <span class="val">{{ fmt(lambda0, 0) }} nm</span>
       </div>
       <div class="stat-card">
-        <span class="label">光電流 $I$ (検出値)</span>
+        <span class="label">光電流 <i>I</i> (検出値)</span>
         <span class="val" :class="photocurrent > 0 ? 'current-flow' : 'current-zero'">
-          {{ fmt(photocurrent, 1) }} $\mu\text{A}$
+          {{ fmt(photocurrent, 1) }} μ<i>A</i>
         </span>
       </div>
     </div>

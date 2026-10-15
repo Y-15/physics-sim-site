@@ -32,45 +32,36 @@ description: 高校物理の熱力学・難関大最頻出テーマ「気体の�
     </defs>
     <rect width="760" height="320" fill="url(#gradGM)" rx="10"/>
     <rect width="760" height="320" fill="url(#gridGM)" rx="10"/>
-
     <!-- コック混合プロセス -->
     <g transform="translate(60, 40)">
       <text x="140" y="25" fill="#38bdf8" font-size="14" font-weight="bold" text-anchor="middle">【コック開通と内部エネルギー保存】</text>
-
       <!-- 2つの球形/箱形容器 -->
       <!-- 容器A -->
       <rect x="20" y="60" width="110" height="110" fill="rgba(56, 189, 248, 0.2)" stroke="#38bdf8" stroke-width="2" rx="10"/>
       <text x="75" y="100" fill="#38bdf8" font-size="13" font-weight="bold" text-anchor="middle">気体A</text>
       <text x="75" y="125" fill="#e2e8f0" font-size="11" text-anchor="middle">n_A, T_A, V_A</text>
-
       <!-- 連結管とコック -->
       <rect x="130" y="105" width="60" height="20" fill="#1e293b" stroke="#94a3b8" stroke-width="1.5"/>
       <circle cx="160" cy="115" r="7" fill="#ef4444"/>
       <text x="160" y="95" fill="#ef4444" font-size="11" font-weight="bold" text-anchor="middle">コック</text>
-
       <!-- 容器B -->
       <rect x="190" y="60" width="110" height="110" fill="rgba(245, 158, 11, 0.2)" stroke="#f59e0b" stroke-width="2" rx="10"/>
       <text x="245" y="100" fill="#f59e0b" font-size="13" font-weight="bold" text-anchor="middle">気体B</text>
       <text x="245" y="125" fill="#e2e8f0" font-size="11" text-anchor="middle">n_B, T_B, V_B</text>
-
       <!-- 断熱壁表示 -->
       <rect x="10" y="50" width="300" height="130" fill="none" stroke="#64748b" stroke-width="3" stroke-dasharray="6,4" rx="12"/>
       <text x="160" y="205" fill="#64748b" font-size="12" text-anchor="middle">外壁は断熱材で覆われている (Q = 0, W = 0)</text>
     </g>
-
     <!-- 右側: 理論式まとめカード -->
     <g transform="translate(420, 30)">
       <rect x="0" y="0" width="300" height="260" fill="#1e293b" rx="8" stroke="#334155"/>
       <text x="150" y="30" fill="#34d399" font-size="14" font-weight="bold" text-anchor="middle">【熱力学第1法則: Q = ΔU + W】</text>
-
       <text x="20" y="60" fill="#94a3b8" font-size="12">1. 断熱材なので熱の出入りなし: Q = 0</text>
       <text x="20" y="85" fill="#94a3b8" font-size="12">2. 外壁は剛体で動かないので: W = 0</text>
       <text x="20" y="115" fill="#f8fafc" font-size="13" font-weight="bold">⇒ 全体の内部エネルギーが保存！</text>
       <text x="20" y="140" fill="#38bdf8" font-size="13">U_前 = U_後</text>
       <text x="20" y="165" fill="#f59e0b" font-size="13">n_A C_V T_A + n_B C_V T_B = (n_A + n_B) C_V T</text>
-
       <line x1="20" y1="180" x2="280" y2="180" stroke="#334155"/>
-
       <text x="20" y="205" fill="#a855f7" font-size="13" font-weight="bold">混合後の絶対温度 T:</text>
       <text x="150" y="235" fill="#34d399" font-size="15" font-weight="bold" text-anchor="middle">T = (n_A T_A + n_B T_B) / (n_A + n_B)</text>
     </g>

@@ -45,10 +45,8 @@ description: 高校物理の波動分野・最頻出実験テーマ「気柱の�
     </defs>
     <rect width="760" height="440" fill="url(#gradRes)" rx="10"/>
     <rect width="760" height="440" fill="url(#gridRes)" rx="10"/>
-
     <!-- 左列: 閉管 (Closed Pipe) -->
     <text x="50" y="35" fill="#38bdf8" font-size="16" font-weight="bold">【閉管（片側閉口）】: 奇数倍振動のみ (m = 1, 3, 5)</text>
-
     <!-- 閉管 基本振動 (m=1) -->
     <g transform="translate(40, 60)">
       <!-- 管枠 (右側閉端) -->
@@ -61,7 +59,6 @@ description: 高校物理の波動分野・最頻出実験テーマ「気柱の�
       <text x="260" y="25" fill="#ef4444" font-size="11" font-weight="bold">節 (閉)</text>
       <text x="0" y="80" fill="#e2e8f0" font-size="13">① 基本振動: L = λ/4  (f₁ = V / 4L)</text>
     </g>
-
     <!-- 閉管 3倍振動 (m=3) -->
     <g transform="translate(40, 180)">
       <rect x="0" y="0" width="300" height="60" fill="rgba(30, 41, 59, 0.6)" stroke="#64748b" stroke-width="2"/>
@@ -73,7 +70,6 @@ description: 高校物理の波動分野・最頻出実験テーマ「気柱の�
       <text x="195" y="45" fill="#ef4444" font-size="10">節</text>
       <text x="0" y="80" fill="#e2e8f0" font-size="13">② 3倍振動: L = 3λ/4  (f₃ = 3V / 4L)</text>
     </g>
-
     <!-- 閉管 5倍振動 (m=5) -->
     <g transform="translate(40, 300)">
       <rect x="0" y="0" width="300" height="60" fill="rgba(30, 41, 59, 0.6)" stroke="#64748b" stroke-width="2"/>
@@ -83,13 +79,10 @@ description: 高校物理の波動分野・最頻出実験テーマ「気柱の�
       <path d="M 0 55 Q 60 5 120 55 Q 180 5 240 55 Q 270 55 300 30" fill="none" stroke="#38bdf8" stroke-width="2.5"/>
       <text x="0" y="80" fill="#e2e8f0" font-size="13">③ 5倍振動: L = 5λ/4  (f₅ = 5V / 4L)</text>
     </g>
-
     <!-- 中央の仕切り線 -->
     <line x1="380" y1="20" x2="380" y2="420" stroke="#334155" stroke-width="1.5" stroke-dasharray="6,4"/>
-
     <!-- 右列: 開管 (Open Pipe) -->
     <text x="410" y="35" fill="#f59e0b" font-size="16" font-weight="bold">【開管（両側開口）】: 全倍振動 (n = 1, 2, 3)</text>
-
     <!-- 開管 基本振動 (n=1) -->
     <g transform="translate(410, 60)">
       <rect x="0" y="0" width="300" height="60" fill="rgba(30, 41, 59, 0.6)" stroke="#64748b" stroke-width="2"/>
@@ -100,7 +93,6 @@ description: 高校物理の波動分野・最頻出実験テーマ「気柱の�
       <text x="145" y="48" fill="#ef4444" font-size="11">節</text>
       <text x="0" y="80" fill="#e2e8f0" font-size="13">① 基本振動: L = λ/2  (f₁ = V / 2L)</text>
     </g>
-
     <!-- 開管 2倍振動 (n=2) -->
     <g transform="translate(410, 180)">
       <rect x="0" y="0" width="300" height="60" fill="rgba(30, 41, 59, 0.6)" stroke="#64748b" stroke-width="2"/>
@@ -111,7 +103,6 @@ description: 高校物理の波動分野・最頻出実験テーマ「気柱の�
       <circle cx="225" cy="30" r="3" fill="#ef4444"/>
       <text x="0" y="80" fill="#e2e8f0" font-size="13">② 2倍振動: L = λ  (f₂ = 2V / 2L)</text>
     </g>
-
     <!-- 開管 3倍振動 (n=3) -->
     <g transform="translate(410, 300)">
       <rect x="0" y="0" width="300" height="60" fill="rgba(30, 41, 59, 0.6)" stroke="#64748b" stroke-width="2"/>
@@ -143,7 +134,6 @@ description: 高校物理の波動分野・最頻出実験テーマ「気柱の�
 <div class="vector-graph-card">
   <svg viewBox="0 0 760 260" class="vector-graph" xmlns="http://www.w3.org/2000/svg">
     <rect width="760" height="260" fill="#0f172a" rx="10"/>
-
     <!-- 第1共鳴 -->
     <g transform="translate(80, 20)">
       <text x="70" y="20" fill="#38bdf8" font-size="14" font-weight="bold" text-anchor="middle">【第1共鳴】(管長 l₁)</text>
@@ -160,14 +150,12 @@ description: 高校物理の波動分野・最頻出実験テーマ「気柱の�
       <!-- 式 -->
       <text x="70" y="235" fill="#e2e8f0" font-size="12" text-anchor="middle">l₁ + Δl = λ/4</text>
     </g>
-
     <!-- 矢印 -->
     <g transform="translate(270, 110)">
       <line x1="0" y1="0" x2="60" y2="0" stroke="#38bdf8" stroke-width="3"/>
       <polygon points="60,-5 75,0 60,5" fill="#38bdf8"/>
       <text x="35" y="-10" fill="#38bdf8" font-size="11" text-anchor="middle">水面を下げる</text>
     </g>
-
     <!-- 第2共鳴 -->
     <g transform="translate(420, 20)">
       <text x="70" y="20" fill="#f59e0b" font-size="14" font-weight="bold" text-anchor="middle">【第2共鳴】(管長 l₂)</text>
@@ -182,7 +170,6 @@ description: 高校物理の波動分野・最頻出実験テーマ「気柱の�
       <!-- 式 -->
       <text x="70" y="235" fill="#e2e8f0" font-size="12" text-anchor="middle">l₂ + Δl = 3λ/4</text>
     </g>
-
     <!-- 差分による決定 -->
     <g transform="translate(580, 70)">
       <rect x="0" y="0" width="160" height="120" fill="#1e293b" rx="8" stroke="#334155"/>

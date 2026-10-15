@@ -8,7 +8,7 @@ description: 高校物理の原子物理最重要テーマ。原子核の構造�
 <div class="lead">
 太陽はなぜ何十億年もの間、燃え尽きることなく莫大な光と熱を放ち続けられるのでしょうか？<br>
 また、わずか数グラムのウラン燃料から、なぜ火力発電所の何千トンもの石炭に匹敵する電力が生み出されるのでしょうか？<br>
-その答えが、アインシュタインが特殊相対性理論から導き出した物理学史上もっとも有名な方程式<strong>「$E = mc^2$（質量とエネルギーの等価性）」</strong>です。<br>
+その答えが、アインシュタインが特殊相対性理論から導き出した物理学史上もっとも有名な方程式<strong>「<i>E</i> = mc²（質量とエネルギーの等価性）」</strong>です。<br>
 原子核が結合するとき、測定できるレベルで質量が消え去り（<strong>質量欠損</strong>）、それが猛烈なエネルギーへと変換されます。<br>
 本ページでは、原子核の結合エネルギー曲線からウランの核分裂、太陽の熱核融合までを完全攻略します。
 </div>
@@ -105,31 +105,25 @@ $$\frac{1.4924 \times 10^{-10}\,\text{J}}{1.6022 \times 10^{-13}\,\text{J/MeV}} 
   <line x1="60" y1="240" x2="60" y2="30" stroke="#94a3b8" stroke-width="2"/>
   <text x="505" y="244" fill="#94a3b8" font-size="12">質量数 A</text>
   <text x="50" y="22" fill="#94a3b8" font-size="12">B / A [MeV/核子]</text>
-
   <!-- 曲線 (鉄56がピーク約8.8 MeV) -->
   <!-- 原点(60,240) -> 4He(80,105) -> 56Fe(170, 60) -> 235U(450, 100) -->
   <path d="M 60,240 Q 75,100 85,105 T 110,85 T 170,60 Q 280,70 460,95" fill="none" stroke="#38bdf8" stroke-width="3"/>
-
   <!-- ピーク: 鉄56 (x = 170, y = 60) -->
   <circle cx="170" cy="60" r="6" fill="#f43f5e"/>
   <rect x="75" y="30" width="190" height="22" rx="4" fill="#0f172a" stroke="#f43f5e" stroke-width="1.2"/>
   <text x="170" y="45" fill="#f43f5e" font-size="12" font-weight="700" text-anchor="middle">⁵⁶Fe (最安定！約 8.8 MeV)</text>
-
   <!-- ヘリウム4の局所ピーク (x = 85, y = 105) -->
   <circle cx="85" cy="105" r="5" fill="#fbbf24"/>
   <rect x="92" y="102" width="75" height="18" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
   <text x="129" y="115" fill="#fbbf24" font-size="10" font-weight="600" text-anchor="middle">⁴He (α粒子)</text>
-
   <!-- ウラン235 (x = 460, y = 95) -->
   <circle cx="460" cy="95" r="5" fill="#10b981"/>
   <rect x="390" y="66" width="140" height="20" rx="3" fill="#0f172a" stroke="#10b981" stroke-width="1"/>
   <text x="460" y="80" fill="#10b981" font-size="11" font-weight="700" text-anchor="middle">²³⁵U (約 7.6 MeV)</text>
-
   <!-- 領域矢印 1: 核融合 (左側から右へピークに向かう) -->
   <line x1="80" y1="170" x2="150" y2="100" stroke="#fbbf24" stroke-width="2"/>
   <rect x="50" y="178" width="135" height="20" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
   <text x="117" y="192" fill="#fbbf24" font-size="11" font-weight="700" text-anchor="middle">【核融合】軽核が結合</text>
-
   <!-- 領域矢印 2: 核分裂 (右側から左へピークに向かう) -->
   <line x1="440" y1="130" x2="340" y2="90" stroke="#10b981" stroke-width="2"/>
   <rect x="330" y="132" width="135" height="20" rx="3" fill="#0f172a" stroke="#10b981" stroke-width="1"/>

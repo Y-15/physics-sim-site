@@ -253,19 +253,19 @@ onUnmounted(() => {
 
       <div class="status-panel">
         <div class="stat-row">
-          <span class="lbl">大気圧 $P_0$:</span>
+          <span class="lbl">大気圧 <i>P</i><sub>0</sub>:</span>
           <span class="val highlight">{{ atmosphericPressure }} mmHg</span>
         </div>
         <div class="stat-row">
-          <span class="lbl">水銀柱高さ $h$:</span>
+          <span class="lbl">水銀柱高さ <i>h</i>:</span>
           <span class="val">{{ simData.h }} mmHg</span>
         </div>
         <div class="stat-row">
-          <span class="lbl">気柱の長さ $L$:</span>
+          <span class="lbl">気柱の長さ <i>L</i>:</span>
           <span class="val">{{ simData.L }} mm</span>
         </div>
         <div class="stat-row">
-          <span class="lbl">上部圧力 $P_{\text{gas}}$:</span>
+          <span class="lbl">上部圧力 <i>P</i><sub>gas</sub>:</span>
           <span class="val status-gas">{{ simData.Pgas }} mmHg</span>
         </div>
         <div class="condition-note" v-if="simData.isTorricelliVacuum">
@@ -278,22 +278,22 @@ onUnmounted(() => {
     <div class="controls-panel">
       <div class="control-row">
         <div class="control-group">
-          <label>ガラス管の引き上げ高さ $H$: <span>{{ tubePullUp }} mm</span></label>
+          <label>ガラス管の引き上げ高さ <i>H</i>: <span>{{ tubePullUp }} mm</span></label>
           <input type="range" v-model.number="tubePullUp" min="700" max="950" step="5" />
         </div>
         <div class="control-group">
-          <label>大気圧 $P_0$: <span>{{ atmosphericPressure }} mmHg</span></label>
+          <label>大気圧 <i>P</i><sub>0</sub>: <span>{{ atmosphericPressure }} mmHg</span></label>
           <input type="range" v-model.number="atmosphericPressure" min="720" max="800" step="5" />
         </div>
       </div>
 
       <div class="control-row">
         <div class="control-group">
-          <label>封入気体の量 $n$: <span>{{ gasAmount === 0 ? '真空 (0)' : gasAmount }}</span></label>
+          <label>封入気体の量 <i>n</i>: <span>{{ gasAmount === 0 ? '真空 (0)' : gasAmount }}</span></label>
           <input type="range" v-model.number="gasAmount" min="0" max="10" step="1" />
         </div>
         <div class="control-group">
-          <label>気体温度 $T$: <span>{{ gasTemperature }} K</span></label>
+          <label>気体温度 <i>T</i>: <span>{{ gasTemperature }} K</span></label>
           <input type="range" v-model.number="gasTemperature" min="250" max="400" step="5" :disabled="gasAmount === 0" />
         </div>
       </div>

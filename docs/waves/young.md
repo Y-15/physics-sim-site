@@ -37,63 +37,54 @@ description: 高校物理の波動分野。ヤングの二重スリット実験�
 ヤングの実験では、1つの単色光源（レーザーなど）から出た光を2つのスリット $\text{S}_1, \text{S}_2$ に通すことで、**「常に同じタイミングで振動する（同位相の）2つの波」**を作り出します。これによって、きれいな干渉縞がスクリーンにくっきりと現れます。
 
 <div class="vector-graph-card">
-<svg viewBox="0 0 540 250" xmlns="http://www.w3.org/2000/svg">
+<svg viewBox="0 0 580 250" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <marker id="arr-young-ray" markerWidth="7" markerHeight="7" refX="5" refY="2.5" orient="auto">
       <path d="M0,0 L0,5 L6,2.5 z" fill="#38bdf8" />
     </marker>
   </defs>
-
   <!-- 左端: 単色光源 -->
-  <rect x="20" y="95" width="50" height="50" rx="4" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
-  <text x="45" y="120" fill="#38bdf8" font-size="11" font-weight="700" text-anchor="middle">単色光源</text>
-  <text x="45" y="135" fill="#94a3b8" font-size="10" text-anchor="middle">波長 λ</text>
-
+  <rect x="15" y="95" width="55" height="50" rx="4" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+  <text x="42" y="118" fill="#38bdf8" font-size="11" font-weight="700" text-anchor="middle">単色光源</text>
+  <text x="42" y="133" fill="#94a3b8" font-size="10" text-anchor="middle">波長 λ</text>
   <!-- 光源からの光線 -->
-  <line x1="70" y1="120" x2="140" y2="120" stroke="#38bdf8" stroke-width="2" marker-end="url(#arr-young-ray)"/>
-
-  <!-- スリット板 (x = 150) -->
-  <line x1="150" y1="20" x2="150" y2="95" stroke="#64748b" stroke-width="4"/>
-  <line x1="150" y1="110" x2="150" y2="130" stroke="#64748b" stroke-width="4"/>
-  <line x1="150" y1="145" x2="150" y2="220" stroke="#64748b" stroke-width="4"/>
-  <text x="145" y="15" fill="#94a3b8" font-size="11" text-anchor="end">スリット板</text>
-
+  <line x1="70" y1="120" x2="125" y2="120" stroke="#38bdf8" stroke-width="2" marker-end="url(#arr-young-ray)"/>
+  <!-- スリット板 (x = 135) -->
+  <line x1="135" y1="20" x2="135" y2="95" stroke="#64748b" stroke-width="4"/>
+  <line x1="135" y1="110" x2="135" y2="130" stroke="#64748b" stroke-width="4"/>
+  <line x1="135" y1="145" x2="135" y2="220" stroke="#64748b" stroke-width="4"/>
+  <text x="130" y="15" fill="#94a3b8" font-size="11" text-anchor="end">スリット板</text>
   <!-- スリット S1, S2 -->
-  <circle cx="150" cy="102" r="3" fill="#fbbf24"/>
-  <text x="135" y="106" fill="#fbbf24" font-size="12" font-weight="700">S₁</text>
-  <circle cx="150" cy="138" r="3" fill="#fbbf24"/>
-  <text x="135" y="142" fill="#fbbf24" font-size="12" font-weight="700">S₂</text>
-
+  <circle cx="135" cy="102" r="3" fill="#fbbf24"/>
+  <text x="120" y="106" fill="#fbbf24" font-size="12" font-weight="700">S₁</text>
+  <circle cx="135" cy="138" r="3" fill="#fbbf24"/>
+  <text x="120" y="142" fill="#fbbf24" font-size="12" font-weight="700">S₂</text>
   <!-- スリット間隔 d の寸法線 -->
-  <line x1="165" y1="102" x2="165" y2="138" stroke="#fbbf24" stroke-width="1.5"/>
-  <line x1="160" y1="102" x2="170" y2="102" stroke="#fbbf24" stroke-width="1.5"/>
-  <line x1="160" y1="138" x2="170" y2="138" stroke="#fbbf24" stroke-width="1.5"/>
-  <text x="175" y="124" fill="#fbbf24" font-size="12" font-weight="700">d</text>
-
-  <!-- 右端: スクリーン (x = 420) -->
-  <line x1="420" y1="20" x2="420" y2="220" stroke="#94a3b8" stroke-width="3"/>
-  <text x="420" y="15" fill="#94a3b8" font-size="11" text-anchor="middle">スクリーン</text>
-
+  <line x1="150" y1="102" x2="150" y2="138" stroke="#fbbf24" stroke-width="1.5"/>
+  <line x1="145" y1="102" x2="155" y2="102" stroke="#fbbf24" stroke-width="1.5"/>
+  <line x1="145" y1="138" x2="155" y2="138" stroke="#fbbf24" stroke-width="1.5"/>
+  <text x="160" y="124" fill="#fbbf24" font-size="12" font-weight="700">d</text>
+  <!-- 右端: スクリーン (x = 380) -->
+  <line x1="380" y1="20" x2="380" y2="220" stroke="#94a3b8" stroke-width="3"/>
+  <text x="380" y="15" fill="#94a3b8" font-size="11" text-anchor="middle">スクリーン</text>
   <!-- 中心軸 (y = 120) -->
-  <line x1="150" y1="120" x2="420" y2="120" stroke="#475569" stroke-width="1" stroke-dasharray="3,3"/>
-  <circle cx="420" cy="120" r="4" fill="#94a3b8"/>
-  <text x="430" y="124" fill="#94a3b8" font-size="12">点 O (中心明線)</text>
-
-  <!-- スクリーン上の点 P (y = 60, x = 420) -->
-  <circle cx="420" cy="60" r="5" fill="#f43f5e"/>
-  <text x="430" y="64" fill="#f43f5e" font-size="13" font-weight="700">点 P (変位 x)</text>
-
+  <line x1="135" y1="120" x2="380" y2="120" stroke="#475569" stroke-width="1" stroke-dasharray="3,3"/>
+  <circle cx="380" cy="120" r="4" fill="#94a3b8"/>
+  <rect x="390" y="110" width="85" height="20" rx="3" fill="#0f172a" stroke="#475569" stroke-width="1"/>
+  <text x="432" y="124" fill="#94a3b8" font-size="11" font-weight="600" text-anchor="middle">点 O (中央)</text>
+  <!-- スクリーン上の点 P (y = 60, x = 380) -->
+  <circle cx="380" cy="60" r="5" fill="#f43f5e"/>
+  <rect x="390" y="50" width="95" height="20" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1.2"/>
+  <text x="437" y="64" fill="#f43f5e" font-size="11" font-weight="700" text-anchor="middle">点 P (変位 x)</text>
   <!-- 光路 l1, l2 -->
-  <line x1="150" y1="102" x2="420" y2="60" stroke="#38bdf8" stroke-width="2"/>
-  <rect x="250" y="66" width="60" height="18" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
-  <text x="280" y="79" fill="#38bdf8" font-size="11" font-weight="600" text-anchor="middle">光路 l₁</text>
-
-  <line x1="150" y1="138" x2="420" y2="60" stroke="#22d3ee" stroke-width="2"/>
-  <rect x="250" y="103" width="60" height="18" rx="3" fill="#0f172a" stroke="#22d3ee" stroke-width="1"/>
-  <text x="280" y="116" fill="#22d3ee" font-size="11" font-weight="600" text-anchor="middle">光路 l₂</text>
-
-  <!-- スクリーン右側の明暗縞プレビュー (x = 470..500) -->
-  <g transform="translate(470, 20)">
+  <line x1="135" y1="102" x2="380" y2="60" stroke="#38bdf8" stroke-width="2"/>
+  <rect x="230" y="66" width="60" height="18" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="260" y="79" fill="#38bdf8" font-size="11" font-weight="600" text-anchor="middle">光路 l₁</text>
+  <line x1="135" y1="138" x2="380" y2="60" stroke="#22d3ee" stroke-width="2"/>
+  <rect x="230" y="103" width="60" height="18" rx="3" fill="#0f172a" stroke="#22d3ee" stroke-width="1"/>
+  <text x="260" y="116" fill="#22d3ee" font-size="11" font-weight="600" text-anchor="middle">光路 l₂</text>
+  <!-- スクリーン右側の明暗縞プレビュー (x = 505..535) -->
+  <g transform="translate(505, 20)">
     <rect x="0" y="0" width="30" height="200" fill="#020617" stroke="#334155" stroke-width="1"/>
     <!-- 明線 (グラデーション) -->
     <rect x="2" y="90" width="26" height="20" fill="#38bdf8" opacity="0.9"/> <!-- m = 0 -->
@@ -103,14 +94,13 @@ description: 高校物理の波動分野。ヤングの二重スリット実験�
     <text x="15" y="44" fill="#000" font-size="10" font-weight="700" text-anchor="middle">明</text>
     <text x="15" y="164" fill="#000" font-size="10" font-weight="700" text-anchor="middle">明</text>
   </g>
-  <text x="485" y="235" fill="#38bdf8" font-size="11" text-anchor="middle">明暗の干渉縞</text>
-
+  <text x="520" y="235" fill="#38bdf8" font-size="11" font-weight="600" text-anchor="middle">明暗の干渉縞</text>
   <!-- 距離 L の寸法線 -->
-  <line x1="150" y1="210" x2="420" y2="210" stroke="#94a3b8" stroke-width="1.5"/>
-  <line x1="150" y1="205" x2="150" y2="215" stroke="#94a3b8" stroke-width="1.5"/>
-  <line x1="420" y1="205" x2="420" y2="215" stroke="#94a3b8" stroke-width="1.5"/>
-  <rect x="255" y="200" width="60" height="20" rx="3" fill="#0f172a" stroke="#64748b" stroke-width="1"/>
-  <text x="285" y="214" fill="#cbd5e1" font-size="11" font-weight="600" text-anchor="middle">距離 L</text>
+  <line x1="135" y1="210" x2="380" y2="210" stroke="#94a3b8" stroke-width="1.5"/>
+  <line x1="135" y1="205" x2="135" y2="215" stroke="#94a3b8" stroke-width="1.5"/>
+  <line x1="380" y1="205" x2="380" y2="215" stroke="#94a3b8" stroke-width="1.5"/>
+  <rect x="230" y="200" width="60" height="20" rx="3" fill="#0f172a" stroke="#64748b" stroke-width="1"/>
+  <text x="260" y="214" fill="#cbd5e1" font-size="11" font-weight="600" text-anchor="middle">距離 L</text>
 </svg>
 <div class="graph-caption">図: ヤングの二重スリット実験（スリット間隔 <i>d</i>、スクリーン距離 <i>L</i>、経路差 Δ<i>l</i> = <i>l</i>₂ − <i>l</i>₁ ≈ <i>dx</i>/<i>L</i> による明暗干渉縞の形成）</div>
 </div>

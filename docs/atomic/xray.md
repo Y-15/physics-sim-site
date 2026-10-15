@@ -34,77 +34,62 @@ description: 高校物理の原子物理・大学入試超頻出「X線の発生
     </defs>
     <rect width="760" height="340" fill="url(#gradXR)" rx="10"/>
     <rect width="760" height="340" fill="url(#gridXR)" rx="10"/>
-
     <!-- 左側: 2つの発生機構の模式図 -->
     <!-- ① 連続X線 (制動放射) -->
     <g transform="translate(40, 30)">
       <rect x="0" y="0" width="320" height="135" fill="#1e293b" rx="6" stroke="#38bdf8"/>
       <text x="15" y="25" fill="#38bdf8" font-size="13" font-weight="bold">① 連続X線（制動放射: Bremsstrahlung）</text>
-
       <!-- 原子核 -->
       <circle cx="160" cy="80" r="14" fill="#ef4444"/>
       <text x="160" y="84" fill="#ffffff" font-size="10" font-weight="bold" text-anchor="middle">+Ze</text>
-
       <!-- 入射電子が軌道を曲げられて減速 -->
       <path d="M 30 110 Q 140 110 160 100 Q 180 80 280 50" fill="none" stroke="#38bdf8" stroke-width="2.5"/>
       <circle cx="50" cy="110" r="4" fill="#38bdf8"/>
       <text x="50" y="125" fill="#38bdf8" font-size="10">入射電子 (eV)</text>
-
       <!-- X線光子の放出 (波線) -->
       <path d="M 160 100 Q 170 120 180 100 T 200 100 T 220 100" fill="none" stroke="#f43f5e" stroke-width="2"/>
       <polygon points="220,96 228,100 220,104" fill="#f43f5e"/>
       <text x="210" y="125" fill="#f43f5e" font-size="11" font-weight="bold">X線光子 (hν)</text>
     </g>
-
     <!-- ② 特性X線 (内殻電子遷移) -->
     <g transform="translate(40, 180)">
       <rect x="0" y="0" width="320" height="140" fill="#1e293b" rx="6" stroke="#f59e0b"/>
       <text x="15" y="25" fill="#f59e0b" font-size="13" font-weight="bold">② 特性X線（内殻電子の電離と外殻からの遷移）</text>
-
       <!-- 原子核と軌道 -->
       <circle cx="160" cy="80" r="10" fill="#ef4444"/>
       <circle cx="160" cy="80" r="28" fill="none" stroke="#64748b" stroke-dasharray="3,3"/>
       <text x="195" y="80" fill="#64748b" font-size="10">K殻</text>
       <circle cx="160" cy="80" r="48" fill="none" stroke="#64748b" stroke-dasharray="3,3"/>
       <text x="215" y="80" fill="#64748b" font-size="10">L殻</text>
-
       <!-- 弾き飛ばされたK殻電子 -->
       <line x1="160" y1="52" x2="220" y2="25" stroke="#38bdf8" stroke-width="2"/>
       <text x="230" y="30" fill="#38bdf8" font-size="10">弾出電子</text>
-
       <!-- L殻からK殻への落ち込み遷移矢印 -->
       <line x1="160" y1="32" x2="160" y2="52" stroke="#f59e0b" stroke-width="3"/>
       <polygon points="156,48 160,56 164,48" fill="#f59e0b"/>
       <text x="145" y="45" fill="#f59e0b" font-size="10" font-weight="bold" text-anchor="end">Kα遷移</text>
     </g>
-
     <!-- 右側: X線スペクトルのグラフ解説 -->
     <g transform="translate(390, 30)">
       <rect x="0" y="0" width="330" height="290" fill="#1e293b" rx="8" stroke="#334155"/>
       <text x="165" y="25" fill="#f8fafc" font-size="14" font-weight="bold" text-anchor="middle">【X線スペクトルの2大特徴】</text>
-
       <!-- グラフ軸 -->
       <line x1="30" y1="230" x2="300" y2="230" stroke="#94a3b8" stroke-width="2"/>
       <line x1="30" y1="230" x2="30" y2="50" stroke="#94a3b8" stroke-width="2"/>
       <text x="25" y="45" fill="#94a3b8" font-size="10" text-anchor="end">強度 I</text>
       <text x="305" y="245" fill="#94a3b8" font-size="10">波長 λ</text>
-
       <!-- 最短波長 λ0 (破線) -->
       <line x1="80" y1="230" x2="80" y2="60" stroke="#38bdf8" stroke-width="1.5" stroke-dasharray="3,3"/>
       <text x="80" y="245" fill="#38bdf8" font-size="11" font-weight="bold" text-anchor="middle">λ₀</text>
-
       <!-- スペクトル曲線 (連続曲線 + 鋭いピーク) -->
       <!-- 連続山 -->
       <path d="M 80 230 Q 130 110 180 150 Q 230 190 280 220" fill="none" stroke="#ef4444" stroke-width="2"/>
-
       <!-- Kβ ピーク -->
       <line x1="140" y1="130" x2="140" y2="85" stroke="#34d399" stroke-width="3"/>
       <text x="140" y="78" fill="#34d399" font-size="10" font-weight="bold" text-anchor="middle">Kβ</text>
-
       <!-- Kα ピーク -->
       <line x1="160" y1="138" x2="160" y2="65" stroke="#f59e0b" stroke-width="3.5"/>
       <text x="160" y="58" fill="#f59e0b" font-size="11" font-weight="bold" text-anchor="middle">Kα (強)</text>
-
       <!-- 公式注記 -->
       <text x="165" y="270" fill="#38bdf8" font-size="13" font-weight="bold" text-anchor="middle">デュアン=ハントの式: λ₀ = hc / (eV)</text>
     </g>

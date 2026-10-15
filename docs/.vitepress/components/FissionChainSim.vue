@@ -310,7 +310,7 @@ onUnmounted(() => {
 
       <div class="stat-overlay">
         <div class="stat-row">
-          <span class="lbl">中性子増倍率 $k$:</span>
+          <span class="lbl">中性子増倍率 <i>k</i>:</span>
           <span class="val highlight" :style="{ color: criticalityStatus.color }">
             {{ effectiveK.toFixed(2) }}
           </span>

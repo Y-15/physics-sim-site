@@ -227,23 +227,23 @@ onUnmounted(() => {
 
       <div class="overlay-stats">
         <div class="stat-row">
-          <span class="lbl">電子速度 $v$:</span>
+          <span class="lbl">電子速度 <i>v</i>:</span>
           <span class="val highlight">{{ (state.v * 15).toFixed(1) }} ×10⁶ m/s</span>
         </div>
         <div class="stat-row">
-          <span class="lbl">誘導電場 $E$:</span>
+          <span class="lbl">誘導電場 <i>E</i>:</span>
           <span class="val">{{ inducedEField }} V/m相当</span>
         </div>
         <div class="stat-row">
-          <span class="lbl">軌道磁場 $B_0$:</span>
+          <span class="lbl">軌道磁場 <i>B</i><sub>0</sub>:</span>
           <span class="val">{{ state.bZero.toFixed(2) }} T</span>
         </div>
         <div class="stat-row">
-          <span class="lbl">平均磁場 $\bar{B}$:</span>
+          <span class="lbl">平均磁場 <i>B</i>̄:</span>
           <span class="val">{{ state.bAvg.toFixed(2) }} T</span>
         </div>
         <div class="stat-row highlight-box">
-          <span class="lbl">磁場比 $\bar{B} / B_0$:</span>
+          <span class="lbl">磁場比 <i>B</i>̄ / <i>B</i><sub>0</sub>:</span>
           <span class="val" :style="{ color: Math.abs(fieldProfileRatio - 2.0) < 0.1 ? '#10b981' : '#f43f5e' }">
             {{ fieldProfileRatio.toFixed(2) }} (理想: 2.00)
           </span>
@@ -255,11 +255,11 @@ onUnmounted(() => {
     <div class="controls-panel">
       <div class="control-row">
         <div class="control-group">
-          <label>磁場上昇率 $\frac{dB}{dt}$: <span>{{ dBdt.toFixed(1) }} T/s</span></label>
+          <label>磁場上昇率 (dB / dt): <span>{{ dBdt.toFixed(1) }} T/s</span></label>
           <input type="range" v-model.number="dBdt" min="0.5" max="4.0" step="0.5" />
         </div>
         <div class="control-group">
-          <label>磁場プロファイル比 $\bar{B} / B_0$: <span>{{ fieldProfileRatio.toFixed(2) }}</span></label>
+          <label>磁場プロファイル比 <i>B</i>̄ / <i>B</i><sub>0</sub>: <span>{{ fieldProfileRatio.toFixed(2) }}</span></label>
           <input type="range" v-model.number="fieldProfileRatio" min="1.4" max="2.6" step="0.05" />
         </div>
       </div>
@@ -276,7 +276,7 @@ onUnmounted(() => {
     </div>
 
     <div class="betatron-note">
-      💡 <strong>2対1の法則（The 2:1 Rule）</strong>：電磁誘導で電子を加速すると運動量 $p$ が増え、軌道半径 $r = \frac{p}{eB_0}$ を一定に保つには軌道上の磁場 $B_0$ も増やす必要があります。計算すると、中心内部の平均磁束密度 $\bar{B}$ は軌道上の磁束密度 $B_0$ の**ちょうど2倍（$\bar{B} = 2B_0$）**でなければ軌道半径が維持できません！スライダーを動かして条件が崩れたときのドリフトを観察してください。
+      💡 <strong>2対1の法則（The 2:1 Rule）</strong>：電磁誘導で電子を加速すると運動量 <i>p</i> が増え、軌道半径 <i>r</i> = (<i>p</i> / eB<sub>0</sub>) を一定に保つには軌道上の磁場 <i>B</i><sub>0</sub> も増やす必要があります。計算すると、中心内部の平均磁束密度 <i>B</i>̄ は軌道上の磁束密度 <i>B</i><sub>0</sub> の<strong>ちょうど2倍（<i>B</i>̄ = 2B<sub>0</sub>）</strong>でなければ軌道半径が維持できません！スライダーを動かして条件が崩れたときのドリフトを観察してください。
     </div>
   </div>
 </template>

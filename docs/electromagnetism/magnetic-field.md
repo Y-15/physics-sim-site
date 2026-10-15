@@ -51,22 +51,17 @@ description: 高校物理の電磁気学最頻出テーマ。右ねじの法則�
       <path d="M0,0 L0,6 L7,3 z" fill="#38bdf8" />
     </marker>
   </defs>
-
   <!-- 導線 (鉛直中央) -->
   <line x1="270" y1="20" x2="270" y2="200" stroke="#fbbf24" stroke-width="4"/>
   <text x="285" y="40" fill="#fbbf24" font-size="14" font-weight="700">電流 I (上向き)</text>
-
   <!-- 水平平面 (楕円透視図) -->
   <ellipse cx="270" cy="120" rx="160" ry="45" fill="none" stroke="#475569" stroke-width="1.5" stroke-dasharray="3,3"/>
-
   <!-- 半径 r の同心円磁力線 -->
   <ellipse cx="270" cy="120" rx="100" ry="28" fill="none" stroke="#38bdf8" stroke-width="2.5"/>
-
   <!-- 磁場矢印 (反時計回り) -->
   <line x1="370" y1="120" x2="370" y2="105" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-mag-circ)"/>
   <rect x="380" y="100" width="130" height="20" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
   <text x="445" y="114" fill="#38bdf8" font-size="11" font-weight="700" text-anchor="middle">磁場 H ＝ I / (2πr)</text>
-
   <!-- 半径 r の寸法線 -->
   <line x1="270" y1="120" x2="370" y2="120" stroke="#fbbf24" stroke-width="1.5"/>
   <rect x="305" y="128" width="45" height="18" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
@@ -136,36 +131,29 @@ $$
       <path d="M0,0 L0,6 L7,3 z" fill="#f43f5e" />
     </marker>
   </defs>
-
   <!-- 導線 1 (左: x = 160) -->
   <line x1="160" y1="20" x2="160" y2="220" stroke="#fbbf24" stroke-width="4"/>
   <text x="135" y="40" fill="#fbbf24" font-size="14" font-weight="700">I₁</text>
-
   <!-- 導線 2 (右: x = 360) -->
   <line x1="360" y1="20" x2="360" y2="220" stroke="#fbbf24" stroke-width="4"/>
   <text x="375" y="40" fill="#fbbf24" font-size="14" font-weight="700">I₂</text>
-
   <!-- 距離 r -->
   <line x1="160" y1="120" x2="360" y2="120" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="3,3"/>
   <rect x="235" y="110" width="50" height="18" rx="3" fill="#0f172a" stroke="#64748b" stroke-width="1"/>
   <text x="260" y="123" fill="#cbd5e1" font-size="10" text-anchor="middle">距離 r</text>
-
   <!-- 電流1が導線2の位置につくる磁場 B1 (奥向き ⊗) -->
   <circle cx="360" cy="120" r="14" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
   <text x="360" y="125" fill="#38bdf8" font-size="13" font-weight="700" text-anchor="middle">⊗</text>
   <rect x="380" y="112" width="125" height="20" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
   <text x="442" y="126" fill="#38bdf8" font-size="10" font-weight="600" text-anchor="middle">B₁ ＝ μ₀ I₁ / (2πr)</text>
-
   <!-- 導線2が受ける力 F (フレミング左手: 左向き引力) -->
   <line x1="360" y1="160" x2="280" y2="160" stroke="#f43f5e" stroke-width="3" marker-end="url(#arr-par-f)"/>
   <rect x="290" y="172" width="55" height="18" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
   <text x="317" y="185" fill="#f43f5e" font-size="10" font-weight="700" text-anchor="middle">引力 F</text>
-
   <!-- 導線1が受ける反作用の力 F (右向き引力) -->
   <line x1="160" y1="160" x2="240" y2="160" stroke="#f43f5e" stroke-width="3" marker-end="url(#arr-par-f)"/>
   <rect x="180" y="172" width="55" height="18" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
   <text x="207" y="185" fill="#f43f5e" font-size="10" font-weight="700" text-anchor="middle">引力 F</text>
-
   <rect x="140" y="228" width="240" height="24" rx="4" fill="#0f172a" stroke="#fbbf24" stroke-width="1.2"/>
   <text x="260" y="244" fill="#fbbf24" font-size="12" font-weight="700" text-anchor="middle">【同方向の電流は互いに引き合う！】</text>
 </svg>

@@ -82,11 +82,9 @@ $$
     </defs>
     <rect width="760" height="380" fill="url(#gradLab)" rx="10"/>
     <rect width="760" height="380" fill="url(#grid2)" rx="10"/>
-
     <!-- 上段: 実験室系 (Lab frame) -->
     <text x="30" y="35" fill="#38bdf8" font-size="16" font-weight="bold">【実験室系 (床から見た視点)】: 重心Gが右へ速度 v_G で等速運動しながら振動</text>
     <line x1="40" y1="130" x2="720" y2="130" stroke="#64748b" stroke-width="2"/>
-
     <!-- 物体1 -->
     <rect x="140" y="80" width="50" height="50" fill="#38bdf8" rx="6" stroke="#0284c7" stroke-width="2"/>
     <text x="165" y="110" fill="#0f172a" font-size="14" font-weight="bold" text-anchor="middle">m₁</text>
@@ -95,7 +93,6 @@ $$
     <!-- 物体2 -->
     <rect x="350" y="70" width="70" height="60" fill="#f59e0b" rx="6" stroke="#d97706" stroke-width="2"/>
     <text x="385" y="105" fill="#0f172a" font-size="14" font-weight="bold" text-anchor="middle">m₂</text>
-
     <!-- 重心G表示 -->
     <line x1="280" y1="50" x2="280" y2="150" stroke="#a855f7" stroke-width="2" stroke-dasharray="4,4"/>
     <circle cx="280" cy="50" r="10" fill="#a855f7"/>
@@ -104,31 +101,25 @@ $$
     <line x1="280" y1="30" x2="360" y2="30" stroke="#a855f7" stroke-width="3"/>
     <polygon points="360,26 370,30 360,34" fill="#a855f7"/>
     <text x="375" y="34" fill="#a855f7" font-size="13" font-weight="bold">v_G (一定)</text>
-
     <!-- 距離比 m2 : m1 -->
     <line x1="165" y1="145" x2="280" y2="145" stroke="#38bdf8" stroke-width="1.5"/>
     <line x1="280" y1="145" x2="385" y2="145" stroke="#f59e0b" stroke-width="1.5"/>
     <text x="220" y="162" fill="#38bdf8" font-size="12" text-anchor="middle">距離比 m₂</text>
     <text x="330" y="162" fill="#f59e0b" font-size="12" text-anchor="middle">距離比 m₁</text>
-
     <!-- 区切り線 -->
     <line x1="40" y1="190" x2="720" y2="190" stroke="#334155" stroke-width="1.5" stroke-dasharray="8,4"/>
-
     <!-- 下段: 重心静止系 (Center of Mass Frame) -->
     <text x="30" y="225" fill="#c084fc" font-size="16" font-weight="bold">【重心静止系 (Gに乗った視点)】: Gは完全に不動！2物体が逆位相で単振動</text>
     <line x1="40" y1="330" x2="720" y2="330" stroke="#64748b" stroke-width="2"/>
-
     <!-- G固定点 -->
     <line x1="380" y1="240" x2="380" y2="340" stroke="#a855f7" stroke-width="3"/>
     <circle cx="380" cy="240" r="10" fill="#a855f7"/>
     <text x="380" y="244" fill="#ffffff" font-size="12" font-weight="bold" text-anchor="middle">G</text>
     <text x="380" y="360" fill="#c084fc" font-size="13" font-weight="bold" text-anchor="middle">不動点 (壁と同じ)</text>
-
     <!-- 左のばね (定数 k1 = k(m1+m2)/m2) -->
     <path d="M 230 305 L 250 295 L 270 315 L 290 295 L 310 315 L 330 295 L 350 315 L 380 305" fill="none" stroke="#38bdf8" stroke-width="3"/>
     <!-- 右のばね (定数 k2 = k(m1+m2)/m1) -->
     <path d="M 380 305 L 410 315 L 430 295 L 450 315 L 470 295 L 490 315 L 510 295 L 530 305" fill="none" stroke="#f59e0b" stroke-width="3"/>
-
     <!-- 物体1 (重心系) -->
     <rect x="180" y="280" width="50" height="50" fill="#38bdf8" rx="6" stroke="#0284c7" stroke-width="2"/>
     <text x="205" y="310" fill="#0f172a" font-size="14" font-weight="bold" text-anchor="middle">m₁</text>
@@ -136,7 +127,6 @@ $$
     <line x1="180" y1="265" x2="130" y2="265" stroke="#38bdf8" stroke-width="3"/>
     <polygon points="130,261 120,265 130,269" fill="#38bdf8"/>
     <text x="145" y="255" fill="#38bdf8" font-size="12" font-weight="bold">v₁ - v_G</text>
-
     <!-- 物体2 (重心系) -->
     <rect x="530" y="270" width="70" height="60" fill="#f59e0b" rx="6" stroke="#d97706" stroke-width="2"/>
     <text x="565" y="305" fill="#0f172a" font-size="14" font-weight="bold" text-anchor="middle">m₂</text>

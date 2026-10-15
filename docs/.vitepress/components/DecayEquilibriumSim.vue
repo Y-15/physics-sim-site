@@ -244,7 +244,7 @@ onUnmounted(() => {
     <div class="sim-header">
       <div class="sim-title">
         <span class="icon">☢️</span>
-        <span>放射平衡と壊変系列シミュレーター（$A \to B \to C$）</span>
+        <span>放射平衡と壊変系列シミュレーター（<i>A</i> → <i>B</i> → <i>C</i>）</span>
       </div>
       <div class="badge" :style="{ borderColor: equilibriumType.color, color: equilibriumType.color }">
         {{ equilibriumType.name }}
@@ -255,32 +255,32 @@ onUnmounted(() => {
       <canvas ref="canvasRef" :width="width" :height="height" class="sim-canvas"></canvas>
 
       <div class="legend-panel">
-        <div class="legend-item"><span class="line a-line"></span> 親核種 $N_A$ (減衰)</div>
-        <div class="legend-item"><span class="line b-line"></span> 娘核種 $N_B$ (生成・減衰)</div>
-        <div class="legend-item"><span class="line c-line"></span> 安定核種 $N_C$ (蓄積)</div>
+        <div class="legend-item"><span class="line a-line"></span> 親核種 <i>N</i><sub><i>A</i></sub> (減衰)</div>
+        <div class="legend-item"><span class="line b-line"></span> 娘核種 <i>N</i><sub><i>B</i></sub> (生成・減衰)</div>
+        <div class="legend-item"><span class="line c-line"></span> 安定核種 <i>N</i><sub><i>C</i></sub> (蓄積)</div>
       </div>
     </div>
 
     <!-- リアルタイム放射能ステータス -->
     <div class="status-grid">
       <div class="status-card">
-        <span class="lbl">経過時間 $t$:</span>
+        <span class="lbl">経過時間 <i>t</i>:</span>
         <span class="val highlight">{{ currentTime.toFixed(1) }}</span>
       </div>
       <div class="status-card">
-        <span class="lbl">娘核種極大時刻 $t_{\max}$:</span>
+        <span class="lbl">娘核種極大時刻 <i>t</i><sub>\max</sub>:</span>
         <span class="val">{{ tMax ? tMax.toFixed(1) : 'なし' }}</span>
       </div>
       <div class="status-card">
-        <span class="lbl">親の放射能 $\lambda_A N_A$:</span>
+        <span class="lbl">親の放射能 λ<sub><i>A</i></sub> <i>N</i><sub><i>A</i></sub>:</span>
         <span class="val" style="color: #38bdf8">{{ currentStatus.actA }} Bq相当</span>
       </div>
       <div class="status-card">
-        <span class="lbl">娘の放射能 $\lambda_B N_B$:</span>
+        <span class="lbl">娘の放射能 λ<sub><i>B</i></sub> <i>N</i><sub><i>B</i></sub>:</span>
         <span class="val" style="color: #fbbf24">{{ currentStatus.actB }} Bq相当</span>
       </div>
       <div class="status-card highlight-box">
-        <span class="lbl">放射能比 $(\lambda_B N_B) / (\lambda_A N_A)$:</span>
+        <span class="lbl">放射能比 (λ<sub><i>B</i></sub> <i>N</i><sub><i>B</i></sub>) / (λ<sub><i>A</i></sub> <i>N</i><sub><i>A</i></sub>):</span>
         <span class="val">{{ currentStatus.actRatio }}</span>
       </div>
     </div>
@@ -290,7 +290,7 @@ onUnmounted(() => {
       <div class="preset-buttons">
         <span class="preset-label">典型例プリセット:</span>
         <button class="preset-btn" @click="setPreset('secular')">
-          永続平衡（ウラン-ラジウム型 $T_A \gg T_B$）
+          永続平衡（ウラン-ラジウム型 <i>T</i><sub><i>A</i></sub> ≫ <i>T</i><sub><i>B</i></sub>）
         </button>
         <button class="preset-btn" @click="setPreset('transient')">
           過渡平衡（Mo-99/Tc-99m型 $T_A > T_B$）
@@ -302,11 +302,11 @@ onUnmounted(() => {
 
       <div class="control-row">
         <div class="control-group">
-          <label>親核種の半減期 $T_A$: <span>{{ halfLifeA.toFixed(1) }}</span></label>
+          <label>親核種の半減期 <i>T</i><sub><i>A</i></sub>: <span>{{ halfLifeA.toFixed(1) }}</span></label>
           <input type="range" v-model.number="halfLifeA" min="2.0" max="45.0" step="0.5" />
         </div>
         <div class="control-group">
-          <label>娘核種の半減期 $T_B$: <span>{{ halfLifeB.toFixed(1) }}</span></label>
+          <label>娘核種の半減期 <i>T</i><sub><i>B</i></sub>: <span>{{ halfLifeB.toFixed(1) }}</span></label>
           <input type="range" v-model.number="halfLifeB" min="1.0" max="25.0" step="0.5" />
         </div>
         <div class="control-group">

@@ -30,7 +30,7 @@ description: 2つの波源から広がる波の強め合い・弱め合いの条
 $$\Delta r = |r_1 - r_2| = |S_1 P - S_2 P|$$
 
 <div class="vector-graph-card">
-  <div class="graph-title">図1：2波源 $S_1, S_2$ と観測点 $P$ の経路差</div>
+  <div class="graph-title">図1：2波源 <i>S</i><sub>1</sub>, <i>S</i><sub>2</sub> と観測点 <i>P</i> の経路差</div>
   <svg viewBox="0 0 540 240" class="vector-svg">
     <defs>
       <!-- 背景グリッド -->
@@ -45,47 +45,37 @@ $$\Delta r = |r_1 - r_2| = |S_1 P - S_2 P|$$
         <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#f43f5e"/>
       </marker>
     </defs>
-    
     <rect width="540" height="240" fill="#0f172a" rx="8"/>
     <rect width="540" height="240" fill="url(#grid-pattern-wave)" rx="8"/>
-
     <!-- 波源 S1 からの同心円波 -->
     <circle cx="160" cy="170" r="40" fill="none" stroke="#38bdf8" stroke-width="1.2" stroke-opacity="0.3"/>
     <circle cx="160" cy="170" r="80" fill="none" stroke="#38bdf8" stroke-width="1.2" stroke-opacity="0.3"/>
     <circle cx="160" cy="170" r="120" fill="none" stroke="#38bdf8" stroke-width="1.2" stroke-opacity="0.3"/>
     <circle cx="160" cy="170" r="160" fill="none" stroke="#38bdf8" stroke-width="1.2" stroke-opacity="0.2"/>
-
     <!-- 波源 S2 からの同心円波 -->
     <circle cx="380" cy="170" r="40" fill="none" stroke="#f43f5e" stroke-width="1.2" stroke-opacity="0.3"/>
     <circle cx="380" cy="170" r="80" fill="none" stroke="#f43f5e" stroke-width="1.2" stroke-opacity="0.3"/>
     <circle cx="380" cy="170" r="120" fill="none" stroke="#f43f5e" stroke-width="1.2" stroke-opacity="0.3"/>
     <circle cx="380" cy="170" r="160" fill="none" stroke="#f43f5e" stroke-width="1.2" stroke-opacity="0.2"/>
-
     <!-- 経路線 S1 -> P -->
     <line x1="160" y1="170" x2="290" y2="50" stroke="#38bdf8" stroke-width="2" stroke-dasharray="4 3"/>
     <!-- 経路線 S2 -> P -->
     <line x1="380" y1="170" x2="290" y2="50" stroke="#f43f5e" stroke-width="2" stroke-dasharray="4 3"/>
-
     <!-- 垂直二等分線 (m=0 腹線) -->
     <line x1="270" y1="20" x2="270" y2="220" stroke="#06b6d4" stroke-width="1.5" stroke-dasharray="5 3"/>
     <text x="275" y="215" fill="#06b6d4" font-size="11" font-weight="bold">m=0 腹線 (二等分線)</text>
-
     <!-- 波源 S1 -->
     <circle cx="160" cy="170" r="6" fill="#38bdf8"/>
     <text x="145" y="195" fill="#38bdf8" font-size="13" font-weight="bold">S₁</text>
-
     <!-- 波源 S2 -->
     <circle cx="380" cy="170" r="6" fill="#f43f5e"/>
     <text x="385" y="195" fill="#f43f5e" font-size="13" font-weight="bold">S₂</text>
-
     <!-- 点 P -->
     <circle cx="290" cy="50" r="5" fill="#fbbf24"/>
     <text x="298" y="48" fill="#fbbf24" font-size="13" font-weight="bold">P (観測点)</text>
-
     <!-- 距離ラベル -->
     <text x="200" y="100" fill="#38bdf8" font-size="12">距離 r₁</text>
     <text x="345" y="100" fill="#f43f5e" font-size="12">距離 r₂</text>
-
     <!-- 波源間隔 d -->
     <line x1="160" y1="210" x2="380" y2="210" stroke="#94a3b8" stroke-width="1.2"/>
     <line x1="160" y1="205" x2="160" y2="215" stroke="#94a3b8" stroke-width="1.2"/>
@@ -141,31 +131,25 @@ $$\frac{x^2}{a^2} - \frac{y^2}{b^2} = 1 \quad (\text{ただし } b^2 = c^2 - a^2
 最も確実でミスを防ぐ解法は、**「線分 $S_1 S_2$ 上にある腹・節の個数を数える」**ことです。
 
 <div class="vector-graph-card">
-  <div class="graph-title">図2：線分 $S_1 S_2$ 上における経路差の範囲と交点</div>
+  <div class="graph-title">図2：線分 <i>S</i><sub>1</sub> <i>S</i><sub>2</sub> 上における経路差の範囲と交点</div>
   <svg viewBox="0 0 540 160" class="vector-svg">
     <rect width="540" height="160" fill="#0f172a" rx="8"/>
-    
     <!-- 数軸ライン -->
     <line x1="60" y1="80" x2="480" y2="80" stroke="#475569" stroke-width="2"/>
-    
     <!-- 線分 S1-S2 強調 -->
     <line x1="140" y1="80" x2="400" y2="80" stroke="#38bdf8" stroke-width="4"/>
-
     <!-- 波源 S1 -->
     <circle cx="140" cy="80" r="7" fill="#38bdf8"/>
     <text x="140" y="60" fill="#38bdf8" font-size="14" font-weight="bold" text-anchor="middle">S₁</text>
     <text x="140" y="110" fill="#94a3b8" font-size="11" text-anchor="middle">経路差: -d</text>
-
     <!-- 波源 S2 -->
     <circle cx="400" cy="80" r="7" fill="#f43f5e"/>
     <text x="400" y="60" fill="#f43f5e" font-size="14" font-weight="bold" text-anchor="middle">S₂</text>
     <text x="400" y="110" fill="#94a3b8" font-size="11" text-anchor="middle">経路差: +d</text>
-
     <!-- 中点 M -->
     <circle cx="270" cy="80" r="5" fill="#10b981"/>
     <text x="270" y="60" fill="#10b981" font-size="12" font-weight="bold" text-anchor="middle">M (中点)</text>
     <text x="270" y="110" fill="#10b981" font-size="11" text-anchor="middle">経路差: 0</text>
-
     <!-- 節の位置マーク例 -->
     <line x1="205" y1="72" x2="205" y2="88" stroke="#f43f5e" stroke-width="2.5"/>
     <line x1="335" y1="72" x2="335" y2="88" stroke="#f43f5e" stroke-width="2.5"/>

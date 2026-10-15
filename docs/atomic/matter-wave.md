@@ -77,64 +77,52 @@ $$
     </defs>
     <rect width="760" height="320" fill="url(#gradMW)" rx="10"/>
     <rect width="760" height="320" fill="url(#gridMW)" rx="10"/>
-
     <!-- 左側: ブラッグ反射の幾何学的経路差 -->
     <g transform="translate(40, 30)">
       <text x="140" y="25" fill="#38bdf8" font-size="14" font-weight="bold" text-anchor="middle">【結晶格子によるブラッグ反射】</text>
-
       <!-- 第1層・第2層 原子列 -->
       <line x1="30" y1="120" x2="270" y2="120" stroke="#475569" stroke-width="1" stroke-dasharray="4,4"/>
       <line x1="30" y1="180" x2="270" y2="180" stroke="#475569" stroke-width="1" stroke-dasharray="4,4"/>
-
       <!-- 原子 (丸) -->
       <circle cx="80" cy="120" r="7" fill="#64748b"/>
       <circle cx="150" cy="120" r="7" fill="#38bdf8"/>
       <text x="150" y="110" fill="#38bdf8" font-size="11" text-anchor="middle">A</text>
       <circle cx="220" cy="120" r="7" fill="#64748b"/>
-
       <circle cx="80" cy="180" r="7" fill="#64748b"/>
       <circle cx="150" cy="180" r="7" fill="#f59e0b"/>
       <text x="150" y="200" fill="#f59e0b" font-size="11" text-anchor="middle">B</text>
       <circle cx="220" cy="180" r="7" fill="#64748b"/>
-
       <!-- 面間隔 d -->
       <line x1="40" y1="120" x2="40" y2="180" stroke="#38bdf8" stroke-width="1.5"/>
       <text x="25" y="155" fill="#38bdf8" font-size="12">d</text>
-
       <!-- 入射・反射光線 -->
       <!-- 入射1 -->
       <line x1="70" y1="70" x2="150" y2="120" stroke="#38bdf8" stroke-width="2.5"/>
       <!-- 反射1 -->
       <line x1="150" y1="120" x2="230" y2="70" stroke="#38bdf8" stroke-width="2.5"/>
-
       <!-- 入射2 -->
       <line x1="30" y1="105" x2="150" y2="180" stroke="#f59e0b" stroke-width="2.5"/>
       <!-- 反射2 -->
       <line x1="150" y1="180" x2="270" y2="105" stroke="#f59e0b" stroke-width="2.5"/>
-
       <!-- 垂線と経路差 -->
       <line x1="150" y1="120" x2="114" y2="157" stroke="#ef4444" stroke-width="2" stroke-dasharray="3,3"/>
       <line x1="150" y1="120" x2="186" y2="157" stroke="#ef4444" stroke-width="2" stroke-dasharray="3,3"/>
       <!-- 経路差部分を赤線ハイライト -->
       <line x1="114" y1="157" x2="150" y2="180" stroke="#ef4444" stroke-width="3.5"/>
       <line x1="150" y1="180" x2="186" y2="157" stroke="#ef4444" stroke-width="3.5"/>
-
       <text x="150" y="235" fill="#ef4444" font-size="13" font-weight="bold" text-anchor="middle">光路差 = 2 d sinθ</text>
       <text x="150" y="260" fill="#34d399" font-size="14" font-weight="bold" text-anchor="middle">強め合い: 2 d sinθ = n λ</text>
     </g>
-
     <!-- 右側: ボーア量子条件の物理的意味 -->
     <g transform="translate(420, 30)">
       <rect x="0" y="0" width="300" height="260" fill="#1e293b" rx="8" stroke="#334155"/>
       <text x="150" y="30" fill="#c084fc" font-size="14" font-weight="bold" text-anchor="middle">【ボーア量子条件の正体】</text>
-
       <!-- 円形軌道と物質波の定常波 (n=4) -->
       <circle cx="150" cy="120" r="50" fill="none" stroke="#64748b" stroke-width="1.5" stroke-dasharray="4,4"/>
       <!-- 波打つ軌道 -->
       <path d="M 150 60 Q 165 65 175 75 Q 185 85 190 100 Q 205 110 200 120 Q 205 130 190 140 Q 185 155 175 165 Q 165 175 150 180 Q 135 175 125 165 Q 115 155 110 140 Q 95 130 100 120 Q 95 110 110 100 Q 115 85 125 75 Q 135 65 150 60 Z" fill="none" stroke="#c084fc" stroke-width="2.5"/>
       <circle cx="150" cy="120" r="8" fill="#ef4444"/>
       <text x="150" y="124" fill="#ffffff" font-size="10" font-weight="bold" text-anchor="middle">原子核</text>
-
       <text x="150" y="195" fill="#f8fafc" font-size="12" text-anchor="middle">軌道周長 2πr にド・ブロイ波が</text>
       <text x="150" y="215" fill="#f8fafc" font-size="12" text-anchor="middle">ちょうど整数個 (n個) ぴったり収まる！</text>
       <text x="150" y="240" fill="#38bdf8" font-size="14" font-weight="bold" text-anchor="middle">2πr = n λ = n (h / mv)</text>

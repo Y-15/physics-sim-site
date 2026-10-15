@@ -14,21 +14,21 @@
     <div class="controls-grid">
       <div class="control-item">
         <label>
-          初速度 $v_0$: <strong>{{ v0 }} m/s</strong>
+          初速度 <i>v</i><sub>0</sub>: <strong>{{ v0 }} m/s</strong>
         </label>
         <input type="range" v-model.number="v0" min="5" max="35" step="1" @input="onParamChange" />
       </div>
 
       <div class="control-item">
         <label>
-          発射角 $\theta$: <strong>{{ angle }}°</strong>
+          発射角 θ: <strong>{{ angle }}°</strong>
         </label>
         <input type="range" v-model.number="angle" min="5" max="85" step="1" @input="onParamChange" />
       </div>
 
       <div class="control-item">
         <label>
-          重力加速度 $g$: <strong>{{ g }} m/s²</strong>
+          重力加速度 <i>g</i>: <strong>{{ g }} m/s²</strong>
         </label>
         <input type="range" v-model.number="g" min="1.6" max="25" step="0.1" @input="onParamChange" />
       </div>
@@ -59,19 +59,19 @@
     <!-- 理論値データ表示カード -->
     <div class="stats-grid">
       <div class="stat-card">
-        <div class="stat-label">滞空時間 $T$</div>
+        <div class="stat-label">滞空時間 <i>T</i></div>
         <div class="stat-value">{{ theoreticalTime.toFixed(2) }} <span class="unit">s</span></div>
-        <div class="stat-formula">$\frac{2 v_0 \sin\theta}{g}$</div>
+        <div class="stat-formula">(2 <i>v</i><sub>0</sub> sinθ / <i>g</i>)</div>
       </div>
       <div class="stat-card">
-        <div class="stat-label">最高到達点 $H$</div>
+        <div class="stat-label">最高到達点 <i>H</i></div>
         <div class="stat-value">{{ maxHeight.toFixed(2) }} <span class="unit">m</span></div>
-        <div class="stat-formula">$\frac{v_0^2 \sin^2\theta}{2g}$</div>
+        <div class="stat-formula">(<i>v</i><sub>0</sub>² sin²θ / 2g)</div>
       </div>
       <div class="stat-card highlight">
-        <div class="stat-label">水平到達距離 $R$</div>
+        <div class="stat-label">水平到達距離 <i>R</i></div>
         <div class="stat-value">{{ maxDistance.toFixed(2) }} <span class="unit">m</span></div>
-        <div class="stat-formula">$\frac{v_0^2 \sin 2\theta}{g}$</div>
+        <div class="stat-formula">(<i>v</i><sub>0</sub>² sin 2θ / <i>g</i>)</div>
       </div>
     </div>
   </div>

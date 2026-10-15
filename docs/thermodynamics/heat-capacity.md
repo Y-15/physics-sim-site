@@ -79,7 +79,6 @@ $$
     </defs>
     <rect width="760" height="320" fill="url(#gradHC)" rx="10"/>
     <rect width="760" height="320" fill="url(#gridHC)" rx="10"/>
-
     <!-- 定積加熱 -->
     <g transform="translate(60, 40)">
       <rect x="0" y="0" width="280" height="240" fill="#1e293b" rx="8" stroke="#38bdf8"/>
@@ -93,7 +92,6 @@ $$
       <text x="140" y="200" fill="#38bdf8" font-size="14" font-weight="bold" text-anchor="middle">Q_V = n C_V ΔT</text>
       <text x="140" y="225" fill="#94a3b8" font-size="12" text-anchor="middle">熱は100%温度上昇に使われる</text>
     </g>
-
     <!-- 定圧加熱 -->
     <g transform="translate(420, 40)">
       <rect x="0" y="0" width="280" height="240" fill="#1e293b" rx="8" stroke="#f59e0b"/>

@@ -5,7 +5,7 @@
         <span class="icon">🌈</span>
         <h3>回折格子・スペクトル分析シミュレーター</h3>
       </div>
-      <p class="subtitle">数千本のスリットによる極めて鋭い干渉主極大（$d\sin\theta = m\lambda$）。単色光の波長測定から水素原子線スペクトル、白色光の連続分光虹までリアルタイム再現。</p>
+      <p class="subtitle">数千本のスリットによる極めて鋭い干渉主極大（dsinθ = <i>m</i>λ）。単色光の波長測定から水素原子線スペクトル、白色光の連続分光虹までリアルタイム再現。</p>
     </div>
 
     <div class="canvas-wrapper">
@@ -37,21 +37,21 @@
 
         <div class="control-group" v-if="sourceType === 'laser'">
           <label>
-            <span>レーザー波長 $\lambda$: <strong>{{ wavelengthNm }} nm</strong></span>
+            <span>レーザー波長 λ: <strong>{{ wavelengthNm }} nm</strong></span>
             <input type="range" v-model.number="wavelengthNm" min="400" max="700" step="5" />
           </label>
         </div>
 
         <div class="control-group">
           <label>
-            <span>スリット密度 $N$: <strong>{{ linesPerMm }} 本/mm</strong></span>
+            <span>スリット密度 <i>N</i>: <strong>{{ linesPerMm }} 本/mm</strong></span>
             <input type="range" v-model.number="linesPerMm" min="200" max="800" step="50" />
           </label>
         </div>
 
         <div class="control-group">
           <label>
-            <span>スクリーン距離 $L$: <strong>{{ screenDistCm.toFixed(0) }} cm</strong></span>
+            <span>スクリーン距離 <i>L</i>: <strong>{{ screenDistCm.toFixed(0) }} cm</strong></span>
             <input type="range" v-model.number="screenDistCm" min="50" max="150" step="5" />
           </label>
         </div>
@@ -67,27 +67,27 @@
     <!-- 物理量モニター -->
     <div class="stats-monitor">
       <div class="stat-card">
-        <span class="label">格子定数 $d$</span>
+        <span class="label">格子定数 <i>d</i></span>
         <span class="value">{{ (gratingD_um).toFixed(2) }} <span class="unit">μm</span></span>
         <span class="subtext">1 / {{ linesPerMm }} mm</span>
       </div>
 
       <div class="stat-card">
-        <span class="label">1次回折角 $\theta_1$ (中央波長)</span>
+        <span class="label">1次回折角 θ<sub>1</sub> (中央波長)</span>
         <span class="value">{{ theta1Deg.toFixed(1) }} <span class="unit">°</span></span>
-        <span class="subtext">$\sin\theta = \lambda / d$</span>
+        <span class="subtext">sinθ = λ / <i>d</i></span>
       </div>
 
       <div class="stat-card">
-        <span class="label">1次明線位置 $x_1$</span>
+        <span class="label">1次明線位置 <i>x</i><sub>1</sub></span>
         <span class="value highlight">{{ x1Cm.toFixed(1) }} <span class="unit">cm</span></span>
-        <span class="subtext">$L \tan\theta$</span>
+        <span class="subtext"><i>L</i> tanθ</span>
       </div>
 
       <div class="stat-card">
-        <span class="label">可視光の最大次数 $m_{\max}$</span>
+        <span class="label">可視光の最大次数 <i>m</i><sub>\max</sub></span>
         <span class="value">{{ maxOrder }}</span>
-        <span class="subtext">$\sin\theta \le 1$ より</span>
+        <span class="subtext">sinθ ≤ 1 より</span>
       </div>
     </div>
   </div>

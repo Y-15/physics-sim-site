@@ -6,7 +6,7 @@
         <span class="badge">Radioactive Decay &amp; Radiation</span>
       </div>
       <p class="desc">
-        原子核の確率的な崩壊による半減期 $N(t) = N_0 (1/2)^{t/T}$ の指数関数的減衰、および $\alpha$ 線・$\beta$ 線・$\gamma$ 線の透過力・遮蔽実験をリアルタイムに体験できます。
+        原子核の確率的な崩壊による半減期 <i>N</i>(<i>t</i>) = <i>N</i><sub>0</sub> (1/2)<sup><i>t</i>/<i>T</i></sup> の指数関数的減衰、および α 線・β 線・γ 線の透過力・遮蔽実験をリアルタイムに体験できます。
       </p>
     </div>
 
@@ -29,11 +29,11 @@
       <!-- モード1: 崩壊 -->
       <div v-if="mode === 'decay'" class="controls-grid">
         <div class="control-group">
-          <label>半減期 $T$: <strong>{{ halfLife }} 秒</strong></label>
+          <label>半減期 <i>T</i>: <strong>{{ halfLife }} 秒</strong></label>
           <input type="range" v-model.number="halfLife" min="2" max="15" step="1" />
         </div>
         <div class="control-group">
-          <label>初期原子核数 $N_0$: <strong>{{ initialCount }} 個</strong></label>
+          <label>初期原子核数 <i>N</i><sub>0</sub>: <strong>{{ initialCount }} 個</strong></label>
           <input type="range" v-model.number="initialCount" min="100" max="600" step="50" @change="resetDecay" />
         </div>
         <div class="control-group button-group">
@@ -49,13 +49,13 @@
           <label>放射線の線源：</label>
           <div class="radio-buttons">
             <button :class="{ active: radiationType === 'alpha' }" @click="radiationType = 'alpha'">
-              $\alpha$ 線 (He原子核)
+              α 線 (He原子核)
             </button>
             <button :class="{ active: radiationType === 'beta' }" @click="radiationType = 'beta'">
-              $\beta$ 線 (高速電子)
+              β 線 (高速電子)
             </button>
             <button :class="{ active: radiationType === 'gamma' }" @click="radiationType = 'gamma'">
-              $\gamma$ 線 (電磁波)
+              γ 線 (電磁波)
             </button>
           </div>
         </div>
@@ -66,23 +66,23 @@
     <div class="stats-panel">
       <template v-if="mode === 'decay'">
         <div class="stat-card">
-          <span class="label">経過時間 $t$</span>
+          <span class="label">経過時間 <i>t</i></span>
           <span class="val highlight">{{ fmt(simTime, 1) }} 秒</span>
         </div>
         <div class="stat-card">
-          <span class="label">現在の残存原子核数 $N(t)$</span>
+          <span class="label">現在の残存原子核数 <i>N</i>(<i>t</i>)</span>
           <span class="val highlight-alt">{{ activeNucleiCount }} / {{ initialCount }} 個</span>
         </div>
         <div class="stat-card">
-          <span class="label">残存割合 $N/N_0$</span>
+          <span class="label">残存割合 <i>N</i>/<i>N</i><sub>0</sub></span>
           <span class="val">{{ fmt((activeNucleiCount / initialCount) * 100, 1) }} %</span>
         </div>
         <div class="stat-card">
-          <span class="label">理論値 $N_0(1/2)^{t/T}$</span>
+          <span class="label">理論値 <i>N</i><sub>0</sub>(1/2)<sup><i>t</i>/<i>T</i></sup></span>
           <span class="val">{{ fmt(theoryCount, 0) }} 個</span>
         </div>
         <div class="stat-card">
-          <span class="label">経過半減期数 $t/T$</span>
+          <span class="label">経過半減期数 <i>t</i>/<i>T</i></span>
           <span class="val">{{ fmt(simTime / halfLife, 2) }} 周期</span>
         </div>
       </template>

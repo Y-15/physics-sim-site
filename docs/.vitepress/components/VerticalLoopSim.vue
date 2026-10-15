@@ -5,7 +5,7 @@
         <span class="icon">🎢</span>
         <h3>鉛直面内の円運動・宙返りシミュレーター</h3>
       </div>
-      <p class="subtitle">ジェットコースターの宙返りループ。力学的エネルギー保存則と向心力（垂直抗力・糸の張力 $N$）のつり合い。一周成功するか、途中で軌道離脱（落下）するかをリアルタイム検証できます。</p>
+      <p class="subtitle">ジェットコースターの宙返りループ。力学的エネルギー保存則と向心力（垂直抗力・糸の張力 <i>N</i>）のつり合い。一周成功するか、途中で軌道離脱（落下）するかをリアルタイム検証できます。</p>
     </div>
 
     <div class="canvas-wrapper">
@@ -20,21 +20,21 @@
       <div class="control-grid">
         <div class="control-group">
           <label>
-            <span>最下点 初速度 $v_0$: <strong>{{ v0.toFixed(2) }} m/s</strong></span>
+            <span>最下点 初速度 <i>v</i><sub>0</sub>: <strong>{{ v0.toFixed(2) }} m/s</strong></span>
             <input type="range" v-model.number="v0" min="4.0" max="12.0" step="0.1" @input="resetSim" />
           </label>
         </div>
 
         <div class="control-group">
           <label>
-            <span>円軌道半径 $R$: <strong>{{ radius.toFixed(1) }} m</strong></span>
+            <span>円軌道半径 <i>R</i>: <strong>{{ radius.toFixed(1) }} m</strong></span>
             <input type="range" v-model.number="radius" min="1.0" max="3.0" step="0.2" @input="resetSim" />
           </label>
         </div>
 
         <div class="control-group">
           <label>
-            <span>小球の質量 $m$: <strong>{{ mass.toFixed(1) }} kg</strong></span>
+            <span>小球の質量 <i>m</i>: <strong>{{ mass.toFixed(1) }} kg</strong></span>
             <input type="range" v-model.number="mass" min="0.5" max="3.0" step="0.5" />
           </label>
         </div>
@@ -70,13 +70,13 @@
     <!-- 物理量モニター -->
     <div class="stats-monitor">
       <div class="stat-card">
-        <span class="label">現在の速さ $v$</span>
+        <span class="label">現在の速さ <i>v</i></span>
         <span class="value">{{ currentV.toFixed(2) }} <span class="unit">m/s</span></span>
         <span class="subtext">力学的エネルギー保存</span>
       </div>
 
       <div class="stat-card">
-        <span class="label">垂直抗力 / 張力 $N$</span>
+        <span class="label">垂直抗力 / 張力 <i>N</i></span>
         <span class="value" :class="{ highlight: currentN > 0.1, negative: currentN <= 0.05 }">
           {{ currentN.toFixed(1) }} <span class="unit">N</span>
         </span>
@@ -84,17 +84,17 @@
       </div>
 
       <div class="stat-card">
-        <span class="label">最高点到達限界 $v_0$</span>
+        <span class="label">最高点到達限界 <i>v</i><sub>0</sub></span>
         <span class="value">{{ vCritical.toFixed(2) }} <span class="unit">m/s</span></span>
-        <span class="subtext">$\sqrt{5gR}$ (一周の必要十分条件)</span>
+        <span class="subtext">√(5gR) (一周の必要十分条件)</span>
       </div>
 
       <div class="stat-card">
-        <span class="label">最高点速度 $v_{\text{top}}$ (予想)</span>
+        <span class="label">最高点速度 <i>v</i><sub>top</sub> (予想)</span>
         <span class="value" :class="{ positive: predictedVtop > 0, negative: predictedVtop <= 0 }">
           {{ predictedVtop > 0 ? predictedVtop.toFixed(2) + ' m/s' : '到達不可' }}
         </span>
-        <span class="subtext">$\sqrt{v_0^2 - 4gR}$</span>
+        <span class="subtext">√(<i>v</i><sub>0</sub>² - 4gR)</span>
       </div>
     </div>
   </div>

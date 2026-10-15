@@ -6,7 +6,7 @@
         <span class="badge">Bohr Model &amp; Spectrum</span>
       </div>
       <p class="desc">
-        電子のド・ブロイ波が軌道円周上で「定常波」をつくるボーアの量子条件 $2\pi r = n\lambda$ と、準位間遷移による光子の放出（ライマン・バルマー・パッシェン系列）をリアルタイムに体験できます。
+        電子のド・ブロイ波が軌道円周上で「定常波」をつくるボーアの量子条件 2π <i>r</i> = <i>n</i>λ と、準位間遷移による光子の放出（ライマン・バルマー・パッシェン系列）をリアルタイムに体験できます。
       </p>
     </div>
 
@@ -19,7 +19,7 @@
       <div class="controls-grid">
         <!-- 主量子数 n の選択 -->
         <div class="control-group">
-          <label>現在の電子の軌道 (主量子数 $n$): <strong>n = {{ currentN }}</strong></label>
+          <label>現在の電子の軌道 (主量子数 <i>n</i>): <strong>n = {{ currentN }}</strong></label>
           <div class="n-buttons">
             <button
               v-for="n in 5"
@@ -62,36 +62,36 @@
     <div class="series-panel">
       <span class="series-title">代表的なスペクトル系列：</span>
       <div class="series-badges">
-        <span class="badge-series lyman">ライマン系列 ($n \to 1$: 紫外線)</span>
-        <span class="badge-series balmer">バルマー系列 ($n \to 2$: 可視光線)</span>
-        <span class="badge-series paschen">パッシェン系列 ($n \to 3$: 赤外線)</span>
+        <span class="badge-series lyman">ライマン系列 (<i>n</i> → 1: 紫外線)</span>
+        <span class="badge-series balmer">バルマー系列 (<i>n</i> → 2: 可視光線)</span>
+        <span class="badge-series paschen">パッシェン系列 (<i>n</i> → 3: 赤外線)</span>
       </div>
     </div>
 
     <!-- ステータス値カード -->
     <div class="stats-panel">
       <div class="stat-card">
-        <span class="label">軌道半径 $r_n = n^2 r_1$</span>
+        <span class="label">軌道半径 <i>r</i><sub><i>n</i></sub> = <i>n</i>² <i>r</i><sub>1</sub></span>
         <span class="val highlight">{{ fmt(rn, 3) }} nm</span>
       </div>
       <div class="stat-card">
-        <span class="label">エネルギー準位 $E_n = -13.6/n^2$</span>
+        <span class="label">エネルギー準位 <i>E</i><sub><i>n</i></sub> = -13.6/<i>n</i>²</span>
         <span class="val highlight-alt">{{ fmt(En, 2) }} eV</span>
       </div>
       <div class="stat-card">
-        <span class="label">電子の速さ $v_n = v_1/n$</span>
-        <span class="val">{{ fmt(vn * 1e-6, 2) }} $\times 10^6$ m/s</span>
+        <span class="label">電子の速さ <i>v</i><sub><i>n</i></sub> = <i>v</i><sub>1</sub>/<i>n</i></span>
+        <span class="val">{{ fmt(vn * 1e-6, 2) }} × 10<sup>6</sup> m/s</span>
       </div>
       <div class="stat-card">
-        <span class="label">物質波波長 $\lambda_{\text{dB}} = h/mv$</span>
+        <span class="label">物質波波長 λ<sub>dB</sub> = <i>h</i>/mv</span>
         <span class="val">{{ fmt(lambdaDB, 3) }} nm</span>
       </div>
       <div class="stat-card">
-        <span class="label">円周 $2\pi r_n$ / $\lambda_{\text{dB}}$</span>
+        <span class="label">円周 2π <i>r</i><sub><i>n</i></sub> / λ<sub>dB</sub></span>
         <span class="val highlight">{{ currentN }} 波長分 (完全定常波)</span>
       </div>
       <div class="stat-card">
-        <span class="label">直近の遷移波長 $\lambda$</span>
+        <span class="label">直近の遷移波長 λ</span>
         <span class="val" :style="{ color: lastPhotonColor }">
           {{ lastPhotonWl ? fmt(lastPhotonWl, 1) + ' nm (' + lastPhotonType + ')' : '—' }}
         </span>

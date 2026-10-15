@@ -45,7 +45,6 @@ description: 高校物理の電磁気学最頻出テーマ。ファラデーの�
       <path d="M0,0 L0,5 L6,2.5 z" fill="#f43f5e" />
     </marker>
   </defs>
-
   <!-- ケース1: N極を近づける (y = 20..90) -->
   <g transform="translate(20, 20)">
     <!-- 磁石: 左から右へ移動 -->
@@ -53,24 +52,20 @@ description: 高校物理の電磁気学最頻出テーマ。ファラデーの�
     <text x="30" y="32" fill="#fff" font-size="12" font-weight="700" text-anchor="middle">S</text>
     <rect x="50" y="15" width="40" height="24" rx="2" fill="#ef4444"/>
     <text x="70" y="32" fill="#fff" font-size="12" font-weight="700" text-anchor="middle">N</text>
-
     <!-- 移動矢印 (右向き) -->
     <line x1="95" y1="27" x2="135" y2="27" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-lenz-push)"/>
     <text x="115" y="18" fill="#38bdf8" font-size="11" font-weight="700" text-anchor="middle">近づける</text>
-
     <!-- コイル (楕円ループ) -->
     <ellipse cx="230" cy="27" rx="14" ry="26" fill="rgba(251, 191, 36, 0.15)" stroke="#fbbf24" stroke-width="3"/>
     <text x="230" y="70" fill="#fbbf24" font-size="11" font-weight="700" text-anchor="middle">コイル</text>
-
     <!-- コイルに生じる磁極（手前がN極） -->
     <rect x="175" y="18" width="30" height="18" rx="2" fill="#ef4444"/>
     <text x="190" y="32" fill="#fff" font-size="11" font-weight="700" text-anchor="middle">N</text>
-
     <!-- 反発力 (斥力ブレーキ) -->
     <line x1="165" y1="27" x2="145" y2="27" stroke="#f43f5e" stroke-width="2" marker-end="url(#arr-lenz-force)"/>
-    <text x="270" y="32" fill="#f43f5e" font-size="13" font-weight="700">反発力（入ってくるな！とブレーキ）</text>
+    <rect x="255" y="18" width="220" height="20" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
+    <text x="365" y="32" fill="#f43f5e" font-size="11" font-weight="700" text-anchor="middle">反発力（入ってくるな！とブレーキ）</text>
   </g>
-
   <!-- ケース2: N極を遠ざける (y = 105..175) -->
   <g transform="translate(20, 105)">
     <!-- 磁石: 左へ遠ざかる -->
@@ -78,19 +73,15 @@ description: 高校物理の電磁気学最頻出テーマ。ファラデーの�
     <text x="30" y="32" fill="#fff" font-size="12" font-weight="700" text-anchor="middle">S</text>
     <rect x="50" y="15" width="40" height="24" rx="2" fill="#ef4444"/>
     <text x="70" y="32" fill="#fff" font-size="12" font-weight="700" text-anchor="middle">N</text>
-
     <!-- 移動矢印 (左向き) -->
     <line x1="95" y1="27" x2="65" y2="27" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-lenz-push)"/>
     <rect x="55" y="4" width="55" height="16" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
     <text x="82" y="16" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">遠ざける</text>
-
     <!-- コイル (楕円ループ) -->
     <ellipse cx="230" cy="27" rx="14" ry="26" fill="rgba(251, 191, 36, 0.15)" stroke="#fbbf24" stroke-width="3"/>
-
     <!-- コイルに生じる磁極（手前がS極） -->
     <rect x="175" y="18" width="30" height="18" rx="2" fill="#3b82f6"/>
     <text x="190" y="32" fill="#fff" font-size="11" font-weight="700" text-anchor="middle">S</text>
-
     <!-- 引力 (引き止めブレーキ) -->
     <line x1="145" y1="27" x2="165" y2="27" stroke="#38bdf8" stroke-width="2" marker-end="url(#arr-lenz-push)"/>
     <rect x="255" y="18" width="220" height="20" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>

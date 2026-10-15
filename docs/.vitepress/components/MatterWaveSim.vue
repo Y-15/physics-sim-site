@@ -5,7 +5,7 @@
         <span class="icon">⚛️</span>
         <h3>物質波（ド・ブロイ波）と電子線回折シミュレーター</h3>
       </div>
-      <p class="subtitle">電子などの粒子がもつ波動性。加速電圧 $V$ で電子を加速したときの物質波の波長 $\lambda = h/p$ と、結晶格子によるブラッグ反射・回折リングの半径変化をリアルタイム観察できます。</p>
+      <p class="subtitle">電子などの粒子がもつ波動性。加速電圧 <i>V</i> で電子を加速したときの物質波の波長 λ = <i>h</i>/<i>p</i> と、結晶格子によるブラッグ反射・回折リングの半径変化をリアルタイム観察できます。</p>
     </div>
 
     <div class="canvas-wrapper">
@@ -20,21 +20,21 @@
       <div class="control-grid">
         <div class="control-group">
           <label>
-            <span>電子加速電圧 $V$: <strong>{{ voltage }} V</strong></span>
+            <span>電子加速電圧 <i>V</i>: <strong>{{ voltage }} V</strong></span>
             <input type="range" v-model.number="voltage" min="30" max="400" step="10" />
           </label>
         </div>
 
         <div class="control-group">
           <label>
-            <span>結晶格子面間隔 $d$: <strong>{{ d_nm.toFixed(2) }} nm</strong></span>
+            <span>結晶格子面間隔 <i>d</i>: <strong>{{ d_nm.toFixed(2) }} nm</strong></span>
             <input type="range" v-model.number="d_nm" min="0.10" max="0.35" step="0.01" />
           </label>
         </div>
 
         <div class="control-group">
           <label>
-            <span>入射角 $\theta$: <strong>{{ thetaDeg.toFixed(1) }}°</strong></span>
+            <span>入射角 θ: <strong>{{ thetaDeg.toFixed(1) }}°</strong></span>
             <input type="range" v-model.number="thetaDeg" min="10" max="75" step="0.5" />
           </label>
         </div>
@@ -64,27 +64,27 @@
     <!-- 物理量リアルタイム表示モニター -->
     <div class="stats-monitor">
       <div class="stat-card">
-        <span class="label">電子の運動エネルギー $E_k$</span>
+        <span class="label">電子の運動エネルギー <i>E</i><sub><i>k</i></sub></span>
         <span class="value">{{ voltage }} <span class="unit">eV</span></span>
-        <span class="subtext">$E_k = e V$</span>
+        <span class="subtext"><i>E</i><sub><i>k</i></sub> = <i>e</i> <i>V</i></span>
       </div>
 
       <div class="stat-card">
-        <span class="label">ド・ブロイ波長 $\lambda$</span>
+        <span class="label">ド・ブロイ波長 λ</span>
         <span class="value highlight">{{ lambda_nm.toFixed(3) }} <span class="unit">nm</span></span>
-        <span class="subtext">$h / \sqrt{2 m_e e V}$</span>
+        <span class="subtext"><i>h</i> / √(2 <i>m</i><sub><i>e</i></sub> <i>e</i> <i>V</i>)</span>
       </div>
 
       <div class="stat-card">
-        <span class="label">光路差 $2 d \sin\theta$</span>
+        <span class="label">光路差 2 <i>d</i> sinθ</span>
         <span class="value">{{ pathDiff_nm.toFixed(3) }} <span class="unit">nm</span></span>
-        <span class="subtext">比 $2d\sin\theta / \lambda$: {{ (pathDiff_nm / lambda_nm).toFixed(2) }}</span>
+        <span class="subtext">比 2dsinθ / λ: {{ (pathDiff_nm / lambda_nm).toFixed(2) }}</span>
       </div>
 
       <div class="stat-card">
-        <span class="label">回折リング半径 $R$</span>
+        <span class="label">回折リング半径 <i>R</i></span>
         <span class="value">{{ ringRadiusPx.toFixed(0) }} <span class="unit">px</span></span>
-        <span class="subtext">$R \propto \lambda \propto 1/\sqrt{V}$</span>
+        <span class="subtext"><i>R</i> \propto λ \propto 1/√(<i>V</i>)</span>
       </div>
     </div>
   </div>

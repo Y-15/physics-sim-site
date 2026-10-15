@@ -33,10 +33,8 @@ description: 一様な磁場による等速円運動の「等時性」と高周�
         <path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
       </pattern>
     </defs>
-    
     <rect width="540" height="320" fill="#090d16" rx="8"/>
     <rect width="540" height="320" fill="url(#grid-bg-cyclotron)" rx="8"/>
-
     <!-- 磁場マーク (手前向き) -->
     <g fill="none" stroke="rgba(56, 189, 248, 0.2)" stroke-width="1">
       <circle cx="80" cy="60" r="5"/><circle cx="80" cy="60" r="1.5" fill="#38bdf8"/>
@@ -47,27 +45,22 @@ description: 一様な磁場による等速円運動の「等時性」と高周�
       <circle cx="460" cy="260" r="5"/><circle cx="460" cy="260" r="1.5" fill="#38bdf8"/>
     </g>
     <text x="35" y="45" fill="#38bdf8" font-size="12">一様な磁場 B (紙面手前向き ⊙)</text>
-
     <!-- ディー D1 (左) -->
     <path d="M 260 40 A 120 120 0 0 0 260 280 Z" fill="rgba(30, 41, 59, 0.6)" stroke="#38bdf8" stroke-width="2.5"/>
     <text x="180" y="80" fill="#38bdf8" font-size="16" font-weight="bold">D₁</text>
     <text x="145" y="105" fill="#94a3b8" font-size="11">内部電場 E = 0 (静電遮蔽)</text>
-
     <!-- ディー D2 (右) -->
     <path d="M 280 40 A 120 120 0 0 1 280 280 Z" fill="rgba(30, 41, 59, 0.6)" stroke="#38bdf8" stroke-width="2.5"/>
     <text x="340" y="80" fill="#38bdf8" font-size="16" font-weight="bold">D₂</text>
     <text x="315" y="105" fill="#94a3b8" font-size="11">内部電場 E = 0 (静電遮蔽)</text>
-
     <!-- ギャップ領域 (加速領域) -->
     <rect x="261" y="40" width="18" height="240" fill="rgba(251, 191, 36, 0.08)"/>
     <text x="270" y="305" fill="#fbbf24" font-size="12" text-anchor="middle">隙間（加速ギャップ）</text>
-
     <!-- 高周波交流電源の接続表示 -->
     <path d="M 260 280 L 260 305 L 230 305" fill="none" stroke="#94a3b8" stroke-width="1.5"/>
     <path d="M 280 280 L 280 305 L 310 305" fill="none" stroke="#94a3b8" stroke-width="1.5"/>
     <circle cx="270" cy="305" r="12" fill="#1e293b" stroke="#38bdf8" stroke-width="1.5"/>
     <path d="M 264 305 Q 267 301 270 305 T 276 305" fill="none" stroke="#38bdf8" stroke-width="1.5"/>
-
     <!-- スパイラル加速軌道 (例) -->
     <path d="M 270 160 
              A 15 15 0 0 0 270 130 
@@ -82,7 +75,6 @@ description: 一様な磁場による等速円運動の「等時性」と高周�
              L 270 50
              A 115 115 0 0 1 270 280 L 400 280" 
           fill="none" stroke="#f43f5e" stroke-width="2" stroke-dasharray="3 2"/>
-
     <!-- 粒子ビーム放出矢印 -->
     <line x1="270" y1="280" x2="440" y2="280" stroke="#22c55e" stroke-width="3"/>
     <polygon points="445,280 435,275 435,285" fill="#22c55e"/>

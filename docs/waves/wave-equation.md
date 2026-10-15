@@ -6,8 +6,8 @@ description: 高校物理の波動分野。波の基本式（v=fλ）、波の�
 # 波の式とグラフ（y-xグラフとy-tグラフ）
 
 <div class="lead">
-「波の式」に出てくる $\sin 2\pi \left(\frac{t}{T} - \frac{x}{\lambda}\right)$ という数式を見て、なぜマイナスがつくのか分からず丸暗記していませんか？<br>
-あるいは、「$y$-$x$ グラフ」と「$y$-$t$ グラフ」の変換問題で、どちらが時間軸か分からなくなって符号ミスをしていませんか？<br>
+「波の式」に出てくる sin 2π ≤ft((<i>t</i> / <i>T</i>) - (<i>x</i> / λ)) という数式を見て、なぜマイナスがつくのか分からず丸暗記していませんか？<br>
+あるいは、「<i>y</i>-<i>x</i> グラフ」と「<i>y</i>-<i>t</i> グラフ」の変換問題で、どちらが時間軸か分からなくなって符号ミスをしていませんか？<br>
 波の正体は、<strong>「各地点の媒質が、少しずつ遅れて同じ単振動を真似している現象」</strong>にすぎません。<br>
 このページでは、受験生が最も苦手とする波の式の導出ロジックとグラフ変換を、動く2段連動シミュレーターで直感的にマスターします。
 </div>
@@ -48,35 +48,28 @@ description: 高校物理の波動分野。波の基本式（v=fλ）、波の�
       <path d="M0,0 L3,5 L6,0 z" fill="#f43f5e" />
     </marker>
   </defs>
-
   <!-- 中心軸 (y = 110) -->
   <line x1="40" y1="110" x2="490" y2="110" stroke="#475569" stroke-width="1.5" stroke-dasharray="3,3"/>
   <text x="495" y="114" fill="#94a3b8" font-size="12">x</text>
-
   <!-- 正弦波形 (振幅 A = 50, 波長 λ = 240) -->
   <!-- 40から480まで (1.8波長) -->
   <path d="M 40,110 Q 100,20 160,110 T 280,110 T 400,110 T 480,110" fill="none" stroke="#38bdf8" stroke-width="3" stroke-linecap="round"/>
-
   <!-- 波の伝播矢印 (+x 方向) -->
   <line x1="300" y1="40" x2="430" y2="40" stroke="#38bdf8" stroke-width="3" marker-end="url(#arr-wave-prop)"/>
   <text x="320" y="30" fill="#38bdf8" font-size="13" font-weight="700">波形の移動速度 v (+x方向)</text>
   <text x="320" y="58" fill="#94a3b8" font-size="11">パターン（エネルギー）が移動</text>
-
   <!-- 媒質粒子1: 山の位置 (x = 100, y = 60) -->
   <line x1="100" y1="40" x2="100" y2="180" stroke="#64748b" stroke-width="1" stroke-dasharray="2,2"/>
   <circle cx="100" cy="65" r="7" fill="#f43f5e" stroke="#fff" stroke-width="1.5"/>
   <line x1="100" y1="75" x2="100" y2="105" stroke="#f43f5e" stroke-width="2" marker-end="url(#arr-med-dn)"/>
-
   <!-- 媒質粒子2: 節の位置 (x = 160, y = 110) -->
   <line x1="160" y1="40" x2="160" y2="180" stroke="#64748b" stroke-width="1" stroke-dasharray="2,2"/>
   <circle cx="160" cy="110" r="7" fill="#fbbf24" stroke="#fff" stroke-width="1.5"/>
   <line x1="160" y1="100" x2="160" y2="75" stroke="#fbbf24" stroke-width="2" marker-end="url(#arr-med-up)"/>
-
   <!-- 媒質粒子3: 谷の位置 (x = 220, y = 160) -->
   <line x1="220" y1="40" x2="220" y2="180" stroke="#64748b" stroke-width="1" stroke-dasharray="2,2"/>
   <circle cx="220" cy="155" r="7" fill="#10b981" stroke="#fff" stroke-width="1.5"/>
   <line x1="220" y1="145" x2="220" y2="120" stroke="#10b981" stroke-width="2" marker-end="url(#arr-med-up)"/>
-
   <!-- 媒質の単振動説明 -->
   <rect x="50" y="195" width="410" height="42" rx="5" fill="#0f172a" stroke="#f43f5e" stroke-width="1.2"/>
   <text x="255" y="212" fill="#f43f5e" font-size="12" font-weight="700" text-anchor="middle">各媒質は x 地点に留まり、上下に単振動 ↕</text>

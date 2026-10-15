@@ -363,22 +363,22 @@ onUnmounted(() => {
       </div>
     </div>
     <div class="probe-hint" v-else>
-      💡 画面上にマウスを合わせると、任意の位置 $P$ での距離・経路差・干渉条件（腹/節）を即座に計算・検証できます。
+      💡 画面上にマウスを合わせると、任意の位置 <i>P</i> での距離・経路差・干渉条件（腹/節）を即座に計算・検証できます。
     </div>
 
     <!-- コントロール群 -->
     <div class="controls-panel">
       <div class="control-row">
         <div class="control-group">
-          <label>波源間隔 $d$: <span>{{ waveSourceDist }} px</span></label>
+          <label>波源間隔 <i>d</i>: <span>{{ waveSourceDist }} px</span></label>
           <input type="range" v-model.number="waveSourceDist" min="80" max="260" step="10" />
         </div>
         <div class="control-group">
-          <label>波長 $\lambda$: <span>{{ wavelength }} px</span></label>
+          <label>波長 λ: <span>{{ wavelength }} px</span></label>
           <input type="range" v-model.number="wavelength" min="20" max="60" step="2" />
         </div>
         <div class="control-group">
-          <label>波の速さ $v$: <span>{{ waveSpeed.toFixed(1) }}</span></label>
+          <label>波の速さ <i>v</i>: <span>{{ waveSpeed.toFixed(1) }}</span></label>
           <input type="range" v-model.number="waveSpeed" min="0.5" max="3.0" step="0.1" />
         </div>
       </div>

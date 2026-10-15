@@ -51,57 +51,46 @@ description: 糸の長さとおもりの関係、微小振動近似、力学的�
       <path d="M0,0 L0,6 L7,3 z" fill="#fbbf24" />
     </marker>
   </defs>
-
   <!-- 天井と支点 -->
   <rect x="200" y="15" width="140" height="12" fill="url(#pend-ceiling-hatch)"/>
   <line x1="200" y1="27" x2="340" y2="27" stroke="#64748b" stroke-width="3"/>
   <circle cx="270" cy="27" r="4.5" fill="#94a3b8"/>
   <rect x="235" y="8" width="70" height="16" rx="3" fill="#0f172a" stroke="#475569" stroke-width="1"/>
   <text x="270" y="20" fill="#94a3b8" font-size="10" font-weight="600" text-anchor="middle">支点 (Pivot)</text>
-
   <!-- 鉛直中心線 (点線) -->
-  <line x1="270" y1="27" x2="270" y2="285" stroke="#475569" stroke-width="1.5" stroke-dasharray="4,4"/>
-
+  <line x1="270" y1="27" x2="270" y2="295" stroke="#475569" stroke-width="1.5" stroke-dasharray="4,4"/>
   <!-- 角度 θ の円弧 -->
   <path d="M 270,90 A 63,63 0 0,1 243,84" fill="none" stroke="#fbbf24" stroke-width="1.8"/>
   <rect x="245" y="93" width="22" height="18" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
   <text x="256" y="106" fill="#fbbf24" font-size="12" font-weight="700" text-anchor="middle">θ</text>
-
   <!-- 糸 (長さ L) -->
   <line x1="270" y1="27" x2="194" y2="193" stroke="#94a3b8" stroke-width="2"/>
-  <rect x="180" y="95" width="60" height="18" rx="3" fill="#0f172a" stroke="#64748b" stroke-width="1"/>
-  <text x="210" y="108" fill="#cbd5e1" font-size="11" font-weight="600" text-anchor="middle">長さ L</text>
-
+  <rect x="175" y="95" width="60" height="18" rx="3" fill="#0f172a" stroke="#64748b" stroke-width="1"/>
+  <text x="205" y="108" fill="#cbd5e1" font-size="11" font-weight="600" text-anchor="middle">長さ L</text>
   <!-- 軌道円弧 (点線) -->
   <path d="M 120,225 A 180,180 0 0,0 270,207" fill="none" stroke="#334155" stroke-width="1.5" stroke-dasharray="3,3"/>
-
   <!-- おもり (cx=194, cy=193) -->
   <circle cx="194" cy="193" r="15" fill="#1e293b" stroke="#38bdf8" stroke-width="2.5"/>
   <text x="194" y="198" fill="#f8fafc" font-size="13" font-weight="700" text-anchor="middle">m</text>
-
   <!-- 1. 糸の張力 S (支点方向) -->
-  <line x1="194" y1="193" x2="228" y2="120" stroke="#10b981" stroke-width="2.5" marker-end="url(#arr-pend-green)"/>
-  <rect x="235" y="115" width="55" height="20" rx="4" fill="#0f172a" stroke="#10b981" stroke-width="1"/>
-  <text x="262" y="129" fill="#10b981" font-size="11" font-weight="700" text-anchor="middle">張力 S</text>
-
+  <line x1="194" y1="193" x2="232" y2="120" stroke="#10b981" stroke-width="2.5" marker-end="url(#arr-pend-green)"/>
+  <rect x="240" y="120" width="55" height="20" rx="4" fill="#0f172a" stroke="#10b981" stroke-width="1"/>
+  <text x="267" y="134" fill="#10b981" font-size="11" font-weight="700" text-anchor="middle">張力 S</text>
   <!-- 2. 重力 mg (鉛直下向き) -->
-  <line x1="194" y1="193" x2="194" y2="283" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-pend-blue)"/>
-  <rect x="202" y="260" width="65" height="20" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
-  <text x="234" y="274" fill="#38bdf8" font-size="11" font-weight="700" text-anchor="middle">重力 mg</text>
-
+  <line x1="194" y1="193" x2="194" y2="280" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-pend-blue)"/>
+  <rect x="165" y="290" width="60" height="20" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="195" y="304" fill="#38bdf8" font-size="11" font-weight="700" text-anchor="middle">重力 mg</text>
   <!-- 重力の分解成分: 半径外向き mg cos θ -->
   <line x1="194" y1="193" x2="160" y2="267" stroke="#fbbf24" stroke-width="2" marker-end="url(#arr-pend-yellow)"/>
-  <rect x="35" y="260" width="120" height="20" rx="4" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
-  <text x="95" y="274" fill="#fbbf24" font-size="11" font-weight="700" text-anchor="middle">mg cos θ (動径成分)</text>
-
+  <rect x="25" y="258" width="130" height="20" rx="4" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
+  <text x="90" y="272" fill="#fbbf24" font-size="11" font-weight="700" text-anchor="middle">mg cos θ (動径成分)</text>
   <!-- 重力の分解成分: 接線成分（復元力） -mg sin θ -->
   <line x1="194" y1="193" x2="232" y2="210" stroke="#f43f5e" stroke-width="2.5" marker-end="url(#arr-pend-rose)"/>
-  <rect x="242" y="202" width="135" height="22" rx="4" fill="#0f172a" stroke="#f43f5e" stroke-width="1.2"/>
-  <text x="309" y="217" fill="#f43f5e" font-size="11" font-weight="700" text-anchor="middle">復元力: −mg sin θ</text>
-
+  <rect x="245" y="202" width="135" height="22" rx="4" fill="#0f172a" stroke="#f43f5e" stroke-width="1.2"/>
+  <text x="312" y="217" fill="#f43f5e" font-size="11" font-weight="700" text-anchor="middle">復元力: −mg sin θ</text>
   <!-- 分解平行四辺形の補助点線 -->
-  <line x1="160" y1="267" x2="194" y2="283" stroke="#64748b" stroke-width="1.5" stroke-dasharray="3,3"/>
-  <line x1="232" y1="210" x2="194" y2="283" stroke="#64748b" stroke-width="1.5" stroke-dasharray="3,3"/>
+  <line x1="160" y1="267" x2="194" y2="280" stroke="#64748b" stroke-width="1.5" stroke-dasharray="3,3"/>
+  <line x1="232" y1="210" x2="194" y2="280" stroke="#64748b" stroke-width="1.5" stroke-dasharray="3,3"/>
 </svg>
 <div class="graph-caption">図: 単振り子の力と重力分解（動径方向：張力 <i>S</i> と <i>mg</i> cos <i>θ</i>、接線方向：復元力 −<i>mg</i> sin <i>θ</i>）</div>
 </div>

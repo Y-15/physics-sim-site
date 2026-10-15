@@ -31,36 +31,28 @@ description: 大気圧の測定原理、トリチェリの真空、ガラス管�
   <div class="graph-title">図1：トリチェリの実験と同一水平面での圧力のつり合い</div>
   <svg viewBox="0 0 540 300" class="vector-svg">
     <rect width="540" height="300" fill="#0f172a" rx="8"/>
-    
     <!-- 水銀槽 -->
     <path d="M 100 210 L 110 270 L 430 270 L 440 210 Z" fill="#1e293b" stroke="#64748b" stroke-width="2.5"/>
     <rect x="110" y="210" width="320" height="60" fill="#94a3b8" opacity="0.8"/>
-    
     <!-- 液面基準線 (等圧面) -->
     <line x1="80" y1="210" x2="460" y2="210" stroke="#38bdf8" stroke-width="1.5" stroke-dasharray="4 3"/>
     <text x="40" y="214" fill="#38bdf8" font-size="12">等圧面</text>
-
     <!-- ガラス管 -->
     <rect x="250" y="40" width="40" height="200" fill="none" stroke="#e2e8f0" stroke-width="2"/>
     <path d="M 250 40 A 20 15 0 0 1 290 40 Z" fill="rgba(255,255,255,0.4)" stroke="#e2e8f0" stroke-width="2"/>
-
     <!-- 管内水銀柱 (高さ 760mm 相当) -->
     <rect x="252" y="80" width="36" height="150" fill="#94a3b8"/>
     <ellipse cx="270" cy="80" rx="18" ry="4" fill="#cbd5e1"/>
-
     <!-- トリチェリの真空 -->
     <rect x="252" y="40" width="36" height="40" fill="#020617"/>
     <text x="270" y="65" fill="#f8fafc" font-size="11" font-weight="bold" text-anchor="middle">真空</text>
     <text x="270" y="76" fill="#94a3b8" font-size="9" text-anchor="middle">(P ≈ 0)</text>
-
     <!-- 点 A (水銀槽液面) -->
     <circle cx="170" cy="210" r="4" fill="#38bdf8"/>
     <text x="160" y="235" fill="#38bdf8" font-size="13" font-weight="bold">点 A (P₀)</text>
-
     <!-- 点 B (管内の同高面) -->
     <circle cx="270" cy="210" r="4" fill="#fbbf24"/>
     <text x="280" y="235" fill="#fbbf24" font-size="13" font-weight="bold">点 B (ρgh)</text>
-
     <!-- 大気圧矢印 -->
     <g stroke="#38bdf8" stroke-width="2" fill="#38bdf8">
       <line x1="170" y1="160" x2="170" y2="195"/>
@@ -69,7 +61,6 @@ description: 大気圧の測定原理、トリチェリの真空、ガラス管�
       <polygon points="370,200 366,192 374,192"/>
     </g>
     <text x="170" y="150" fill="#38bdf8" font-size="12" text-anchor="middle">大気圧 P₀</text>
-
     <!-- 水銀柱の高さ h の寸法線 -->
     <line x1="320" y1="80" x2="320" y2="210" stroke="#fbbf24" stroke-width="1.8"/>
     <line x1="310" y1="80" x2="330" y2="80" stroke="#fbbf24" stroke-width="1.5"/>
@@ -105,7 +96,6 @@ $$1\text{ atm} = 760\text{ mmHg} = 1.013 \times 10^5\text{ Pa}$$
   <div class="graph-title">図2：気体封入時の圧力のつり合いと管の引き上げ効果</div>
   <svg viewBox="0 0 540 220" class="vector-svg">
     <rect width="540" height="220" fill="#0f172a" rx="8"/>
-    
     <!-- 比較：左=引き上げ前、右=引き上げ後 -->
     <!-- 左側 -->
     <text x="140" y="30" fill="#94a3b8" font-size="12" text-anchor="middle">【引き上げ前】</text>
@@ -114,7 +104,6 @@ $$1\text{ atm} = 760\text{ mmHg} = 1.013 \times 10^5\text{ Pa}$$
     <rect x="122" y="50" width="36" height="60" fill="rgba(16, 185, 129, 0.2)"/>
     <text x="140" y="85" fill="#10b981" font-size="11" text-anchor="middle">P₁, L₁</text>
     <text x="140" y="160" fill="#e2e8f0" font-size="11" text-anchor="middle">h₁</text>
-
     <!-- 右側 -->
     <text x="380" y="30" fill="#38bdf8" font-size="12" text-anchor="middle">【管を引き上げた後】</text>
     <rect x="360" y="40" width="40" height="160" fill="none" stroke="#38bdf8" stroke-width="2"/>
@@ -122,7 +111,6 @@ $$1\text{ atm} = 760\text{ mmHg} = 1.013 \times 10^5\text{ Pa}$$
     <rect x="362" y="40" width="36" height="85" fill="rgba(16, 185, 129, 0.2)"/>
     <text x="380" y="85" fill="#10b981" font-size="11" text-anchor="middle">P₂ (低下), L₂ (増大)</text>
     <text x="380" y="165" fill="#e2e8f0" font-size="11" text-anchor="middle">h₂ (わずかに上昇)</text>
-
     <!-- つり合い式まとめ -->
     <rect x="200" y="80" width="120" height="50" fill="#1e293b" rx="6" stroke="#475569"/>
     <text x="260" y="100" fill="#fbbf24" font-size="12" font-weight="bold" text-anchor="middle">P + h = P₀</text>

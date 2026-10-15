@@ -27,28 +27,28 @@
     <div class="controls-grid">
       <div class="control-item">
         <label>
-          糸の長さ $L$: <strong>{{ length.toFixed(2) }} m</strong>
+          糸の長さ <i>L</i>: <strong>{{ length.toFixed(2) }} m</strong>
         </label>
         <input type="range" v-model.number="length" min="0.5" max="2.5" step="0.05" @input="onParamChange" />
       </div>
 
       <div class="control-item">
         <label>
-          初期角度 $\theta_0$: <strong>{{ initialAngleDeg }}°</strong>
+          初期角度 <i>θ</i><sub>0</sub>: <strong>{{ initialAngleDeg }}°</strong>
         </label>
         <input type="range" v-model.number="initialAngleDeg" min="5" max="85" step="1" @input="onAngleSliderChange" />
       </div>
 
       <div class="control-item">
         <label>
-          おもりの質量 $m$: <strong>{{ mass.toFixed(1) }} kg</strong>
+          おもりの質量 <i>m</i>: <strong>{{ mass.toFixed(1) }} kg</strong>
         </label>
         <input type="range" v-model.number="mass" min="0.2" max="5.0" step="0.1" @input="onParamChange" />
       </div>
 
       <div class="control-item">
         <label>
-          重力加速度 $g$: <strong>{{ g.toFixed(2) }} m/s²</strong>
+          重力加速度 <i>g</i>: <strong>{{ g.toFixed(2) }} m/s²</strong>
         </label>
         <input type="range" v-model.number="g" min="1.6" max="25" step="0.1" @input="onParamChange" />
       </div>
@@ -91,7 +91,7 @@
     <!-- エネルギー保存メーター -->
     <div class="energy-panel">
       <div class="energy-header">
-        <span>⚡ 力学的エネルギー保存 ($E = K + U$)</span>
+        <span>⚡ 力学的エネルギー保存 (<i>E</i> = <i>K</i> + <i>U</i>)</span>
         <span class="total-energy-val">{{ totalEnergy.toFixed(2) }} J</span>
       </div>
       <div class="energy-bar-wrap">
@@ -111,27 +111,27 @@
         </div>
       </div>
       <div class="energy-legend">
-        <span class="legend-item"><span class="dot kinetic"></span> 運動エネルギー $K = \frac{1}{2}mv^2$: <strong>{{ kineticEnergy.toFixed(2) }} J</strong></span>
-        <span class="legend-item"><span class="dot potential"></span> 位置エネルギー $U = mgh$: <strong>{{ potentialEnergy.toFixed(2) }} J</strong></span>
+        <span class="legend-item"><span class="dot kinetic"></span> 運動エネルギー <i>K</i> = ½<i>m</i><i>v</i>²: <strong>{{ kineticEnergy.toFixed(2) }} J</strong></span>
+        <span class="legend-item"><span class="dot potential"></span> 位置エネルギー <i>U</i> = <i>mgh</i>: <strong>{{ potentialEnergy.toFixed(2) }} J</strong></span>
       </div>
     </div>
 
     <!-- 理論値データ表示カード -->
     <div class="stats-grid">
       <div class="stat-card highlight">
-        <div class="stat-label">理論周期 $T_0$（微小振幅）</div>
+        <div class="stat-label">理論周期 <i>T</i><sub>0</sub>（微小振幅）</div>
         <div class="stat-value">{{ theoreticalPeriod.toFixed(3) }} <span class="unit">s</span></div>
-        <div class="stat-formula">$T_0 = 2\pi\sqrt{\frac{L}{g}}$</div>
+        <div class="stat-formula"><i>T</i><sub>0</sub> = 2π√(<i>L</i> / <i>g</i>)</div>
       </div>
       <div class="stat-card">
-        <div class="stat-label">現在角度 $\theta$</div>
+        <div class="stat-label">現在角度 <i>θ</i></div>
         <div class="stat-value">{{ currentAngleDeg.toFixed(1) }} <span class="unit">°</span></div>
-        <div class="stat-formula">角速度 $\omega = {{ omega.toFixed(2) }} \text{ rad/s}$</div>
+        <div class="stat-formula">角速度 <i>ω</i> = {{ omega.toFixed(2) }} rad/s</div>
       </div>
       <div class="stat-card">
-        <div class="stat-label">現在速度 $v$</div>
+        <div class="stat-label">現在速度 <i>v</i></div>
         <div class="stat-value">{{ currentSpeed.toFixed(2) }} <span class="unit">m/s</span></div>
-        <div class="stat-formula">$v = L \frac{d\theta}{dt}$</div>
+        <div class="stat-formula"><i>v</i> = <i>L</i>(d<i>θ</i>/d<i>t</i>)</div>
       </div>
     </div>
   </div>

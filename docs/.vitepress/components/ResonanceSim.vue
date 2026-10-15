@@ -34,21 +34,21 @@
 
         <div class="control-group">
           <label>
-            <span>音叉の振動数 $f$: <strong>{{ freq }} Hz</strong></span>
+            <span>音叉の振動数 <i>f</i>: <strong>{{ freq }} Hz</strong></span>
             <input type="range" v-model.number="freq" min="300" max="900" step="10" />
           </label>
         </div>
 
         <div class="control-group">
           <label>
-            <span>管の長さ $L$: <strong>{{ pipeLengthCm.toFixed(1) }} cm</strong></span>
+            <span>管の長さ <i>L</i>: <strong>{{ pipeLengthCm.toFixed(1) }} cm</strong></span>
             <input type="range" v-model.number="pipeLengthCm" min="15" max="85" step="0.5" />
           </label>
         </div>
 
         <div class="control-group">
           <label>
-            <span>開口端補正 $\Delta l$: <strong>{{ deltaLCm.toFixed(1) }} cm</strong></span>
+            <span>開口端補正 Δ <i>l</i>: <strong>{{ deltaLCm.toFixed(1) }} cm</strong></span>
             <input type="range" v-model.number="deltaLCm" min="0" max="4" step="0.5" />
           </label>
         </div>
@@ -67,19 +67,19 @@
     <!-- 物理量リアルタイム表示モニター -->
     <div class="stats-monitor">
       <div class="stat-card">
-        <span class="label">音速 $V$ (常温15℃)</span>
+        <span class="label">音速 <i>V</i> (常温15℃)</span>
         <span class="value">340 <span class="unit">m/s</span></span>
-        <span class="subtext">$331.5 + 0.6 \times 15$</span>
+        <span class="subtext">331.5 + 0.6 × 15</span>
       </div>
 
       <div class="stat-card">
-        <span class="label">音波の波長 $\lambda$</span>
+        <span class="label">音波の波長 λ</span>
         <span class="value">{{ wavelengthCm.toFixed(1) }} <span class="unit">cm</span></span>
-        <span class="subtext">$\lambda = V / f$</span>
+        <span class="subtext">λ = <i>V</i> / <i>f</i></span>
       </div>
 
       <div class="stat-card">
-        <span class="label">実効長さ $L + \Delta l$</span>
+        <span class="label">実効長さ <i>L</i> + Δ <i>l</i></span>
         <span class="value">{{ effectiveLengthCm.toFixed(1) }} <span class="unit">cm</span></span>
         <span class="subtext">{{ pipeType === 'closed' ? 'L + Δl' : 'L + 2Δl' }}</span>
       </div>

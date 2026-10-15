@@ -5,7 +5,7 @@
         <span class="icon">⚡</span>
         <h3>X線の発生とスペクトル解析シミュレーター</h3>
       </div>
-      <p class="subtitle">クーリッジ管での高速電子衝突によるX線発生。最短波長 $\lambda_0 = hc/eV$（デュアン＝ハント則）をもつ連続X線と、ターゲット金属固有の特性X線（$K_\alpha, K_\beta$）の波形変化を観察できます。</p>
+      <p class="subtitle">クーリッジ管での高速電子衝突によるX線発生。最短波長 λ<sub>0</sub> = hc/eV（デュアン＝ハント則）をもつ連続X線と、ターゲット金属固有の特性X線（K_α, K_β）の波形変化を観察できます。</p>
     </div>
 
     <div class="canvas-wrapper">
@@ -37,7 +37,7 @@
 
         <div class="control-group">
           <label>
-            <span>管電圧（加速電圧）$V$: <strong>{{ voltageKv.toFixed(0) }} kV</strong></span>
+            <span>管電圧（加速電圧）<i>V</i>: <strong>{{ voltageKv.toFixed(0) }} kV</strong></span>
             <input type="range" v-model.number="voltageKv" min="20" max="80" step="2" />
           </label>
         </div>
@@ -60,7 +60,7 @@
     <!-- 物理量モニター -->
     <div class="stats-monitor">
       <div class="stat-card">
-        <span class="label">最短波長 $\lambda_0$</span>
+        <span class="label">最短波長 λ<sub>0</sub></span>
         <span class="value highlight">{{ lambda0_pm.toFixed(1) }} <span class="unit">pm</span></span>
         <span class="subtext">hc / eV (デュアン=ハント)</span>
       </div>
@@ -72,13 +72,13 @@
       </div>
 
       <div class="stat-card">
-        <span class="label">特性X線 $K_\alpha$ 波長</span>
+        <span class="label">特性X線 K_α 波長</span>
         <span class="value">{{ targetData.kAlphaPm }} <span class="unit">pm</span></span>
         <span class="subtext">固有エネルギー差で一定</span>
       </div>
 
       <div class="stat-card">
-        <span class="label">特性X線 $K_\beta$ 波長</span>
+        <span class="label">特性X線 K_β 波長</span>
         <span class="value">{{ targetData.kBetaPm }} <span class="unit">pm</span></span>
         <span class="subtext">M殻 → K殻 遷移</span>
       </div>

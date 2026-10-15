@@ -5,7 +5,7 @@
         <span class="icon">🧲</span>
         <h3>ホール効果・キャリア判定シミュレーター</h3>
       </div>
-      <p class="subtitle">磁場中の導体・半導体に電流を流したときに発生するホール電圧 $V_H$。電子キャリア（$-e$）と正孔キャリア（$+e$）で生じる起電力の極性が逆転する仕組みを可視化します。</p>
+      <p class="subtitle">磁場中の導体・半導体に電流を流したときに発生するホール電圧 <i>V</i><sub><i>H</i></sub>。電子キャリア（-<i>e</i>）と正孔キャリア（+<i>e</i>）で生じる起電力の極性が逆転する仕組みを可視化します。</p>
     </div>
 
     <div class="canvas-wrapper">
@@ -34,21 +34,21 @@
 
         <div class="control-group">
           <label>
-            <span>電流 $I$: <strong>{{ currentA.toFixed(1) }} A</strong> (右向き)</span>
+            <span>電流 <i>I</i>: <strong>{{ currentA.toFixed(1) }} A</strong> (右向き)</span>
             <input type="range" v-model.number="currentA" min="0.5" max="5.0" step="0.5" />
           </label>
         </div>
 
         <div class="control-group">
           <label>
-            <span>磁束密度 $B$: <strong>{{ magneticTesla.toFixed(1) }} T</strong> (手前→奥)</span>
+            <span>磁束密度 <i>B</i>: <strong>{{ magneticTesla.toFixed(1) }} T</strong> (手前→奥)</span>
             <input type="range" v-model.number="magneticTesla" min="0.2" max="2.0" step="0.2" />
           </label>
         </div>
 
         <div class="control-group">
           <label>
-            <span>キャリア密度 $n$: <strong>{{ carrierDensity }}</strong></span>
+            <span>キャリア密度 <i>n</i>: <strong>{{ carrierDensity }}</strong></span>
             <div class="btn-group">
               <button class="select-btn" :class="{ active: isHighDensity }" @click="isHighDensity = !isHighDensity">
                 {{ isHighDensity ? '金属並 (高密度: 小VH)' : '半導体並 (低密度: 大VH)' }}
@@ -68,7 +68,7 @@
     <!-- 物理量モニター -->
     <div class="stats-monitor">
       <div class="stat-card">
-        <span class="label">ホール電圧 $V_H$</span>
+        <span class="label">ホール電圧 <i>V</i><sub><i>H</i></sub></span>
         <span class="value" :class="{ positive: signedVh > 0, negative: signedVh < 0 }">
           {{ signedVh > 0 ? '+' : '' }}{{ signedVh.toFixed(2) }} <span class="unit">mV</span>
         </span>
@@ -82,13 +82,13 @@
       </div>
 
       <div class="stat-card">
-        <span class="label">ホール電場 $E_H$</span>
+        <span class="label">ホール電場 <i>E</i><sub><i>H</i></sub></span>
         <span class="value">{{ (Math.abs(signedVh) / 20).toFixed(2) }} <span class="unit">V/m</span></span>
-        <span class="subtext">$E_H = v \times B$</span>
+        <span class="subtext"><i>E</i><sub><i>H</i></sub> = <i>v</i> × <i>B</i></span>
       </div>
 
       <div class="stat-card">
-        <span class="label">ドリフト速度 $v_d$</span>
+        <span class="label">ドリフト速度 <i>v</i><sub><i>d</i></sub></span>
         <span class="value">{{ driftSpeedDisplay.toFixed(1) }} <span class="unit">mm/s</span></span>
         <span class="subtext">{{ carrierType === 'electron' ? '左向きにドリフト' : '右向きにドリフト' }}</span>
       </div>

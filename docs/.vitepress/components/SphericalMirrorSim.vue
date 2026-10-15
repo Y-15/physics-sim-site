@@ -300,15 +300,15 @@ onMounted(() => {
           <span class="val highlight">{{ mirrorType === 'concave' ? '凹面鏡 (f > 0)' : '凸面鏡 (f < 0)' }}</span>
         </div>
         <div class="stat-row">
-          <span class="lbl">物体距離 $a$:</span>
+          <span class="lbl">物体距離 <i>a</i>:</span>
           <span class="val">{{ objectDist }} px</span>
         </div>
         <div class="stat-row">
-          <span class="lbl">像距離 $b$:</span>
+          <span class="lbl">像距離 <i>b</i>:</span>
           <span class="val">{{ imageStats.bStr }}</span>
         </div>
         <div class="stat-row">
-          <span class="lbl">倍率 $m$:</span>
+          <span class="lbl">倍率 <i>m</i>:</span>
           <span class="val">{{ imageStats.magStr }}</span>
         </div>
         <div class="stat-row">
@@ -342,15 +342,15 @@ onMounted(() => {
 
       <div class="control-row">
         <div class="control-group">
-          <label>物体距離 $a$: <span>{{ objectDist }} px</span></label>
+          <label>物体距離 <i>a</i>: <span>{{ objectDist }} px</span></label>
           <input type="range" v-model.number="objectDist" min="40" max="300" step="5" @input="draw" />
         </div>
         <div class="control-group">
-          <label>焦点距離 $|f|$: <span>{{ focalLengthAbs }} px</span></label>
+          <label>焦点距離 |<i>f</i>|: <span>{{ focalLengthAbs }} px</span></label>
           <input type="range" v-model.number="focalLengthAbs" min="60" max="180" step="5" @input="draw" />
         </div>
         <div class="control-group">
-          <label>物体の高さ $h$: <span>{{ objectHeight }} px</span></label>
+          <label>物体の高さ <i>h</i>: <span>{{ objectHeight }} px</span></label>
           <input type="range" v-model.number="objectHeight" min="25" max="90" step="5" @input="draw" />
         </div>
       </div>

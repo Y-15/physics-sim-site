@@ -34,25 +34,20 @@ description: 高校物理の電磁気最難関テーマ「ホール効果（Hall
     </defs>
     <rect width="760" height="340" fill="url(#gradHE)" rx="10"/>
     <rect width="760" height="340" fill="url(#gridHE)" rx="10"/>
-
     <!-- 直方体導体の立体配置図 -->
     <g transform="translate(60, 40)">
       <text x="140" y="25" fill="#38bdf8" font-size="14" font-weight="bold" text-anchor="middle">【電子キャリア（金属・n型）の場合】</text>
-
       <!-- 導体ブロック -->
       <rect x="40" y="70" width="240" height="120" fill="rgba(30, 41, 59, 0.85)" stroke="#94a3b8" stroke-width="2"/>
-
       <!-- 寸法線: 幅 d (縦), 厚さ t (奥行き) -->
       <line x1="25" y1="70" x2="25" y2="190" stroke="#f59e0b" stroke-width="1.5"/>
       <line x1="20" y1="70" x2="30" y2="70" stroke="#f59e0b" stroke-width="1.5"/>
       <line x1="20" y1="190" x2="30" y2="190" stroke="#f59e0b" stroke-width="1.5"/>
       <text x="15" y="135" fill="#f59e0b" font-size="12" text-anchor="end">幅 d</text>
-
       <!-- 電流 I (右向き) -->
       <line x1="10" y1="130" x2="35" y2="130" stroke="#f59e0b" stroke-width="3"/>
       <polygon points="35,126 43,130 35,134" fill="#f59e0b"/>
       <text x="10" y="115" fill="#f59e0b" font-size="11" font-weight="bold">電流 I</text>
-
       <!-- 電子 e- (左向きにドリフト vd) -->
       <circle cx="160" cy="130" r="10" fill="#38bdf8"/>
       <text x="160" y="134" fill="#0f172a" font-size="11" font-weight="bold" text-anchor="middle">-e</text>
@@ -60,32 +55,25 @@ description: 高校物理の電磁気最難関テーマ「ホール効果（Hall
       <line x1="150" y1="130" x2="110" y2="130" stroke="#38bdf8" stroke-width="2.5"/>
       <polygon points="110,127 102,130 110,133" fill="#38bdf8"/>
       <text x="125" y="120" fill="#38bdf8" font-size="11">v_d</text>
-
       <!-- ローレンツ力 fL (上向き！) -->
       <!-- 左向き速度(-x) × 奥向き磁場(-z) = 上向き(+y)。電荷が-eなので力は上向き！ -->
       <line x1="160" y1="120" x2="160" y2="80" stroke="#f43f5e" stroke-width="3"/>
       <polygon points="156,80 160,72 164,80" fill="#f43f5e"/>
       <text x="175" y="90" fill="#f43f5e" font-size="11" font-weight="bold">f_L = e v_d B (上向き)</text>
-
       <!-- 上面に電子が蓄積（負極）、下面に正電荷（正極） -->
       <text x="160" y="62" fill="#38bdf8" font-size="14" font-weight="bold" text-anchor="middle">ーーーーー (上面: 負極)</text>
       <text x="160" y="210" fill="#ef4444" font-size="14" font-weight="bold" text-anchor="middle">＋＋＋＋＋ (下面: 正極)</text>
-
       <!-- ホール電場 EH (下から上へ) -->
       <line x1="220" y1="170" x2="220" y2="100" stroke="#a855f7" stroke-width="2" stroke-dasharray="3,3"/>
       <polygon points="217,100 220,92 223,100" fill="#a855f7"/>
       <text x="235" y="135" fill="#a855f7" font-size="11" font-weight="bold">E_H</text>
-
       <!-- 判定結論 -->
       <text x="160" y="245" fill="#ef4444" font-size="13" font-weight="bold" text-anchor="middle">金属・n型: 下面の電位が高い (V_下面 &gt; V_上面)</text>
     </g>
-
     <!-- 右側: 正孔キャリア（p型半導体）の場合 -->
     <g transform="translate(420, 40)">
       <text x="140" y="25" fill="#ef4444" font-size="14" font-weight="bold" text-anchor="middle">【正孔キャリア（p型半導体）の場合】</text>
-
       <rect x="40" y="70" width="240" height="120" fill="rgba(30, 41, 59, 0.85)" stroke="#94a3b8" stroke-width="2"/>
-
       <!-- 正孔 +e (右向きにドリフト vd) -->
       <circle cx="160" cy="130" r="10" fill="#ef4444"/>
       <text x="160" y="134" fill="#ffffff" font-size="11" font-weight="bold" text-anchor="middle">+e</text>
@@ -93,17 +81,14 @@ description: 高校物理の電磁気最難関テーマ「ホール効果（Hall
       <line x1="170" y1="130" x2="210" y2="130" stroke="#ef4444" stroke-width="2.5"/>
       <polygon points="210,127 218,130 210,133" fill="#ef4444"/>
       <text x="190" y="120" fill="#ef4444" font-size="11">v_d</text>
-
       <!-- ローレンツ力 fL (上向き！) -->
       <!-- 右向き速度(+x) × 奥向き磁場(-z) = 上向き(+y)。電荷が+eなので力も上向き！ -->
       <line x1="160" y1="120" x2="160" y2="80" stroke="#f43f5e" stroke-width="3"/>
       <polygon points="156,80 160,72 164,80" fill="#f43f5e"/>
       <text x="175" y="90" fill="#f43f5e" font-size="11" font-weight="bold">f_L = e v_d B (上向き)</text>
-
       <!-- 上面に正孔が蓄積（正極）、下面に負極 -->
       <text x="160" y="62" fill="#ef4444" font-size="14" font-weight="bold" text-anchor="middle">＋＋＋＋＋ (上面: 正極)</text>
       <text x="160" y="210" fill="#38bdf8" font-size="14" font-weight="bold" text-anchor="middle">ーーーーー (下面: 負極)</text>
-
       <text x="160" y="245" fill="#34d399" font-size="13" font-weight="bold" text-anchor="middle">p型: 上面の電位が高い (V_上面 &gt; V_下面)</text>
     </g>
   </svg>

@@ -6,7 +6,7 @@
         <span class="badge">Inertial Forces &amp; Frames</span>
       </div>
       <p class="desc">
-        「静止系（外からの観察）」と「非慣性系（乗っている人からの観察）」の視点を切り替え、見かけの力 $\vec{f} = -m\vec{a}$ の本質やエレベーター内の無重量状態、回転円盤上の遠心力を視覚的に体感できます。
+        「静止系（外からの観察）」と「非慣性系（乗っている人からの観察）」の視点を切り替え、見かけの力 <i>f</i> = -ma の本質やエレベーター内の無重量状態、回転円盤上の遠心力を視覚的に体感できます。
       </p>
     </div>
 
@@ -31,13 +31,13 @@
           :class="{ active: observerFrame === 'inside' }"
           @click="observerFrame = 'inside'"
         >
-          👤 内部の観測者（非慣性系：慣性力 $-m\vec{a}$ を受けてつり合う）
+          👤 内部の観測者（非慣性系：慣性力 -ma を受けてつり合う）
         </button>
         <button
           :class="{ active: observerFrame === 'outside' }"
           @click="observerFrame = 'outside'"
         >
-          🌍 地上の観測者（慣性系：合力によって加速度 $\vec{a}$ で加速中）
+          🌍 地上の観測者（慣性系：合力によって加速度 <i>a</i> で加速中）
         </button>
       </div>
     </div>
@@ -51,27 +51,27 @@
       <!-- モード1: 台車 -->
       <div v-if="mode === 'cart'" class="controls-grid">
         <div class="control-group">
-          <label>台車の加速度 $a$: <strong>{{ fmt(cartA, 1) }} $\text{m/s}^2$</strong></label>
+          <label>台車の加速度 <i>a</i>: <strong>{{ fmt(cartA, 1) }} <i>m</i>/<i>s</i>²</strong></label>
           <input type="range" v-model.number="cartA" min="-9.8" max="9.8" step="0.2" />
         </div>
         <div class="control-group">
-          <label>おもりの質量 $m$: <strong>{{ cartM }} kg</strong></label>
+          <label>おもりの質量 <i>m</i>: <strong>{{ cartM }} kg</strong></label>
           <input type="range" v-model.number="cartM" min="0.5" max="5.0" step="0.5" />
         </div>
         <div class="control-group">
-          <label>重力加速度 $g$: <strong>9.8 $\text{m/s}^2$</strong></label>
-          <span class="sub-info">傾き角 $\tan\theta = a/g$</span>
+          <label>重力加速度 <i>g</i>: <strong>9.8 <i>m</i>/<i>s</i>²</strong></label>
+          <span class="sub-info">傾き角 tanθ = <i>a</i>/<i>g</i></span>
         </div>
       </div>
 
       <!-- モード2: エレベーター -->
       <div v-if="mode === 'elevator'" class="controls-grid">
         <div class="control-group">
-          <label>鉛直加速度 $a$ (上向き正): <strong>{{ fmt(elevA, 1) }} $\text{m/s}^2$</strong></label>
+          <label>鉛直加速度 <i>a</i> (上向き正): <strong>{{ fmt(elevA, 1) }} <i>m</i>/<i>s</i>²</strong></label>
           <input type="range" v-model.number="elevA" min="-9.8" max="9.8" step="0.2" />
         </div>
         <div class="control-group">
-          <label>人の質量 $m$: <strong>{{ elevM }} kg</strong></label>
+          <label>人の質量 <i>m</i>: <strong>{{ elevM }} kg</strong></label>
           <input type="range" v-model.number="elevM" min="30" max="100" step="5" />
         </div>
         <div class="preset-buttons">
@@ -85,15 +85,15 @@
       <!-- モード3: 遠心力 -->
       <div v-if="mode === 'centrifugal'" class="controls-grid">
         <div class="control-group">
-          <label>回転角速度 $\omega$: <strong>{{ fmt(rotOmega, 2) }} rad/s</strong></label>
+          <label>回転角速度 ω: <strong>{{ fmt(rotOmega, 2) }} rad/s</strong></label>
           <input type="range" v-model.number="rotOmega" min="0" max="5.0" step="0.1" />
         </div>
         <div class="control-group">
-          <label>回転半径 $r$: <strong>{{ fmt(rotR, 2) }} m</strong></label>
+          <label>回転半径 <i>r</i>: <strong>{{ fmt(rotR, 2) }} m</strong></label>
           <input type="range" v-model.number="rotR" min="0.5" max="3.0" step="0.1" />
         </div>
         <div class="control-group">
-          <label>静止摩擦係数 $\mu$: <strong>{{ rotMu }}</strong></label>
+          <label>静止摩擦係数 μ: <strong>{{ rotMu }}</strong></label>
           <input type="range" v-model.number="rotMu" min="0.1" max="0.8" step="0.05" />
         </div>
       </div>
@@ -103,20 +103,20 @@
     <div class="stats-panel">
       <template v-if="mode === 'cart'">
         <div class="stat-card">
-          <span class="label">つり革の傾き角 $\theta$</span>
+          <span class="label">つり革の傾き角 θ</span>
           <span class="val highlight">{{ fmt(cartThetaDeg, 1) }}°</span>
         </div>
         <div class="stat-card">
-          <span class="label">慣性力 $f = m|a|$</span>
+          <span class="label">慣性力 <i>f</i> = <i>m</i>|<i>a</i>|</span>
           <span class="val highlight-alt">{{ fmt(cartInertiaForce, 1) }} N</span>
         </div>
         <div class="stat-card">
-          <span class="label">糸の張力 $T = m\sqrt{g^2+a^2}$</span>
+          <span class="label">糸の張力 <i>T</i> = <i>m</i>√(<i>g</i>²+<i>a</i>²)</span>
           <span class="val">{{ fmt(cartTension, 1) }} N</span>
         </div>
         <div class="stat-card">
-          <span class="label">見かけの重力加速度 $g'$</span>
-          <span class="val">{{ fmt(cartGprime, 2) }} $\text{m/s}^2$</span>
+          <span class="label">見かけの重力加速度 <i>g</i>'</span>
+          <span class="val">{{ fmt(cartGprime, 2) }} <i>m</i>/<i>s</i>²</span>
         </div>
       </template>
 

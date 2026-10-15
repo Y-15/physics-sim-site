@@ -276,15 +276,15 @@ onUnmounted(() => {
 
       <div class="overlay-stats">
         <div class="stat-row">
-          <span class="lbl">台の速度 $V_x$:</span>
+          <span class="lbl">台の速度 <i>V</i><sub><i>x</i></sub>:</span>
           <span class="val" style="color: #38bdf8">{{ (state.wedgeVx / 10).toFixed(2) }} m/s</span>
         </div>
         <div class="stat-row">
-          <span class="lbl">垂直抗力 $N$:</span>
+          <span class="lbl">垂直抗力 <i>N</i>:</span>
           <span class="val">{{ accelerations.normalForce }} N</span>
         </div>
         <div class="stat-row">
-          <span class="lbl">滑走時間 $t$:</span>
+          <span class="lbl">滑走時間 <i>t</i>:</span>
           <span class="val highlight">{{ state.time.toFixed(2) }} s</span>
         </div>
       </div>
@@ -294,15 +294,15 @@ onUnmounted(() => {
     <div class="controls-panel">
       <div class="control-row">
         <div class="control-group">
-          <label>斜面台の質量 $M$: <span>{{ wedgeMass.toFixed(1) }} kg</span></label>
+          <label>斜面台の質量 <i>M</i>: <span>{{ wedgeMass.toFixed(1) }} kg</span></label>
           <input type="range" v-model.number="wedgeMass" min="1.0" max="8.0" step="0.5" @input="resetSim" />
         </div>
         <div class="control-group">
-          <label>小球の質量 $m$: <span>{{ ballMass.toFixed(1) }} kg</span></label>
+          <label>小球の質量 <i>m</i>: <span>{{ ballMass.toFixed(1) }} kg</span></label>
           <input type="range" v-model.number="ballMass" min="0.5" max="4.0" step="0.5" @input="resetSim" />
         </div>
         <div class="control-group">
-          <label>斜面角度 $\theta$: <span>{{ slopeAngleDeg }}°</span></label>
+          <label>斜面角度 θ: <span>{{ slopeAngleDeg }}°</span></label>
           <input type="range" v-model.number="slopeAngleDeg" min="20" max="50" step="5" @input="resetSim" />
         </div>
       </div>
@@ -316,7 +316,7 @@ onUnmounted(() => {
     </div>
 
     <div class="physics-principle">
-      💡 <strong>入試の核心</strong>：床との間に摩擦がないため、全体に対して水平方向の外力は一切働きません。したがって、<strong>「全体の水平方向の重心 $X_G$ は滑走中も完全に静止（不変）」</strong>し、水平方向の運動量保存則 $M V_x + m v_x = 0$ が厳密に成立します。
+      💡 <strong>入試の核心</strong>：床との間に摩擦がないため、全体に対して水平方向の外力は一切働きません。したがって、<strong>「全体の水平方向の重心 <i>X</i><sub><i>G</i></sub> は滑走中も完全に静止（不変）」</strong>し、水平方向の運動量保存則 <i>M</i> <i>V</i><sub><i>x</i></sub> + <i>m</i> <i>v</i><sub><i>x</i></sub> = 0 が厳密に成立します。
     </div>
   </div>
 </template>

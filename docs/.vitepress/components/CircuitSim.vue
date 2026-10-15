@@ -6,7 +6,7 @@
         <span class="badge">DC Circuit &amp; Kirchhoff</span>
       </div>
       <p class="desc">
-        キルヒホッフの法則による回路網解析、電球の非線形 $I$-$V$ 特性と負荷線のリアルタイム作図、ホイートストンブリッジの平衡条件を直感的に探究できます。
+        キルヒホッフの法則による回路網解析、電球の非線形 <i>I</i>-<i>V</i> 特性と負荷線のリアルタイム作図、ホイートストンブリッジの平衡条件を直感的に探究できます。
       </p>
     </div>
 
@@ -32,23 +32,23 @@
       <!-- モード1: キルヒホッフ -->
       <div v-if="mode === 'kirchhoff'" class="controls-grid">
         <div class="control-group">
-          <label>起電力 $E_1$: <strong>{{ E1 }} V</strong></label>
+          <label>起電力 <i>E</i><sub>1</sub>: <strong>{{ E1 }} V</strong></label>
           <input type="range" v-model.number="E1" min="0" max="24" step="1" />
         </div>
         <div class="control-group">
-          <label>起電力 $E_2$: <strong>{{ E2 }} V</strong></label>
+          <label>起電力 <i>E</i><sub>2</sub>: <strong>{{ E2 }} V</strong></label>
           <input type="range" v-model.number="E2" min="0" max="24" step="1" />
         </div>
         <div class="control-group">
-          <label>抵抗 $R_1$: <strong>{{ R1 }} $\Omega$</strong></label>
+          <label>抵抗 <i>R</i><sub>1</sub>: <strong>{{ R1 }} Ω</strong></label>
           <input type="range" v-model.number="R1" min="1" max="20" step="1" />
         </div>
         <div class="control-group">
-          <label>抵抗 $R_2$: <strong>{{ R2 }} $\Omega$</strong></label>
+          <label>抵抗 <i>R</i><sub>2</sub>: <strong>{{ R2 }} Ω</strong></label>
           <input type="range" v-model.number="R2" min="1" max="20" step="1" />
         </div>
         <div class="control-group">
-          <label>中央抵抗 $R_3$: <strong>{{ R3 }} $\Omega$</strong></label>
+          <label>中央抵抗 <i>R</i><sub>3</sub>: <strong>{{ R3 }} Ω</strong></label>
           <input type="range" v-model.number="R3" min="1" max="20" step="1" />
         </div>
       </div>
@@ -56,15 +56,15 @@
       <!-- モード2: 非オーム抵抗 -->
       <div v-if="mode === 'nonOhmic'" class="controls-grid">
         <div class="control-group">
-          <label>電源起電力 $E$: <strong>{{ nonOhmicE }} V</strong></label>
+          <label>電源起電力 <i>E</i>: <strong>{{ nonOhmicE }} V</strong></label>
           <input type="range" v-model.number="nonOhmicE" min="2" max="20" step="0.5" />
         </div>
         <div class="control-group">
-          <label>直列抵抗 $R$: <strong>{{ nonOhmicR }} $\Omega$</strong></label>
+          <label>直列抵抗 <i>R</i>: <strong>{{ nonOhmicR }} Ω</strong></label>
           <input type="range" v-model.number="nonOhmicR" min="2" max="30" step="1" />
         </div>
         <div class="control-group">
-          <label>電球特性係数 $k$ ($I=k\sqrt{V}$): <strong>{{ nonOhmicK }}</strong></label>
+          <label>電球特性係数 <i>k</i> (<i>I</i>=<i>k</i>√(<i>V</i>)): <strong>{{ nonOhmicK }}</strong></label>
           <input type="range" v-model.number="nonOhmicK" min="0.2" max="1.5" step="0.1" />
         </div>
       </div>
@@ -72,23 +72,23 @@
       <!-- モード3: ホイートストンブリッジ -->
       <div v-if="mode === 'bridge'" class="controls-grid">
         <div class="control-group">
-          <label>電源電圧 $E$: <strong>{{ bridgeE }} V</strong></label>
+          <label>電源電圧 <i>E</i>: <strong>{{ bridgeE }} V</strong></label>
           <input type="range" v-model.number="bridgeE" min="2" max="20" step="1" />
         </div>
         <div class="control-group">
-          <label>抵抗 $R_1$: <strong>{{ bridgeR1 }} $\Omega$</strong></label>
+          <label>抵抗 <i>R</i><sub>1</sub>: <strong>{{ bridgeR1 }} Ω</strong></label>
           <input type="range" v-model.number="bridgeR1" min="2" max="30" step="1" />
         </div>
         <div class="control-group">
-          <label>可変抵抗 $R_2$: <strong>{{ bridgeR2 }} $\Omega$</strong></label>
+          <label>可変抵抗 <i>R</i><sub>2</sub>: <strong>{{ bridgeR2 }} Ω</strong></label>
           <input type="range" v-model.number="bridgeR2" min="2" max="30" step="1" />
         </div>
         <div class="control-group">
-          <label>抵抗 $R_3$: <strong>{{ bridgeR3 }} $\Omega$</strong></label>
+          <label>抵抗 <i>R</i><sub>3</sub>: <strong>{{ bridgeR3 }} Ω</strong></label>
           <input type="range" v-model.number="bridgeR3" min="2" max="30" step="1" />
         </div>
         <div class="control-group">
-          <label>抵抗 $R_4$ (未知/調整): <strong>{{ bridgeR4 }} $\Omega$</strong></label>
+          <label>抵抗 <i>R</i><sub>4</sub> (未知/調整): <strong>{{ bridgeR4 }} Ω</strong></label>
           <input type="range" v-model.number="bridgeR4" min="2" max="30" step="1" />
         </div>
       </div>
@@ -98,19 +98,19 @@
     <div class="stats-panel">
       <template v-if="mode === 'kirchhoff'">
         <div class="stat-card">
-          <span class="label">枝1の電流 $I_1$</span>
+          <span class="label">枝1の電流 <i>I</i><sub>1</sub></span>
           <span class="val highlight">{{ fmt(kRes.I1, 3) }} A</span>
         </div>
         <div class="stat-card">
-          <span class="label">枝2の電流 $I_2$</span>
+          <span class="label">枝2の電流 <i>I</i><sub>2</sub></span>
           <span class="val">{{ fmt(kRes.I2, 3) }} A</span>
         </div>
         <div class="stat-card">
-          <span class="label">中央電流 $I_3 = I_1+I_2$</span>
+          <span class="label">中央電流 <i>I</i><sub>3</sub> = <i>I</i><sub>1</sub>+<i>I</i><sub>2</sub></span>
           <span class="val highlight-alt">{{ fmt(kRes.I3, 3) }} A</span>
         </div>
         <div class="stat-card">
-          <span class="label">中央接続点電位 $V_P$</span>
+          <span class="label">中央接続点電位 <i>V</i><sub><i>P</i></sub></span>
           <span class="val">{{ fmt(kRes.VP, 2) }} V</span>
         </div>
       </template>

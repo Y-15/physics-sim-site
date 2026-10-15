@@ -33,32 +33,26 @@ $$P_{\text{in}} = P_{\text{out}} = P_0$$
   <div class="graph-title">図1：熱気球に働く浮力と重力のつり合いモデル</div>
   <svg viewBox="0 0 540 280" class="vector-svg">
     <rect width="540" height="280" fill="#0f172a" rx="8"/>
-
     <!-- 熱気球のエンベロープ -->
     <path d="M 270 50 A 60 60 0 0 1 320 120 L 285 170 L 255 170 L 220 120 A 60 60 0 0 1 270 50 Z" 
           fill="rgba(251, 146, 60, 0.2)" stroke="#fb923c" stroke-width="2.5"/>
     <text x="270" y="100" fill="#fb923c" font-size="13" font-weight="bold" text-anchor="middle">内部空気 (高温 T_in)</text>
     <text x="270" y="118" fill="#fed7aa" font-size="11" text-anchor="middle">低密度 ρ_in = P₀M / RT_in</text>
-
     <!-- バーナー炎 -->
     <polygon points="265,170 270,150 275,170" fill="#fbbf24"/>
-
     <!-- カゴ (ゴンドラ) -->
     <rect x="260" y="185" width="20" height="15" fill="#78350f" stroke="#b45309" stroke-width="1.5"/>
     <line x1="255" y1="170" x2="260" y2="185" stroke="#94a3b8" stroke-width="1.2"/>
     <line x1="285" y1="170" x2="280" y2="185" stroke="#94a3b8" stroke-width="1.2"/>
     <text x="270" y="215" fill="#94a3b8" font-size="11" text-anchor="middle">本体質量 M</text>
-
     <!-- 外気の表記 -->
     <text x="80" y="100" fill="#38bdf8" font-size="13" font-weight="bold">外気 (低温 T_out)</text>
     <text x="80" y="118" fill="#94a3b8" font-size="11">高密度 ρ_out = P₀M / RT_out</text>
-
     <!-- 浮力ベクトル F_B (上向き) -->
     <line x1="390" y1="150" x2="390" y2="60" stroke="#22c55e" stroke-width="3"/>
     <polygon points="390,52 384,65 396,65" fill="#22c55e"/>
     <text x="402" y="90" fill="#22c55e" font-size="13" font-weight="bold">浮力 F_B = ρ_out V g</text>
     <text x="402" y="108" fill="#94a3b8" font-size="10">（排除した外気の重さ）</text>
-
     <!-- 重力ベクトル (下向き) -->
     <line x1="390" y1="150" x2="390" y2="230" stroke="#f43f5e" stroke-width="3"/>
     <polygon points="390,238 384,225 396,225" fill="#f43f5e"/>

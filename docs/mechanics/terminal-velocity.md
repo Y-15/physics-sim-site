@@ -94,11 +94,9 @@ $$
     </defs>
     <rect width="760" height="320" fill="url(#gradTV)" rx="10"/>
     <rect width="760" height="320" fill="url(#gridTV)" rx="10"/>
-
     <!-- 左側: 力の矢印推移 (3段階) -->
     <g transform="translate(40, 30)">
       <text x="140" y="25" fill="#38bdf8" font-size="14" font-weight="bold" text-anchor="middle">【速度の増加と力のつり合い推移】</text>
-
       <!-- 段階1: t = 0 -->
       <g transform="translate(20, 60)">
         <circle cx="20" cy="50" r="14" fill="#38bdf8"/>
@@ -109,7 +107,6 @@ $$
         <text x="20" y="175" fill="#e2e8f0" font-size="12" text-anchor="middle">① 落下開始</text>
         <text x="20" y="195" fill="#38bdf8" font-size="11" text-anchor="middle">a = g</text>
       </g>
-
       <!-- 段階2: 加速中 -->
       <g transform="translate(130, 60)">
         <circle cx="20" cy="50" r="14" fill="#38bdf8"/>
@@ -123,7 +120,6 @@ $$
         <text x="20" y="175" fill="#e2e8f0" font-size="12" text-anchor="middle">② 加速中</text>
         <text x="20" y="195" fill="#38bdf8" font-size="11" text-anchor="middle">0 &lt; a &lt; g</text>
       </g>
-
       <!-- 段階3: 終端速度 -->
       <g transform="translate(240, 60)">
         <circle cx="20" cy="50" r="14" fill="#38bdf8"/>
@@ -138,30 +134,24 @@ $$
         <text x="20" y="195" fill="#ef4444" font-size="11" font-weight="bold" text-anchor="middle">a = 0 (等速)</text>
       </g>
     </g>
-
     <!-- 右側: v-t グラフ -->
     <g transform="translate(380, 40)">
       <rect x="0" y="0" width="340" height="240" fill="#1e293b" rx="8" stroke="#334155"/>
       <text x="170" y="25" fill="#f59e0b" font-size="14" font-weight="bold" text-anchor="middle">【v-t グラフの比較】</text>
-
       <!-- 軸 -->
       <line x1="40" y1="200" x2="310" y2="200" stroke="#94a3b8" stroke-width="2"/>
       <line x1="40" y1="200" x2="40" y2="50" stroke="#94a3b8" stroke-width="2"/>
       <text x="35" y="45" fill="#94a3b8" font-size="11" text-anchor="end">v</text>
       <text x="315" y="215" fill="#94a3b8" font-size="11">t</text>
-
       <!-- 自由落下 (直線: 傾きg) -->
       <line x1="40" y1="200" x2="160" y2="50" stroke="#64748b" stroke-width="1.5" stroke-dasharray="4,4"/>
       <text x="165" y="65" fill="#64748b" font-size="10">自由落下 (v = gt)</text>
-
       <!-- 終端速度漸近線 (赤) -->
       <line x1="40" y1="90" x2="310" y2="90" stroke="#ef4444" stroke-width="1.5" stroke-dasharray="3,3"/>
       <text x="250" y="82" fill="#ef4444" font-size="11" font-weight="bold">v_term = mg/k</text>
-
       <!-- 実際の速度曲線 (青) -->
       <path d="M 40 200 Q 100 100 180 93 T 310 90" fill="none" stroke="#38bdf8" stroke-width="3"/>
       <text x="190" y="125" fill="#38bdf8" font-size="11" font-weight="bold">v(t) = v_term(1 - e^{-kt/m})</text>
-
       <!-- 原点での接線 (傾きg) -->
       <text x="60" y="180" fill="#34d399" font-size="10">初期傾き = g</text>
     </g>

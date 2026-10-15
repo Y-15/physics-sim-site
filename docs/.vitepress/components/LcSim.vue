@@ -11,7 +11,7 @@
     <div class="canvas-wrapper">
       <canvas ref="canvasRef" width="700" height="300"></canvas>
       <div class="phase-badge">
-        位相 $\phi$: {{ currentPhaseDeg.toFixed(0) }}° ({{ phaseDescription }})
+        位相 φ: {{ currentPhaseDeg.toFixed(0) }}° ({{ phaseDescription }})
       </div>
     </div>
 
@@ -20,21 +20,21 @@
       <div class="control-grid">
         <div class="control-group">
           <label>
-            <span>自己インダクタンス $L$: <strong>{{ L_mH }} mH</strong></span>
+            <span>自己インダクタンス <i>L</i>: <strong>{{ L_mH }} mH</strong></span>
             <input type="range" v-model.number="L_mH" min="10" max="200" step="10" />
           </label>
         </div>
 
         <div class="control-group">
           <label>
-            <span>電気容量 $C$: <strong>{{ C_uF }} μF</strong></span>
+            <span>電気容量 <i>C</i>: <strong>{{ C_uF }} μF</strong></span>
             <input type="range" v-model.number="C_uF" min="10" max="100" step="5" />
           </label>
         </div>
 
         <div class="control-group">
           <label>
-            <span>初期充電電圧 $V_0$: <strong>{{ V0.toFixed(0) }} V</strong></span>
+            <span>初期充電電圧 <i>V</i><sub>0</sub>: <strong>{{ V0.toFixed(0) }} V</strong></span>
             <input type="range" v-model.number="V0" min="5" max="30" step="1" @input="resetSim" />
           </label>
         </div>
@@ -60,42 +60,42 @@
     <!-- リアルタイム物理量モニター -->
     <div class="stats-monitor">
       <div class="stat-card">
-        <span class="label">固有角振動数 $\omega$</span>
+        <span class="label">固有角振動数 ω</span>
         <span class="value">{{ omega.toFixed(0) }} <span class="unit">rad/s</span></span>
-        <span class="subtext">$1/\sqrt{LC}$</span>
+        <span class="subtext">1/√(LC)</span>
       </div>
 
       <div class="stat-card">
-        <span class="label">固有振動数 $f$</span>
+        <span class="label">固有振動数 <i>f</i></span>
         <span class="value">{{ freq.toFixed(1) }} <span class="unit">Hz</span></span>
-        <span class="subtext">$\omega / 2\pi$</span>
+        <span class="subtext">ω / 2π</span>
       </div>
 
       <div class="stat-card">
-        <span class="label">固有周期 $T$</span>
+        <span class="label">固有周期 <i>T</i></span>
         <span class="value">{{ (period * 1000).toFixed(1) }} <span class="unit">ms</span></span>
-        <span class="subtext">$2\pi\sqrt{LC}$</span>
+        <span class="subtext">2π√(LC)</span>
       </div>
 
       <div class="stat-card">
-        <span class="label">最大電流 $I_{\max}$</span>
+        <span class="label">最大電流 <i>I</i><sub>\max</sub></span>
         <span class="value">{{ (I_max * 1000).toFixed(1) }} <span class="unit">mA</span></span>
-        <span class="subtext">$V_0 \sqrt{C/L}$</span>
+        <span class="subtext"><i>V</i><sub>0</sub> √(<i>C</i>/<i>L</i>)</span>
       </div>
     </div>
 
     <!-- エネルギー保存内訳バー -->
     <div class="energy-card">
       <div class="energy-header">
-        <span>全エネルギー保存則 $E = U_E + U_B = {{ (totalE * 1000).toFixed(2) }}\,\text{mJ}$ (一定)</span>
+        <span>全エネルギー保存則 <i>E</i> = <i>U</i><sub><i>E</i></sub> + <i>U</i><sub><i>B</i></sub> = {{ (totalE * 1000).toFixed(2) }} mJ (一定)</span>
       </div>
       <div class="energy-bar">
         <div class="bar-segment cap" :style="{ width: capEPercent + '%' }" title="静電エネルギー"></div>
         <div class="bar-segment coil" :style="{ width: coilEPercent + '%' }" title="磁気エネルギー"></div>
       </div>
       <div class="legend-row">
-        <div class="legend-item"><span class="dot cap"></span>静電エネルギー $U_E = Q^2/2C$: {{ (UE * 1000).toFixed(2) }} mJ</div>
-        <div class="legend-item"><span class="dot coil"></span>磁気エネルギー $U_B = \frac{1}{2}LI^2$: {{ (UB * 1000).toFixed(2) }} mJ</div>
+        <div class="legend-item"><span class="dot cap"></span>静電エネルギー <i>U</i><sub><i>E</i></sub> = <i>Q</i>²/2C: {{ (UE * 1000).toFixed(2) }} mJ</div>
+        <div class="legend-item"><span class="dot coil"></span>磁気エネルギー <i>U</i><sub><i>B</i></sub> = (1 / 2)LI²: {{ (UB * 1000).toFixed(2) }} mJ</div>
       </div>
     </div>
   </div>

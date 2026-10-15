@@ -243,23 +243,23 @@ onUnmounted(() => {
 
       <div class="stat-overlay">
         <div class="stat-row">
-          <span class="lbl">外気密度 $\rho_{\text{out}}$:</span>
+          <span class="lbl">外気密度 ρ<sub>out</sub>:</span>
           <span class="val">{{ simData.rhoOut }} kg/m³</span>
         </div>
         <div class="stat-row">
-          <span class="lbl">気球内密度 $\rho_{\text{in}}$:</span>
+          <span class="lbl">気球内密度 ρ<sub>in</sub>:</span>
           <span class="val" style="color: #fb923c">{{ simData.rhoIn }} kg/m³</span>
         </div>
         <div class="stat-row">
-          <span class="lbl">浮力 $F_B$:</span>
+          <span class="lbl">浮力 <i>F</i><sub><i>B</i></sub>:</span>
           <span class="val" style="color: #22c55e">{{ simData.buoyancy }} N</span>
         </div>
         <div class="stat-row">
-          <span class="lbl">総重量 $W$:</span>
+          <span class="lbl">総重量 <i>W</i>:</span>
           <span class="val" style="color: #f43f5e">{{ simData.totalWeight }} N</span>
         </div>
         <div class="stat-row highlight">
-          <span class="lbl">合力 $F_{\text{net}}$:</span>
+          <span class="lbl">合力 <i>F</i><sub>net</sub>:</span>
           <span class="val">{{ simData.netForce }} N</span>
         </div>
         <div class="min-temp" v-if="simData.minTempC">
@@ -272,22 +272,22 @@ onUnmounted(() => {
     <div class="controls-panel">
       <div class="control-row">
         <div class="control-group">
-          <label>内部加熱温度 $T_{\text{in}}$: <span>{{ insideTempC }} ℃</span></label>
+          <label>内部加熱温度 <i>T</i><sub>in</sub>: <span>{{ insideTempC }} ℃</span></label>
           <input type="range" v-model.number="insideTempC" min="20" max="110" step="2" />
         </div>
         <div class="control-group">
-          <label>外気温 $T_{\text{out}}$: <span>{{ outsideTempC }} ℃</span></label>
+          <label>外気温 <i>T</i><sub>out</sub>: <span>{{ outsideTempC }} ℃</span></label>
           <input type="range" v-model.number="outsideTempC" min="-10" max="35" step="1" />
         </div>
       </div>
 
       <div class="control-row">
         <div class="control-group">
-          <label>気球体積 $V$: <span>{{ balloonVolume }} m³</span></label>
+          <label>気球体積 <i>V</i>: <span>{{ balloonVolume }} m³</span></label>
           <input type="range" v-model.number="balloonVolume" min="1000" max="3500" step="100" />
         </div>
         <div class="control-group">
-          <label>本体質量 $M$: <span>{{ balloonMass }} kg</span></label>
+          <label>本体質量 <i>M</i>: <span>{{ balloonMass }} kg</span></label>
           <input type="range" v-model.number="balloonMass" min="200" max="700" step="25" />
         </div>
       </div>

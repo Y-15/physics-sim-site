@@ -34,20 +34,16 @@ description: 高校物理の力学分野・最難関入試大問の王道「鉛�
     </defs>
     <rect width="760" height="360" fill="url(#gradVL)" rx="10"/>
     <rect width="760" height="360" fill="url(#gridVL)" rx="10"/>
-
     <!-- 円軌道と力の幾何作図 -->
     <g transform="translate(60, 30)">
       <text x="140" y="25" fill="#38bdf8" font-size="14" font-weight="bold" text-anchor="middle">【任意の位置 θ における力の分解】</text>
-
       <!-- 中心 O -->
       <circle cx="160" cy="170" r="110" fill="none" stroke="#64748b" stroke-width="2"/>
       <circle cx="160" cy="170" r="4" fill="#94a3b8"/>
       <text x="175" y="175" fill="#94a3b8" font-size="12">O</text>
-
       <!-- 鉛直下向き基準軸 (θ = 0) -->
       <line x1="160" y1="170" x2="160" y2="280" stroke="#475569" stroke-width="1.5" stroke-dasharray="4,4"/>
       <text x="160" y="300" fill="#38bdf8" font-size="12" font-weight="bold" text-anchor="middle">最下点 (θ=0, v₀)</text>
-
       <!-- θ = 120度の位置 P (左上側) -->
       <!-- cos(120) = -0.5, sin(120) = 0.866 -->
       <!-- x = 160 - 110*0.866 = 160 - 95.3 = 64.7 -->
@@ -55,50 +51,39 @@ description: 高校物理の力学分野・最難関入試大問の王道「鉛�
       <line x1="160" y1="170" x2="65" y2="115" stroke="#38bdf8" stroke-width="2"/>
       <circle cx="65" cy="115" r="10" fill="#38bdf8"/>
       <text x="50" y="105" fill="#38bdf8" font-size="12" font-weight="bold">P (θ)</text>
-
       <!-- 角度 θ の弧 -->
       <path d="M 160 210 A 40 40 0 0 1 125 190" fill="none" stroke="#f59e0b" stroke-width="1.5"/>
       <text x="145" y="225" fill="#f59e0b" font-size="12">θ</text>
-
       <!-- 重力 mg (真下) -->
       <line x1="65" y1="115" x2="65" y2="175" stroke="#34d399" stroke-width="2.5"/>
       <polygon points="62,175 65,183 68,175" fill="#34d399"/>
       <text x="75" y="170" fill="#34d399" font-size="11" font-weight="bold">mg</text>
-
       <!-- 垂直抗力 / 張力 N (中心向き) -->
       <line x1="65" y1="115" x2="112" y2="142" stroke="#f59e0b" stroke-width="2.5"/>
       <polygon points="112,137 118,146 109,144" fill="#f59e0b"/>
       <text x="115" y="135" fill="#f59e0b" font-size="11" font-weight="bold">N</text>
-
       <!-- 速度ベクトル v (接線方向) -->
       <line x1="65" y1="115" x2="35" y2="167" stroke="#38bdf8" stroke-width="2.5"/>
       <polygon points="32,162 31,173 39,166" fill="#38bdf8"/>
       <text x="20" y="155" fill="#38bdf8" font-size="11" font-weight="bold">v</text>
-
       <!-- 高さ h = R(1 - cosθ) -->
       <line x1="190" y1="280" x2="190" y2="115" stroke="#ef4444" stroke-width="1.5"/>
       <line x1="185" y1="280" x2="195" y2="280" stroke="#ef4444" stroke-width="1.5"/>
       <line x1="185" y1="115" x2="195" y2="115" stroke="#ef4444" stroke-width="1.5"/>
       <text x="200" y="200" fill="#ef4444" font-size="12">h = R(1 - cosθ)</text>
     </g>
-
     <!-- 右側: 2大方程式まとめカード -->
     <g transform="translate(420, 30)">
       <rect x="0" y="0" width="300" height="290" fill="#1e293b" rx="8" stroke="#334155"/>
       <text x="150" y="25" fill="#f59e0b" font-size="14" font-weight="bold" text-anchor="middle">【円運動を支配する2大方程式】</text>
-
       <text x="20" y="55" fill="#38bdf8" font-size="12" font-weight="bold">① 力学的エネルギー保存則:</text>
       <text x="30" y="80" fill="#f8fafc" font-size="12">(1/2)m v₀² = (1/2)m v² + mg R(1 - cosθ)</text>
       <text x="30" y="105" fill="#34d399" font-size="13" font-weight="bold">⇒ v² = v₀² - 2gR(1 - cosθ)</text>
-
       <line x1="20" y1="120" x2="280" y2="120" stroke="#334155"/>
-
       <text x="20" y="145" fill="#f59e0b" font-size="12" font-weight="bold">② 円の中心方向（法線）の運動方程式:</text>
       <text x="30" y="170" fill="#f8fafc" font-size="12">m (v² / R) = N + mg cosθ</text>
       <text x="30" y="195" fill="#a855f7" font-size="13" font-weight="bold">⇒ N = m (v² / R) - mg cosθ</text>
-
       <line x1="20" y1="210" x2="280" y2="210" stroke="#334155"/>
-
       <text x="20" y="235" fill="#ef4444" font-size="12" font-weight="bold">③ v² を消去して抗力 N を一元化:</text>
       <text x="150" y="265" fill="#ef4444" font-size="13" font-weight="bold" text-anchor="middle">N = m [v₀²/R - g(2 - 3cosθ)]</text>
     </g>

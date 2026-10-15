@@ -5,7 +5,7 @@
         <span class="icon">🪂</span>
         <h3>空気抵抗と終端速度シミュレーター</h3>
       </div>
-      <p class="subtitle">重力と空気抵抗（粘性抵抗 $f=-kv$ または慣性抵抗 $f=-\kappa v^2$）のつり合い。落下速度が次第に一定値（終端速度 $v_{\text{term}}$）に達する様子をリアルタイム観察できます。</p>
+      <p class="subtitle">重力と空気抵抗（粘性抵抗 <i>f</i>=-kv または慣性抵抗 <i>f</i>=-κ <i>v</i>²）のつり合い。落下速度が次第に一定値（終端速度 <i>v</i><sub>term</sub>）に達する様子をリアルタイム観察できます。</p>
     </div>
 
     <div class="canvas-wrapper">
@@ -20,7 +20,7 @@
       <div class="control-grid">
         <div class="control-group">
           <label>
-            <span>物体の質量 $m$: <strong>{{ mass.toFixed(1) }} kg</strong></span>
+            <span>物体の質量 <i>m</i>: <strong>{{ mass.toFixed(1) }} kg</strong></span>
             <input type="range" v-model.number="mass" min="0.5" max="10.0" step="0.5" @input="updatePhysics" />
           </label>
         </div>
@@ -71,19 +71,19 @@
     <!-- リアルタイム物理量モニター -->
     <div class="stats-monitor">
       <div class="stat-card">
-        <span class="label">現在の落下速度 $v$</span>
+        <span class="label">現在の落下速度 <i>v</i></span>
         <span class="value">{{ velocity.toFixed(1) }} <span class="unit">m/s</span></span>
         <span class="subtext">時速 {{ (velocity * 3.6).toFixed(0) }} km/h</span>
       </div>
 
       <div class="stat-card">
-        <span class="label">理論終端速度 $v_{\text{term}}$</span>
+        <span class="label">理論終端速度 <i>v</i><sub>term</sub></span>
         <span class="value highlight">{{ theoreticalVterm.toFixed(1) }} <span class="unit">m/s</span></span>
         <span class="subtext">{{ dragModel === 'linear' ? 'mg / k' : '√(mg / κ)' }}</span>
       </div>
 
       <div class="stat-card">
-        <span class="label">現在加速度 $a$</span>
+        <span class="label">現在加速度 <i>a</i></span>
         <span class="value">{{ acceleration.toFixed(2) }} <span class="unit">m/s²</span></span>
         <span class="subtext">重力加速度 g = 9.80</span>
       </div>

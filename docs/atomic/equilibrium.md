@@ -51,32 +51,26 @@ $$A \xrightarrow{\lambda_A} B \xrightarrow{\lambda_B} C\ (\text{安定})$$
   <div class="graph-title">図1：2段階連続壊変における原子数と放射能の流れ</div>
   <svg viewBox="0 0 540 180" class="vector-svg">
     <rect width="540" height="180" fill="#090d16" rx="8"/>
-    
     <!-- 核種 A -->
     <rect x="50" y="50" width="100" height="70" fill="rgba(56, 189, 248, 0.15)" stroke="#38bdf8" stroke-width="2" rx="8"/>
     <text x="100" y="80" fill="#38bdf8" font-size="16" font-weight="bold" text-anchor="middle">親核種 A</text>
     <text x="100" y="105" fill="#94a3b8" font-size="12" text-anchor="middle">N_A(t), λ_A</text>
-
     <!-- 矢印 A -> B -->
     <line x1="150" y1="85" x2="210" y2="85" stroke="#38bdf8" stroke-width="2.5"/>
     <polygon points="215,85 205,80 205,90" fill="#38bdf8"/>
     <text x="182" y="75" fill="#38bdf8" font-size="11" text-anchor="middle">λ_A N_A</text>
-
     <!-- 核種 B -->
     <rect x="220" y="50" width="100" height="70" fill="rgba(251, 191, 36, 0.15)" stroke="#fbbf24" stroke-width="2" rx="8"/>
     <text x="270" y="80" fill="#fbbf24" font-size="16" font-weight="bold" text-anchor="middle">娘核種 B</text>
     <text x="270" y="105" fill="#94a3b8" font-size="12" text-anchor="middle">N_B(t), λ_B</text>
-
     <!-- 矢印 B -> C -->
     <line x1="320" y1="85" x2="380" y2="85" stroke="#fbbf24" stroke-width="2.5"/>
     <polygon points="385,85 375,80 375,90" fill="#fbbf24"/>
     <text x="352" y="75" fill="#fbbf24" font-size="11" text-anchor="middle">λ_B N_B</text>
-
     <!-- 核種 C -->
     <rect x="390" y="50" width="100" height="70" fill="rgba(16, 185, 129, 0.15)" stroke="#10b981" stroke-width="2" rx="8"/>
     <text x="440" y="80" fill="#10b981" font-size="16" font-weight="bold" text-anchor="middle">孫核種 C</text>
     <text x="440" y="105" fill="#10b981" font-size="12" text-anchor="middle">(安定核種)</text>
-
     <!-- 微分方程式まとめ -->
     <text x="270" y="155" fill="#94a3b8" font-size="12" text-anchor="middle">dN_B / dt = (Aからの生成速度) - (B自身の崩壊速度) = λ_A N_A - λ_B N_B</text>
   </svg>
@@ -112,29 +106,23 @@ $$\mathbf{t_{\max} = \frac{\ln(\lambda_B / \lambda_A)}{\lambda_B - \lambda_A} = 
   <div class="graph-title">図2：永続平衡と過渡平衡の放射能減衰特性の比較</div>
   <svg viewBox="0 0 540 240" class="vector-svg">
     <rect width="540" height="240" fill="#090d16" rx="8"/>
-
     <!-- 左グラフ：永続平衡 -->
     <text x="140" y="30" fill="#38bdf8" font-size="13" font-weight="bold" text-anchor="middle">【永続平衡】(T_A ≫ T_B)</text>
     <line x1="40" y1="190" x2="240" y2="190" stroke="#475569" stroke-width="1.5"/>
     <line x1="40" y1="190" x2="40" y2="50" stroke="#475569" stroke-width="1.5"/>
-    
     <!-- 親核種 A の放射能 (ほぼ一定水平線) -->
     <line x1="40" y1="80" x2="230" y2="82" stroke="#38bdf8" stroke-width="2.5"/>
     <text x="180" y="70" fill="#38bdf8" font-size="11">λ_A N_A (ほぼ一定)</text>
-
     <!-- 娘核種 B の放射能 (急上昇して親と一致) -->
     <path d="M 40 190 Q 70 82 120 82 L 230 82" fill="none" stroke="#fbbf24" stroke-width="2.5"/>
     <text x="120" y="105" fill="#fbbf24" font-size="11">λ_B N_B → λ_A N_A</text>
-
     <!-- 右グラフ：過渡平衡 -->
     <text x="390" y="30" fill="#10b981" font-size="13" font-weight="bold" text-anchor="middle">【過渡平衡】(T_A > T_B)</text>
     <line x1="290" y1="190" x2="490" y2="190" stroke="#475569" stroke-width="1.5"/>
     <line x1="290" y1="190" x2="290" y2="50" stroke="#475569" stroke-width="1.5"/>
-
     <!-- 親核種 A の減衰曲線 -->
     <path d="M 290 80 Q 370 110 480 150" fill="none" stroke="#38bdf8" stroke-width="2"/>
     <text x="440" y="135" fill="#38bdf8" font-size="11">λ_A N_A</text>
-
     <!-- 娘核種 B の曲線 (ピーク後、親より少し上で並走減衰) -->
     <path d="M 290 190 Q 315 55 350 75 Q 410 100 480 140" fill="none" stroke="#fbbf24" stroke-width="2.5"/>
     <text x="350" y="55" fill="#fbbf24" font-size="11">t_max (極大)</text>

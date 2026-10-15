@@ -6,10 +6,10 @@ description: 高校物理の原子物理最頻出テーマ。光子の運動量 
 # コンプトン効果と光子の運動量・エネルギー保存則
 
 <div class="lead">
-「光電効果」によって、光がエネルギー $E = h\nu$ を持った粒子（光子）であることが証明されました。<br>
+「光電効果」によって、光がエネルギー <i>E</i> = <i>h</i>ν を持った粒子（光子）であることが証明されました。<br>
 では、<strong>光の粒には「運動量」もあるのでしょうか？</strong><br>
 質量がゼロであるはずの光子が、静止している電子にビリヤード球のように衝突し、電子を弾き飛ばして自らは波長を伸ばして散乱される――。<br>
-1923年、アーサー・コンプトンが発見したこの<strong>コンプトン効果（Compton Effect）</strong>は、光がまぎれもなく「運動量 $p = \frac{h}{\lambda}$」を持った実体であることを決定づけました。<br>
+1923年、アーサー・コンプトンが発見したこの<strong>コンプトン効果（Compton Effect）</strong>は、光がまぎれもなく「運動量 <i>p</i> = (<i>h</i> / λ)」を持った実体であることを決定づけました。<br>
 本ページでは、入試で頻出する保存則の連立導出から、波長変化の幾何学的解法までを完全攻略します。
 </div>
 
@@ -78,36 +78,29 @@ $$
       <path d="M0,0 L0,6 L7,3 z" fill="#f43f5e" />
     </marker>
   </defs>
-
   <!-- 水平衝突軸 (x 軸) -->
   <line x1="30" y1="140" x2="510" y2="140" stroke="#475569" stroke-width="1.5" stroke-dasharray="3,3"/>
   <text x="515" y="144" fill="#94a3b8" font-size="12">x</text>
-
   <!-- 入射光子 (p0 = h / lambda0) -->
   <line x1="60" y1="140" x2="200" y2="140" stroke="#38bdf8" stroke-width="3" marker-end="url(#arr-cp-ray)"/>
   <rect x="50" y="112" width="145" height="20" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
   <text x="122" y="126" fill="#38bdf8" font-size="11" font-weight="700" text-anchor="middle">入射光子: p₀ ＝ h / λ₀</text>
-
   <!-- 衝突点 (電子 e-) cx = 210, cy = 140 -->
   <circle cx="210" cy="140" r="7" fill="#fbbf24"/>
   <rect x="155" y="152" width="110" height="20" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
   <text x="210" y="166" fill="#fbbf24" font-size="10" font-weight="700" text-anchor="middle">静止電子 m_e</text>
-
   <!-- 散乱光子 (角度 θ = 40度, 長さ 160) -->
   <line x1="210" y1="140" x2="332" y2="37" stroke="#22d3ee" stroke-width="2.5" marker-end="url(#arr-cp-scat)"/>
   <rect x="340" y="30" width="170" height="38" rx="4" fill="#0f172a" stroke="#22d3ee" stroke-width="1.2"/>
   <text x="425" y="46" fill="#22d3ee" font-size="11" font-weight="700" text-anchor="middle">散乱光子: p' ＝ h / λ'</text>
   <text x="425" y="60" fill="#cbd5e1" font-size="9" text-anchor="middle">波長が伸びる (λ' > λ₀)</text>
-
   <!-- 散乱角 θ の弧 -->
   <path d="M 270,140 A 60,60 0 0,0 256,101" fill="none" stroke="#22d3ee" stroke-width="1.5"/>
   <text x="270" y="120" fill="#22d3ee" font-size="13" font-style="italic">θ</text>
-
   <!-- 反跳電子 (角度 φ = -30度, 長さ 140) -->
   <line x1="210" y1="140" x2="331" y2="210" stroke="#f43f5e" stroke-width="2.5" marker-end="url(#arr-cp-elec)"/>
   <rect x="340" y="200" width="150" height="22" rx="4" fill="#0f172a" stroke="#f43f5e" stroke-width="1.2"/>
   <text x="415" y="215" fill="#f43f5e" font-size="11" font-weight="700" text-anchor="middle">反跳電子: p_e ＝ m_e v</text>
-
   <!-- 反跳角 φ の弧 -->
   <path d="M 270,140 A 60,60 0 0,1 262,170" fill="none" stroke="#f43f5e" stroke-width="1.5"/>
   <text x="270" y="165" fill="#f43f5e" font-size="13" font-style="italic">φ</text>

@@ -30,32 +30,26 @@ description: ファラデーの電磁誘導の法則が生み出す渦電場、�
   <div class="graph-title">図1：ベータトロンの磁場分布と電子の円形加速軌道</div>
   <svg viewBox="0 0 540 280" class="vector-svg">
     <rect width="540" height="280" fill="#090d16" rx="8"/>
-
     <!-- ドーナツ型真空チェンバー -->
     <path d="M 270 20 A 120 120 0 1 0 270 260 A 120 120 0 1 0 270 20 Z 
              M 270 60 A 80 80 0 1 1 270 220 A 80 80 0 1 1 270 60 Z" 
           fill="rgba(30, 41, 59, 0.7)" stroke="#475569" stroke-width="2"/>
-
     <!-- 理想安定軌道 (半径 R) -->
     <circle cx="270" cy="140" r="100" fill="none" stroke="#38bdf8" stroke-width="1.8" stroke-dasharray="4 4"/>
     <text x="270" y="32" fill="#38bdf8" font-size="12" font-weight="bold" text-anchor="middle">電子軌道 (半径 R)</text>
-
     <!-- 中心磁極コア (強い磁束) -->
     <circle cx="270" cy="140" r="55" fill="rgba(56, 189, 248, 0.15)" stroke="#38bdf8" stroke-width="2"/>
     <text x="270" y="135" fill="#38bdf8" font-size="13" font-weight="bold" text-anchor="middle">中心磁極コア</text>
     <text x="270" y="155" fill="#fbbf24" font-size="11" text-anchor="middle">強い磁場 (平均 B̄)</text>
-
     <!-- 軌道上の磁場マーク -->
     <circle cx="370" cy="140" r="3" fill="#10b981"/>
     <text x="380" y="145" fill="#10b981" font-size="12" font-weight="bold">B₀ (軌道上磁場)</text>
-
     <!-- 誘導電場 E の接線矢印 -->
     <g stroke="#fbbf24" stroke-width="2" fill="#fbbf24">
       <path d="M 270 40 L 230 40"/>
       <polygon points="225,40 235,36 235,44"/>
       <text x="250" y="28" fill="#fbbf24" font-size="11">誘導電場 E</text>
     </g>
-
     <!-- 加速される電子 e- -->
     <circle cx="270" cy="40" r="6" fill="#f43f5e" stroke="#ffffff" stroke-width="1.5"/>
     <text x="282" y="44" fill="#ffffff" font-size="11" font-weight="bold">e⁻</text>

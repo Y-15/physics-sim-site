@@ -20,28 +20,28 @@
       <div class="control-grid">
         <div class="control-group">
           <label>
-            <span>物体1 質量 $m_1$: <strong>{{ m1.toFixed(1) }} kg</strong></span>
+            <span>物体1 質量 <i>m</i><sub>1</sub>: <strong>{{ m1.toFixed(1) }} kg</strong></span>
             <input type="range" v-model.number="m1" min="0.5" max="5.0" step="0.5" @input="updatePhysics" />
           </label>
         </div>
 
         <div class="control-group">
           <label>
-            <span>物体2 質量 $m_2$: <strong>{{ m2.toFixed(1) }} kg</strong></span>
+            <span>物体2 質量 <i>m</i><sub>2</sub>: <strong>{{ m2.toFixed(1) }} kg</strong></span>
             <input type="range" v-model.number="m2" min="0.5" max="5.0" step="0.5" @input="updatePhysics" />
           </label>
         </div>
 
         <div class="control-group">
           <label>
-            <span>ばね定数 $k$: <strong>{{ k.toFixed(0) }} N/m</strong></span>
+            <span>ばね定数 <i>k</i>: <strong>{{ k.toFixed(0) }} N/m</strong></span>
             <input type="range" v-model.number="k" min="10" max="100" step="5" @input="updatePhysics" />
           </label>
         </div>
 
         <div class="control-group">
           <label>
-            <span>物体1 初速度 $v_{10}$: <strong>{{ v1_init.toFixed(1) }} m/s</strong></span>
+            <span>物体1 初速度 <i>v</i><sub>10</sub>: <strong>{{ v1_init.toFixed(1) }} m/s</strong></span>
             <input type="range" v-model.number="v1_init" min="-4" max="4" step="0.5" @input="resetSim" />
           </label>
         </div>
@@ -63,25 +63,25 @@
     <!-- 物理量リアルタイム表示モニター -->
     <div class="stats-monitor">
       <div class="stat-card">
-        <span class="label">重心速度 $v_G$ (一定)</span>
+        <span class="label">重心速度 <i>v</i><sub><i>G</i></sub> (一定)</span>
         <span class="value">{{ vG.toFixed(2) }} <span class="unit">m/s</span></span>
-        <span class="subtext">$(m_1 v_1 + m_2 v_2)/(m_1+m_2)$</span>
+        <span class="subtext">(<i>m</i><sub>1</sub> <i>v</i><sub>1</sub> + <i>m</i><sub>2</sub> <i>v</i><sub>2</sub>)/(<i>m</i><sub>1</sub>+<i>m</i><sub>2</sub>)</span>
       </div>
 
       <div class="stat-card">
-        <span class="label">換算質量 $\mu$</span>
+        <span class="label">換算質量 μ</span>
         <span class="value">{{ mu.toFixed(2) }} <span class="unit">kg</span></span>
-        <span class="subtext">$m_1 m_2 / (m_1+m_2)$</span>
+        <span class="subtext"><i>m</i><sub>1</sub> <i>m</i><sub>2</sub> / (<i>m</i><sub>1</sub>+<i>m</i><sub>2</sub>)</span>
       </div>
 
       <div class="stat-card">
-        <span class="label">相対単振動の周期 $T$</span>
+        <span class="label">相対単振動の周期 <i>T</i></span>
         <span class="value">{{ period.toFixed(2) }} <span class="unit">s</span></span>
-        <span class="subtext">$2\pi\sqrt{\mu/k}$</span>
+        <span class="subtext">2π√(μ/<i>k</i>)</span>
       </div>
 
       <div class="stat-card">
-        <span class="label">ばねの伸び縮み $\Delta x$</span>
+        <span class="label">ばねの伸び縮み Δ <i>x</i></span>
         <span class="value" :class="{ positive: deltaX > 0.02, negative: deltaX < -0.02 }">
           {{ deltaX > 0 ? '+' : '' }}{{ (deltaX * 100).toFixed(1) }} <span class="unit">cm</span>
         </span>
@@ -92,7 +92,7 @@
     <!-- エネルギー内訳バー -->
     <div class="energy-card">
       <div class="energy-header">
-        <span>力学的エネルギー保存の内訳 (全エネルギー $E = {{ totalE.toFixed(1) }}\,\text{J}$)</span>
+        <span>力学的エネルギー保存の内訳 (全エネルギー <i>E</i> = {{ totalE.toFixed(1) }} <i>J</i>)</span>
       </div>
       <div class="energy-bar">
         <div class="bar-segment trans" :style="{ width: transEPercent + '%' }" title="重心並進エネルギー"></div>

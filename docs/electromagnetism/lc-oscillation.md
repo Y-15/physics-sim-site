@@ -32,30 +32,25 @@ description: 高校物理の電磁気最難関テーマ「LC振動回路」。�
     </defs>
     <rect width="760" height="300" fill="url(#gradLC)" rx="10"/>
     <rect width="760" height="300" fill="url(#gridLC)" rx="10"/>
-
     <!-- 回路図 -->
     <g transform="translate(60, 40)">
       <!-- 導線 -->
       <path d="M 50 40 L 250 40 L 250 90 M 250 150 L 250 200 L 50 200 L 50 140 M 50 100 L 50 40" fill="none" stroke="#94a3b8" stroke-width="3"/>
-
       <!-- コンデンサー (左) -->
       <line x1="25" y1="100" x2="75" y2="100" stroke="#38bdf8" stroke-width="4"/>
       <line x1="25" y1="140" x2="75" y2="140" stroke="#38bdf8" stroke-width="4"/>
       <text x="15" y="90" fill="#ef4444" font-size="12" font-weight="bold">+Q</text>
       <text x="15" y="155" fill="#38bdf8" font-size="12" font-weight="bold">-Q</text>
       <text x="50" y="125" fill="#e2e8f0" font-size="12" text-anchor="middle">V = Q/C</text>
-
       <!-- コイル (右) -->
       <path d="M 250 90 C 270 90 270 105 250 105 C 270 105 270 120 250 120 C 270 120 270 135 250 135 C 270 135 270 150 250 150" fill="none" stroke="#f59e0b" stroke-width="3"/>
       <text x="285" y="125" fill="#f59e0b" font-size="13" font-weight="bold">L</text>
       <text x="290" y="145" fill="#94a3b8" font-size="11">-L(dI/dt)</text>
-
       <!-- 電流矢印 (時計回り) -->
       <path d="M 130 30 L 170 30" stroke="#ef4444" stroke-width="2.5"/>
       <polygon points="170,26 180,30 170,34" fill="#ef4444"/>
       <text x="150" y="22" fill="#ef4444" font-size="12" font-weight="bold">I = - dQ/dt</text>
     </g>
-
     <!-- 微分方程式の誘導カード -->
     <g transform="translate(400, 30)">
       <rect x="0" y="0" width="320" height="240" fill="#1e293b" rx="8" stroke="#334155"/>
@@ -131,7 +126,6 @@ $$
 <div class="vector-graph-card">
   <svg viewBox="0 0 760 220" class="vector-graph" xmlns="http://www.w3.org/2000/svg">
     <rect width="760" height="220" fill="#0f172a" rx="10"/>
-
     <!-- 4つの主要状態 -->
     <!-- t = 0 -->
     <g transform="translate(40, 20)">
@@ -144,7 +138,6 @@ $$
       <text x="70" y="135" fill="#0284c7" font-size="11" text-anchor="middle">UE = 最大</text>
       <text x="70" y="155" fill="#64748b" font-size="11" text-anchor="middle">UB = 0</text>
     </g>
-
     <!-- t = T/4 -->
     <g transform="translate(220, 20)">
       <rect x="0" y="0" width="140" height="170" fill="#1e293b" rx="6" stroke="#f59e0b"/>
@@ -155,7 +148,6 @@ $$
       <text x="70" y="135" fill="#64748b" font-size="11" text-anchor="middle">UE = 0</text>
       <text x="70" y="155" fill="#f59e0b" font-size="11" text-anchor="middle">UB = 最大</text>
     </g>
-
     <!-- t = T/2 -->
     <g transform="translate(400, 20)">
       <rect x="0" y="0" width="140" height="170" fill="#1e293b" rx="6" stroke="#38bdf8"/>
@@ -166,7 +158,6 @@ $$
       <text x="70" y="135" fill="#0284c7" font-size="11" text-anchor="middle">UE = 最大</text>
       <text x="70" y="155" fill="#64748b" font-size="11" text-anchor="middle">UB = 0</text>
     </g>
-
     <!-- t = 3T/4 -->
     <g transform="translate(580, 20)">
       <rect x="0" y="0" width="140" height="170" fill="#1e293b" rx="6" stroke="#f59e0b"/>

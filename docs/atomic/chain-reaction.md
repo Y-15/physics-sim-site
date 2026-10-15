@@ -32,29 +32,23 @@ $$^{235}_{92}\text{U} + ^1_0n \longrightarrow ^{141}_{56}\text{Ba} + ^{92}_{36}\
   <div class="graph-title">図1：ウラン235の熱中性子吸収による核分裂と中性子の倍増</div>
   <svg viewBox="0 0 540 240" class="vector-svg">
     <rect width="540" height="240" fill="#090d16" rx="8"/>
-
     <!-- 入射中性子 n -->
     <circle cx="50" cy="120" r="4" fill="#ffffff"/>
     <line x1="50" y1="120" x2="130" y2="120" stroke="#ffffff" stroke-width="1.8" stroke-dasharray="3 3"/>
     <text x="50" y="105" fill="#ffffff" font-size="12" font-weight="bold">熱中性子 n</text>
-
     <!-- ウラン235 原子核 -->
     <circle cx="150" cy="120" r="22" fill="#10b981" stroke="#34d399" stroke-width="2"/>
     <text x="150" y="125" fill="#ffffff" font-size="12" font-weight="bold" text-anchor="middle">²³⁵U</text>
-
     <!-- 複合核のくびれ振動 -->
     <path d="M 230 100 Q 250 120 230 140 Q 270 140 290 120 Q 270 100 230 100 Z" 
           fill="rgba(251, 191, 36, 0.4)" stroke="#fbbf24" stroke-width="2"/>
     <text x="260" y="85" fill="#fbbf24" font-size="11" text-anchor="middle">複合核 ²³⁶U* (励起)</text>
-
     <!-- 分裂後の核 (バリウム Ba) -->
     <circle cx="380" cy="65" r="16" fill="#38bdf8" stroke="#0284c7" stroke-width="1.5"/>
     <text x="380" y="70" fill="#ffffff" font-size="11" font-weight="bold" text-anchor="middle">¹⁴¹Ba</text>
-
     <!-- 分裂後の核 (クリプトン Kr) -->
     <circle cx="380" cy="175" r="14" fill="#38bdf8" stroke="#0284c7" stroke-width="1.5"/>
     <text x="380" y="180" fill="#ffffff" font-size="11" font-weight="bold" text-anchor="middle">⁹²Kr</text>
-
     <!-- 放出される3個の高速中性子 -->
     <g fill="#ffffff">
       <circle cx="450" cy="100" r="3.5"/>
@@ -62,7 +56,6 @@ $$^{235}_{92}\text{U} + ^1_0n \longrightarrow ^{141}_{56}\text{Ba} + ^{92}_{36}\
       <circle cx="450" cy="140" r="3.5"/>
     </g>
     <text x="460" y="85" fill="#ffffff" font-size="11">高速中性子 (2〜3個)</text>
-
     <!-- エネルギー放出表記 -->
     <rect x="330" y="105" width="90" height="30" fill="rgba(244, 63, 94, 0.2)" stroke="#f43f5e" rx="4"/>
     <text x="375" y="125" fill="#f43f5e" font-size="12" font-weight="bold" text-anchor="middle">約 200 MeV</text>
@@ -91,19 +84,16 @@ $$\mathbf{k = \frac{\text{次の世代の中性子数}}{\text{現在の世代の
   <div class="graph-title">図2：中性子増倍率 k による連鎖反応の3つの状態</div>
   <svg viewBox="0 0 540 160" class="vector-svg">
     <rect width="540" height="160" fill="#090d16" rx="8"/>
-
     <!-- 未臨界 -->
     <rect x="30" y="30" width="145" height="100" fill="rgba(56, 189, 248, 0.1)" stroke="#38bdf8" stroke-width="1.5" rx="6"/>
     <text x="102" y="55" fill="#38bdf8" font-size="14" font-weight="bold" text-anchor="middle">未臨界 (k &lt; 1)</text>
     <text x="102" y="80" fill="#cbd5e1" font-size="11" text-anchor="middle">中性子数が徐々に減少</text>
     <text x="102" y="105" fill="#94a3b8" font-size="11" text-anchor="middle">反応は自然停止する</text>
-
     <!-- 臨界 -->
     <rect x="195" y="30" width="150" height="100" fill="rgba(16, 185, 129, 0.15)" stroke="#10b981" stroke-width="2" rx="6"/>
     <text x="270" y="55" fill="#10b981" font-size="14" font-weight="bold" text-anchor="middle">臨界 (k = 1.000)</text>
     <text x="270" y="80" fill="#f1f5f9" font-size="11" font-weight="bold" text-anchor="middle">中性子数が一定に保持</text>
     <text x="270" y="105" fill="#10b981" font-size="11" text-anchor="middle">原子炉の定常運転状態</text>
-
     <!-- 臨界超過 -->
     <rect x="365" y="30" width="145" height="100" fill="rgba(244, 63, 94, 0.15)" stroke="#f43f5e" stroke-width="1.5" rx="6"/>
     <text x="437" y="55" fill="#f43f5e" font-size="14" font-weight="bold" text-anchor="middle">臨界超過 (k &gt; 1)</text>

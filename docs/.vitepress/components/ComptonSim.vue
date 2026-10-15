@@ -67,9 +67,9 @@
     <!-- 解説コールアウト -->
     <div class="sim-footer-note">
       💡 <strong>物理の急所</strong>:
-      光子は質量ゼロですが、アインシュタインの相対論より**運動量 $p = \frac{h}{\lambda}$** を持ちます。
-      電子と弾性衝突してエネルギーの一部を電子に渡すため、散乱光子のエネルギーは低下し（$E' < E$）、**波長が長くなります（$\lambda' > \lambda_0$）**。
-      波長の伸び $\Delta \lambda = \frac{h}{m_e c}(1 - \cos\theta)$ は、<strong>入射光の波長に関係なく「散乱角 $\theta$ だけ」で決まります！</strong>
+      光子は質量ゼロですが、アインシュタインの相対論より<strong>運動量 <i>p</i> = (<i>h</i> / λ)</strong> を持ちます。
+      電子と弾性衝突してエネルギーの一部を電子に渡すため、散乱光子のエネルギーは低下し（<i>E</i>′ &lt; <i>E</i>）、<strong>波長が長くなります（<i>λ</i>′ &gt; <i>λ</i><sub>0</sub>）</strong>。
+      波長の伸び Δ λ = (<i>h</i> / <i>m</i><sub><i>e</i></sub> <i>c</i>)(1 - cosθ) は、<strong>入射光の波長に関係なく「散乱角 θ だけ」で決まります！</strong>
     </div>
   </div>
 </template>

@@ -54,40 +54,33 @@ description: 光を当てると電子が飛び出す光電効果。古典波動�
       <path d="M0,0 L0,6 L7,3 z" fill="#fbbf24" />
     </marker>
   </defs>
-
   <!-- 金属プレート (右側: x = 200..500, y = 80..240) -->
   <rect x="200" y="80" width="300" height="160" rx="6" fill="#1e293b" stroke="#475569" stroke-width="2"/>
   <text x="350" y="105" fill="#64748b" font-size="13" font-weight="700" text-anchor="middle">金属内部（原子核と自由電子群）</text>
-
   <!-- 金属表面の境界線 (x = 200) -->
   <line x1="200" y1="70" x2="200" y2="250" stroke="#94a3b8" stroke-width="3"/>
   <text x="195" y="65" fill="#94a3b8" font-size="12" text-anchor="end">金属表面</text>
-
   <!-- 他の自由電子 (薄い表示) -->
   <circle cx="280" cy="140" r="5" fill="#475569"/>
   <circle cx="340" cy="180" r="5" fill="#475569"/>
   <circle cx="420" cy="130" r="5" fill="#475569"/>
   <circle cx="380" cy="210" r="5" fill="#475569"/>
   <circle cx="460" cy="190" r="5" fill="#475569"/>
-
   <!-- 入射光子 (Photon: 波束アニメーション調の正弦波) -->
   <path d="M 40,150 Q 55,135 70,150 T 100,150 T 130,150 T 160,150" fill="none" stroke="#38bdf8" stroke-width="2.5"/>
   <line x1="160" y1="150" x2="192" y2="150" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-pe-cyan)"/>
   <rect x="35" y="112" width="105" height="42" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
   <text x="87" y="128" fill="#38bdf8" font-size="12" font-weight="700" text-anchor="middle">光子 (Photon)</text>
   <text x="87" y="146" fill="#cbd5e1" font-size="11" text-anchor="middle">E ＝ hν</text>
-
   <!-- 衝突・吸収点 (x=200, y=150) -->
   <circle cx="200" cy="150" r="8" fill="#fbbf24" stroke="#fff" stroke-width="1.5"/>
   <rect x="215" y="138" width="115" height="20" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
   <text x="272" y="152" fill="#fbbf24" font-size="10" font-weight="700" text-anchor="middle">電子が光子を吸収</text>
-
   <!-- エネルギー分配 1: 脱出エネルギー（仕事関数 W） -->
   <path d="M 200,150 L 250,195" fill="none" stroke="#f59e0b" stroke-width="2" stroke-dasharray="3,3" marker-end="url(#arr-pe-yellow)"/>
   <rect x="255" y="180" width="160" height="42" rx="4" fill="#0f172a" stroke="#f59e0b" stroke-width="1"/>
   <text x="265" y="198" fill="#f59e0b" font-size="12" font-weight="700">仕事関数 W (脱出コスト)</text>
   <text x="265" y="214" fill="#cbd5e1" font-size="10">束縛を断ち切るために消費</text>
-
   <!-- エネルギー分配 2: 飛び出す光電子 (最大運動エネルギー K_max) -->
   <line x1="200" y1="150" x2="110" y2="70" stroke="#f43f5e" stroke-width="3" marker-end="url(#arr-pe-rose)"/>
   <circle cx="110" cy="70" r="7" fill="#f43f5e"/>

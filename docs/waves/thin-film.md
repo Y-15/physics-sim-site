@@ -65,49 +65,39 @@ description: 高校物理の光の干渉最頻出分野。固定端反射によ�
       <path d="M0,0 L0,6 L7,3 z" fill="#38bdf8" />
     </marker>
   </defs>
-
   <!-- 空気層 (上部) -->
   <rect x="30" y="20" width="480" height="70" fill="rgba(30, 41, 59, 0.4)"/>
   <text x="45" y="45" fill="#94a3b8" font-size="12">空気 (屈折率 1.0)</text>
-
   <!-- 薄膜 (中央: y = 90..210, 厚さ d = 120) -->
   <rect x="30" y="90" width="480" height="120" fill="rgba(56, 189, 248, 0.15)" stroke="#38bdf8" stroke-width="2"/>
   <text x="45" y="115" fill="#38bdf8" font-size="12" font-weight="700">薄膜 (屈折率 n, 厚さ d)</text>
-
   <!-- 膜厚 d の寸法矢印 -->
   <line x1="500" y1="90" x2="500" y2="210" stroke="#fbbf24" stroke-width="1.5"/>
   <line x1="495" y1="90" x2="505" y2="90" stroke="#fbbf24" stroke-width="1.5"/>
   <line x1="495" y1="210" x2="505" y2="210" stroke="#fbbf24" stroke-width="1.5"/>
   <text x="480" y="155" fill="#fbbf24" font-size="13" font-weight="700" text-anchor="end">厚さ d</text>
-
   <!-- 法線 (x = 180, x = 300) -->
   <line x1="180" y1="50" x2="180" y2="240" stroke="#64748b" stroke-width="1" stroke-dasharray="3,3"/>
   <line x1="300" y1="50" x2="300" y2="130" stroke="#64748b" stroke-width="1" stroke-dasharray="3,3"/>
-
   <!-- 光線 1 (表面反射: 点 A = (180, 90)) -->
   <line x1="100" y1="30" x2="180" y2="90" stroke="#38bdf8" stroke-width="2.5"/>
   <line x1="180" y1="90" x2="260" y2="30" stroke="#f43f5e" stroke-width="2.5" marker-end="url(#arr-tf-ray)"/>
   <circle cx="180" cy="90" r="4" fill="#f43f5e"/>
   <text x="170" y="82" fill="#f43f5e" font-size="13" font-weight="700">点 A</text>
-
   <!-- 光線 2 (膜内屈折: 点 A(180,90) -> 点 B(240, 210) -> 点 C(300, 90)) -->
   <line x1="180" y1="90" x2="240" y2="210" stroke="#38bdf8" stroke-width="2.5"/>
   <circle cx="240" cy="210" r="4" fill="#fbbf24"/>
   <text x="240" y="230" fill="#fbbf24" font-size="13" font-weight="700" text-anchor="middle">点 B</text>
-
   <line x1="240" y1="210" x2="300" y2="90" stroke="#38bdf8" stroke-width="2.5"/>
   <circle cx="300" cy="90" r="4" fill="#10b981"/>
   <text x="310" y="82" fill="#10b981" font-size="13" font-weight="700">点 C</text>
-
   <!-- 点 C からの反射光 -->
   <line x1="300" y1="90" x2="380" y2="30" stroke="#10b981" stroke-width="2.5" marker-end="url(#arr-tf-ray)"/>
-
   <!-- 同波面垂線 (点 A から光線2の反射光へ下ろした垂線の足 点 D) -->
   <line x1="180" y1="90" x2="240" y2="45" stroke="#fbbf24" stroke-width="1.5" stroke-dasharray="3,3"/>
   <circle cx="240" cy="45" r="3" fill="#fbbf24"/>
   <rect x="245" y="28" width="85" height="18" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
   <text x="287" y="41" fill="#fbbf24" font-size="10" font-weight="600" text-anchor="middle">点 D (等波面)</text>
-
   <!-- 角度表示 -->
   <rect x="135" y="52" width="60" height="18" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
   <text x="165" y="65" fill="#38bdf8" font-size="10" font-weight="600" text-anchor="middle">入射角 i</text>
@@ -155,26 +145,21 @@ $$2Rd \approx r^2 \implies \boxed{d \approx \frac{r^2}{2R}}$$
   <!-- 平板ガラス (y = 170) -->
   <line x1="50" y1="170" x2="490" y2="170" stroke="#94a3b8" stroke-width="3"/>
   <text x="495" y="174" fill="#94a3b8" font-size="12">平面ガラス板</text>
-
   <!-- 平凸レンズの球面 (中心 cx=270, R=300) -->
   <path d="M 90,120 Q 270,170 450,120" fill="none" stroke="#38bdf8" stroke-width="3"/>
   <text x="455" y="125" fill="#38bdf8" font-size="12">平凸レンズ (曲率半径 R)</text>
-
   <!-- 接触点 O (x = 270, y = 170) -->
   <circle cx="270" cy="170" r="5" fill="#f43f5e"/>
   <rect x="185" y="185" width="170" height="22" rx="4" fill="#0f172a" stroke="#f43f5e" stroke-width="1.2"/>
   <text x="270" y="200" fill="#f43f5e" font-size="11" font-weight="700" text-anchor="middle">接触点 O (d = 0, 中心暗斑)</text>
-
   <!-- 任意位置 r (x = 380, y = 170) -->
   <line x1="270" y1="170" x2="380" y2="170" stroke="#fbbf24" stroke-width="1.5"/>
   <rect x="305" y="172" width="45" height="18" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
   <text x="327" y="185" fill="#fbbf24" font-size="10" font-weight="700" text-anchor="middle">半径 r</text>
-
   <!-- 空気層厚さ d (x = 380 でのレンズと板の間隔) -->
   <line x1="380" y1="170" x2="380" y2="150" stroke="#10b981" stroke-width="2"/>
   <rect x="390" y="150" width="100" height="20" rx="3" fill="#0f172a" stroke="#10b981" stroke-width="1"/>
   <text x="440" y="164" fill="#10b981" font-size="11" font-weight="700" text-anchor="middle">d ≈ r² / (2R)</text>
-
   <!-- 反射光の位相判定 -->
   <rect x="80" y="38" width="380" height="52" rx="5" fill="#0f172a" stroke="#334155" stroke-width="1.2"/>
   <text x="95" y="58" fill="#38bdf8" font-size="11" font-weight="600">① レンズ下面反射: ガラス → 空気（位相変化なし 0）</text>

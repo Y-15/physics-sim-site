@@ -5,7 +5,7 @@
         <span class="icon">🔥</span>
         <h3>気体のモル比熱・マイヤーの関係式シミュレーター</h3>
       </div>
-      <p class="subtitle">定積変化と定圧変化における熱量 $Q$ の使われ方の違い。分子構造（単原子・2原子・3原子）による自由度と、マイヤーの関係式 $C_P = C_V + R$ を直感比較できます。</p>
+      <p class="subtitle">定積変化と定圧変化における熱量 <i>Q</i> の使われ方の違い。分子構造（単原子・2原子・3原子）による自由度と、マイヤーの関係式 <i>C</i><sub><i>P</i></sub> = <i>C</i><sub><i>V</i></sub> + <i>R</i> を直感比較できます。</p>
     </div>
 
     <div class="canvas-wrapper">
@@ -51,14 +51,14 @@
 
         <div class="control-group">
           <label>
-            <span>気体の物質量 $n$: <strong>{{ mol.toFixed(1) }} mol</strong></span>
+            <span>気体の物質量 <i>n</i>: <strong>{{ mol.toFixed(1) }} mol</strong></span>
             <input type="range" v-model.number="mol" min="0.5" max="3.0" step="0.5" />
           </label>
         </div>
 
         <div class="control-group">
           <label>
-            <span>投入熱量 $Q$: <strong>{{ heatInputJ }} J</strong></span>
+            <span>投入熱量 <i>Q</i>: <strong>{{ heatInputJ }} J</strong></span>
             <input type="range" v-model.number="heatInputJ" min="100" max="2000" step="100" />
           </label>
         </div>
@@ -77,25 +77,25 @@
     <!-- 物理量モニター -->
     <div class="stats-monitor">
       <div class="stat-card">
-        <span class="label">定積モル比熱 $C_V$</span>
+        <span class="label">定積モル比熱 <i>C</i><sub><i>V</i></sub></span>
         <span class="value">{{ (Cv_factor * 8.31).toFixed(1) }} <span class="unit">J/(mol·K)</span></span>
         <span class="subtext">{{ Cv_text }}</span>
       </div>
 
       <div class="stat-card">
-        <span class="label">定圧モル比熱 $C_P$</span>
+        <span class="label">定圧モル比熱 <i>C</i><sub><i>P</i></sub></span>
         <span class="value">{{ (Cp_factor * 8.31).toFixed(1) }} <span class="unit">J/(mol·K)</span></span>
-        <span class="subtext">$C_V + R$ (マイヤー)</span>
+        <span class="subtext"><i>C</i><sub><i>V</i></sub> + <i>R</i> (マイヤー)</span>
       </div>
 
       <div class="stat-card">
-        <span class="label">比熱比 $\gamma = C_P/C_V$</span>
+        <span class="label">比熱比 γ = <i>C</i><sub><i>P</i></sub>/<i>C</i><sub><i>V</i></sub></span>
         <span class="value highlight">{{ gamma.toFixed(2) }}</span>
         <span class="subtext">{{ gammaFraction }}</span>
       </div>
 
       <div class="stat-card">
-        <span class="label">温度上昇 $\Delta T$</span>
+        <span class="label">温度上昇 Δ <i>T</i></span>
         <span class="value">{{ deltaT.toFixed(1) }} <span class="unit">K</span></span>
         <span class="subtext">現在温度: {{ tempK.toFixed(1) }} K</span>
       </div>
@@ -104,15 +104,15 @@
     <!-- 熱力学第1法則 分配バー (Q = ΔU + W) -->
     <div class="energy-card">
       <div class="energy-header">
-        <span>熱力学第1法則の分配: $Q = \Delta U + W$ (全熱量 $Q = {{ heatInputJ }}\,\text{J}$)</span>
+        <span>熱力学第1法則の分配: <i>Q</i> = Δ <i>U</i> + <i>W</i> (全熱量 <i>Q</i> = {{ heatInputJ }} <i>J</i>)</span>
       </div>
       <div class="energy-bar">
         <div class="bar-segment u" :style="{ width: deltaUPercent + '%' }" title="内部エネルギー増加"></div>
         <div class="bar-segment w" :style="{ width: workPercent + '%' }" title="外部にした仕事"></div>
       </div>
       <div class="legend-row">
-        <div class="legend-item"><span class="dot u"></span>内部エネルギー増加 $\Delta U = n C_V \Delta T$: {{ deltaU.toFixed(1) }} J ({{ deltaUPercent.toFixed(0) }}%)</div>
-        <div class="legend-item"><span class="dot w"></span>外部にした仕事 $W = P\Delta V$: {{ workOut.toFixed(1) }} J ({{ workPercent.toFixed(0) }}%)</div>
+        <div class="legend-item"><span class="dot u"></span>内部エネルギー増加 Δ <i>U</i> = <i>n</i> <i>C</i><sub><i>V</i></sub> Δ <i>T</i>: {{ deltaU.toFixed(1) }} J ({{ deltaUPercent.toFixed(0) }}%)</div>
+        <div class="legend-item"><span class="dot w"></span>外部にした仕事 <i>W</i> = <i>P</i>Δ <i>V</i>: {{ workOut.toFixed(1) }} J ({{ workPercent.toFixed(0) }}%)</div>
       </div>
     </div>
   </div>

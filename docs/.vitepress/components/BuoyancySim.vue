@@ -79,8 +79,8 @@
     <!-- 解説コールアウト -->
     <div class="sim-footer-note">
       💡 <strong>力学の急所</strong>:
-      浮力 $F_B$ のミクロな正体は、<strong>「上面にかかる水圧 $P_1$ よりも、深い下面にかかる水圧 $P_2$ の方が大きい」</strong>という圧力差です。<br>
-      底面積を $S$ とすると、$F_B = (P_2 - P_1)S = \rho_0 g (h_2 - h_1)S = \rho_0 V_{\text{浸}} g$ となり、完全に<strong>「物体が押しのけた流体の重さ（アルキメデスの原理）」</strong>と一致します！
+      浮力 <i>F</i><sub><i>B</i></sub> のミクロな正体は、<strong>「上面にかかる水圧 <i>P</i><sub>1</sub> よりも、深い下面にかかる水圧 <i>P</i><sub>2</sub> の方が大きい」</strong>という圧力差です。<br>
+      底面積を <i>S</i> とすると、<i>F</i><sub><i>B</i></sub> = (<i>P</i><sub>2</sub> - <i>P</i><sub>1</sub>)<i>S</i> = ρ<sub>0</sub> <i>g</i> (<i>h</i><sub>2</sub> - <i>h</i><sub>1</sub>)<i>S</i> = ρ<sub>0</sub> <i>V</i><sub>浸</sub> <i>g</i> となり、完全に<strong>「物体が押しのけた流体の重さ（アルキメデスの原理）」</strong>と一致します！
     </div>
   </div>
 </template>

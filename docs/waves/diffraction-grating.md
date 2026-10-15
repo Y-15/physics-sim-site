@@ -50,14 +50,11 @@ $$
     </defs>
     <rect width="760" height="340" fill="url(#gradDG)" rx="10"/>
     <rect width="760" height="340" fill="url(#gridDG)" rx="10"/>
-
     <!-- 左側: 回折格子のスリットと幾何経路差 -->
     <g transform="translate(60, 40)">
       <text x="140" y="25" fill="#38bdf8" font-size="14" font-weight="bold" text-anchor="middle">【スリット間の光路差 d sinθ】</text>
-
       <!-- 回折格子基板 (縦線) -->
       <line x1="80" y1="50" x2="80" y2="250" stroke="#64748b" stroke-width="4"/>
-
       <!-- スリット穴 A, B, C (間隔 d) -->
       <circle cx="80" cy="90" r="4" fill="#38bdf8"/>
       <text x="65" y="94" fill="#38bdf8" font-size="12" font-weight="bold" text-anchor="end">S₁</text>
@@ -65,50 +62,40 @@ $$
       <text x="65" y="154" fill="#38bdf8" font-size="12" font-weight="bold" text-anchor="end">S₂</text>
       <circle cx="80" cy="210" r="4" fill="#38bdf8"/>
       <text x="65" y="214" fill="#38bdf8" font-size="12" font-weight="bold" text-anchor="end">S₃</text>
-
       <!-- 格子定数 d の寸法線 -->
       <line x1="45" y1="90" x2="45" y2="150" stroke="#f59e0b" stroke-width="1.5"/>
       <line x1="40" y1="90" x2="50" y2="90" stroke="#f59e0b" stroke-width="1.5"/>
       <line x1="40" y1="150" x2="50" y2="150" stroke="#f59e0b" stroke-width="1.5"/>
       <text x="35" y="125" fill="#f59e0b" font-size="12" text-anchor="end">d</text>
-
       <!-- 入射平行光線 (左から) -->
       <line x1="10" y1="90" x2="70" y2="90" stroke="#38bdf8" stroke-width="2"/>
       <line x1="10" y1="150" x2="70" y2="150" stroke="#38bdf8" stroke-width="2"/>
       <line x1="10" y1="210" x2="70" y2="210" stroke="#38bdf8" stroke-width="2"/>
-
       <!-- 回折光線 (角度 θ で右上へ) -->
       <!-- θ = 25度 -->
       <line x1="80" y1="90" x2="260" y2="6" stroke="#34d399" stroke-width="2.5"/>
       <line x1="80" y1="150" x2="260" y2="66" stroke="#34d399" stroke-width="2.5"/>
       <line x1="80" y1="210" x2="260" y2="126" stroke="#34d399" stroke-width="2.5"/>
-
       <!-- 垂線の足と経路差 (赤線) -->
       <line x1="80" y1="90" x2="105" y2="144" stroke="#ef4444" stroke-width="1.5" stroke-dasharray="3,3"/>
       <!-- S2から垂線までの部分が経路差 d sinθ -->
       <line x1="80" y1="150" x2="105" y2="144" stroke="#ef4444" stroke-width="3.5"/>
-
       <text x="135" y="160" fill="#ef4444" font-size="12" font-weight="bold">d sinθ</text>
-
       <!-- 角度 θ の表示 -->
       <line x1="80" y1="90" x2="170" y2="90" stroke="#475569" stroke-width="1" stroke-dasharray="3,3"/>
       <path d="M 130 90 A 50 50 0 0 0 126 68" fill="none" stroke="#f59e0b" stroke-width="1.5"/>
       <text x="140" y="80" fill="#f59e0b" font-size="12">θ</text>
     </g>
-
     <!-- 右側: ヤングの2重スリット vs 回折格子のシャープさ比較 -->
     <g transform="translate(420, 30)">
       <rect x="0" y="0" width="300" height="270" fill="#1e293b" rx="8" stroke="#334155"/>
       <text x="150" y="25" fill="#f59e0b" font-size="14" font-weight="bold" text-anchor="middle">【ヤング vs 回折格子のピーク鋭さ】</text>
-
       <!-- ヤング (2スリット: ブロードなcos^2) -->
       <text x="20" y="55" fill="#94a3b8" font-size="11">● ヤングの二重スリット (N=2): 縞が太くぼやける</text>
       <path d="M 30 110 Q 70 60 110 110 Q 150 60 190 110 Q 230 60 270 110" fill="none" stroke="#64748b" stroke-width="2"/>
-
       <!-- 回折格子 (N=数千: 針のように鋭いデルタ関数ピーク) -->
       <text x="20" y="145" fill="#38bdf8" font-size="11" font-weight="bold">● 回折格子 (N=数千): 条件から少しでも外れると完全消滅！</text>
       <path d="M 30 220 L 68 220 L 70 160 L 72 220 L 148 220 L 150 160 L 152 220 L 228 220 L 230 160 L 232 220 L 270 220" fill="none" stroke="#38bdf8" stroke-width="2.5"/>
-
       <!-- 極大公式まとめ -->
       <text x="150" y="250" fill="#34d399" font-size="15" font-weight="bold" text-anchor="middle">明線条件: d sinθ = m λ</text>
     </g>

@@ -126,16 +126,13 @@ $$
 <div class="vector-graph-card">
 <svg viewBox="0 0 680 390" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <!-- 天井の固定ハッチングパターン -->
     <pattern id="spr-ceiling-hatch" width="10" height="10" patternTransform="rotate(45 0 0)" patternUnits="userSpaceOnUse">
       <line x1="0" y1="0" x2="0" y2="10" stroke="#475569" stroke-width="1.5" />
     </pattern>
-    <!-- おもりのメタリックグラデーション -->
     <linearGradient id="spr-mass-grad" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="#1e293b"/>
       <stop offset="100%" stop-color="#0f172a"/>
     </linearGradient>
-    <!-- 矢印マーカー -->
     <marker id="spr-arr-blue" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
       <path d="M0,0 L0,6 L7,3 z" fill="#38bdf8" />
     </marker>
@@ -149,101 +146,58 @@ $$
       <path d="M0,0 L0,6 L7,3 z" fill="#fbbf24" />
     </marker>
   </defs>
-
-  <!-- 天井 (固定面) -->
   <rect x="30" y="14" width="620" height="16" fill="url(#spr-ceiling-hatch)"/>
   <line x1="30" y1="30" x2="650" y2="30" stroke="#94a3b8" stroke-width="3"/>
   <rect x="40" y="10" width="90" height="18" rx="4" fill="#0f172a" stroke="#475569" stroke-width="1"/>
   <text x="85" y="23" fill="#cbd5e1" font-size="11" font-weight="600" text-anchor="middle">天井 (固定面)</text>
-
-  <!-- 水平基準線 (点線ガイドライン) -->
-  <!-- 1. 自然長位置 y = 125 -->
   <line x1="30" y1="125" x2="520" y2="125" stroke="#475569" stroke-width="1.5" stroke-dasharray="4,4"/>
   <rect x="530" y="115" width="120" height="20" rx="4" fill="#1e293b" stroke="#475569" stroke-width="1"/>
   <text x="590" y="129" fill="#94a3b8" font-size="11" font-weight="600" text-anchor="middle">自然長位置</text>
-
-  <!-- 2. つり合い位置 y = 205 -->
   <line x1="30" y1="205" x2="510" y2="205" stroke="#fbbf24" stroke-width="1.5" stroke-dasharray="5,4" opacity="0.8"/>
   <rect x="515" y="194" width="145" height="22" rx="4" fill="#1e293b" stroke="#fbbf24" stroke-width="1.2"/>
   <text x="587" y="209" fill="#fbbf24" font-size="11" font-weight="700" text-anchor="middle">★ つり合い位置 (x = 0)</text>
-
-  <!-- ==================== ① 自然長 (x = 110) ==================== -->
-  <g>
-    <!-- 列見出しバッジ -->
+  <g id="state-natural">
     <rect x="65" y="40" width="90" height="22" rx="11" fill="#1e293b" stroke="#64748b" stroke-width="1"/>
     <text x="110" y="55" fill="#e2e8f0" font-size="11" font-weight="700" text-anchor="middle">① 自然長</text>
-    <!-- 天井吊り具 -->
     <rect x="106" y="30" width="8" height="6" fill="#64748b"/>
-    <!-- ばね (y=36 から y=125) -->
-    <path d="M 110,36 L 110,48 L 122,55 L 98,66 L 122,77 L 98,88 L 122,99 L 98,110 L 110,118 L 110,125" 
-          fill="none" stroke="#38bdf8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-    <!-- 下端リングフック -->
+    <path d="M 110,36 L 110,48 L 122,55 L 98,66 L 122,77 L 98,88 L 122,99 L 98,110 L 110,118 L 110,125" fill="none" stroke="#38bdf8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
     <circle cx="110" cy="125" r="4" fill="none" stroke="#38bdf8" stroke-width="2"/>
-    <!-- おもりなしラベルバッジ -->
     <rect x="75" y="140" width="70" height="20" rx="4" fill="#0f172a" stroke="#334155" stroke-width="1"/>
     <text x="110" y="154" fill="#94a3b8" font-size="11" text-anchor="middle">おもりなし</text>
   </g>
-
-  <!-- 寸法線: 伸び x0 (x = 190, y: 125 -> 205) -->
-  <g>
+  <g id="dimension-x0">
     <line x1="190" y1="125" x2="190" y2="205" stroke="#fbbf24" stroke-width="1.5"/>
     <line x1="182" y1="125" x2="198" y2="125" stroke="#fbbf24" stroke-width="1.5"/>
     <line x1="182" y1="205" x2="198" y2="205" stroke="#fbbf24" stroke-width="1.5"/>
     <polygon points="190,125 187,133 193,133" fill="#fbbf24"/>
     <polygon points="190,205 187,197 193,197" fill="#fbbf24"/>
-    <!-- 寸法ラベルバッジ -->
     <rect x="155" y="153" width="70" height="22" rx="4" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
     <text x="190" y="168" fill="#fbbf24" font-size="11" font-weight="700" text-anchor="middle">伸び x₀</text>
   </g>
-
-  <!-- ==================== ② つり合い状態 (x = 300) ==================== -->
-  <g>
-    <!-- 列見出しバッジ -->
+  <g id="state-equilibrium">
     <rect x="245" y="40" width="110" height="22" rx="11" fill="#1e293b" stroke="#fbbf24" stroke-width="1.2"/>
     <text x="300" y="55" fill="#fbbf24" font-size="11" font-weight="700" text-anchor="middle">② つり合い状態</text>
-    <!-- 天井吊り具 -->
     <rect x="296" y="30" width="8" height="6" fill="#64748b"/>
-    <!-- 伸びたばね (y=36 から y=185) -->
-    <path d="M 300,36 L 300,46 L 314,55 L 286,69 L 314,83 L 286,97 L 314,111 L 286,125 L 314,139 L 286,153 L 314,167 L 286,177 L 300,181 L 300,185" 
-          fill="none" stroke="#38bdf8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-    <!-- おもり (幅 40, 高さ 36, 上端 y=187) -->
+    <path d="M 300,36 L 300,46 L 314,55 L 286,69 L 314,83 L 286,97 L 314,111 L 286,125 L 314,139 L 286,153 L 314,167 L 286,177 L 300,181 L 300,185" fill="none" stroke="#38bdf8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
     <rect x="280" y="187" width="40" height="36" rx="5" fill="url(#spr-mass-grad)" stroke="#fbbf24" stroke-width="2"/>
     <text x="300" y="210" fill="#f8fafc" font-size="14" font-weight="700" text-anchor="middle">m</text>
-
-    <!-- 力のつり合いベクトル (ばねの外側 x = 338 に独立配置して被り完全解消) -->
-    <!-- 1. 弾性力 kx0 (鉛直上向き) -->
     <line x1="338" y1="205" x2="338" y2="155" stroke="#10b981" stroke-width="2.5" marker-end="url(#spr-arr-green)"/>
     <rect x="348" y="152" width="95" height="20" rx="4" fill="#0f172a" stroke="#10b981" stroke-width="1"/>
     <text x="395" y="166" fill="#10b981" font-size="11" font-weight="700" text-anchor="middle">kx₀ (弾性力)</text>
-
-    <!-- 2. 重力 mg (鉛直下向き) -->
     <line x1="338" y1="205" x2="338" y2="255" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#spr-arr-blue)"/>
     <rect x="348" y="242" width="85" height="20" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
     <text x="390" y="256" fill="#38bdf8" font-size="11" font-weight="700" text-anchor="middle">mg (重力)</text>
-
-    <!-- 作用点マーク (おもり右端) -->
     <circle cx="338" cy="205" r="3.5" fill="#fbbf24"/>
-
-    <!-- つり合い式バッジ -->
     <rect x="245" y="275" width="110" height="24" rx="5" fill="#1e293b" stroke="#fbbf24" stroke-width="1.2"/>
     <text x="300" y="291" fill="#fbbf24" font-size="12" font-weight="700" text-anchor="middle">mg = kx₀ (合力 0)</text>
   </g>
-
-  <!-- ==================== ③ つり合いから変位 x (x = 480) ==================== -->
-  <g>
-    <!-- 列見出しバッジ -->
+  <g id="state-displacement">
     <rect x="420" y="40" width="125" height="22" rx="11" fill="#1e293b" stroke="#f43f5e" stroke-width="1.2"/>
     <text x="482" y="55" fill="#f43f5e" font-size="11" font-weight="700" text-anchor="middle">③ つり合いから変位 x</text>
-    <!-- 天井吊り具 -->
     <rect x="478" y="30" width="8" height="6" fill="#64748b"/>
-    <!-- さらに伸びたばね (y=36 から y=245) -->
-    <path d="M 482,36 L 482,46 L 498,58 L 466,74 L 498,90 L 466,106 L 498,122 L 466,138 L 498,154 L 466,170 L 498,186 L 466,202 L 498,218 L 466,232 L 482,240 L 482,245" 
-          fill="none" stroke="#38bdf8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-    <!-- おもり (y=245 から y=281) -->
+    <path d="M 482,36 L 482,46 L 498,58 L 466,74 L 498,90 L 466,106 L 498,122 L 466,138 L 498,154 L 466,170 L 498,186 L 466,202 L 498,218 L 466,232 L 482,240 L 482,245" fill="none" stroke="#38bdf8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
     <rect x="462" y="245" width="40" height="36" rx="5" fill="url(#spr-mass-grad)" stroke="#f43f5e" stroke-width="2"/>
     <text x="482" y="268" fill="#f8fafc" font-size="14" font-weight="700" text-anchor="middle">m</text>
-
-    <!-- 寸法線: 変位 x (おもりの左側 x = 438, y: 205 -> 263) -->
     <line x1="438" y1="205" x2="438" y2="263" stroke="#f43f5e" stroke-width="1.5"/>
     <line x1="430" y1="205" x2="446" y2="205" stroke="#f43f5e" stroke-width="1.5"/>
     <line x1="430" y1="263" x2="446" y2="263" stroke="#f43f5e" stroke-width="1.5"/>
@@ -251,14 +205,10 @@ $$
     <polygon points="438,263 435,255 441,255" fill="#f43f5e"/>
     <rect x="400" y="222" width="55" height="20" rx="4" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
     <text x="427" y="236" fill="#f43f5e" font-size="11" font-weight="700" text-anchor="middle">変位 x</text>
-
-    <!-- 合力・復元力ベクトル (おもりの右側 x = 520 に独立配置) -->
     <circle cx="520" cy="263" r="3.5" fill="#f43f5e"/>
     <line x1="520" y1="263" x2="520" y2="205" stroke="#f43f5e" stroke-width="3" marker-end="url(#spr-arr-rose)"/>
     <rect x="532" y="220" width="135" height="22" rx="4" fill="#0f172a" stroke="#f43f5e" stroke-width="1.2"/>
     <text x="599" y="235" fill="#f43f5e" font-size="11" font-weight="700" text-anchor="middle">合力 F = −kx (復元力)</text>
-
-    <!-- 運動方程式バッジ -->
     <rect x="385" y="320" width="235" height="26" rx="5" fill="#1e293b" stroke="#f43f5e" stroke-width="1.2"/>
     <text x="502" y="337" fill="#f8fafc" font-size="12" font-weight="700" text-anchor="middle">F = mg − k(x₀ + x) = −kx</text>
   </g>

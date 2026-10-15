@@ -31,7 +31,6 @@ description: 動滑車のひもの幾何学的拘束条件、動く斜面台上�
   <div class="graph-title">図1：動滑車におけるひもの幾何学的束縛条件</div>
   <svg viewBox="0 0 540 260" class="vector-svg">
     <rect width="540" height="260" fill="#0f172a" rx="8"/>
-    
     <!-- 天井 -->
     <line x1="100" y1="40" x2="440" y2="40" stroke="#64748b" stroke-width="3"/>
     <!-- 天井ハッチング -->
@@ -42,34 +41,27 @@ description: 動滑車のひもの幾何学的拘束条件、動く斜面台上�
     <line x1="280" y1="40" x2="270" y2="30" stroke="#475569" stroke-width="1.5"/>
     <line x1="320" y1="40" x2="310" y2="30" stroke="#475569" stroke-width="1.5"/>
     <line x1="360" y1="40" x2="350" y2="30" stroke="#475569" stroke-width="1.5"/>
-
     <!-- 基準面 (天井 y=0) -->
     <text x="50" y="45" fill="#94a3b8" font-size="12">基準 y = 0</text>
-
     <!-- 定滑車 (天井に固定) -->
     <circle cx="220" cy="70" r="16" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
     <circle cx="220" cy="70" r="3" fill="#38bdf8"/>
     <line x1="220" y1="40" x2="220" y2="54" stroke="#64748b" stroke-width="3"/>
-
     <!-- 動滑車 (物体Bを吊るす) -->
     <circle cx="340" cy="140" r="16" fill="#1e293b" stroke="#fbbf24" stroke-width="2"/>
     <circle cx="340" cy="140" r="3" fill="#fbbf24"/>
-
     <!-- ひも (天井 -> 動滑車 -> 定滑車 -> 物体A) -->
     <path d="M 324 40 L 324 140 A 16 16 0 0 0 356 140 L 356 70 A 16 16 0 0 0 220 70 L 220 180" 
           fill="none" stroke="#e2e8f0" stroke-width="2"/>
-
     <!-- 物体 A (左側) -->
     <rect x="205" y="180" width="30" height="30" fill="#38bdf8" rx="4"/>
     <text x="220" y="200" fill="#0f172a" font-size="12" font-weight="bold" text-anchor="middle">A</text>
     <text x="245" y="195" fill="#38bdf8" font-size="12">y_A</text>
-
     <!-- 物体 B (動滑車の下) -->
     <line x1="340" y1="156" x2="340" y2="185" stroke="#fbbf24" stroke-width="2"/>
     <rect x="325" y="185" width="30" height="30" fill="#fbbf24" rx="4"/>
     <text x="340" y="205" fill="#0f172a" font-size="12" font-weight="bold" text-anchor="middle">B</text>
     <text x="365" y="195" fill="#fbbf24" font-size="12">y_B</text>
-
     <!-- 座標軸と微分関係のテキスト -->
     <text x="400" y="90" fill="#e2e8f0" font-size="12">ひもの長さ L = y_A + 2 y_B + const</text>
     <text x="400" y="120" fill="#38bdf8" font-size="13" font-weight="bold">v_A + 2 v_B = 0</text>
@@ -96,40 +88,32 @@ $$\frac{d^2 y_A}{dt^2} + 2\frac{d^2 y_B}{dt^2} = 0 \implies \mathbf{a_A + 2a_B =
   <div class="graph-title">図2：動く斜面台（非慣性系）における力のつり合いと慣性力</div>
   <svg viewBox="0 0 540 280" class="vector-svg">
     <rect width="540" height="280" fill="#0f172a" rx="8"/>
-
     <!-- 床 -->
     <line x1="50" y1="230" x2="490" y2="230" stroke="#64748b" stroke-width="2.5"/>
-
     <!-- 三角台 -->
     <polygon points="120,230 400,230 400,90" fill="rgba(30, 41, 59, 0.8)" stroke="#38bdf8" stroke-width="2.5"/>
     <text x="320" y="200" fill="#38bdf8" font-size="16" font-weight="bold">M (台)</text>
     <text x="180" y="222" fill="#94a3b8" font-size="12">θ</text>
-
     <!-- 台の加速度 A (左向き) -->
     <line x1="280" y1="250" x2="220" y2="250" stroke="#38bdf8" stroke-width="2.5"/>
     <polygon points="215,250 225,245 225,255" fill="#38bdf8"/>
     <text x="250" y="270" fill="#38bdf8" font-size="13" font-weight="bold" text-anchor="middle">台の加速度 A (左向き)</text>
-
     <!-- 小球 -->
     <circle cx="280" cy="150" r="14" fill="#f43f5e" stroke="#ffffff" stroke-width="2"/>
     <text x="280" y="154" fill="#ffffff" font-size="11" font-weight="bold" text-anchor="middle">m</text>
-
     <!-- 斜面に沿う相対加速度 alpha -->
     <line x1="280" y1="150" x2="230" y2="175" stroke="#fbbf24" stroke-width="2"/>
     <polygon points="225,177 236,172 232,181" fill="#fbbf24"/>
     <text x="220" y="165" fill="#fbbf24" font-size="12" font-weight="bold">相対加速度 α</text>
-
     <!-- 小球に働く力（台から見た非慣性系） -->
     <!-- 重力 mg -->
     <line x1="280" y1="150" x2="280" y2="210" stroke="#94a3b8" stroke-width="1.8"/>
     <polygon points="280,214 276,206 284,206" fill="#94a3b8"/>
     <text x="288" y="205" fill="#94a3b8" font-size="11">mg</text>
-
     <!-- 垂直抗力 N -->
     <line x1="280" y1="150" x2="315" y2="80" stroke="#38bdf8" stroke-width="2"/>
     <polygon points="318,74 311,81 319,85" fill="#38bdf8"/>
     <text x="325" y="85" fill="#38bdf8" font-size="12" font-weight="bold">垂直抗力 N</text>
-
     <!-- 慣性力 mA (右向き) -->
     <line x1="280" y1="150" x2="340" y2="150" stroke="#10b981" stroke-width="2"/>
     <polygon points="345,150 337,146 337,154" fill="#10b981"/>

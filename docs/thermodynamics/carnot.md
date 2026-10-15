@@ -52,35 +52,30 @@ description: 高校物理の熱力学最重要応用テーマ。熱機関の熱�
       <path d="M0,0 L0,6 L7,3 z" fill="#fbbf24" />
     </marker>
   </defs>
-
   <!-- 高温熱源 (上部) -->
   <rect x="180" y="20" width="180" height="40" rx="4" fill="#ef4444"/>
   <text x="270" y="45" fill="#fff" font-size="14" font-weight="700" text-anchor="middle">高温熱源 T_H</text>
-
   <!-- 熱機関 (中央の丸) -->
   <circle cx="270" cy="130" r="35" fill="#1e293b" stroke="#38bdf8" stroke-width="2.5"/>
   <text x="270" y="135" fill="#f8fafc" font-size="13" font-weight="700" text-anchor="middle">熱機関</text>
-
   <!-- 低温熱源 (下部) -->
   <rect x="180" y="200" width="180" height="40" rx="4" fill="#3b82f6"/>
   <text x="270" y="225" fill="#fff" font-size="14" font-weight="700" text-anchor="middle">低温熱源 T_L</text>
-
   <!-- 吸熱矢印 Qin (高温 -> 機関) -->
   <line x1="270" y1="60" x2="270" y2="92" stroke="#ef4444" stroke-width="4" marker-end="url(#arr-car-flow)"/>
-  <text x="285" y="80" fill="#ef4444" font-size="13" font-weight="700">吸熱 Q_in</text>
-
+  <rect x="285" y="68" width="85" height="20" rx="3" fill="#0f172a" stroke="#ef4444" stroke-width="1"/>
+  <text x="327" y="82" fill="#ef4444" font-size="11" font-weight="700" text-anchor="middle">吸熱 Q_in</text>
   <!-- 正味の仕事矢印 W (機関 -> 外部右向き) -->
   <line x1="305" y1="130" x2="430" y2="130" stroke="#fbbf24" stroke-width="4" marker-end="url(#arr-car-work)"/>
-  <rect x="330" y="105" width="130" height="38" rx="4" fill="#0f172a" stroke="#fbbf24" stroke-width="1.2"/>
-  <text x="395" y="122" fill="#fbbf24" font-size="12" font-weight="700" text-anchor="middle">正味の仕事 W</text>
-  <text x="395" y="136" fill="#cbd5e1" font-size="10" text-anchor="middle">W ＝ Q_in − Q_out</text>
-
+  <rect x="330" y="105" width="135" height="38" rx="4" fill="#0f172a" stroke="#fbbf24" stroke-width="1.2"/>
+  <text x="397" y="122" fill="#fbbf24" font-size="12" font-weight="700" text-anchor="middle">正味の仕事 W</text>
+  <text x="397" y="136" fill="#cbd5e1" font-size="10" text-anchor="middle">W ＝ Q_in − Q_out</text>
   <!-- 放熱矢印 Qout (機関 -> 低温) -->
   <line x1="270" y1="165" x2="270" y2="197" stroke="#3b82f6" stroke-width="4" marker-end="url(#arr-car-flow)"/>
   <rect x="285" y="172" width="90" height="20" rx="3" fill="#0f172a" stroke="#3b82f6" stroke-width="1"/>
   <text x="330" y="186" fill="#3b82f6" font-size="11" font-weight="700" text-anchor="middle">放熱 Q_out</text>
 </svg>
-<div class="graph-caption">図: 熱機関のエネルギーフロー図（投入された熱量 <i>Q</i>_in のうち、一部が仕事 <i>W</i> に変換され、残りは <i>Q</i>_out として捨てられる）</div>
+<div class="graph-caption">図: 熱機関のエネルギーフロー図（投入された熱量 <i>Q</i><sub>in</sub> のうち、一部が仕事 <i>W</i> に変換され、残りは <i>Q</i><sub>out</sub> として捨てられる）</div>
 </div>
 
 1サイクル回って気体が元の状態に戻ると、内部エネルギー変化は $\Delta U = 0$ です。  
@@ -107,38 +102,29 @@ $$
   <line x1="80" y1="250" x2="80" y2="30" stroke="#94a3b8" stroke-width="2"/>
   <text x="485" y="254" fill="#94a3b8" font-size="12">V</text>
   <text x="70" y="25" fill="#94a3b8" font-size="12">P</text>
-
   <!-- 4つの状態点 -->
   <!-- A: (140, 60), B: (240, 100), C: (380, 210), D: (220, 180) -->
   <path d="M 140,60 Q 190,80 240,100" fill="none" stroke="#ef4444" stroke-width="3"/>
   <rect x="150" y="58" width="130" height="20" rx="3" fill="#0f172a" stroke="#ef4444" stroke-width="1"/>
   <text x="215" y="72" fill="#ef4444" font-size="10" font-weight="700" text-anchor="middle">① 等温膨張 (T_H, Q_in)</text>
-
   <path d="M 240,100 Q 320,150 380,210" fill="none" stroke="#38bdf8" stroke-width="3"/>
   <rect x="300" y="132" width="115" height="20" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
   <text x="357" y="146" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">② 断熱膨張 (Q=0)</text>
-
   <path d="M 380,210 Q 300,195 220,180" fill="none" stroke="#3b82f6" stroke-width="3"/>
   <rect x="250" y="205" width="135" height="20" rx="3" fill="#0f172a" stroke="#3b82f6" stroke-width="1"/>
   <text x="317" y="219" fill="#3b82f6" font-size="10" font-weight="700" text-anchor="middle">③ 等温圧縮 (T_L, Q_out)</text>
-
   <path d="M 220,180 Q 170,120 140,60" fill="none" stroke="#22d3ee" stroke-width="3"/>
   <rect x="100" y="132" width="115" height="20" rx="3" fill="#0f172a" stroke="#22d3ee" stroke-width="1"/>
   <text x="157" y="146" fill="#22d3ee" font-size="10" font-weight="700" text-anchor="middle">④ 断熱圧縮 (Q=0)</text>
-
   <!-- 点マーク -->
   <circle cx="140" cy="60" r="5" fill="#ef4444"/>
   <text x="125" y="55" fill="#f8fafc" font-size="12" font-weight="700">A</text>
-
   <circle cx="240" cy="100" r="5" fill="#ef4444"/>
   <text x="248" y="95" fill="#f8fafc" font-size="12" font-weight="700">B</text>
-
   <circle cx="380" cy="210" r="5" fill="#3b82f6"/>
   <text x="390" y="215" fill="#f8fafc" font-size="12" font-weight="700">C</text>
-
   <circle cx="220" cy="180" r="5" fill="#3b82f6"/>
   <text x="205" y="195" fill="#f8fafc" font-size="12" font-weight="700">D</text>
-
   <!-- サイクル内部の仕事 W -->
   <rect x="175" y="125" width="110" height="24" rx="4" fill="#0f172a" stroke="#fbbf24" stroke-width="1.2"/>
   <text x="230" y="141" fill="#fbbf24" font-size="12" font-weight="700" text-anchor="middle">正味の仕事 W</text>

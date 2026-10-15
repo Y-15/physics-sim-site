@@ -47,37 +47,29 @@ description: 高校物理の幾何光学。スネルの屈折の法則、臨界�
       <path d="M0,0 L0,6 L7,3 z" fill="#38bdf8" />
     </marker>
   </defs>
-
   <!-- 上部媒質: 空気 (速い) -->
   <rect x="20" y="20" width="500" height="105" fill="rgba(30, 41, 59, 0.4)"/>
   <text x="35" y="45" fill="#38bdf8" font-size="13" font-weight="700">空気（屈折率 n₁ : 光速 c で速い）</text>
-
   <!-- 下部媒質: 水・ガラス (遅い) -->
   <rect x="20" y="125" width="500" height="105" fill="rgba(14, 116, 144, 0.25)"/>
   <text x="35" y="215" fill="#22d3ee" font-size="13" font-weight="700">水・ガラス（屈折率 n₂ > n₁ : 光速 v で遅い）</text>
-
   <!-- 境界面 -->
   <line x1="20" y1="125" x2="520" y2="125" stroke="#94a3b8" stroke-width="2"/>
   <text x="450" y="120" fill="#94a3b8" font-size="11">境界面</text>
-
   <!-- 法線 (境界面に垂直な破線) -->
   <line x1="270" y1="30" x2="270" y2="220" stroke="#64748b" stroke-width="1.5" stroke-dasharray="4,4"/>
   <text x="275" y="42" fill="#64748b" font-size="11">法線</text>
-
   <!-- 光線 (Ray) -->
   <!-- 入射角 45度: (165, 20) -> (270, 125) -->
   <line x1="165" y1="20" x2="270" y2="125" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-opt-ray)"/>
   <!-- 屈折角 約28度: (270, 125) -> (320, 220) -->
   <line x1="270" y1="125" x2="320" y2="220" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-opt-ray)"/>
-
   <!-- 入射角 θ1 の円弧 -->
   <path d="M 270,75 A 50,50 0 0,0 235,90" fill="none" stroke="#fbbf24" stroke-width="1.5"/>
   <text x="238" y="75" fill="#fbbf24" font-size="12" font-weight="700">θ₁</text>
-
   <!-- 屈折角 θ2 の円弧 -->
   <path d="M 270,175 A 50,50 0 0,1 293,169" fill="none" stroke="#fbbf24" stroke-width="1.5"/>
   <text x="282" y="190" fill="#fbbf24" font-size="12" font-weight="700">θ₂</text>
-
   <!-- 波面 / 車輪アナロジーのバー -->
   <!-- 入射側の車輪バー (進行方向に垂直: 傾き -45度) -->
   <g transform="translate(210, 65) rotate(45)">
@@ -87,7 +79,6 @@ description: 高校物理の幾何光学。スネルの屈折の法則、臨界�
     <text x="-40" y="-8" fill="#f43f5e" font-size="10">左輪</text>
     <text x="15" y="-8" fill="#38bdf8" font-size="10">右輪</text>
   </g>
-
   <!-- 境界通過中の車輪バー: 左輪が先に突入して減速！ -->
   <circle cx="250" cy="125" r="4" fill="#f43f5e"/>
   <rect x="260" y="98" width="120" height="20" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>

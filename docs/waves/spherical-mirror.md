@@ -29,43 +29,33 @@ description: 球面鏡の反射の法則、焦点距離 f = R/2 の幾何導出�
   <div class="graph-title">図1：凹面鏡における平行光線の反射と焦点距離の導出</div>
   <svg viewBox="0 0 540 260" class="vector-svg">
     <rect width="540" height="260" fill="#0f172a" rx="8"/>
-
     <!-- 光軸 -->
     <line x1="20" y1="130" x2="520" y2="130" stroke="#475569" stroke-width="1.5"/>
-
     <!-- 凹面鏡の円弧 (曲率半径 R) -->
     <path d="M 400 40 A 180 180 0 0 0 400 220" fill="none" stroke="#38bdf8" stroke-width="3"/>
-    
     <!-- 頂点 V -->
     <circle cx="400" cy="130" r="4" fill="#38bdf8"/>
     <text x="408" y="145" fill="#38bdf8" font-size="13" font-weight="bold">V (頂点)</text>
-
     <!-- 曲率中心 C (距離 R) -->
     <circle cx="220" cy="130" r="4" fill="#94a3b8"/>
     <text x="210" y="150" fill="#94a3b8" font-size="13" font-weight="bold">C (曲率中心)</text>
-
     <!-- 焦点 F (距離 f = R/2) -->
     <circle cx="310" cy="130" r="4" fill="#fbbf24"/>
     <text x="305" y="150" fill="#fbbf24" font-size="13" font-weight="bold">F (焦点)</text>
-
     <!-- 入射光線 (光軸に平行) -->
     <line x1="40" y1="70" x2="385" y2="70" stroke="#fbbf24" stroke-width="2"/>
     <polygon points="200,70 190,66 190,74" fill="#fbbf24"/>
     <text x="140" y="60" fill="#fbbf24" font-size="11">平行入射光</text>
-
     <!-- 法線 (C と反射点 P を結ぶ線) -->
     <line x1="220" y1="130" x2="385" y2="70" stroke="#94a3b8" stroke-width="1.2" stroke-dasharray="3 3"/>
     <text x="315" y="90" fill="#94a3b8" font-size="11">法線</text>
-
     <!-- 反射光線 (焦点 F を通る) -->
     <line x1="385" y1="70" x2="220" y2="200" stroke="#38bdf8" stroke-width="2"/>
     <polygon points="340,105 348,99 342,94" fill="#38bdf8"/>
     <text x="330" y="180" fill="#38bdf8" font-size="11">反射光</text>
-
     <!-- 寸法線 R と f -->
     <line x1="220" y1="210" x2="400" y2="210" stroke="#94a3b8" stroke-width="1.2"/>
     <text x="310" y="225" fill="#94a3b8" font-size="11" text-anchor="middle">曲率半径 R</text>
-
     <line x1="310" y1="185" x2="400" y2="185" stroke="#fbbf24" stroke-width="1.2"/>
     <text x="355" y="180" fill="#fbbf24" font-size="11" text-anchor="middle">f = R/2</text>
   </svg>
@@ -135,7 +125,6 @@ $$\mathbf{m = \frac{|b|}{a}}$$
   <div class="graph-title">図2：凹面鏡（上：実像、中：拡大正立虚像）と凸面鏡（下：縮小正立虚像）</div>
   <svg viewBox="0 0 540 260" class="vector-svg">
     <rect width="540" height="260" fill="#0f172a" rx="8"/>
-
     <!-- 3パターンの比較サマリー -->
     <g transform="translate(20, 25)">
       <rect width="500" height="60" fill="rgba(30, 41, 59, 0.7)" rx="6" stroke="#38bdf8" stroke-width="1.2"/>
@@ -143,14 +132,12 @@ $$\mathbf{m = \frac{|b|}{a}}$$
       <text x="15" y="45" fill="#e2e8f0" font-size="11">鏡の手前に【倒立実像】が結像（スクリーン投影可能、天体望遠鏡）</text>
       <text x="360" y="35" fill="#10b981" font-size="12" font-weight="bold">b > 0 (手前)</text>
     </g>
-
     <g transform="translate(20, 100)">
       <rect width="500" height="60" fill="rgba(30, 41, 59, 0.7)" rx="6" stroke="#fbbf24" stroke-width="1.2"/>
       <text x="15" y="25" fill="#fbbf24" font-size="13" font-weight="bold">② 凹面鏡 (a < f: 焦点の内側)</text>
       <text x="15" y="45" fill="#e2e8f0" font-size="11">鏡の奥に大きく拡大された【正立虚像】が見える（コスメ拡大鏡、歯科用ミラー）</text>
       <text x="360" y="35" fill="#a855f7" font-size="12" font-weight="bold">b < 0 (拡大虚像)</text>
     </g>
-
     <g transform="translate(20, 175)">
       <rect width="500" height="60" fill="rgba(30, 41, 59, 0.7)" rx="6" stroke="#f43f5e" stroke-width="1.2"/>
       <text x="15" y="25" fill="#f43f5e" font-size="13" font-weight="bold">③ 凸面鏡 (常に a > 0, f < 0)</text>

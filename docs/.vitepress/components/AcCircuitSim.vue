@@ -6,7 +6,7 @@
         <span class="badge">AC Circuit &amp; Resonance</span>
       </div>
       <p class="desc">
-        交流電源 $v(t) = V_0 \sin(\omega t)$ に対する抵抗 $R$・コイル $L$・コンデンサー $C$ の位相関係（フェーザー回転ベクトル）、オシロスコープ波形、インピーダンス $Z$、共振周波数 $f_0$ をリアルタイムに可視化します。
+        交流電源 <i>v</i>(<i>t</i>) = <i>V</i><sub>0</sub> sin(ω <i>t</i>) に対する抵抗 <i>R</i>・コイル <i>L</i>・コンデンサー <i>C</i> の位相関係（フェーザー回転ベクトル）、オシロスコープ波形、インピーダンス <i>Z</i>、共振周波数 <i>f</i><sub>0</sub> をリアルタイムに可視化します。
       </p>
     </div>
 
@@ -34,28 +34,28 @@
     <div class="controls-panel">
       <div class="controls-grid">
         <div class="control-group">
-          <label>電源周波数 $f$: <strong>{{ fmt(frequency, 1) }} Hz</strong></label>
+          <label>電源周波数 <i>f</i>: <strong>{{ fmt(frequency, 1) }} Hz</strong></label>
           <input type="range" v-model.number="frequency" min="10" max="200" step="2" />
-          <span class="sub-info">角周波数 $\omega = {{ fmt(omega, 1) }}\,\text{rad/s}$</span>
+          <span class="sub-info">角周波数 ω = {{ fmt(omega, 1) }} rad/<i>s</i></span>
         </div>
         <div class="control-group">
-          <label>電源電圧振幅 $V_0$: <strong>{{ V0 }} V</strong></label>
+          <label>電源電圧振幅 <i>V</i><sub>0</sub>: <strong>{{ V0 }} V</strong></label>
           <input type="range" v-model.number="V0" min="5" max="30" step="1" />
-          <span class="sub-info">実効値 $V_e = {{ fmt(V0 / Math.SQRT2, 1) }}\,\text{V}$</span>
+          <span class="sub-info">実効値 <i>V</i><sub><i>e</i></sub> = {{ fmt(V0 / Math.SQRT2, 1) }} <i>V</i></span>
         </div>
         <div class="control-group">
-          <label>抵抗 $R$: <strong>{{ R }} $\Omega$</strong></label>
+          <label>抵抗 <i>R</i>: <strong>{{ R }} Ω</strong></label>
           <input type="range" v-model.number="R" min="5" max="60" step="5" />
         </div>
         <div class="control-group">
-          <label>インダクタンス $L$: <strong>{{ fmt(L * 1000, 0) }} mH</strong></label>
+          <label>インダクタンス <i>L</i>: <strong>{{ fmt(L * 1000, 0) }} mH</strong></label>
           <input type="range" v-model.number="L" min="0.01" max="0.20" step="0.01" />
-          <span class="sub-info">誘導リアクタンス $X_L = {{ fmt(XL, 1) }}\,\Omega$</span>
+          <span class="sub-info">誘導リアクタンス <i>X</i><sub><i>L</i></sub> = {{ fmt(XL, 1) }}\,Ω</span>
         </div>
         <div class="control-group">
-          <label>静電容量 $C$: <strong>{{ fmt(C * 1e6, 0) }} $\mu\text{F}$</strong></label>
+          <label>静電容量 <i>C</i>: <strong>{{ fmt(C * 1e6, 0) }} μ<i>F</i></strong></label>
           <input type="range" v-model.number="C" min="10e-6" max="200e-6" step="5e-6" />
-          <span class="sub-info">容量リアクタンス $X_C = {{ fmt(XC, 1) }}\,\Omega$</span>
+          <span class="sub-info">容量リアクタンス <i>X</i><sub><i>C</i></sub> = {{ fmt(XC, 1) }}\,Ω</span>
         </div>
         <div class="control-group button-group">
           <button class="resonance-btn" @click="setResonance">
@@ -68,27 +68,27 @@
     <!-- ステータス値カード -->
     <div class="stats-panel">
       <div class="stat-card">
-        <span class="label">インピーダンス $Z$</span>
-        <span class="val highlight">{{ fmt(Z, 1) }} $\Omega$</span>
+        <span class="label">インピーダンス <i>Z</i></span>
+        <span class="val highlight">{{ fmt(Z, 1) }} Ω</span>
       </div>
       <div class="stat-card">
-        <span class="label">電流振幅 $I_0 = V_0 / Z$</span>
+        <span class="label">電流振幅 <i>I</i><sub>0</sub> = <i>V</i><sub>0</sub> / <i>Z</i></span>
         <span class="val highlight-alt">{{ fmt(I0, 3) }} A</span>
       </div>
       <div class="stat-card">
-        <span class="label">位相差 $\phi$ (電圧に対する電流の遅れ)</span>
+        <span class="label">位相差 φ (電圧に対する電流の遅れ)</span>
         <span class="val">{{ fmt(phaseDeg, 1) }}°</span>
       </div>
       <div class="stat-card">
-        <span class="label">共振周波数 $f_0 = 1/(2\pi\sqrt{LC})$</span>
+        <span class="label">共振周波数 <i>f</i><sub>0</sub> = 1/(2π√(LC))</span>
         <span class="val highlight">{{ fmt(f0, 1) }} Hz</span>
       </div>
       <div class="stat-card">
-        <span class="label">力率 $\cos\phi = R / Z$</span>
+        <span class="label">力率 cosφ = <i>R</i> / <i>Z</i></span>
         <span class="val">{{ fmt(powerFactor, 3) }}</span>
       </div>
       <div class="stat-card">
-        <span class="label">消費電力 $P = V_e I_e \cos\phi$</span>
+        <span class="label">消費電力 <i>P</i> = <i>V</i><sub><i>e</i></sub> <i>I</i><sub><i>e</i></sub> cosφ</span>
         <span class="val">{{ fmt(power, 2) }} W</span>
       </div>
     </div>

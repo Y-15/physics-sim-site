@@ -5,7 +5,7 @@
         <span class="icon">🧪</span>
         <h3>気体の混合・可動ピストンのつり合いシミュレーター</h3>
       </div>
-      <p class="subtitle">断熱容器内での気体混合（内部エネルギー保存則とドルトンの分圧則）および可動ピストンで仕切られた2気体の力学的つり合い（$P_A = P_B$）をリアルタイムに体験できます。</p>
+      <p class="subtitle">断熱容器内での気体混合（内部エネルギー保存則とドルトンの分圧則）および可動ピストンで仕切られた2気体の力学的つり合い（<i>P</i><sub><i>A</i></sub> = <i>P</i><sub><i>B</i></sub>）をリアルタイムに体験できます。</p>
     </div>
 
     <div class="canvas-wrapper">
@@ -34,21 +34,21 @@
 
         <div class="control-group">
           <label>
-            <span>気体A 温度 $T_A$: <strong>{{ TA }} K</strong></span>
+            <span>気体A 温度 <i>T</i><sub><i>A</i></sub>: <strong>{{ TA }} K</strong></span>
             <input type="range" v-model.number="TA" min="200" max="600" step="20" @input="updatePhysics" />
           </label>
         </div>
 
         <div class="control-group">
           <label>
-            <span>気体B 温度 $T_B$: <strong>{{ TB }} K</strong></span>
+            <span>気体B 温度 <i>T</i><sub><i>B</i></sub>: <strong>{{ TB }} K</strong></span>
             <input type="range" v-model.number="TB" min="200" max="600" step="20" @input="updatePhysics" />
           </label>
         </div>
 
         <div class="control-group">
           <label>
-            <span>物質量比 $n_A : n_B$: <strong>{{ nA.toFixed(1) }} : {{ nB.toFixed(1) }} mol</strong></span>
+            <span>物質量比 <i>n</i><sub><i>A</i></sub> : <i>n</i><sub><i>B</i></sub>: <strong>{{ nA.toFixed(1) }} : {{ nB.toFixed(1) }} mol</strong></span>
             <input type="range" v-model.number="nA" min="0.5" max="3.0" step="0.5" @input="updatePhysics" />
           </label>
         </div>
@@ -84,13 +84,13 @@
       </div>
 
       <div class="stat-card">
-        <span class="label">内部エネルギー総和 $U$</span>
+        <span class="label">内部エネルギー総和 <i>U</i></span>
         <span class="value">{{ (totalU / 1000).toFixed(2) }} <span class="unit">kJ</span></span>
         <span class="subtext">断熱系により完全保存！</span>
       </div>
 
       <div class="stat-card">
-        <span class="label">体積比 $V_A : V_B$</span>
+        <span class="label">体積比 <i>V</i><sub><i>A</i></sub> : <i>V</i><sub><i>B</i></sub></span>
         <span class="value">{{ VA_ratio.toFixed(1) }} : {{ (10 - VA_ratio).toFixed(1) }}</span>
         <span class="subtext">全容積 V = 10.0 L</span>
       </div>

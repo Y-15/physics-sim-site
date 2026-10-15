@@ -305,15 +305,15 @@ onUnmounted(() => {
     <div class="controls-panel">
       <div class="control-row">
         <div class="control-group">
-          <label>磁束密度 $B$: <span>{{ magneticField.toFixed(2) }} T</span></label>
+          <label>磁束密度 <i>B</i>: <span>{{ magneticField.toFixed(2) }} T</span></label>
           <input type="range" v-model.number="magneticField" min="0.4" max="2.0" step="0.1" @input="resetSim" />
         </div>
         <div class="control-group">
-          <label>加速電圧 $V$: <span>{{ voltage }} kV</span></label>
+          <label>加速電圧 <i>V</i>: <span>{{ voltage }} kV</span></label>
           <input type="range" v-model.number="voltage" min="20" max="100" step="5" @input="resetSim" />
         </div>
         <div class="control-group">
-          <label>ディー半径 $R$: <span>{{ deeRadius }} px</span></label>
+          <label>ディー半径 <i>R</i>: <span>{{ deeRadius }} px</span></label>
           <input type="range" v-model.number="deeRadius" min="100" max="180" step="5" @input="resetSim" />
         </div>
       </div>
@@ -347,7 +347,7 @@ onUnmounted(() => {
     </div>
 
     <div class="cyclotron-note">
-      💡 <strong>等時性の驚異</strong>：電極内での円運動周期 $T = \frac{2\pi m}{qB}$ は速度 $v$ に依存しません。速くなるほど半径 $r = \frac{mv}{qB}$ が比例して広がるため、半周する時間は常に一定です。これにより、一定周波数の交流電源で完璧に同期加速できます。
+      💡 <strong>等時性の驚異</strong>：電極内での円運動周期 <i>T</i> = (2π <i>m</i> / qB) は速度 <i>v</i> に依存しません。速くなるほど半径 <i>r</i> = (mv / qB) が比例して広がるため、半周する時間は常に一定です。これにより、一定周波数の交流電源で完璧に同期加速できます。
     </div>
   </div>
 </template>
