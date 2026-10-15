@@ -76,7 +76,8 @@ export default defineConfig({
             { text: '🧱 剛体の転倒条件と滑り出し限界', link: '/mechanics/toppling' },
             { text: '🌊 浮力とアルキメデスの原理・水圧', link: '/mechanics/buoyancy' },
             { text: '⚖️ 2体問題・重心運動と相対運動', link: '/mechanics/two-body' },
-            { text: '🪂 空気抵抗と終端速度', link: '/mechanics/terminal-velocity' }
+            { text: '🪂 空気抵抗と終端速度', link: '/mechanics/terminal-velocity' },
+            { text: '🎢 鉛直面内の円運動と宙返り・軌道離脱', link: '/mechanics/vertical-loop' }
           ]
         }
       ],
@@ -91,7 +92,8 @@ export default defineConfig({
             { text: '🔍 光の屈折・全反射とレンズの結像公式', link: '/waves/optics' },
             { text: '✨ 薄膜干渉とニュートンリング', link: '/waves/thin-film' },
             { text: '📢 気柱の共鳴と開口端補正', link: '/waves/resonance' },
-            { text: '🌈 回折格子とスペクトル分析', link: '/waves/diffraction-grating' }
+            { text: '🌈 回折格子とスペクトル分析', link: '/waves/diffraction-grating' },
+            { text: '🌊 2波源の波の干渉と双曲線縞', link: '/waves/interference-2d' }
           ]
         }
       ],
@@ -108,7 +110,8 @@ export default defineConfig({
             { text: '🧲 電流がつくる磁場とアンペールの法則', link: '/electromagnetism/magnetic-field' },
             { text: '〰️ 交流回路とRLC直列回路・共振', link: '/electromagnetism/ac-circuit' },
             { text: '⚡ LC振動回路と電磁振動', link: '/electromagnetism/lc-oscillation' },
-            { text: '🧲 ホール効果とキャリア判定', link: '/electromagnetism/hall-effect' }
+            { text: '🧲 ホール効果とキャリア判定', link: '/electromagnetism/hall-effect' },
+            { text: '⚡ サイクロトロン（粒子加速器）とローレンツ力', link: '/electromagnetism/cyclotron' }
           ]
         }
       ],
@@ -121,7 +124,8 @@ export default defineConfig({
             { text: '🔬 気体分子運動論と二乗平均速度', link: '/thermodynamics/kinetic-theory' },
             { text: '🔥 カルノーサイクルと熱機関の熱効率', link: '/thermodynamics/carnot' },
             { text: '🔥 モル比熱とマイヤーの式・断熱変化', link: '/thermodynamics/heat-capacity' },
-            { text: '🧪 気体の混合と可動ピストン', link: '/thermodynamics/gas-mixing' }
+            { text: '🧪 気体の混合と可動ピストン', link: '/thermodynamics/gas-mixing' },
+            { text: '🌡️ 水銀柱と大気圧・トリチェリの真空', link: '/thermodynamics/torricelli' }
           ]
         }
       ],
@@ -136,7 +140,8 @@ export default defineConfig({
             { text: '⚛️ コンプトン効果と光子の運動量', link: '/atomic/compton' },
             { text: '⚛️ 核反応・質量欠損と結合エネルギー', link: '/atomic/nuclear' },
             { text: '⚛️ 物質波（ド・ブロイ波）と電子線回折', link: '/atomic/matter-wave' },
-            { text: '⚡ X線の発生とX線スペクトル', link: '/atomic/xray' }
+            { text: '⚡ X線の発生とX線スペクトル', link: '/atomic/xray' },
+            { text: '☢️ 放射平衡と壊変系列（過渡平衡・永続平衡）', link: '/atomic/equilibrium' }
           ]
         }
       ]
