@@ -14,17 +14,18 @@ let animationId = null
 let audioCtx = null
 let masterGain = null
 
-// アニメーション進行管理（映画的シークエンス + 落ち着いた余韻・アンビエントモード）
+// アニメーション進行管理（映画的シークエンス + 完成後1.8秒間の安定静止表示HOLD）
 const simTime = ref(0)
-const initDuration = 3.6 // 宇宙創生からタイトル完成まで
-const totalMaxDuration = 7.8 // ゆったり鑑賞できる十分な余韻時間（合計約7.8秒）
+const animDuration = 3.6 // 宇宙創生からタイトル・原子完全完成まで
+const holdDuration = 1.8 // 再生後に完成画面をそのまま安定表示する静止余韻時間（1〜2秒間）
+const totalMaxDuration = animDuration + holdDuration // 合計5.4秒でシネマティック着地
 const currentPhase = ref(0)
 const phaseCaption = ref('SINGULARITY // QUANTUM VACUUM FLUCTUATION')
 
-// タイトルが立ち上がったら「実験室へ入る」ボタンを優美に表示
+// タイトル完成（3.4s〜）で「実験室へ入る」ボタンを表示し、完成静止モードへ
 const isReadyToEnter = computed(() => simTime.value >= 3.4)
-// 初期チャージ進行度（0%〜100%）
-const progressPercent = computed(() => Math.min(100, Math.floor((simTime.value / initDuration) * 100)))
+// 初期アニメーション進行度（0%〜100%）
+const progressPercent = computed(() => Math.min(100, Math.floor((simTime.value / animDuration) * 100)))
 
 // マウスインタラクション（重力レンズ効果）
 const mouse = {
@@ -290,56 +291,113 @@ function drawSpacetimeGrid(ctx, w, h, t, cx, cy, phase) {
   ctx.restore()
 }
 
-// ブラックホール特異点・降着円盤（Phase 0）
+// 1. ブラックホール特異点・相対論的降着円盤（Phase 0）
 function drawSingularity(ctx, cx, cy, t) {
   ctx.save()
 
-  // 1. 光子球（Photon Sphere: 光のリング）
-  const ringR = 60 + Math.sin(t * 8) * 3
-  const grad = ctx.createRadialGradient(cx, cy, 30, cx, cy, ringR + 30)
-  grad.addColorStop(0, 'rgba(0, 0, 0, 1)')
-  grad.addColorStop(0.35, 'rgba(56, 189, 248, 0.9)')
-  grad.addColorStop(0.6, 'rgba(236, 72, 153, 0.6)')
+  // 1-1. 重力レンズ光条・光子球（Photon Sphere: 光が円軌道を周回する境界）
+  const ringR = 64 + Math.sin(t * 9) * 2.5
+  const grad = ctx.createRadialGradient(cx, cy, 28, cx, cy, ringR + 45)
+  grad.addColorStop(0, '#000000')
+  grad.addColorStop(0.32, 'rgba(56, 189, 248, 0.95)')
+  grad.addColorStop(0.55, 'rgba(236, 72, 153, 0.65)')
+  grad.addColorStop(0.85, 'rgba(251, 191, 36, 0.35)')
   grad.addColorStop(1, 'rgba(3, 7, 18, 0)')
 
   ctx.fillStyle = grad
   ctx.beginPath()
-  ctx.arc(cx, cy, ringR + 35, 0, Math.PI * 2)
+  ctx.arc(cx, cy, ringR + 50, 0, Math.PI * 2)
   ctx.fill()
 
-  // 2. 降着円盤（高速回転する極薄の高温プラズマガス）
+  // 1-2. 相対論的降着円盤（ドップラー増光: 観測者に近づく左側が青白く、遠ざかる右側が赤く減光）
+  const diskRot = t * 1.5
   ctx.save()
   ctx.translate(cx, cy)
-  ctx.rotate(0.35)
-  ctx.scale(1, 0.3)
-  ctx.beginPath()
-  ctx.arc(0, 0, 150, 0, Math.PI * 2)
-  ctx.strokeStyle = 'rgba(56, 189, 248, 0.75)'
-  ctx.lineWidth = 14
-  ctx.shadowColor = '#38bdf8'
-  ctx.shadowBlur = 24
-  ctx.stroke()
+  ctx.rotate(0.38)
+  ctx.scale(1, 0.28)
+
+  // 円盤外縁部
+  const diskGrad = ctx.createLinearGradient(-190, 0, 190, 0)
+  diskGrad.addColorStop(0, 'rgba(125, 211, 252, 0.95)') // 青方偏移・ドップラー増光
+  diskGrad.addColorStop(0.45, 'rgba(56, 189, 248, 0.85)')
+  diskGrad.addColorStop(0.7, 'rgba(251, 191, 36, 0.7)')
+  diskGrad.addColorStop(1, 'rgba(244, 63, 94, 0.35)')  // 赤方偏移・減光
 
   ctx.beginPath()
-  ctx.arc(0, 0, 130, 0, Math.PI * 2)
-  ctx.strokeStyle = 'rgba(251, 191, 36, 0.85)'
-  ctx.lineWidth = 6
+  ctx.arc(0, 0, 165, 0, Math.PI * 2)
+  ctx.strokeStyle = diskGrad
+  ctx.lineWidth = 18
+  ctx.shadowColor = '#38bdf8'
+  ctx.shadowBlur = 28
+  ctx.stroke()
+
+  // 円盤内縁超高温リング
+  ctx.beginPath()
+  ctx.arc(0, 0, 135, 0, Math.PI * 2)
+  ctx.strokeStyle = 'rgba(255, 255, 255, 0.9)'
+  ctx.lineWidth = 5
+  ctx.shadowColor = '#ffffff'
+  ctx.shadowBlur = 16
   ctx.stroke()
   ctx.restore()
 
-  // 3. 事象の地平面（Event Horizon: 完全な漆黒の特異点球）
+  // 1-3. 事象の地平面（Event Horizon: 完全な漆黒の特異点）
   ctx.beginPath()
-  ctx.arc(cx, cy, 38, 0, Math.PI * 2)
+  ctx.arc(cx, cy, 36, 0, Math.PI * 2)
   ctx.fillStyle = '#000000'
   ctx.fill()
-  ctx.strokeStyle = 'rgba(255, 255, 255, 0.65)'
+  ctx.strokeStyle = 'rgba(255, 255, 255, 0.75)'
   ctx.lineWidth = 1.5
+  ctx.shadowColor = '#38bdf8'
+  ctx.shadowBlur = 10
   ctx.stroke()
 
   ctx.restore()
 }
 
-// 相対論的衝撃波リング
+// 2. ビッグバン・エネルギー放射光芒（Phase 1: 1.0s〜2.0s）
+function drawBigBangRays(ctx, w, h, t, cx, cy) {
+  if (t < 0.9 || t > 2.2) return
+  ctx.save()
+  const elapsed = t - 0.9
+  const alpha = Math.max(0, 1 - elapsed / 1.2)
+
+  // 画面全体の一瞬のエネルギーパルス
+  if (elapsed < 0.35) {
+    const flashAlpha = (1 - elapsed / 0.35) * 0.22
+    ctx.fillStyle = `rgba(56, 189, 248, ${flashAlpha})`
+    ctx.fillRect(0, 0, w, h)
+  }
+
+  // 中心から全方位への高エネルギー放射光条（32本）
+  const rayCount = 32
+  const maxRayLen = Math.max(w, h) * 0.75 * Math.min(1, elapsed * 2.5)
+  ctx.lineWidth = 2.0
+  ctx.shadowBlur = 12
+
+  for (let i = 0; i < rayCount; i++) {
+    const angle = (i * Math.PI * 2) / rayCount + t * 0.4
+    const rayLen = maxRayLen * (0.6 + ((i % 4) * 0.15))
+    const ex = cx + Math.cos(angle) * rayLen
+    const ey = cy + Math.sin(angle) * rayLen
+
+    const grad = ctx.createLinearGradient(cx, cy, ex, ey)
+    const rayColor = i % 2 === 0 ? '56, 189, 248' : '251, 191, 36'
+    grad.addColorStop(0, `rgba(255, 255, 255, ${alpha * 0.9})`)
+    grad.addColorStop(0.3, `rgba(${rayColor}, ${alpha * 0.6})`)
+    grad.addColorStop(1, `rgba(${rayColor}, 0)`)
+
+    ctx.strokeStyle = grad
+    ctx.beginPath()
+    ctx.moveTo(cx, cy)
+    ctx.lineTo(ex, ey)
+    ctx.stroke()
+  }
+
+  ctx.restore()
+}
+
+// 3. 相対論的衝撃波リング
 function drawShockwaves(ctx, dt) {
   for (let i = shockwaves.length - 1; i >= 0; i--) {
     const sw = shockwaves[i]
@@ -363,51 +421,98 @@ function drawShockwaves(ctx, dt) {
   }
 }
 
-// 3次元マクスウェル電磁波（Phase 1〜2）
+// 4. 3次元マクスウェル電磁波（Phase 1〜2: 直交する電場Eと磁場Bの進行波）
 function drawMaxwellWaves(ctx, w, h, t) {
   ctx.save()
-  const waveY = h * 0.5
-  const waveLen = 220
+  const waveY = h * 0.48
+  const waveLen = 240
   const k = (Math.PI * 2) / waveLen
-  const omega = 7.5
+  const omega = 7.0
 
-  ctx.lineWidth = 2.5
-  // 電場 E (鉛直振動: 青)
+  // 進行波の基底中心軸
   ctx.beginPath()
-  for (let x = 0; x < w; x += 6) {
-    const y = waveY - Math.sin(k * x - omega * t) * 45
+  ctx.moveTo(0, waveY)
+  ctx.lineTo(w, waveY)
+  ctx.strokeStyle = 'rgba(255, 255, 255, 0.12)'
+  ctx.lineWidth = 1
+  ctx.setLineDash([6, 6])
+  ctx.stroke()
+  ctx.setLineDash([])
+
+  // 電場 E (鉛直振動: シアン)
+  ctx.beginPath()
+  for (let x = 0; x <= w; x += 6) {
+    const y = waveY - Math.sin(k * x - omega * t) * 48
     if (x === 0) ctx.moveTo(x, y)
     else ctx.lineTo(x, y)
   }
-  ctx.strokeStyle = 'rgba(56, 189, 248, 0.75)'
+  ctx.strokeStyle = 'rgba(56, 189, 248, 0.85)'
+  ctx.lineWidth = 2.5
   ctx.shadowColor = '#38bdf8'
-  ctx.shadowBlur = 10
+  ctx.shadowBlur = 12
   ctx.stroke()
 
-  // 磁場 B (奥行き傾斜振動: ピンク/オレンジ)
+  // 磁場 B (奥行き直交傾斜振動: マゼンタ/ローズ)
   ctx.beginPath()
-  for (let x = 0; x < w; x += 6) {
-    const slant = Math.sin(k * x - omega * t) * 35
-    const y = waveY + slant * 0.4
-    const drawX = x + slant * 0.8
+  for (let x = 0; x <= w; x += 6) {
+    const slant = Math.sin(k * x - omega * t) * 38
+    const y = waveY + slant * 0.42
+    const drawX = x + slant * 0.85
     if (x === 0) ctx.moveTo(drawX, y)
     else ctx.lineTo(drawX, y)
   }
-  ctx.strokeStyle = 'rgba(244, 63, 94, 0.7)'
+  ctx.strokeStyle = 'rgba(244, 63, 94, 0.8)'
+  ctx.lineWidth = 2.2
   ctx.shadowColor = '#f43f5e'
-  ctx.shadowBlur = 10
+  ctx.shadowBlur = 12
   ctx.stroke()
+
+  // 各ピークでの直交ベクトル矢印描画（物理学的可視化）
+  const step = 60
+  for (let x = step / 2; x < w; x += step) {
+    const eVal = Math.sin(k * x - omega * t)
+    const ey = waveY - eVal * 48
+    // Eベクトル (鉛直)
+    ctx.beginPath()
+    ctx.moveTo(x, waveY)
+    ctx.lineTo(x, ey)
+    ctx.strokeStyle = 'rgba(56, 189, 248, 0.45)'
+    ctx.lineWidth = 1.2
+    ctx.stroke()
+
+    // Bベクトル (直交傾斜)
+    const bx = x + eVal * 38 * 0.85
+    const by = waveY + eVal * 38 * 0.42
+    ctx.beginPath()
+    ctx.moveTo(x, waveY)
+    ctx.lineTo(bx, by)
+    ctx.strokeStyle = 'rgba(244, 63, 94, 0.45)'
+    ctx.lineWidth = 1.2
+    ctx.stroke()
+  }
 
   ctx.restore()
 }
 
-// ケプラー楕円軌道（Phase 2: 惑星運動と面積速度一定）
+// 5. ケプラー楕円軌道（Phase 2: 面積速度一定と惑星運動）
 function drawKeplerOrbits(ctx, cx, cy, t) {
   ctx.save()
 
-  // 中心主星（太陽）
+  // 中心主星（太陽: コロナ発光）
+  const sunR = 14 + Math.sin(t * 6) * 1.5
+  const sunGrad = ctx.createRadialGradient(cx - 20, cy, 4, cx - 20, cy, sunR + 18)
+  sunGrad.addColorStop(0, '#ffffff')
+  sunGrad.addColorStop(0.35, '#fbbf24')
+  sunGrad.addColorStop(0.8, 'rgba(245, 158, 11, 0.4)')
+  sunGrad.addColorStop(1, 'rgba(245, 158, 11, 0)')
+
+  ctx.fillStyle = sunGrad
   ctx.beginPath()
-  ctx.arc(cx - 20, cy, 14, 0, Math.PI * 2)
+  ctx.arc(cx - 20, cy, sunR + 18, 0, Math.PI * 2)
+  ctx.fill()
+
+  ctx.beginPath()
+  ctx.arc(cx - 20, cy, sunR, 0, Math.PI * 2)
   ctx.fillStyle = '#fbbf24'
   ctx.shadowColor = '#f59e0b'
   ctx.shadowBlur = 24
@@ -418,7 +523,7 @@ function drawKeplerOrbits(ctx, cx, cy, t) {
     // 楕円軌道線
     ctx.beginPath()
     ctx.ellipse(cx, cy, p.a, p.b, 0, 0, Math.PI * 2)
-    ctx.strokeStyle = 'rgba(255, 255, 255, 0.12)'
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.14)'
     ctx.lineWidth = 1.2
     ctx.setLineDash([4, 4])
     ctx.stroke()
@@ -433,8 +538,8 @@ function drawKeplerOrbits(ctx, cx, cy, t) {
     ctx.beginPath()
     ctx.moveTo(cx - 20, cy)
     ctx.lineTo(px, py)
-    ctx.strokeStyle = `${p.color}40`
-    ctx.lineWidth = 1
+    ctx.strokeStyle = `${p.color}50`
+    ctx.lineWidth = 1.2
     ctx.stroke()
 
     // 惑星本体
@@ -442,24 +547,26 @@ function drawKeplerOrbits(ctx, cx, cy, t) {
     ctx.arc(px, py, p.size, 0, Math.PI * 2)
     ctx.fillStyle = p.color
     ctx.shadowColor = p.color
-    ctx.shadowBlur = 14
+    ctx.shadowBlur = 16
     ctx.fill()
 
     // 速度ベクトル
-    const vx = -Math.sin(meanAnomaly) * 22
-    const vy = Math.cos(meanAnomaly) * 14
+    const vx = -Math.sin(meanAnomaly) * 24
+    const vy = Math.cos(meanAnomaly) * 15
     ctx.beginPath()
     ctx.moveTo(px, py)
     ctx.lineTo(px + vx, py + vy)
     ctx.strokeStyle = '#34d399'
     ctx.lineWidth = 2
+    ctx.shadowColor = '#34d399'
+    ctx.shadowBlur = 8
     ctx.stroke()
   })
 
   ctx.restore()
 }
 
-// 物理公式ホログラムカード
+// 6. 物理公式ホログラムカード
 function drawFormulas(ctx, w, h, t) {
   ctx.save()
   formulas.forEach((item) => {
@@ -476,8 +583,8 @@ function drawFormulas(ctx, w, h, t) {
 
     // ホログラムカード枠
     const cardW = 210, cardH = 50
-    ctx.fillStyle = `rgba(15, 23, 42, ${Math.min(0.9, alpha * 0.88)})`
-    ctx.strokeStyle = `rgba(56, 189, 248, ${alpha * 0.7})`
+    ctx.fillStyle = `rgba(15, 23, 42, ${Math.min(0.92, alpha * 0.88)})`
+    ctx.strokeStyle = `rgba(56, 189, 248, ${alpha * 0.75})`
     ctx.lineWidth = 1.2
     ctx.beginPath()
     if (typeof ctx.roundRect === 'function') {
@@ -488,18 +595,22 @@ function drawFormulas(ctx, w, h, t) {
     ctx.fill()
     ctx.stroke()
 
-    // コーナー照準マーカー
-    ctx.strokeStyle = `rgba(56, 189, 248, ${alpha * 0.9})`
-    ctx.lineWidth = 1.8
+    // コーナー照準マーカー（SF映画HUD仕様）
+    ctx.strokeStyle = `rgba(56, 189, 248, ${alpha * 0.95})`
+    ctx.lineWidth = 2.0
     const mLen = 6
     // 左上
     ctx.beginPath(); ctx.moveTo(-cardW / 2, -cardH / 2 + mLen); ctx.lineTo(-cardW / 2, -cardH / 2); ctx.lineTo(-cardW / 2 + mLen, -cardH / 2); ctx.stroke()
     // 右上
     ctx.beginPath(); ctx.moveTo(cardW / 2 - mLen, -cardH / 2); ctx.lineTo(cardW / 2, -cardH / 2); ctx.lineTo(cardW / 2, -cardH / 2 + mLen); ctx.stroke()
+    // 左下
+    ctx.beginPath(); ctx.moveTo(-cardW / 2, cardH / 2 - mLen); ctx.lineTo(-cardW / 2, cardH / 2); ctx.lineTo(-cardW / 2 + mLen, cardH / 2); ctx.stroke()
+    // 右下
+    ctx.beginPath(); ctx.moveTo(cardW / 2 - mLen, cardH / 2); ctx.lineTo(cardW / 2, cardH / 2); ctx.lineTo(cardW / 2, cardH / 2 - mLen); ctx.stroke()
 
     // 公式テキスト
     ctx.font = `700 ${item.size}px "Outfit", "Fira Code", monospace`
-    ctx.fillStyle = `rgba(241, 245, 249, ${alpha})`
+    ctx.fillStyle = `rgba(248, 250, 252, ${alpha})`
     ctx.shadowColor = '#38bdf8'
     ctx.shadowBlur = 10
     ctx.textAlign = 'center'
@@ -516,52 +627,81 @@ function drawFormulas(ctx, w, h, t) {
   ctx.restore()
 }
 
-// ラボタイトル・ロゴ（Phase 3 & 4）
+// 7. ラボタイトル・ボーア水素原子模型（Phase 3 & 4）
 function drawLabTitle(ctx, cx, cy, t, phase, w) {
-  if (t < 2.7) return
+  if (t < 2.6) return
   ctx.save()
 
-  const elapsed = t - 2.7
-  const alpha = Math.min(1, elapsed * 2.5)
+  const elapsed = t - 2.6
+  const alpha = Math.min(1, elapsed * 2.2)
 
-  // 1. ボーアの水素原子模型（3重交差楕円軌道）
-  const ringR = 90
-  ctx.lineWidth = 2
+  // 7-1. ボーアの水素原子模型（3重交差楕円軌道 + 周回電子）
+  const ringR = 94
+  ctx.lineWidth = 2.0
+  const electronSpeeds = [3.2, -2.6, 2.0]
+
   for (let rot = 0; rot < 3; rot++) {
     ctx.save()
     ctx.translate(cx, cy - 45)
-    ctx.rotate((rot * Math.PI) / 3 + t * 1.2)
+    ctx.rotate((rot * Math.PI) / 3 + t * 0.8)
+
+    // 軌道リング
     ctx.beginPath()
     ctx.ellipse(0, 0, ringR, ringR * 0.38, 0, 0, Math.PI * 2)
     ctx.strokeStyle = `rgba(56, 189, 248, ${alpha * 0.85})`
     ctx.shadowColor = '#38bdf8'
-    ctx.shadowBlur = 16
+    ctx.shadowBlur = 18
     ctx.stroke()
+
+    // 高速周回する量子電子（クォンタムドット）
+    const eAngle = t * electronSpeeds[rot]
+    const ex = Math.cos(eAngle) * ringR
+    const ey = Math.sin(eAngle) * (ringR * 0.38)
+
+    ctx.beginPath()
+    ctx.arc(ex, ey, 3.8, 0, Math.PI * 2)
+    ctx.fillStyle = '#ffffff'
+    ctx.shadowColor = '#38bdf8'
+    ctx.shadowBlur = 14
+    ctx.fill()
+
     ctx.restore()
   }
 
-  // 2. 原子の中心核
+  // 7-2. 原子の中心核（高エネルギー陽子・中性子コア）
+  const corePulse = 16 + Math.sin(t * 8) * 2.5
+  const coreGrad = ctx.createRadialGradient(cx, cy - 45, 4, cx, cy - 45, corePulse + 18)
+  coreGrad.addColorStop(0, '#ffffff')
+  coreGrad.addColorStop(0.4, 'rgba(56, 189, 248, 0.95)')
+  coreGrad.addColorStop(0.8, 'rgba(129, 140, 248, 0.4)')
+  coreGrad.addColorStop(1, 'rgba(56, 189, 248, 0)')
+
+  ctx.fillStyle = coreGrad
   ctx.beginPath()
-  ctx.arc(cx, cy - 45, 16 + Math.sin(t * 8) * 2, 0, Math.PI * 2)
-  ctx.fillStyle = `rgba(255, 255, 255, ${alpha})`
-  ctx.shadowColor = '#38bdf8'
-  ctx.shadowBlur = 25
+  ctx.arc(cx, cy - 45, corePulse + 18, 0, Math.PI * 2)
   ctx.fill()
 
-  // 3. タイトル背景バックライト
-  const bgGrad = ctx.createRadialGradient(cx, cy + 90, 20, cx, cy + 90, 300)
-  bgGrad.addColorStop(0, `rgba(3, 7, 18, ${alpha * 0.9})`)
+  ctx.beginPath()
+  ctx.arc(cx, cy - 45, corePulse, 0, Math.PI * 2)
+  ctx.fillStyle = '#ffffff'
+  ctx.shadowColor = '#38bdf8'
+  ctx.shadowBlur = 24
+  ctx.fill()
+
+  // 7-3. タイトル背景バックライト
+  const bgGrad = ctx.createRadialGradient(cx, cy + 90, 20, cx, cy + 90, 320)
+  bgGrad.addColorStop(0, `rgba(3, 7, 18, ${alpha * 0.92})`)
   bgGrad.addColorStop(1, 'rgba(3, 7, 18, 0)')
   ctx.fillStyle = bgGrad
-  ctx.fillRect(cx - 360, cy + 30, 720, 160)
+  ctx.fillRect(cx - 380, cy + 30, 760, 160)
 
-  // 4. メインタイトル
+  // 7-4. メインタイトル
   ctx.textAlign = 'center'
   const fontSize = Math.min(38, Math.max(26, w * 0.045))
   ctx.font = `900 ${fontSize}px "Outfit", "Inter", sans-serif`
   ctx.fillStyle = `rgba(255, 255, 255, ${alpha})`
   ctx.shadowColor = '#38bdf8'
-  ctx.shadowBlur = 22
+  ctx.shadowBlur = 24
   ctx.fillText('高校物理シミュレーションラボ', cx, cy + 85)
 
   // サブタイトル
@@ -578,10 +718,10 @@ function drawLabTitle(ctx, cx, cy, t, phase, w) {
 
   // 水平アナモルフィック・レンズフレア光芒
   ctx.save()
-  const flareW = Math.min(w * 0.85, 750) * Math.min(1, elapsed * 1.5)
+  const flareW = Math.min(w * 0.85, 750) * Math.min(1, elapsed * 1.6)
   const flareGrad = ctx.createLinearGradient(cx - flareW / 2, cy + 85, cx + flareW / 2, cy + 85)
   flareGrad.addColorStop(0, 'rgba(56, 189, 248, 0)')
-  flareGrad.addColorStop(0.5, `rgba(255, 255, 255, ${alpha * 0.75})`)
+  flareGrad.addColorStop(0.5, `rgba(255, 255, 255, ${alpha * 0.8})`)
   flareGrad.addColorStop(1, 'rgba(56, 189, 248, 0)')
   ctx.fillStyle = flareGrad
   ctx.fillRect(cx - flareW / 2, cy + 83, flareW, 3)
@@ -621,10 +761,10 @@ function animate(timestamp) {
   const cy = h / 2
 
   // タイムラインとフェーズ自動更新
-  if (t < 0.8) {
+  if (t < 0.9) {
     currentPhase.value = 0
     phaseCaption.value = 'T = 0.000s | SINGULARITY // QUANTUM VACUUM FLUCTUATION'
-  } else if (t < 1.8) {
+  } else if (t < 1.9) {
     currentPhase.value = 1
     phaseCaption.value = 'T = 10⁻³²s | BIG BANG // RELATIVISTIC INFLATION & EM FIELDS'
     if (!bigBangTriggered && fixedTimeParam === null) {
@@ -634,10 +774,10 @@ function animate(timestamp) {
       shockwaves.push({ x: cx, y: cy, radius: 2, speed: 850, alpha: 0.9, color: '#fbbf24', width: 3.5 })
       shockwaves.push({ x: cx, y: cy, radius: 1, speed: 500, alpha: 0.85, color: '#f43f5e', width: 2.5 })
     }
-  } else if (t < 2.8) {
+  } else if (t < 2.9) {
     currentPhase.value = 2
     phaseCaption.value = 'T = 3.8×10⁵ yr | ORDER EMERGENCE // KEPLERIAN GRAVITATIONAL BALLET'
-  } else if (t < initDuration) {
+  } else if (t < animDuration) {
     currentPhase.value = 3
     phaseCaption.value = 'T = 13.8 Gyr | ATOMIC EMERGENCE // LABORATORY HARMONY'
     if (!chimeTriggered && fixedTimeParam === null) {
@@ -645,10 +785,11 @@ function animate(timestamp) {
       playChimeSound()
     }
   } else if (t < totalMaxDuration) {
+    // Phase 4: アニメーション再生後、完成画面をそのまま 1.8秒間（1〜2秒間）静止・安定表示するHOLD状態
     currentPhase.value = 4
     phaseCaption.value = 'SYSTEM READY // ALL LAWS SYNCHRONIZED [CLICK TO ENTER]'
   } else {
-    // 7.8秒経過（十分な余韻時間）で自動的に優雅なロングフェードアウト
+    // 5.4秒経過（アニメーション3.6秒 + 静止HOLD 1.8秒）で自動的に優雅なロングフェードアウト
     finishIntro()
     return
   }
@@ -668,17 +809,22 @@ function animate(timestamp) {
       drawSingularity(ctx, cx, cy, t)
     }
 
-    // 3. マクスウェル電磁波（Phase 1〜2）
+    // 3. ビッグバン放射光芒（Phase 1）
+    if (currentPhase.value === 1) {
+      drawBigBangRays(ctx, w, h, t, cx, cy)
+    }
+
+    // 4. マクスウェル電磁波（Phase 1〜2）
     if (currentPhase.value === 1 || currentPhase.value === 2) {
       drawMaxwellWaves(ctx, w, h, t)
     }
 
-    // 4. ケプラー惑星軌道（Phase 2）
+    // 5. ケプラー惑星軌道（Phase 2）
     if (currentPhase.value === 2) {
       drawKeplerOrbits(ctx, cx, cy, t)
     }
 
-    // 5. 粒子シミュレーション更新と描画
+    // 6. 粒子シミュレーション更新と描画
     ctx.save()
     ctx.globalCompositeOperation = 'lighter'
     const stepDt = fixedTimeParam !== null ? 0.016 : Math.min(0.033, 1 / 60)
@@ -688,15 +834,15 @@ function animate(timestamp) {
     }
     ctx.restore()
 
-    // 6. 相対論的ショックウェーブ
+    // 7. 相対論的ショックウェーブ
     drawShockwaves(ctx, stepDt)
 
-    // 7. 公式ホログラム
+    // 8. 公式ホログラム
     if (currentPhase.value >= 1) {
       drawFormulas(ctx, w, h, t)
     }
 
-    // 8. ラボエンブレム・タイトル（Phase 3〜4）
+    // 9. ラボエンブレム・タイトル（Phase 3〜4: 完成後は静止形態で安定表示）
     drawLabTitle(ctx, cx, cy, t, currentPhase.value, w)
   } catch (err) {
     phaseCaption.value = 'CANVAS ERROR: ' + err.message
