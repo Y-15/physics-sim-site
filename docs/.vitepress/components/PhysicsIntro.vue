@@ -35,17 +35,17 @@ const mouse = {
   active: false
 }
 
-// 物理公式ホログラム（映画的サイバーUI: HUDと干渉しない最適マージン配置）
+// 物理公式（宇宙の深遠に刻まれた不変の真理・天球星座の神聖幾何学）
 const formulas = [
-  { text: 'm(d²r/dt²) = F', desc: 'NEWTONIAN DYNAMICS', x: 0.14, y: 0.28, size: 20, delay: 0.8 },
-  { text: 'E = mc²', desc: 'MASS-ENERGY EQUIVALENCE', x: 0.86, y: 0.26, size: 22, delay: 1.0 },
-  { text: '∇ × E = -∂B/∂t', desc: 'FARADAY-MAXWELL INDUCTION', x: 0.14, y: 0.73, size: 19, delay: 1.2 },
-  { text: 'iħ(∂ψ/∂t) = Ĥψ', desc: 'SCHRÖDINGER WAVE EQUATION', x: 0.86, y: 0.73, size: 20, delay: 1.4 },
-  { text: 'G_μν = (8πG/c⁴)T_μν', desc: 'EINSTEIN FIELD EQUATIONS', x: 0.50, y: 0.175, size: 20, delay: 1.7 },
-  { text: 'E = hν = hc/λ', desc: 'PLANCK-EINSTEIN QUANTA', x: 0.50, y: 0.90, size: 19, delay: 2.0 }
+  { text: 'm(d²r/dt²) = F', desc: '✦ ニュートン力学 // 万物運動の基本法則', x: 0.14, y: 0.28, size: 21, delay: 0.8 },
+  { text: 'E = mc²', desc: '✦ 特殊相対性理論 // 質量とエネルギーの等価性', x: 0.86, y: 0.26, size: 23, delay: 1.0 },
+  { text: '∇ × E = -∂B/∂t', desc: '✦ マクスウェル方程式 // 電磁誘導と光の統一', x: 0.14, y: 0.73, size: 20, delay: 1.2 },
+  { text: 'iħ(∂ψ/∂t) = Ĥψ', desc: '✦ シュレーディンガー方程式 // 量子波動と確率の幾何学', x: 0.86, y: 0.73, size: 21, delay: 1.4 },
+  { text: 'G_μν = (8πG/c⁴)T_μν', desc: '✦ 一般相対性理論 // 重力と時空の曲率幾何学', x: 0.50, y: 0.17, size: 21, delay: 1.7 },
+  { text: 'E = hν = hc/λ', desc: '✦ プランクの量子仮説 // 光子エネルギーと普遍定数', x: 0.50, y: 0.90, size: 20, delay: 2.0 }
 ]
 
-// 音響シンセサイザー (Web Audio API: 重力波＆量子シンセ音)
+// 音響シンセサイザー (Web Audio API: 432Hzピタゴラス調律 & 528Hzソルフェジオ・クリスタルボウル和音)
 function initAudio() {
   if (typeof window === 'undefined') return
   try {
@@ -53,7 +53,7 @@ function initAudio() {
     if (!AudioContext) return
     audioCtx = new AudioContext()
     masterGain = audioCtx.createGain()
-    masterGain.gain.setValueAtTime(0.2, audioCtx.currentTime)
+    masterGain.gain.setValueAtTime(0.22, audioCtx.currentTime)
     masterGain.connect(audioCtx.destination)
   } catch (e) {
     console.warn('Web Audio not supported', e)
@@ -67,61 +67,124 @@ function toggleSound() {
   if (masterGain && audioCtx) {
     masterGain.gain.setValueAtTime(isSoundEnabled.value ? 0.25 : 0, audioCtx.currentTime)
     if (isSoundEnabled.value) {
-      playTone(440, 'sine', 0.2, 0.06)
+      playTone(432, 'sine', 1.8, 0.08)
     }
   }
 }
 
+// デュアル・オシレーター（わずかなデチューンによる天球のうなり・コーラス残響）
 function playTone(freq, type = 'sine', duration = 0.5, gainVal = 0.1) {
   if (!isSoundEnabled.value || !audioCtx) return
   try {
-    const osc = audioCtx.createOscillator()
+    const osc1 = audioCtx.createOscillator()
+    const osc2 = audioCtx.createOscillator()
     const gain = audioCtx.createGain()
-    osc.type = type
-    osc.frequency.setValueAtTime(freq, audioCtx.currentTime)
+    osc1.type = type
+    osc1.frequency.setValueAtTime(freq, audioCtx.currentTime)
+    osc2.type = 'sine'
+    osc2.frequency.setValueAtTime(freq * 1.0025, audioCtx.currentTime) // 微小な揺らぎ（コーラス・うなり）
+
     gain.gain.setValueAtTime(gainVal, audioCtx.currentTime)
-    gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + duration)
-    osc.connect(gain)
+    gain.gain.exponentialRampToValueAtTime(0.00005, audioCtx.currentTime + duration)
+
+    osc1.connect(gain)
+    osc2.connect(gain)
     gain.connect(masterGain)
-    osc.start()
-    osc.stop(audioCtx.currentTime + duration)
+
+    osc1.start()
+    osc2.start()
+    osc1.stop(audioCtx.currentTime + duration)
+    osc2.stop(audioCtx.currentTime + duration)
   } catch (e) {}
 }
 
 function playBigBangSound() {
   if (!isSoundEnabled.value || !audioCtx) return
   try {
-    // 重低音サブベース + ノイズスイープ
+    // 深宇宙の重低音サブベース（オーム OM 周波数 108Hz -> 36Hz）
     const osc = audioCtx.createOscillator()
     const gain = audioCtx.createGain()
-    osc.type = 'sawtooth'
-    osc.frequency.setValueAtTime(160, audioCtx.currentTime)
-    osc.frequency.exponentialRampToValueAtTime(28, audioCtx.currentTime + 1.2)
-    gain.gain.setValueAtTime(0.4, audioCtx.currentTime)
-    gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 1.4)
+    osc.type = 'sine'
+    osc.frequency.setValueAtTime(108, audioCtx.currentTime)
+    osc.frequency.exponentialRampToValueAtTime(36, audioCtx.currentTime + 2.2)
+    gain.gain.setValueAtTime(0.3, audioCtx.currentTime)
+    gain.gain.exponentialRampToValueAtTime(0.0005, audioCtx.currentTime + 2.4)
     osc.connect(gain)
     gain.connect(masterGain)
     osc.start()
-    osc.stop(audioCtx.currentTime + 1.4)
+    osc.stop(audioCtx.currentTime + 2.4)
   } catch (e) {}
 }
 
 function playChimeSound() {
   if (!isSoundEnabled.value || !audioCtx) return
   try {
-    const freqs = [523.25, 659.25, 783.99, 1046.5] // C - E - G - C 和音
+    // 神秘のピタゴラス調律 432Hz & ソルフェジオ 528Hz クリスタルボウル共鳴倍音
+    const freqs = [216.0, 432.0, 528.0, 648.0, 864.0, 1296.0]
     freqs.forEach((f, i) => {
-      setTimeout(() => playTone(f, 'sine', 1.0, 0.08), i * 70)
+      setTimeout(() => playTone(f, 'sine', 3.8, 0.045), i * 160)
     })
   } catch (e) {}
 }
 
 // ==========================================
-// 映画級ビジュアルパーティクル & 宇宙物理
+// 神秘の深宇宙星屑 & 流星 (Meteors)
 // ==========================================
-const NUM_PARTICLES = 500
+const NUM_PARTICLES = 520
 const particles = []
+const meteors = []
 const shockwaves = []
+
+class Meteor {
+  constructor(w, h) {
+    this.reset(w, h)
+  }
+
+  reset(w, h) {
+    this.x = Math.random() * w * 1.2 - w * 0.1
+    this.y = Math.random() * h * 0.45 - 60
+    this.len = Math.random() * 140 + 80
+    this.speed = Math.random() * 480 + 360
+    this.angle = Math.PI / 4 + (Math.random() - 0.5) * 0.35
+    this.alpha = Math.random() * 0.75 + 0.25
+    this.active = false
+    this.timer = Math.random() * 2.2 + 0.4
+  }
+
+  update(dt, w, h) {
+    if (!this.active) {
+      this.timer -= dt
+      if (this.timer <= 0) this.active = true
+      return
+    }
+    this.x += Math.cos(this.angle) * this.speed * dt
+    this.y += Math.sin(this.angle) * this.speed * dt
+    this.alpha -= 0.65 * dt
+    if (this.alpha <= 0 || this.x > w + 100 || this.y > h + 100) {
+      this.reset(w, h)
+    }
+  }
+
+  draw(ctx) {
+    if (!this.active || this.alpha <= 0) return
+    const tailX = this.x - Math.cos(this.angle) * this.len
+    const tailY = this.y - Math.sin(this.angle) * this.len
+    const grad = ctx.createLinearGradient(tailX, tailY, this.x, this.y)
+    grad.addColorStop(0, 'rgba(255, 255, 255, 0)')
+    grad.addColorStop(0.7, `rgba(186, 230, 253, ${this.alpha * 0.5})`)
+    grad.addColorStop(1, `rgba(255, 255, 255, ${this.alpha})`)
+    ctx.save()
+    ctx.beginPath()
+    ctx.moveTo(tailX, tailY)
+    ctx.lineTo(this.x, this.y)
+    ctx.strokeStyle = grad
+    ctx.lineWidth = 1.6
+    ctx.shadowColor = '#38bdf8'
+    ctx.shadowBlur = 8
+    ctx.stroke()
+    ctx.restore()
+  }
+}
 
 class StarParticle {
   constructor(w, h) {
@@ -133,15 +196,20 @@ class StarParticle {
     const dist = initial ? Math.random() * Math.max(w, h) * 0.7 : Math.random() * 80 + 10
     this.x = w / 2 + Math.cos(angle) * dist
     this.y = h / 2 + Math.sin(angle) * dist
-    this.vx = (Math.random() - 0.5) * 40
-    this.vy = (Math.random() - 0.5) * 40
+    this.vx = (Math.random() - 0.5) * 35
+    this.vy = (Math.random() - 0.5) * 35
     this.size = Math.random() * 2.2 + 0.8
     this.baseSize = this.size
-    this.orbitRadius = Math.random() * 260 + 60
+    this.orbitRadius = Math.random() * 270 + 60
     this.orbitAngle = Math.random() * Math.PI * 2
-    this.orbitSpeed = (Math.random() * 1.5 + 0.5) * (Math.random() < 0.5 ? 1 : -1)
-    this.hue = Math.random() < 0.6 ? 200 + Math.random() * 30 : (Math.random() < 0.7 ? 40 + Math.random() * 20 : 280 + Math.random() * 40)
+    this.orbitSpeed = (Math.random() * 1.2 + 0.4) * (Math.random() < 0.5 ? 1 : -1)
+    // 神秘的な星気色：天藍（シアン）、恒星ゴールド、星雲アメジスト、純白
+    const colorRnd = Math.random()
+    this.hue = colorRnd < 0.5 ? 195 + Math.random() * 25 : (colorRnd < 0.75 ? 42 + Math.random() * 18 : 275 + Math.random() * 30)
+    this.isPureWhite = Math.random() < 0.2
     this.alpha = Math.random() * 0.7 + 0.3
+    this.twinklePhase = Math.random() * Math.PI * 2
+    this.twinkleSpeed = Math.random() * 3 + 1.5
     this.trail = []
   }
 
@@ -204,23 +272,31 @@ class StarParticle {
     }
   }
 
-  draw(ctx, phase) {
-    // トレイル描画
+  draw(ctx, phase, t) {
+    const twinkle = 0.5 + 0.5 * Math.sin((t || 0) * this.twinkleSpeed + this.twinklePhase)
+    const currentAlpha = this.alpha * (0.65 + 0.35 * twinkle)
+    const currentSize = this.size * (0.85 + 0.25 * twinkle)
+
+    // トレイル描画（光の糸）
     if (this.trail.length > 2) {
       ctx.beginPath()
       ctx.moveTo(this.trail[0].x, this.trail[0].y)
       for (let i = 1; i < this.trail.length; i++) {
         ctx.lineTo(this.trail[i].x, this.trail[i].y)
       }
-      ctx.strokeStyle = `hsla(${this.hue}, 95%, 65%, ${this.alpha * 0.35})`
-      ctx.lineWidth = this.size * 0.8
+      ctx.strokeStyle = this.isPureWhite
+        ? `rgba(255, 255, 255, ${currentAlpha * 0.4})`
+        : `hsla(${this.hue}, 95%, 70%, ${currentAlpha * 0.35})`
+      ctx.lineWidth = currentSize * 0.7
       ctx.stroke()
     }
 
     // 粒子本体（発光ブルーム）
     ctx.beginPath()
-    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2)
-    ctx.fillStyle = `hsla(${this.hue}, 100%, 75%, ${this.alpha})`
+    ctx.arc(this.x, this.y, currentSize, 0, Math.PI * 2)
+    ctx.fillStyle = this.isPureWhite
+      ? `rgba(255, 255, 255, ${currentAlpha})`
+      : `hsla(${this.hue}, 100%, 80%, ${currentAlpha})`
     ctx.fill()
   }
 }
@@ -233,33 +309,161 @@ const planets = [
 ]
 
 // ==========================================
-// レンダリング関数
+// レンダリング関数（神秘の深宇宙 & 宇宙の織物）
 // ==========================================
+
+// 神秘の深宇宙・星雲ガス & オーロラカーテン（Cosmic Nebula Clouds & Aurora Curtains）
+function drawNebulaClouds(ctx, w, h, t, cx, cy) {
+  ctx.save()
+  ctx.globalCompositeOperation = 'screen'
+
+  // 1. コズミック・ディープシアン星雲（ゆっくり漂う星間ガス）
+  const neb1X = cx + Math.cos(t * 0.2) * (w * 0.2) - w * 0.1
+  const neb1Y = cy + Math.sin(t * 0.16) * (h * 0.18) - h * 0.08
+  const rad1 = Math.max(w, h) * 0.62
+  const grad1 = ctx.createRadialGradient(neb1X, neb1Y, 15, neb1X, neb1Y, rad1)
+  grad1.addColorStop(0, 'rgba(14, 165, 233, 0.22)') // シアン
+  grad1.addColorStop(0.35, 'rgba(56, 189, 248, 0.09)')
+  grad1.addColorStop(0.75, 'rgba(99, 102, 241, 0.035)')
+  grad1.addColorStop(1, 'rgba(0, 0, 0, 0)')
+  ctx.fillStyle = grad1
+  ctx.fillRect(0, 0, w, h)
+
+  // 2. ディープアメジスト・バイオレット星雲（神聖な紫紺の雲）
+  const neb2X = cx - Math.cos(t * 0.18) * (w * 0.18) + w * 0.12
+  const neb2Y = cy - Math.sin(t * 0.22) * (h * 0.14) + h * 0.10
+  const rad2 = Math.max(w, h) * 0.58
+  const grad2 = ctx.createRadialGradient(neb2X, neb2Y, 20, neb2X, neb2Y, rad2)
+  grad2.addColorStop(0, 'rgba(168, 85, 247, 0.20)') // バイオレット
+  grad2.addColorStop(0.4, 'rgba(217, 70, 239, 0.07)')
+  grad2.addColorStop(0.8, 'rgba(236, 72, 153, 0.025)')
+  grad2.addColorStop(1, 'rgba(0, 0, 0, 0)')
+  ctx.fillStyle = grad2
+  ctx.fillRect(0, 0, w, h)
+
+  // 3. 宇宙創生のゴールド・アンバー核光（神聖な後光）
+  const pulse = Math.sin(t * 1.3) * 0.025 + 0.15
+  const rad3 = Math.min(w, h) * 0.48
+  const grad3 = ctx.createRadialGradient(cx, cy, 10, cx, cy, rad3)
+  grad3.addColorStop(0, `rgba(251, 191, 36, ${pulse * 1.2})`)
+  grad3.addColorStop(0.35, `rgba(245, 158, 11, ${pulse * 0.55})`)
+  grad3.addColorStop(0.7, 'rgba(56, 189, 248, 0.03)')
+  grad3.addColorStop(1, 'rgba(0, 0, 0, 0)')
+  ctx.fillStyle = grad3
+  ctx.fillRect(0, 0, w, h)
+
+  // 4. オーロラカーテン光帯（Aurora Curtains）
+  const auroraY1 = h * 0.26
+  const auroraY2 = h * 0.74
+  drawAuroraWave(ctx, w, auroraY1, t, 0.7, 'rgba(52, 211, 153, 0.06)', 'rgba(56, 189, 248, 0.07)')
+  drawAuroraWave(ctx, w, auroraY2, t + 1.2, 0.5, 'rgba(168, 85, 247, 0.06)', 'rgba(236, 72, 153, 0.04)')
+
+  ctx.restore()
+}
+
+function drawAuroraWave(ctx, w, baseY, t, speed, color1, color2) {
+  ctx.beginPath()
+  ctx.moveTo(0, baseY)
+  for (let x = 0; x <= w; x += 15) {
+    const wave = Math.sin(x * 0.0035 + t * speed) * 32 + Math.cos(x * 0.007 - t * speed * 0.6) * 18
+    ctx.lineTo(x, baseY + wave)
+  }
+  ctx.lineTo(w, baseY + 70)
+  ctx.lineTo(0, baseY + 70)
+  ctx.closePath()
+  const grad = ctx.createLinearGradient(0, baseY - 40, 0, baseY + 70)
+  grad.addColorStop(0, 'rgba(0, 0, 0, 0)')
+  grad.addColorStop(0.4, color1)
+  grad.addColorStop(0.7, color2)
+  grad.addColorStop(1, 'rgba(0, 0, 0, 0)')
+  ctx.fillStyle = grad
+  ctx.fill()
+}
+
+// 神秘の時空測地線グリッド & 天球儀リング（Celestial Astrolabe）
 function drawSpacetimeGrid(ctx, w, h, t, cx, cy, phase) {
   ctx.save()
-  const step = 45
-  const gridW = w
-  const gridH = h
 
-  ctx.strokeStyle = phase === 0
-    ? 'rgba(56, 189, 248, 0.16)'
-    : phase === 1
-    ? 'rgba(244, 63, 94, 0.14)'
-    : 'rgba(56, 189, 248, 0.14)'
-  ctx.lineWidth = 1
-
-  // 水平・垂直の測地線グリッドに、特異点の重力井戸ポテンシャル歪曲を適用
-  for (let x = 0; x <= gridW; x += step) {
+  // 1. 神聖天球儀リング（Armillary Astrolabe Rings: 古代ルネサンスの天球儀と黄道帯）
+  const maxR = Math.max(w, h) * 0.58
+  // 同心円天球環
+  for (let r = 70; r < maxR; r += 85) {
     ctx.beginPath()
-    for (let y = 0; y <= gridH; y += 15) {
+    ctx.arc(cx, cy, r, 0, Math.PI * 2)
+    ctx.strokeStyle = 'rgba(125, 211, 252, 0.055)'
+    ctx.lineWidth = 1
+    ctx.setLineDash([3, 10])
+    ctx.stroke()
+  }
+  ctx.setLineDash([])
+
+  // 3D傾斜の黄道天球環（Ecliptic Celestial Ring）
+  ctx.save()
+  ctx.translate(cx, cy)
+  ctx.rotate(0.42 + t * 0.04)
+  ctx.scale(1, 0.32)
+  ctx.beginPath()
+  ctx.arc(0, 0, 360, 0, Math.PI * 2)
+  ctx.strokeStyle = 'rgba(251, 191, 36, 0.12)'
+  ctx.lineWidth = 1.2
+  ctx.stroke()
+
+  // 黄道環の目盛り（Degrees of the Zodiac / Astrolabe Ticks）
+  const ticks = 48
+  for (let i = 0; i < ticks; i++) {
+    const ang = (i * Math.PI * 2) / ticks
+    const r1 = 352
+    const r2 = (i % 4 === 0) ? 368 : 362
+    ctx.beginPath()
+    ctx.moveTo(Math.cos(ang) * r1, Math.sin(ang) * r1)
+    ctx.lineTo(Math.cos(ang) * r2, Math.sin(ang) * r2)
+    ctx.strokeStyle = (i % 4 === 0) ? 'rgba(251, 191, 36, 0.28)' : 'rgba(125, 211, 252, 0.12)'
+    ctx.lineWidth = 1
+    ctx.stroke()
+  }
+  ctx.restore()
+
+  // 2. 黄金螺旋（Golden Logarithmic Spiral: 宇宙の調和比）
+  ctx.save()
+  ctx.translate(cx, cy)
+  ctx.rotate(t * 0.06)
+  ctx.beginPath()
+  const spiralSteps = 120
+  const b = 0.14
+  for (let i = 0; i < spiralSteps; i++) {
+    const theta = i * 0.08
+    const r = 8 * Math.exp(b * theta)
+    if (r > maxR) break
+    const sx = Math.cos(theta) * r
+    const sy = Math.sin(theta) * r
+    if (i === 0) ctx.moveTo(sx, sy)
+    else ctx.lineTo(sx, sy)
+  }
+  ctx.strokeStyle = 'rgba(251, 191, 36, 0.06)'
+  ctx.lineWidth = 1
+  ctx.setLineDash([2, 8])
+  ctx.stroke()
+  ctx.restore()
+
+  // 3. 繊細な時空測地線メッシュ（曲面幾何学）
+  const step = 55
+  ctx.strokeStyle = phase === 0
+    ? 'rgba(56, 189, 248, 0.08)'
+    : phase === 1
+    ? 'rgba(244, 63, 94, 0.06)'
+    : 'rgba(125, 211, 252, 0.055)'
+  ctx.lineWidth = 0.75
+
+  for (let x = 0; x <= w; x += step) {
+    ctx.beginPath()
+    for (let y = 0; y <= h; y += 20) {
       const dx = x - cx
       const dy = y - cy
       const dist = Math.hypot(dx, dy)
-      // 重力ポテンシャル井戸沈み込み
       const warp = phase === 0
-        ? Math.min(70, 8000 / (dist + 80))
+        ? Math.min(65, 7000 / (dist + 80))
         : phase === 2
-        ? Math.min(35, 3500 / (dist + 90))
+        ? Math.min(25, 2500 / (dist + 90))
         : 0
       const px = x - (dx / (dist + 1)) * warp
       const py = y - (dy / (dist + 1)) * warp
@@ -269,16 +473,16 @@ function drawSpacetimeGrid(ctx, w, h, t, cx, cy, phase) {
     ctx.stroke()
   }
 
-  for (let y = 0; y <= gridH; y += step) {
+  for (let y = 0; y <= h; y += step) {
     ctx.beginPath()
-    for (let x = 0; x <= gridW; x += 15) {
+    for (let x = 0; x <= w; x += 20) {
       const dx = x - cx
       const dy = y - cy
       const dist = Math.hypot(dx, dy)
       const warp = phase === 0
-        ? Math.min(70, 8000 / (dist + 80))
+        ? Math.min(65, 7000 / (dist + 80))
         : phase === 2
-        ? Math.min(35, 3500 / (dist + 90))
+        ? Math.min(25, 2500 / (dist + 90))
         : 0
       const px = x - (dx / (dist + 1)) * warp
       const py = y - (dy / (dist + 1)) * warp
@@ -566,14 +770,38 @@ function drawKeplerOrbits(ctx, cx, cy, t) {
   ctx.restore()
 }
 
-// 6. 物理公式ホログラムカード
+// 6. 物理公式ホログラム（宇宙の深遠に浮かぶ星座と真理の碑文・神聖幾何学）
 function drawFormulas(ctx, w, h, t) {
   ctx.save()
-  formulas.forEach((item) => {
+
+  // 6-0. 星座連結ライン（Constellation Filaments: 公式ノード同士を結ぶ星間光条）
+  if (t >= 1.0) {
+    const constAlpha = Math.min(0.35, (t - 1.0) * 0.4)
+    ctx.save()
+    ctx.strokeStyle = `rgba(251, 191, 36, ${constAlpha * 0.65})`
+    ctx.lineWidth = 0.9
+    ctx.setLineDash([4, 8])
+
+    // 星座の結線ペア: [0, 4], [4, 1], [1, 3], [3, 5], [5, 2], [2, 0] (六芒星的な幾何学エンベロープ)
+    const pairs = [[0, 4], [4, 1], [1, 3], [3, 5], [5, 2], [2, 0]]
+    pairs.forEach(([i, j]) => {
+      const fi = formulas[i], fj = formulas[j]
+      if (t >= fi.delay && t >= fj.delay) {
+        ctx.beginPath()
+        ctx.moveTo(w * fi.x, h * fi.y)
+        ctx.lineTo(w * fj.x, h * fj.y)
+        ctx.stroke()
+      }
+    })
+    ctx.restore()
+  }
+
+  // 6-1. 各公式の星座ノード描画
+  formulas.forEach((item, idx) => {
     if (t < item.delay) return
     const elapsed = t - item.delay
     const alpha = Math.min(1, elapsed * 2.2)
-    const scale = Math.min(1, 0.8 + elapsed * 0.25)
+    const scale = Math.min(1, 0.88 + elapsed * 0.16)
     const px = w * item.x
     const py = h * item.y
 
@@ -581,44 +809,51 @@ function drawFormulas(ctx, w, h, t) {
     ctx.translate(px, py)
     ctx.scale(scale, scale)
 
-    // ホログラムカード枠
-    const cardW = 210, cardH = 50
-    ctx.fillStyle = `rgba(15, 23, 42, ${Math.min(0.92, alpha * 0.88)})`
-    ctx.strokeStyle = `rgba(56, 189, 248, ${alpha * 0.75})`
-    ctx.lineWidth = 1.2
+    // 星間クリスタル・柔らかなラジアルバックライト（四角い重厚な枠を廃し、神聖な光彩へ）
+    const cardW = 224, cardH = 46
+    const bgRad = ctx.createRadialGradient(0, 0, 10, 0, 0, 130)
+    bgRad.addColorStop(0, `rgba(15, 23, 42, ${alpha * 0.75})`)
+    bgRad.addColorStop(0.65, `rgba(3, 7, 18, ${alpha * 0.65})`)
+    bgRad.addColorStop(1, 'rgba(2, 4, 10, 0)')
+    ctx.fillStyle = bgRad
     ctx.beginPath()
     if (typeof ctx.roundRect === 'function') {
-      ctx.roundRect(-cardW / 2, -cardH / 2, cardW, cardH, 8)
+      ctx.roundRect(-cardW / 2, -cardH / 2, cardW, cardH, 23)
     } else {
       ctx.rect(-cardW / 2, -cardH / 2, cardW, cardH)
     }
     ctx.fill()
+
+    // 繊細な金藍の星座フレーム（Constellation Aura Border）
+    ctx.strokeStyle = `rgba(125, 211, 252, ${alpha * 0.45})`
+    ctx.lineWidth = 0.85
     ctx.stroke()
 
-    // コーナー照準マーカー（SF映画HUD仕様）
-    ctx.strokeStyle = `rgba(56, 189, 248, ${alpha * 0.95})`
-    ctx.lineWidth = 2.0
-    const mLen = 6
-    // 左上
-    ctx.beginPath(); ctx.moveTo(-cardW / 2, -cardH / 2 + mLen); ctx.lineTo(-cardW / 2, -cardH / 2); ctx.lineTo(-cardW / 2 + mLen, -cardH / 2); ctx.stroke()
-    // 右上
-    ctx.beginPath(); ctx.moveTo(cardW / 2 - mLen, -cardH / 2); ctx.lineTo(cardW / 2, -cardH / 2); ctx.lineTo(cardW / 2, -cardH / 2 + mLen); ctx.stroke()
-    // 左下
-    ctx.beginPath(); ctx.moveTo(-cardW / 2, cardH / 2 - mLen); ctx.lineTo(-cardW / 2, cardH / 2); ctx.lineTo(-cardW / 2 + mLen, cardH / 2); ctx.stroke()
-    // 右下
-    ctx.beginPath(); ctx.moveTo(cardW / 2 - mLen, cardH / 2); ctx.lineTo(cardW / 2, cardH / 2); ctx.lineTo(cardW / 2, cardH / 2 - mLen); ctx.stroke()
-
-    // 公式テキスト
-    ctx.font = `700 ${item.size}px "Outfit", "Fira Code", monospace`
-    ctx.fillStyle = `rgba(248, 250, 252, ${alpha})`
+    // 瞬く星のノード（✧ ダイヤモンド・スター）
+    const starPulse = 0.7 + 0.3 * Math.sin(t * 3.5 + idx * 1.8)
+    ctx.fillStyle = `rgba(255, 255, 255, ${alpha * starPulse})`
     ctx.shadowColor = '#38bdf8'
-    ctx.shadowBlur = 10
+    ctx.shadowBlur = 12
+    // 左端星
+    ctx.beginPath()
+    ctx.arc(-cardW / 2 + 10, 0, 2.5, 0, Math.PI * 2)
+    ctx.fill()
+    // 右端星
+    ctx.beginPath()
+    ctx.arc(cardW / 2 - 10, 0, 2.5, 0, Math.PI * 2)
+    ctx.fill()
+
+    // 公式テキスト（純白の星明かりとシアンの微光）
+    ctx.font = `700 ${item.size}px "Outfit", "Fira Code", monospace`
+    ctx.fillStyle = `rgba(255, 255, 255, ${alpha * 0.98})`
+    ctx.shadowColor = '#38bdf8'
+    ctx.shadowBlur = 14
     ctx.textAlign = 'center'
     ctx.fillText(item.text, 0, -2)
 
-    // 解説ラベル
-    ctx.font = `600 9px monospace`
-    ctx.fillStyle = `rgba(56, 189, 248, ${alpha * 0.9})`
+    // 解説ラベル（黄金と天藍のサブテキスト）
+    ctx.font = `600 9.5px "Outfit", sans-serif`
+    ctx.fillStyle = `rgba(186, 230, 253, ${alpha * 0.90})`
     ctx.shadowBlur = 0
     ctx.fillText(item.desc, 0, 16)
 
@@ -627,7 +862,7 @@ function drawFormulas(ctx, w, h, t) {
   ctx.restore()
 }
 
-// 7. ラボタイトル・ボーア水素原子模型（Phase 3 & 4）
+// 7. ラボタイトル・ボーア水素原子模型（神秘の量子共鳴・神聖幾何学）
 function drawLabTitle(ctx, cx, cy, t, phase, w) {
   if (t < 2.6) return
   ctx.save()
@@ -635,65 +870,110 @@ function drawLabTitle(ctx, cx, cy, t, phase, w) {
   const elapsed = t - 2.6
   const alpha = Math.min(1, elapsed * 2.2)
 
-  // 7-1. ボーアの水素原子模型（3重交差楕円軌道 + 周回電子）
-  const ringR = 94
-  ctx.lineWidth = 2.0
-  const electronSpeeds = [3.2, -2.6, 2.0]
+  // 7-0. 量子確率雲（シュレーディンガー・オーロラヘイロー）
+  const cloudR = 135 + Math.sin(t * 2.5) * 10
+  const cloudGrad = ctx.createRadialGradient(cx, cy - 45, 12, cx, cy - 45, cloudR)
+  cloudGrad.addColorStop(0, `rgba(56, 189, 248, ${alpha * 0.26})`)
+  cloudGrad.addColorStop(0.4, `rgba(168, 85, 247, ${alpha * 0.14})`)
+  cloudGrad.addColorStop(0.75, `rgba(251, 191, 36, ${alpha * 0.05})`)
+  cloudGrad.addColorStop(1, 'rgba(0, 0, 0, 0)')
+  ctx.fillStyle = cloudGrad
+  ctx.beginPath()
+  ctx.arc(cx, cy - 45, cloudR, 0, Math.PI * 2)
+  ctx.fill()
+
+  // 7-1. ボーアの水素原子模型（ド・ブロイ定在波物質波 + 周回量子電子）
+  const ringR = 96
+  const waveModes = [3, 4, 5] // n=3, 4, 5 の定在物質波 (2πr = nλ)
+  const electronSpeeds = [2.8, -2.2, 1.7]
 
   for (let rot = 0; rot < 3; rot++) {
     ctx.save()
     ctx.translate(cx, cy - 45)
-    ctx.rotate((rot * Math.PI) / 3 + t * 0.8)
+    ctx.rotate((rot * Math.PI) / 3 + t * 0.5)
 
-    // 軌道リング
+    // ド・ブロイ定在波の軌道（量子条件を満たす物質波の美しい波打ち）
     ctx.beginPath()
-    ctx.ellipse(0, 0, ringR, ringR * 0.38, 0, 0, Math.PI * 2)
-    ctx.strokeStyle = `rgba(56, 189, 248, ${alpha * 0.85})`
-    ctx.shadowColor = '#38bdf8'
+    const steps = 100
+    const waveN = waveModes[rot]
+    for (let s = 0; s <= steps; s++) {
+      const theta = (s * Math.PI * 2) / steps
+      const wave = Math.sin(theta * waveN - t * 3.5) * 3.6
+      const r = ringR + wave
+      const ex = Math.cos(theta) * r
+      const ey = Math.sin(theta) * (r * 0.38)
+      if (s === 0) ctx.moveTo(ex, ey)
+      else ctx.lineTo(ex, ey)
+    }
+    ctx.closePath()
+
+    ctx.strokeStyle = rot === 1
+      ? `rgba(192, 132, 252, ${alpha * 0.85})`
+      : rot === 2
+      ? `rgba(251, 191, 36, ${alpha * 0.8})`
+      : `rgba(56, 189, 248, ${alpha * 0.85})`
+    ctx.shadowColor = rot === 1 ? '#c084fc' : (rot === 2 ? '#fbbf24' : '#38bdf8')
     ctx.shadowBlur = 18
+    ctx.lineWidth = 1.6
     ctx.stroke()
 
     // 高速周回する量子電子（クォンタムドット）
     const eAngle = t * electronSpeeds[rot]
-    const ex = Math.cos(eAngle) * ringR
-    const ey = Math.sin(eAngle) * (ringR * 0.38)
+    const eWave = Math.sin(eAngle * waveN - t * 3.5) * 3.6
+    const eDist = ringR + eWave
+    const elX = Math.cos(eAngle) * eDist
+    const elY = Math.sin(eAngle) * (eDist * 0.38)
 
+    // 電子の発光オーラ
     ctx.beginPath()
-    ctx.arc(ex, ey, 3.8, 0, Math.PI * 2)
+    ctx.arc(elX, elY, 4.2, 0, Math.PI * 2)
     ctx.fillStyle = '#ffffff'
     ctx.shadowColor = '#38bdf8'
-    ctx.shadowBlur = 14
+    ctx.shadowBlur = 16
     ctx.fill()
 
     ctx.restore()
   }
 
-  // 7-2. 原子の中心核（高エネルギー陽子・中性子コア）
-  const corePulse = 16 + Math.sin(t * 8) * 2.5
-  const coreGrad = ctx.createRadialGradient(cx, cy - 45, 4, cx, cy - 45, corePulse + 18)
+  // 7-2. 原子の中心核（神聖なる陽子・中性子コア & 12本の放射光芒）
+  const corePulse = 17 + Math.sin(t * 6) * 2.5
+  // 12本の神聖放射光条
+  for (let ray = 0; ray < 12; ray++) {
+    const rayAng = (ray * Math.PI * 2) / 12 + t * 0.3
+    const rayLen = corePulse + 22 + Math.sin(t * 4 + ray) * 6
+    ctx.beginPath()
+    ctx.moveTo(cx, cy - 45)
+    ctx.lineTo(cx + Math.cos(rayAng) * rayLen, cy - 45 + Math.sin(rayAng) * rayLen)
+    ctx.strokeStyle = `rgba(255, 255, 255, ${alpha * 0.5})`
+    ctx.lineWidth = 1.2
+    ctx.stroke()
+  }
+
+  const coreGrad = ctx.createRadialGradient(cx, cy - 45, 3, cx, cy - 45, corePulse + 25)
   coreGrad.addColorStop(0, '#ffffff')
-  coreGrad.addColorStop(0.4, 'rgba(56, 189, 248, 0.95)')
-  coreGrad.addColorStop(0.8, 'rgba(129, 140, 248, 0.4)')
+  coreGrad.addColorStop(0.35, 'rgba(125, 211, 252, 0.95)')
+  coreGrad.addColorStop(0.7, 'rgba(168, 85, 247, 0.45)')
   coreGrad.addColorStop(1, 'rgba(56, 189, 248, 0)')
 
   ctx.fillStyle = coreGrad
   ctx.beginPath()
-  ctx.arc(cx, cy - 45, corePulse + 18, 0, Math.PI * 2)
+  ctx.arc(cx, cy - 45, corePulse + 25, 0, Math.PI * 2)
   ctx.fill()
 
   ctx.beginPath()
   ctx.arc(cx, cy - 45, corePulse, 0, Math.PI * 2)
   ctx.fillStyle = '#ffffff'
   ctx.shadowColor = '#38bdf8'
-  ctx.shadowBlur = 24
+  ctx.shadowBlur = 28
   ctx.fill()
 
-  // 7-3. タイトル背景バックライト
-  const bgGrad = ctx.createRadialGradient(cx, cy + 90, 20, cx, cy + 90, 320)
-  bgGrad.addColorStop(0, `rgba(3, 7, 18, ${alpha * 0.92})`)
+  // 7-3. タイトル背景バックライト（星雲のベール）
+  const bgGrad = ctx.createRadialGradient(cx, cy + 90, 20, cx, cy + 90, 360)
+  bgGrad.addColorStop(0, `rgba(3, 7, 18, ${alpha * 0.94})`)
+  bgGrad.addColorStop(0.6, `rgba(15, 23, 42, ${alpha * 0.75})`)
   bgGrad.addColorStop(1, 'rgba(3, 7, 18, 0)')
   ctx.fillStyle = bgGrad
-  ctx.fillRect(cx - 380, cy + 30, 760, 160)
+  ctx.fillRect(cx - 400, cy + 25, 800, 170)
 
   // 7-4. メインタイトル
   ctx.textAlign = 'center'
@@ -701,28 +981,30 @@ function drawLabTitle(ctx, cx, cy, t, phase, w) {
   ctx.font = `900 ${fontSize}px "Outfit", "Inter", sans-serif`
   ctx.fillStyle = `rgba(255, 255, 255, ${alpha})`
   ctx.shadowColor = '#38bdf8'
-  ctx.shadowBlur = 24
+  ctx.shadowBlur = 28
   ctx.fillText('高校物理シミュレーションラボ', cx, cy + 85)
 
-  // サブタイトル
-  ctx.font = `700 13px "Fira Code", monospace`
-  ctx.fillStyle = `rgba(56, 189, 248, ${alpha})`
-  ctx.shadowBlur = 8
-  ctx.fillText('INTERACTIVE PHYSICS SIMULATION LABORATORY', cx, cy + 115)
+  // サブタイトル（星の叡智・天球の調和）
+  ctx.font = `700 13px "Outfit", monospace`
+  ctx.fillStyle = `rgba(186, 230, 253, ${alpha})`
+  ctx.shadowBlur = 10
+  ctx.fillText('HARMONIA MUNDI // 天球の音楽と自然界の調和', cx, cy + 115)
 
   // キャッチコピー
   ctx.font = `500 14px sans-serif`
-  ctx.fillStyle = `rgba(203, 213, 225, ${alpha * 0.95})`
+  ctx.fillStyle = `rgba(241, 245, 249, ${alpha * 0.95})`
   ctx.shadowBlur = 0
-  ctx.fillText('すべての公式には、理由がある。動く世界で物理を解き明かす。', cx, cy + 142)
+  ctx.fillText('すべての公式には、理由がある。動く世界で物理の深淵を解き明かす。', cx, cy + 142)
 
-  // 水平アナモルフィック・レンズフレア光芒
+  // 水平アナモルフィック・オーロラフレア光芒
   ctx.save()
-  const flareW = Math.min(w * 0.85, 750) * Math.min(1, elapsed * 1.6)
+  const flareW = Math.min(w * 0.88, 780) * Math.min(1, elapsed * 1.6)
   const flareGrad = ctx.createLinearGradient(cx - flareW / 2, cy + 85, cx + flareW / 2, cy + 85)
   flareGrad.addColorStop(0, 'rgba(56, 189, 248, 0)')
-  flareGrad.addColorStop(0.5, `rgba(255, 255, 255, ${alpha * 0.8})`)
-  flareGrad.addColorStop(1, 'rgba(56, 189, 248, 0)')
+  flareGrad.addColorStop(0.25, `rgba(168, 85, 247, ${alpha * 0.65})`)
+  flareGrad.addColorStop(0.5, `rgba(255, 255, 255, ${alpha * 0.9})`)
+  flareGrad.addColorStop(0.75, `rgba(251, 191, 36, ${alpha * 0.65})`)
+  flareGrad.addColorStop(1, 'rgba(168, 85, 247, 0)')
   ctx.fillStyle = flareGrad
   ctx.fillRect(cx - flareW / 2, cy + 83, flareW, 3)
   ctx.restore()
@@ -760,26 +1042,26 @@ function animate(timestamp) {
   const cx = w / 2
   const cy = h / 2
 
-  // タイムラインとフェーズ自動更新
+  // タイムラインとフェーズ自動更新（詩的・神秘的な宇宙の開示）
   if (t < 0.9) {
     currentPhase.value = 0
-    phaseCaption.value = 'T = 0.000s | SINGULARITY // QUANTUM VACUUM FLUCTUATION'
+    phaseCaption.value = '⟡ 虚無の量子揺らぎと時間の創生 ── The Primordial Singularity'
   } else if (t < 1.9) {
     currentPhase.value = 1
-    phaseCaption.value = 'T = 10⁻³²s | BIG BANG // RELATIVISTIC INFLATION & EM FIELDS'
+    phaseCaption.value = '✧ 光あれ。時空の展開と電磁共鳴 ── Genesis of Light'
     if (!bigBangTriggered && fixedTimeParam === null) {
       bigBangTriggered = true
       playBigBangSound()
       shockwaves.push({ x: cx, y: cy, radius: 5, speed: 1200, alpha: 1.0, color: '#38bdf8', width: 4.5 })
       shockwaves.push({ x: cx, y: cy, radius: 2, speed: 850, alpha: 0.9, color: '#fbbf24', width: 3.5 })
-      shockwaves.push({ x: cx, y: cy, radius: 1, speed: 500, alpha: 0.85, color: '#f43f5e', width: 2.5 })
+      shockwaves.push({ x: cx, y: cy, radius: 1, speed: 500, alpha: 0.85, color: '#c084fc', width: 2.5 })
     }
   } else if (t < 2.9) {
     currentPhase.value = 2
-    phaseCaption.value = 'T = 3.8×10⁵ yr | ORDER EMERGENCE // KEPLERIAN GRAVITATIONAL BALLET'
+    phaseCaption.value = '✦ 天球の音楽。万有引力とケプラーの調和 ── Musica Universalis'
   } else if (t < animDuration) {
     currentPhase.value = 3
-    phaseCaption.value = 'T = 13.8 Gyr | ATOMIC EMERGENCE // LABORATORY HARMONY'
+    phaseCaption.value = '✦ 微小なる量子と大宇宙の調和 ── The Sacred Tapestry'
     if (!chimeTriggered && fixedTimeParam === null) {
       chimeTriggered = true
       playChimeSound()
@@ -787,7 +1069,7 @@ function animate(timestamp) {
   } else if (t < totalMaxDuration) {
     // Phase 4: アニメーション再生後、完成画面をそのまま 1.8秒間（1〜2秒間）静止・安定表示するHOLD状態
     currentPhase.value = 4
-    phaseCaption.value = 'SYSTEM READY // ALL LAWS SYNCHRONIZED [CLICK TO ENTER]'
+    phaseCaption.value = '✦ 不変の真理。物理の世界へ ── The Cosmos Synchronized'
   } else {
     // 5.4秒経過（アニメーション3.6秒 + 静止HOLD 1.8秒）で自動的に優雅なロングフェードアウト
     finishIntro()
@@ -795,13 +1077,23 @@ function animate(timestamp) {
   }
 
   try {
-    // 画面クリア（加算合成＆微小残像トレイル）
+    // 画面クリア（加算合成＆微小残像トレイル: 深宇宙ディープブラック）
     ctx.save()
-    ctx.fillStyle = currentPhase.value === 4 ? 'rgba(3, 7, 18, 0.30)' : 'rgba(3, 7, 18, 0.36)'
+    ctx.fillStyle = currentPhase.value === 4 ? 'rgba(2, 4, 10, 0.30)' : 'rgba(2, 4, 10, 0.35)'
     ctx.fillRect(0, 0, w, h)
     ctx.restore()
 
-    // 1. 時空測地線グリッド
+    // 0. 深宇宙星雲ガス & オーロラカーテン（Nebula Clouds）
+    drawNebulaClouds(ctx, w, h, t, cx, cy)
+
+    // 0-1. 流星（Meteors）
+    const stepDt = fixedTimeParam !== null ? 0.016 : Math.min(0.033, 1 / 60)
+    for (let i = 0; i < meteors.length; i++) {
+      meteors[i].update(stepDt, w, h)
+      meteors[i].draw(ctx)
+    }
+
+    // 1. 神秘の天球儀グリッド & 黄金螺旋（Celestial Astrolabe）
     drawSpacetimeGrid(ctx, w, h, t, cx, cy, currentPhase.value)
 
     // 2. 特異点（Phase 0）
@@ -824,20 +1116,19 @@ function animate(timestamp) {
       drawKeplerOrbits(ctx, cx, cy, t)
     }
 
-    // 6. 粒子シミュレーション更新と描画
+    // 6. 星屑粒子シミュレーション更新と描画（瞬きエフェクト付き）
     ctx.save()
     ctx.globalCompositeOperation = 'lighter'
-    const stepDt = fixedTimeParam !== null ? 0.016 : Math.min(0.033, 1 / 60)
     for (let i = 0; i < particles.length; i++) {
       particles[i].update(stepDt, t, cx, cy, currentPhase.value)
-      particles[i].draw(ctx, currentPhase.value)
+      particles[i].draw(ctx, currentPhase.value, t)
     }
     ctx.restore()
 
     // 7. 相対論的ショックウェーブ
     drawShockwaves(ctx, stepDt)
 
-    // 8. 公式ホログラム
+    // 8. 星座・公式ホログラム（神聖幾何学ライン付き）
     if (currentPhase.value >= 1) {
       drawFormulas(ctx, w, h, t)
     }
@@ -966,6 +1257,10 @@ onMounted(async () => {
   for (let i = 0; i < NUM_PARTICLES; i++) {
     particles.push(new StarParticle(w, h))
   }
+  meteors.length = 0
+  for (let i = 0; i < 4; i++) {
+    meteors.push(new Meteor(w, h))
+  }
 
   if (testT !== null && !isNaN(testT)) {
     fixedTimeParam = testT
@@ -1041,12 +1336,12 @@ onUnmounted(() => {
         <div class="hud-badge-group">
           <div class="hud-badge">
             <span class="pulsing-dot"></span>
-            <span class="hud-title">PHYSICS ENGINE v3.0</span>
+            <span class="hud-title">✦ HARMONIA MUNDI</span>
           </div>
           <div class="hud-status-badge" :class="{ 'status-ready': isReadyToEnter }">
             <span class="pulsing-radar" :class="{ 'radar-ready': isReadyToEnter }"></span>
             <span class="status-seq-text">
-              {{ isReadyToEnter ? '✨ SYSTEM READY // ALL MODULES SYNCHRONIZED' : `⚡ INITIALIZING CORE [${progressPercent}%]` }}
+              {{ isReadyToEnter ? '✦ 宇宙の調和が同期されました ── HARMONIA MUNDI' : `✧ 宇宙の創生と物理法則の開示 [${progressPercent}%]` }}
             </span>
           </div>
         </div>
@@ -1059,28 +1354,28 @@ onUnmounted(() => {
           <button
             class="hud-btn sound-btn"
             @click.stop="toggleSound"
-            :title="isSoundEnabled ? 'サウンド OFF' : 'サウンド ON (重力シンセ音)'"
+            :title="isSoundEnabled ? 'サウンド OFF' : '432Hz ピタゴラス調律 & 528Hz ソルフェジオ天球和音'"
           >
-            {{ isSoundEnabled ? '🔊 SOUND ON' : '🔈 SOUND OFF' }}
+            {{ isSoundEnabled ? '♪ 432Hz HARMONY ON' : '♪ 432Hz 天球の調和音' }}
           </button>
           <button
             class="hud-btn never-btn"
             @click.stop="neverPlayAgain"
             title="次回以降はこのアニメーションを表示せず直接サイトを開きます"
           >
-            ✕ 次からは再生しない
+            ✕ 次回からスキップ
           </button>
           <button
             class="hud-btn skip-btn"
             @click.stop="finishIntro"
             title="今すぐサイトへ進む (ESC)"
           >
-            ⏩ スキップしてサイトへ [ESC]
+            ✦ 物理の世界へ入る [ESC]
           </button>
         </div>
       </div>
 
-      <!-- 中央「実験室へ入る」アクション（タイトル完成後にフワッと優美に現れる） -->
+      <!-- 中央「物理の世界へ入る」アクション（神秘のクリスタル・ポータル） -->
       <transition name="enter-btn-fade">
         <div
           v-if="isReadyToEnter"
@@ -1088,10 +1383,10 @@ onUnmounted(() => {
           @click.stop="finishIntro"
         >
           <button class="enter-lab-btn" @click.stop="finishIntro">
-            <span class="enter-icon">🚀</span>
+            <span class="enter-icon">✦</span>
             <span class="enter-text-group">
-              <span class="enter-main-title">実験室へ入る</span>
-              <span class="enter-sub-title">ENTER LABORATORY</span>
+              <span class="enter-main-title">物理の世界へ入る</span>
+              <span class="enter-sub-title">ENTER THE SACRED COSMOS // LAB</span>
             </span>
             <span class="enter-kbd-badge">↵ Enter</span>
           </button>
@@ -1101,10 +1396,10 @@ onUnmounted(() => {
       <!-- HUD Bottom Bar -->
       <div class="hud-bottom-bar">
         <div class="hud-hint">
-          <span class="hint-sparkle">✦</span> 「実験室へ入る」ボタンまたは画面クリックでサイトへ進みます（放置でも自然に移行します）
+          <span class="hint-sparkle">✦</span> クリックまたは「物理の世界へ入る」で進みます（数秒の余韻ののち自動で移行します）
         </div>
         <button class="bottom-never-btn" @click.stop="neverPlayAgain">
-          次からは再生しない
+          次回から自動でスキップする
         </button>
       </div>
     </div>
@@ -1119,7 +1414,7 @@ onUnmounted(() => {
   width: 100vw;
   height: 100vh;
   z-index: 9999999;
-  background-color: #030712;
+  background-color: #02040a;
   overflow: hidden;
   user-select: none;
   cursor: crosshair;
@@ -1147,21 +1442,21 @@ onUnmounted(() => {
   top: 0;
   left: 0;
   width: 100%;
-  height: 4px;
-  background: rgba(255, 255, 255, 0.08);
+  height: 3px;
+  background: rgba(255, 255, 255, 0.06);
   z-index: 100;
 }
 
 .top-timeline-bar {
   height: 100%;
-  background: linear-gradient(90deg, #38bdf8, #818cf8, #ec4899);
-  box-shadow: 0 0 12px #38bdf8, 0 0 4px #ec4899;
+  background: linear-gradient(90deg, #38bdf8, #818cf8, #c084fc, #fbbf24);
+  box-shadow: 0 0 14px #38bdf8, 0 0 8px #c084fc;
   transition: width 0.08s linear;
 }
 
 .top-timeline-bar.complete {
-  background: linear-gradient(90deg, #10b981, #38bdf8, #818cf8);
-  box-shadow: 0 0 16px #10b981, 0 0 8px #38bdf8;
+  background: linear-gradient(90deg, #38bdf8, #c084fc, #fbbf24);
+  box-shadow: 0 0 20px #38bdf8, 0 0 12px #c084fc, 0 0 6px #fbbf24;
 }
 
 .hud-top-bar {
@@ -1174,7 +1469,7 @@ onUnmounted(() => {
   justify-content: space-between;
   align-items: center;
   pointer-events: none;
-  background: linear-gradient(to bottom, rgba(3, 7, 18, 0.88) 0%, transparent 100%);
+  background: linear-gradient(to bottom, rgba(2, 4, 10, 0.88) 0%, transparent 100%);
   z-index: 10;
 }
 
@@ -1189,20 +1484,21 @@ onUnmounted(() => {
   display: flex;
   align-items: center;
   gap: 8px;
-  background: rgba(56, 189, 248, 0.12);
-  border: 1px solid rgba(56, 189, 248, 0.32);
-  padding: 4px 12px;
+  background: rgba(8, 14, 30, 0.70);
+  border: 1px solid rgba(251, 191, 36, 0.35);
+  padding: 5px 14px;
   border-radius: 9999px;
-  backdrop-filter: blur(8px);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 0 15px rgba(251, 191, 36, 0.15);
 }
 
 .pulsing-dot {
-  width: 8px;
-  height: 8px;
+  width: 7px;
+  height: 7px;
   border-radius: 50%;
-  background: #38bdf8;
-  box-shadow: 0 0 10px #38bdf8;
-  animation: pulseDot 1.2s infinite ease-in-out;
+  background: #fbbf24;
+  box-shadow: 0 0 10px #fbbf24;
+  animation: pulseDot 1.4s infinite ease-in-out;
 }
 
 @keyframes pulseDot {
@@ -1211,28 +1507,31 @@ onUnmounted(() => {
 }
 
 .hud-title {
-  font-family: 'Fira Code', monospace;
-  font-size: 0.74rem;
-  letter-spacing: 0.08em;
-  color: #38bdf8;
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  color: #fef08a;
   font-weight: 700;
+  text-shadow: 0 0 10px rgba(251, 191, 36, 0.45);
 }
 
 .hud-status-badge {
   display: flex;
   align-items: center;
-  gap: 6px;
-  background: rgba(56, 189, 248, 0.12);
-  border: 1px solid rgba(56, 189, 248, 0.35);
-  padding: 4px 12px;
+  gap: 7px;
+  background: rgba(8, 14, 30, 0.70);
+  border: 1px solid rgba(125, 211, 252, 0.35);
+  padding: 5px 14px;
   border-radius: 9999px;
-  backdrop-filter: blur(8px);
+  backdrop-filter: blur(12px);
   transition: all 0.4s ease;
+  box-shadow: 0 0 15px rgba(56, 189, 248, 0.15);
 }
 
 .hud-status-badge.status-ready {
-  background: rgba(16, 185, 129, 0.15);
-  border-color: rgba(16, 185, 129, 0.45);
+  background: rgba(168, 85, 247, 0.18);
+  border-color: rgba(192, 132, 252, 0.55);
+  box-shadow: 0 0 20px rgba(168, 85, 247, 0.3);
 }
 
 .pulsing-radar {
@@ -1245,33 +1544,36 @@ onUnmounted(() => {
 }
 
 .pulsing-radar.radar-ready {
-  background: #10b981;
-  box-shadow: 0 0 10px #10b981;
+  background: #c084fc;
+  box-shadow: 0 0 12px #c084fc;
 }
 
 .status-seq-text {
-  font-family: 'Fira Code', monospace;
-  font-size: 0.72rem;
-  letter-spacing: 0.05em;
-  color: #7dd3fc;
-  font-weight: 700;
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  color: #bae6fd;
+  font-weight: 600;
   transition: color 0.4s ease;
 }
 
 .hud-status-badge.status-ready .status-seq-text {
-  color: #6ee7b7;
+  color: #f3e8ff;
+  text-shadow: 0 0 10px rgba(192, 132, 252, 0.6);
 }
 
 .hud-caption {
-  font-family: 'Fira Code', monospace;
-  font-size: 0.8rem;
-  color: #e2e8f0;
-  letter-spacing: 0.05em;
-  text-shadow: 0 0 8px rgba(56, 189, 248, 0.6);
-  background: rgba(15, 23, 42, 0.65);
-  padding: 4px 16px;
-  border-radius: 8px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.82rem;
+  color: #f8fafc;
+  letter-spacing: 0.08em;
+  text-shadow: 0 0 14px rgba(56, 189, 248, 0.8), 0 0 22px rgba(168, 85, 247, 0.5);
+  background: rgba(8, 14, 30, 0.78);
+  padding: 6px 22px;
+  border-radius: 9999px;
+  border: 1px solid rgba(125, 211, 252, 0.28);
+  backdrop-filter: blur(14px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.7);
 }
 
 .hud-controls {
@@ -1281,50 +1583,64 @@ onUnmounted(() => {
 }
 
 .hud-btn {
-  background: rgba(15, 23, 42, 0.85);
-  border: 1px solid rgba(56, 189, 248, 0.35);
+  background: rgba(8, 14, 30, 0.82);
+  border: 1px solid rgba(125, 211, 252, 0.32);
   color: #f1f5f9;
-  font-family: 'Fira Code', monospace;
-  font-size: 0.8rem;
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.78rem;
   font-weight: 600;
-  padding: 6px 14px;
-  border-radius: 8px;
+  letter-spacing: 0.05em;
+  padding: 6px 15px;
+  border-radius: 9999px;
   cursor: pointer;
-  backdrop-filter: blur(8px);
-  transition: all 0.2s ease;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(10px);
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.6);
 }
 
 .hud-btn:hover {
-  background: rgba(56, 189, 248, 0.22);
+  background: rgba(56, 189, 248, 0.2);
   border-color: #38bdf8;
-  color: #38bdf8;
+  color: #bae6fd;
   transform: translateY(-1px);
+  box-shadow: 0 0 16px rgba(56, 189, 248, 0.4);
+}
+
+.sound-btn {
+  border-color: rgba(251, 191, 36, 0.4);
+  color: #fef08a;
+}
+
+.sound-btn:hover {
+  background: rgba(251, 191, 36, 0.2);
+  border-color: #fbbf24;
+  color: #ffffff;
+  box-shadow: 0 0 18px rgba(251, 191, 36, 0.5);
 }
 
 .never-btn {
-  background: rgba(244, 63, 94, 0.16);
-  border-color: rgba(244, 63, 94, 0.45);
+  background: rgba(244, 63, 94, 0.12);
+  border-color: rgba(244, 63, 94, 0.38);
   color: #fca5a5;
 }
 
 .never-btn:hover {
-  background: rgba(244, 63, 94, 0.35);
+  background: rgba(244, 63, 94, 0.28);
   border-color: #f43f5e;
   color: #ffffff;
   box-shadow: 0 0 14px rgba(244, 63, 94, 0.4);
 }
 
 .skip-btn {
-  background: rgba(56, 189, 248, 0.28);
-  border-color: #38bdf8;
+  background: rgba(56, 189, 248, 0.2);
+  border-color: rgba(125, 211, 252, 0.5);
   color: #ffffff;
 }
 
 .skip-btn:hover {
-  background: #38bdf8;
-  color: #030712;
-  box-shadow: 0 0 16px rgba(56, 189, 248, 0.5);
+  background: rgba(56, 189, 248, 0.4);
+  color: #ffffff;
+  box-shadow: 0 0 18px rgba(56, 189, 248, 0.6);
 }
 
 .hud-bottom-bar {
@@ -1336,7 +1652,7 @@ onUnmounted(() => {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: linear-gradient(to top, rgba(3, 7, 18, 0.88) 0%, transparent 100%);
+  background: linear-gradient(to top, rgba(2, 4, 10, 0.88) 0%, transparent 100%);
   pointer-events: auto;
   z-index: 10;
 }
@@ -1344,16 +1660,16 @@ onUnmounted(() => {
 .hud-hint {
   font-size: 0.82rem;
   color: #94a3b8;
-  letter-spacing: 0.03em;
+  letter-spacing: 0.04em;
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
 }
 
 .hint-sparkle {
   color: #38bdf8;
   font-size: 0.95rem;
-  text-shadow: 0 0 8px #38bdf8;
+  text-shadow: 0 0 10px #38bdf8, 0 0 16px #c084fc;
   animation: pulseDot 2.0s infinite ease-in-out;
 }
 
@@ -1371,7 +1687,7 @@ onUnmounted(() => {
   color: #f87171;
 }
 
-/* 中央「実験室へ入る」アクション */
+/* 中央「物理の世界へ入る」アクション（神秘のクリスタル・ポータル） */
 .center-action-area {
   position: absolute;
   top: calc(50% + 172px);
@@ -1385,39 +1701,40 @@ onUnmounted(() => {
   display: flex;
   align-items: center;
   gap: 14px;
-  padding: 10px 26px;
-  background: rgba(15, 23, 42, 0.90);
-  border: 1.5px solid rgba(56, 189, 248, 0.7);
+  padding: 11px 28px;
+  background: rgba(8, 14, 30, 0.85);
+  border: 1.5px solid rgba(125, 211, 252, 0.65);
   border-radius: 9999px;
   color: #ffffff;
   cursor: pointer;
-  backdrop-filter: blur(12px);
-  box-shadow: 0 0 25px rgba(56, 189, 248, 0.45), 0 4px 18px rgba(0, 0, 0, 0.6);
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-  animation: enterPulse 2.8s infinite ease-in-out;
+  backdrop-filter: blur(14px);
+  box-shadow: 0 0 30px rgba(56, 189, 248, 0.4), 0 0 15px rgba(192, 132, 252, 0.25), 0 4px 20px rgba(0, 0, 0, 0.8);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  animation: enterCosmicPulse 3.0s infinite ease-in-out;
 }
 
-@keyframes enterPulse {
+@keyframes enterCosmicPulse {
   0%, 100% {
-    box-shadow: 0 0 20px rgba(56, 189, 248, 0.4), 0 4px 18px rgba(0, 0, 0, 0.6);
-    border-color: rgba(56, 189, 248, 0.65);
+    box-shadow: 0 0 25px rgba(56, 189, 248, 0.35), 0 0 12px rgba(192, 132, 252, 0.2), 0 4px 18px rgba(0, 0, 0, 0.8);
+    border-color: rgba(125, 211, 252, 0.6);
   }
   50% {
-    box-shadow: 0 0 38px rgba(56, 189, 248, 0.8), 0 0 18px rgba(129, 140, 248, 0.5), 0 4px 22px rgba(0, 0, 0, 0.7);
-    border-color: #38bdf8;
+    box-shadow: 0 0 45px rgba(56, 189, 248, 0.75), 0 0 22px rgba(192, 132, 252, 0.5), 0 0 12px rgba(251, 191, 36, 0.35), 0 4px 24px rgba(0, 0, 0, 0.9);
+    border-color: #7dd3fc;
   }
 }
 
 .enter-lab-btn:hover {
-  transform: translateY(-2px) scale(1.03);
-  background: rgba(56, 189, 248, 0.25);
-  border-color: #38bdf8;
-  box-shadow: 0 0 44px rgba(56, 189, 248, 0.9), 0 0 22px #818cf8;
+  transform: translateY(-2px) scale(1.04);
+  background: rgba(14, 23, 48, 0.92);
+  border-color: #bae6fd;
+  box-shadow: 0 0 50px rgba(56, 189, 248, 0.9), 0 0 28px #c084fc, 0 0 16px #fbbf24;
 }
 
 .enter-icon {
-  font-size: 1.35rem;
-  filter: drop-shadow(0 0 6px #38bdf8);
+  font-size: 1.25rem;
+  color: #bae6fd;
+  text-shadow: 0 0 10px #38bdf8, 0 0 18px #c084fc;
 }
 
 .enter-text-group {
