@@ -1,29 +1,29 @@
 <script setup>
 import { ref, computed, onMounted, onUnmounted, nextTick } from 'vue'
-import { useRoute } from 'vitepress'
+import { useData } from 'vitepress'
 
-const route = useRoute()
+const { frontmatter } = useData()
+
 const isClient = ref(false)
-const isVisible = ref(true)
+const isVisible = ref(false)
 const isFadingOut = ref(false)
 const isSoundEnabled = ref(false)
-const autoSkipNextTime = ref(false)
 
 const canvasRef = ref(null)
 let animationId = null
 let audioCtx = null
 let masterGain = null
 
-// アニメーション進行管理（自動で流れるように進む4秒シークエンス）
+// アニメーション進行管理（自動で流れるように進む4.0秒の映画的シークエンス）
 const simTime = ref(0)
-const maxDuration = 4.0 // 全体で4.0秒のシネマティック物理導入
+const maxDuration = 4.0
 const currentPhase = ref(0)
-const phaseCaption = ref('QUANTUM SINGULARITY & SPACETIME WARP')
+const phaseCaption = ref('SINGULARITY // QUANTUM VACUUM FLUCTUATION')
 
 const progressPercent = computed(() => Math.min(100, Math.floor((simTime.value / maxDuration) * 100)))
 const remainingSec = computed(() => Math.max(0, maxDuration - simTime.value).toFixed(1))
 
-// マウスインタラクション
+// マウスインタラクション（重力レンズ効果）
 const mouse = {
   x: -1000,
   y: -1000,
@@ -31,17 +31,17 @@ const mouse = {
   active: false
 }
 
-// 物理公式ホログラム一覧（テンポよく自動出現）
+// 物理公式ホログラム（映画的サイバーUI: HUDと干渉しない最適マージン配置）
 const formulas = [
-  { text: 'm(d²r/dt²) = F', x: 0.16, y: 0.28, size: 21, delay: 0.9 },
-  { text: 'E = mc²', x: 0.84, y: 0.26, size: 24, delay: 1.1 },
-  { text: '∇ × E = -∂B/∂t', x: 0.14, y: 0.72, size: 20, delay: 1.3 },
-  { text: 'iħ(∂ψ/∂t) = Ĥψ', x: 0.84, y: 0.72, size: 21, delay: 1.5 },
-  { text: 'F = G(Mm/r²)', x: 0.5, y: 0.13, size: 22, delay: 1.8 },
-  { text: 'T = 2π√(m/k)', x: 0.5, y: 0.90, size: 20, delay: 2.1 }
+  { text: 'm(d²r/dt²) = F', desc: 'NEWTONIAN DYNAMICS', x: 0.14, y: 0.28, size: 20, delay: 0.8 },
+  { text: 'E = mc²', desc: 'MASS-ENERGY EQUIVALENCE', x: 0.86, y: 0.26, size: 22, delay: 1.0 },
+  { text: '∇ × E = -∂B/∂t', desc: 'FARADAY-MAXWELL INDUCTION', x: 0.14, y: 0.73, size: 19, delay: 1.2 },
+  { text: 'iħ(∂ψ/∂t) = Ĥψ', desc: 'SCHRÖDINGER WAVE EQUATION', x: 0.86, y: 0.73, size: 20, delay: 1.4 },
+  { text: 'G_μν = (8πG/c⁴)T_μν', desc: 'EINSTEIN FIELD EQUATIONS', x: 0.50, y: 0.175, size: 20, delay: 1.7 },
+  { text: 'E = hν = hc/λ', desc: 'PLANCK-EINSTEIN QUANTA', x: 0.50, y: 0.87, size: 19, delay: 2.0 }
 ]
 
-// 音響シンセサイザー (Web Audio API)
+// 音響シンセサイザー (Web Audio API: 重力波＆量子シンセ音)
 function initAudio() {
   if (typeof window === 'undefined') return
   try {
@@ -49,10 +49,10 @@ function initAudio() {
     if (!AudioContext) return
     audioCtx = new AudioContext()
     masterGain = audioCtx.createGain()
-    masterGain.gain.setValueAtTime(0.18, audioCtx.currentTime)
+    masterGain.gain.setValueAtTime(0.2, audioCtx.currentTime)
     masterGain.connect(audioCtx.destination)
   } catch (e) {
-    console.warn('Web Audio API not supported', e)
+    console.warn('Web Audio not supported', e)
   }
 }
 
@@ -61,9 +61,9 @@ function toggleSound() {
   if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume()
   isSoundEnabled.value = !isSoundEnabled.value
   if (masterGain && audioCtx) {
-    masterGain.gain.setValueAtTime(isSoundEnabled.value ? 0.2 : 0, audioCtx.currentTime)
+    masterGain.gain.setValueAtTime(isSoundEnabled.value ? 0.25 : 0, audioCtx.currentTime)
     if (isSoundEnabled.value) {
-      playTone(440, 'sine', 0.2, 0.05)
+      playTone(440, 'sine', 0.2, 0.06)
     }
   }
 }
@@ -87,12 +87,13 @@ function playTone(freq, type = 'sine', duration = 0.5, gainVal = 0.1) {
 function playBigBangSound() {
   if (!isSoundEnabled.value || !audioCtx) return
   try {
+    // 重低音サブベース + ノイズスイープ
     const osc = audioCtx.createOscillator()
     const gain = audioCtx.createGain()
     osc.type = 'sawtooth'
-    osc.frequency.setValueAtTime(140, audioCtx.currentTime)
-    osc.frequency.exponentialRampToValueAtTime(32, audioCtx.currentTime + 1.2)
-    gain.gain.setValueAtTime(0.35, audioCtx.currentTime)
+    osc.frequency.setValueAtTime(160, audioCtx.currentTime)
+    osc.frequency.exponentialRampToValueAtTime(28, audioCtx.currentTime + 1.2)
+    gain.gain.setValueAtTime(0.4, audioCtx.currentTime)
     gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 1.4)
     osc.connect(gain)
     gain.connect(masterGain)
@@ -103,231 +104,245 @@ function playBigBangSound() {
 
 function playChimeSound() {
   if (!isSoundEnabled.value || !audioCtx) return
-  const notes = [329.63, 415.30, 493.88, 622.25, 659.25]
-  notes.forEach((freq, idx) => {
-    setTimeout(() => {
-      playTone(freq, 'sine', 1.5, 0.08)
-    }, idx * 90)
-  })
+  try {
+    const freqs = [523.25, 659.25, 783.99, 1046.5] // C - E - G - C 和音
+    freqs.forEach((f, i) => {
+      setTimeout(() => playTone(f, 'sine', 1.0, 0.08), i * 70)
+    })
+  } catch (e) {}
 }
 
-// 粒子システム
+// ==========================================
+// 映画級ビジュアルパーティクル & 宇宙物理
+// ==========================================
+const NUM_PARTICLES = 500
 const particles = []
-const NUM_PARTICLES = 650
 const shockwaves = []
 
-class Particle {
+class StarParticle {
   constructor(w, h) {
     this.reset(w, h, true)
   }
 
   reset(w, h, initial = false) {
-    this.w = w
-    this.h = h
-    const cx = w / 2
-    const cy = h / 2
-
     const angle = Math.random() * Math.PI * 2
-    const r = initial ? Math.pow(Math.random(), 2.0) * 15 : Math.random() * 6
-    this.x = cx + Math.cos(angle) * r
-    this.y = cy + Math.sin(angle) * r
-
-    // ビッグバン初速度
-    const speed = 250 + Math.random() * 550
-    this.vx = Math.cos(angle) * speed
-    this.vy = Math.sin(angle) * speed
-
-    this.mass = 0.5 + Math.random() * 2.0
-    this.charge = Math.random() > 0.5 ? 1 : -1
-    this.radius = 1.3 + Math.random() * 2.2
-
-    const colors = [
-      '#38bdf8', // シアン (電場/量子)
-      '#60a5fa', // スカイブルー
-      '#c084fc', // バイオレット (相対論)
-      '#fbbf24', // ゴールド (重力/エネルギー)
-      '#34d399', // エメラルド (波動)
-      '#ffffff'  // ホワイト
-    ]
-    this.color = colors[Math.floor(Math.random() * colors.length)]
-
-    // 軌道パラメータ（ケプラー楕円運動）
-    this.orbitRadius = 60 + Math.random() * (Math.min(w, h) * 0.42)
+    const dist = initial ? Math.random() * Math.max(w, h) * 0.7 : Math.random() * 80 + 10
+    this.x = w / 2 + Math.cos(angle) * dist
+    this.y = h / 2 + Math.sin(angle) * dist
+    this.vx = (Math.random() - 0.5) * 40
+    this.vy = (Math.random() - 0.5) * 40
+    this.size = Math.random() * 2.2 + 0.8
+    this.baseSize = this.size
+    this.orbitRadius = Math.random() * 260 + 60
     this.orbitAngle = Math.random() * Math.PI * 2
-    this.orbitSpeed = (1.5 + Math.random() * 2.2) * (Math.random() > 0.5 ? 1 : -1)
-    this.orbitEccentricity = 0.65 + Math.random() * 0.5
-
+    this.orbitSpeed = (Math.random() * 1.5 + 0.5) * (Math.random() < 0.5 ? 1 : -1)
+    this.hue = Math.random() < 0.6 ? 200 + Math.random() * 30 : (Math.random() < 0.7 ? 40 + Math.random() * 20 : 280 + Math.random() * 40)
+    this.alpha = Math.random() * 0.7 + 0.3
     this.trail = []
-    this.maxTrail = Math.floor(6 + Math.random() * 7)
   }
 
   update(dt, t, cx, cy, phase) {
+    // 軌跡記録
     this.trail.push({ x: this.x, y: this.y })
-    if (this.trail.length > this.maxTrail) {
-      this.trail.shift()
-    }
+    if (this.trail.length > (phase === 2 ? 10 : 5)) this.trail.shift()
 
     if (phase === 0) {
-      // Phase 0: 特異点振動（量子ゆらぎ）
-      const dr = (Math.random() - 0.5) * 6
-      this.x = cx + Math.cos(t * 18 + this.orbitAngle) * (6 + dr)
-      this.y = cy + Math.sin(t * 18 + this.orbitAngle) * (6 + dr)
-      return
-    }
-
-    if (phase === 1) {
-      // Phase 1: インフレーション膨張
+      // Phase 0: 特異点への強力な吸い込み（重力ポテンシャル井戸）
+      const dx = cx - this.x
+      const dy = cy - this.y
+      const dist = Math.hypot(dx, dy) || 1
+      const force = Math.min(2500, 45000 / (dist * dist + 100))
+      // 接線方向の角運動量保存（旋回しながら吸い込まれる）
+      const tangX = -dy / dist
+      const tangY = dx / dist
+      this.vx += (dx / dist * force + tangX * 180) * dt
+      this.vy += (dy / dist * force + tangY * 180) * dt
+      this.vx *= 0.94
+      this.vy *= 0.94
       this.x += this.vx * dt
       this.y += this.vy * dt
-      this.vx *= Math.pow(0.92, dt * 60)
-      this.vy *= Math.pow(0.92, dt * 60)
-    } else if (phase === 2) {
-      // Phase 2: 自己組織化（万有引力とケプラー楕円軌道）
-      this.orbitAngle += this.orbitSpeed * dt * 0.95
-      const targetX = cx + Math.cos(this.orbitAngle) * this.orbitRadius
-      const targetY = cy + Math.sin(this.orbitAngle) * (this.orbitRadius * this.orbitEccentricity)
-
-      const springK = 6.0
-      this.vx += (targetX - this.x) * springK * dt
-      this.vy += (targetY - this.y) * springK * dt
-      this.vx *= Math.pow(0.88, dt * 60)
-      this.vy *= Math.pow(0.88, dt * 60)
-
-      this.x += this.vx * dt * 20
-      this.y += this.vy * dt * 20
-    } else if (phase === 3) {
-      // Phase 3: ラボエンブレム・シンクロトロン光輪への収束
-      const ringRadius = 150 + (this.charge > 0 ? 35 : -25)
-      this.orbitAngle += (this.charge > 0 ? 2.8 : -2.8) * dt
-      const targetX = cx + Math.cos(this.orbitAngle) * ringRadius
-      const targetY = cy + Math.sin(this.orbitAngle) * (ringRadius * 0.42) - 40
-
-      this.x += (targetX - this.x) * 5.0 * dt
-      this.y += (targetY - this.y) * 5.0 * dt
-    } else if (phase === 4) {
-      // Phase 4: ハイパードライブ（手前へ光速ワープ）
+    } else if (phase === 1) {
+      // Phase 1: ビッグバン・インフレーション（外側への超高速拡散）
       const dx = this.x - cx
       const dy = this.y - cy
       const dist = Math.hypot(dx, dy) || 1
-      const warpSpeed = (dist * 4.0 + 450) * dt
-      this.x += (dx / dist) * warpSpeed
-      this.y += (dy / dist) * warpSpeed
-      this.radius *= 1.025
+      const blowSpeed = 650 + Math.random() * 350
+      this.vx = (dx / dist) * blowSpeed
+      this.vy = (dy / dist) * blowSpeed
+      this.x += this.vx * dt
+      this.y += this.vy * dt
+    } else if (phase === 2) {
+      // Phase 2: ケプラー運動と秩序形成（楕円軌道での優雅な旋回）
+      this.orbitAngle += this.orbitSpeed * dt * 1.4
+      const targetX = cx + Math.cos(this.orbitAngle) * this.orbitRadius * 1.3
+      const targetY = cy + Math.sin(this.orbitAngle) * (this.orbitRadius * 0.65)
+      this.x += (targetX - this.x) * 0.12
+      this.y += (targetY - this.y) * 0.12
+    } else {
+      // Phase 3 & 4: ラボワープ（外側へ広がりながら光条へと収束）
+      const dx = this.x - cx
+      const dy = this.y - cy
+      const dist = Math.hypot(dx, dy) || 1
+      this.x += (dx / dist) * (180 + t * 90) * dt
+      this.y += (dy / dist) * (180 + t * 90) * dt
     }
 
-    // マウス重力インタラクション
+    // マウス重力レンズ干渉
     if (mouse.active) {
       const mdx = mouse.x - this.x
       const mdy = mouse.y - this.y
-      const mdistSq = mdx * mdx + mdy * mdy + 400
-      const mforce = 60000 / mdistSq
-      if (mouse.isDown) {
-        this.x -= (mdx / Math.sqrt(mdistSq)) * mforce * dt * 1.5
-        this.y -= (mdy / Math.sqrt(mdistSq)) * mforce * dt * 1.5
-      } else {
-        this.x += (mdx / Math.sqrt(mdistSq)) * mforce * dt
-        this.y += (mdy / Math.sqrt(mdistSq)) * mforce * dt
+      const mdist = Math.hypot(mdx, mdy)
+      if (mdist < 180 && mdist > 5) {
+        const mForce = (1 - mdist / 180) * 120
+        this.x -= (mdx / mdist) * mForce * dt
+        this.y -= (mdy / mdist) * mForce * dt
       }
     }
   }
 
   draw(ctx, phase) {
-    if (this.trail.length < 2) return
-
-    ctx.beginPath()
-    ctx.moveTo(this.trail[0].x, this.trail[0].y)
-    for (let i = 1; i < this.trail.length; i++) {
-      ctx.lineTo(this.trail[i].x, this.trail[i].y)
+    // トレイル描画
+    if (this.trail.length > 2) {
+      ctx.beginPath()
+      ctx.moveTo(this.trail[0].x, this.trail[0].y)
+      for (let i = 1; i < this.trail.length; i++) {
+        ctx.lineTo(this.trail[i].x, this.trail[i].y)
+      }
+      ctx.strokeStyle = `hsla(${this.hue}, 95%, 65%, ${this.alpha * 0.35})`
+      ctx.lineWidth = this.size * 0.8
+      ctx.stroke()
     }
-    ctx.strokeStyle = this.color
-    ctx.globalAlpha = phase === 4 ? 0.85 : 0.45
-    ctx.lineWidth = phase === 4 ? this.radius * 2.0 : this.radius * 0.9
-    ctx.stroke()
 
-    ctx.save()
+    // 粒子本体（発光ブルーム）
     ctx.beginPath()
-    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2)
-    ctx.fillStyle = this.color
-    ctx.shadowColor = this.color
-    ctx.shadowBlur = phase === 0 ? 14 : 9
-    ctx.globalAlpha = 0.95
+    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2)
+    ctx.fillStyle = `hsla(${this.hue}, 100%, 75%, ${this.alpha})`
     ctx.fill()
-    ctx.restore()
   }
 }
 
-// 時空メッシュ（重力井戸・アインシュタインの一般相対性理論）
+// 惑星系のケプラー運動モデル
+const planets = [
+  { a: 140, b: 70, speed: 1.8, color: '#38bdf8', size: 5.5, name: 'Planet I (v ∝ 1/√r)' },
+  { a: 220, b: 110, speed: 1.1, color: '#10b981', size: 7.0, name: 'Planet II (Kepler III)' },
+  { a: 310, b: 155, speed: 0.65, color: '#f59e0b', size: 8.5, name: 'Planet III (Conservation)' }
+]
+
+// ==========================================
+// レンダリング関数
+// ==========================================
 function drawSpacetimeGrid(ctx, w, h, t, cx, cy, phase) {
   ctx.save()
-  const step = 42
+  const step = 45
+  const gridW = w
+  const gridH = h
+
+  ctx.strokeStyle = phase === 0
+    ? 'rgba(56, 189, 248, 0.16)'
+    : phase === 1
+    ? 'rgba(244, 63, 94, 0.14)'
+    : 'rgba(56, 189, 248, 0.14)'
   ctx.lineWidth = 1
 
-  // 水平線
-  for (let y = 0; y <= h; y += step) {
+  // 水平・垂直の測地線グリッドに、特異点の重力井戸ポテンシャル歪曲を適用
+  for (let x = 0; x <= gridW; x += step) {
     ctx.beginPath()
-    for (let x = 0; x <= w; x += 14) {
+    for (let y = 0; y <= gridH; y += 15) {
       const dx = x - cx
       const dy = y - cy
       const dist = Math.hypot(dx, dy)
-      let warp = 0
-      if (phase === 0) {
-        warp = Math.exp(-dist * 0.012) * (55 * (1 + Math.sin(t * 8) * 0.25))
-      } else if (phase >= 1 && phase <= 3) {
-        warp = Math.exp(-dist * 0.007) * (30 + Math.sin(t * 4 - dist * 0.03) * 6)
-      }
-      if (mouse.active) {
-        const mdist = Math.hypot(x - mouse.x, y - mouse.y)
-        warp += Math.exp(-mdist * 0.015) * (mouse.isDown ? -35 : 35)
-      }
-
-      const drawY = y + (dy / (dist || 1)) * warp * 0.7
-      if (x === 0) ctx.moveTo(x, drawY)
-      else ctx.lineTo(x, drawY)
+      // 重力ポテンシャル井戸沈み込み
+      const warp = phase === 0
+        ? Math.min(70, 8000 / (dist + 80))
+        : phase === 2
+        ? Math.min(35, 3500 / (dist + 90))
+        : 0
+      const px = x - (dx / (dist + 1)) * warp
+      const py = y - (dy / (dist + 1)) * warp
+      if (y === 0) ctx.moveTo(px, py)
+      else ctx.lineTo(px, py)
     }
-    const distYRatio = Math.abs(y - cy) / (h * 0.8)
-    const alpha = Math.max(0.06, 0.22 - distYRatio * 0.16)
-    ctx.strokeStyle = `rgba(56, 189, 248, ${alpha})`
     ctx.stroke()
   }
 
-  // 垂直線
-  for (let x = 0; x <= w; x += step) {
+  for (let y = 0; y <= gridH; y += step) {
     ctx.beginPath()
-    for (let y = 0; y <= h; y += 14) {
+    for (let x = 0; x <= gridW; x += 15) {
       const dx = x - cx
       const dy = y - cy
       const dist = Math.hypot(dx, dy)
-      let warp = 0
-      if (phase === 0) {
-        warp = Math.exp(-dist * 0.012) * (55 * (1 + Math.sin(t * 8) * 0.25))
-      } else if (phase >= 1 && phase <= 3) {
-        warp = Math.exp(-dist * 0.007) * (30 + Math.sin(t * 4 - dist * 0.03) * 6)
-      }
-      if (mouse.active) {
-        const mdist = Math.hypot(x - mouse.x, y - mouse.y)
-        warp += Math.exp(-mdist * 0.015) * (mouse.isDown ? -35 : 35)
-      }
-
-      const drawX = x + (dx / (dist || 1)) * warp * 0.7
-      if (y === 0) ctx.moveTo(drawX, y)
-      else ctx.lineTo(drawX, y)
+      const warp = phase === 0
+        ? Math.min(70, 8000 / (dist + 80))
+        : phase === 2
+        ? Math.min(35, 3500 / (dist + 90))
+        : 0
+      const px = x - (dx / (dist + 1)) * warp
+      const py = y - (dy / (dist + 1)) * warp
+      if (x === 0) ctx.moveTo(px, py)
+      else ctx.lineTo(px, py)
     }
-    const distXRatio = Math.abs(x - cx) / (w * 0.8)
-    const alpha = Math.max(0.06, 0.22 - distXRatio * 0.16)
-    ctx.strokeStyle = `rgba(56, 189, 248, ${alpha})`
     ctx.stroke()
   }
+
   ctx.restore()
 }
 
-// ショックウェーブ（衝撃波リング）
+// ブラックホール特異点・降着円盤（Phase 0）
+function drawSingularity(ctx, cx, cy, t) {
+  ctx.save()
+
+  // 1. 光子球（Photon Sphere: 光のリング）
+  const ringR = 60 + Math.sin(t * 8) * 3
+  const grad = ctx.createRadialGradient(cx, cy, 30, cx, cy, ringR + 30)
+  grad.addColorStop(0, 'rgba(0, 0, 0, 1)')
+  grad.addColorStop(0.35, 'rgba(56, 189, 248, 0.9)')
+  grad.addColorStop(0.6, 'rgba(236, 72, 153, 0.6)')
+  grad.addColorStop(1, 'rgba(3, 7, 18, 0)')
+
+  ctx.fillStyle = grad
+  ctx.beginPath()
+  ctx.arc(cx, cy, ringR + 35, 0, Math.PI * 2)
+  ctx.fill()
+
+  // 2. 降着円盤（高速回転する極薄の高温プラズマガス）
+  ctx.save()
+  ctx.translate(cx, cy)
+  ctx.rotate(0.35)
+  ctx.scale(1, 0.3)
+  ctx.beginPath()
+  ctx.arc(0, 0, 150, 0, Math.PI * 2)
+  ctx.strokeStyle = 'rgba(56, 189, 248, 0.75)'
+  ctx.lineWidth = 14
+  ctx.shadowColor = '#38bdf8'
+  ctx.shadowBlur = 24
+  ctx.stroke()
+
+  ctx.beginPath()
+  ctx.arc(0, 0, 130, 0, Math.PI * 2)
+  ctx.strokeStyle = 'rgba(251, 191, 36, 0.85)'
+  ctx.lineWidth = 6
+  ctx.stroke()
+  ctx.restore()
+
+  // 3. 事象の地平面（Event Horizon: 完全な漆黒の特異点球）
+  ctx.beginPath()
+  ctx.arc(cx, cy, 38, 0, Math.PI * 2)
+  ctx.fillStyle = '#000000'
+  ctx.fill()
+  ctx.strokeStyle = 'rgba(255, 255, 255, 0.65)'
+  ctx.lineWidth = 1.5
+  ctx.stroke()
+
+  ctx.restore()
+}
+
+// 相対論的衝撃波リング
 function drawShockwaves(ctx, dt) {
   for (let i = shockwaves.length - 1; i >= 0; i--) {
     const sw = shockwaves[i]
     sw.radius += sw.speed * dt
-    sw.alpha *= Math.pow(0.94, dt * 60)
-
-    if (sw.alpha < 0.01) {
+    sw.alpha -= 0.65 * dt
+    if (sw.alpha <= 0) {
       shockwaves.splice(i, 1)
       continue
     }
@@ -336,123 +351,245 @@ function drawShockwaves(ctx, dt) {
     ctx.beginPath()
     ctx.arc(sw.x, sw.y, sw.radius, 0, Math.PI * 2)
     ctx.strokeStyle = sw.color
-    ctx.shadowColor = sw.color
-    ctx.shadowBlur = 20
+    ctx.globalAlpha = Math.max(0, sw.alpha)
     ctx.lineWidth = sw.width
-    ctx.globalAlpha = sw.alpha
+    ctx.shadowColor = sw.color
+    ctx.shadowBlur = 18
     ctx.stroke()
     ctx.restore()
   }
 }
 
-// 物理公式ホログラムの描画
+// 3次元マクスウェル電磁波（Phase 1〜2）
+function drawMaxwellWaves(ctx, w, h, t) {
+  ctx.save()
+  const waveY = h * 0.5
+  const waveLen = 220
+  const k = (Math.PI * 2) / waveLen
+  const omega = 7.5
+
+  ctx.lineWidth = 2.5
+  // 電場 E (鉛直振動: 青)
+  ctx.beginPath()
+  for (let x = 0; x < w; x += 6) {
+    const y = waveY - Math.sin(k * x - omega * t) * 45
+    if (x === 0) ctx.moveTo(x, y)
+    else ctx.lineTo(x, y)
+  }
+  ctx.strokeStyle = 'rgba(56, 189, 248, 0.75)'
+  ctx.shadowColor = '#38bdf8'
+  ctx.shadowBlur = 10
+  ctx.stroke()
+
+  // 磁場 B (奥行き傾斜振動: ピンク/オレンジ)
+  ctx.beginPath()
+  for (let x = 0; x < w; x += 6) {
+    const slant = Math.sin(k * x - omega * t) * 35
+    const y = waveY + slant * 0.4
+    const drawX = x + slant * 0.8
+    if (x === 0) ctx.moveTo(drawX, y)
+    else ctx.lineTo(drawX, y)
+  }
+  ctx.strokeStyle = 'rgba(244, 63, 94, 0.7)'
+  ctx.shadowColor = '#f43f5e'
+  ctx.shadowBlur = 10
+  ctx.stroke()
+
+  ctx.restore()
+}
+
+// ケプラー楕円軌道（Phase 2: 惑星運動と面積速度一定）
+function drawKeplerOrbits(ctx, cx, cy, t) {
+  ctx.save()
+
+  // 中心主星（太陽）
+  ctx.beginPath()
+  ctx.arc(cx - 20, cy, 14, 0, Math.PI * 2)
+  ctx.fillStyle = '#fbbf24'
+  ctx.shadowColor = '#f59e0b'
+  ctx.shadowBlur = 24
+  ctx.fill()
+
+  // 惑星軌道と惑星
+  planets.forEach((p, idx) => {
+    // 楕円軌道線
+    ctx.beginPath()
+    ctx.ellipse(cx, cy, p.a, p.b, 0, 0, Math.PI * 2)
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.12)'
+    ctx.lineWidth = 1.2
+    ctx.setLineDash([4, 4])
+    ctx.stroke()
+    ctx.setLineDash([])
+
+    // 惑星位置（ケプラー第2法則: 近日点で高速、遠日点で低速）
+    const meanAnomaly = t * p.speed + idx * 2.1
+    const px = cx + Math.cos(meanAnomaly) * p.a
+    const py = cy + Math.sin(meanAnomaly) * p.b
+
+    // 動径ベクトル（主星と惑星を結ぶ線）
+    ctx.beginPath()
+    ctx.moveTo(cx - 20, cy)
+    ctx.lineTo(px, py)
+    ctx.strokeStyle = `${p.color}40`
+    ctx.lineWidth = 1
+    ctx.stroke()
+
+    // 惑星本体
+    ctx.beginPath()
+    ctx.arc(px, py, p.size, 0, Math.PI * 2)
+    ctx.fillStyle = p.color
+    ctx.shadowColor = p.color
+    ctx.shadowBlur = 14
+    ctx.fill()
+
+    // 速度ベクトル
+    const vx = -Math.sin(meanAnomaly) * 22
+    const vy = Math.cos(meanAnomaly) * 14
+    ctx.beginPath()
+    ctx.moveTo(px, py)
+    ctx.lineTo(px + vx, py + vy)
+    ctx.strokeStyle = '#34d399'
+    ctx.lineWidth = 2
+    ctx.stroke()
+  })
+
+  ctx.restore()
+}
+
+// 物理公式ホログラムカード
 function drawFormulas(ctx, w, h, t) {
   ctx.save()
   formulas.forEach((item) => {
-    let alpha = 0
-    if (t >= item.delay) {
-      alpha = Math.min(0.85, (t - item.delay) * 1.5)
-    }
-    if (alpha <= 0.01) return
+    if (t < item.delay) return
+    const elapsed = t - item.delay
+    const alpha = Math.min(1, elapsed * 2.2)
+    const scale = Math.min(1, 0.8 + elapsed * 0.25)
+    const px = w * item.x
+    const py = h * item.y
 
-    const px = item.x * w
-    const py = item.y * h + Math.sin(t * 2.5 + item.delay * 3) * 7
+    ctx.save()
+    ctx.translate(px, py)
+    ctx.scale(scale, scale)
 
-    ctx.font = `600 ${item.size}px "Fira Code", monospace, serif`
-    ctx.fillStyle = '#38bdf8'
-    ctx.shadowColor = '#38bdf8'
-    ctx.shadowBlur = 12
-    ctx.globalAlpha = alpha * (0.8 + Math.sin(t * 4 + item.x * 10) * 0.2)
-    ctx.textAlign = 'center'
-    ctx.textBaseline = 'middle'
-    ctx.fillText(item.text, px, py)
-
-    ctx.strokeStyle = 'rgba(56, 189, 248, 0.5)'
+    // ホログラムカード枠
+    const cardW = 210, cardH = 50
+    ctx.fillStyle = `rgba(15, 23, 42, ${Math.min(0.9, alpha * 0.88)})`
+    ctx.strokeStyle = `rgba(56, 189, 248, ${alpha * 0.7})`
     ctx.lineWidth = 1.2
-    const textW = ctx.measureText(item.text).width
-    ctx.strokeRect(px - textW / 2 - 10, py - item.size / 2 - 5, textW + 20, item.size + 10)
+    ctx.beginPath()
+    if (typeof ctx.roundRect === 'function') {
+      ctx.roundRect(-cardW / 2, -cardH / 2, cardW, cardH, 8)
+    } else {
+      ctx.rect(-cardW / 2, -cardH / 2, cardW, cardH)
+    }
+    ctx.fill()
+    ctx.stroke()
+
+    // コーナー照準マーカー
+    ctx.strokeStyle = `rgba(56, 189, 248, ${alpha * 0.9})`
+    ctx.lineWidth = 1.8
+    const mLen = 6
+    // 左上
+    ctx.beginPath(); ctx.moveTo(-cardW / 2, -cardH / 2 + mLen); ctx.lineTo(-cardW / 2, -cardH / 2); ctx.lineTo(-cardW / 2 + mLen, -cardH / 2); ctx.stroke()
+    // 右上
+    ctx.beginPath(); ctx.moveTo(cardW / 2 - mLen, -cardH / 2); ctx.lineTo(cardW / 2, -cardH / 2); ctx.lineTo(cardW / 2, -cardH / 2 + mLen); ctx.stroke()
+
+    // 公式テキスト
+    ctx.font = `700 ${item.size}px "Outfit", "Fira Code", monospace`
+    ctx.fillStyle = `rgba(241, 245, 249, ${alpha})`
+    ctx.shadowColor = '#38bdf8'
+    ctx.shadowBlur = 10
+    ctx.textAlign = 'center'
+    ctx.fillText(item.text, 0, -2)
+
+    // 解説ラベル
+    ctx.font = `600 9px monospace`
+    ctx.fillStyle = `rgba(56, 189, 248, ${alpha * 0.9})`
+    ctx.shadowBlur = 0
+    ctx.fillText(item.desc, 0, 16)
+
+    ctx.restore()
   })
   ctx.restore()
 }
 
-// 中央ラボエンブレムとタイトルの描画（Phase 3）
-function drawLabEmblem(ctx, cx, cy, t, phase, w) {
-  if (phase < 3) return
-
+// ラボタイトル・ロゴ（Phase 3 & 4）
+function drawLabTitle(ctx, cx, cy, t, phase, w) {
+  if (t < 2.7) return
   ctx.save()
-  const appear = Math.min(1, (t - 3.4) * 2.5)
-  ctx.globalAlpha = appear
 
-  // 1. ボーアの電子軌道リング（3重交差楕円）
-  ctx.strokeStyle = 'rgba(56, 189, 248, 0.85)'
-  ctx.shadowColor = '#38bdf8'
-  ctx.shadowBlur = 18
-  ctx.lineWidth = 2.5
+  const elapsed = t - 2.7
+  const alpha = Math.min(1, elapsed * 2.5)
 
-  const ringR = 95
+  // 1. ボーアの水素原子模型（3重交差楕円軌道）
+  const ringR = 90
+  ctx.lineWidth = 2
   for (let rot = 0; rot < 3; rot++) {
     ctx.save()
-    ctx.translate(cx, cy - 40)
-    ctx.rotate((rot * Math.PI) / 3 + t * 0.9)
+    ctx.translate(cx, cy - 45)
+    ctx.rotate((rot * Math.PI) / 3 + t * 1.2)
     ctx.beginPath()
     ctx.ellipse(0, 0, ringR, ringR * 0.38, 0, 0, Math.PI * 2)
+    ctx.strokeStyle = `rgba(56, 189, 248, ${alpha * 0.85})`
+    ctx.shadowColor = '#38bdf8'
+    ctx.shadowBlur = 16
     ctx.stroke()
     ctx.restore()
   }
 
   // 2. 原子の中心核
   ctx.beginPath()
-  ctx.arc(cx, cy - 40, 18 + Math.sin(t * 8) * 2.5, 0, Math.PI * 2)
-  ctx.fillStyle = '#ffffff'
+  ctx.arc(cx, cy - 45, 16 + Math.sin(t * 8) * 2, 0, Math.PI * 2)
+  ctx.fillStyle = `rgba(255, 255, 255, ${alpha})`
   ctx.shadowColor = '#38bdf8'
-  ctx.shadowBlur = 28
+  ctx.shadowBlur = 25
   ctx.fill()
 
-  // 3. タイトルテキスト背景バックライト（粒子の光彩に対する可読性担保）
-  const bgGrad = ctx.createRadialGradient(cx, cy + 120, 20, cx, cy + 120, 260)
-  bgGrad.addColorStop(0, 'rgba(3, 7, 18, 0.82)')
+  // 3. タイトル背景バックライト
+  const bgGrad = ctx.createRadialGradient(cx, cy + 90, 20, cx, cy + 90, 300)
+  bgGrad.addColorStop(0, `rgba(3, 7, 18, ${alpha * 0.9})`)
   bgGrad.addColorStop(1, 'rgba(3, 7, 18, 0)')
   ctx.fillStyle = bgGrad
-  ctx.fillRect(cx - 320, cy + 50, 640, 160)
+  ctx.fillRect(cx - 360, cy + 30, 720, 160)
 
-  ctx.shadowBlur = 16
-  ctx.shadowColor = 'rgba(56, 189, 248, 0.9)'
+  // 4. メインタイトル
   ctx.textAlign = 'center'
-
-  const fontSize = Math.min(36, Math.max(24, w * 0.042))
-  ctx.font = `800 ${fontSize}px "Outfit", "Inter", sans-serif`
-  ctx.fillStyle = '#ffffff'
-  ctx.fillText('高校物理シミュレーションラボ', cx, cy + 90)
-
-  ctx.font = `600 14px "Fira Code", monospace`
-  ctx.fillStyle = '#38bdf8'
-  ctx.shadowBlur = 10
-  ctx.fillText('INTERACTIVE PHYSICS SIMULATION LABORATORY', cx, cy + 122)
-
-  ctx.font = `500 14px sans-serif`
-  ctx.fillStyle = '#cbd5e1'
-  ctx.shadowBlur = 0
-  ctx.fillText('すべての公式には、理由がある。動く世界で物理を解き明かす。', cx, cy + 150)
-
-  // プログレスバー（自動進行ゲージ）
-  const barW = Math.min(380, w * 0.75)
-  const barH = 5
-  ctx.fillStyle = 'rgba(255, 255, 255, 0.12)'
-  ctx.fillRect(cx - barW / 2, cy + 178, barW, barH)
-
-  const progress = Math.min(1, Math.max(0, (t - 2.8) / 0.8))
-  ctx.fillStyle = '#38bdf8'
+  const fontSize = Math.min(38, Math.max(26, w * 0.045))
+  ctx.font = `900 ${fontSize}px "Outfit", "Inter", sans-serif`
+  ctx.fillStyle = `rgba(255, 255, 255, ${alpha})`
   ctx.shadowColor = '#38bdf8'
-  ctx.shadowBlur = 12
-  ctx.fillRect(cx - barW / 2, cy + 178, barW * progress, barH)
+  ctx.shadowBlur = 22
+  ctx.fillText('高校物理シミュレーションラボ', cx, cy + 85)
 
-  ctx.font = `700 11px monospace`
-  ctx.fillStyle = '#38bdf8'
-  ctx.fillText(progress >= 1 ? 'PHYSICS ENGINE SYNCHRONIZED [100%] // ENTERING LAB...' : `INITIALIZING VIRTUAL LAB [${Math.floor(progress * 100)}%] // AUTO ADVANCING...`, cx, cy + 200)
+  // サブタイトル
+  ctx.font = `700 13px "Fira Code", monospace`
+  ctx.fillStyle = `rgba(56, 189, 248, ${alpha})`
+  ctx.shadowBlur = 8
+  ctx.fillText('INTERACTIVE PHYSICS SIMULATION LABORATORY', cx, cy + 115)
+
+  // キャッチコピー
+  ctx.font = `500 14px sans-serif`
+  ctx.fillStyle = `rgba(203, 213, 225, ${alpha * 0.95})`
+  ctx.shadowBlur = 0
+  ctx.fillText('すべての公式には、理由がある。動く世界で物理を解き明かす。', cx, cy + 142)
+
+  // 水平アナモルフィック・レンズフレア光芒
+  ctx.save()
+  const flareW = Math.min(w * 0.85, 750) * Math.min(1, elapsed * 1.5)
+  const flareGrad = ctx.createLinearGradient(cx - flareW / 2, cy + 85, cx + flareW / 2, cy + 85)
+  flareGrad.addColorStop(0, 'rgba(56, 189, 248, 0)')
+  flareGrad.addColorStop(0.5, `rgba(255, 255, 255, ${alpha * 0.75})`)
+  flareGrad.addColorStop(1, 'rgba(56, 189, 248, 0)')
+  ctx.fillStyle = flareGrad
+  ctx.fillRect(cx - flareW / 2, cy + 83, flareW, 3)
+  ctx.restore()
 
   ctx.restore()
 }
 
+// ==========================================
+// アニメーションループ & 終了処理
+// ==========================================
 let startTime = null
 let lastTimestamp = 0
 let bigBangTriggered = false
@@ -480,79 +617,96 @@ function animate(timestamp) {
   const cx = w / 2
   const cy = h / 2
 
-  if (t < 0.7) {
+  // タイムラインとフェーズ自動更新
+  if (t < 0.8) {
     currentPhase.value = 0
-    phaseCaption.value = 'T = 0.000s | QUANTUM SINGULARITY & FLUCTUATION'
+    phaseCaption.value = 'T = 0.000s | SINGULARITY // QUANTUM VACUUM FLUCTUATION'
   } else if (t < 1.8) {
     currentPhase.value = 1
-    phaseCaption.value = 'T = 10⁻³²s | COSMIC INFLATION & FIELD EMERGENCE'
+    phaseCaption.value = 'T = 10⁻³²s | BIG BANG // RELATIVISTIC INFLATION & EM FIELDS'
     if (!bigBangTriggered && fixedTimeParam === null) {
       bigBangTriggered = true
       playBigBangSound()
-      shockwaves.push({ x: cx, y: cy, radius: 5, speed: 1100, alpha: 1.0, color: '#38bdf8', width: 4 })
-      shockwaves.push({ x: cx, y: cy, radius: 2, speed: 750, alpha: 0.9, color: '#fbbf24', width: 3 })
-      shockwaves.push({ x: cx, y: cy, radius: 1, speed: 450, alpha: 0.8, color: '#a855f7', width: 2 })
+      shockwaves.push({ x: cx, y: cy, radius: 5, speed: 1200, alpha: 1.0, color: '#38bdf8', width: 4.5 })
+      shockwaves.push({ x: cx, y: cy, radius: 2, speed: 850, alpha: 0.9, color: '#fbbf24', width: 3.5 })
+      shockwaves.push({ x: cx, y: cy, radius: 1, speed: 500, alpha: 0.85, color: '#f43f5e', width: 2.5 })
     }
   } else if (t < 2.8) {
     currentPhase.value = 2
-    phaseCaption.value = 'T = 3.8×10⁵ yr | SELF-ORGANIZATION & GRAVITATIONAL ORBITS'
-  } else if (t < 3.6) {
+    phaseCaption.value = 'T = 3.8×10⁵ yr | ORDER EMERGENCE // KEPLERIAN GRAVITATIONAL BALLET'
+  } else if (t < 3.5) {
     currentPhase.value = 3
-    phaseCaption.value = 'REAL-TIME PHYSICS ENGINE | SIMULATION READY'
+    phaseCaption.value = 'REAL-TIME PHYSICS ENGINE // SYSTEM SYNCHRONIZED [100%]'
     if (!chimeTriggered && fixedTimeParam === null) {
       chimeTriggered = true
       playChimeSound()
     }
   } else if (t < maxDuration) {
     currentPhase.value = 4
-    phaseCaption.value = 'AUTO WARP TO LABORATORY | ENTERING MATRIX'
+    phaseCaption.value = 'WARP ACCELERATION // ENTERING SIMULATION LABORATORY'
   } else {
+    // 4.0秒経過で自動フェードアウト＆サイトへ着地
     finishIntro()
     return
   }
 
-  // 画面クリア（加算合成＆微小残像トレイル）
-  ctx.save()
-  ctx.fillStyle = currentPhase.value === 4 ? 'rgba(3, 7, 18, 0.25)' : 'rgba(3, 7, 18, 0.38)'
-  ctx.fillRect(0, 0, w, h)
-  ctx.restore()
+  try {
+    // 画面クリア（加算合成＆微小残像トレイル）
+    ctx.save()
+    ctx.fillStyle = currentPhase.value === 4 ? 'rgba(3, 7, 18, 0.22)' : 'rgba(3, 7, 18, 0.36)'
+    ctx.fillRect(0, 0, w, h)
+    ctx.restore()
 
-  // 1. 時空グリッド
-  drawSpacetimeGrid(ctx, w, h, t, cx, cy, currentPhase.value)
+    // 1. 時空測地線グリッド
+    drawSpacetimeGrid(ctx, w, h, t, cx, cy, currentPhase.value)
 
-  // 2. 粒子シミュレーション更新と描画
-  ctx.save()
-  ctx.globalCompositeOperation = 'lighter'
-  const stepDt = fixedTimeParam !== null ? 0.016 : Math.min(0.033, 1 / 60)
-  for (let i = 0; i < particles.length; i++) {
-    particles[i].update(stepDt, t, cx, cy, currentPhase.value)
-    particles[i].draw(ctx, currentPhase.value)
+    // 2. 特異点（Phase 0）
+    if (currentPhase.value === 0) {
+      drawSingularity(ctx, cx, cy, t)
+    }
+
+    // 3. マクスウェル電磁波（Phase 1〜2）
+    if (currentPhase.value === 1 || currentPhase.value === 2) {
+      drawMaxwellWaves(ctx, w, h, t)
+    }
+
+    // 4. ケプラー惑星軌道（Phase 2）
+    if (currentPhase.value === 2) {
+      drawKeplerOrbits(ctx, cx, cy, t)
+    }
+
+    // 5. 粒子シミュレーション更新と描画
+    ctx.save()
+    ctx.globalCompositeOperation = 'lighter'
+    const stepDt = fixedTimeParam !== null ? 0.016 : Math.min(0.033, 1 / 60)
+    for (let i = 0; i < particles.length; i++) {
+      particles[i].update(stepDt, t, cx, cy, currentPhase.value)
+      particles[i].draw(ctx, currentPhase.value)
+    }
+    ctx.restore()
+
+    // 6. 相対論的ショックウェーブ
+    drawShockwaves(ctx, stepDt)
+
+    // 7. 公式ホログラム
+    if (currentPhase.value >= 1) {
+      drawFormulas(ctx, w, h, t)
+    }
+
+    // 8. ラボエンブレム・タイトル（Phase 3〜4）
+    drawLabTitle(ctx, cx, cy, t, currentPhase.value, w)
+  } catch (err) {
+    phaseCaption.value = 'CANVAS ERROR: ' + err.message
+    console.error('INTRO RENDER ERROR:', err)
   }
-  ctx.restore()
 
-  // 3. ショックウェーブ
-  drawShockwaves(ctx, stepDt)
-
-  // 4. 公式ホログラム（Phase 1以降）
-  if (currentPhase.value >= 1) {
-    drawFormulas(ctx, w, h, t)
-  }
-
-  // 5. ラボエンブレム・タイトル（Phase 3）
-  drawLabEmblem(ctx, cx, cy, t, currentPhase.value, w)
-
-  if (fixedTimeParam === null) {
-    animationId = requestAnimationFrame(animate)
-  }
+  animationId = requestAnimationFrame(animate)
 }
 
+// イントロ終了処理
 function finishIntro() {
   if (isFadingOut.value) return
   isFadingOut.value = true
-
-  if (autoSkipNextTime.value && typeof window !== 'undefined') {
-    localStorage.setItem('physics_sim_intro_skip', 'true')
-  }
 
   setTimeout(() => {
     isVisible.value = false
@@ -560,16 +714,21 @@ function finishIntro() {
     if (typeof document !== 'undefined') {
       document.body.style.overflow = ''
     }
-  }, 450)
+  }, 420)
+}
+
+// 「次からは再生しない」ボタンを押したとき
+function neverPlayAgain() {
+  if (typeof window !== 'undefined') {
+    localStorage.setItem('physics_sim_intro_skip', 'true')
+  }
+  finishIntro()
 }
 
 function handleResize() {
   if (!canvasRef.value) return
-  const dpr = window.devicePixelRatio || 1
-  canvasRef.value.width = window.innerWidth * dpr
-  canvasRef.value.height = window.innerHeight * dpr
-  const ctx = canvasRef.value.getContext('2d')
-  ctx.scale(dpr, dpr)
+  canvasRef.value.width = window.innerWidth
+  canvasRef.value.height = window.innerHeight
 }
 
 function onMouseMove(e) {
@@ -584,12 +743,12 @@ function onMouseDown(e) {
     x: e.clientX,
     y: e.clientY,
     radius: 4,
-    speed: 600,
+    speed: 650,
     alpha: 0.9,
     color: '#38bdf8',
     width: 2.5
   })
-  playTone(587.33, 'sine', 0.3, 0.08)
+  playTone(587.33, 'sine', 0.25, 0.08)
 }
 
 function onMouseUp() {
@@ -610,67 +769,58 @@ function onKeyDown(e) {
   }
 }
 
-function playIntroManually() {
-  simTime.value = 0
-  startTime = null
-  lastTimestamp = 0
-  fixedTimeParam = null
-  bigBangTriggered = false
-  chimeTriggered = false
-  isFadingOut.value = false
-  isVisible.value = true
+onMounted(async () => {
+  isClient.value = true
 
+  // URLパラメータ（テスト・検証用）
+  const urlParams = typeof window !== 'undefined' ? new URLSearchParams(window.location.search) : null
+  const testT = urlParams?.get('intro_t') ? parseFloat(urlParams.get('intro_t')) : null
+
+  // 永続スキップ（次からは再生しない）が設定されている場合は即時非表示（※テストURL時を除く）
+  const permanentSkip = localStorage.getItem('physics_sim_intro_skip')
+  if (permanentSkip === 'true' && testT === null) {
+    isVisible.value = false
+    return
+  }
+
+  // ホーム画面判定（frontmatter.layout === 'home' または / または /index.html）
+  const isHome = testT !== null || frontmatter.value?.layout === 'home' ||
+    (typeof window !== 'undefined' && (window.location.pathname === '/' || window.location.pathname.endsWith('/index.html') || window.location.pathname === ''))
+
+  if (!isHome) {
+    isVisible.value = false
+    return
+  }
+
+  isVisible.value = true
   if (typeof document !== 'undefined') {
     document.body.style.overflow = 'hidden'
   }
+
+  await nextTick()
+
+  window.addEventListener('resize', handleResize)
+  window.addEventListener('keydown', onKeyDown)
 
   handleResize()
   const w = window.innerWidth
   const h = window.innerHeight
   particles.length = 0
   for (let i = 0; i < NUM_PARTICLES; i++) {
-    particles.push(new Particle(w, h))
+    particles.push(new StarParticle(w, h))
   }
-  shockwaves.length = 0
-
-  if (animationId) cancelAnimationFrame(animationId)
-  animationId = requestAnimationFrame(animate)
-}
-
-onMounted(async () => {
-  isClient.value = true
-  await nextTick()
-
-  const permanentSkip = localStorage.getItem('physics_sim_intro_skip')
-
-  window.addEventListener('play-physics-intro', playIntroManually)
-  window.addEventListener('resize', handleResize)
-  window.addEventListener('keydown', onKeyDown)
-
-  const urlParams = typeof window !== 'undefined' ? new URLSearchParams(window.location.search) : null
-  const testT = urlParams?.get('intro_t') ? parseFloat(urlParams.get('intro_t')) : null
 
   if (testT !== null && !isNaN(testT)) {
     fixedTimeParam = testT
-    isVisible.value = true
-    document.body.style.overflow = 'hidden'
-    handleResize()
-    const w = window.innerWidth
-    const h = window.innerHeight
-    const cx = w / 2
-    const cy = h / 2
-    particles.length = 0
-    for (let i = 0; i < NUM_PARTICLES; i++) {
-      particles.push(new Particle(w, h))
-    }
-    const simDt = 0.016
     let curT = 0
+    const simDt = 0.016
+    const cx = w / 2, cy = h / 2
     while (curT < testT) {
       let phase = 0
-      if (curT < 0.7) phase = 0
+      if (curT < 0.8) phase = 0
       else if (curT < 1.8) phase = 1
       else if (curT < 2.8) phase = 2
-      else if (curT < 3.6) phase = 3
+      else if (curT < 3.5) phase = 3
       else phase = 4
       for (let i = 0; i < particles.length; i++) {
         particles[i].update(simDt, curT, cx, cy, phase)
@@ -678,43 +828,19 @@ onMounted(async () => {
       curT += simDt
     }
     if (testT >= 0.8 && testT <= 2.0) {
-      const swRadius = (testT - 0.7) * 550
-      shockwaves.push({ x: cx, y: cy, radius: swRadius, speed: 0, alpha: 0.85, color: '#38bdf8', width: 3.5 })
-      shockwaves.push({ x: cx, y: cy, radius: swRadius * 0.7, speed: 0, alpha: 0.7, color: '#fbbf24', width: 2.5 })
+      const swRadius = (testT - 0.8) * 600
+      shockwaves.push({ x: cx, y: cy, radius: swRadius, speed: 0, alpha: 0.85, color: '#38bdf8', width: 4 })
+      shockwaves.push({ x: cx, y: cy, radius: swRadius * 0.7, speed: 0, alpha: 0.75, color: '#fbbf24', width: 3 })
     }
-    animate(performance.now())
+    animationId = requestAnimationFrame(animate)
     return
   }
 
-  // 永続スキップ設定がある場合は非表示
-  if (permanentSkip === 'true') {
-    isVisible.value = false
-    return
-  }
-
-  // 個別シミュレーター記事などを直接開いたときは邪魔にならないよう非表示（トップページ / のみ自動起動）
-  const currentPath = route.path || '/'
-  const isHome = currentPath === '/' || currentPath === '/index.html'
-  if (!isHome) {
-    isVisible.value = false
-    return
-  }
-
-  isVisible.value = true
-  document.body.style.overflow = 'hidden'
-
-  handleResize()
-  const w = window.innerWidth
-  const h = window.innerHeight
-  for (let i = 0; i < NUM_PARTICLES; i++) {
-    particles.push(new Particle(w, h))
-  }
   animationId = requestAnimationFrame(animate)
 })
 
 onUnmounted(() => {
   if (typeof window !== 'undefined') {
-    window.removeEventListener('play-physics-intro', playIntroManually)
     window.removeEventListener('resize', handleResize)
     window.removeEventListener('keydown', onKeyDown)
   }
@@ -742,22 +868,23 @@ onUnmounted(() => {
       @touchmove="onTouchMove"
       @touchstart="onMouseDown"
     >
-      <!-- 最上部 全画面タイムライン自動進行インジケーター -->
+      <!-- 最上部 全画面タイムライン自動進行インジケーター (0% -> 100%) -->
       <div class="top-timeline-wrap">
         <div class="top-timeline-bar" :style="{ width: progressPercent + '%' }"></div>
       </div>
 
       <canvas ref="canvasRef" class="physics-canvas"></canvas>
 
+      <!-- HUD Top Bar -->
       <div class="hud-top-bar">
         <div class="hud-badge-group">
           <div class="hud-badge">
             <span class="pulsing-dot"></span>
-            <span class="hud-title">PHYSICS ENGINE v2.6 // REAL-TIME CALCULATION</span>
+            <span class="hud-title">PHYSICS ENGINE v3.0 // REAL-TIME CALCULATION</span>
           </div>
           <div class="hud-auto-badge">
             <span class="pulsing-radar"></span>
-            <span class="auto-seq-text">⚡ SEQUENCE AUTO-ADVANCING [{{ progressPercent }}%] // あと {{ remainingSec }} 秒</span>
+            <span class="auto-seq-text">⚡ AUTO-ADVANCING [{{ progressPercent }}%] // 残り {{ remainingSec }}s で自動移行</span>
           </div>
         </div>
 
@@ -769,28 +896,35 @@ onUnmounted(() => {
           <button
             class="hud-btn sound-btn"
             @click.stop="toggleSound"
-            :title="isSoundEnabled ? 'サウンド OFF' : 'サウンド ON (物理シンセ音)'"
+            :title="isSoundEnabled ? 'サウンド OFF' : 'サウンド ON (重力シンセ音)'"
           >
             {{ isSoundEnabled ? '🔊 SOUND ON' : '🔈 SOUND OFF' }}
           </button>
           <button
+            class="hud-btn never-btn"
+            @click.stop="neverPlayAgain"
+            title="次回以降はこのアニメーションを表示せず直接サイトを開きます"
+          >
+            ✕ 次からは再生しない
+          </button>
+          <button
             class="hud-btn skip-btn"
             @click.stop="finishIntro"
-            title="すぐにラボへ入場 (ESC)"
+            title="今すぐサイトへ進む (ESC)"
           >
-            ⏩ すぐにラボへ [ESC]
+            ⏩ スキップしてサイトへ [ESC]
           </button>
         </div>
       </div>
 
+      <!-- HUD Bottom Bar -->
       <div class="hud-bottom-bar">
         <div class="hud-hint">
-          ⏱️ アニメーションは自動で進行します（画面マウス移動で時空歪曲、クリックで量子波干渉が可能）
+          ⏱️ 4.0秒で自動的にラボへ移行します（画面マウス移動で時空を重力レンズ歪曲・クリックで量子波干渉が可能）
         </div>
-        <label class="skip-next-label">
-          <input type="checkbox" v-model="autoSkipNextTime" />
-          次回から自動スキップ
-        </label>
+        <button class="bottom-never-btn" @click.stop="neverPlayAgain">
+          次からは再生しない
+        </button>
       </div>
     </div>
   </ClientOnly>
@@ -803,17 +937,17 @@ onUnmounted(() => {
   left: 0;
   width: 100vw;
   height: 100vh;
-  z-index: 999999;
+  z-index: 9999999;
   background-color: #030712;
   overflow: hidden;
   user-select: none;
   cursor: crosshair;
-  transition: opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1), transform 0.45s ease-out;
+  transition: opacity 0.42s cubic-bezier(0.16, 1, 0.3, 1), transform 0.42s ease-out;
 }
 
 .physics-intro-overlay.fade-out {
   opacity: 0;
-  transform: scale(1.04);
+  transform: scale(1.05);
   pointer-events: none;
 }
 
@@ -854,7 +988,7 @@ onUnmounted(() => {
   justify-content: space-between;
   align-items: center;
   pointer-events: none;
-  background: linear-gradient(to bottom, rgba(3, 7, 18, 0.85) 0%, transparent 100%);
+  background: linear-gradient(to bottom, rgba(3, 7, 18, 0.88) 0%, transparent 100%);
   z-index: 10;
 }
 
@@ -863,6 +997,39 @@ onUnmounted(() => {
   align-items: center;
   gap: 10px;
   flex-wrap: wrap;
+}
+
+.hud-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(56, 189, 248, 0.12);
+  border: 1px solid rgba(56, 189, 248, 0.32);
+  padding: 4px 12px;
+  border-radius: 9999px;
+  backdrop-filter: blur(8px);
+}
+
+.pulsing-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #38bdf8;
+  box-shadow: 0 0 10px #38bdf8;
+  animation: pulseDot 1.2s infinite ease-in-out;
+}
+
+@keyframes pulseDot {
+  0%, 100% { opacity: 0.4; transform: scale(0.85); }
+  50% { opacity: 1; transform: scale(1.2); }
+}
+
+.hud-title {
+  font-family: 'Fira Code', monospace;
+  font-size: 0.74rem;
+  letter-spacing: 0.08em;
+  color: #38bdf8;
+  font-weight: 700;
 }
 
 .hud-auto-badge {
@@ -887,52 +1054,19 @@ onUnmounted(() => {
 
 .auto-seq-text {
   font-family: 'Fira Code', monospace;
-  font-size: 0.73rem;
+  font-size: 0.72rem;
   letter-spacing: 0.05em;
   color: #34d399;
   font-weight: 700;
 }
 
-.hud-badge {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  background: rgba(56, 189, 248, 0.12);
-  border: 1px solid rgba(56, 189, 248, 0.3);
-  padding: 4px 12px;
-  border-radius: 9999px;
-  backdrop-filter: blur(8px);
-}
-
-.pulsing-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: #38bdf8;
-  box-shadow: 0 0 10px #38bdf8;
-  animation: pulseDot 1.2s infinite ease-in-out;
-}
-
-@keyframes pulseDot {
-  0%, 100% { opacity: 0.4; transform: scale(0.85); }
-  50% { opacity: 1; transform: scale(1.2); }
-}
-
-.hud-title {
-  font-family: 'Fira Code', monospace;
-  font-size: 0.75rem;
-  letter-spacing: 0.08em;
-  color: #38bdf8;
-  font-weight: 700;
-}
-
 .hud-caption {
   font-family: 'Fira Code', monospace;
-  font-size: 0.82rem;
+  font-size: 0.8rem;
   color: #e2e8f0;
   letter-spacing: 0.05em;
   text-shadow: 0 0 8px rgba(56, 189, 248, 0.6);
-  background: rgba(15, 23, 42, 0.6);
+  background: rgba(15, 23, 42, 0.65);
   padding: 4px 16px;
   border-radius: 8px;
   border: 1px solid rgba(255, 255, 255, 0.08);
@@ -940,7 +1074,7 @@ onUnmounted(() => {
 
 .hud-controls {
   display: flex;
-  gap: 12px;
+  gap: 10px;
   pointer-events: auto;
 }
 
@@ -960,15 +1094,27 @@ onUnmounted(() => {
 }
 
 .hud-btn:hover {
-  background: rgba(56, 189, 248, 0.2);
+  background: rgba(56, 189, 248, 0.22);
   border-color: #38bdf8;
   color: #38bdf8;
   transform: translateY(-1px);
-  box-shadow: 0 0 12px rgba(56, 189, 248, 0.3);
+}
+
+.never-btn {
+  background: rgba(244, 63, 94, 0.16);
+  border-color: rgba(244, 63, 94, 0.45);
+  color: #fca5a5;
+}
+
+.never-btn:hover {
+  background: rgba(244, 63, 94, 0.35);
+  border-color: #f43f5e;
+  color: #ffffff;
+  box-shadow: 0 0 14px rgba(244, 63, 94, 0.4);
 }
 
 .skip-btn {
-  background: rgba(56, 189, 248, 0.25);
+  background: rgba(56, 189, 248, 0.28);
   border-color: #38bdf8;
   color: #ffffff;
 }
@@ -976,6 +1122,7 @@ onUnmounted(() => {
 .skip-btn:hover {
   background: #38bdf8;
   color: #030712;
+  box-shadow: 0 0 16px rgba(56, 189, 248, 0.5);
 }
 
 .hud-bottom-bar {
@@ -987,7 +1134,7 @@ onUnmounted(() => {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: linear-gradient(to top, rgba(3, 7, 18, 0.85) 0%, transparent 100%);
+  background: linear-gradient(to top, rgba(3, 7, 18, 0.88) 0%, transparent 100%);
   pointer-events: auto;
   z-index: 10;
 }
@@ -998,26 +1145,32 @@ onUnmounted(() => {
   letter-spacing: 0.03em;
 }
 
-.skip-next-label {
-  display: flex;
-  align-items: center;
-  gap: 8px;
+.bottom-never-btn {
+  background: transparent;
+  border: none;
+  color: #94a3b8;
   font-size: 0.8rem;
-  color: #cbd5e1;
+  text-decoration: underline;
   cursor: pointer;
+  transition: color 0.18s;
 }
 
-.skip-next-label input[type="checkbox"] {
-  accent-color: #38bdf8;
-  cursor: pointer;
+.bottom-never-btn:hover {
+  color: #f87171;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 900px) {
   .hud-caption {
     display: none;
   }
-  .hud-hint {
+}
+
+@media (max-width: 640px) {
+  .hud-badge-group {
     display: none;
+  }
+  .hud-hint {
+    font-size: 0.74rem;
   }
 }
 </style>
