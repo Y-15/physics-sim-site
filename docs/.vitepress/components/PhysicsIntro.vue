@@ -14,14 +14,17 @@ let animationId = null
 let audioCtx = null
 let masterGain = null
 
-// アニメーション進行管理（自動で流れるように進む4.0秒の映画的シークエンス）
+// アニメーション進行管理（映画的シークエンス + 落ち着いた余韻・アンビエントモード）
 const simTime = ref(0)
-const maxDuration = 4.0
+const initDuration = 3.6 // 宇宙創生からタイトル完成まで
+const totalMaxDuration = 7.8 // ゆったり鑑賞できる十分な余韻時間（合計約7.8秒）
 const currentPhase = ref(0)
 const phaseCaption = ref('SINGULARITY // QUANTUM VACUUM FLUCTUATION')
 
-const progressPercent = computed(() => Math.min(100, Math.floor((simTime.value / maxDuration) * 100)))
-const remainingSec = computed(() => Math.max(0, maxDuration - simTime.value).toFixed(1))
+// タイトルが立ち上がったら「実験室へ入る」ボタンを優美に表示
+const isReadyToEnter = computed(() => simTime.value >= 3.4)
+// 初期チャージ進行度（0%〜100%）
+const progressPercent = computed(() => Math.min(100, Math.floor((simTime.value / initDuration) * 100)))
 
 // マウスインタラクション（重力レンズ効果）
 const mouse = {
@@ -38,7 +41,7 @@ const formulas = [
   { text: '∇ × E = -∂B/∂t', desc: 'FARADAY-MAXWELL INDUCTION', x: 0.14, y: 0.73, size: 19, delay: 1.2 },
   { text: 'iħ(∂ψ/∂t) = Ĥψ', desc: 'SCHRÖDINGER WAVE EQUATION', x: 0.86, y: 0.73, size: 20, delay: 1.4 },
   { text: 'G_μν = (8πG/c⁴)T_μν', desc: 'EINSTEIN FIELD EQUATIONS', x: 0.50, y: 0.175, size: 20, delay: 1.7 },
-  { text: 'E = hν = hc/λ', desc: 'PLANCK-EINSTEIN QUANTA', x: 0.50, y: 0.87, size: 19, delay: 2.0 }
+  { text: 'E = hν = hc/λ', desc: 'PLANCK-EINSTEIN QUANTA', x: 0.50, y: 0.90, size: 19, delay: 2.0 }
 ]
 
 // 音響シンセサイザー (Web Audio API: 重力波＆量子シンセ音)
@@ -634,18 +637,18 @@ function animate(timestamp) {
   } else if (t < 2.8) {
     currentPhase.value = 2
     phaseCaption.value = 'T = 3.8×10⁵ yr | ORDER EMERGENCE // KEPLERIAN GRAVITATIONAL BALLET'
-  } else if (t < 3.5) {
+  } else if (t < initDuration) {
     currentPhase.value = 3
-    phaseCaption.value = 'REAL-TIME PHYSICS ENGINE // SYSTEM SYNCHRONIZED [100%]'
+    phaseCaption.value = 'T = 13.8 Gyr | ATOMIC EMERGENCE // LABORATORY HARMONY'
     if (!chimeTriggered && fixedTimeParam === null) {
       chimeTriggered = true
       playChimeSound()
     }
-  } else if (t < maxDuration) {
+  } else if (t < totalMaxDuration) {
     currentPhase.value = 4
-    phaseCaption.value = 'WARP ACCELERATION // ENTERING SIMULATION LABORATORY'
+    phaseCaption.value = 'SYSTEM READY // ALL LAWS SYNCHRONIZED [CLICK TO ENTER]'
   } else {
-    // 4.0秒経過で自動フェードアウト＆サイトへ着地
+    // 7.8秒経過（十分な余韻時間）で自動的に優雅なロングフェードアウト
     finishIntro()
     return
   }
@@ -653,7 +656,7 @@ function animate(timestamp) {
   try {
     // 画面クリア（加算合成＆微小残像トレイル）
     ctx.save()
-    ctx.fillStyle = currentPhase.value === 4 ? 'rgba(3, 7, 18, 0.22)' : 'rgba(3, 7, 18, 0.36)'
+    ctx.fillStyle = currentPhase.value === 4 ? 'rgba(3, 7, 18, 0.30)' : 'rgba(3, 7, 18, 0.36)'
     ctx.fillRect(0, 0, w, h)
     ctx.restore()
 
@@ -703,7 +706,7 @@ function animate(timestamp) {
   animationId = requestAnimationFrame(animate)
 }
 
-// イントロ終了処理
+// イントロ終了処理（1.0秒のシネマティック・ディゾルブ）
 function finishIntro() {
   if (isFadingOut.value) return
   isFadingOut.value = true
@@ -714,7 +717,7 @@ function finishIntro() {
     if (typeof document !== 'undefined') {
       document.body.style.overflow = ''
     }
-  }, 420)
+  }, 1000)
 }
 
 // 「次からは再生しない」ボタンを押したとき
@@ -751,6 +754,14 @@ function onMouseDown(e) {
   playTone(587.33, 'sine', 0.25, 0.08)
 }
 
+function onOverlayClick(e) {
+  onMouseDown(e)
+  // タイトルが立ち上がった後は画面のどこをクリックしても自分のペースで入室可能
+  if (isReadyToEnter.value) {
+    finishIntro()
+  }
+}
+
 function onMouseUp() {
   mouse.isDown = false
 }
@@ -764,7 +775,7 @@ function onTouchMove(e) {
 }
 
 function onKeyDown(e) {
-  if (e.key === 'Escape' || e.key === ' ') {
+  if (e.key === 'Escape' || e.key === ' ' || e.key === 'Enter') {
     finishIntro()
   }
 }
@@ -861,16 +872,20 @@ onUnmounted(() => {
     <div
       v-if="isVisible"
       class="physics-intro-overlay"
-      :class="{ 'fade-out': isFadingOut }"
+      :class="{ 'fade-out': isFadingOut, 'ready-state': isReadyToEnter }"
       @mousemove="onMouseMove"
-      @mousedown="onMouseDown"
+      @mousedown="onOverlayClick"
       @mouseup="onMouseUp"
       @touchmove="onTouchMove"
-      @touchstart="onMouseDown"
+      @touchstart="onOverlayClick"
     >
-      <!-- 最上部 全画面タイムライン自動進行インジケーター (0% -> 100%) -->
+      <!-- 最上部 全画面タイムライン進行インジケーター (0% -> 100%) -->
       <div class="top-timeline-wrap">
-        <div class="top-timeline-bar" :style="{ width: progressPercent + '%' }"></div>
+        <div
+          class="top-timeline-bar"
+          :class="{ complete: isReadyToEnter }"
+          :style="{ width: progressPercent + '%' }"
+        ></div>
       </div>
 
       <canvas ref="canvasRef" class="physics-canvas"></canvas>
@@ -880,11 +895,13 @@ onUnmounted(() => {
         <div class="hud-badge-group">
           <div class="hud-badge">
             <span class="pulsing-dot"></span>
-            <span class="hud-title">PHYSICS ENGINE v3.0 // REAL-TIME CALCULATION</span>
+            <span class="hud-title">PHYSICS ENGINE v3.0</span>
           </div>
-          <div class="hud-auto-badge">
-            <span class="pulsing-radar"></span>
-            <span class="auto-seq-text">⚡ AUTO-ADVANCING [{{ progressPercent }}%] // 残り {{ remainingSec }}s で自動移行</span>
+          <div class="hud-status-badge" :class="{ 'status-ready': isReadyToEnter }">
+            <span class="pulsing-radar" :class="{ 'radar-ready': isReadyToEnter }"></span>
+            <span class="status-seq-text">
+              {{ isReadyToEnter ? '✨ SYSTEM READY // ALL MODULES SYNCHRONIZED' : `⚡ INITIALIZING CORE [${progressPercent}%]` }}
+            </span>
           </div>
         </div>
 
@@ -917,10 +934,28 @@ onUnmounted(() => {
         </div>
       </div>
 
+      <!-- 中央「実験室へ入る」アクション（タイトル完成後にフワッと優美に現れる） -->
+      <transition name="enter-btn-fade">
+        <div
+          v-if="isReadyToEnter"
+          class="center-action-area"
+          @click.stop="finishIntro"
+        >
+          <button class="enter-lab-btn" @click.stop="finishIntro">
+            <span class="enter-icon">🚀</span>
+            <span class="enter-text-group">
+              <span class="enter-main-title">実験室へ入る</span>
+              <span class="enter-sub-title">ENTER LABORATORY</span>
+            </span>
+            <span class="enter-kbd-badge">↵ Enter</span>
+          </button>
+        </div>
+      </transition>
+
       <!-- HUD Bottom Bar -->
       <div class="hud-bottom-bar">
         <div class="hud-hint">
-          ⏱️ 4.0秒で自動的にラボへ移行します（画面マウス移動で時空を重力レンズ歪曲・クリックで量子波干渉が可能）
+          <span class="hint-sparkle">✦</span> 「実験室へ入る」ボタンまたは画面クリックでサイトへ進みます（放置でも自然に移行します）
         </div>
         <button class="bottom-never-btn" @click.stop="neverPlayAgain">
           次からは再生しない
@@ -942,12 +977,12 @@ onUnmounted(() => {
   overflow: hidden;
   user-select: none;
   cursor: crosshair;
-  transition: opacity 0.42s cubic-bezier(0.16, 1, 0.3, 1), transform 0.42s ease-out;
+  transition: opacity 1.0s cubic-bezier(0.16, 1, 0.3, 1), transform 1.0s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .physics-intro-overlay.fade-out {
   opacity: 0;
-  transform: scale(1.05);
+  transform: scale(1.03);
   pointer-events: none;
 }
 
@@ -960,7 +995,7 @@ onUnmounted(() => {
   display: block;
 }
 
-/* 最上部 全画面タイムライン自動進行インジケーター */
+/* 最上部 全画面タイムライン進行インジケーター */
 .top-timeline-wrap {
   position: absolute;
   top: 0;
@@ -976,6 +1011,11 @@ onUnmounted(() => {
   background: linear-gradient(90deg, #38bdf8, #818cf8, #ec4899);
   box-shadow: 0 0 12px #38bdf8, 0 0 4px #ec4899;
   transition: width 0.08s linear;
+}
+
+.top-timeline-bar.complete {
+  background: linear-gradient(90deg, #10b981, #38bdf8, #818cf8);
+  box-shadow: 0 0 16px #10b981, 0 0 8px #38bdf8;
 }
 
 .hud-top-bar {
@@ -1032,32 +1072,48 @@ onUnmounted(() => {
   font-weight: 700;
 }
 
-.hud-auto-badge {
+.hud-status-badge {
   display: flex;
   align-items: center;
   gap: 6px;
-  background: rgba(16, 185, 129, 0.12);
-  border: 1px solid rgba(16, 185, 129, 0.35);
+  background: rgba(56, 189, 248, 0.12);
+  border: 1px solid rgba(56, 189, 248, 0.35);
   padding: 4px 12px;
   border-radius: 9999px;
   backdrop-filter: blur(8px);
+  transition: all 0.4s ease;
+}
+
+.hud-status-badge.status-ready {
+  background: rgba(16, 185, 129, 0.15);
+  border-color: rgba(16, 185, 129, 0.45);
 }
 
 .pulsing-radar {
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: #10b981;
-  box-shadow: 0 0 8px #10b981;
-  animation: pulseDot 1.0s infinite ease-in-out;
+  background: #38bdf8;
+  box-shadow: 0 0 8px #38bdf8;
+  animation: pulseDot 1.2s infinite ease-in-out;
 }
 
-.auto-seq-text {
+.pulsing-radar.radar-ready {
+  background: #10b981;
+  box-shadow: 0 0 10px #10b981;
+}
+
+.status-seq-text {
   font-family: 'Fira Code', monospace;
   font-size: 0.72rem;
   letter-spacing: 0.05em;
-  color: #34d399;
+  color: #7dd3fc;
   font-weight: 700;
+  transition: color 0.4s ease;
+}
+
+.hud-status-badge.status-ready .status-seq-text {
+  color: #6ee7b7;
 }
 
 .hud-caption {
@@ -1143,6 +1199,16 @@ onUnmounted(() => {
   font-size: 0.82rem;
   color: #94a3b8;
   letter-spacing: 0.03em;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.hint-sparkle {
+  color: #38bdf8;
+  font-size: 0.95rem;
+  text-shadow: 0 0 8px #38bdf8;
+  animation: pulseDot 2.0s infinite ease-in-out;
 }
 
 .bottom-never-btn {
@@ -1159,6 +1225,101 @@ onUnmounted(() => {
   color: #f87171;
 }
 
+/* 中央「実験室へ入る」アクション */
+.center-action-area {
+  position: absolute;
+  top: calc(50% + 172px);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 50;
+  pointer-events: auto;
+}
+
+.enter-lab-btn {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 10px 26px;
+  background: rgba(15, 23, 42, 0.90);
+  border: 1.5px solid rgba(56, 189, 248, 0.7);
+  border-radius: 9999px;
+  color: #ffffff;
+  cursor: pointer;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 0 25px rgba(56, 189, 248, 0.45), 0 4px 18px rgba(0, 0, 0, 0.6);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  animation: enterPulse 2.8s infinite ease-in-out;
+}
+
+@keyframes enterPulse {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(56, 189, 248, 0.4), 0 4px 18px rgba(0, 0, 0, 0.6);
+    border-color: rgba(56, 189, 248, 0.65);
+  }
+  50% {
+    box-shadow: 0 0 38px rgba(56, 189, 248, 0.8), 0 0 18px rgba(129, 140, 248, 0.5), 0 4px 22px rgba(0, 0, 0, 0.7);
+    border-color: #38bdf8;
+  }
+}
+
+.enter-lab-btn:hover {
+  transform: translateY(-2px) scale(1.03);
+  background: rgba(56, 189, 248, 0.25);
+  border-color: #38bdf8;
+  box-shadow: 0 0 44px rgba(56, 189, 248, 0.9), 0 0 22px #818cf8;
+}
+
+.enter-icon {
+  font-size: 1.35rem;
+  filter: drop-shadow(0 0 6px #38bdf8);
+}
+
+.enter-text-group {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.enter-main-title {
+  font-family: 'Outfit', 'Inter', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  color: #ffffff;
+  text-shadow: 0 0 12px rgba(56, 189, 248, 0.8);
+}
+
+.enter-sub-title {
+  font-family: 'Fira Code', monospace;
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: #38bdf8;
+}
+
+.enter-kbd-badge {
+  font-family: 'Fira Code', monospace;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #94a3b8;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  padding: 3px 8px;
+  border-radius: 6px;
+  margin-left: 4px;
+}
+
+.enter-btn-fade-enter-active,
+.enter-btn-fade-leave-active {
+  transition: opacity 0.55s ease, transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.enter-btn-fade-enter-from,
+.enter-btn-fade-leave-to {
+  opacity: 0;
+  transform: translate(-50%, 15px);
+}
+
 @media (max-width: 900px) {
   .hud-caption {
     display: none;
@@ -1171,6 +1332,26 @@ onUnmounted(() => {
   }
   .hud-hint {
     font-size: 0.74rem;
+  }
+  .center-action-area {
+    top: calc(50% + 160px);
+  }
+  .enter-lab-btn {
+    padding: 8px 18px;
+    gap: 10px;
+  }
+  .enter-main-title {
+    font-size: 0.95rem;
+  }
+  .enter-kbd-badge {
+    display: none;
+  }
+}
+
+@media (max-height: 600px) {
+  .center-action-area {
+    top: auto;
+    bottom: 60px;
   }
 }
 </style>
