@@ -59,6 +59,7 @@
       <div class="stat-card highlight">
         <div class="stat-label">カルノー熱効率 e</div>
         <div class="stat-value text-cyan">{{ (carnotEfficiency * 100).toFixed(1) }} <span class="stat-unit">%</span></div>
+        <div class="stat-formula" style="font-size:0.85rem;color:#94a3b8;margin-top:4px">e = 1 − <span class="frac"><span class="num">T<sub>L</sub></span><span class="den">T<sub>H</sub></span></span> = <span class="frac"><span class="num">W</span><span class="den">Q<sub>in</sub></span></span></div>
       </div>
     </div>
 
@@ -86,7 +87,7 @@
     <!-- 解説コールアウト -->
     <div class="sim-footer-note">
       💡 <strong>熱力学の金字塔</strong>:
-      どんなに優秀な技術者が未来の技術で作っても、<strong>熱機関の効率はカルノー効率 <i>e</i> = 1 - (<i>T</i><sub><i>L</i></sub> / <i>T</i><sub><i>H</i></sub>) を超えることはできません</strong>（熱力学第2法則）。<br>
+      どんなに優秀な技術者が未来の技術で作っても、<strong>熱機関の効率はカルノー効率 <i>e</i> = 1 − <span class="frac"><span class="num"><i>T</i><sub><i>L</i></sub></span><span class="den"><i>T</i><sub><i>H</i></sub></span></span> を超えることはできません</strong>（熱力学第2法則）。<br>
       熱効率を 100% にするには、低温熱源を絶対零度（<i>T</i><sub><i>L</i></sub> = 0 <i>K</i>）にする必要がありますが、これは有限回の操作では不可能です。
     </div>
   </div>

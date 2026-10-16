@@ -72,19 +72,19 @@
       <div class="stat-card">
         <span class="label">ド・ブロイ波長 λ</span>
         <span class="value highlight">{{ lambda_nm.toFixed(3) }} <span class="unit">nm</span></span>
-        <span class="subtext"><i>h</i> / √(2 <i>m</i><sub><i>e</i></sub> <i>e</i> <i>V</i>)</span>
+        <span class="subtext"><span class="frac"><span class="num"><i>h</i></span><span class="den"><span class="math-radical">√</span><span class="math-radicand">2<i>m</i><sub><i>e</i></sub><i>e</i><i>V</i></span></span></span></span>
       </div>
 
       <div class="stat-card">
         <span class="label">光路差 2 <i>d</i> sinθ</span>
         <span class="value">{{ pathDiff_nm.toFixed(3) }} <span class="unit">nm</span></span>
-        <span class="subtext">比 2dsinθ / λ: {{ (pathDiff_nm / lambda_nm).toFixed(2) }}</span>
+        <span class="subtext">比 <span class="frac"><span class="num">2<i>d</i> sinθ</span><span class="den">λ</span></span>: {{ (pathDiff_nm / lambda_nm).toFixed(2) }}</span>
       </div>
 
       <div class="stat-card">
         <span class="label">回折リング半径 <i>R</i></span>
         <span class="value">{{ ringRadiusPx.toFixed(0) }} <span class="unit">px</span></span>
-        <span class="subtext"><i>R</i> \propto λ \propto 1/√(<i>V</i>)</span>
+        <span class="subtext"><i>R</i> ∝ λ ∝ <span class="frac"><span class="num">1</span><span class="den"><span class="math-radical">√</span><span class="math-radicand"><i>V</i></span></span></span></span>
       </div>
     </div>
   </div>

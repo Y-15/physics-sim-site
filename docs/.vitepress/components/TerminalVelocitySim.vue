@@ -92,7 +92,8 @@
       <div class="stat-card">
         <span class="label">理論終端速度 <i>v</i><sub>term</sub></span>
         <span class="value highlight">{{ theoreticalVterm.toFixed(1) }} <span class="unit">m/s</span></span>
-        <span class="subtext">{{ dragModel === 'linear' ? 'mg / k' : '√(mg / κ)' }}</span>
+        <span class="subtext" v-if="dragModel === 'linear'"><span class="frac"><span class="num">mg</span><span class="den">k</span></span></span>
+        <span class="subtext" v-else><span class="math-radical">√</span><span class="math-radicand"><span class="frac"><span class="num">mg</span><span class="den">κ</span></span></span></span>
       </div>
 
       <div class="stat-card">

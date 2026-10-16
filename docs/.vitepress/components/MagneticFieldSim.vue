@@ -45,14 +45,17 @@
       <div v-if="mode === 'straight'" class="stat-card highlight">
         <div class="stat-label">距離 r = 5 cm での磁場 H</div>
         <div class="stat-value text-cyan">{{ (currentI / (2 * Math.PI * 0.05)).toFixed(1) }} <span class="stat-unit">A/m</span></div>
+        <div class="stat-formula" style="font-size:0.85rem;color:#94a3b8;margin-top:4px">H = <span class="frac"><span class="num">I</span><span class="den">2πr</span></span></div>
       </div>
       <div v-if="mode === 'circular'" class="stat-card highlight">
         <div class="stat-label">中心での磁場 H (半径 5 cm)</div>
         <div class="stat-value text-cyan">{{ (currentI / (2 * 0.05)).toFixed(1) }} <span class="stat-unit">A/m</span></div>
+        <div class="stat-formula" style="font-size:0.85rem;color:#94a3b8;margin-top:4px">H = <span class="frac"><span class="num">I</span><span class="den">2r</span></span></div>
       </div>
       <div v-if="mode === 'solenoid'" class="stat-card highlight">
         <div class="stat-label">内部一様磁場 H (n=500回/m)</div>
         <div class="stat-value text-cyan">{{ (500 * currentI).toFixed(0) }} <span class="stat-unit">A/m</span></div>
+        <div class="stat-formula" style="font-size:0.85rem;color:#94a3b8;margin-top:4px">H = nI</div>
       </div>
     </div>
 

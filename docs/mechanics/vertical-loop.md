@@ -77,7 +77,7 @@ description: 高校物理の力学分野・最難関入試大問の王道「鉛�
       <rect x="0" y="0" width="300" height="290" fill="#1e293b" rx="8" stroke="#334155"/>
       <text x="150" y="25" fill="#f59e0b" font-size="14" font-weight="bold" text-anchor="middle">【円運動を支配する2大方程式】</text>
       <text x="20" y="55" fill="#38bdf8" font-size="12" font-weight="bold">① 力学的エネルギー保存則:</text>
-      <text x="30" y="80" fill="#f8fafc" font-size="12">(1/2)m v₀² = (1/2)m v² + mg R(1 - cosθ)</text>
+      <text x="30" y="80" fill="#f8fafc" font-size="12">½m v₀² = ½m v² + mg R(1 - cosθ)</text>
       <text x="30" y="105" fill="#34d399" font-size="13" font-weight="bold">⇒ v² = v₀² - 2gR(1 - cosθ)</text>
       <line x1="20" y1="120" x2="280" y2="120" stroke="#334155"/>
       <text x="20" y="145" fill="#f59e0b" font-size="12" font-weight="bold">② 円の中心方向（法線）の運動方程式:</text>

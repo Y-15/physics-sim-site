@@ -42,14 +42,14 @@
     <div class="lab-stats">
       <div class="lab-stat hl">
         <div class="k">波の基本関係式</div>
-        <div class="v" style="font-size:17px;color:#06b6d4">v = fλ = λ / T</div>
-        <div class="f">速さ v = {{ wavelength.toFixed(1) }} / {{ periodT.toFixed(1) }} = {{ waveSpeed.toFixed(2) }} m/s</div>
+        <div class="v" style="font-size:17px;color:#06b6d4">v = fλ = <span class="frac"><span class="num">λ</span><span class="den">T</span></span></div>
+        <div class="f">速さ v = <span class="frac"><span class="num">{{ wavelength.toFixed(1) }}</span><span class="den">{{ periodT.toFixed(1) }}</span></span> = {{ waveSpeed.toFixed(2) }} m/s</div>
       </div>
 
       <div class="lab-stat">
         <div class="k">観測点 x₀ での変位 y</div>
         <div class="v" style="color:#ef4444">{{ curObsY.toFixed(2) }} <small>m</small></div>
-        <div class="f">y = A sin 2π(t/T ∓ x₀/λ)</div>
+        <div class="f">y = A sin 2π<span class="math-parens">(</span><span class="frac"><span class="num">t</span><span class="den">T</span></span> ∓ <span class="frac"><span class="num">x₀</span><span class="den">λ</span></span><span class="math-parens">)</span></div>
       </div>
 
       <div class="lab-stat">
@@ -62,7 +62,9 @@
 
       <div class="lab-stat">
         <div class="k">波の式（一般形）</div>
-        <div class="v" style="font-size:14px;color:#e2e8f0">y = {{ amplitude.toFixed(1) }} sin 2π(t/{{ periodT.toFixed(1) }} {{ direction > 0 ? '-' : '+' }} x/{{ wavelength.toFixed(1) }})</div>
+        <div class="v" style="font-size:14px;color:#e2e8f0;display:inline-flex;align-items:center;gap:3px">
+          y = {{ amplitude.toFixed(1) }} sin 2π<span class="math-parens">(</span><span class="frac"><span class="num">t</span><span class="den">{{ periodT.toFixed(1) }}</span></span> {{ direction > 0 ? '−' : '+' }} <span class="frac"><span class="num">x</span><span class="den">{{ wavelength.toFixed(1) }}</span></span><span class="math-parens">)</span>
+        </div>
         <div class="f">{{ direction > 0 ? '+x方向進行は「引く」' : '-x方向進行は「足す」' }}</div>
       </div>
     </div>

@@ -69,7 +69,7 @@
       <div class="stat-card highlight">
         <div class="stat-label">向心加速度 a</div>
         <div class="stat-value">{{ accel.toFixed(2) }} <span class="unit">m/s²</span></div>
-        <div class="stat-formula">a = rω² = v²/r</div>
+        <div class="stat-formula">a = rω² = <span class="frac"><span class="num">v²</span><span class="den">r</span></span></div>
       </div>
       <div class="stat-card">
         <div class="stat-label">必要な向心力 F</div>
@@ -79,12 +79,12 @@
       <div class="stat-card">
         <div class="stat-label">周期 T</div>
         <div class="stat-value">{{ period.toFixed(2) }} <span class="unit">s</span></div>
-        <div class="stat-formula">T = 2π/ω (1周の時間)</div>
+        <div class="stat-formula">T = <span class="frac"><span class="num">2π</span><span class="den">ω</span></span> (1周の時間)</div>
       </div>
       <div class="stat-card">
         <div class="stat-label">回転数 f</div>
         <div class="stat-value">{{ freq.toFixed(2) }} <span class="unit">Hz</span></div>
-        <div class="stat-formula">f = 1/T (1秒あたりの回転数)</div>
+        <div class="stat-formula">f = <span class="frac"><span class="num">1</span><span class="den">T</span></span> (1秒あたりの回転数)</div>
       </div>
     </div>
   </div>

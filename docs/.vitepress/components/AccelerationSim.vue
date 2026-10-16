@@ -65,7 +65,7 @@
       <div class="stat-card">
         <div class="stat-label">現在の変位 x</div>
         <div class="stat-value">{{ currentX.toFixed(2) }} <span class="unit">m</span></div>
-        <div class="stat-formula">② x = v₀t + ½at² (面積)</div>
+        <div class="stat-formula">② x = v₀t + <span class="frac"><span class="num">1</span><span class="den">2</span></span>at² (面積)</div>
       </div>
       <div class="stat-card">
         <div class="stat-label">公式③ 検証 v² - v₀²</div>

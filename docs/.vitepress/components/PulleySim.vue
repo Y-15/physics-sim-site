@@ -51,13 +51,23 @@
       <div class="lab-stat hl">
         <div class="k">生じる加速度 a</div>
         <div class="v" style="color:#6366f1">{{ curAcc.toFixed(2) }} <small>m/s²</small></div>
-        <div class="f">{{ accFormulaText }}</div>
+        <div class="f" v-if="configMode === 'atwood'">
+          a = <span class="frac"><span class="num">M − m</span><span class="den">M + m</span></span> · g
+        </div>
+        <div class="f" v-else>
+          a = <span class="frac"><span class="num">mg − Mg sinθ − f'</span><span class="den">M + m</span></span>
+        </div>
       </div>
 
       <div class="lab-stat">
         <div class="k">糸の張力 T</div>
         <div class="v" style="color:#ec4899">{{ curTension.toFixed(1) }} <small>N</small></div>
-        <div class="f">内力（2物体で等しい大きさ）</div>
+        <div class="f" v-if="configMode === 'atwood'">
+          T = <span class="frac"><span class="num">2Mm</span><span class="den">M + m</span></span> · g
+        </div>
+        <div class="f" v-else>
+          T = m(g − a)
+        </div>
       </div>
 
       <div class="lab-stat">

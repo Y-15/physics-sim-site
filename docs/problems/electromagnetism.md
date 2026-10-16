@@ -902,7 +902,7 @@ $$
   <text x="400" y="68" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">Q ＝ CV ,  C ＝ ε S/d</text>
   <text x="400" y="85" fill="#f43f5e" font-size="9" text-anchor="middle">エネルギー U ＝ ½ CV²</text>
 </svg>
-  <div class="graph-caption">極板間の電位差 V に対し Q = CV の電荷が蓄えられ、静電エネルギー U = ½CV² が蓄積されます。</div>
+  <div class="graph-caption">極板間の電位差 V に対し Q = CV の電荷が蓄えられ、静電エネルギー $U = \frac{1}{2}CV^2$ が蓄積されます。</div>
 </div>
 
 <details class="hint-box">
@@ -1210,7 +1210,7 @@ $$
   <text x="400" y="68" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">Q ＝ CV ,  C ＝ ε S/d</text>
   <text x="400" y="85" fill="#f43f5e" font-size="9" text-anchor="middle">エネルギー U ＝ ½ CV²</text>
 </svg>
-  <div class="graph-caption">極板間の電位差 V に対し Q = CV の電荷が蓄えられ、静電エネルギー U = ½CV² が蓄積されます。</div>
+  <div class="graph-caption">極板間の電位差 V に対し Q = CV の電荷が蓄えられ、静電エネルギー $U = \frac{1}{2}CV^2$ が蓄積されます。</div>
 </div>
 
 <details class="hint-box">
@@ -1368,13 +1368,13 @@ $$
   <text x="400" y="68" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">Q ＝ CV ,  C ＝ ε S/d</text>
   <text x="400" y="85" fill="#f43f5e" font-size="9" text-anchor="middle">エネルギー U ＝ ½ CV²</text>
 </svg>
-  <div class="graph-caption">極板間の電位差 V に対し Q = CV の電荷が蓄えられ、静電エネルギー U = ½CV² が蓄積されます。</div>
+  <div class="graph-caption">極板間の電位差 V に対し Q = CV の電荷が蓄えられ、静電エネルギー $U = \frac{1}{2}CV^2$ が蓄積されます。</div>
 </div>
 
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
 
-Q=CV、U=1/2CV^2を使います。
+$Q = CV$、$U = \frac{1}{2}CV^2$ を使います。
 
 </details>
 
@@ -1385,19 +1385,19 @@ Q=CV、U=1/2CV^2を使います。
 電気量は48 μC、エネルギーは288 μJです。
 
 **【詳しい解説】**  
-Q=4.0×12=48 μC、U=1/2×4.0×12^2=288 μJです。
+$Q = 4.0 \times 12 = 48\,\mu\text{C}$、$U = \frac{1}{2} \times 4.0 \times 12^2 = 288\,\mu\text{J}$ です。
 
 **【立式と計算ステップ】**
 
 **Step 1: 電気量**
 $$
-Q=CV=4.0 μF×12 V=48 μC
+Q = CV = 4.0\,\mu\text{F} \times 12\,\text{V} = 48\,\mu\text{C}
 $$
 *※ μFとμCを使えば、値をそのまま計算できます。*
 
 **Step 2: 静電エネルギー**
 $$
-U=1/2CV^2=288 μJ
+U = \frac{1}{2}CV^2 = \frac{1}{2} \times 4.0 \times 12^2 = 288\,\mu\text{J}
 $$
 *※ 電圧を2乗する点に注意します。*
 
@@ -2537,7 +2537,7 @@ C₂=3.0 μF
   <text x="400" y="68" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">Q ＝ CV ,  C ＝ ε S/d</text>
   <text x="400" y="85" fill="#f43f5e" font-size="9" text-anchor="middle">エネルギー U ＝ ½ CV²</text>
 </svg>
-  <div class="graph-caption">極板間の電位差 V に対し Q = CV の電荷が蓄えられ、静電エネルギー U = ½CV² が蓄積されます。</div>
+  <div class="graph-caption">極板間の電位差 V に対し Q = CV の電荷が蓄えられ、静電エネルギー $U = \frac{1}{2}CV^2$ が蓄積されます。</div>
 </div>
 
 <details class="hint-box">
@@ -2729,7 +2729,7 @@ $$
   <text x="400" y="68" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">Q ＝ CV ,  C ＝ ε S/d</text>
   <text x="400" y="85" fill="#f43f5e" font-size="9" text-anchor="middle">エネルギー U ＝ ½ CV²</text>
 </svg>
-  <div class="graph-caption">極板間の電位差 V に対し Q = CV の電荷が蓄えられ、静電エネルギー U = ½CV² が蓄積されます。</div>
+  <div class="graph-caption">極板間の電位差 V に対し Q = CV の電荷が蓄えられ、静電エネルギー $U = \frac{1}{2}CV^2$ が蓄積されます。</div>
 </div>
 
 <details class="hint-box">
@@ -3528,7 +3528,7 @@ k=0.10 N/m
   <text x="400" y="68" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">Q ＝ CV ,  C ＝ ε S/d</text>
   <text x="400" y="85" fill="#f43f5e" font-size="9" text-anchor="middle">エネルギー U ＝ ½ CV²</text>
 </svg>
-  <div class="graph-caption">極板間の電位差 V に対し Q = CV の電荷が蓄えられ、静電エネルギー U = ½CV² が蓄積されます。</div>
+  <div class="graph-caption">極板間の電位差 V に対し Q = CV の電荷が蓄えられ、静電エネルギー $U = \frac{1}{2}CV^2$ が蓄積されます。</div>
 </div>
 
 <details class="hint-box">
@@ -4200,7 +4200,7 @@ Mg>mgsinθ
   <text x="400" y="68" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">Q ＝ CV ,  C ＝ ε S/d</text>
   <text x="400" y="85" fill="#f43f5e" font-size="9" text-anchor="middle">エネルギー U ＝ ½ CV²</text>
 </svg>
-  <div class="graph-caption">極板間の電位差 V に対し Q = CV の電荷が蓄えられ、静電エネルギー U = ½CV² が蓄積されます。</div>
+  <div class="graph-caption">極板間の電位差 V に対し Q = CV の電荷が蓄えられ、静電エネルギー $U = \frac{1}{2}CV^2$ が蓄積されます。</div>
 </div>
 
 <details class="hint-box">

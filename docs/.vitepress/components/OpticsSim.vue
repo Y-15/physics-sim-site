@@ -85,13 +85,13 @@
       <div class="lab-stat">
         <div class="k">臨界角 θ_c</div>
         <div class="v" style="color:#f59e0b">{{ criticalAngleText }}</div>
-        <div class="f">sinθ_c = n₂ / n₁ (n₁ &gt; n₂ のときのみ存在)</div>
+        <div class="f">sinθ_c = <span class="frac"><span class="num">n₂</span><span class="den">n₁</span></span> (n₁ &gt; n₂ のときのみ存在)</div>
       </div>
 
       <div class="lab-stat">
         <div class="k">相対屈折率 ₁n₂</div>
         <div class="v" style="color:#38bdf8">{{ (n2 / n1).toFixed(3) }}</div>
-        <div class="f">₁n₂ = n₂ / n₁ = v₁ / v₂ = λ₁ / λ₂</div>
+        <div class="f">₁n₂ = <span class="frac"><span class="num">n₂</span><span class="den">n₁</span></span> = <span class="frac"><span class="num">v₁</span><span class="den">v₂</span></span> = <span class="frac"><span class="num">λ₁</span><span class="den">λ₂</span></span></div>
       </div>
 
       <div class="lab-stat">
@@ -108,13 +108,13 @@
         <div class="v" :style="{ color: imageInfo.isReal ? '#10b981' : '#f59e0b' }">
           {{ imageInfo.text }}
         </div>
-        <div class="f">1/a + 1/b = 1/f より計算</div>
+        <div class="f"><span class="frac"><span class="num">1</span><span class="den">a</span></span> + <span class="frac"><span class="num">1</span><span class="den">b</span></span> = <span class="frac"><span class="num">1</span><span class="den">f</span></span> より計算</div>
       </div>
 
       <div class="lab-stat">
         <div class="k">像の倍率 m</div>
         <div class="v" style="color:#38bdf8">{{ Math.abs(imageInfo.m).toFixed(2) }} <small>倍</small></div>
-        <div class="f">m = |b| / a</div>
+        <div class="f">m = <span class="frac"><span class="num">|b|</span><span class="den">a</span></span></div>
       </div>
 
       <div class="lab-stat">

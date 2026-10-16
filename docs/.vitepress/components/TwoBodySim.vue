@@ -78,19 +78,19 @@
       <div class="stat-card">
         <span class="label">重心速度 <i>v</i><sub><i>G</i></sub> (一定)</span>
         <span class="value">{{ vG.toFixed(2) }} <span class="unit">m/s</span></span>
-        <span class="subtext">(<i>m</i><sub>1</sub> <i>v</i><sub>1</sub> + <i>m</i><sub>2</sub> <i>v</i><sub>2</sub>)/(<i>m</i><sub>1</sub>+<i>m</i><sub>2</sub>)</span>
+        <span class="subtext"><span class="frac"><span class="num"><i>m</i><sub>1</sub><i>v</i><sub>1</sub> + <i>m</i><sub>2</sub><i>v</i><sub>2</sub></span><span class="den"><i>m</i><sub>1</sub> + <i>m</i><sub>2</sub></span></span></span>
       </div>
 
       <div class="stat-card">
         <span class="label">換算質量 μ</span>
         <span class="value">{{ mu.toFixed(2) }} <span class="unit">kg</span></span>
-        <span class="subtext"><i>m</i><sub>1</sub> <i>m</i><sub>2</sub> / (<i>m</i><sub>1</sub>+<i>m</i><sub>2</sub>)</span>
+        <span class="subtext"><span class="frac"><span class="num"><i>m</i><sub>1</sub><i>m</i><sub>2</sub></span><span class="den"><i>m</i><sub>1</sub> + <i>m</i><sub>2</sub></span></span></span>
       </div>
 
       <div class="stat-card">
         <span class="label">相対単振動の周期 <i>T</i></span>
         <span class="value">{{ period.toFixed(2) }} <span class="unit">s</span></span>
-        <span class="subtext">2π√(μ/<i>k</i>)</span>
+        <span class="subtext">2π<span class="math-radical">√</span><span class="math-radicand"><span class="frac"><span class="num">μ</span><span class="den"><i>k</i></span></span></span></span>
       </div>
 
       <div class="stat-card">

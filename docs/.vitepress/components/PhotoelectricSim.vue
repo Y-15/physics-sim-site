@@ -60,7 +60,7 @@
           ① I-V 特性曲線（光電流 vs 電圧）
         </button>
         <button :class="{ active: graphMode === 'V0Nu' }" @click="graphMode = 'V0Nu'">
-          ② 阻止電圧 <i>V</i><sub>0</sub> vs 振動数 ν グラフ（傾き <i>h</i>/<i>e</i>）
+          ② 阻止電圧 <i>V</i><sub>0</sub> vs 振動数 ν グラフ（傾き <span class="frac"><span class="num"><i>h</i></span><span class="den"><i>e</i></span></span>）
         </button>
       </div>
     </div>
@@ -76,7 +76,7 @@
         <span class="val">{{ fmt(currentMetal.W, 2) }} eV</span>
       </div>
       <div class="stat-card">
-        <span class="label">最大運動エネルギー <i>K</i><sub>\max</sub></span>
+        <span class="label">最大運動エネルギー <i>K</i><sub>max</sub></span>
         <span class="val" :class="{ 'zero-k': KmaxEV <= 0 }">
           {{ KmaxEV > 0 ? fmt(KmaxEV, 2) + ' eV' : '0 eV (電子放出なし)' }}
         </span>
@@ -88,7 +88,7 @@
         </span>
       </div>
       <div class="stat-card">
-        <span class="label">限界波長 λ<sub>0</sub> = hc/<i>W</i></span>
+        <span class="label">限界波長 λ<sub>0</sub> = <span class="frac"><span class="num">hc</span><span class="den"><i>W</i></span></span></span>
         <span class="val">{{ fmt(lambda0, 0) }} nm</span>
       </div>
       <div class="stat-card">

@@ -77,17 +77,17 @@
       <div class="stat-card">
         <div class="stat-label">滞空時間 <i>T</i></div>
         <div class="stat-value">{{ theoreticalTime.toFixed(2) }} <span class="unit">s</span></div>
-        <div class="stat-formula">(2 <i>v</i><sub>0</sub> sinθ / <i>g</i>)</div>
+        <div class="stat-formula"><span class="frac"><span class="num">2<i>v</i>₀ sinθ</span><span class="den"><i>g</i></span></span></div>
       </div>
       <div class="stat-card">
         <div class="stat-label">最高到達点 <i>H</i></div>
         <div class="stat-value">{{ maxHeight.toFixed(2) }} <span class="unit">m</span></div>
-        <div class="stat-formula">(<i>v</i><sub>0</sub>² sin²θ / 2g)</div>
+        <div class="stat-formula"><span class="frac"><span class="num"><i>v</i>₀² sin²θ</span><span class="den">2<i>g</i></span></span></div>
       </div>
       <div class="stat-card highlight">
         <div class="stat-label">水平到達距離 <i>R</i></div>
         <div class="stat-value">{{ maxDistance.toFixed(2) }} <span class="unit">m</span></div>
-        <div class="stat-formula">(<i>v</i><sub>0</sub>² sin 2θ / <i>g</i>)</div>
+        <div class="stat-formula"><span class="frac"><span class="num"><i>v</i>₀² sin 2θ</span><span class="den"><i>g</i></span></span></div>
       </div>
     </div>
   </div>

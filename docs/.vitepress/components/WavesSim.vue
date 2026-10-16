@@ -56,12 +56,22 @@
         <div class="lab-stat hl">
           <div class="k">固有振動数 f</div>
           <div class="v">{{ fn.toFixed(0) }} <small>Hz</small></div>
-          <div class="f">{{ formulaText }}</div>
+          <div class="f">
+            <template v-if="bc === 'closed'">
+              f = <span class="frac"><span class="num">(2n − 1)V</span><span class="den">4L</span></span>
+            </template>
+            <template v-else-if="bc === 'open'">
+              f = <span class="frac"><span class="num">nV</span><span class="den">2L</span></span>
+            </template>
+            <template v-else>
+              f = <span class="frac"><span class="num">nv</span><span class="den">2L</span></span>
+            </template>
+          </div>
         </div>
         <div class="lab-stat">
           <div class="k">波長 λ</div>
           <div class="v">{{ lambdaN.toFixed(3) }} <small>m</small></div>
-          <div class="f">λ = v / f</div>
+          <div class="f">λ = <span class="frac"><span class="num">v</span><span class="den">f</span></span></div>
         </div>
         <div class="lab-stat">
           <div class="k">節の数 / 腹の数</div>
@@ -112,7 +122,7 @@
         <div class="lab-stat">
           <div class="k">波長 λ₁ / λ₂</div>
           <div class="v" style="font-size:1rem">{{ (vS / f1).toFixed(2) }} / {{ (vS / f2).toFixed(2) }}</div>
-          <div class="f">同じ媒質なので速さ共通、λ = v/f</div>
+          <div class="f">同じ媒質なので速さ共通、λ = <span class="frac"><span class="num">v</span><span class="den">f</span></span></div>
         </div>
       </div>
     </template>
@@ -139,17 +149,17 @@
         <div class="lab-stat hl">
           <div class="k">観測者が聞く振動数 f′</div>
           <div class="v">{{ fPrime.toFixed(1) }} <small>Hz</small></div>
-          <div class="f">f′ = (V − v<sub>o</sub>)/(V − v<sub>s</sub>) · f₀</div>
+          <div class="f">f′ = <span class="frac"><span class="num">V − v<sub>o</sub></span><span class="den">V − v<sub>s</sub></span></span> · f₀</div>
         </div>
         <div class="lab-stat">
           <div class="k">音源の前方の波長</div>
           <div class="v">{{ ((V - vs) / f0).toFixed(3) }} <small>m</small></div>
-          <div class="f">λ′ = (V − v<sub>s</sub>)/f₀</div>
+          <div class="f">λ′ = <span class="frac"><span class="num">V − v<sub>s</sub></span><span class="den">f₀</span></span></div>
         </div>
         <div class="lab-stat">
           <div class="k">音源の後方の波長</div>
           <div class="v">{{ ((V + vs) / f0).toFixed(3) }} <small>m</small></div>
-          <div class="f">λ″ = (V + v<sub>s</sub>)/f₀</div>
+          <div class="f">λ″ = <span class="frac"><span class="num">V + v<sub>s</sub></span><span class="den">f₀</span></span></div>
         </div>
         <div class="lab-stat">
           <div class="k">聞こえ方</div>

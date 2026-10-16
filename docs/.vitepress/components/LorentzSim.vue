@@ -79,13 +79,13 @@
       <div class="lab-stat hl">
         <div class="k">円運動の軌道半径 r</div>
         <div class="v" style="color:#ec4899">{{ orbitRadius_mm.toFixed(2) }} <small>mm</small></div>
-        <div class="f">r = mv / (|q|B)</div>
+        <div class="f">r = <span class="frac"><span class="num">mv</span><span class="den">|q|B</span></span></div>
       </div>
 
       <div class="lab-stat">
         <div class="k">回転周期 T</div>
         <div class="v" style="color:#38bdf8">{{ (orbitPeriod_ns).toFixed(2) }} <small>ns</small></div>
-        <div class="f">T = 2πm / (|q|B)（速さ v によらず一定！）</div>
+        <div class="f">T = <span class="frac"><span class="num">2πm</span><span class="den">|q|B</span></span>（速さ v によらず一定！）</div>
       </div>
 
       <div class="lab-stat">
@@ -99,7 +99,7 @@
         <div class="v" :style="{ color: isStraight ? '#10b981' : '#f43f5e' }">
           {{ isStraight ? '直進通過！ (qE = qvB)' : (speedV_kms > straightSpeed ? '磁気力が勝り上へ偏向' : '静電気力が勝り下へ偏向') }}
         </div>
-        <div class="f">通過速度 v = E / B = {{ straightSpeed.toFixed(0) }} km/s</div>
+        <div class="f">通過速度 v = <span class="frac"><span class="num">E</span><span class="den">B</span></span> = {{ straightSpeed.toFixed(0) }} km/s</div>
       </div>
     </div>
   </div>

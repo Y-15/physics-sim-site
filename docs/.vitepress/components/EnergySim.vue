@@ -62,7 +62,7 @@
       <div class="lab-stat">
         <div class="k">運動エネルギー K</div>
         <div class="v" style="color:#38bdf8">{{ curK.toFixed(1) }} <small>J</small></div>
-        <div class="f">K = ½mv² (速さ {{ curV.toFixed(2) }} m/s)</div>
+        <div class="f">K = <span class="frac"><span class="num">1</span><span class="den">2</span></span>mv² (速さ {{ curV.toFixed(2) }} m/s)</div>
       </div>
       <div class="lab-stat">
         <div class="k">重力位置エネルギー U</div>
@@ -77,7 +77,7 @@
       <div class="lab-stat">
         <div class="k">最下点での理論速さ</div>
         <div class="v">{{ Math.sqrt(2 * g * h0).toFixed(2) }} <small>m/s</small></div>
-        <div class="f">v = √(2gh) (質量によらない！)</div>
+        <div class="f">v = <span class="math-radical">√</span><span class="math-radicand">2gh</span> (質量によらない！)</div>
       </div>
     </div>
   </div>

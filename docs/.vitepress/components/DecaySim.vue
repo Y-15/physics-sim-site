@@ -6,7 +6,7 @@
         <span class="badge">Radioactive Decay &amp; Radiation</span>
       </div>
       <p class="desc">
-        原子核の確率的な崩壊による半減期 <i>N</i>(<i>t</i>) = <i>N</i><sub>0</sub> (1/2)<sup><i>t</i>/<i>T</i></sup> の指数関数的減衰、および α 線・β 線・γ 線の透過力・遮蔽実験をリアルタイムに体験できます。
+        原子核の確率的な崩壊による半減期 <i>N</i>(<i>t</i>) = <i>N</i><sub>0</sub> (<span class="frac"><span class="num">1</span><span class="den">2</span></span>)<sup><span class="frac" style="font-size:0.75em"><span class="num"><i>t</i></span><span class="den"><i>T</i></span></span></sup> の指数関数的減衰、および α 線・β 線・γ 線の透過力・遮蔽実験をリアルタイムに体験できます。
       </p>
     </div>
 
@@ -74,15 +74,15 @@
           <span class="val highlight-alt">{{ activeNucleiCount }} / {{ initialCount }} 個</span>
         </div>
         <div class="stat-card">
-          <span class="label">残存割合 <i>N</i>/<i>N</i><sub>0</sub></span>
+          <span class="label">残存割合 <span class="frac"><span class="num"><i>N</i></span><span class="den"><i>N</i><sub>0</sub></span></span></span>
           <span class="val">{{ fmt((activeNucleiCount / initialCount) * 100, 1) }} %</span>
         </div>
         <div class="stat-card">
-          <span class="label">理論値 <i>N</i><sub>0</sub>(1/2)<sup><i>t</i>/<i>T</i></sup></span>
+          <span class="label">理論値 <i>N</i><sub>0</sub>(<span class="frac"><span class="num">1</span><span class="den">2</span></span>)<sup><span class="frac" style="font-size:0.75em"><span class="num"><i>t</i></span><span class="den"><i>T</i></span></span></sup></span>
           <span class="val">{{ fmt(theoryCount, 0) }} 個</span>
         </div>
         <div class="stat-card">
-          <span class="label">経過半減期数 <i>t</i>/<i>T</i></span>
+          <span class="label">経過半減期数 <span class="frac"><span class="num"><i>t</i></span><span class="den"><i>T</i></span></span></span>
           <span class="val">{{ fmt(simTime / halfLife, 2) }} 周期</span>
         </div>
       </template>

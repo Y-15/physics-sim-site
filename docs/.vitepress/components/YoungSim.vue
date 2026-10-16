@@ -50,7 +50,7 @@
         <div class="v" :style="{ color: laserColorHex }">
           {{ deltaX_mm.toFixed(3) }} <small>mm</small>
         </div>
-        <div class="f">Δx = Lλ / d（波長が長いほど広がる！）</div>
+        <div class="f">Δx = <span class="frac"><span class="num">Lλ</span><span class="den">d</span></span>（波長が長いほど広がる！）</div>
       </div>
 
       <div class="lab-stat">
@@ -68,7 +68,8 @@
       <div class="lab-stat">
         <div class="k">媒質中の実効波長 λ'</div>
         <div class="v" style="color:#10b981">{{ effectiveLambdaNm.toFixed(0) }} <small>nm</small></div>
-        <div class="f">{{ inWater ? '水中では波長が 1/n に縮小し縞が詰まる' : '真空中 / 空気中 (n ≈ 1.0)' }}</div>
+        <div class="f" v-if="inWater">水中では波長が <span class="frac"><span class="num">1</span><span class="den">n</span></span> に縮小し縞が詰まる</div>
+        <div class="f" v-else>真空中 / 空気中 (n ≈ 1.0)</div>
       </div>
     </div>
   </div>

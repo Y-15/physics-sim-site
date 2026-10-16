@@ -54,13 +54,14 @@
       <div class="lab-stat hl">
         <div class="k">電気容量 C</div>
         <div class="v" style="color:#38bdf8">{{ (capC_pF).toFixed(1) }} <small>pF</small></div>
-        <div class="f">C = ε · S / d</div>
+        <div class="f">C = ε · <span class="frac"><span class="num">S</span><span class="den">d</span></span></div>
       </div>
 
       <div class="lab-stat">
         <div class="k">極板間電圧 V</div>
         <div class="v" style="color:#f59e0b">{{ curVoltage.toFixed(1) }} <small>V</small></div>
-        <div class="f">{{ isConnected ? '電源により固定' : 'V = Q / C（変化する！）' }}</div>
+        <div class="f" v-if="isConnected">電源により固定</div>
+        <div class="f" v-else>V = <span class="frac"><span class="num">Q</span><span class="den">C</span></span>（変化する！）</div>
       </div>
 
       <div class="lab-stat">
@@ -72,19 +73,19 @@
       <div class="lab-stat">
         <div class="k">静電エネルギー U</div>
         <div class="v" style="color:#10b981">{{ curEnergy_nJ.toFixed(2) }} <small>nJ</small></div>
-        <div class="f">U = ½QV = ½CV² = Q² / (2C)</div>
+        <div class="f">U = <span class="frac"><span class="num">1</span><span class="den">2</span></span>QV = <span class="frac"><span class="num">1</span><span class="den">2</span></span>CV² = <span class="frac"><span class="num">Q²</span><span class="den">2C</span></span></div>
       </div>
 
       <div class="lab-stat">
         <div class="k">極板間電場 E</div>
         <div class="v" style="color:#a855f7">{{ (curField_kVm).toFixed(1) }} <small>kV/m</small></div>
-        <div class="f">E = V / d = Q / (εS)</div>
+        <div class="f">E = <span class="frac"><span class="num">V</span><span class="den">d</span></span> = <span class="frac"><span class="num">Q</span><span class="den">εS</span></span></div>
       </div>
 
       <div class="lab-stat">
         <div class="k">極板間の引力 F</div>
         <div class="v" style="color:#ec4899">{{ curForce_uN.toFixed(2) }} <small>μN</small></div>
-        <div class="f">F = ½QE（係数 ½ に注意！）</div>
+        <div class="f">F = <span class="frac"><span class="num">1</span><span class="den">2</span></span>QE（係数 <span class="frac"><span class="num">1</span><span class="den">2</span></span> に注意！）</div>
       </div>
     </div>
   </div>

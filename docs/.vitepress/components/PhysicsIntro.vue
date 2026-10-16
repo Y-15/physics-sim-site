@@ -35,14 +35,56 @@ const mouse = {
   active: false
 }
 
-// 物理公式（宇宙の深遠に刻まれた不変の真理・天球星座の神聖幾何学）
+// 物理公式（宇宙の深遠に刻まれた不変の真理・天球星座の神聖幾何学・正しい垂直分数フォーマット）
 const formulas = [
-  { text: 'm(d²r/dt²) = F', desc: '✦ ニュートン力学 // 万物運動の基本法則', x: 0.14, y: 0.28, size: 21, delay: 0.8 },
-  { text: 'E = mc²', desc: '✦ 特殊相対性理論 // 質量とエネルギーの等価性', x: 0.86, y: 0.26, size: 23, delay: 1.0 },
-  { text: '∇ × E = -∂B/∂t', desc: '✦ マクスウェル方程式 // 電磁誘導と光の統一', x: 0.14, y: 0.73, size: 20, delay: 1.2 },
-  { text: 'iħ(∂ψ/∂t) = Ĥψ', desc: '✦ シュレーディンガー方程式 // 量子波動と確率の幾何学', x: 0.86, y: 0.73, size: 21, delay: 1.4 },
-  { text: 'G_μν = (8πG/c⁴)T_μν', desc: '✦ 一般相対性理論 // 重力と時空の曲率幾何学', x: 0.50, y: 0.17, size: 21, delay: 1.7 },
-  { text: 'E = hν = hc/λ', desc: '✦ プランクの量子仮説 // 光子エネルギーと普遍定数', x: 0.50, y: 0.90, size: 20, delay: 2.0 }
+  {
+    prefix: 'm',
+    num: 'd²r',
+    den: 'dt²',
+    suffix: '= F',
+    desc: '✦ ニュートン力学 // 万物運動の基本法則',
+    x: 0.14, y: 0.28, size: 20, delay: 0.8
+  },
+  {
+    prefix: 'E = mc²',
+    num: null,
+    den: null,
+    suffix: null,
+    desc: '✦ 特殊相対性理論 // 質量とエネルギーの等価性',
+    x: 0.86, y: 0.26, size: 22, delay: 1.0
+  },
+  {
+    prefix: '∇ × E = -',
+    num: '∂B',
+    den: '∂t',
+    suffix: null,
+    desc: '✦ マクスウェル方程式 // 電磁誘導と光の統一',
+    x: 0.14, y: 0.73, size: 19, delay: 1.2
+  },
+  {
+    prefix: 'iħ',
+    num: '∂ψ',
+    den: '∂t',
+    suffix: '= Ĥψ',
+    desc: '✦ シュレーディンガー方程式 // 量子波動と確率の幾何学',
+    x: 0.86, y: 0.73, size: 20, delay: 1.4
+  },
+  {
+    prefix: 'G_μν =',
+    num: '8πG',
+    den: 'c⁴',
+    suffix: 'T_μν',
+    desc: '✦ 一般相対性理論 // 重力と時空の曲率幾何学',
+    x: 0.50, y: 0.17, size: 20, delay: 1.7
+  },
+  {
+    prefix: 'E = hν =',
+    num: 'hc',
+    den: 'λ',
+    suffix: null,
+    desc: '✦ プランクの量子仮説 // 光子エネルギーと普遍定数',
+    x: 0.50, y: 0.90, size: 19, delay: 2.0
+  }
 ]
 
 // 音響シンセサイザー (Web Audio API: 432Hzピタゴラス調律 & 528Hzソルフェジオ・クリスタルボウル和音)
@@ -770,6 +812,79 @@ function drawKeplerOrbits(ctx, cx, cy, t) {
   ctx.restore()
 }
 
+// 正しい数式フォーマット描画（上に分子、下に分母、中央に水平分数線）
+function drawFormattedFormulaCanvas(ctx, item, alpha) {
+  const mainFont = `700 ${item.size}px "Outfit", sans-serif`
+  const fracFont = `700 ${Math.round(item.size * 0.74)}px "Outfit", sans-serif`
+
+  if (!item.num || !item.den) {
+    // 分数なしのシンプルな数式 (E = mc²)
+    ctx.font = mainFont
+    ctx.textAlign = 'center'
+    ctx.textBaseline = 'middle'
+    ctx.fillText(item.prefix, 0, -3)
+    return
+  }
+
+  // 分数ありの数式: 上に分子、下に分母、中央に水平分数線
+  ctx.font = mainFont
+  const preW = item.prefix ? ctx.measureText(item.prefix).width + 5 : 0
+  const sufW = item.suffix ? ctx.measureText(item.suffix).width + 5 : 0
+
+  ctx.font = fracFont
+  const numW = ctx.measureText(item.num).width
+  const denW = ctx.measureText(item.den).width
+  const fracW = Math.max(numW, denW) + 8
+
+  const totalW = preW + fracW + sufW
+  const startX = -totalW / 2
+
+  // 1. Prefix（前置項: m, ∇ × E = -, iħ, etc.）
+  if (item.prefix) {
+    ctx.font = mainFont
+    ctx.textAlign = 'left'
+    ctx.textBaseline = 'middle'
+    ctx.fillText(item.prefix, startX, -3)
+  }
+
+  const fracCenterX = startX + preW + fracW / 2
+  const fracLeft = startX + preW
+  const fracRight = fracLeft + fracW
+  const barY = -3
+
+  // 2. 分子（上に配置）
+  ctx.font = fracFont
+  ctx.textAlign = 'center'
+  ctx.textBaseline = 'bottom'
+  ctx.fillText(item.num, fracCenterX, barY - 2)
+
+  // 3. 水平分数線（区切りバー）
+  ctx.save()
+  ctx.beginPath()
+  ctx.moveTo(fracLeft, barY)
+  ctx.lineTo(fracRight, barY)
+  ctx.lineWidth = 1.3
+  ctx.strokeStyle = `rgba(255, 255, 255, ${alpha * 0.95})`
+  ctx.shadowColor = '#38bdf8'
+  ctx.shadowBlur = 8
+  ctx.stroke()
+  ctx.restore()
+
+  // 4. 分母（下に配置）
+  ctx.font = fracFont
+  ctx.textAlign = 'center'
+  ctx.textBaseline = 'top'
+  ctx.fillText(item.den, fracCenterX, barY + 3)
+
+  // 5. Suffix（後置項: = F, = Ĥψ, T_μν, etc.）
+  if (item.suffix) {
+    ctx.font = mainFont
+    ctx.textAlign = 'left'
+    ctx.textBaseline = 'middle'
+    ctx.fillText(item.suffix, fracRight + 4, -3)
+  }
+}
+
 // 6. 物理公式ホログラム（宇宙の深遠に浮かぶ星座と真理の碑文・神聖幾何学）
 function drawFormulas(ctx, w, h, t) {
   ctx.save()
@@ -810,7 +925,7 @@ function drawFormulas(ctx, w, h, t) {
     ctx.scale(scale, scale)
 
     // 星間クリスタル・柔らかなラジアルバックライト（四角い重厚な枠を廃し、神聖な光彩へ）
-    const cardW = 224, cardH = 46
+    const cardW = 240, cardH = 48
     const bgRad = ctx.createRadialGradient(0, 0, 10, 0, 0, 130)
     bgRad.addColorStop(0, `rgba(15, 23, 42, ${alpha * 0.75})`)
     bgRad.addColorStop(0.65, `rgba(3, 7, 18, ${alpha * 0.65})`)
@@ -843,13 +958,11 @@ function drawFormulas(ctx, w, h, t) {
     ctx.arc(cardW / 2 - 10, 0, 2.5, 0, Math.PI * 2)
     ctx.fill()
 
-    // 公式テキスト（純白の星明かりとシアンの微光）
-    ctx.font = `700 ${item.size}px "Outfit", "Fira Code", monospace`
+    // 公式テキスト（純白の星明かりとシアンの微光: 上に分子・下に分母の正しい垂直分数フォーマット）
     ctx.fillStyle = `rgba(255, 255, 255, ${alpha * 0.98})`
     ctx.shadowColor = '#38bdf8'
     ctx.shadowBlur = 14
-    ctx.textAlign = 'center'
-    ctx.fillText(item.text, 0, -2)
+    drawFormattedFormulaCanvas(ctx, item, alpha)
 
     // 解説ラベル（黄金と天藍のサブテキスト）
     ctx.font = `600 9.5px "Outfit", sans-serif`

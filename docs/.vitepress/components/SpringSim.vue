@@ -48,12 +48,12 @@
       <div class="stat-card highlight">
         <div class="stat-label">角振動数 ω</div>
         <div class="stat-value">{{ omega.toFixed(2) }} <span class="unit">rad/s</span></div>
-        <div class="stat-formula">ω = √(k/m)</div>
+        <div class="stat-formula">ω = <span class="math-radical">√</span><span class="math-radicand"><span class="frac"><span class="num">k</span><span class="den">m</span></span></span></div>
       </div>
       <div class="stat-card highlight">
         <div class="stat-label">周期 T</div>
         <div class="stat-value">{{ period.toFixed(2) }} <span class="unit">s</span></div>
-        <div class="stat-formula">T = 2π/ω = 2π√(m/k)</div>
+        <div class="stat-formula">T = <span class="frac"><span class="num">2π</span><span class="den">ω</span></span> = 2π<span class="math-radical">√</span><span class="math-radicand"><span class="frac"><span class="num">m</span><span class="den">k</span></span></span></div>
       </div>
       <div class="stat-card">
         <div class="stat-label">現在の変位 x</div>
@@ -68,10 +68,12 @@
       <div class="stat-card">
         <div class="stat-label">運動エネルギー K</div>
         <div class="stat-value">{{ ke.toFixed(2) }} <span class="unit">J</span></div>
+        <div class="stat-formula">K = <span class="frac"><span class="num">1</span><span class="den">2</span></span>mv²</div>
       </div>
       <div class="stat-card">
         <div class="stat-label">弾性エネルギー U</div>
         <div class="stat-value">{{ pe.toFixed(2) }} <span class="unit">J</span></div>
+        <div class="stat-formula">U = <span class="frac"><span class="num">1</span><span class="den">2</span></span>kx²</div>
       </div>
     </div>
   </div>

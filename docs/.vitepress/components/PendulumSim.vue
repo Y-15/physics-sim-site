@@ -126,7 +126,7 @@
         </div>
       </div>
       <div class="energy-legend">
-        <span class="legend-item"><span class="dot kinetic"></span> 運動エネルギー <i>K</i> = ½<i>m</i><i>v</i>²: <strong>{{ kineticEnergy.toFixed(2) }} J</strong></span>
+        <span class="legend-item"><span class="dot kinetic"></span> 運動エネルギー <i>K</i> = <span class="frac"><span class="num">1</span><span class="den">2</span></span><i>m</i><i>v</i>²: <strong>{{ kineticEnergy.toFixed(2) }} J</strong></span>
         <span class="legend-item"><span class="dot potential"></span> 位置エネルギー <i>U</i> = <i>mgh</i>: <strong>{{ potentialEnergy.toFixed(2) }} J</strong></span>
       </div>
     </div>
@@ -136,7 +136,7 @@
       <div class="stat-card highlight">
         <div class="stat-label">理論周期 <i>T</i><sub>0</sub>（微小振幅）</div>
         <div class="stat-value">{{ theoreticalPeriod.toFixed(3) }} <span class="unit">s</span></div>
-        <div class="stat-formula"><i>T</i><sub>0</sub> = 2π√(<i>L</i> / <i>g</i>)</div>
+        <div class="stat-formula"><i>T</i><sub>0</sub> = 2π√(<span class="frac"><span class="num"><i>L</i></span><span class="den"><i>g</i></span></span>)</div>
       </div>
       <div class="stat-card">
         <div class="stat-label">現在角度 <i>θ</i></div>
@@ -146,7 +146,7 @@
       <div class="stat-card">
         <div class="stat-label">現在速度 <i>v</i></div>
         <div class="stat-value">{{ currentSpeed.toFixed(2) }} <span class="unit">m/s</span></div>
-        <div class="stat-formula"><i>v</i> = <i>L</i>(d<i>θ</i>/d<i>t</i>)</div>
+        <div class="stat-formula"><i>v</i> = <i>L</i><span class="frac"><span class="num">d<i>θ</i></span><span class="den">d<i>t</i></span></span></div>
       </div>
     </div>
   </div>
