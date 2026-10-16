@@ -8,6 +8,28 @@
       <p class="subtitle">重力と空気抵抗（粘性抵抗 <i>f</i>=-kv または慣性抵抗 <i>f</i>=-κ <i>v</i>²）のつり合い。落下速度が次第に一定値（終端速度 <i>v</i><sub>term</sub>）に達する様子をリアルタイム観察できます。</p>
     </div>
 
+    <!-- 再生速度・アニメーションコントロールバー -->
+    <div class="playback-bar">
+      <button class="btn btn-primary" @click="togglePlay" style="padding: 6px 16px; font-weight: 700; border-radius: 8px; cursor: pointer;">
+        {{ isRunning ? '⏸ 一時停止' : '▶ 落下開始' }}
+      </button>
+      <div class="speed-control-group">
+        <span class="speed-label">⏱️ 再生速度:</span>
+        <div class="speed-btn-group">
+          <button :class="{ active: timeScale === 0.25 }" @click="timeScale = 0.25">🐢 0.25x (超スロー)</button>
+          <button :class="{ active: timeScale === 0.5 }" @click="timeScale = 0.5">🎯 0.5x (推奨・観察)</button>
+          <button :class="{ active: timeScale === 1.0 }" @click="timeScale = 1.0">1.0x (標準)</button>
+          <button :class="{ active: timeScale === 1.5 }" @click="timeScale = 1.5">1.5x (速め)</button>
+        </div>
+      </div>
+      <button class="btn btn-secondary" @click="stepForward" style="padding: 6px 12px; border-radius: 8px; font-size: 0.85rem; cursor: pointer;">
+        ⏭ コマ送り (+0.05s)
+      </button>
+      <button class="btn btn-secondary" @click="resetSim" style="padding: 6px 12px; border-radius: 8px; font-size: 0.85rem; cursor: pointer;">
+        ⏮ 最上部から再ドロップ
+      </button>
+    </div>
+
     <div class="canvas-wrapper">
       <canvas ref="canvasRef" width="700" height="300"></canvas>
       <div class="chute-badge" :class="{ open: isChuteOpen }">
@@ -57,15 +79,6 @@
           </label>
         </div>
       </div>
-
-      <div class="button-row">
-        <button class="btn btn-primary" @click="togglePlay">
-          {{ isRunning ? '⏸️ 一時停止' : '▶️ 落下開始 / 再生' }}
-        </button>
-        <button class="btn btn-secondary" @click="resetSim">
-          🔄 最上部から再ドロップ
-        </button>
-      </div>
     </div>
 
     <!-- リアルタイム物理量モニター -->
@@ -102,6 +115,7 @@ import { ref, onMounted, onUnmounted, computed } from 'vue'
 
 const canvasRef = ref(null)
 const isRunning = ref(true)
+const timeScale = ref(0.5) // 空気抵抗と加速度の推移が追える0.5x推奨
 
 const mass = ref(3.0) // kg
 const dragModel = ref('linear') // 'linear' or 'quadratic'
@@ -148,6 +162,11 @@ const maxHistory = 150
 
 const togglePlay = () => {
   isRunning.value = !isRunning.value
+}
+
+const stepForward = () => {
+  step(0.04)
+  draw()
 }
 
 const toggleChute = () => {
@@ -377,7 +396,7 @@ const animate = (timestamp) => {
   lastTime = timestamp
 
   if (isRunning.value) {
-    step(dt)
+    step(dt * timeScale.value)
   }
 
   draw()

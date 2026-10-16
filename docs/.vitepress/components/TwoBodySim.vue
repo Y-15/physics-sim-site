@@ -8,6 +8,31 @@
       <p class="subtitle">ばねでつながれた2物体の運動。外力がないとき、重心Gは等速直線運動（または静止）し、2物体は重心から見て逆位相で単振動します。</p>
     </div>
 
+    <!-- 再生速度・アニメーションコントロールバー -->
+    <div class="playback-bar">
+      <button class="btn btn-primary" @click="togglePlay" style="padding: 6px 16px; font-weight: 700; border-radius: 8px; cursor: pointer;">
+        {{ isRunning ? '⏸ 一時停止' : '▶ 再生' }}
+      </button>
+      <div class="speed-control-group">
+        <span class="speed-label">⏱️ 再生速度:</span>
+        <div class="speed-btn-group">
+          <button :class="{ active: timeScale === 0.25 }" @click="timeScale = 0.25">🐢 0.25x (超スロー)</button>
+          <button :class="{ active: timeScale === 0.5 }" @click="timeScale = 0.5">🎯 0.5x (推奨・観察)</button>
+          <button :class="{ active: timeScale === 1.0 }" @click="timeScale = 1.0">1.0x (標準)</button>
+          <button :class="{ active: timeScale === 1.5 }" @click="timeScale = 1.5">1.5x (速め)</button>
+        </div>
+      </div>
+      <button class="btn btn-secondary" @click="stepForward" style="padding: 6px 12px; border-radius: 8px; font-size: 0.85rem; cursor: pointer;">
+        ⏭ コマ送り (+0.05s)
+      </button>
+      <button class="btn btn-secondary" @click="resetSim" style="padding: 6px 12px; border-radius: 8px; font-size: 0.85rem; cursor: pointer;">
+        ⏮ リセット
+      </button>
+      <button class="btn btn-secondary" @click="toggleView" style="padding: 6px 12px; border-radius: 8px; font-size: 0.85rem; cursor: pointer; border-color: #38bdf8; color: #38bdf8;">
+        👀 視点切替 ({{ viewMode === 'lab' ? '重心系へ' : '実験室系へ' }})
+      </button>
+    </div>
+
     <div class="canvas-wrapper">
       <canvas ref="canvasRef" width="700" height="300"></canvas>
       <div class="mode-badge" :class="viewMode">
@@ -45,18 +70,6 @@
             <input type="range" v-model.number="v1_init" min="-4" max="4" step="0.5" @input="resetSim" />
           </label>
         </div>
-      </div>
-
-      <div class="button-row">
-        <button class="btn btn-primary" @click="togglePlay">
-          {{ isRunning ? '⏸️ 一時停止' : '▶️ 再生' }}
-        </button>
-        <button class="btn btn-secondary" @click="resetSim">
-          🔄 リセット
-        </button>
-        <button class="btn btn-accent" @click="toggleView">
-          👀 視点切替 ({{ viewMode === 'lab' ? '重心系へ' : '実験室系へ' }})
-        </button>
       </div>
     </div>
 
@@ -113,6 +126,7 @@ import { ref, onMounted, onUnmounted, computed } from 'vue'
 
 const canvasRef = ref(null)
 const isRunning = ref(true)
+const timeScale = ref(0.5) // 重心運動と相対単振動がじっくり追える0.5x推奨
 const viewMode = ref('lab') // 'lab' or 'com' (center of mass)
 
 // 物理パラメータ
@@ -152,6 +166,11 @@ let lastTime = 0
 
 const togglePlay = () => {
   isRunning.value = !isRunning.value
+}
+
+const stepForward = () => {
+  step(0.04)
+  draw()
 }
 
 const toggleView = () => {
@@ -365,7 +384,7 @@ const animate = (time) => {
   lastTime = time
 
   if (isRunning.value) {
-    step(dt)
+    step(dt * timeScale.value)
   }
 
   draw()

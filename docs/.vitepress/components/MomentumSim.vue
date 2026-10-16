@@ -1,9 +1,31 @@
-﻿<template>
+<template>
   <div class="sim-container">
     <div class="sim-header">
       <span class="sim-title">💥 運動量保存と衝突 実験室</span>
       <span class="sim-badge">運動量・反発係数・衝突</span>
     </div>
+    <!-- 再生速度・アニメーションコントロールバー -->
+    <div class="playback-bar">
+      <button class="btn btn-primary" @click="togglePlay" style="padding: 6px 16px; font-weight: 700; border-radius: 8px; cursor: pointer;">
+        {{ isRunning ? '⏸ 一時停止' : '▶ 再生' }}
+      </button>
+      <div class="speed-control-group">
+        <span class="speed-label">⏱️ 再生速度:</span>
+        <div class="speed-btn-group">
+          <button :class="{ active: timeScale === 0.2 }" @click="timeScale = 0.2">🐢 0.2x (超スロー)</button>
+          <button :class="{ active: timeScale === 0.4 }" @click="timeScale = 0.4">🎯 0.4x (推奨・観察)</button>
+          <button :class="{ active: timeScale === 0.8 }" @click="timeScale = 0.8">0.8x (標準)</button>
+          <button :class="{ active: timeScale === 1.5 }" @click="timeScale = 1.5">1.5x (速め)</button>
+        </div>
+      </div>
+      <button class="btn btn-secondary" @click="stepForward" style="padding: 6px 12px; border-radius: 8px; font-size: 0.85rem; cursor: pointer;">
+        ⏭ コマ送り (+0.05s)
+      </button>
+      <button class="btn btn-secondary" @click="resetAnim" style="padding: 6px 12px; border-radius: 8px; font-size: 0.85rem; cursor: pointer;">
+        ⏮ 最初から再衝突
+      </button>
+    </div>
+
     <div class="canvas-wrapper">
       <canvas ref="canvasRef" width="700" height="280"></canvas>
     </div>
@@ -57,9 +79,6 @@
         <div class="stat-formula" style="color:#f59e0b">{{ keLoss.toFixed(2) }} J 失われた</div>
       </div>
     </div>
-    <div class="action-buttons">
-      <button class="btn btn-primary" @click="resetAnim">▶ 衝突シミュレーション</button>
-    </div>
   </div>
 </template>
 
@@ -69,6 +88,8 @@ import { ref, computed, onMounted, onUnmounted, watch } from "vue"
 const canvasRef = ref(null)
 const m1 = ref(2), m2 = ref(1), u1 = ref(5), u2 = 0
 const e = ref(0.7)
+const isRunning = ref(true)
+const timeScale = ref(0.4) // 衝突の前後が目で追える落ち着いた0.4x推奨
 
 const v1 = computed(() => ((m1.value - e.value * m2.value) * u1.value + (1 + e.value) * m2.value * u2) / (m1.value + m2.value))
 const v2 = computed(() => ((m2.value - e.value * m1.value) * u2 + (1 + e.value) * m1.value * u1.value) / (m1.value + m2.value))
@@ -83,6 +104,17 @@ let phase = ref("before") // before | collide | after
 let animT = ref(0)
 let lastTime = null
 
+function togglePlay() {
+  isRunning.value = !isRunning.value
+}
+
+function stepForward() {
+  animT.value += 3
+  if (!isRunning.value) {
+    draw(performance.now())
+  }
+}
+
 function getBlockR(mass) { return 16 + mass * 5 }
 
 function draw(rawT) {
@@ -90,8 +122,11 @@ function draw(rawT) {
   const dt = (rawT - lastTime) / 1000
   lastTime = rawT
 
-  if (phase.value === "before") animT.value += dt * 60
-  else if (phase.value === "after") animT.value += dt * 60
+  if (isRunning.value) {
+    if (phase.value === "before") animT.value += dt * 60 * timeScale.value
+    else if (phase.value === "after") animT.value += dt * 60 * timeScale.value
+    else if (phase.value === "collide") animT.value += dt * 60 * timeScale.value
+  }
 
   const canvas = canvasRef.value
   if (!canvas) return

@@ -8,6 +8,7 @@ const wedgeMass = ref(3.0) // 台の質量 M [kg] (1.0 ~ 10.0)
 const ballMass = ref(1.0)  // 小球の質量 m [kg] (0.5 ~ 5.0)
 const slopeAngleDeg = ref(30) // 斜面角度 theta [deg] (15 ~ 60)
 const isPlaying = ref(true)
+const timeScale = ref(0.4) // 小球の滑走と台の後退が追える0.4x推奨
 
 let animationFrameId = null
 
@@ -92,10 +93,14 @@ function resetSim() {
   }
 }
 
-function updatePhysics() {
-  if (!isPlaying.value) return
+function stepForward() {
+  updatePhysics(0.04)
+}
 
-  const dt = 0.03
+function updatePhysics(dtOverride = null) {
+  if (!isPlaying.value && !dtOverride) return
+
+  const dt = (dtOverride || 0.03) * timeScale.value
   const th = thetaRad.value
   const maxS = wedgeH / Math.sin(th)
 
@@ -271,6 +276,28 @@ onUnmounted(() => {
       <div class="badge">水平方向運動量保存則 × 相対運動</div>
     </div>
 
+    <!-- 再生速度・アニメーションコントロールバー -->
+    <div class="playback-bar">
+      <button class="btn btn-primary" @click="isPlaying = !isPlaying" style="padding: 6px 16px; font-weight: 700; border-radius: 8px; cursor: pointer;">
+        {{ isPlaying ? '⏸ 一時停止' : '▶ 滑走再開' }}
+      </button>
+      <div class="speed-control-group">
+        <span class="speed-label">⏱️ 再生速度:</span>
+        <div class="speed-btn-group">
+          <button :class="{ active: timeScale === 0.2 }" @click="timeScale = 0.2">🐢 0.2x (超スロー)</button>
+          <button :class="{ active: timeScale === 0.4 }" @click="timeScale = 0.4">🎯 0.4x (推奨・観察)</button>
+          <button :class="{ active: timeScale === 0.8 }" @click="timeScale = 0.8">0.8x (標準)</button>
+          <button :class="{ active: timeScale === 1.5 }" @click="timeScale = 1.5">1.5x (速め)</button>
+        </div>
+      </div>
+      <button class="btn btn-secondary" @click="stepForward" style="padding: 6px 12px; border-radius: 8px; font-size: 0.85rem; cursor: pointer;">
+        ⏭ コマ送り (+0.05s)
+      </button>
+      <button class="btn btn-secondary" @click="resetSim" style="padding: 6px 12px; border-radius: 8px; font-size: 0.85rem; cursor: pointer;">
+        ⏮ 最初から滑走
+      </button>
+    </div>
+
     <div class="canvas-wrapper">
       <canvas ref="canvasRef" :width="width" :height="height" class="sim-canvas"></canvas>
 
@@ -305,13 +332,6 @@ onUnmounted(() => {
           <label>斜面角度 θ: <span>{{ slopeAngleDeg }}°</span></label>
           <input type="range" v-model.number="slopeAngleDeg" min="20" max="50" step="5" @input="resetSim" />
         </div>
-      </div>
-
-      <div class="control-buttons">
-        <button class="btn btn-secondary" @click="isPlaying = !isPlaying">
-          {{ isPlaying ? '一時停止' : '再開' }}
-        </button>
-        <button class="btn btn-reset" @click="resetSim">最初から滑走</button>
       </div>
     </div>
 

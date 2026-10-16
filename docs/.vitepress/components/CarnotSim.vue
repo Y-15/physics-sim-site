@@ -8,6 +8,31 @@
       </div>
     </div>
 
+    <!-- 再生速度・アニメーションコントロールバー -->
+    <div class="playback-bar">
+      <button class="btn btn-primary" @click="togglePlay" style="padding: 6px 16px; font-weight: 700; border-radius: 8px; cursor: pointer;">
+        {{ isRunning ? '⏸ 一時停止' : '▶ サイクル再生' }}
+      </button>
+      <div class="speed-control-group">
+        <span class="speed-label">⏱️ 再生速度:</span>
+        <div class="speed-btn-group">
+          <button :class="{ active: timeScale === 0.25 }" @click="timeScale = 0.25">🐢 0.25x (超スロー)</button>
+          <button :class="{ active: timeScale === 0.5 }" @click="timeScale = 0.5">🎯 0.5x (推奨・観察)</button>
+          <button :class="{ active: timeScale === 1.0 }" @click="timeScale = 1.0">1.0x (標準)</button>
+          <button :class="{ active: timeScale === 1.5 }" @click="timeScale = 1.5">1.5x (速め)</button>
+        </div>
+      </div>
+      <button class="btn btn-secondary" @click="stepForward" style="padding: 6px 12px; border-radius: 8px; font-size: 0.85rem; cursor: pointer;">
+        ⏭ コマ送り
+      </button>
+      <button class="btn btn-secondary" @click="nextStage" style="padding: 6px 12px; border-radius: 8px; font-size: 0.85rem; cursor: pointer;">
+        ⏩ 次の工程へ
+      </button>
+      <button class="btn btn-secondary" @click="resetCycle" style="padding: 6px 12px; border-radius: 8px; font-size: 0.85rem; cursor: pointer;">
+        ⏮ 最初から
+      </button>
+    </div>
+
     <!-- メインCanvas (左: P-V図, 右: ピストンシリンダー) -->
     <div class="canvas-wrap">
       <canvas ref="canvasRef" width="700" height="380" class="sim-canvas"></canvas>
@@ -56,14 +81,6 @@
           <input type="range" v-model.number="TL" min="200" max="400" step="10" class="sim-slider" />
         </div>
       </div>
-
-      <div class="btn-group">
-        <button @click="togglePlay" class="sim-btn primary">
-          {{ isRunning ? '⏸️ 一時停止' : '▶️ サイクル再生' }}
-        </button>
-        <button @click="nextStage" class="sim-btn secondary">⏭️ 次の工程へ</button>
-        <button @click="resetCycle" class="sim-btn outline">🔄 リセット</button>
-      </div>
     </div>
 
     <!-- 解説コールアウト -->
@@ -80,6 +97,7 @@ import { ref, computed, watch, onMounted, onUnmounted } from 'vue'
 
 const canvasRef = ref(null)
 const isRunning = ref(true)
+const timeScale = ref(0.5) // 各工程のP-V追従がじっくり観察できる0.5x推奨
 
 // 温度 [K]
 const TH = ref(600) // 高温
@@ -115,6 +133,14 @@ function togglePlay() {
   isRunning.value = !isRunning.value
 }
 
+function stepForward() {
+  stageProgress.value += 0.1
+  if (stageProgress.value >= 1.0) {
+    stageProgress.value = 0
+    currentStage.value = (currentStage.value + 1) % 4
+  }
+}
+
 function nextStage() {
   currentStage.value = (currentStage.value + 1) % 4
   stageProgress.value = 0
@@ -131,7 +157,7 @@ function updateAndDraw(timestamp) {
   lastTime = timestamp
 
   if (isRunning.value) {
-    stageProgress.value += dt * 0.4
+    stageProgress.value += dt * 0.4 * timeScale.value
     if (stageProgress.value >= 1.0) {
       stageProgress.value = 0
       currentStage.value = (currentStage.value + 1) % 4

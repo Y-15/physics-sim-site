@@ -8,6 +8,7 @@ const dBdt = ref(2.0) // 磁場上昇率 [T/s] (0.5 ~ 5.0)
 const orbitRadiusTarget = ref(130) // 設計軌道半径 R0 [px]
 const fieldProfileRatio = ref(2.0) // 平均磁場と軌道磁場の比 (B_bar / B0) -> 2.0 で安定
 const isPlaying = ref(true)
+const timeScale = ref(0.4) // 誘導加速と軌道安定性が追える0.4x推奨
 
 let animationFrameId = null
 
@@ -48,10 +49,14 @@ function resetSim() {
   }
 }
 
-function updatePhysics() {
-  if (!isPlaying.value) return
+function stepForward() {
+  updatePhysics(0.04)
+}
 
-  const dt = 0.03
+function updatePhysics(dtOverride = null) {
+  if (!isPlaying.value && !dtOverride) return
+
+  const dt = (dtOverride || 0.03) * timeScale.value
   const s = state.value
   const R0 = orbitRadiusTarget.value
   const ratio = fieldProfileRatio.value
@@ -222,6 +227,28 @@ onUnmounted(() => {
       <div class="badge">ファラデーの電磁誘導則 × 2:1の法則</div>
     </div>
 
+    <!-- 再生速度・アニメーションコントロールバー -->
+    <div class="playback-bar">
+      <button class="btn btn-primary" @click="isPlaying = !isPlaying" style="padding: 6px 16px; font-weight: 700; border-radius: 8px; cursor: pointer;">
+        {{ isPlaying ? '⏸ 一時停止' : '▶ 加速再開' }}
+      </button>
+      <div class="speed-control-group">
+        <span class="speed-label">⏱️ 再生速度:</span>
+        <div class="speed-btn-group">
+          <button :class="{ active: timeScale === 0.25 }" @click="timeScale = 0.25">🐢 0.25x (超スロー)</button>
+          <button :class="{ active: timeScale === 0.5 }" @click="timeScale = 0.5">🎯 0.5x (推奨・観察)</button>
+          <button :class="{ active: timeScale === 1.0 }" @click="timeScale = 1.0">1.0x (標準)</button>
+          <button :class="{ active: timeScale === 1.5 }" @click="timeScale = 1.5">1.5x (速め)</button>
+        </div>
+      </div>
+      <button class="btn btn-secondary" @click="stepForward" style="padding: 6px 12px; border-radius: 8px; font-size: 0.85rem; cursor: pointer;">
+        ⏭ コマ送り
+      </button>
+      <button class="btn btn-secondary" @click="resetSim" style="padding: 6px 12px; border-radius: 8px; font-size: 0.85rem; cursor: pointer;">
+        ⏮ 最初から加速
+      </button>
+    </div>
+
     <div class="canvas-wrapper">
       <canvas ref="canvasRef" :width="width" :height="height" class="sim-canvas"></canvas>
 
@@ -265,13 +292,9 @@ onUnmounted(() => {
       </div>
 
       <div class="control-buttons">
-        <button class="btn btn-secondary" @click="fieldProfileRatio = 2.0">
-          理想の 2:1 条件に合わせる
+        <button class="btn btn-secondary" @click="fieldProfileRatio = 2.0" style="color:#38bdf8; border-color:#38bdf8;">
+          🎯 理想の 2:1 条件（B̄ = 2B₀）にワンタップで合わせる
         </button>
-        <button class="btn btn-secondary" @click="isPlaying = !isPlaying">
-          {{ isPlaying ? '一時停止' : '再開' }}
-        </button>
-        <button class="btn btn-reset" @click="resetSim">最初から加速</button>
       </div>
     </div>
 
