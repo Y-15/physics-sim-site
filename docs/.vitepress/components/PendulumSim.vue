@@ -85,15 +85,8 @@
       <button :class="{ active: Math.abs(g - 3.72) < 0.05 }" @click="setGravity(3.72)">🔴 火星 (3.72)</button>
     </div>
 
-    <!-- アクションボタンとオプション -->
-    <div class="action-buttons">
-      <button class="btn btn-primary" @click="togglePlay">
-        {{ isPlaying ? '⏸ 一時停止' : '▶ スタート' }}
-      </button>
-      <button class="btn btn-secondary" @click="resetSim">
-        ⏮ リセット
-      </button>
-
+    <!-- 表示・減衰オプション -->
+    <div class="action-buttons" style="justify-content: flex-start; gap: 16px;">
       <label class="toggle-label">
         <input type="checkbox" v-model="airResistance" />
         空気抵抗（微小減衰）

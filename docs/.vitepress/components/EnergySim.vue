@@ -5,6 +5,28 @@
       <span class="lab-badge">保存力・非保存力・摩擦熱</span>
     </div>
 
+    <!-- 再生速度・アニメーションコントロールバー -->
+    <div class="playback-bar">
+      <button class="lab-btn primary" @click="playing = !playing" style="padding: 6px 16px; font-weight: 700; border-radius: 8px; cursor: pointer;">
+        {{ playing ? '⏸ 一時停止' : '▶ 再生' }}
+      </button>
+      <div class="speed-control-group">
+        <span class="speed-label">⏱️ 再生速度:</span>
+        <div class="speed-btn-group">
+          <button :class="{ active: timeScale === 0.25 }" @click="timeScale = 0.25">🐢 0.25x (超スロー)</button>
+          <button :class="{ active: timeScale === 0.5 }" @click="timeScale = 0.5">🎯 0.5x (推奨・観察)</button>
+          <button :class="{ active: timeScale === 1.0 }" @click="timeScale = 1.0">1.0x (標準)</button>
+          <button :class="{ active: timeScale === 1.5 }" @click="timeScale = 1.5">1.5x (速め)</button>
+        </div>
+      </div>
+      <button class="lab-btn" @click="stepSim(0.04)" style="padding: 6px 12px; border-radius: 8px; font-size: 0.85rem; cursor: pointer;">
+        ⏭ コマ送り (+0.04s)
+      </button>
+      <button class="lab-btn" @click="reset" style="padding: 6px 12px; border-radius: 8px; font-size: 0.85rem; cursor: pointer;">
+        ⏮ 最初から滑らせる
+      </button>
+    </div>
+
     <div class="lab-canvas"><canvas ref="canvasRef"></canvas></div>
 
     <div class="lab-controls">
@@ -58,11 +80,6 @@
         <div class="f">v = √(2gh) (質量によらない！)</div>
       </div>
     </div>
-
-    <div class="lab-btns">
-      <button class="lab-btn primary" @click="playing = !playing">{{ playing ? '⏸ 一時停止' : '▶ 再生' }}</button>
-      <button class="lab-btn" @click="reset">⏮ 最初から滑らせる</button>
-    </div>
   </div>
 </template>
 
@@ -80,6 +97,7 @@ const muK = ref(0.15)
 const g = 9.8
 
 const playing = ref(true)
+const timeScale = ref(0.5) // デフォルトで力学的エネルギー変化をじっくり追える0.5xスロー再生
 
 // 初期全エネルギー
 const totalE0 = computed(() => m.value * g * h0.value)
@@ -300,9 +318,14 @@ onMounted(() => {
   reset()
 })
 
+function stepSim(delta = 0.04) {
+  step(delta)
+  draw()
+}
+
 useLoop((dt) => {
   if (!ctx) return
-  if (playing.value) step(dt)
+  if (playing.value) step(dt * timeScale.value)
   draw()
 })
 </script>

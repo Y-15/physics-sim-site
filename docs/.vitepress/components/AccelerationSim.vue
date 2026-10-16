@@ -73,13 +73,6 @@
         <div class="stat-formula">2ax = {{ (2 * a * currentX).toFixed(1) }} (一致！)</div>
       </div>
     </div>
-
-    <div class="action-buttons">
-      <button class="btn btn-primary" @click="togglePlay">
-        {{ isPlaying ? '⏸ 一時停止' : '▶ 再生' }}
-      </button>
-      <button class="btn btn-secondary" @click="reset">⏮ 最初から再生</button>
-    </div>
   </div>
 </template>
 

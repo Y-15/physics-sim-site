@@ -87,13 +87,6 @@
         <div class="stat-formula">f = 1/T (1秒あたりの回転数)</div>
       </div>
     </div>
-
-    <div class="action-buttons">
-      <button class="btn btn-primary" @click="togglePlay">
-        {{ isPlaying ? '⏸ 一時停止' : '▶ 再生' }}
-      </button>
-      <button class="btn btn-secondary" @click="reset">⏮ リセット</button>
-    </div>
   </div>
 </template>
 

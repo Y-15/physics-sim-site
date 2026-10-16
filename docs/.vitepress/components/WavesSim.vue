@@ -160,11 +160,6 @@
         </div>
       </div>
     </template>
-
-    <div class="lab-btns">
-      <button class="lab-btn primary" @click="playing = !playing">{{ playing ? '⏸ 一時停止' : '▶ 再生' }}</button>
-      <button class="lab-btn" @click="reset">⏮ リセット</button>
-    </div>
   </div>
 </template>
 

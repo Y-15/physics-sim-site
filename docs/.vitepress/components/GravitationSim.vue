@@ -5,6 +5,28 @@
       <span class="lab-badge">第1・第2宇宙速度／面積速度一定</span>
     </div>
 
+    <!-- 再生速度・アニメーションコントロールバー -->
+    <div class="playback-bar">
+      <button class="lab-btn primary" @click="playing = !playing" style="padding: 6px 16px; font-weight: 700; border-radius: 8px; cursor: pointer;">
+        {{ playing ? '⏸ 一時停止' : '▶ 再生' }}
+      </button>
+      <div class="speed-control-group">
+        <span class="speed-label">⏱️ 再生速度:</span>
+        <div class="speed-btn-group">
+          <button :class="{ active: timeScale === 0.25 }" @click="timeScale = 0.25">🐢 0.25x (超スロー)</button>
+          <button :class="{ active: timeScale === 0.5 }" @click="timeScale = 0.5">🎯 0.5x (推奨・観察)</button>
+          <button :class="{ active: timeScale === 1.0 }" @click="timeScale = 1.0">1.0x (標準)</button>
+          <button :class="{ active: timeScale === 1.5 }" @click="timeScale = 1.5">1.5x (速め)</button>
+        </div>
+      </div>
+      <button class="lab-btn" @click="stepSim(0.04)" style="padding: 6px 12px; border-radius: 8px; font-size: 0.85rem; cursor: pointer;">
+        ⏭ コマ送り (+0.04s)
+      </button>
+      <button class="lab-btn" @click="reset" style="padding: 6px 12px; border-radius: 8px; font-size: 0.85rem; cursor: pointer;">
+        ⏮ 打ち上げ直す
+      </button>
+    </div>
+
     <div class="lab-canvas"><canvas ref="canvasRef"></canvas></div>
 
     <div class="lab-msg" v-if="status">{{ status }}</div>
@@ -60,11 +82,6 @@
         <div class="f">T² ∝ a³（第3法則）</div>
       </div>
     </div>
-
-    <div class="lab-btns">
-      <button class="lab-btn primary" @click="playing = !playing">{{ playing ? '⏸ 一時停止' : '▶ 再生' }}</button>
-      <button class="lab-btn" @click="reset">⏮ 打ち上げ直す</button>
-    </div>
   </div>
 </template>
 
@@ -83,6 +100,7 @@ const RE = 6.37 // 地球半径 [Mm]
 const ratio = ref(1.0)
 const r0 = ref(10)
 const playing = ref(true)
+const timeScale = ref(0.5) // デフォルトで楕円軌道や面積速度をじっくり追える0.5xスロー再生
 const showSectors = ref(true)
 const status = ref('')
 
@@ -143,9 +161,14 @@ function measure() {
   energy.value = 0.5 * v * v - GM / r
 }
 
+function stepSim(delta = 0.04) {
+  step(delta)
+  draw()
+}
+
 function step(dtReal) {
   if (stopped) return
-  const simDt = dtReal * (T0.value / 7) // 円軌道1周 ≒ 7 秒で表示
+  const simDt = dtReal * timeScale.value * (T0.value / 7) // 円軌道1周 ≒ 7 秒で表示
   const N = 40
   for (let i = 0; i < N; i++) {
     rk4(simDt / N)

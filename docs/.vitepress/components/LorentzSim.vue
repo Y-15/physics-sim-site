@@ -15,6 +15,28 @@
       </button>
     </div>
 
+    <!-- 再生速度・アニメーションコントロールバー -->
+    <div class="playback-bar" style="margin-top: 0.8rem;">
+      <button class="lab-btn primary" @click="isPlaying = !isPlaying" style="padding: 6px 16px; font-weight: 700; border-radius: 8px; cursor: pointer;">
+        {{ isPlaying ? '⏸ 一時停止' : '▶ 再生' }}
+      </button>
+      <div class="speed-control-group">
+        <span class="speed-label">⏱️ 再生速度:</span>
+        <div class="speed-btn-group">
+          <button :class="{ active: timeScale === 0.25 }" @click="timeScale = 0.25">🐢 0.25x (超スロー)</button>
+          <button :class="{ active: timeScale === 0.5 }" @click="timeScale = 0.5">🎯 0.5x (推奨・観察)</button>
+          <button :class="{ active: timeScale === 1.0 }" @click="timeScale = 1.0">1.0x (標準)</button>
+          <button :class="{ active: timeScale === 1.5 }" @click="timeScale = 1.5">1.5x (速め)</button>
+        </div>
+      </div>
+      <button class="lab-btn" @click="stepSim(0.03)" style="padding: 6px 12px; border-radius: 8px; font-size: 0.85rem; cursor: pointer;">
+        ⏭ コマ送り (+0.03s)
+      </button>
+      <button class="lab-btn" @click="emitParticle" style="padding: 6px 12px; border-radius: 8px; font-size: 0.85rem; cursor: pointer;">
+        🚀 新粒子を発射
+      </button>
+    </div>
+
     <div class="lab-canvas"><canvas ref="canvasRef"></canvas></div>
 
     <div class="lab-controls">
@@ -97,6 +119,13 @@ const bFieldT = ref(0.6) // T
 const speedV_kms = ref(100) // km/s
 const eField_kVm = ref(60) // kV/m
 const particleType = ref('electron')
+const isPlaying = ref(true)
+const timeScale = ref(0.5) // デフォルトで粒子の曲がり方や回転をじっくり追える0.5xスロー再生
+let manualStepDt = 0
+
+function stepSim(delta = 0.03) {
+  manualStepDt = delta
+}
 
 // 粒子の電荷 (単位 e) と質量 (kg)
 const particleProps = computed(() => {
@@ -191,7 +220,12 @@ useLoop(canvasRef, ({ ctx, width, height, dt }) => {
   drawFields(ctx, width, height)
 
   // 2. 粒子の物理更新 & 軌跡
-  updateAndDrawParticles(ctx, width, height, dt)
+  let stepDt = isPlaying.value ? dt * timeScale.value : 0
+  if (manualStepDt > 0) {
+    stepDt = manualStepDt
+    manualStepDt = 0
+  }
+  updateAndDrawParticles(ctx, width, height, stepDt)
 })
 
 function drawFields(ctx, w, h) {
