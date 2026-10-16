@@ -1,6 +1,8 @@
 <script setup>
-import { ref, onMounted, onUnmounted, nextTick } from 'vue'
+import { ref, computed, onMounted, onUnmounted, nextTick } from 'vue'
+import { useRoute } from 'vitepress'
 
+const route = useRoute()
 const isClient = ref(false)
 const isVisible = ref(true)
 const isFadingOut = ref(false)
@@ -12,11 +14,14 @@ let animationId = null
 let audioCtx = null
 let masterGain = null
 
-// アニメーション進行管理
+// アニメーション進行管理（自動で流れるように進む4秒シークエンス）
 const simTime = ref(0)
-const maxDuration = 5.0 // 全体で5秒のシネマティック物理導入
+const maxDuration = 4.0 // 全体で4.0秒のシネマティック物理導入
 const currentPhase = ref(0)
 const phaseCaption = ref('QUANTUM SINGULARITY & SPACETIME WARP')
+
+const progressPercent = computed(() => Math.min(100, Math.floor((simTime.value / maxDuration) * 100)))
+const remainingSec = computed(() => Math.max(0, maxDuration - simTime.value).toFixed(1))
 
 // マウスインタラクション
 const mouse = {
@@ -26,14 +31,14 @@ const mouse = {
   active: false
 }
 
-// 物理公式ホログラム一覧
+// 物理公式ホログラム一覧（テンポよく自動出現）
 const formulas = [
-  { text: 'm(d²r/dt²) = F', x: 0.16, y: 0.28, size: 21, delay: 1.2 },
-  { text: 'E = mc²', x: 0.84, y: 0.26, size: 24, delay: 1.4 },
-  { text: '∇ × E = -∂B/∂t', x: 0.14, y: 0.72, size: 20, delay: 1.7 },
-  { text: 'iħ(∂ψ/∂t) = Ĥψ', x: 0.84, y: 0.72, size: 21, delay: 2.0 },
-  { text: 'F = G(Mm/r²)', x: 0.5, y: 0.13, size: 22, delay: 2.3 },
-  { text: 'T = 2π√(m/k)', x: 0.5, y: 0.90, size: 20, delay: 2.6 }
+  { text: 'm(d²r/dt²) = F', x: 0.16, y: 0.28, size: 21, delay: 0.9 },
+  { text: 'E = mc²', x: 0.84, y: 0.26, size: 24, delay: 1.1 },
+  { text: '∇ × E = -∂B/∂t', x: 0.14, y: 0.72, size: 20, delay: 1.3 },
+  { text: 'iħ(∂ψ/∂t) = Ĥψ', x: 0.84, y: 0.72, size: 21, delay: 1.5 },
+  { text: 'F = G(Mm/r²)', x: 0.5, y: 0.13, size: 22, delay: 1.8 },
+  { text: 'T = 2π√(m/k)', x: 0.5, y: 0.90, size: 20, delay: 2.1 }
 ]
 
 // 音響シンセサイザー (Web Audio API)
@@ -429,13 +434,13 @@ function drawLabEmblem(ctx, cx, cy, t, phase, w) {
   ctx.shadowBlur = 0
   ctx.fillText('すべての公式には、理由がある。動く世界で物理を解き明かす。', cx, cy + 150)
 
-  // プログレスバー
+  // プログレスバー（自動進行ゲージ）
   const barW = Math.min(380, w * 0.75)
   const barH = 5
   ctx.fillStyle = 'rgba(255, 255, 255, 0.12)'
   ctx.fillRect(cx - barW / 2, cy + 178, barW, barH)
 
-  const progress = Math.min(1, (t - 3.4) / 0.9)
+  const progress = Math.min(1, Math.max(0, (t - 2.8) / 0.8))
   ctx.fillStyle = '#38bdf8'
   ctx.shadowColor = '#38bdf8'
   ctx.shadowBlur = 12
@@ -443,7 +448,7 @@ function drawLabEmblem(ctx, cx, cy, t, phase, w) {
 
   ctx.font = `700 11px monospace`
   ctx.fillStyle = '#38bdf8'
-  ctx.fillText(progress >= 1 ? 'PHYSICS ENGINE SYNCHRONIZED [100%]' : `INITIALIZING VIRTUAL LAB [${Math.floor(progress * 100)}%]`, cx, cy + 200)
+  ctx.fillText(progress >= 1 ? 'PHYSICS ENGINE SYNCHRONIZED [100%] // ENTERING LAB...' : `INITIALIZING VIRTUAL LAB [${Math.floor(progress * 100)}%] // AUTO ADVANCING...`, cx, cy + 200)
 
   ctx.restore()
 }
@@ -475,10 +480,10 @@ function animate(timestamp) {
   const cx = w / 2
   const cy = h / 2
 
-  if (t < 0.9) {
+  if (t < 0.7) {
     currentPhase.value = 0
     phaseCaption.value = 'T = 0.000s | QUANTUM SINGULARITY & FLUCTUATION'
-  } else if (t < 2.2) {
+  } else if (t < 1.8) {
     currentPhase.value = 1
     phaseCaption.value = 'T = 10⁻³²s | COSMIC INFLATION & FIELD EMERGENCE'
     if (!bigBangTriggered && fixedTimeParam === null) {
@@ -488,10 +493,10 @@ function animate(timestamp) {
       shockwaves.push({ x: cx, y: cy, radius: 2, speed: 750, alpha: 0.9, color: '#fbbf24', width: 3 })
       shockwaves.push({ x: cx, y: cy, radius: 1, speed: 450, alpha: 0.8, color: '#a855f7', width: 2 })
     }
-  } else if (t < 3.5) {
+  } else if (t < 2.8) {
     currentPhase.value = 2
     phaseCaption.value = 'T = 3.8×10⁵ yr | SELF-ORGANIZATION & GRAVITATIONAL ORBITS'
-  } else if (t < 4.5) {
+  } else if (t < 3.6) {
     currentPhase.value = 3
     phaseCaption.value = 'REAL-TIME PHYSICS ENGINE | SIMULATION READY'
     if (!chimeTriggered && fixedTimeParam === null) {
@@ -500,7 +505,7 @@ function animate(timestamp) {
     }
   } else if (t < maxDuration) {
     currentPhase.value = 4
-    phaseCaption.value = 'WARP TO LABORATORY | ENTERING MATRIX'
+    phaseCaption.value = 'AUTO WARP TO LABORATORY | ENTERING MATRIX'
   } else {
     finishIntro()
     return
@@ -636,7 +641,6 @@ onMounted(async () => {
   isClient.value = true
   await nextTick()
 
-  const hasSeenIntro = sessionStorage.getItem('physics_sim_intro_seen')
   const permanentSkip = localStorage.getItem('physics_sim_intro_skip')
 
   window.addEventListener('play-physics-intro', playIntroManually)
@@ -663,18 +667,18 @@ onMounted(async () => {
     let curT = 0
     while (curT < testT) {
       let phase = 0
-      if (curT < 0.9) phase = 0
-      else if (curT < 2.2) phase = 1
-      else if (curT < 3.5) phase = 2
-      else if (curT < 4.5) phase = 3
+      if (curT < 0.7) phase = 0
+      else if (curT < 1.8) phase = 1
+      else if (curT < 2.8) phase = 2
+      else if (curT < 3.6) phase = 3
       else phase = 4
       for (let i = 0; i < particles.length; i++) {
         particles[i].update(simDt, curT, cx, cy, phase)
       }
       curT += simDt
     }
-    if (testT >= 1.0 && testT <= 2.2) {
-      const swRadius = (testT - 0.9) * 450
+    if (testT >= 0.8 && testT <= 2.0) {
+      const swRadius = (testT - 0.7) * 550
       shockwaves.push({ x: cx, y: cy, radius: swRadius, speed: 0, alpha: 0.85, color: '#38bdf8', width: 3.5 })
       shockwaves.push({ x: cx, y: cy, radius: swRadius * 0.7, speed: 0, alpha: 0.7, color: '#fbbf24', width: 2.5 })
     }
@@ -682,12 +686,20 @@ onMounted(async () => {
     return
   }
 
-  if (permanentSkip === 'true' || hasSeenIntro === 'true') {
+  // 永続スキップ設定がある場合は非表示
+  if (permanentSkip === 'true') {
     isVisible.value = false
     return
   }
 
-  sessionStorage.setItem('physics_sim_intro_seen', 'true')
+  // 個別シミュレーター記事などを直接開いたときは邪魔にならないよう非表示（トップページ / のみ自動起動）
+  const currentPath = route.path || '/'
+  const isHome = currentPath === '/' || currentPath === '/index.html'
+  if (!isHome) {
+    isVisible.value = false
+    return
+  }
+
   isVisible.value = true
   document.body.style.overflow = 'hidden'
 
@@ -730,16 +742,29 @@ onUnmounted(() => {
       @touchmove="onTouchMove"
       @touchstart="onMouseDown"
     >
+      <!-- 最上部 全画面タイムライン自動進行インジケーター -->
+      <div class="top-timeline-wrap">
+        <div class="top-timeline-bar" :style="{ width: progressPercent + '%' }"></div>
+      </div>
+
       <canvas ref="canvasRef" class="physics-canvas"></canvas>
 
       <div class="hud-top-bar">
-        <div class="hud-badge">
-          <span class="pulsing-dot"></span>
-          <span class="hud-title">PHYSICS ENGINE v2.6 // REAL-TIME CALCULATION</span>
+        <div class="hud-badge-group">
+          <div class="hud-badge">
+            <span class="pulsing-dot"></span>
+            <span class="hud-title">PHYSICS ENGINE v2.6 // REAL-TIME CALCULATION</span>
+          </div>
+          <div class="hud-auto-badge">
+            <span class="pulsing-radar"></span>
+            <span class="auto-seq-text">⚡ SEQUENCE AUTO-ADVANCING [{{ progressPercent }}%] // あと {{ remainingSec }} 秒</span>
+          </div>
         </div>
+
         <div class="hud-caption">
           {{ phaseCaption }}
         </div>
+
         <div class="hud-controls">
           <button
             class="hud-btn sound-btn"
@@ -751,16 +776,16 @@ onUnmounted(() => {
           <button
             class="hud-btn skip-btn"
             @click.stop="finishIntro"
-            title="スキップ (ESC)"
+            title="すぐにラボへ入場 (ESC)"
           >
-            ⏩ スキップ [ESC]
+            ⏩ すぐにラボへ [ESC]
           </button>
         </div>
       </div>
 
       <div class="hud-bottom-bar">
         <div class="hud-hint">
-          💡 画面内をマウス移動で重力レンズ、クリックで量子衝撃波が発生します
+          ⏱️ アニメーションは自動で進行します（画面マウス移動で時空歪曲、クリックで量子波干渉が可能）
         </div>
         <label class="skip-next-label">
           <input type="checkbox" v-model="autoSkipNextTime" />
@@ -801,6 +826,24 @@ onUnmounted(() => {
   display: block;
 }
 
+/* 最上部 全画面タイムライン自動進行インジケーター */
+.top-timeline-wrap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.08);
+  z-index: 100;
+}
+
+.top-timeline-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #38bdf8, #818cf8, #ec4899);
+  box-shadow: 0 0 12px #38bdf8, 0 0 4px #ec4899;
+  transition: width 0.08s linear;
+}
+
 .hud-top-bar {
   position: absolute;
   top: 0;
@@ -813,6 +856,41 @@ onUnmounted(() => {
   pointer-events: none;
   background: linear-gradient(to bottom, rgba(3, 7, 18, 0.85) 0%, transparent 100%);
   z-index: 10;
+}
+
+.hud-badge-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.hud-auto-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(16, 185, 129, 0.12);
+  border: 1px solid rgba(16, 185, 129, 0.35);
+  padding: 4px 12px;
+  border-radius: 9999px;
+  backdrop-filter: blur(8px);
+}
+
+.pulsing-radar {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #10b981;
+  box-shadow: 0 0 8px #10b981;
+  animation: pulseDot 1.0s infinite ease-in-out;
+}
+
+.auto-seq-text {
+  font-family: 'Fira Code', monospace;
+  font-size: 0.73rem;
+  letter-spacing: 0.05em;
+  color: #34d399;
+  font-weight: 700;
 }
 
 .hud-badge {
