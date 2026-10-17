@@ -7,12 +7,34 @@
 
     <!-- モード切替タブ -->
     <div style="display:flex;gap:8px;padding:8px 16px;background:rgba(255,255,255,0.03);border-bottom:1px solid rgba(255,255,255,0.08)">
-      <button class="lab-btn" :class="{ 'lab-btn-pri': mode === 'lever' }" @click="mode = 'lever'">
+      <button class="lab-btn" :class="{ 'lab-btn-pri': mode === 'lever' }" @click="switchMode('lever')">
         📐 てこ・シーソー（回転のつり合い）
       </button>
-      <button class="lab-btn" :class="{ 'lab-btn-pri': mode === 'ladder' }" @click="mode = 'ladder'">
+      <button class="lab-btn" :class="{ 'lab-btn-pri': mode === 'ladder' }" @click="switchMode('ladder')">
         🧱 壁に立てかけた棒（滑り出し限界）
       </button>
+    </div>
+
+    <!-- アニメーション・実験コントロールバー -->
+    <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px;padding:8px 16px;background:rgba(255,255,255,0.05);border-bottom:1px solid rgba(255,255,255,0.08)">
+      <div style="display:flex;flex-wrap:wrap;align-items:center;gap:8px">
+        <button class="lab-btn lab-btn-pri" @click="togglePlay" style="padding:6px 16px;font-weight:700">
+          {{ isPlaying ? '⏸ 一時停止' : (isFinished ? '🔄 最初から再実験' : '▶ 実験スタート') }}
+        </button>
+        <button v-if="mode === 'ladder'" class="lab-btn" :class="{ 'lab-btn-pri': climberAutoClimb }" @click="climberAutoClimb = !climberAutoClimb" style="font-size:0.85rem">
+          🚶 人が登るモード: {{ climberAutoClimb ? 'ON' : 'OFF' }}
+        </button>
+        <button class="lab-btn" @click="resetSim" style="font-size:0.85rem">
+          🔄 リセット
+        </button>
+      </div>
+
+      <div style="display:flex;align-items:center;gap:6px;font-size:0.85rem;color:#94a3b8">
+        <span>⏱️ 速度:</span>
+        <button class="lab-chip" :class="{ active: timeScale === 0.5 }" @click="timeScale = 0.5">0.5x</button>
+        <button class="lab-chip" :class="{ active: timeScale === 1.0 }" @click="timeScale = 1.0">1.0x</button>
+        <button class="lab-chip" :class="{ active: timeScale === 1.5 }" @click="timeScale = 1.5">1.5x</button>
+      </div>
     </div>
 
     <div class="lab-canvas"><canvas ref="canvasRef"></canvas></div>
@@ -136,6 +158,12 @@ import { setupCanvas, clearGrid, arrow, text, dot, line, useLoop } from './simUt
 const g = 9.8
 const mode = ref('lever')
 
+// アニメーション制御
+const isPlaying = ref(false)
+const isFinished = ref(false)
+const timeScale = ref(1.0)
+const climberAutoClimb = ref(false)
+
 // てこモードのパラメータ
 const m1 = ref(4.0)
 const d1 = ref(2.0)
@@ -167,15 +195,15 @@ const ladderM = ref(10.0)
 const climberPos = ref(0.6) // 0〜1
 const climberM = ref(50.0)
 
-// はしごの力学計算（長さ L = 1 として比率計算）
-// 点B（床との接地点）まわりのモーメントのつり合い：
-// 時計回り：壁の抗力 N_A × L sinθ
-// 反時計回り：棒の重力 Mg × (L/2) cosθ + 人の重力 mg × (x L) cosθ
-// N_A · sinθ = [M/2 + m·x] g · cosθ
-// N_A = [ (M/2 + m·x) g ] / tanθ
-// 水平方向のつり合い：f = N_A
-// 鉛直方向のつり合い：N_B = (M + m) g
-// 最大静止摩擦力：f_max = μ · N_B = μ · (M + m) g
+// はしご動的アニメーション変数
+const dynamicTheta = ref((60 * Math.PI) / 180)
+const dynamicOmega = ref(0)
+const dynamicClimberPos = ref(0.6)
+const isSlidingLadder = ref(false)
+const ladderDust = ref([])
+const impactRing = ref(0)
+
+// はしごの力学計算（静的理論値）
 const ladderThetaRad = computed(() => (thetaDeg.value * Math.PI) / 180)
 const normalFloorNB = computed(() => (ladderM.value + climberM.value) * g)
 const reqFriction = computed(() => {
@@ -191,6 +219,43 @@ const isLadderSafe = computed(() => reqFriction.value <= maxFriction.value)
 const criticalTheta = computed(() => {
   const tanMin = (ladderM.value * 0.5 + climberM.value * climberPos.value) / (muS.value * (ladderM.value + climberM.value))
   return (Math.atan(tanMin) * 180) / Math.PI
+})
+
+function switchMode(newMode) {
+  mode.value = newMode
+  resetSim()
+}
+
+function togglePlay() {
+  if (isFinished.value) {
+    resetSim()
+    isPlaying.value = true
+    return
+  }
+  isPlaying.value = !isPlaying.value
+}
+
+function resetSim() {
+  isPlaying.value = false
+  isFinished.value = false
+  isSlidingLadder.value = false
+  dynamicTheta.value = (thetaDeg.value * Math.PI) / 180
+  dynamicOmega.value = 0
+  dynamicClimberPos.value = climberPos.value
+  ladderDust.value = []
+  impactRing.value = 0
+  angle.value = 0
+  angleVel.value = 0
+}
+
+watch([thetaDeg, climberPos, muS, ladderM, climberM], () => {
+  if (!isPlaying.value) {
+    dynamicTheta.value = (thetaDeg.value * Math.PI) / 180
+    dynamicClimberPos.value = climberPos.value
+    isSlidingLadder.value = false
+    isFinished.value = false
+    impactRing.value = 0
+  }
 })
 
 const canvasRef = ref(null)
@@ -218,11 +283,13 @@ function drawLever(ctx, w, h, dt) {
   }
 
   // 簡易スプリングダンパーで滑らかに傾ける
-  const kA = 15.0
-  const cA = 6.0
+  const speed = isPlaying.value ? 1.0 : 0.6
+  const kA = 15.0 * speed
+  const cA = 6.0 * speed
+  const scaledDt = Math.min(dt, 0.05) * timeScale.value
   const acc = kA * (targetAngle - angle.value) - cA * angleVel.value
-  angleVel.value += acc * Math.min(dt, 0.05)
-  angle.value += angleVel.value * Math.min(dt, 0.05)
+  angleVel.value += acc * scaledDt
+  angle.value += angleVel.value * scaledDt
 
   ctx.save()
 
@@ -292,11 +359,9 @@ function drawLever(ctx, w, h, dt) {
   ctx.strokeRect(x2 - size2 / 2, -8 - size2, size2, size2)
   text(ctx, `${m2.value}kg`, x2, -8 - size2 / 2, { color: '#000', font: 'bold 11px sans-serif' })
 
-  // 力の矢印（重力 W1, W2）
-  // 棒の傾きを考慮して鉛直下向きにするため、逆回転して描画
   ctx.restore()
 
-  // 逆回転後のワールド座標でおもりの中心位置を計算
+  // 逆回転後のワールド座標でおもりの中心位置を計算（重力矢印は鉛直下向き）
   const cosA = Math.cos(angle.value)
   const sinA = Math.sin(angle.value)
   const wX1 = cx + x1 * cosA - (-8) * sinA
@@ -321,7 +386,7 @@ function drawLever(ctx, w, h, dt) {
   line(ctx, cx, cy - 35, cx + d2.value * pxPerM, cy - 35, { color: 'rgba(56,189,248,0.6)', width: 1.5, dash: [4, 4] })
   text(ctx, `d₂ = ${d2.value.toFixed(1)} m`, cx + (d2.value * pxPerM) / 2, cy - 42, { color: '#38bdf8', font: '11px sans-serif' })
 
-  // モーメントバランスバー（上部中央）
+  // モーメントバランスバー
   drawBalanceMeter(ctx, cx, 40, tauLeft.value, tauRight.value)
 }
 
@@ -349,13 +414,73 @@ function drawBalanceMeter(ctx, cx, cy, lVal, rVal) {
   text(ctx, '時計 M₂ ↻', cx + barW / 2 + 10, cy + 4, { align: 'left', color: '#38bdf8', font: 'bold 11px sans-serif' })
 }
 
-// はしごの描画
+// はしごの描画 & リアルタイム滑落シミュレーション
 function drawLadder(ctx, w, h, dt) {
+  const scaledDt = Math.min(dt, 0.05) * timeScale.value
+
+  // 1. 物理シミュレーション更新
+  if (isPlaying.value) {
+    // 人が登るモード
+    if (climberAutoClimb.value && !isSlidingLadder.value && !isFinished.value) {
+      dynamicClimberPos.value += scaledDt * 0.12
+      if (dynamicClimberPos.value >= 1.0) {
+        dynamicClimberPos.value = 1.0
+      }
+      climberPos.value = Number(dynamicClimberPos.value.toFixed(2))
+    }
+
+    // 動的力学判定
+    const curRad = dynamicTheta.value
+    const curTan = Math.tan(curRad)
+    const curNumerator = (ladderM.value * 0.5 + climberM.value * dynamicClimberPos.value) * g
+    const curReqF = curTan > 0.02 ? curNumerator / curTan : 9999
+    const curMaxF = muS.value * (ladderM.value + climberM.value) * g
+
+    // スリップ発生判定
+    if (curReqF > curMaxF && !isSlidingLadder.value && curRad > 0.04) {
+      isSlidingLadder.value = true
+    }
+
+    // スリップ滑落物理運動
+    if (isSlidingLadder.value) {
+      const muK = muS.value * 0.75
+      // 角度が小さくなるほど重力の腕が伸び、急激に加速して倒れ込む
+      const alpha = - (6.0 + 12.0 * Math.cos(curRad)) * Math.max(0.3, 1.0 - muK * 0.6)
+      dynamicOmega.value += alpha * scaledDt
+      dynamicTheta.value += dynamicOmega.value * scaledDt
+
+      // 床への激突判定
+      if (dynamicTheta.value <= 0.03) {
+        dynamicTheta.value = 0.01
+        dynamicOmega.value = 0
+        isSlidingLadder.value = false
+        isPlaying.value = false
+        isFinished.value = true
+        impactRing.value = 6
+      }
+    }
+  }
+
+  // 砂埃パーティクルの更新
+  for (let i = ladderDust.value.length - 1; i >= 0; i--) {
+    const p = ladderDust.value[i]
+    p.x += p.vx * scaledDt
+    p.y += p.vy * scaledDt
+    p.alpha -= scaledDt * 1.5
+    if (p.alpha <= 0) ladderDust.value.splice(i, 1)
+  }
+
+  // 衝撃波リング更新
+  if (impactRing.value > 0) {
+    impactRing.value += 75 * scaledDt
+    if (impactRing.value > 70) impactRing.value = 0
+  }
+
   const wallX = w * 0.28
   const floorY = h * 0.78
   const ladderLen = Math.min(w * 0.5, h * 0.6)
 
-  // 1. 壁と床の描画
+  // 壁と床の描画
   ctx.fillStyle = '#1e293b'
   ctx.fillRect(0, 0, wallX, floorY) // 壁の左側
   ctx.fillStyle = '#0f172a'
@@ -365,24 +490,55 @@ function drawLadder(ctx, w, h, dt) {
   line(ctx, wallX, 40, wallX, floorY, { color: '#38bdf8', width: 4 })
   text(ctx, 'なめらかな壁 (摩擦なし)', wallX - 10, 60, { align: 'right', color: '#38bdf8', font: '11px sans-serif' })
 
-  // 床面（あらい・黄色点線模様）
+  // 床面（あらい・黄色ライン）
   line(ctx, wallX, floorY, w - 40, floorY, { color: '#f59e0b', width: 4 })
   text(ctx, `あらい床 (静止摩擦係数 μ = ${muS.value.toFixed(2)})`, w - 50, floorY + 22, { align: 'right', color: '#f59e0b', font: '11px sans-serif' })
 
-  // 2. はしごの位置計算
-  const rad = ladderThetaRad.value
+  // はしごの幾何座標（dynamicTheta を使用）
+  const rad = Math.max(0.01, dynamicTheta.value)
+  const isLDown = dynamicTheta.value <= 0.03
   const topX = wallX
   const topY = floorY - ladderLen * Math.sin(rad)
   const botX = wallX + ladderLen * Math.cos(rad)
   const botY = floorY
 
-  // はしごの棒
-  ctx.strokeStyle = isLadderSafe.value ? '#e2e8f0' : '#ef4444'
+  // スリップ中の砂埃発生
+  if (isSlidingLadder.value && Math.random() < 0.6) {
+    ladderDust.value.push({
+      x: botX,
+      y: botY,
+      vx: Math.random() * 50 + 20,
+      vy: -Math.random() * 25 - 5,
+      alpha: 0.85,
+      radius: Math.random() * 4 + 2
+    })
+  }
+
+  // 砂埃描画
+  ladderDust.value.forEach(p => {
+    ctx.fillStyle = `rgba(251, 191, 36, ${p.alpha})`
+    ctx.beginPath()
+    ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2)
+    ctx.fill()
+  })
+
+  // 衝撃波リング描画
+  if (impactRing.value > 0) {
+    ctx.strokeStyle = `rgba(239, 68, 68, ${Math.max(0, 1 - impactRing.value / 70)})`
+    ctx.lineWidth = 3
+    ctx.beginPath()
+    ctx.arc(botX, floorY, impactRing.value, 0, Math.PI * 2)
+    ctx.stroke()
+  }
+
+  // はしごの棒描画
+  const isSafeNow = !isSlidingLadder.value && !isFinished.value && isLadderSafe.value
+  ctx.strokeStyle = isSafeNow ? '#cbd5e1' : '#ef4444'
   ctx.lineWidth = 8
   ctx.lineCap = 'round'
-  line(ctx, botX, botY, topX, topY, { color: isLadderSafe.value ? '#cbd5e1' : '#ef4444', width: 8 })
+  line(ctx, botX, botY, topX, topY, { color: isSafeNow ? '#cbd5e1' : '#ef4444', width: 8 })
 
-  // はしごの横桟（ステップ）
+  // はしごのステップ
   const steps = 7
   for (let i = 1; i < steps; i++) {
     const t = i / steps
@@ -395,51 +551,70 @@ function drawLadder(ctx, w, h, dt) {
   const midX = (botX + topX) / 2
   const midY = (botY + topY) / 2
   dot(ctx, midX, midY, 5, '#10b981', '#fff', 1.5)
-  // 棒の重力矢印 Mg
+  // 棒の重力矢印 Mg (鉛直真下)
   arrow(ctx, midX, midY, midX, midY + 45, { color: '#10b981', width: 2, head: 7 })
   text(ctx, `Mg = ${(ladderM.value * g).toFixed(0)} N`, midX + 8, midY + 35, { align: 'left', color: '#10b981', font: '11px sans-serif' })
 
   // 登る人の位置
-  if (climberM.value > 0) {
-    const px = botX + (topX - botX) * climberPos.value
-    const py = botY + (topY - botY) * climberPos.value
+  if (climberM.value > 0 && !isLDown) {
+    const curP = dynamicClimberPos.value
+    const px = botX + (topX - botX) * curP
+    const py = botY + (topY - botY) * curP
     dot(ctx, px, py, 9, '#f59e0b', '#fff', 2)
-    // 人の重力矢印 mg
+    // 人の重力矢印 mg (鉛直真下)
     const pArrLen = Math.min(65, 20 + climberM.value * 0.6)
     arrow(ctx, px, py, px, py + pArrLen, { color: '#f59e0b', width: 2.5, head: 7 })
     text(ctx, `mg = ${(climberM.value * g).toFixed(0)} N`, px + 10, py + pArrLen, { align: 'left', color: '#f59e0b', font: 'bold 11px sans-serif' })
     text(ctx, '人', px - 12, py - 6, { align: 'right', color: '#f59e0b', font: '11px sans-serif' })
   }
 
-  // 壁からの垂直抗力 N_A（点A：top）
-  arrow(ctx, topX, topY, topX + 50, topY, { color: '#38bdf8', width: 2.5, head: 7 })
-  text(ctx, `N_A = ${reqFriction.value.toFixed(1)} N`, topX + 55, topY - 6, { align: 'left', color: '#38bdf8', font: 'bold 11px sans-serif' })
+  // 力の矢印（倒れる前）
+  if (!isLDown) {
+    // 壁からの垂直抗力 N_A
+    arrow(ctx, topX, topY, topX + 50, topY, { color: '#38bdf8', width: 2.5, head: 7 })
+    text(ctx, `N_A = ${reqFriction.value.toFixed(1)} N`, topX + 55, topY - 6, { align: 'left', color: '#38bdf8', font: 'bold 11px sans-serif' })
 
-  // 床からの垂直抗力 N_B（点B：bot）
-  arrow(ctx, botX, botY, botX, botY - 60, { color: '#a855f7', width: 2.5, head: 7 })
-  text(ctx, `N_B = ${normalFloorNB.value.toFixed(1)} N`, botX + 8, botY - 45, { align: 'left', color: '#a855f7', font: 'bold 11px sans-serif' })
+    // 床からの垂直抗力 N_B
+    arrow(ctx, botX, botY, botX, botY - 60, { color: '#a855f7', width: 2.5, head: 7 })
+    text(ctx, `N_B = ${normalFloorNB.value.toFixed(1)} N`, botX + 8, botY - 45, { align: 'left', color: '#a855f7', font: 'bold 11px sans-serif' })
 
-  // 床からの静止摩擦力 f（左向き：壁へ向かう向き）
-  const fArrLen = Math.min(60, reqFriction.value * 0.3)
-  arrow(ctx, botX, botY, botX - fArrLen, botY, { color: isLadderSafe.value ? '#f59e0b' : '#ef4444', width: 2.5, head: 7 })
-  text(ctx, `f = ${reqFriction.value.toFixed(1)} N`, botX - fArrLen - 8, botY + 16, { align: 'right', color: isLadderSafe.value ? '#f59e0b' : '#ef4444', font: 'bold 11px sans-serif' })
+    // 床からの静止摩擦力 f（左向き）
+    const fArrLen = Math.min(60, reqFriction.value * 0.3)
+    arrow(ctx, botX, botY, botX - fArrLen, botY, { color: isSafeNow ? '#f59e0b' : '#ef4444', width: 2.5, head: 7 })
+    text(ctx, `f = ${reqFriction.value.toFixed(1)} N`, botX - fArrLen - 8, botY + 16, { align: 'right', color: isSafeNow ? '#f59e0b' : '#ef4444', font: 'bold 11px sans-serif' })
 
-  // 角度 θ の円弧表示
-  ctx.strokeStyle = '#94a3b8'
-  ctx.lineWidth = 1.5
-  ctx.beginPath()
-  ctx.arc(botX, botY, 40, Math.PI, Math.PI - rad, true)
-  ctx.stroke()
-  text(ctx, `θ = ${thetaDeg.value}°`, botX - 52, botY - 12, { align: 'center', color: '#e2e8f0', font: 'bold 11px sans-serif' })
+    // 角度 θ の円弧表示
+    ctx.strokeStyle = '#94a3b8'
+    ctx.lineWidth = 1.5
+    ctx.beginPath()
+    ctx.arc(botX, botY, 40, Math.PI, Math.PI - rad, true)
+    ctx.stroke()
+    const degDisplay = (rad * 180 / Math.PI).toFixed(0)
+    text(ctx, `θ = ${degDisplay}°`, botX - 52, botY - 12, { align: 'center', color: '#e2e8f0', font: 'bold 11px sans-serif' })
+  }
 
-  // 警告バナー（スリップ時）
-  if (!isLadderSafe.value) {
+  // 状態バナー
+  if (isFinished.value) {
+    ctx.fillStyle = 'rgba(239, 68, 68, 0.25)'
+    ctx.strokeStyle = '#ef4444'
+    ctx.lineWidth = 2
+    ctx.fillRect(w * 0.22, 20, w * 0.72, 42)
+    ctx.strokeRect(w * 0.22, 20, w * 0.72, 42)
+    text(ctx, '💥 摩擦限界超過：足元が外側に滑り落ちて床に倒れ込みました！', w * 0.58, 46, { color: '#fca5a5', font: 'bold 13px sans-serif' })
+  } else if (isSlidingLadder.value) {
+    ctx.fillStyle = 'rgba(245, 158, 11, 0.25)'
+    ctx.strokeStyle = '#f59e0b'
+    ctx.lineWidth = 2
+    ctx.fillRect(w * 0.28, 20, w * 0.6, 40)
+    ctx.strokeRect(w * 0.28, 20, w * 0.6, 40)
+    text(ctx, '⚠️ スリップ中！足元が滑り出しています…', w * 0.58, 45, { color: '#fde68a', font: 'bold 13px sans-serif' })
+  } else if (!isLadderSafe.value) {
     ctx.fillStyle = 'rgba(239, 68, 68, 0.2)'
     ctx.strokeStyle = '#ef4444'
     ctx.lineWidth = 2
-    ctx.fillRect(w * 0.35, 20, w * 0.45, 40)
-    ctx.strokeRect(w * 0.35, 20, w * 0.45, 40)
-    text(ctx, '⚠️ 摩擦限界超過：はしごが足元から滑り落ちます！', w * 0.575, 45, { color: '#fca5a5', font: 'bold 13px sans-serif' })
+    ctx.fillRect(w * 0.28, 20, w * 0.6, 40)
+    ctx.strokeRect(w * 0.28, 20, w * 0.6, 40)
+    text(ctx, '⚠️ 摩擦限界超過！「実験スタート」で滑り落ちます', w * 0.58, 45, { color: '#fca5a5', font: 'bold 13px sans-serif' })
   }
 }
 </script>

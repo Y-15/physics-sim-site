@@ -53,6 +53,19 @@
           {{ Math.min(xN, width_w / 2).toFixed(1) }} / {{ (width_w / 2).toFixed(1) }} <span class="stat-unit">cm</span>
         </div>
       </div>
+      <div class="stat-card">
+        <div class="stat-label">重力の水平腕 d</div>
+        <div class="stat-value" :class="arm_d_cm > 0.1 ? 'text-cyan' : (arm_d_cm < -0.1 ? 'text-rose' : 'text-yellow')">
+          {{ arm_d_cm.toFixed(1) }} <span class="stat-unit">cm</span>
+        </div>
+      </div>
+      <div class="stat-card highlight">
+        <div class="stat-label">重力のモーメント τ_G</div>
+        <div class="stat-value" :class="tauG > 0.05 ? 'text-cyan' : (tauG < -0.05 ? 'text-rose' : 'text-yellow')">
+          {{ Math.abs(tauG).toFixed(1) }} <span class="stat-unit">N·m</span>
+          <span style="font-size: 0.7rem; display: block;">{{ tauGLabel }}</span>
+        </div>
+      </div>
     </div>
 
     <!-- コントロール群 -->
@@ -157,6 +170,30 @@ const toppleForce = computed(() => {
 // 垂直抗力の作用点シフト x_N (中心から右向き [cm])
 const xN = computed(() => {
   return (F.value * forceHeight.value) / weight.value
+})
+
+// 支点まわりの重力モーメントの腕の長さ d [cm]
+// 直立時: d = w/2 (復元)
+// 傾き角 θ: d = (w/2)*cosθ - (h/2)*sinθ
+const arm_d_cm = computed(() => {
+  const theta = simAngle.value
+  const w = width_w.value
+  const h = height_h.value
+  return (w / 2) * Math.cos(theta) - (h / 2) * Math.sin(theta)
+})
+
+// 支点まわりの重力モーメント τ_G [N·m]
+// 正: 反時計回り（直方体を元の直立状態に引き戻す「復元モーメント」）
+// 負: 時計回り（重心が支点を行き過ぎて押し倒す「転倒モーメント」）
+const tauG = computed(() => {
+  return weight.value * (arm_d_cm.value / 100)
+})
+
+const tauGLabel = computed(() => {
+  if (simAngle.value >= Math.PI / 2) return '床面支持 (静止安定)'
+  if (tauG.value > 0.05) return '復元力（元に戻す ↩️）'
+  if (tauG.value < -0.05) return '転倒力（倒す力 ⤵️）'
+  return '死点（つり合い境界 0）'
 })
 
 // 状態判定
@@ -372,33 +409,34 @@ function render() {
     ctx.fill()
   })
 
-  // 転倒・回転トランスフォーム
+  // 状態変数
   const angle = simAngle.value
   const isToppled = currentState.value === 'toppled'
   const isSliding = currentState.value === 'sliding'
 
+  // 支点 P (右下端) のワールド座標
+  const pivotX = bx + bw
+  const pivotY = floorY
+
+  // 1. 直方体本体の描画（回転座標系）
   ctx.save()
   if (angle > 0) {
-    // 右下端 (bx + bw, floorY) を中心に回転
-    const pivotX = bx + bw
-    const pivotY = floorY
     ctx.translate(pivotX, pivotY)
     ctx.rotate(angle)
     ctx.translate(-pivotX, -pivotY)
   }
 
-  // 直方体本体
-  ctx.fillStyle = isToppled && angle > 0.1
+  ctx.fillStyle = isToppled && angle > 0.05
     ? 'rgba(244, 63, 94, 0.28)'
     : (isSliding && simX.value > 0 ? 'rgba(251, 191, 36, 0.28)' : 'rgba(30, 41, 59, 0.85)')
-  ctx.strokeStyle = isToppled && angle > 0.1
+  ctx.strokeStyle = isToppled && angle > 0.05
     ? '#f43f5e'
     : (isSliding && simX.value > 0 ? '#fbbf24' : '#38bdf8')
   ctx.lineWidth = 2.5
   ctx.fillRect(bx, by, bw, bh)
   ctx.strokeRect(bx, by, bw, bh)
 
-  // 直方体の中心軸点線
+  // 直方体内部の中心軸点線
   ctx.strokeStyle = 'rgba(255, 255, 255, 0.15)'
   ctx.setLineDash([3, 3])
   ctx.beginPath()
@@ -407,30 +445,7 @@ function render() {
   ctx.stroke()
   ctx.setLineDash([])
 
-  // 重心 G
-  const gx = bx + bw / 2
-  const gy = by + bh / 2
-  ctx.fillStyle = '#fbbf24'
-  ctx.beginPath()
-  ctx.arc(gx, gy, 5, 0, Math.PI * 2)
-  ctx.fill()
-  ctx.fillStyle = '#f8fafc'
-  ctx.font = 'bold 11px sans-serif'
-  ctx.fillText('重心 G', gx - 18, gy - 12)
-
-  // 重力 Mg ベクトル (真下)
-  ctx.strokeStyle = '#38bdf8'
-  ctx.lineWidth = 2.5
-  ctx.beginPath()
-  ctx.moveTo(gx, gy)
-  ctx.lineTo(gx, gy + 65)
-  ctx.stroke()
-  // 矢じり
-  drawArrowHead(ctx, gx, gy + 65, Math.PI / 2, '#38bdf8')
-  ctx.fillStyle = '#38bdf8'
-  ctx.fillText('Mg', gx + 8, gy + 50)
-
-  // 外力 F ベクトル
+  // 外力 F ベクトル（直方体の左面にかかる）
   if (angle < Math.PI / 3) {
     const fyPos = floorY - forceHeight.value * scale
     ctx.strokeStyle = '#f43f5e'
@@ -441,13 +456,101 @@ function render() {
     ctx.stroke()
     drawArrowHead(ctx, bx, fyPos, 0, '#f43f5e')
     ctx.fillStyle = '#f43f5e'
+    ctx.font = 'bold 12px sans-serif'
     ctx.fillText(`外力 F = ${F.value}N`, bx - 75, fyPos - 10)
   }
 
-  // 垂直抗力 N ベクトル（床面から上向き）
+  ctx.restore() // ワールド座標系に戻す
+
+  // 2. ワールド座標系での物理量計算
+  // 支点 P(pivotX, pivotY) からの重心ベクトル: 直立時は (-bw/2, -bh/2)
+  // 時計回り angle 回転後の重心 G のワールド座標:
+  const cosA = Math.cos(angle)
+  const sinA = Math.sin(angle)
+  const gx = pivotX - (bw / 2) * cosA + (bh / 2) * sinA
+  const gy = pivotY - (bw / 2) * sinA - (bh / 2) * cosA
+
+  // 支点 P のマーカー描画
+  ctx.fillStyle = '#f43f5e'
+  ctx.beginPath()
+  ctx.arc(pivotX, pivotY, angle > 0 ? 5 : 3, 0, Math.PI * 2)
+  ctx.fill()
+  if (angle > 0 || currentState.value === 'toppled') {
+    ctx.fillStyle = '#fca5a5'
+    ctx.font = 'bold 11px sans-serif'
+    ctx.fillText('支点 P', pivotX + 6, pivotY + 16)
+  }
+
+  // 重心 G の描画（ワールド座標）
+  ctx.fillStyle = '#fbbf24'
+  ctx.beginPath()
+  ctx.arc(gx, gy, 5, 0, Math.PI * 2)
+  ctx.fill()
+  ctx.fillStyle = '#f8fafc'
+  ctx.font = 'bold 11px sans-serif'
+  ctx.fillText('重心 G', gx - 18, gy - 12)
+
+  // 重力の鉛直作用線（重心 G から真下へ床面まで伸ばす破線）
+  ctx.strokeStyle = 'rgba(56, 189, 248, 0.45)'
+  ctx.lineWidth = 1.5
+  ctx.setLineDash([3, 3])
+  ctx.beginPath()
+  ctx.moveTo(gx, gy)
+  ctx.lineTo(gx, floorY + 10)
+  ctx.stroke()
+  ctx.setLineDash([])
+
+  // ★重要★ 重力 Mg ベクトル（どんな状態でも常に「鉛直真下」に向く！）
+  const mgLen = 65
+  ctx.strokeStyle = '#38bdf8'
+  ctx.lineWidth = 3
+  ctx.beginPath()
+  ctx.moveTo(gx, gy)
+  ctx.lineTo(gx, gy + mgLen)
+  ctx.stroke()
+  drawArrowHead(ctx, gx, gy + mgLen, Math.PI / 2, '#38bdf8')
+  ctx.fillStyle = '#38bdf8'
+  ctx.font = 'bold 12px sans-serif'
+  ctx.fillText(`重力 Mg = ${weight.value.toFixed(1)} N (鉛直真下)`, gx + 8, gy + 45)
+
+  // 傾きがある場合 (0 < angle < 90度): 支点まわりの水平腕 d とモーメント τ_G の変化を可視化
+  if (angle > 0 && angle < Math.PI / 2 - 0.02) {
+    const dVal = arm_d_cm.value
+    const dimY = floorY - 12
+
+    // 支点 P と 重心作用線 gx の間の水平寸法線
+    ctx.strokeStyle = dVal >= 0 ? '#10b981' : '#f43f5e'
+    ctx.lineWidth = 2
+    ctx.beginPath()
+    ctx.moveTo(gx, dimY)
+    ctx.lineTo(pivotX, dimY)
+    ctx.stroke()
+
+    // 両端ドット
+    ctx.fillStyle = dVal >= 0 ? '#10b981' : '#f43f5e'
+    ctx.beginPath()
+    ctx.arc(gx, dimY, 3, 0, Math.PI * 2)
+    ctx.arc(pivotX, dimY, 3, 0, Math.PI * 2)
+    ctx.fill()
+
+    // 腕のラベルとモーメント状態
+    ctx.font = 'bold 11px sans-serif'
+    if (dVal > 0.1) {
+      ctx.fillStyle = '#34d399'
+      ctx.fillText(`復元の腕 d = ${dVal.toFixed(1)}cm (元に戻すモーメント ↩️)`, Math.min(gx, pivotX) - 20, dimY - 8)
+    } else if (dVal < -0.1) {
+      ctx.fillStyle = '#f87171'
+      ctx.fillText(`転倒の腕 d = ${Math.abs(dVal).toFixed(1)}cm (押し倒すモーメント ⤵️)`, Math.min(gx, pivotX) - 20, dimY - 8)
+    } else {
+      ctx.fillStyle = '#fbbf24'
+      ctx.fillText(`死点 d = 0cm (つり合い境界)`, Math.min(gx, pivotX) - 10, dimY - 8)
+    }
+  }
+
+  // 直立静止時 (angle === 0) の垂直抗力 N と摩擦力 f
   if (angle === 0) {
     const shiftClamped = Math.min(xN.value, width_w.value / 2)
-    const nx = gx + shiftClamped * scale
+    const nx = (bx + bw / 2) + shiftClamped * scale
     ctx.strokeStyle = '#10b981'
     ctx.lineWidth = 3
     ctx.beginPath()
@@ -456,13 +559,16 @@ function render() {
     ctx.stroke()
     drawArrowHead(ctx, nx, floorY - 70, -Math.PI / 2, '#10b981')
     ctx.fillStyle = '#10b981'
-    ctx.fillText('垂直抗力 N', nx + 8, floorY - 50)
+    ctx.font = 'bold 12px sans-serif'
+    ctx.fillText(`垂直抗力 N = ${weight.value.toFixed(1)} N`, nx + 8, floorY - 50)
 
     // 作用点マーカー
     ctx.fillStyle = '#10b981'
     ctx.beginPath()
     ctx.arc(nx, floorY, 4, 0, Math.PI * 2)
     ctx.fill()
+    ctx.font = '10px sans-serif'
+    ctx.fillText('作用点', nx - 12, floorY + 16)
 
     // 摩擦力 f ベクトル (底面、左向き)
     const frictionLen = Math.min(60, Math.max(15, (F.value / 60) * 80))
@@ -474,25 +580,40 @@ function render() {
     ctx.stroke()
     drawArrowHead(ctx, bx + bw / 2 - frictionLen, floorY, Math.PI, '#fbbf24')
     ctx.fillStyle = '#fbbf24'
+    ctx.font = '11px sans-serif'
     ctx.fillText(isSliding ? '動摩擦力 μ_k N' : '静止摩擦力 f', bx + bw / 2 - frictionLen - 10, floorY + 18)
   }
 
-  ctx.restore()
+  // 床に倒れ込んだ後 (angle >= Math.PI / 2 - 0.02)
+  if (angle >= Math.PI / 2 - 0.02) {
+    // 完全に倒れた直方体は [pivotX, pivotX + bh] の床面に横たわる
+    const contactCenter = pivotX + bh / 2
+    ctx.strokeStyle = '#10b981'
+    ctx.lineWidth = 3
+    ctx.beginPath()
+    ctx.moveTo(contactCenter, floorY)
+    ctx.lineTo(contactCenter, floorY - 65)
+    ctx.stroke()
+    drawArrowHead(ctx, contactCenter, floorY - 65, -Math.PI / 2, '#10b981')
+    ctx.fillStyle = '#10b981'
+    ctx.font = 'bold 12px sans-serif'
+    ctx.fillText(`床の垂直抗力 N = ${weight.value.toFixed(1)} N (床面で受けてつり合い)`, contactCenter + 8, floorY - 45)
+
+    // 倒れ込み衝撃リング
+    if (bounceCount.value > 0) {
+      ctx.strokeStyle = 'rgba(244, 63, 94, 0.6)'
+      ctx.lineWidth = 2
+      ctx.beginPath()
+      ctx.arc(pivotX, floorY, 25, 0, Math.PI * 2)
+      ctx.stroke()
+    }
+  }
 
   // 速度表示（滑走時）
   if (simVx.value > 0) {
     ctx.fillStyle = '#fbbf24'
     ctx.font = 'bold 12px sans-serif'
     ctx.fillText(`速度 v = ${(simVx.value / 150).toFixed(2)} m/s`, bx + bw / 2 - 30, by - 15)
-  }
-
-  // 倒れ込み衝撃リング
-  if (angle >= Math.PI / 2 && bounceCount.value > 0) {
-    ctx.strokeStyle = 'rgba(244, 63, 94, 0.6)'
-    ctx.lineWidth = 2
-    ctx.beginPath()
-    ctx.arc(bx + bw, floorY, 25, 0, Math.PI * 2)
-    ctx.stroke()
   }
 }
 

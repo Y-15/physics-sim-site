@@ -24,18 +24,32 @@ export function clearGrid(ctx, w, h, step = 40, bg = '#09090b') {
   ctx.stroke()
 }
 
-/** 矢印（ベクトル）を描く。長さが短すぎる場合は描かない */
-export function arrow(ctx, x1, y1, x2, y2, color = '#fff', width = 2.5, label = '', opts = {}) {
+/** 矢印（ベクトル）を描く。第6引数が options オブジェクトの場合も安全に対応 */
+export function arrow(ctx, x1, y1, x2, y2, colorOrOpts = '#fff', width = 2.5, label = '', opts = {}) {
+  let color = '#fff'
+  let strokeWidth = width
+  let finalLabel = label
+  let finalOpts = opts
+
+  if (typeof colorOrOpts === 'object' && colorOrOpts !== null) {
+    color = colorOrOpts.color || '#fff'
+    strokeWidth = colorOrOpts.width ?? 2.5
+    finalLabel = colorOrOpts.label ?? ''
+    finalOpts = colorOrOpts
+  } else {
+    color = colorOrOpts
+  }
+
   const dx = x2 - x1, dy = y2 - y1
   const len = Math.hypot(dx, dy)
   if (len < 2) return
   const ux = dx / len, uy = dy / len
-  const head = Math.min(opts.head ?? 9, len * 0.6)
+  const head = Math.min(finalOpts.head ?? 9, len * 0.6)
   ctx.save()
   ctx.strokeStyle = color
   ctx.fillStyle = color
-  ctx.lineWidth = width
-  if (opts.dash) ctx.setLineDash(opts.dash)
+  ctx.lineWidth = strokeWidth
+  if (finalOpts.dash) ctx.setLineDash(finalOpts.dash)
   ctx.beginPath()
   ctx.moveTo(x1, y1)
   ctx.lineTo(x2 - ux * head * 0.8, y2 - uy * head * 0.8)
@@ -47,41 +61,67 @@ export function arrow(ctx, x1, y1, x2, y2, color = '#fff', width = 2.5, label = 
   ctx.lineTo(x2 - ux * head + uy * head * 0.5, y2 - uy * head - ux * head * 0.5)
   ctx.closePath()
   ctx.fill()
-  if (label) {
-    ctx.font = opts.font || 'bold 12px sans-serif'
-    ctx.textAlign = opts.align || 'left'
+  if (finalLabel) {
+    ctx.font = finalOpts.font || 'bold 12px sans-serif'
+    ctx.textAlign = finalOpts.align || 'left'
     ctx.textBaseline = 'middle'
-    const ox = opts.lx ?? 6, oy = opts.ly ?? 0
-    ctx.fillText(label, x2 + ox, y2 + oy)
+    const ox = finalOpts.lx ?? 6, oy = finalOpts.ly ?? 0
+    ctx.fillText(finalLabel, x2 + ox, y2 + oy)
     ctx.textBaseline = 'alphabetic'
   }
   ctx.restore()
 }
 
-/** テキスト描画の短縮 */
-export function text(ctx, str, x, y, color = '#e4e4e7', font = '12px sans-serif', align = 'left', base = 'alphabetic') {
+/** テキスト描画の短縮（第5引数が options オブジェクトでも安全に対応） */
+export function text(ctx, str, x, y, colorOrOpts = '#e4e4e7', font = '12px sans-serif', align = 'left', base = 'alphabetic') {
+  let color = '#e4e4e7'
+  let fontStr = font
+  let alignStr = align
+  let baseStr = base
+
+  if (typeof colorOrOpts === 'object' && colorOrOpts !== null) {
+    color = colorOrOpts.color || '#e4e4e7'
+    fontStr = colorOrOpts.font || font
+    alignStr = colorOrOpts.align || align
+    baseStr = colorOrOpts.base || base
+  } else {
+    color = colorOrOpts
+  }
+
   ctx.fillStyle = color
-  ctx.font = font
-  ctx.textAlign = align
-  ctx.textBaseline = base
+  ctx.font = fontStr
+  ctx.textAlign = alignStr
+  ctx.textBaseline = baseStr
   ctx.fillText(str, x, y)
   ctx.textBaseline = 'alphabetic'
 }
 
-/** 丸 */
-export function dot(ctx, x, y, r, fill, stroke) {
+/** 丸（fill / stroke 引数が柔軟に対応） */
+export function dot(ctx, x, y, r, fill = '#fbbf24', stroke = null, strokeWidth = 1.5) {
   ctx.beginPath()
   ctx.arc(x, y, r, 0, Math.PI * 2)
   if (fill) { ctx.fillStyle = fill; ctx.fill() }
-  if (stroke) { ctx.strokeStyle = stroke; ctx.lineWidth = 1.5; ctx.stroke() }
+  if (stroke) { ctx.strokeStyle = stroke; ctx.lineWidth = strokeWidth; ctx.stroke() }
 }
 
-/** 線 */
-export function line(ctx, x1, y1, x2, y2, color = '#52525b', width = 1, dash) {
+/** 線（第6引数が options オブジェクトでも安全に対応） */
+export function line(ctx, x1, y1, x2, y2, colorOrOpts = '#52525b', width = 1, dash = null) {
+  let color = '#52525b'
+  let lineWidth = width
+  let lineDash = dash
+
+  if (typeof colorOrOpts === 'object' && colorOrOpts !== null) {
+    color = colorOrOpts.color || '#52525b'
+    lineWidth = colorOrOpts.width ?? 1
+    lineDash = colorOrOpts.dash ?? null
+  } else {
+    color = colorOrOpts
+  }
+
   ctx.save()
   ctx.strokeStyle = color
-  ctx.lineWidth = width
-  if (dash) ctx.setLineDash(dash)
+  ctx.lineWidth = lineWidth
+  if (lineDash) ctx.setLineDash(lineDash)
   ctx.beginPath()
   ctx.moveTo(x1, y1)
   ctx.lineTo(x2, y2)
