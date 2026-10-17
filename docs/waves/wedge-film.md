@@ -163,3 +163,12 @@ $$
 $$
 \Delta x' = \frac{\Delta x}{n} = \frac{2.0\,\text{mm}}{\frac{4}{3}} = 2.0 \times \frac{3}{4} = \mathbf{1.5\,\text{mm}}
 $$
+
+---
+
+## 📚 関連テーマ・シミュレーター
+* ✨ [薄膜干渉とニュートンリングの完全攻略](/waves/thin-film)
+* 🌈 [光の干渉・ヤングの二重スリット実験](/waves/young)
+* 🌈 [回折格子とスペクトル分析](/waves/diffraction-grating)
+* 🔍 [光の屈折・全反射とレンズの結像公式](/waves/optics)
+* 📝 [波動 厳選演習問題集（全180問）](/problems/waves)
