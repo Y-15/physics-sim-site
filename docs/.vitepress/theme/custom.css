@@ -561,3 +561,22 @@ input:focus-visible {
   opacity: 0.85;
 }
 
+/* KaTeX 数式表示の最適化 */
+.katex {
+  font-size: 1.05em;
+  color: inherit;
+  text-rendering: auto;
+}
+
+.katex-display {
+  color: inherit;
+  margin: 0.8em 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 4px 0;
+}
+
+.katex-html {
+  white-space: normal;
+}
+

@@ -1,0 +1,127 @@
+// problem_generator/utils.cjs
+const simMap = {
+  // Mechanics
+  'velocity-acceleration': { path: '/mechanics/acceleration', title: '🏎️ 等加速度直線運動とv-tグラフ' },
+  'uniform-acceleration': { path: '/mechanics/acceleration', title: '🏎️ 等加速度直線運動とv-tグラフ' },
+  'free-fall': { path: '/mechanics/projectile', title: '🚀 斜方投射（放物運動の公式）' },
+  'projectile-motion': { path: '/mechanics/projectile', title: '🚀 斜方投射（放物運動の公式）' },
+  'forces-equilibrium': { path: '/mechanics/friction', title: '📐 摩擦力と斜面上の運動' },
+  'friction': { path: '/mechanics/friction', title: '📐 摩擦力と斜面上の運動' },
+  'newtons-laws': { path: '/mechanics/newton', title: '⚙️ 運動の法則・連結物体の運動方程式' },
+  'connected-bodies': { path: '/mechanics/newton', title: '⚙️ 運動の法則・連結物体の運動方程式' },
+  'work-power': { path: '/mechanics/energy', title: '⚡ 仕事・仕事率と力学的エネルギー保存則' },
+  'energy-conservation': { path: '/mechanics/energy', title: '⚡ 仕事・仕事率と力学的エネルギー保存則' },
+  'non-conservative-work': { path: '/mechanics/energy', title: '⚡ 仕事・仕事率と力学的エネルギー保存則' },
+  'momentum-impulse': { path: '/mechanics/momentum', title: '💥 運動量保存則と衝突' },
+  'momentum-conservation': { path: '/mechanics/momentum', title: '💥 運動量保存則と衝突' },
+  'restitution-collision': { path: '/mechanics/collision-2d', title: '🎱 2次元平面衝突・斜め衝突と反発係数' },
+  'circular-motion': { path: '/mechanics/circular', title: '🔄 等速円運動・向心加速度・向心力' },
+  'vertical-circle': { path: '/mechanics/vertical-loop', title: '🎢 鉛直面内の円運動と宙返り' },
+  'inertial-forces': { path: '/mechanics/inertia', title: '🚀 慣性力・見かけの重力・遠心力' },
+  'spring-oscillation': { path: '/mechanics/spring', title: '🔩 ばねの単振動（復元力とエネルギー）' },
+  'simple-pendulum': { path: '/mechanics/pendulum', title: '🕰️ 単振り子（等時性と周期公式）' },
+  'gravitation-kepler': { path: '/mechanics/kepler-orbit', title: '🪐 惑星の楕円軌道・面積速度一定則' },
+  'rigid-body': { path: '/mechanics/moment', title: '⚖️ 剛体のつり合いと力のモーメント' },
+  'toppling': { path: '/mechanics/toppling', title: '🧱 剛体の転倒条件と滑り出し限界' },
+  'buoyancy-fluids': { path: '/mechanics/buoyancy', title: '🌊 浮力とアルキメデスの原理' },
+  'two-body-problem': { path: '/mechanics/two-body', title: '⚖️ 2体問題・重心運動と相対運動' },
+  'terminal-velocity': { path: '/mechanics/terminal-velocity', title: '🪂 空気抵抗と終端速度' },
+  'constraint-motion': { path: '/mechanics/constraint-motion', title: '🪢 束縛運動と滑車・動く台上の運動' },
+
+  // Waves
+  'wave-equation': { path: '/waves/wave-equation', title: '🌊 波の式とグラフ' },
+  'wave-graphs': { path: '/waves/wave-equation', title: '🌊 波の式とグラフ' },
+  'wave-superposition': { path: '/waves/index', title: '✅ 定常波・重ね合わせ・ドップラー効果' },
+  'wave-reflection': { path: '/waves/wave-equation', title: '🌊 波の式とグラフ' },
+  'standing-waves': { path: '/waves/index', title: '✅ 定常波・重ね合わせ・ドップラー効果' },
+  'sound-speed-beats': { path: '/waves/beats', title: '🔊 うなり（脈動）と音波の合成' },
+  'string-vibrations': { path: '/waves/string-vibration', title: '🎸 弦の振動と定常波・メルデの実験' },
+  'air-columns': { path: '/waves/resonance', title: '📢 気柱の共鳴と開口端補正' },
+  'doppler-effect': { path: '/waves/doppler', title: '🔊 ドップラー効果の完全攻略' },
+  'geometrical-optics': { path: '/waves/optics', title: '🔍 光の屈折・全反射とレンズの結像公式' },
+  'lenses-mirrors': { path: '/waves/spherical-mirror', title: '🪞 凹面鏡・凸面鏡と球面反射' },
+  'young-interference': { path: '/waves/young', title: '🌈 光の干渉・ヤングの二重スリット実験' },
+  'diffraction-grating': { path: '/waves/diffraction-grating', title: '🌈 回折格子とスペクトル分析' },
+  'thin-film-wedge': { path: '/waves/wedge-film', title: '✨ くさび形空気層の干渉・等厚干渉縞' },
+  'interference-2d': { path: '/waves/interference-2d', title: '🌊 2波源の波の干渉と双曲線縞' },
+
+  // Electromagnetism
+  'coulomb-law': { path: '/electromagnetism/field', title: '⚡ クーロンの法則・電場と電位' },
+  'electric-field': { path: '/electromagnetism/field', title: '⚡ クーロンの法則・電場と電位' },
+  'electric-potential': { path: '/electromagnetism/field', title: '⚡ クーロンの法則・電場と電位' },
+  'conductors-dielectrics': { path: '/electromagnetism/field', title: '⚡ クーロンの法則・電場と電位' },
+  'capacitor-basics': { path: '/electromagnetism/capacitor', title: '🔋 コンデンサー回路と静電エネルギー' },
+  'capacitor-circuits': { path: '/electromagnetism/capacitor', title: '🔋 コンデンサー回路と静電エネルギー' },
+  'capacitor-dielectrics': { path: '/electromagnetism/capacitor', title: '🔋 コンデンサー回路と静電エネルギー' },
+  'dc-circuits-resistors': { path: '/electromagnetism/circuit', title: '💡 直流回路とキルヒホッフの法則' },
+  'kirchhoff-laws': { path: '/electromagnetism/circuit', title: '💡 直流回路とキルヒホッフの法則' },
+  'meters-potentiometer': { path: '/electromagnetism/circuit', title: '💡 直流回路とキルヒホッフの法則' },
+  'non-linear-elements': { path: '/electromagnetism/circuit', title: '💡 直流回路とキルヒホッフの法則' },
+  'magnetic-field-current': { path: '/electromagnetism/magnetic-field', title: '🧲 電流がつくる磁場とアンペールの法則' },
+  'magnetic-force': { path: '/electromagnetism/magnetic-force', title: '🧲 電磁力と平行電流間に働く力' },
+  'lorentz-force': { path: '/electromagnetism/lorentz', title: '🌀 磁場中の荷電粒子の運動・ローレンツ力' },
+  'charged-particles-applications': { path: '/electromagnetism/cyclotron', title: '⚡ サイクロトロンとローレンツ力' },
+  'thomson-experiment': { path: '/electromagnetism/thomson', title: '🔬 トムソンの比電荷測定と速度セレクター' },
+  'hall-effect': { path: '/electromagnetism/hall-effect', title: '🧲 ホール効果とキャリア判定' },
+  'electromagnetic-induction': { path: '/electromagnetism/induction', title: '🧲 電磁誘導の法則と導線棒の運動' },
+  'moving-conductor': { path: '/electromagnetism/induction', title: '🧲 電磁誘導の法則と導線棒の運動' },
+  'self-mutual-induction': { path: '/electromagnetism/self-induction', title: '⚡ 自己誘導とコイルの過渡現象・RL回路' },
+  'lc-oscillation': { path: '/electromagnetism/lc-oscillation', title: '⚡ LC振動回路と電磁振動' },
+  'ac-circuits': { path: '/electromagnetism/ac-circuit', title: '〰️ 交流回路とRLC直列回路・共振' },
+  'rlc-circuits': { path: '/electromagnetism/ac-circuit', title: '〰️ 交流回路とRLC直列回路・共振' },
+  'betatron': { path: '/electromagnetism/betatron', title: '🧲 ベータトロンと電磁誘導加速' },
+
+  // Thermodynamics
+  'heat-capacity-calorimetry': { path: '/thermodynamics/calorimetry', title: '🧊 熱量保存則・比熱・潜熱' },
+  'latent-heat-phase-change': { path: '/thermodynamics/calorimetry', title: '🧊 熱量保存則・比熱・潜熱' },
+  'thermal-expansion': { path: '/thermodynamics/calorimetry', title: '🧊 熱量保存則・比熱・潜熱' },
+  'gas-laws-boyle-charles': { path: '/thermodynamics/gas-law', title: '🔥 気体の状態変化・P-V図' },
+  'ideal-gas-equation': { path: '/thermodynamics/gas-law', title: '🔥 気体の状態変化・P-V図' },
+  'kinetic-theory-gases': { path: '/thermodynamics/kinetic-theory', title: '🔬 気体分子運動論と二乗平均速度' },
+  'internal-energy-first-law': { path: '/thermodynamics/gas-law', title: '🔥 気体の状態変化・P-V図' },
+  'four-gas-processes': { path: '/thermodynamics/gas-law', title: '🔥 気体の状態変化・P-V図' },
+  'molar-heat-capacity': { path: '/thermodynamics/heat-capacity', title: '🔥 モル比熱とマイヤーの式・断熱変化' },
+  'thermodynamic-cycles': { path: '/thermodynamics/carnot', title: '🔥 カルノーサイクルと熱機関の熱効率' },
+  'otto-cycle': { path: '/thermodynamics/otto-cycle', title: '🚗 オットーサイクルと4行程内燃機関' },
+  'gas-mixing-pistons': { path: '/thermodynamics/gas-mixing', title: '🧪 気体の混合と可動ピストン' },
+  'atmospheric-pressure-balloon': { path: '/thermodynamics/torricelli', title: '🌡️ 水銀柱と大気圧・トリチェリの真空' },
+  'hot-air-balloon': { path: '/thermodynamics/hot-air-balloon', title: '🎈 気球の浮力と熱気球の浮上条件' },
+
+  // Atomic
+  'electron-discovery-millikan': { path: '/atomic/millikan', title: '🔬 ミリカンの油滴実験と電気素量測定' },
+  'photoelectric-effect': { path: '/atomic/photoelectric', title: '💡 光電効果とアインシュタインの光量子仮説' },
+  'photons-compton': { path: '/atomic/compton', title: '⚛️ コンプトン効果と光子の運動量' },
+  'x-ray-generation': { path: '/atomic/xray', title: '⚡ X線の発生とX線スペクトル' },
+  'bragg-reflection': { path: '/atomic/bragg', title: '💎 ブラッグ反射とX線結晶回折' },
+  'matter-waves-diffraction': { path: '/atomic/matter-wave', title: '⚛️ 物質波（ド・ブロイ波）と電子線回折' },
+  'bohr-atom-model': { path: '/atomic/bohr', title: '🔬 ボーアの水素原子模型と量子条件' },
+  'rutherford-scattering': { path: '/atomic/rutherford', title: '⚛️ ラザフォード散乱実験と原子核の発見' },
+  'radioactivity-half-life': { path: '/atomic/decay', title: '☢️ 放射性崩壊・半減期と放射線の性質' },
+  'radioactive-equilibrium': { path: '/atomic/equilibrium', title: '☢️ 放射平衡と壊変系列' },
+  'nuclear-structure-mass-defect': { path: '/atomic/nuclear', title: '⚛️ 核反応・質量欠損と結合エネルギー' },
+  'nuclear-reactions-fission-fusion': { path: '/atomic/chain-reaction', title: '⚛️ 原子核分裂と連鎖反応' }
+};
+
+function createProblem(data) {
+  const sim = simMap[data.topicId] || { path: '/problems/index', title: '📝 演習問題トップ' };
+  return {
+    id: data.id,
+    unitId: data.unitId,
+    topicId: data.topicId,
+    category: data.category || '',
+    title: data.title,
+    prompt: data.prompt,
+    hint: data.hint,
+    level: data.level || 1,
+    answer: data.answer,
+    explanation: data.explanation,
+    solutionFormulas: data.solutionFormulas || [],
+    simTopic: sim.path,
+    simTitle: sim.title
+  };
+}
+
+module.exports = {
+  simMap,
+  createProblem
+};

@@ -39,18 +39,64 @@ $$
 
 ### (2) コイルとコンデンサーの位相特性
 
-```
-【抵抗 R】
-  オームの法則 v = R i より、電圧と電流の山と谷は完全に一致（同位相）。
+<div class="rlc-phase-grid">
+  <div class="rlc-phase-card res">
+    <h4>🔌 抵抗 R（同位相）</h4>
+    <p>オームの法則 $v = R i$ より、電圧と電流の山と谷は完全に一致します。</p>
+    <div class="phase-badge">位相差 $\Delta\phi = 0$</div>
+  </div>
+  <div class="rlc-phase-card ind">
+    <h4>🌀 コイル L（電圧先行 / 電流遅れ）</h4>
+    <p>自己誘導逆起電力 $-L \frac{di}{dt}$ が電流の変化を妨げるため、電圧が先に立ち上がり、電流は $\frac{\pi}{2}$ 遅れます。</p>
+    <div class="phase-badge">電流が $\frac{\pi}{2}$ 遅れる（電圧が先行）</div>
+  </div>
+  <div class="rlc-phase-card cap">
+    <h4>⚡ コンデンサー C（電流先行 / 電圧遅れ）</h4>
+    <p>電荷が極板に溜まる前にまず電流が一気に流れ込む（$i = C \frac{dv}{dt}$）ため、電流が先に最大になり電圧は遅れます。</p>
+    <div class="phase-badge">電流が $\frac{\pi}{2}$ 進む（電圧が遅れる）</div>
+  </div>
+</div>
 
-【コイル L】
-  電流が変化すると自己誘導による逆起電力 -L(di/dt) が生じ、電流の変化を妨げる。
-  ⇒ 電圧が先に立ち上がり、電流は 1/4 周期 (π/2) 遅れて流れる！
-
-【コンデンサー C】
-  極板に電荷が溜まる前に、まず電流が一気に流れ込む（i = dq/dt = C dv/dt）。
-  ⇒ 電流が先に最大になり、電圧は 1/4 周期 (π/2) 遅れて追いかける（電流が π/2 進む）！
-```
+<style scoped>
+.rlc-phase-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 14px;
+  margin: 1.5rem 0;
+}
+.rlc-phase-card {
+  background: var(--vp-c-bg-soft);
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+}
+.rlc-phase-card.res { border-top: 4px solid #10b981; }
+.rlc-phase-card.ind { border-top: 4px solid #a78bfa; }
+.rlc-phase-card.cap { border-top: 4px solid #38bdf8; }
+.rlc-phase-card h4 {
+  margin: 0 0 8px 0;
+  font-size: 1.05rem;
+  color: var(--vp-c-text-1);
+}
+.rlc-phase-card p {
+  margin: 0 0 12px 0;
+  font-size: 0.92rem;
+  color: var(--vp-c-text-2);
+  line-height: 1.5;
+  flex: 1;
+}
+.phase-badge {
+  background: rgba(15, 23, 42, 0.4);
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: bold;
+  color: var(--vp-c-text-1);
+  text-align: center;
+}
+</style>
 
 ---
 
@@ -171,7 +217,7 @@ $$
 
 ### 【完全オリジナル例題】RLC直列回路と共振周波数
 
-```
+``::: info 📖 【問題設定】
 抵抗 R = 30 Ω、自己インダクタンス L = 0.10 H のコイル、
 静電容量 C = 50 μF (5.0 × 10⁻⁵ F) のコンデンサーを直列に接続し、
 実効値 V_e = 100 V、周波数 f = 50 Hz の交流電源をつないだ。
@@ -181,7 +227,7 @@ $$
 (2) 回路全体のインピーダンス Z [Ω]、および流れる電流の実効値 I_e [A] を求めよ。
 (3) この回路の共振周波数 f₀ [Hz] を求めよ。
 (4) 電源の周波数を共振周波数 f₀ に変更したとき、電流の実効値 I_e' [A] および平均消費電力 P' [W] を求めよ。
-```
+:::``
 
 #### 【解法手順】
 

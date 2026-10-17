@@ -1,53 +1,52 @@
 ---
-title: 原子物理分野インデックス
-description: 光量子仮説、ボーアの水素原子模型、物質波、放射線と原子核反応など、現代物理学の基礎となる高校原子物理の重要テーマを完全網羅。
+title: 原子物理（高校物理）シミュレーション & 完全攻略マップ
+description: 高校物理の原子物理分野（全12テーマ：光電効果、ミリカンの油滴実験、ラザフォード散乱、ボーア模型、ブラッグ反射、X線の発生、物質波、コンプトン効果、放射性崩壊、放射平衡、質量欠損と結合エネルギー、核分裂と連鎖反応）を動くシミュレーターと完全解説でマスター。
 ---
 
-# ⚛️ 原子物理（Atomic & Quantum Physics）
+# ⚛️ 原子物理（Atomic & Quantum Physics）完全学習マップ
 
-19世紀末、ニュートン力学とマクスウェル電磁気学によって物理学は完成したかに見えました。しかし、黒体放射のスペクトル、光電効果、水素原子の発光スペクトルなど、ミクロの世界の現象を古典論で説明しようとすると、ことごとく矛盾に突き当たりました。
-
-その矛盾を打破したのが、マックス・プランクの「エネルギー量子仮説」とアルベルト・アインシュタインの「光量子仮説」です。波と考えられていた光が粒子のように振る舞い、粒子と考えられていた電子が波のように振る舞う「波と粒子の二重性」の発見から、現代の半導体・レーザー・量子コンピュータを支える量子力学の扉が開かれました。
-
-本ポータルでは、高校物理の指導要領に基づき、入試最頻出のテーマを直感的なシミュレーターとともに深く学べます。
+<div class="lead">
+19世紀末、古典物理学が直面した矛盾を打破した「光量子仮説」と「ボーアの量子条件」。<br>
+波と粒子の二重性から原子核の構造、放射壊変、核エネルギーまで、現代量子科学の根幹をなす高校原子物理の最重要テーマをリアルタイム対話型シミュレーターで完全攻略します。
+</div>
 
 ---
 
-## 📚 テーマ一覧
+## 📚 原子物理 テーマ別ナビゲーション（全12分野）
 
-<div class="features-grid">
+<div class="topic-grid">
 
-<div class="feature-card">
-  <h3>💡 <a href="./photoelectric.html">光電効果と光量子仮説</a></h3>
-  <p>
-    光を当てると金属から電子が飛び出す現象。古典波動論の破綻と、アインシュタインの光量子仮説 <i>E</i> = <i>h</i>ν、光電方程式 eV<sub>0</sub> = <i>h</i>ν - <i>W</i> をインタラクティブ実験で検証。
-  </p>
-  <span class="tag">シミュレーター完備</span>
-</div>
+### 1. 光の粒子性と電子
+* **[💡 光電効果とアインシュタインの光量子仮説](/atomic/photoelectric)**  
+  光電方程式 $h\nu = W + e V_0$、限界振動数 $\nu_0$、阻止電圧 $V_0$ の測定とプランク定数 $h$ の決定シミュレーター。
+* **[🔬 ミリカンの油滴実験と電気素量測定](/atomic/millikan)**  
+  重力・電場・空気抵抗（ストークスの法則）がつり合う帯電油滴の上昇・下降終端速度測定から電気素量 $e \approx 1.602\times 10^{-19}\ \text{C}$ の離散性を導出。
+* **[🎯 コンプトン効果と光子の運動量](/atomic/compton)**  
+  X線光子と電子の衝突、光子の運動量 $p = h/\lambda$、相対論的エネルギー・運動量保存則から波長変化 $\Delta \lambda = \frac{h}{m_e c}(1 - \cos\theta)$ を完全導出。
 
-<div class="feature-card">
-  <h3>🎯 <a href="../about.html">コンプトン効果と光子の運動量</a></h3>
-  <p>
-    X線を炭素に当てると散乱波の波長が伸びる現象。光子を運動量 <i>p</i> = \dfrac{<i>h</i>}{λ} を持つ粒子とみなし、相対論的エネルギー・運動量保存則から波長変化 Δ λ を導出。
-  </p>
-  <span class="tag">近日公開</span>
-</div>
+### 2. 物質の波動性とX線結晶解析
+* **[⚛️ 物質波（ド・ブロイ波）と電子線回折](/atomic/matter-wave)**  
+  電子などの物質粒子の波長 $\lambda = h/p = \frac{h}{\sqrt{2m e V}}$、デイヴィソン・ガーマーの実験、トムソンの電子線回折環のシミュレーター。
+* **[⚡ X線の発生とX線スペクトル](/atomic/xray)**  
+  熱電子の衝突による制動放射（連続X線）と最短波長（デュアン・ハントの法則 $\lambda_0 = \frac{hc}{eV}$）、および内殻電子励起による特性X線（固有X線）の発生。
+* **[💎 ブラッグ反射とX線結晶回折](/atomic/bragg)**  
+  結晶格子面によるX線の干渉反射条件 $2d\sin\theta = n\lambda$、ブラッグ角 $\theta$ と回折強度ピークのリアルタイムシミュレーション。
 
-<div class="feature-card">
-  <h3>🔬 <a href="./bohr.html">ボーアの水素原子模型と量子条件</a></h3>
-  <p>
-    なぜ電子は原子核に墜落しないのか？角運動量の量子化 mvr = <i>n</i>\dfrac{<i>h</i>}{2π} とド・ブロイ波の定常波条件、エネルギー準位 <i>E</i><sub><i>n</i></sub> = -\dfrac{13.6}{<i>n</i>²} eV と発光スペクトル系列の完全導出。
-  </p>
-  <span class="tag">シミュレーター完備</span>
-</div>
+### 3. 原子模型と量子条件
+* **[⚛️ ラザフォード散乱実験と原子核の発見](/atomic/rutherford)**  
+  金箔に照射された $\alpha$ 粒子のクーロン斥力散乱、大角度散乱の確率、トムソンのブドウパン模型の否定と原子核（核局在）の発見シミュレーター。
+* **[🔬 ボーアの水素原子模型と量子条件](/atomic/bohr)**  
+  角運動量の量子化 $mvr = n\frac{h}{2\pi}$（物質波の定常波条件）、エネルギー準位 $E_n = -\frac{13.6}{n^2}\ \text{eV}$、リュードベリ定数と線スペクトル系列（ライマン・バルマー・パッシェン）。
 
-<div class="feature-card">
-  <h3>☢️ <a href="../about.html">放射性崩壊と核分裂・質量欠損</a></h3>
-  <p>
-    α 崩壊、β 崩壊、γ 崩壊と半減期の指数関数減衰 <i>N</i> = <i>N</i><sub>0</sub> (1/2)<sup><i>t</i>/<i>T</i></sup>。アインシュタインの質量エネルギー等価性 <i>E</i> = Δ <i>m</i> \cdot <i>c</i>² と結合エネルギー。
-  </p>
-  <span class="tag">近日公開</span>
-</div>
+### 4. 原子核・放射線・核エネルギー
+* **[☢️ 放射性崩壊・半減期と放射線の性質](/atomic/decay)**  
+  $\alpha$ 崩壊・$\beta$ 崩壊・$\gamma$ 崩壊、崩壊則 $N(t) = N_0 (1/2)^{t/T}$、放射能 $A = \lambda N$、放射線の透過力と電離作用。
+* **[☢️ 放射平衡と壊変系列（過渡平衡・永続平衡）](/atomic/equilibrium)**  
+  親核種から娘核種への連鎖崩壊（バテマン方程式）、親の半減期が長い永続平衡 $\lambda_1 N_1 = \lambda_2 N_2$、過渡平衡の比率。
+* **[⚛️ 核反応・質量欠損と結合エネルギー](/atomic/nuclear)**  
+  アインシュタインの式 $\Delta E = \Delta m \cdot c^2$、原子核の質量欠損、核子あたりの結合エネルギー曲線、核融合反応のエネルギー収支。
+* **[⚛️ 原子核分裂と連鎖反応（臨界条件）](/atomic/chain-reaction)**  
+  ウラン235の中性子誘起核分裂、核分裂片と放出中性子、増倍率 $k$ と臨界状態（未臨界・臨界・未臨界超過）のリアルタイム核連鎖シミュレーション。
 
 </div>
 
@@ -55,76 +54,124 @@ description: 光量子仮説、ボーアの水素原子模型、物質波、放�
 
 ## 🎓 原子物理の学習ロードマップ
 
-```
-[古典物理学の破綻]
-  ├─ 黒体放射 (プランクの量子仮説 E = n h ν)
-  └─ 光電効果 (アインシュタインの光量子仮説 E = h ν)
-        │
-        ▼
-[光の粒子性]
-  ├─ 光電方程式 (h ν = W + K_max = W + e V_0)
-  └─ コンプトン散乱 (光子の運動量 p = h / λ)
-        │
-        ▼
-[波と粒子の二重性]
-  └─ ド・ブロイの物質波 (λ = h / p)
-        │
-        ▼
-[原子構造の解明]
-  ├─ ラザフォード散乱 (原子核の発見)
-  ├─ ボーアの量子条件 (2πr = n λ)
-  └─ 水素原子のエネルギー準位 (E_n = -13.6 / n² eV)
-        │
-        ▼
-[原子核と放射線]
-  ├─ 放射壊変と半減期
-  └─ 質量欠損 (E = Δm c²)
-```
+<div class="roadmap-timeline">
+  <div class="roadmap-step">
+    <div class="step-badge">STAGE 1</div>
+    <div class="step-content">
+      <h4>古典物理学の破綻と量子の胎動</h4>
+      <ul>
+        <li><strong>黒体放射</strong>：プランクのエネルギー量子仮説 $E = n h \nu$</li>
+        <li><strong>光電効果</strong>：アインシュタインの光量子仮説 $E = h \nu$</li>
+        <li><strong>ミリカンの油滴実験</strong>：電気素量 $e = 1.6 \times 10^{-19}\ \text{C}$ の測定</li>
+      </ul>
+    </div>
+  </div>
+  <div class="step-connector">↓</div>
+  <div class="roadmap-step">
+    <div class="step-badge">STAGE 2</div>
+    <div class="step-content">
+      <h4>光の粒子性と光子の衝突</h4>
+      <ul>
+        <li><strong>光電方程式</strong>：$h \nu = W + e V_0$（仕事関数と阻止電圧）</li>
+        <li><strong>コンプトン効果</strong>：光子の運動量 $p = \frac{h}{\lambda}$ と散乱波長変化</li>
+        <li><strong>X線の発生</strong>：制動放射の最短波長 $\lambda_0 = \frac{hc}{eV}$ と特性X線</li>
+      </ul>
+    </div>
+  </div>
+  <div class="step-connector">↓</div>
+  <div class="roadmap-step">
+    <div class="step-badge">STAGE 3</div>
+    <div class="step-content">
+      <h4>波と粒子の二重性</h4>
+      <ul>
+        <li><strong>ド・ブロイの物質波</strong>：$\lambda = \frac{h}{p} = \frac{h}{mv}$</li>
+        <li><strong>ブラッグ反射</strong>：結晶格子面における干渉条件 $2d \sin\theta = n \lambda$</li>
+      </ul>
+    </div>
+  </div>
+  <div class="step-connector">↓</div>
+  <div class="roadmap-step">
+    <div class="step-badge">STAGE 4</div>
+    <div class="step-content">
+      <h4>原子構造の解明とボーア模型</h4>
+      <ul>
+        <li><strong>ラザフォード散乱</strong>：$\alpha$ 粒子散乱と原子核の発見</li>
+        <li><strong>ボーアの量子条件</strong>：$2\pi r = n \lambda \iff mvr = n \frac{h}{2\pi}$</li>
+        <li><strong>エネルギー準位</strong>：$E_n = -\frac{13.6}{n^2}\ \text{eV}$ と線スペクトル系列</li>
+      </ul>
+    </div>
+  </div>
+  <div class="step-connector">↓</div>
+  <div class="roadmap-step">
+    <div class="step-badge">STAGE 5</div>
+    <div class="step-content">
+      <h4>原子核・放射壊変と核エネルギー</h4>
+      <ul>
+        <li><strong>放射性崩壊と半減期</strong>：$N(t) = N_0 \left(\frac{1}{2}\right)^{t/T}$</li>
+        <li><strong>放射平衡</strong>：過渡平衡と永続平衡 $\lambda_1 N_1 = \lambda_2 N_2$</li>
+        <li><strong>質量欠損と結合エネルギー</strong>：$\Delta E = \Delta m \cdot c^2$</li>
+        <li><strong>核分裂と連鎖反応</strong>：増倍率 $k$ と臨界状態制御</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<style scoped>
+.roadmap-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 1.5rem 0;
+}
+.roadmap-step {
+  display: flex;
+  gap: 16px;
+  background: var(--vp-c-bg-soft);
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 12px;
+  padding: 16px 20px;
+  align-items: flex-start;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.roadmap-step:hover {
+  border-color: var(--vp-c-brand-1);
+  box-shadow: 0 4px 16px rgba(56, 189, 248, 0.08);
+}
+.step-badge {
+  background: linear-gradient(135deg, #38bdf8, #818cf8);
+  color: #0f172a;
+  font-weight: 800;
+  font-size: 0.8rem;
+  padding: 4px 10px;
+  border-radius: 6px;
+  white-space: nowrap;
+}
+.step-content {
+  flex: 1;
+}
+.step-content h4 {
+  margin: 0 0 8px 0;
+  font-size: 1.05rem;
+  color: var(--vp-c-text-1);
+}
+.step-content ul {
+  margin: 0;
+  padding-left: 20px;
+  font-size: 0.95rem;
+  color: var(--vp-c-text-2);
+}
+.step-connector {
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: var(--vp-c-brand-1);
+  line-height: 1;
+}
+</style>
 
 ---
 
-## ⚠️ 学習上の注意点
-
-原子物理は大学入試（特に国公立二次試験や共通テスト）で出題比率が急上昇しています。しかし公式の丸暗記に頼ると、少し設定をひねられただけで手が出なくなります。
-
-「**プランク定数 $h$ がエネルギーと振動数を結ぶ架け橋であること**」や「**エネルギー保存則と運動量保存則がミクロの世界でもそのまま成立すること**」を常に意識して学習を進めてください。
+## 📝 原子物理の入試対策と演習問題
+* **[⚛️ 原子物理 厳選演習問題集（全120問・解答解説付き）](/problems/atomic)**
 
 <!--@include: ../parts/notice.md-->
-
-<style scoped>
-.features-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 16px;
-  margin: 1.5rem 0;
-}
-.feature-card {
-  background: #18181b;
-  border: 1px solid #27272a;
-  border-radius: 10px;
-  padding: 16px;
-  transition: transform 0.2s, border-color 0.2s;
-}
-.feature-card:hover {
-  transform: translateY(-2px);
-  border-color: #38bdf8;
-}
-.feature-card h3 {
-  margin: 0 0 8px 0;
-  font-size: 1.05rem;
-}
-.feature-card p {
-  font-size: 0.85rem;
-  color: #a1a1aa;
-  margin: 0 0 12px 0;
-  line-height: 1.5;
-}
-.tag {
-  background: #27272a;
-  color: #38bdf8;
-  font-size: 0.72rem;
-  padding: 2px 8px;
-  border-radius: 9999px;
-  border: 1px solid #3f3f46;
-}
-</style>

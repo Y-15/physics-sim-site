@@ -255,6 +255,338 @@ $$P_{\text{joule}} = I^2 R = \left( \frac{v B l}{R} \right)^2 R = \frac{B^2 l^2 
 
 ---
 
+### 【最難関大・発展演習】自己相似な無限はしご型コンデンサー回路と磁場中を落下する導体棒
+
+高校物理（「物理基礎」および「物理」）の範囲内で解くことができ、**「空間的な無限（自己相似性をもつ無限はしご型コンデンサー回路）」**と**「時間的な無限（$t \to \infty$ における導体棒の漸近挙動）」**の2つの「無限」が交差する、難関大入試レベルの融合難問です。
+
+微積分や微分方程式を一切使わずに、**「自己相似性」「無限等比級数」「力積と運動量の関係」「キルヒホッフの法則」**を組み合わせることで、直感に反する物理現象まで厳密に導き出せる構成になっています。
+
+<div style="text-align: center; margin: 20px 0;">
+  <svg viewBox="0 0 700 240" style="max-width: 100%; height: auto; background: #0c0e14; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1);">
+    <defs>
+      <marker id="arrInd" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+        <path d="M 0 1 L 10 5 L 0 9 z" fill="#38bdf8" />
+      </marker>
+      <marker id="arrGrav" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+        <path d="M 0 1 L 10 5 L 0 9 z" fill="#f43f5e" />
+      </marker>
+    </defs>
+
+    <!-- Magnetic field B symbols -->
+    <text x="40" y="30" fill="#38bdf8" font-size="12" font-family="monospace">⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗</text>
+    <text x="40" y="60" fill="#38bdf8" font-size="12" font-family="monospace">⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗</text>
+    <text x="40" y="90" fill="#38bdf8" font-size="12" font-family="monospace">⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗</text>
+    <text x="40" y="120" fill="#38bdf8" font-size="12" font-family="monospace">⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗</text>
+    <text x="40" y="150" fill="#38bdf8" font-size="12" font-family="monospace">⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗</text>
+    <text x="40" y="180" fill="#38bdf8" font-size="12" font-family="monospace">⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗</text>
+    <text x="40" y="210" fill="#38bdf8" font-size="12" font-family="monospace">⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗</text>
+    <text x="560" y="30" fill="#38bdf8" font-size="12" font-weight="bold" font-family="monospace">⊗ B (紙面奥向き)</text>
+
+    <!-- Rails M1, M2 -->
+    <line x1="80" y1="50" x2="80" y2="230" stroke="#a1a1aa" stroke-width="4" />
+    <text x="65" y="235" fill="#a1a1aa" font-size="11" font-weight="bold" font-family="sans-serif">M₁</text>
+    <line x1="200" y1="50" x2="200" y2="230" stroke="#a1a1aa" stroke-width="4" />
+    <text x="205" y="235" fill="#a1a1aa" font-size="11" font-weight="bold" font-family="sans-serif">M₂</text>
+
+    <!-- Rail width L -->
+    <line x1="80" y1="40" x2="200" y2="40" stroke="#e4e4e7" stroke-width="1.5" />
+    <text x="135" y="35" fill="#e4e4e7" font-size="11" font-family="sans-serif">間隔 L</text>
+
+    <!-- Terminals X, Y -->
+    <circle cx="80" cy="50" r="4" fill="#38bdf8" />
+    <text x="60" y="48" fill="#38bdf8" font-size="12" font-weight="bold" font-family="sans-serif">X (N₀)</text>
+    <circle cx="200" cy="50" r="4" fill="#38bdf8" />
+    <text x="210" y="48" fill="#38bdf8" font-size="12" font-weight="bold" font-family="sans-serif">Y (基準電位0)</text>
+
+    <!-- Falling rod PQ -->
+    <rect x="75" y="125" width="130" height="12" fill="#f59e0b" stroke="#fbbf24" stroke-width="1.5" rx="3" />
+    <text x="95" y="120" fill="#f59e0b" font-size="11" font-weight="bold" font-family="sans-serif">導体棒 PQ (質量 m, 抵抗 R)</text>
+    <line x1="140" y1="145" x2="140" y2="185" stroke="#f43f5e" stroke-width="2.5" marker-end="url(#arrGrav)" />
+    <text x="148" y="170" fill="#f43f5e" font-size="11" font-weight="bold" font-family="sans-serif">mg (重力)</text>
+    <line x1="140" y1="120" x2="140" y2="90" stroke="#10b981" stroke-width="2" marker-end="url(#arrInd)" />
+    <text x="148" y="105" fill="#10b981" font-size="10" font-weight="bold" font-family="sans-serif">I BL (電磁ブレーキ)</text>
+
+    <!-- Connection from X, Y to Ladder circuit on the right -->
+    <line x1="80" y1="50" x2="270" y2="50" stroke="#38bdf8" stroke-width="2" />
+    <line x1="200" y1="50" x2="200" y2="65" stroke="#38bdf8" stroke-width="2" />
+    <line x1="200" y1="65" x2="270" y2="65" stroke="#38bdf8" stroke-width="2" />
+    <line x1="270" y1="65" x2="270" y2="170" stroke="#38bdf8" stroke-width="2" />
+    <line x1="270" y1="170" x2="680" y2="170" stroke="#38bdf8" stroke-width="2" />
+
+    <!-- Ladder Network: Stage 1 -->
+    <!-- Cap A1 on upper wire -->
+    <line x1="270" y1="50" x2="310" y2="50" stroke="#38bdf8" stroke-width="2" />
+    <line x1="310" y1="40" x2="310" y2="60" stroke="#fff" stroke-width="2.5" />
+    <line x1="316" y1="40" x2="316" y2="60" stroke="#fff" stroke-width="2.5" />
+    <text x="305" y="32" fill="#fff" font-size="10" font-family="sans-serif">A₁ (C)</text>
+    <line x1="316" y1="50" x2="360" y2="50" stroke="#38bdf8" stroke-width="2" />
+    <circle cx="360" cy="50" r="3" fill="#fbbf24" />
+    <text x="355" y="42" fill="#fbbf24" font-size="10" font-weight="bold" font-family="sans-serif">N₁</text>
+    <!-- Cap B1 vertical -->
+    <line x1="360" y1="50" x2="360" y2="95" stroke="#38bdf8" stroke-width="2" />
+    <line x1="350" y1="95" x2="370" y2="95" stroke="#fff" stroke-width="2.5" />
+    <line x1="350" y1="101" x2="370" y2="101" stroke="#fff" stroke-width="2.5" />
+    <text x="375" y="102" fill="#fff" font-size="10" font-family="sans-serif">B₁ (C)</text>
+    <line x1="360" y1="101" x2="360" y2="170" stroke="#38bdf8" stroke-width="2" />
+
+    <!-- Stage 2 -->
+    <line x1="360" y1="50" x2="410" y2="50" stroke="#38bdf8" stroke-width="2" />
+    <line x1="410" y1="40" x2="410" y2="60" stroke="#fff" stroke-width="2.5" />
+    <line x1="416" y1="40" x2="416" y2="60" stroke="#fff" stroke-width="2.5" />
+    <text x="405" y="32" fill="#fff" font-size="10" font-family="sans-serif">A₂ (C)</text>
+    <line x1="416" y1="50" x2="460" y2="50" stroke="#38bdf8" stroke-width="2" />
+    <circle cx="460" cy="50" r="3" fill="#fbbf24" />
+    <text x="455" y="42" fill="#fbbf24" font-size="10" font-weight="bold" font-family="sans-serif">N₂</text>
+    <!-- Cap B2 -->
+    <line x1="460" y1="50" x2="460" y2="95" stroke="#38bdf8" stroke-width="2" />
+    <line x1="450" y1="95" x2="470" y2="95" stroke="#fff" stroke-width="2.5" />
+    <line x1="450" y1="101" x2="470" y2="101" stroke="#fff" stroke-width="2.5" />
+    <text x="475" y="102" fill="#fff" font-size="10" font-family="sans-serif">B₂ (C)</text>
+    <line x1="460" y1="101" x2="460" y2="170" stroke="#38bdf8" stroke-width="2" />
+
+    <!-- Stage 3 -->
+    <line x1="460" y1="50" x2="510" y2="50" stroke="#38bdf8" stroke-width="2" />
+    <line x1="510" y1="40" x2="510" y2="60" stroke="#fff" stroke-width="2.5" />
+    <line x1="516" y1="40" x2="516" y2="60" stroke="#fff" stroke-width="2.5" />
+    <text x="505" y="32" fill="#fff" font-size="10" font-family="sans-serif">A₃</text>
+    <line x1="516" y1="50" x2="560" y2="50" stroke="#38bdf8" stroke-width="2" />
+    <circle cx="560" cy="50" r="3" fill="#fbbf24" />
+    <text x="555" y="42" fill="#fbbf24" font-size="10" font-weight="bold" font-family="sans-serif">N₃</text>
+    <!-- Cap B3 -->
+    <line x1="560" y1="50" x2="560" y2="95" stroke="#38bdf8" stroke-width="2" />
+    <line x1="550" y1="95" x2="570" y2="95" stroke="#fff" stroke-width="2.5" />
+    <line x1="550" y1="101" x2="570" y2="101" stroke="#fff" stroke-width="2.5" />
+    <text x="575" y="102" fill="#fff" font-size="10" font-family="sans-serif">B₃</text>
+    <line x1="560" y1="101" x2="560" y2="170" stroke="#38bdf8" stroke-width="2" />
+
+    <!-- Infinite continuation dots -->
+    <text x="590" y="55" fill="#38bdf8" font-size="20" font-family="sans-serif">…</text>
+    <text x="590" y="175" fill="#38bdf8" font-size="20" font-family="sans-serif">…</text>
+    <text x="570" y="215" fill="#fbbf24" font-size="11" font-weight="bold" font-family="sans-serif">合成容量 C_∞ = (√5 - 1)/2 C</text>
+  </svg>
+</div>
+
+#### 【問題文】
+鉛直面内に、間隔 $L$ で互いに平行な2本の十分長い（下方に無限に伸びる）なめらかな金属レール $\mathrm{M}_1, \mathrm{M}_2$ が鉛直に固定されている。空間全体には、レールを含む鉛直面に垂直で手前から奥に向かう向きに、磁束密度の大きさ $B$ の一様な磁場がかかっている。重力加速度の大きさを $g$ とする。
+
+レールの上端（入力端子 $\mathrm{X}, \mathrm{Y}$）の間には、すべて同じ電気容量 $C$ をもつコンデンサーが**無限個**、はしご状（ラダー状）に接続された回路網がつながっている。具体的には、左から第 $n$ 番目の基本区間（$n = 1, 2, 3, \dots$）として、
+- 上側の導線に直列に挿入された電気容量 $C$ のコンデンサー $\mathrm{A}_n$
+- そのすぐ右側の節点 $\mathrm{N}_n$ と下側の共通導線（端子 $\mathrm{Y}$ から水平に伸びる導線）の間に並列に接続された電気容量 $C$ のコンデンサー $\mathrm{B}_n$
+
+のペアが、右方へ無限に繰り返されている（ただし、節点 $\mathrm{N}_0$ は入力端子 $\mathrm{X}$ を表すものとする）。
+
+レール $\mathrm{M}_1, \mathrm{M}_2$ の間には、質量 $m$、長さ $L$、電気抵抗 $R$ の一様な導体棒 $\mathrm{PQ}$ が水平（レールに垂直）に掛けられており、レールと常に接触を保ちながら摩擦なく鉛直方向に運動できる。レールや導線の電気抵抗、回路の自己インダクタンス、空気抵抗、および電磁波の放射は無視できるものとする。また、初期状態においてすべてのコンデンサーに蓄えられている電気量は $0$ である。
+
+##### 設問 (1)：無限はしご型回路の合成容量と黄金比
+まず、導体棒を取り除き、入力端子 $\mathrm{X}, \mathrm{Y}$ から右側の無限回路全体を見込んだ全体の合成容量を $C_\infty$ とおく。
+無限に続く回路の「自己相似性」（第1区間 $\mathrm{A}_1, \mathrm{B}_1$ を取り除いた残りの無限回路の合成容量もまた $C_\infty$ に等しいこと）に着目し、合成容量 $C_\infty$ を $C$ を用いて表せ。
+
+##### 設問 (2)：無限回路内部の電位分布・電荷保存・静電エネルギーの総和
+下側の共通導線（端子 $\mathrm{Y}$）の電位を $0$（基準）とし、入力端子 $\mathrm{X}$（節点 $\mathrm{N}_0$）に電位 $V_0$（$V_0$ は正）を与えたとき、第 $n$ 区間の節点 $\mathrm{N}_n$ の電位を $V_n$（$n = 1, 2, 3, \dots$）とする。また、設問 (1) で求めた無次元比を $\alpha = \dfrac{C_\infty}{C}$（ただし $\alpha^2 + \alpha - 1 = 0$ を満たす正の定数）とおく。
+
+- (a) 隣り合う節点の電位の比 $k = \dfrac{V_n}{V_{n-1}}$ が $n$ によらない定数であり、$k = \alpha^2$ となることを示せ。また、$k$ の具体的な数値と、節点 $\mathrm{N}_n$ の電位 $V_n$ を $V_0$ および $n$ を用いて表せ。
+- (b) 第 $n$ 区間の並列コンデンサー $\mathrm{B}_n$ に蓄えられる電気量を $Q_{\mathrm{B}_n}$ とする。無限個の並列コンデンサーすべてに蓄えられる電気量の総和 $Q_{\mathrm{B, total}} = \sum_{n=1}^{\infty} Q_{\mathrm{B}_n}$ を無限等比級数の和として求め、それが入力端子 $\mathrm{X}$ から流入した全電気量 $Q_{\mathrm{in}} = C_\infty V_0$ に完全に一致することを示せ。
+- (c) 第 $n$ 区間の2つのコンデンサー $\mathrm{A}_n, \mathrm{B}_n$ に蓄えられる静電エネルギーの和を $u_n = U_{\mathrm{A}_n} + U_{\mathrm{B}_n}$ とする。無限個のコンデンサーすべてに蓄えられる静電エネルギーの総和 $U_{\mathrm{total}} = \sum_{n=1}^{\infty} u_n$ を計算し、等価合成容量 $C_\infty$ を用いた式 $\dfrac{1}{2} C_\infty V_0^2$ に一致することを示せ。
+
+##### 設問 (3)：磁場中を落下する導体棒と時間無限大（$t \to \infty$）の極限
+すべてのコンデンサーの電荷を $0$ に戻した上で、時刻 $t = 0$ に導体棒 $\mathrm{PQ}$ を初速度 $0$ で静かに放したところ、導体棒は重力を受けて鉛直下向きに運動を始めた。
+時刻 $t$ が十分に大きくなった極限（$t \to \infty$）において、導体棒の加速度 $a(t)$ は一定の値 $a_\infty$ に、導体棒を流れる電流 $I(t)$ は一定の値 $I_\infty$ にそれぞれ収束する。
+$a_\infty$ と $I_\infty$ を、$m, g, B, L, C$（または $C_\infty$）を用いて表せ。また、この定常状態において第 $n$ 区間の並列コンデンサー $\mathrm{B}_n$ に流れ込み続ける電流 $I_{\mathrm{B}_n, \infty}$ を $I_\infty, \alpha, n$ を用いて表せ。
+
+##### 設問 (4)：微積分を用いない漸近速度のズレ $\Delta v_\infty$ の導出
+もし導体棒の電気抵抗が $R = 0$ であれば、導体棒は時刻 $t = 0$ からずっと一定の加速度 $a_\infty$ で落下し、時刻 $t$ における速さは $v_{\mathrm{ideal}}(t) = a_\infty t$ となる。
+では、導体棒に電気抵抗 $R$（$R$ は正）がある場合、十分時間が経過した時刻 $t$（$t \to \infty$）における実際の速さ $v(t)$ は、理想的な速さ $v_{\mathrm{ideal}}(t) = a_\infty t$ に比べて**速くなるか、遅くなるか、あるいは一致するか**。
+
+時刻 $0$ から時刻 $t$ までの導体棒に対する「運動量と力積の関係」と、時刻 $t$ における「キルヒホッフの第二法則」を組み合わせることで、微積分を用いずに時刻 $t$ における速さ $v(t)$ と電流 $I(t)$ の関係式を導き、極限値
+
+$$
+\Delta v_\infty = \lim_{t \to \infty} \left\{ v(t) - a_\infty t \right\}
+$$
+
+を $m, g, B, L, R, C_\infty$ を用いて表せ。また、$\Delta v_\infty$ の符号がそうなる物理的理由を定性的に説明せよ。
+
+---
+
+<details class="tip">
+<summary><strong>💡 思考のヒント・着眼点（クリックして開く）</strong></summary>
+
+1. **設問 (1)・(2) の代数計算の工夫**  
+   $\alpha = \dfrac{C_\infty}{C} = \dfrac{\sqrt{5}-1}{2}$ を毎回根号の分数で代入すると計算が大変になります。$\alpha$ が二次方程式 $\alpha^2 + \alpha - 1 = 0$ の解であることを利用し、**「$\alpha^2 = 1 - \alpha$」という次数下げ公式**を使うと、分圧比や等比級数の和が鮮やかに約分できます。
+2. **設問 (3) の $t \to \infty$ におけるキルヒホッフの法則**  
+   無限はしご回路全体は、端子 $\mathrm{X}, \mathrm{Y}$ から見れば単一の電気容量 $C_\infty$ のコンデンサーと完全に等価です。微小時間 $\Delta t$ の間に速度が $\Delta v = a_\infty \Delta t$、電荷が $\Delta Q = I_\infty \Delta t$ 変化し、電流が一定（$\Delta I = 0$）になることから、抵抗での電圧降下 $R I_\infty$ の変化量が $0$ になることに着目します。
+3. **設問 (4) の力積と電荷の関係**  
+   電流 $I(t)$ が時間変化しても、微小時間 $\Delta t$ に導体棒が受ける上向きの力積 $I(t) B L \Delta t$ は $B L \Delta Q$ に等しいため、時刻 $0$ から $t$ までの力積の総和は、時刻 $t$ までに回路へ流れ込んだ総電気量 $Q(t)$ を使って厳密に $B L Q(t)$ と表せます。
+</details>
+
+---
+
+#### 【解答・完全解説】
+
+##### 設問 (1) の解説
+入力端子 $\mathrm{X}, \mathrm{Y}$ から右側の無限回路全体を見込んだ合成容量が $C_\infty$ であるとき、無限に続く回路の自己相似性より、第1区間の節点 $\mathrm{N}_1$ と下側共通導線の間から右側（第2区間以降）を見込んだ合成容量も $C_\infty$ に等しい。
+
+したがって、回路全体は「コンデンサー $\mathrm{B}_1$（電気容量 $C$）と合成容量 $C_\infty$ の並列接続（合成容量 $C + C_\infty$）」に、「コンデンサー $\mathrm{A}_1$（電気容量 $C$）」を直列に接続したものと等価である。直列合成容量の公式より、
+
+$$
+C_\infty = \frac{C(C + C_\infty)}{C + (C + C_\infty)} = \frac{C(C + C_\infty)}{2C + C_\infty}
+$$
+
+分母を払って整理すると、
+
+$$
+C_\infty^2 + 2C C_\infty = C^2 + C C_\infty \implies C_\infty^2 + C C_\infty - C^2 = 0
+$$
+
+$C_\infty > 0$ であるから、二次方程式の解の公式より、求める合成容量は
+
+$$
+\mathbf{C_\infty = \frac{\sqrt{5} - 1}{2} C}
+$$
+
+となる（この係数 $\alpha = \dfrac{\sqrt{5} - 1}{2} \approx 0.618$ は黄金比 $\phi = \dfrac{1 + \sqrt{5}}{2}$ の逆数である）。
+
+##### 設問 (2) の解説
+
+###### (a) 電位の減衰比 $k$ と一般項 $V_n$
+節点 $\mathrm{N}_0$（電位 $V_0$）から見ると、電気容量 $C$ のコンデンサー $\mathrm{A}_1$ と、節点 $\mathrm{N}_1$ 以降の合成容量 $C + C_\infty$ が直列に接続されている。直列接続されたコンデンサーの電圧は電気容量の逆数に比例して分圧されるため、節点 $\mathrm{N}_1$ の電位 $V_1$ は、
+
+$$
+V_1 = \frac{C}{C + (C + C_\infty)} V_0 = \frac{1}{2 + \alpha} V_0
+$$
+
+となる。ここで $\alpha = \dfrac{C_\infty}{C}$ は $\alpha^2 + \alpha - 1 = 0$（すなわち $1 - \alpha = \alpha^2$、また $1 + \alpha = \dfrac{1}{\alpha}$）を満たすので、
+
+$$
+\frac{V_1}{V_0} = \frac{1}{1 + (1 + \alpha)} = \frac{1}{1 + \frac{1}{\alpha}} = \frac{\alpha}{\alpha + 1} = \alpha^2
+$$
+
+回路の自己相似性により、第 $n-1$ 節点と第 $n$ 節点の間でも全く同じ分圧比が成り立つため、
+
+$$
+\mathbf{k = \frac{V_n}{V_{n-1}} = \alpha^2 = \left(\frac{\sqrt{5} - 1}{2}\right)^2 = \frac{3 - \sqrt{5}}{2}}
+$$
+
+したがって、節点 $\mathrm{N}_n$ の電位 $V_n$ は、
+
+$$
+\mathbf{V_n = k^n V_0 = \left(\frac{3 - \sqrt{5}}{2}\right)^n V_0 \quad \left(= \alpha^{2n} V_0\right)}
+$$
+
+###### (b) 無限個の並列コンデンサーの電気量の総和
+第 $n$ 区間の並列コンデンサー $\mathrm{B}_n$ にかかる電圧は $V_n = k^n V_0$ であるから、蓄えられる電気量は $Q_{\mathrm{B}_n} = C V_n = C k^n V_0$ である。  
+公比 $k = \dfrac{3 - \sqrt{5}}{2} \approx 0.382 < 1$ より、無限等比級数の総和 $Q_{\mathrm{B, total}}$ は、
+
+$$
+Q_{\mathrm{B, total}} = \sum_{n=1}^{\infty} C k^n V_0 = C V_0 \frac{k}{1 - k}
+$$
+
+ここで $k = \alpha^2$ および $1 - \alpha^2 = \alpha$ を代入すると、
+
+$$
+Q_{\mathrm{B, total}} = C V_0 \frac{\alpha^2}{\alpha} = \alpha C V_0 = C_\infty V_0 = \mathbf{Q_{\mathrm{in}}}
+$$
+
+となり、流入した全電気量 $Q_{\mathrm{in}}$ に完全に一致する。（証明終）
+
+###### (c) 無限個のコンデンサーの静電エネルギーの総和
+第 $n$ 区間において、直列コンデンサー $\mathrm{A}_n$ の両端の電位差は $V_{n-1} - V_n = (1 - k) V_{n-1} = (1 - k) k^{n-1} V_0$、並列コンデンサー $\mathrm{B}_n$ の電位差は $V_n = k^n V_0$ である。よって第 $n$ 区間の静電エネルギーの和 $u_n$ は、
+
+$$
+u_n = \frac{1}{2} C (V_{n-1} - V_n)^2 + \frac{1}{2} C V_n^2 = \frac{1}{2} C V_0^2 \left\{ (1 - k)^2 + k^2 \right\} k^{2(n-1)}
+$$
+
+これを $n = 1$ から $\infty$ まで足し合わせると、初項 $\dfrac{1}{2} C V_0^2 \{(1 - k)^2 + k^2\}$、公比 $k^2$ の無限等比級数の和となる：
+
+$$
+U_{\mathrm{total}} = \sum_{n=1}^{\infty} u_n = \frac{1}{2} C V_0^2 \frac{(1 - k)^2 + k^2}{1 - k^2}
+$$
+
+$k = \alpha^2$、$1 - k = \alpha$ を代入すると、
+
+$$
+\frac{(1 - k)^2 + k^2}{1 - k^2} = \frac{\alpha^2 + \alpha^4}{(1 - \alpha^2)(1 + \alpha^2)} = \frac{\alpha^2 (1 + \alpha^2)}{\alpha (1 + \alpha^2)} = \alpha
+$$
+
+ゆえに、
+
+$$
+\mathbf{U_{\mathrm{total}} = \frac{1}{2} \alpha C V_0^2 = \frac{1}{2} C_\infty V_0^2}
+$$
+
+となり、等価合成容量 $C_\infty$ の単一コンデンサーの静電エネルギーと完全に一致する。（証明終）
+
+##### 設問 (3) の解説
+鉛直下向きを正とし、時刻 $t$ における導体棒の速さを $v(t)$、加速度を $a(t)$、導体棒を流れる電流を $I(t)$、時刻 $t$ までに端子 $\mathrm{X}$ へ流入した総電気量を $Q(t)$ とする。
+
+運動方程式：
+$$m a(t) = mg - I(t) B L \quad \cdots \text{①}$$
+キルヒホッフの第二法則（回路全体は合成容量 $C_\infty$ と等価）：
+$$v(t) B L - R I(t) - \frac{Q(t)}{C_\infty} = 0 \quad \cdots \text{②}$$
+
+極限（$t \to \infty$）において加速度が $a_\infty$、電流が $I_\infty$（一定）に収束するとき、微小時間 $\Delta t$ の間の変化量は $\Delta v = a_\infty \Delta t$、$\Delta I = 0$、$\Delta Q = I_\infty \Delta t$ となる。②式の微小変化をとると：
+
+$$
+B L a_\infty \Delta t - 0 - \frac{I_\infty \Delta t}{C_\infty} = 0 \implies I_\infty = C_\infty B L a_\infty \quad \cdots \text{③}
+$$
+
+③を①の極限式 $m a_\infty = mg - I_\infty B L$ に代入すると、
+
+$$
+m a_\infty = mg - C_\infty B^2 L^2 a_\infty
+$$
+
+これより求める加速度 $a_\infty$ と電流 $I_\infty$ は：
+
+$$
+\mathbf{a_\infty = \frac{mg}{m + C_\infty B^2 L^2} = \frac{2mg}{2m + (\sqrt{5} - 1) C B^2 L^2}}
+$$
+
+$$
+\mathbf{I_\infty = \frac{C_\infty B L mg}{m + C_\infty B^2 L^2} = \frac{(\sqrt{5} - 1) C B L mg}{2m + (\sqrt{5} - 1) C B^2 L^2}}
+$$
+
+また、第 $n$ 区間の並列コンデンサー $\mathrm{B}_n$ に蓄えられる電気量は設問 (2) より $Q_{\mathrm{B}_n}(t) = \alpha^{2n-1} Q(t)$ であるから、定常的に流れ込み続ける電流 $I_{\mathrm{B}_n, \infty}$ は：
+
+$$
+\mathbf{I_{\mathrm{B}_n, \infty} = \alpha^{2n-1} I_\infty = \left(\frac{\sqrt{5} - 1}{2}\right)^{2n-1} I_\infty}
+$$
+
+##### 設問 (4) の解説
+時刻 $0$ から時刻 $t$ までの「運動量と力積の関係」より：
+
+$$
+m v(t) - 0 = m g t - B L Q(t) \implies Q(t) = \frac{m g t - m v(t)}{B L} \quad \cdots \text{④}
+$$
+
+キルヒホッフの第二法則②より：
+
+$$
+Q(t) = C_\infty B L v(t) - C_\infty R I(t) \quad \cdots \text{⑤}
+$$
+
+④と⑤から $Q(t)$ を消去して整理すると：
+
+$$
+(m + C_\infty B^2 L^2) v(t) = m g t + C_\infty R B L I(t)
+$$
+
+$$
+v(t) = a_\infty t + \frac{C_\infty R B L}{m + C_\infty B^2 L^2} I(t) \quad \cdots \text{⑥}
+$$
+
+時刻 $t \to \infty$ では $I(t) \to I_\infty = C_\infty B L a_\infty$ に収束するため、
+
+$$
+\mathbf{\Delta v_\infty = \lim_{t \to \infty} \left\{ v(t) - a_\infty t \right\} = \frac{C_\infty^2 B^2 L^2 R m g}{(m + C_\infty B^2 L^2)^2} > 0}
+$$
+
+- **結論と定性的理由：**  
+  $\Delta v_\infty > 0$ であるため、電気抵抗 $R$ がある場合の実際の速さ $v(t)$ は、**$R = 0$ の理想的な速さ $a_\infty t$ よりも $\Delta v_\infty$ だけ速くなる**。  
+  **【理由】**  
+  抵抗 $R$ がある場合、運動初期（$t=0$）で電流が $0$ から立ち上がるまでに遅れが生じ、導体棒に働く電磁ブレーキ力 $I(t) B L$ が $R=0$ の場合よりも一時的に弱くなります。その間に初期加速度が重力加速度 $g$ 近くまで大きくなって余分にスピードを獲得し、その先行した速度のズレが終端等加速度運動へと移行した後も $\Delta v_\infty$ の下駄（シフト）として永久に残るためです。
+
+---
+
 ## 7. 受験生が陥りやすい誤解・つまずき
 
 ### 誤解1：「終端速度になったら、もう電磁気力は働かなくなる」
@@ -270,22 +602,21 @@ $$P_{\text{joule}} = I^2 R = \left( \frac{v B l}{R} \right)^2 R = \frac{B^2 l^2 
 
 ## 8. 要点まとめ
 
-```
-【ファラデーの電磁誘導の法則】
-V = - N (ΔΦ / Δt)  [V]
-・Φ = B S (磁束 [Wb])
-・マイナスはレンツの法則（変化を妨げる向き！）
+::: tip 📋 電磁誘導の重要公式・解法総まとめ
+* **ファラデーの電磁誘導の法則**:
+  $$V = -N \frac{\Delta\Phi}{\Delta t} \quad [\text{V}]$$
+  * 磁束: $\Phi = B S \quad [\text{Wb}]$
+  * 負符号（$-$）は**レンツの法則**を表し、「磁束の変化を妨げる向きに誘導起電力・誘導電流が生じる」ことを示す。
 
-【導線棒の誘導起電力】
-V = v B l  [V]
-・高電位端の見分け方: フレミング左手の中指の向き
+* **磁場を横切る導線棒の誘導起電力**:
+  $$V = v B l \quad [\text{V}]$$
+  * 高電位端の見分け方：自由電子が受けるローレンツ力（フレミングの左手の中指が正電荷の受ける力＝高電位側）。
 
-【レール回路の終端速度】
-下向き重力 mg = 上向き電磁気力 (B²l²v / R)
-⇒ v_terminal = mgR / (B²l²)
+* **レール回路の終端速度**:
+  $$mg = \frac{B^2 l^2 v_{\text{terminal}}}{R} \implies v_{\text{terminal}} = \frac{mgR}{B^2 l^2}$$
 
-【エネルギー保存】
-(外力・重力の仕事率) = (抵抗で消費されるジュール熱 P = I²R)
-```
+* **エネルギー保存の鉄則**:
+  $$(\text{重力・外力の仕事率 } P = F v) = (\text{回路の消費電力・ジュール熱 } P = I^2 R)$$
+:::
 
 <!--@include: ../parts/notice.md-->

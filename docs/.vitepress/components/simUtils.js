@@ -93,18 +93,69 @@ export function line(ctx, x1, y1, x2, y2, color = '#52525b', width = 1, dash) {
  * requestAnimationFrame ループ。step(dt秒) を毎フレーム呼ぶ。
  * マウント時に開始し、アンマウント時に自動停止（SSR安全）。
  */
-export function useLoop(step) {
+export function useLoop(arg1, arg2) {
   let id = null
   let last = null
-  const frame = (ts) => {
-    if (last === null) last = ts
-    const dt = Math.min(0.05, (ts - last) / 1000)
-    last = ts
-    step(dt)
-    id = requestAnimationFrame(frame)
+
+  if (typeof arg1 === 'function') {
+    // 1引数シグネチャ: useLoop(step)
+    const step = arg1
+    const frame = (ts) => {
+      if (last === null) last = ts
+      const dt = Math.min(0.05, (ts - last) / 1000)
+      last = ts
+      step(dt)
+      id = requestAnimationFrame(frame)
+    }
+    onMounted(() => { id = requestAnimationFrame(frame) })
+    onUnmounted(() => { if (id) cancelAnimationFrame(id) })
+  } else {
+    // 2引数シグネチャ: useLoop(canvasRef, callback)
+    const canvasRef = arg1
+    const callback = arg2
+
+    const frame = (ts) => {
+      if (last === null) last = ts
+      const dt = Math.min(0.05, (ts - last) / 1000)
+      last = ts
+
+      const canvas = canvasRef?.value
+      if (canvas && typeof callback === 'function') {
+        const rect = canvas.getBoundingClientRect()
+        const logicalW = rect.width || canvas.width || 700
+        const logicalH = rect.height || canvas.height || 300
+        const targetDpr = Math.min(2, (typeof window !== 'undefined' && window.devicePixelRatio) || 1)
+
+        const pixelW = Math.round(logicalW * targetDpr)
+        const pixelH = Math.round(logicalH * targetDpr)
+        if (canvas.width !== pixelW || canvas.height !== pixelH) {
+          canvas.width = pixelW
+          canvas.height = pixelH
+        }
+
+        const ctx = canvas.getContext('2d')
+        ctx.save()
+        ctx.setTransform(targetDpr, 0, 0, targetDpr, 0, 0)
+        const payload = { ctx, canvas, width: logicalW, height: logicalH, dt }
+        ctx.ctx = ctx
+        ctx.canvas = canvas
+        ctx.width = logicalW
+        ctx.height = logicalH
+        ctx.dt = dt
+        try {
+          callback(payload, logicalW, logicalH, dt)
+        } catch (e) {
+          console.error('Simulation loop error:', e)
+        } finally {
+          ctx.restore()
+        }
+      }
+
+      id = requestAnimationFrame(frame)
+    }
+    onMounted(() => { id = requestAnimationFrame(frame) })
+    onUnmounted(() => { if (id) cancelAnimationFrame(id) })
   }
-  onMounted(() => { id = requestAnimationFrame(frame) })
-  onUnmounted(() => { if (id) cancelAnimationFrame(id) })
 }
 
 /** キャンバス上のポインタ座標を論理座標へ変換 */

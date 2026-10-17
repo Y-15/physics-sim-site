@@ -293,10 +293,10 @@ onUnmounted(() => {
           永続平衡（ウラン-ラジウム型 <i>T</i><sub><i>A</i></sub> ≫ <i>T</i><sub><i>B</i></sub>）
         </button>
         <button class="preset-btn" @click="setPreset('transient')">
-          過渡平衡（Mo-99/Tc-99m型 $T_A > T_B$）
+          過渡平衡（Mo-99/Tc-99m型 <i>T</i><sub>A</sub> > <i>T</i><sub>B</sub>）
         </button>
         <button class="preset-btn" @click="setPreset('none')">
-          平衡なし（$T_A < T_B$）
+          平衡なし（<i>T</i><sub>A</sub> < <i>T</i><sub>B</sub>）
         </button>
       </div>
 

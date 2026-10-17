@@ -34,23 +34,73 @@ description: 加速する乗り物やエレベーター、回転系で現れる�
 
 ニュートンの運動の第1法則（慣性の法則）によれば、外力が働かない物体は「**その場にとどまり続けるか、等速直線運動を続けようとする**」性質（慣性）を持っています。
 
-```
-【電車が右へ加速度 a で急発進したとき】
+<div class="observer-comparison-grid">
+  <div class="observer-card ground">
+    <h4>🌍 地上の観測者（慣性系）から見た視点</h4>
+    <ul>
+      <li>電車と床は右へ加速度 $a$ で加速している。</li>
+      <li>つり革のおもりは「その場にとどまろう（慣性）」とする。</li>
+      <li>ひもが後ろに傾くことで、張力の水平成分 $T \sin\theta$ が右向きに生じ、おもりも右へ加速される。</li>
+    </ul>
+    <div class="formula-box">
+      <strong>運動方程式</strong>：$m a = T \sin\theta$
+    </div>
+  </div>
+  <div class="observer-card train">
+    <h4>🚃 車内の観測者（非慣性系）から見た視点</h4>
+    <ul>
+      <li>自分も電車と一緒に右へ加速している。</li>
+      <li>おもりを見ると、傾いたまま空中で静止している。</li>
+      <li>「静止しているということは、右向きの張力成分とつり合う<strong>左向きの慣性力 $f = ma$</strong> が働いている！」</li>
+    </ul>
+    <div class="formula-box">
+      <strong>力のつり合い</strong>：$T \sin\theta - ma = 0$
+    </div>
+  </div>
+</div>
 
-[ 地上の観測者（慣性系）から見る ]
-・電車と床は右へ加速している。
-・つり革のおもりは「その場にとどまろう」としている。
-・ひもが後ろに傾くことで、ひもの張力の水平成分 T sinθ が右向きに生じ、
-  その結果おもりも電車と同じ加速度 a で右へ加速される。
-  ⇒ 運動方程式: m a = T sinθ
-
-[ 車内の観測者（非慣性系）から見る ]
-・自分も電車と一緒に右へ加速している。
-・おもりを見ると、傾いたまま空中で静止している。
-・「静止しているということは、右向きの張力 T sinθ と逆向きにつり合う
-  左向きの力 f = m a が働いているはずだ！」
-  ⇒ つり合いの式: T sinθ - m a = 0  (f = -m a)
-```
+<style scoped>
+.observer-comparison-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+  margin: 1.5rem 0;
+}
+.observer-card {
+  background: var(--vp-c-bg-soft);
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 12px;
+  padding: 16px 20px;
+  display: flex;
+  flex-direction: column;
+}
+.observer-card.ground {
+  border-left: 4px solid #38bdf8;
+}
+.observer-card.train {
+  border-left: 4px solid #fbbf24;
+}
+.observer-card h4 {
+  margin: 0 0 10px 0;
+  font-size: 1.05rem;
+  color: var(--vp-c-text-1);
+}
+.observer-card ul {
+  margin: 0 0 12px 0;
+  padding-left: 20px;
+  font-size: 0.93rem;
+  color: var(--vp-c-text-2);
+  line-height: 1.5;
+  flex: 1;
+}
+.formula-box {
+  background: rgba(15, 23, 42, 0.4);
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  color: var(--vp-c-text-1);
+}
+</style>
 
 車内の人にとっては、自分自身が加速している自覚がないため、「空間全体におもりを左へ引っ張る謎の力場が生じた」と解釈せざるを得ません。これが慣性力の正体です。
 
@@ -132,7 +182,7 @@ $$
 
 ### 【完全オリジナル例題 1】加速する電車内の振り子の傾きと周期
 
-```
+``::: info 📖 【問題設定】
 水平面上を右向きに一定の加速度 a = 3.5 m/s² で走行している電車がある。
 天井から長さ L = 1.0 m の軽い糸でおもり（質量 m = 2.0 kg）をつるしたところ、
 おもりは鉛直線から角度 θ だけ傾いて電車に対して静止した。
@@ -140,8 +190,7 @@ $$
 
 (1) 傾き角 θ の tanθ の値、および糸の張力の大きさ T [N] を求めよ。
 (2) この傾いた位置を中心に、おもりを微小振動させたときの周期 T₀ [s] を求めよ。
-```
-
+:::`::: info 📖 【問題設定】
 #### 【解法手順】
 
 **Step 1: 電車内の観測者（非慣性系）から見た力を図示する**
@@ -190,14 +239,13 @@ $$
 ---
 
 ### 【完全オリジナル例題 2】回転するターンテーブル上の物体の滑り出し
-
-```
+:::`::: info 📖 【問題設定】
 水平に回転する半径 R = 2.0 m の円盤の中心から r = 1.5 m の位置に、
 質量 m = 1.0 kg の小物体を置いた。
 物体と円盤の間の静止摩擦係数を μ = 0.40、重力加速度を g = 9.8 m/s² とする。
 円盤の回転角速度 ω [rad/s] を徐々に上げていくとき、
 物体が外側へ滑り出さずにいられる限界の角速度 ω₀ [rad/s] を求めよ。
-```
+:::``
 
 #### 【解法手順】
 

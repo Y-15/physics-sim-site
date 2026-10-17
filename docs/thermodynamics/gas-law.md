@@ -252,25 +252,28 @@ $$e = \frac{W_{\text{net}}}{Q_{\text{in}}} = \frac{Q_{\text{in}} - Q_{\text{out}
 
 ## 8. 要点まとめ
 
-```
-【理想気体の状態方程式】
-PV = nRT  (単原子分子: U = ³⁄₂ nRT, ΔU = ³⁄₂ nRΔT)
+::: tip 📋 気体の状態方程式と熱力学第1法則の総まとめ
+* **理想気体の状態方程式**:
+  $$P V = n R T$$
+  * 単原子分子理想気体の内部エネルギー:
+    $$U = \frac{3}{2} n R T \implies \Delta U = \frac{3}{2} n R \Delta T$$
+    * ※ 内部エネルギーの変化量は**温度変化 $\Delta T$ のみ**で決まる！
 
-【熱力学第1法則】
-Q = ΔU + W'  [J]
-・Q: 気体が吸収した熱量
-・ΔU: 内部エネルギー変化 (温度 T だけで決まる！)
-・W': 気体が外部にした仕事 (P-V グラフ下の面積)
+* **熱力学第1法則**:
+  $$Q = \Delta U + W' \quad [\text{J}]$$
+  * $Q$: 気体が吸収した熱量（吸熱が正、放熱が負）
+  * $\Delta U$: 内部エネルギーの増加量
+  * $W'$: 気体が外部にした仕事（$P$-$V$ グラフの曲線下面積）
 
-【4大変化の極意】
-・定積: W' = 0, Q = ΔU
-・定圧: W' = PΔV, Q = ΔU + W' = ⁵⁄₂ nRΔT
-・等温: ΔU = 0, Q = W'
-・断熱: Q = 0, W' = -ΔU
+* **4大変化の整理**:
+  * **定積変化**: $\Delta V = 0 \implies W' = 0, \quad Q = \Delta U$
+  * **定圧変化**: $W' = P \Delta V, \quad Q = \Delta U + W' = \frac{5}{2} n R \Delta T$
+  * **等温変化**: $\Delta T = 0 \implies \Delta U = 0, \quad Q = W'$
+  * **断熱変化**: $Q = 0 \implies W' = -\Delta U$
 
-【サイクルと熱効率】
-・正味の仕事 W_net = (P-V 閉曲線の囲む面積)
-・熱効率 e = W_net / Q_in
-```
+* **熱サイクルと熱効率**:
+  * 正味の仕事 $W_{\text{net}} = (\text{P-V 閉曲線が囲む面積})$
+  * 熱効率: $e = \frac{W_{\text{net}}}{Q_{\text{in}}} = \frac{Q_{\text{in}} - Q_{\text{out}}}{Q_{\text{in}}}$
+:::
 
 <!--@include: ../parts/notice.md-->

@@ -251,22 +251,21 @@ $$y_{\text{O}}(t) = 0.50 \sin (4.0\pi t)$$
 
 ## 8. 要点まとめ
 
-```
-【波の基本式】
-v = f λ = λ / T
+::: tip 📋 波動の重要公式・式のまとめ
+* **波の基本式**:
+  $$v = f \lambda = \frac{\lambda}{T}$$
 
-【波の式の導出ロジック】
-原点 O の振動: y_O(t) = A sin(2π t / T)
-↓ x 地点は x/v 秒遅れて届く！
-y(x, t) = A sin 2π [ (t - x/v) / T ]
-        = A sin 2π ( t/T - x/λ )  [+x方向進行]
+* **正弦波の式の導出ロジック**:
+  * 原点 $\text{O}$ の単振動: $y_O(t) = A \sin\left(\frac{2\pi}{T} t\right)$
+  * 位置 $x$ には $\frac{x}{v}$ 秒遅れて届くため、$t \to \left(t - \frac{x}{v}\right)$ を代入：
+  $$y(x, t) = A \sin 2\pi \left(\frac{t}{T} - \frac{x}{\lambda}\right) \quad (+x\text{方向進行})$$
 
-【進行方向と符号】
-・+x 方向進行: (t/T - x/λ)  (引く！)
-・-x 方向進行: (t/T + x/λ)  (足す！)
+* **進行方向と符号の鉄則**:
+  * $+x$ 方向へ進む波: $y = A \sin 2\pi \left(\frac{t}{T} - \frac{x}{\lambda}\right)$（引き算）
+  * $-x$ 方向へ進む波: $y = A \sin 2\pi \left(\frac{t}{T} + \frac{x}{\lambda}\right)$（足し算）
 
-【媒質速度の見抜き方】
-波形を進行方向に少し平行移動させ、元の波形から上下に矢印を引く！
-```
+* **媒質速度の直感判別法**:
+  * 波形を波の進行方向にほんの少しだけ平行移動させ、元の波形から上下に矢印を引くことで即座に媒質速度の向き（上向きか下向きか）が判別できます。
+:::
 
 <!--@include: ../parts/notice.md-->

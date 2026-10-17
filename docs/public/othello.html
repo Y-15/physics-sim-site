@@ -1,0 +1,2553 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3次元オセロ Online - 高校物理シミュレーションラボ</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Three.js & OrbitControls -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    <!-- PeerJS for WebRTC Room-Code Multiplayer -->
+    <script src="https://unpkg.com/peerjs@1.5.2/dist/peerjs.min.js"></script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;700&display=swap');
+
+        body {
+            font-family: 'Inter', 'Noto Sans JP', sans-serif;
+            background-color: #0f172a;
+            color: #f8fafc;
+            overflow: hidden;
+            user-select: none;
+        }
+
+        /* Cosmic 3D Viewport Background */
+        .cosmic-viewport {
+            background:
+                radial-gradient(circle at 50% 42%, rgba(14, 165, 233, 0.16) 0%, rgba(15, 23, 42, 0) 60%),
+                radial-gradient(circle at 80% 70%, rgba(168, 85, 247, 0.12) 0%, rgba(15, 23, 42, 0) 50%),
+                radial-gradient(circle at 20% 30%, rgba(16, 185, 129, 0.10) 0%, rgba(15, 23, 42, 0) 50%),
+                linear-gradient(180deg, #060b16 0%, #0b1325 50%, #060b16 100%);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1e293b;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #475569;
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #64748b;
+        }
+
+        /* 2D Grid Styling */
+        .grid-2d-cell {
+            aspect-ratio: 1 / 1;
+            transition: all 0.15s ease;
+            background-color: rgba(15, 23, 42, 0.85);
+            border: 1px solid rgba(56, 189, 248, 0.18);
+        }
+        .grid-2d-cell:hover {
+            background-color: rgba(56, 189, 248, 0.22);
+            border-color: rgba(56, 189, 248, 0.5);
+        }
+
+        /* Stone 2D Representations (High-Contrast Obsidian & Pearl with Glowing Rims) */
+        .stone-black {
+            background: radial-gradient(circle at 32% 28%, #94a3b8 0%, #334155 28%, #0f172a 70%, #020617 100%);
+            border: 1.5px solid #fbbf24;
+            box-shadow: 0 0 7px rgba(251, 191, 36, 0.45), inset 0 1px 3px rgba(255, 255, 255, 0.55);
+        }
+        .stone-white {
+            background: radial-gradient(circle at 32% 28%, #ffffff 0%, #f1f5f9 55%, #cbd5e1 85%, #94a3b8 100%);
+            border: 1.5px solid #38bdf8;
+            box-shadow: 0 0 7px rgba(56, 189, 248, 0.4), inset 0 -1px 3px rgba(15, 23, 42, 0.3);
+        }
+        .stone-valid {
+            background-color: rgba(16, 185, 129, 0.35);
+            border: 2px dashed #10b981;
+            animation: pulse-valid 2s infinite;
+        }
+        .stone-flip-preview {
+            box-shadow: 0 0 0 3px #f59e0b !important;
+            transform: scale(1.08);
+        }
+        .stone-last-move {
+            box-shadow: 0 0 0 2px #38bdf8 !important;
+        }
+
+        @keyframes pulse-valid {
+            0%, 100% { transform: scale(0.85); opacity: 0.75; }
+            50% { transform: scale(0.95); opacity: 1; }
+        }
+
+        /* Range Slider Styling */
+        input[type=range] {
+            -webkit-appearance: none;
+            background: transparent;
+        }
+        input[type=range]::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 6px;
+            cursor: pointer;
+            background: #334155;
+            border-radius: 3px;
+        }
+        input[type=range]::-webkit-slider-thumb {
+            height: 16px;
+            width: 16px;
+            border-radius: 50%;
+            background: #38bdf8;
+            cursor: pointer;
+            -webkit-appearance: none;
+            margin-top: -5px;
+            box-shadow: 0 0 8px rgba(56, 189, 248, 0.6);
+        }
+    </style>
+</head>
+<body class="h-screen w-screen flex flex-col bg-slate-950 text-slate-100">
+
+    <!-- Top Navigation / Status Bar -->
+    <header class="h-16 bg-slate-900/95 backdrop-blur border-b border-slate-800 px-3 md:px-5 flex items-center justify-between z-20 shrink-0">
+        <div class="flex items-center space-x-2.5">
+            <a id="btn-back-to-site" href="../games/othello" class="flex items-center justify-center w-8 h-8 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white transition" title="物理ラボ解説へ戻る">
+                <i class="fa-solid fa-arrow-left text-xs"></i>
+            </a>
+            <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-emerald-500 to-cyan-600 flex items-center justify-center shadow-lg shadow-emerald-500/20 shrink-0">
+                <i class="fa-solid fa-cube text-white text-lg"></i>
+            </div>
+            <div>
+                <div class="flex items-center space-x-2">
+                    <h1 class="font-bold text-sm md:text-lg tracking-tight leading-none">3次元オセロ</h1>
+                    <span id="mode-pill" class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+                        1P CPU対戦
+                    </span>
+                </div>
+                <p class="text-[10px] text-slate-400 mt-0.5 hidden sm:block">26方向探索・オンライン通信対応</p>
+            </div>
+        </div>
+
+        <!-- Score & Turn Indicator -->
+        <div class="flex items-center space-x-1.5 md:space-x-4 bg-slate-800/80 px-2.5 py-1.5 rounded-xl border border-slate-700/70">
+            <!-- Black Score -->
+            <div id="turn-black-box" class="flex items-center space-x-2 px-2 py-1 rounded-lg transition-all duration-300 ring-2 ring-emerald-500 bg-slate-700/60">
+                <div class="w-4 h-4 md:w-5 md:h-5 rounded-full stone-black shrink-0"></div>
+                <div class="leading-tight">
+                    <div id="black-label" class="text-[10px] text-slate-300 font-medium">黒 (あなた)</div>
+                    <div id="score-black" class="text-sm md:text-base font-bold text-white">4</div>
+                </div>
+            </div>
+
+            <div class="text-slate-500 font-bold text-[10px] md:text-xs">VS</div>
+
+            <!-- White Score -->
+            <div id="turn-white-box" class="flex items-center space-x-2 px-2 py-1 rounded-lg transition-all duration-300 opacity-75">
+                <div class="w-4 h-4 md:w-5 md:h-5 rounded-full stone-white shrink-0"></div>
+                <div class="leading-tight">
+                    <div id="white-label" class="text-[10px] text-slate-300 font-medium">白 (CPU)</div>
+                    <div id="score-white" class="text-sm md:text-base font-bold text-white">4</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Action Buttons -->
+        <div class="flex items-center space-x-1.5 md:space-x-2">
+            <!-- Active Room Code Pill (Shown during online game) -->
+            <div id="header-room-badge" class="hidden sm:flex items-center space-x-1.5 bg-sky-500/15 border border-sky-500/40 px-2.5 py-1.5 rounded-lg text-xs">
+                <span class="text-slate-400 text-[10px]">ROOM:</span>
+                <span id="header-room-code" class="font-mono font-bold text-sky-300 tracking-wider">------</span>
+                <button onclick="copyRoomCode()" class="text-sky-400 hover:text-white ml-1" title="コードをコピー">
+                    <i class="fa-regular fa-copy"></i>
+                </button>
+            </div>
+
+            <button onclick="openLobbyModal()" class="px-2.5 md:px-3 py-2 rounded-lg bg-sky-600 hover:bg-sky-500 text-white text-xs font-semibold shadow-lg shadow-sky-600/20 transition flex items-center space-x-1.5">
+                <i class="fa-solid fa-users"></i>
+                <span class="hidden sm:inline">モード / 通信対戦</span>
+            </button>
+
+            <button id="btn-undo" onclick="game.undo()" disabled class="px-2.5 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 disabled:opacity-40 disabled:pointer-events-none text-slate-200 text-xs font-medium border border-slate-700 transition flex items-center space-x-1" title="1手戻す (1P/ローカルのみ)">
+                <i class="fa-solid fa-rotate-left"></i>
+                <span class="hidden xl:inline">待った</span>
+            </button>
+
+            <button id="btn-reset" onclick="handleResetButton()" class="px-2.5 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-medium shadow-lg shadow-emerald-600/20 transition flex items-center space-x-1" title="最初からやり直す">
+                <i class="fa-solid fa-arrows-rotate"></i>
+                <span class="hidden xl:inline">リセット</span>
+            </button>
+
+            <button id="btn-sound-toggle" onclick="soundManager.toggle()" class="px-2.5 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs border border-slate-700 items-center space-x-1" title="効果音: ON">
+                <i class="fa-solid fa-volume-high"></i>
+            </button>
+
+            <button id="btn-fullscreen" onclick="toggleBrowserFullscreen()" class="hidden md:flex px-2.5 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs border border-slate-700 items-center space-x-1" title="全画面切り替え">
+                <i class="fa-solid fa-expand"></i>
+            </button>
+
+            <button id="btn-toggle-panel" onclick="toggleSidePanel()" class="lg:hidden px-2.5 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs border border-slate-700">
+                <i class="fa-solid fa-layer-group"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <div class="flex-1 flex relative overflow-hidden">
+
+        <!-- Left / Center: 3D Viewport -->
+        <main class="flex-1 relative h-full w-full cosmic-viewport">
+            <!-- Three.js Canvas Container -->
+            <div id="canvas-container" class="w-full h-full cursor-grab active:cursor-grabbing"></div>
+
+            <!-- Floating Turn / Notification Banner -->
+            <div class="absolute top-4 left-4 pointer-events-none flex flex-col space-y-2 z-10 max-w-xs sm:max-w-md">
+                <div id="status-badge" class="bg-slate-900/90 backdrop-blur-md border border-slate-700/80 px-4 py-2.5 rounded-xl shadow-xl flex items-center space-x-2.5">
+                    <span id="status-dot" class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping shrink-0"></span>
+                    <span id="status-text" class="text-xs md:text-sm font-semibold text-slate-100">黒の番です（置ける場所: 10ヶ所）</span>
+                </div>
+                <div id="hover-info" class="hidden bg-amber-500/95 text-slate-950 font-bold text-xs px-3 py-1.5 rounded-lg shadow-lg backdrop-blur-sm w-fit">
+                    座標 (1, 2, 1) : 3個の石を裏返せます
+                </div>
+            </div>
+
+            <!-- Waiting for Opponent Overlay Card (Online Room Waiting) -->
+            <div id="waiting-room-overlay" class="hidden absolute inset-0 bg-slate-950/75 backdrop-blur-sm flex items-center justify-center z-20 p-4">
+                <div class="bg-slate-900 border border-slate-700 rounded-2xl max-w-md w-full p-6 shadow-2xl text-center space-y-5">
+                    <div class="w-12 h-12 rounded-2xl bg-sky-500/20 border border-sky-500/40 text-sky-400 flex items-center justify-center mx-auto text-xl">
+                        <i class="fa-solid fa-satellite-dish animate-pulse"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold text-white">対戦相手の参加を待っています...</h3>
+                        <p class="text-xs text-slate-400 mt-1">以下のルームコードを対戦相手に共有してください</p>
+                    </div>
+
+                    <div class="bg-slate-950 border border-slate-800 rounded-xl p-4 flex items-center justify-between">
+                        <div class="text-left">
+                            <span class="text-[10px] text-slate-500 uppercase tracking-wider block">ルームコード (6桁)</span>
+                            <span id="waiting-room-code" class="text-3xl font-mono font-extrabold text-sky-400 tracking-widest">------</span>
+                        </div>
+                        <button onclick="copyRoomCode()" class="px-4 py-2.5 rounded-xl bg-sky-600 hover:bg-sky-500 text-white text-xs font-bold shadow-lg shadow-sky-600/30 transition flex items-center space-x-1.5">
+                            <i class="fa-regular fa-copy"></i>
+                            <span id="copy-btn-text">コピー</span>
+                        </button>
+                    </div>
+
+                    <div class="text-xs text-slate-400 flex items-center justify-center space-x-2">
+                        <span>盤面サイズ: <strong id="waiting-board-size" class="text-slate-200">4×4×4</strong></span>
+                        <span>•</span>
+                        <span>あなたの担当: <strong id="waiting-host-color" class="text-emerald-400">黒 (先手)</strong></span>
+                    </div>
+
+                    <div class="pt-2 border-t border-slate-800 flex space-x-3">
+                        <button onclick="leaveOnlineRoom()" class="w-full py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold transition">
+                            キャンセルして1人プレイに戻る
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Floating 3D View Controls (Bottom Left) -->
+            <div class="absolute bottom-4 left-4 right-4 md:right-auto bg-slate-900/90 backdrop-blur-md border border-slate-800 p-3.5 rounded-2xl shadow-2xl z-10 flex flex-col space-y-3 md:w-80">
+                <div class="flex items-center justify-between">
+                    <span class="text-xs font-semibold text-slate-300 flex items-center gap-1.5">
+                        <i class="fa-solid fa-sliders text-sky-400"></i> 3D表示・視点コントロール
+                    </span>
+                    <button onclick="resetCamera()" class="text-[11px] text-sky-400 hover:text-sky-300 font-medium flex items-center gap-1">
+                        <i class="fa-solid fa-video"></i> 視点リセット
+                    </button>
+                </div>
+
+                <!-- Layer Expansion (Explosion) Slider -->
+                <div class="space-y-1">
+                    <div class="flex justify-between text-[11px] text-slate-400">
+                        <span>層（レイヤー）の上下間隔</span>
+                        <span id="explosion-val" class="text-sky-400 font-mono">1.2x</span>
+                    </div>
+                    <input id="slider-explosion" type="range" min="1.0" max="2.6" step="0.1" value="1.2" oninput="updateLayerExpansion(this.value)" class="w-full">
+                </div>
+
+                <!-- Layer Isolate Filter -->
+                <div class="space-y-1">
+                    <div class="flex justify-between text-[11px] text-slate-400">
+                        <span>特定レイヤーの強調フィルター</span>
+                        <span id="filter-layer-label" class="text-emerald-400 font-medium">すべて表示</span>
+                    </div>
+                    <div id="layer-filter-buttons" class="grid grid-cols-5 gap-1 pt-0.5">
+                        <!-- Dynamically populated -->
+                    </div>
+                </div>
+
+                <!-- Toggles -->
+                <div class="flex items-center justify-between pt-1 border-t border-slate-800/80 text-xs">
+                    <label class="flex items-center space-x-2 cursor-pointer">
+                        <input type="checkbox" id="chk-guides" checked onchange="toggleGuides(this.checked)" class="rounded bg-slate-800 border-slate-700 text-emerald-500 focus:ring-0">
+                        <span class="text-slate-300 text-[11px]">置ける場所を表示</span>
+                    </label>
+                    <label class="flex items-center space-x-2 cursor-pointer">
+                        <input type="checkbox" id="chk-frame" checked onchange="toggleFrame(this.checked)" class="rounded bg-slate-800 border-slate-700 text-emerald-500 focus:ring-0">
+                        <span class="text-slate-300 text-[11px]">グリッド枠線</span>
+                    </label>
+                </div>
+            </div>
+        </main>
+
+        <!-- Right Side Panel: 2D Layer Slice View & Game Info -->
+        <aside id="side-panel" class="w-80 md:w-96 bg-slate-900 border-l border-slate-800 flex flex-col h-full z-20 absolute lg:static right-0 top-0 bottom-0 transform translate-x-full lg:translate-x-0 transition-transform duration-300 shadow-2xl lg:shadow-none">
+            
+            <!-- Panel Tabs -->
+            <div class="flex border-b border-slate-800 bg-slate-950/50 p-1 m-2 rounded-xl shrink-0">
+                <button onclick="switchTab('slices')" id="tab-btn-slices" class="flex-1 py-1.5 text-xs font-semibold rounded-lg bg-slate-800 text-white shadow transition">
+                    <i class="fa-solid fa-layer-group mr-1 text-emerald-400"></i>2D 断面マップ
+                </button>
+                <button onclick="switchTab('settings')" id="tab-btn-settings" class="flex-1 py-1.5 text-xs font-semibold rounded-lg text-slate-400 hover:text-slate-200 transition">
+                    <i class="fa-solid fa-circle-info mr-1"></i>通信状態・履歴
+                </button>
+            </div>
+
+            <!-- Tab 1: 2D Layer Slices -->
+            <div id="tab-slices" class="flex-1 overflow-y-auto px-3 pb-4 space-y-3">
+                <div class="bg-slate-800/40 border border-slate-800 rounded-xl p-2.5 text-[11px] text-slate-400 flex items-start space-x-2">
+                    <i class="fa-solid fa-hand-pointer text-sky-400 mt-0.5"></i>
+                    <span>3D画面で奥のマスがクリックしづらい場合、下の<strong>2D断面パネルを直接クリック</strong>しても石を置けます。</span>
+                </div>
+
+                <!-- 2D Grids Container -->
+                <div id="slices-container" class="grid grid-cols-2 gap-3">
+                    <!-- Populated via JS -->
+                </div>
+            </div>
+
+            <!-- Tab 2: Match Info, Rules & History -->
+            <div id="tab-settings" class="hidden flex-1 overflow-y-auto px-4 pb-6 space-y-4">
+                <!-- Current Match Info Card -->
+                <div class="bg-slate-800/40 p-3.5 rounded-xl border border-slate-800 space-y-2.5">
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-xs font-bold text-slate-200 uppercase tracking-wider flex items-center gap-1.5">
+                            <i class="fa-solid fa-gamepad text-emerald-400"></i> 現在の対局設定
+                        </h3>
+                        <button onclick="openLobbyModal()" class="text-[11px] text-sky-400 hover:underline font-medium">
+                            設定変更
+                        </button>
+                    </div>
+                    <div class="text-xs space-y-1 text-slate-300">
+                        <div class="flex justify-between">
+                            <span class="text-slate-400">モード:</span>
+                            <span id="info-mode-name" class="font-semibold">1P vs CPU (普通)</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-slate-400">盤面サイズ:</span>
+                            <span id="info-board-size" class="font-semibold">4 × 4 × 4 (64マス)</span>
+                        </div>
+                        <div id="info-room-row" class="hidden flex justify-between pt-1 border-t border-slate-700/60">
+                            <span class="text-slate-400">ルームコード:</span>
+                            <span id="info-room-code" class="font-mono font-bold text-sky-400">------</span>
+                        </div>
+                    </div>
+                    <div class="pt-1 border-t border-slate-800/80">
+                        <div class="text-[10px] text-slate-500">あなたのプレイヤーID:</div>
+                        <div id="my-user-id" class="text-[10px] font-mono text-slate-400 break-all select-all">認証中...</div>
+                    </div>
+                </div>
+
+                <!-- Rules Explanation -->
+                <div class="space-y-2 bg-slate-800/40 p-3.5 rounded-xl border border-slate-800 text-xs text-slate-300 leading-relaxed">
+                    <h3 class="font-bold text-slate-200 flex items-center gap-1.5">
+                        <i class="fa-solid fa-book-open text-sky-400"></i> 3次元オセロのルール
+                    </h3>
+                    <ul class="list-disc list-inside space-y-1 text-slate-400 text-[11px]">
+                        <li>自分の石で相手の石を挟むと自分の色に裏返ります。</li>
+                        <li>挟める方向は、縦・横・高さ・平面斜め・<strong>立体対角線を含む全26方向</strong>です。</li>
+                        <li><strong>角（8つの頂点）</strong>は絶対に裏返されないため、非常に強力なポジションになります。</li>
+                    </ul>
+                </div>
+
+                <!-- Move History -->
+                <div class="space-y-2">
+                    <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider">着手履歴</h3>
+                    <div id="move-history" class="bg-slate-950/70 border border-slate-800 rounded-xl p-2.5 h-44 overflow-y-auto text-[11px] font-mono space-y-1 text-slate-400">
+                        <div class="text-slate-600 italic">まだ履歴がありません</div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Lobby / Mode Selection Modal -->
+    <div id="lobby-modal" class="fixed inset-0 bg-slate-950/85 backdrop-blur-md flex items-center justify-center z-50 p-4">
+        <div class="bg-slate-900 border border-slate-700/80 rounded-2xl max-w-lg w-full overflow-hidden shadow-2xl flex flex-col max-h-[90vh]">
+            <!-- Modal Header -->
+            <div class="px-6 py-4 bg-slate-950/60 border-b border-slate-800 flex items-center justify-between">
+                <div class="flex items-center space-x-2.5">
+                    <div class="w-8 h-8 rounded-lg bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400">
+                        <i class="fa-solid fa-cube"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-base font-bold text-white">ゲームモード選択・通信ロビー</h2>
+                        <p class="text-[11px] text-slate-400">1人プレイ（CPU）またはルームコードで2人通信対戦</p>
+                    </div>
+                </div>
+                <button onclick="closeLobbyModal()" class="w-8 h-8 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white flex items-center justify-center transition">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <!-- Mode Selector Tabs -->
+            <div class="grid grid-cols-3 gap-1.5 bg-slate-950 p-2 mx-6 mt-4 rounded-xl border border-slate-800 shrink-0">
+                <button onclick="selectLobbyTab('cpu')" id="lobby-tab-cpu" class="py-2 rounded-lg text-xs font-bold bg-emerald-600 text-white shadow transition flex items-center justify-center gap-1.5">
+                    <i class="fa-solid fa-robot"></i> 1人 (CPU対戦)
+                </button>
+                <button onclick="selectLobbyTab('online')" id="lobby-tab-online" class="py-2 rounded-lg text-xs font-bold text-slate-400 hover:text-white transition flex items-center justify-center gap-1.5">
+                    <i class="fa-solid fa-globe"></i> 2人 (通信対戦)
+                </button>
+                <button onclick="selectLobbyTab('local')" id="lobby-tab-local" class="py-2 rounded-lg text-xs font-bold text-slate-400 hover:text-white transition flex items-center justify-center gap-1.5">
+                    <i class="fa-solid fa-user-group"></i> 2人 (1台で対戦)
+                </button>
+            </div>
+
+            <!-- Modal Body -->
+            <div class="p-6 overflow-y-auto space-y-5 flex-1">
+
+                <!-- Common Setting: Board Size -->
+                <div class="space-y-2">
+                    <label class="text-xs font-semibold text-slate-300 block">盤面サイズ</label>
+                    <div class="grid grid-cols-2 gap-3">
+                        <button onclick="setLobbyBoardSize(4)" id="lobby-size-4" class="p-3 rounded-xl border-2 border-emerald-500 bg-emerald-500/15 text-left transition">
+                            <div class="font-bold text-sm text-white flex items-center justify-between">
+                                <span>4 × 4 × 4</span>
+                                <span class="text-[10px] px-2 py-0.5 rounded bg-emerald-500 text-slate-950 font-bold">推奨</span>
+                            </div>
+                            <div class="text-[11px] text-slate-400 mt-0.5">全64マス・10〜15分で気軽に遊べます</div>
+                        </button>
+                        <button onclick="setLobbyBoardSize(6)" id="lobby-size-6" class="p-3 rounded-xl border border-slate-700 bg-slate-800/60 hover:bg-slate-800 text-left transition">
+                            <div class="font-bold text-sm text-slate-200 flex items-center justify-between">
+                                <span>6 × 6 × 6</span>
+                                <span class="text-[10px] px-2 py-0.5 rounded bg-slate-700 text-slate-300">本格派</span>
+                            </div>
+                            <div class="text-[11px] text-slate-400 mt-0.5">全216マス・じっくり戦略を練る大盤面</div>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Panel A: 1P vs CPU Settings -->
+                <div id="lobby-panel-cpu" class="space-y-4 pt-2 border-t border-slate-800">
+                    <div class="space-y-2">
+                        <label class="text-xs font-semibold text-slate-300 block">CPUの強さ (AI難易度)</label>
+                        <div class="grid grid-cols-3 gap-2">
+                            <button onclick="setLobbyCpuDiff('easy')" id="cpu-diff-easy" class="py-2.5 px-3 rounded-xl border border-slate-700 bg-slate-800 text-xs font-semibold text-slate-300 hover:bg-slate-700 transition">
+                                初級 (Easy)
+                            </button>
+                            <button onclick="setLobbyCpuDiff('normal')" id="cpu-diff-normal" class="py-2.5 px-3 rounded-xl border-2 border-emerald-500 bg-emerald-500/15 text-xs font-semibold text-white transition">
+                                中級 (Normal)
+                            </button>
+                            <button onclick="setLobbyCpuDiff('hard')" id="cpu-diff-hard" class="py-2.5 px-3 rounded-xl border border-slate-700 bg-slate-800 text-xs font-semibold text-slate-300 hover:bg-slate-700 transition">
+                                上級 (Hard)
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="space-y-2">
+                        <label class="text-xs font-semibold text-slate-300 block">あなたの石の色（手番）</label>
+                        <div class="grid grid-cols-2 gap-3">
+                            <button onclick="setLobbyPlayerColor(1)" id="cpu-color-black" class="py-2.5 px-3 rounded-xl border-2 border-emerald-500 bg-emerald-500/15 flex items-center justify-center space-x-2 text-xs font-bold text-white transition">
+                                <span class="w-4 h-4 rounded-full stone-black inline-block"></span>
+                                <span>黒 (先手)</span>
+                            </button>
+                            <button onclick="setLobbyPlayerColor(-1)" id="cpu-color-white" class="py-2.5 px-3 rounded-xl border border-slate-700 bg-slate-800 flex items-center justify-center space-x-2 text-xs font-semibold text-slate-300 hover:bg-slate-700 transition">
+                                <span class="w-4 h-4 rounded-full stone-white inline-block"></span>
+                                <span>白 (後手)</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <button onclick="startSinglePlayerGame()" class="w-full py-3 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold text-sm shadow-lg shadow-emerald-600/30 transition flex items-center justify-center space-x-2">
+                        <i class="fa-solid fa-play"></i>
+                        <span>CPU対戦をスタート</span>
+                    </button>
+                </div>
+
+                <!-- Panel B: 2P Online Room Code Matchmaking -->
+                <div id="lobby-panel-online" class="hidden space-y-4 pt-2 border-t border-slate-800">
+                    <div id="online-error-box" class="hidden bg-rose-500/20 border border-rose-500/50 text-rose-300 text-xs px-3.5 py-2.5 rounded-xl flex items-center space-x-2">
+                        <i class="fa-solid fa-circle-exclamation shrink-0"></i>
+                        <span id="online-error-text">エラーが発生しました</span>
+                    </div>
+
+                    <!-- Option 1: Create Room -->
+                    <div class="bg-slate-800/50 border border-slate-700/80 rounded-xl p-4 space-y-3">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <h4 class="text-sm font-bold text-white flex items-center gap-1.5">
+                                    <i class="fa-solid fa-plus-circle text-emerald-400"></i> 新しくルームを作成する
+                                </h4>
+                                <p class="text-[11px] text-slate-400 mt-0.5">6桁のルームコードを発行し、友達を招待します</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center space-x-2 text-xs">
+                            <span class="text-slate-400">ホスト（あなた）の手番:</span>
+                            <button onclick="setOnlineHostColor(1)" id="host-color-black" class="px-2.5 py-1 rounded-lg border border-emerald-500 bg-emerald-500/20 text-white font-semibold">黒 (先手)</button>
+                            <button onclick="setOnlineHostColor(-1)" id="host-color-white" class="px-2.5 py-1 rounded-lg border border-slate-700 bg-slate-800 text-slate-400">白 (後手)</button>
+                        </div>
+
+                        <button id="btn-create-room" onclick="createOnlineRoom()" class="w-full py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs shadow-lg shadow-emerald-600/25 transition flex items-center justify-center space-x-2">
+                            <i class="fa-solid fa-key"></i>
+                            <span>ルームコードを発行して待機する</span>
+                        </button>
+                    </div>
+
+                    <!-- Option 2: Join Room by Code -->
+                    <div class="bg-slate-800/50 border border-slate-700/80 rounded-xl p-4 space-y-3">
+                        <div>
+                            <h4 class="text-sm font-bold text-white flex items-center gap-1.5">
+                                <i class="fa-solid fa-right-to-bracket text-sky-400"></i> ルームコードを入力して参加
+                            </h4>
+                            <p class="text-[11px] text-slate-400 mt-0.5">相手から教えてもらった6桁のコードを入力してください</p>
+                        </div>
+
+                        <div class="flex space-x-2">
+                            <input id="input-room-code" type="text" maxlength="6" placeholder="例: A7K9P2" oninput="this.value = this.value.toUpperCase()" class="flex-1 bg-slate-950 border border-slate-700 focus:border-sky-500 rounded-xl px-4 py-2.5 text-base font-mono font-bold tracking-widest text-white uppercase placeholder:text-slate-600 placeholder:font-sans placeholder:text-xs placeholder:tracking-normal focus:outline-none">
+                            <button id="btn-join-room" onclick="joinOnlineRoom()" class="px-5 py-2.5 rounded-xl bg-sky-600 hover:bg-sky-500 text-white font-bold text-xs shadow-lg shadow-sky-600/25 transition shrink-0 flex items-center space-x-1.5">
+                                <i class="fa-solid fa-bolt"></i>
+                                <span>参加する</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Panel C: Local 2P (Pass & Play) -->
+                <div id="lobby-panel-local" class="hidden space-y-4 pt-2 border-t border-slate-800">
+                    <div class="bg-slate-800/40 border border-slate-800 rounded-xl p-4 text-xs text-slate-300 space-y-2">
+                        <div class="font-bold text-white flex items-center gap-1.5">
+                            <i class="fa-solid fa-mobile-screen text-sky-400"></i> オフライン2人対戦 (1台の端末で交互にプレイ)
+                        </div>
+                        <p class="text-slate-400 text-[11px] leading-relaxed">
+                            1つの画面を使って、黒と白を交互に操作します。目の前にいる友達との対戦や、研究用に最適です。
+                        </p>
+                    </div>
+                    <button onclick="startLocal2PGame()" class="w-full py-3 rounded-xl bg-sky-600 hover:bg-sky-500 text-white font-bold text-sm shadow-lg shadow-sky-600/30 transition flex items-center justify-center space-x-2">
+                        <i class="fa-solid fa-play"></i>
+                        <span>オフライン2人対戦をスタート</span>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Game Over Modal -->
+    <div id="modal-overlay" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center z-50 hidden opacity-0 transition-opacity duration-300">
+        <div class="bg-slate-900 border border-slate-700 rounded-2xl max-w-sm w-full mx-4 p-6 shadow-2xl transform scale-95 transition-transform duration-300 text-center" id="modal-box">
+            <div id="modal-icon" class="w-14 h-14 rounded-2xl bg-emerald-500/20 border border-emerald-500/40 text-emerald-400 flex items-center justify-center mx-auto mb-4 text-2xl">
+                <i class="fa-solid fa-trophy"></i>
+            </div>
+            <h2 id="modal-title" class="text-xl font-bold text-white mb-1">ゲーム終了！</h2>
+            <p id="modal-subtitle" class="text-sm text-slate-400 mb-5">黒の勝利です！</p>
+
+            <div class="flex justify-center items-center space-x-6 bg-slate-800/70 py-3 px-4 rounded-xl mb-6 border border-slate-700/60">
+                <div class="text-center">
+                    <span class="text-xs text-slate-400 block">黒 (Black)</span>
+                    <span id="modal-score-black" class="text-2xl font-bold text-white">34</span>
+                </div>
+                <div class="text-slate-600 font-bold">-</div>
+                <div class="text-center">
+                    <span class="text-xs text-slate-400 block">白 (White)</span>
+                    <span id="modal-score-white" class="text-2xl font-bold text-white">30</span>
+                </div>
+            </div>
+
+            <div class="flex space-x-3">
+                <button onclick="closeModal()" class="flex-1 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold transition">
+                    盤面を見る
+                </button>
+                <button onclick="closeModal(); handleResetButton();" class="flex-1 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold shadow-lg shadow-emerald-600/30 transition">
+                    もう一度遊ぶ
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast-pass" class="fixed top-20 left-1/2 -translate-x-1/2 bg-amber-500 text-slate-950 font-bold px-5 py-2.5 rounded-full shadow-2xl z-50 hidden items-center space-x-2 text-xs">
+        <i class="fa-solid fa-bell"></i>
+        <span id="toast-pass-text">通知メッセージ</span>
+    </div>
+
+    <!-- Hybrid Multiplayer (PeerJS + BroadcastChannel + Firebase) & Core Game Script -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, doc, getDoc, setDoc, updateDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // Constants
+        const EMPTY = 0;
+        const BLACK = 1;
+        const WHITE = -1;
+
+        // Multiplayer State (Firebase + PeerJS WebRTC + BroadcastChannel)
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-3d-othello-app';
+        let db = null;
+        let auth = null;
+        let currentUser = null;
+        let roomUnsubscribe = null;
+
+        let peerInstance = null;
+        let peerConn = null;
+        let localBroadcastChannel = null;
+        let localPlayerId = 'player-' + Math.random().toString(36).substring(2, 10);
+
+        // Lobby UI Selection State
+        let lobbyState = {
+            tab: 'cpu',
+            boardSize: 4,
+            cpuDiff: 'normal',
+            playerColor: BLACK,
+            hostColor: BLACK
+        };
+
+        /**
+         * Initialize Firebase Authentication & Firestore (if configured)
+         */
+        async function initFirebase() {
+            const uidEl = document.getElementById('my-user-id');
+            if (uidEl) uidEl.textContent = localPlayerId + ' (P2P対応)';
+
+            try {
+                if (typeof __firebase_config !== 'undefined' && __firebase_config) {
+                    const firebaseConfig = JSON.parse(__firebase_config);
+                    const app = initializeApp(firebaseConfig);
+                    auth = getAuth(app);
+                    db = getFirestore(app);
+
+                    if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                        await signInWithCustomToken(auth, __initial_auth_token);
+                    } else {
+                        await signInAnonymously(auth);
+                    }
+
+                    onAuthStateChanged(auth, (user) => {
+                        currentUser = user;
+                        if (user && uidEl) {
+                            localPlayerId = user.uid;
+                            uidEl.textContent = user.uid;
+                        }
+                    });
+                }
+            } catch (err) {
+                console.warn("Firebase fallback to PeerJS/BroadcastChannel:", err);
+            }
+        }
+
+        /**
+         * Web Audio API Synthesized Sound Effects
+         */
+        class SoundManager {
+            constructor() {
+                this.ctx = null;
+                this.enabled = true;
+            }
+            init() {
+                if (!this.ctx) {
+                    const AudioCtx = window.AudioContext || window.webkitAudioContext;
+                    if (AudioCtx) this.ctx = new AudioCtx();
+                }
+                if (this.ctx && this.ctx.state === 'suspended') {
+                    this.ctx.resume();
+                }
+            }
+            playPlaceStone() {
+                if (!this.enabled) return;
+                try {
+                    this.init();
+                    if (!this.ctx) return;
+                    const t = this.ctx.currentTime;
+                    const osc = this.ctx.createOscillator();
+                    const gain = this.ctx.createGain();
+                    osc.type = 'triangle';
+                    osc.frequency.setValueAtTime(620, t);
+                    osc.frequency.exponentialRampToValueAtTime(150, t + 0.08);
+                    gain.gain.setValueAtTime(0.35, t);
+                    gain.gain.exponentialRampToValueAtTime(0.001, t + 0.08);
+                    osc.connect(gain);
+                    gain.connect(this.ctx.destination);
+                    osc.start(t);
+                    osc.stop(t + 0.08);
+                } catch (e) {}
+            }
+            playFlip() {
+                if (!this.enabled) return;
+                try {
+                    this.init();
+                    if (!this.ctx) return;
+                    const t = this.ctx.currentTime;
+                    const osc = this.ctx.createOscillator();
+                    const gain = this.ctx.createGain();
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(480, t);
+                    osc.frequency.exponentialRampToValueAtTime(820, t + 0.07);
+                    gain.gain.setValueAtTime(0.22, t);
+                    gain.gain.exponentialRampToValueAtTime(0.001, t + 0.07);
+                    osc.connect(gain);
+                    gain.connect(this.ctx.destination);
+                    osc.start(t);
+                    osc.stop(t + 0.07);
+                } catch (e) {}
+            }
+            playPass() {
+                if (!this.enabled) return;
+                try {
+                    this.init();
+                    if (!this.ctx) return;
+                    const t = this.ctx.currentTime;
+                    const osc = this.ctx.createOscillator();
+                    const gain = this.ctx.createGain();
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(320, t);
+                    osc.frequency.setValueAtTime(240, t + 0.12);
+                    gain.gain.setValueAtTime(0.28, t);
+                    gain.gain.exponentialRampToValueAtTime(0.001, t + 0.28);
+                    osc.connect(gain);
+                    gain.connect(this.ctx.destination);
+                    osc.start(t);
+                    osc.stop(t + 0.28);
+                } catch (e) {}
+            }
+            playWin() {
+                if (!this.enabled) return;
+                try {
+                    this.init();
+                    if (!this.ctx) return;
+                    const notes = [523.25, 659.25, 783.99, 1046.50];
+                    notes.forEach((freq, idx) => {
+                        const t = this.ctx.currentTime + idx * 0.11;
+                        const osc = this.ctx.createOscillator();
+                        const gain = this.ctx.createGain();
+                        osc.type = 'triangle';
+                        osc.frequency.setValueAtTime(freq, t);
+                        gain.gain.setValueAtTime(0.28, t);
+                        gain.gain.exponentialRampToValueAtTime(0.001, t + 0.28);
+                        osc.connect(gain);
+                        gain.connect(this.ctx.destination);
+                        osc.start(t);
+                        osc.stop(t + 0.28);
+                    });
+                } catch (e) {}
+            }
+            toggle() {
+                this.enabled = !this.enabled;
+                const btn = document.getElementById('btn-sound-toggle');
+                if (btn) {
+                    btn.innerHTML = this.enabled ? '<i class="fa-solid fa-volume-high"></i>' : '<i class="fa-solid fa-volume-xmark text-slate-500"></i>';
+                    btn.title = this.enabled ? '効果音: ON' : '効果音: OFF';
+                }
+                if (this.enabled) this.playPlaceStone();
+                return this.enabled;
+            }
+        }
+
+        const soundManager = new SoundManager();
+        window.soundManager = soundManager;
+
+        /**
+         * 3D Othello Game Class
+         */
+        class Othello3DGame {
+            constructor() {
+                this.size = 4;
+                this.mode = 'cpu'; // 'cpu', 'online', 'local'
+                this.cpuDifficulty = 'normal'; // 'easy', 'normal', 'hard'
+                this.myColor = BLACK;
+                this.roomCode = null;
+                this.onlineStatus = null; // 'waiting', 'playing', 'finished'
+
+                this.board = [];
+                this.currentTurn = BLACK;
+                this.history = [];
+                this.moveLog = [];
+                this.lastMove = null;
+                this.isGameOver = false;
+                this.cpuTimer = null;
+
+                // 26 Directions in 3D space
+                this.directions = [];
+                for (let dy = -1; dy <= 1; dy++) {
+                    for (let dz = -1; dz <= 1; dz++) {
+                        for (let dx = -1; dx <= 1; dx++) {
+                            if (dy !== 0 || dz !== 0 || dx !== 0) {
+                                this.directions.push([dy, dz, dx]);
+                            }
+                        }
+                    }
+                }
+
+                this.initBoard();
+            }
+
+            initBoard() {
+                if (this.cpuTimer) clearTimeout(this.cpuTimer);
+                this.board = Array.from({ length: this.size }, () =>
+                    Array.from({ length: this.size }, () =>
+                        Array(this.size).fill(EMPTY)
+                    )
+                );
+
+                // Center 2x2x2 alternating setup
+                const mid = this.size / 2;
+                for (let dy = 0; dy <= 1; dy++) {
+                    for (let dz = 0; dz <= 1; dz++) {
+                        for (let dx = 0; dx <= 1; dx++) {
+                            const color = (dx + dy + dz) % 2 === 0 ? BLACK : WHITE;
+                            this.board[mid - 1 + dy][mid - 1 + dz][mid - 1 + dx] = color;
+                        }
+                    }
+                }
+
+                this.currentTurn = BLACK;
+                this.history = [];
+                this.moveLog = [];
+                this.lastMove = null;
+                this.isGameOver = false;
+            }
+
+            resetGame() {
+                this.initBoard();
+                rebuild3DScene();
+                buildLayerFilterButtons();
+                build2DSlicesUI();
+                updateUI();
+                this.checkCPUTurn();
+            }
+
+            isInside(y, z, x) {
+                return (
+                    y >= 0 && y < this.size &&
+                    z >= 0 && z < this.size &&
+                    x >= 0 && x < this.size
+                );
+            }
+
+            getFlippableStones(y, z, x, color, boardState = this.board) {
+                if (boardState[y][z][x] !== EMPTY) return [];
+
+                const flippable = [];
+                for (let i = 0; i < 26; i++) {
+                    const [dy, dz, dx] = this.directions[i];
+                    const line = [];
+                    let ny = y + dy;
+                    let nz = z + dz;
+                    let nx = x + dx;
+
+                    while (this.isInside(ny, nz, nx) && boardState[ny][nz][nx] === -color) {
+                        line.push([ny, nz, nx]);
+                        ny += dy;
+                        nz += dz;
+                        nx += dx;
+                    }
+
+                    if (line.length > 0 && this.isInside(ny, nz, nx) && boardState[ny][nz][nx] === color) {
+                        for (let j = 0; j < line.length; j++) {
+                            flippable.push(line[j]);
+                        }
+                    }
+                }
+                return flippable;
+            }
+
+            getValidMoves(color = this.currentTurn, boardState = this.board) {
+                const moves = [];
+                for (let y = 0; y < this.size; y++) {
+                    for (let z = 0; z < this.size; z++) {
+                        for (let x = 0; x < this.size; x++) {
+                            if (boardState[y][z][x] === EMPTY) {
+                                const flips = this.getFlippableStones(y, z, x, color, boardState);
+                                if (flips.length > 0) {
+                                    moves.push({ y, z, x, flips });
+                                }
+                            }
+                        }
+                    }
+                }
+                return moves;
+            }
+
+            cloneBoard(boardState = this.board) {
+                return boardState.map(layer => layer.map(row => [...row]));
+            }
+
+            canLocalPlayerInteract() {
+                if (this.isGameOver) return false;
+                if (this.mode === 'local') return true;
+                if (this.mode === 'cpu') return this.currentTurn === this.myColor;
+                if (this.mode === 'online') {
+                    return this.onlineStatus === 'playing' && this.currentTurn === this.myColor;
+                }
+                return false;
+            }
+
+            async makeMove(y, z, x) {
+                if (!this.canLocalPlayerInteract()) return false;
+                return await this._executeMove(y, z, x);
+            }
+
+            async _executeMove(y, z, x) {
+                const flips = this.getFlippableStones(y, z, x, this.currentTurn);
+                if (flips.length === 0) return false;
+
+                soundManager.playPlaceStone();
+                if (flips.length > 0) {
+                    setTimeout(() => soundManager.playFlip(), 75);
+                }
+
+                this.history.push({
+                    board: this.cloneBoard(),
+                    turn: this.currentTurn,
+                    lastMove: this.lastMove,
+                    moveLog: [...this.moveLog]
+                });
+
+                const placedColor = this.currentTurn;
+                this.board[y][z][x] = placedColor;
+                flips.forEach(([fy, fz, fx]) => {
+                    this.board[fy][fz][fx] = placedColor;
+                });
+
+                this.lastMove = { y, z, x, flipsCount: flips.length };
+                const playerLabel = placedColor === BLACK ? '黒' : '白';
+                this.moveLog.unshift(`${this.moveLog.length + 1}. ${playerLabel}: 層${y + 1} (${x + 1}, ${z + 1}) [+${flips.length}]`);
+
+                let nextTurn = -placedColor;
+                let passNotice = null;
+                let gameOverFlag = false;
+
+                const nextMoves = this.getValidMoves(nextTurn);
+                if (nextMoves.length === 0) {
+                    const otherMoves = this.getValidMoves(placedColor);
+                    if (otherMoves.length === 0) {
+                        gameOverFlag = true;
+                    } else {
+                        const passedColorName = nextTurn === BLACK ? '黒' : '白';
+                        passNotice = `${passedColorName}は置ける場所がないためパスとなりました`;
+                        nextTurn = placedColor;
+                    }
+                }
+
+                this.currentTurn = nextTurn;
+                this.isGameOver = gameOverFlag;
+
+                clearHoverPreview();
+                updateUI();
+
+                if (passNotice) {
+                    soundManager.playPass();
+                    showToast(passNotice);
+                }
+
+                if (this.mode === 'online' && this.roomCode) {
+                    await broadcastOnlineState(passNotice);
+                    if (this.isGameOver) {
+                        showGameOverModal();
+                    }
+                } else {
+                    if (this.isGameOver) {
+                        showGameOverModal();
+                    } else {
+                        this.checkCPUTurn();
+                    }
+                }
+
+                return true;
+            }
+
+            undo() {
+                if (this.mode === 'online' || this.history.length === 0) return;
+                if (this.cpuTimer) clearTimeout(this.cpuTimer);
+
+                if (this.mode === 'cpu' && this.history.length >= 2) {
+                    this.history.pop();
+                    const prevState = this.history.pop();
+                    this.restoreState(prevState);
+                } else {
+                    const prevState = this.history.pop();
+                    this.restoreState(prevState);
+                }
+                this.isGameOver = false;
+                clearHoverPreview();
+                updateUI();
+            }
+
+            restoreState(state) {
+                this.board = state.board;
+                this.currentTurn = state.turn;
+                this.lastMove = state.lastMove;
+                this.moveLog = state.moveLog;
+            }
+
+            getCounts(boardState = this.board) {
+                let black = 0, white = 0;
+                for (let y = 0; y < this.size; y++) {
+                    for (let z = 0; z < this.size; z++) {
+                        for (let x = 0; x < this.size; x++) {
+                            if (boardState[y][z][x] === BLACK) black++;
+                            else if (boardState[y][z][x] === WHITE) white++;
+                        }
+                    }
+                }
+                return { black, white };
+            }
+
+            isCPUTurn() {
+                if (this.isGameOver) return false;
+                return this.mode === 'cpu' && this.currentTurn !== this.myColor;
+            }
+
+            checkCPUTurn() {
+                if (this.isCPUTurn()) {
+                    this.cpuTimer = setTimeout(() => {
+                        this.playCPUMove();
+                    }, 550);
+                }
+            }
+
+            getPositionWeight(y, z, x) {
+                const max = this.size - 1;
+                const isYEdge = (y === 0 || y === max);
+                const isZEdge = (z === 0 || z === max);
+                const isXEdge = (x === 0 || x === max);
+                const edgeCount = (isYEdge ? 1 : 0) + (isZEdge ? 1 : 0) + (isXEdge ? 1 : 0);
+
+                if (edgeCount === 3) return 120; // 3D Corner
+                const nearCornerY = (y === 1 || y === max - 1);
+                const nearCornerZ = (z === 1 || z === max - 1);
+                const nearCornerX = (x === 1 || x === max - 1);
+                if ((isYEdge || nearCornerY) && (isZEdge || nearCornerZ) && (isXEdge || nearCornerX)) {
+                    return -25;
+                }
+                if (edgeCount === 2) return 25;
+                if (edgeCount === 1) return 8;
+                return 1;
+            }
+
+            playCPUMove() {
+                if (this.isGameOver) return;
+                const moves = this.getValidMoves(this.currentTurn);
+                if (moves.length === 0) return;
+
+                let bestMove = moves[0];
+
+                if (this.cpuDifficulty === 'easy') {
+                    bestMove = moves[Math.floor(Math.random() * moves.length)];
+                } else if (this.cpuDifficulty === 'normal') {
+                    let bestScore = -Infinity;
+                    for (const move of moves) {
+                        const posScore = this.getPositionWeight(move.y, move.z, move.x);
+                        const score = posScore + move.flips.length * 2 + (Math.random() * 6);
+                        if (score > bestScore) {
+                            bestScore = score;
+                            bestMove = move;
+                        }
+                    }
+                } else {
+                    let bestScore = -Infinity;
+                    const cpuColor = this.currentTurn;
+
+                    for (const move of moves) {
+                        const nextBoard = this.cloneBoard();
+                        nextBoard[move.y][move.z][move.x] = cpuColor;
+                        for (const [fy, fz, fx] of move.flips) {
+                            nextBoard[fy][fz][fx] = cpuColor;
+                        }
+
+                        let score = this.getPositionWeight(move.y, move.z, move.x) * 1.5 + move.flips.length;
+                        const oppMoves = this.getValidMoves(-cpuColor, nextBoard);
+                        score -= oppMoves.length * 4;
+
+                        let maxOppCorner = 0;
+                        for (const om of oppMoves) {
+                            const w = this.getPositionWeight(om.y, om.z, om.x);
+                            if (w > maxOppCorner) maxOppCorner = w;
+                        }
+                        score -= maxOppCorner * 0.8;
+                        score += Math.random() * 2;
+
+                        if (score > bestScore) {
+                            bestScore = score;
+                            bestMove = move;
+                        }
+                    }
+                }
+
+                this._executeMove(bestMove.y, bestMove.z, bestMove.x);
+            }
+        }
+
+        const game = new Othello3DGame();
+        window.game = game;
+
+        /**
+         * Hybrid Online Multiplayer (PeerJS WebRTC + BroadcastChannel + Firestore)
+         */
+        function generateRoomCode() {
+            const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+            let code = '';
+            for (let i = 0; i < 6; i++) {
+                code += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            return code;
+        }
+
+        function cleanupOnlineConnections() {
+            if (roomUnsubscribe) {
+                roomUnsubscribe();
+                roomUnsubscribe = null;
+            }
+            if (peerConn) {
+                try { peerConn.close(); } catch (e) {}
+                peerConn = null;
+            }
+            if (peerInstance) {
+                try { peerInstance.destroy(); } catch (e) {}
+                peerInstance = null;
+            }
+            if (localBroadcastChannel) {
+                try { localBroadcastChannel.close(); } catch (e) {}
+                localBroadcastChannel = null;
+            }
+        }
+
+        function showOnlineError(msg) {
+            const box = document.getElementById('online-error-box');
+            const txt = document.getElementById('online-error-text');
+            txt.textContent = msg;
+            box.classList.remove('hidden');
+        }
+
+        function hideOnlineError() {
+            document.getElementById('online-error-box').classList.add('hidden');
+        }
+
+        function getSerializedState(passNotice = null) {
+            return {
+                roomCode: game.roomCode,
+                size: game.size,
+                boardJson: JSON.stringify(game.board),
+                currentTurn: game.currentTurn,
+                status: game.isGameOver ? 'finished' : game.onlineStatus,
+                hostColor: game.myColor,
+                lastMoveJson: game.lastMove ? JSON.stringify(game.lastMove) : null,
+                moveLogJson: JSON.stringify(game.moveLog),
+                passNotice: passNotice,
+                updatedAt: Date.now()
+            };
+        }
+
+        function applyRemoteState(data) {
+            if (!data) return;
+            const prevStatus = game.onlineStatus;
+            game.onlineStatus = data.status || 'playing';
+
+            if (prevStatus === 'waiting' && game.onlineStatus === 'playing') {
+                showToast('対戦相手が参加しました！対局スタート！');
+            }
+
+            if (data.size && data.size !== game.size) {
+                game.size = data.size;
+                rebuild3DScene();
+                buildLayerFilterButtons();
+                build2DSlicesUI();
+            }
+
+            if (data.boardJson) {
+                game.board = JSON.parse(data.boardJson);
+            }
+            if (typeof data.currentTurn === 'number') {
+                game.currentTurn = data.currentTurn;
+            }
+            game.lastMove = data.lastMoveJson ? JSON.parse(data.lastMoveJson) : null;
+            game.moveLog = data.moveLogJson ? JSON.parse(data.moveLogJson) : [];
+
+            const wasGameOver = game.isGameOver;
+            game.isGameOver = (data.status === 'finished');
+
+            if (data.passNotice && data.updatedAt && (Date.now() - data.updatedAt < 4000)) {
+                showToast(data.passNotice);
+            }
+
+            clearHoverPreview();
+            updateUI();
+
+            if (!wasGameOver && game.isGameOver) {
+                showGameOverModal();
+            } else if (wasGameOver && !game.isGameOver) {
+                closeModal();
+                showToast('新しい対局が開始されました！');
+            }
+        }
+
+        function setupBroadcastChannel(roomCode, isHost) {
+            if (typeof BroadcastChannel === 'undefined') return;
+            localBroadcastChannel = new BroadcastChannel(`othello3d_room_${roomCode}`);
+            localBroadcastChannel.onmessage = (event) => {
+                const msg = event.data;
+                if (!msg) return;
+                if (msg.type === 'GUEST_JOIN' && isHost) {
+                    game.onlineStatus = 'playing';
+                    updateUI();
+                    showToast('別タブのプレイヤーが参加しました！対局開始！');
+                    localBroadcastChannel.postMessage({
+                        type: 'HOST_WELCOME',
+                        guestColor: -game.myColor,
+                        state: getSerializedState()
+                    });
+                } else if (msg.type === 'HOST_WELCOME' && !isHost) {
+                    game.myColor = msg.guestColor;
+                    game.onlineStatus = 'playing';
+                    applyRemoteState(msg.state);
+                } else if (msg.type === 'STATE_UPDATE') {
+                    applyRemoteState(msg.state);
+                }
+            };
+        }
+
+        async function createOnlineRoom() {
+            hideOnlineError();
+            cleanupOnlineConnections();
+
+            const btn = document.getElementById('btn-create-room');
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fa-solid fa-spinner animate-spin"></i> <span>ルーム作成中...</span>';
+
+            const roomCode = generateRoomCode();
+            game.size = lobbyState.boardSize;
+            game.mode = 'online';
+            game.myColor = lobbyState.hostColor;
+            game.roomCode = roomCode;
+            game.onlineStatus = 'waiting';
+            game.initBoard();
+
+            // 1. Setup same-browser multi-tab BroadcastChannel
+            setupBroadcastChannel(roomCode, true);
+
+            // 2. Setup PeerJS WebRTC Host
+            if (typeof Peer !== 'undefined') {
+                try {
+                    peerInstance = new Peer(`othello3d-room-${roomCode}`);
+                    peerInstance.on('connection', (conn) => {
+                        peerConn = conn;
+                        conn.on('open', () => {
+                            game.onlineStatus = 'playing';
+                            updateUI();
+                            showToast('対戦相手が接続しました！対局スタート！');
+                            conn.send({
+                                type: 'HOST_WELCOME',
+                                guestColor: -game.myColor,
+                                state: getSerializedState()
+                            });
+                        });
+                        conn.on('data', (msg) => {
+                            if (msg && msg.type === 'STATE_UPDATE') {
+                                applyRemoteState(msg.state);
+                            }
+                        });
+                    });
+                } catch (e) {
+                    console.warn("PeerJS host init warning:", e);
+                }
+            }
+
+            // 3. Setup Firestore Room (if available)
+            if (db && currentUser) {
+                try {
+                    const roomRef = doc(db, 'artifacts', appId, 'public', 'data', 'othello_rooms', roomCode);
+                    await setDoc(roomRef, {
+                        ...getSerializedState(),
+                        hostId: currentUser.uid,
+                        hostColor: lobbyState.hostColor,
+                        guestId: null
+                    });
+                    subscribeToRoomFirestore(roomCode);
+                } catch (e) {
+                    console.warn("Firestore create fallback:", e);
+                }
+            }
+
+            btn.disabled = false;
+            btn.innerHTML = '<i class="fa-solid fa-key"></i> <span>ルームコードを発行して待機する</span>';
+
+            closeLobbyModal();
+            rebuild3DScene();
+            buildLayerFilterButtons();
+            build2DSlicesUI();
+            resetCameraPosition();
+            updateUI();
+        }
+
+        async function joinOnlineRoom() {
+            hideOnlineError();
+            const input = document.getElementById('input-room-code');
+            const code = input.value.trim().toUpperCase();
+            if (code.length < 4) {
+                showOnlineError('有効なルームコード（6桁）を入力してください。');
+                return;
+            }
+
+            cleanupOnlineConnections();
+
+            const btn = document.getElementById('btn-join-room');
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fa-solid fa-spinner animate-spin"></i> <span>接続中...</span>';
+
+            let joinedSuccess = false;
+
+            // Try Firestore first if available
+            if (db && currentUser) {
+                try {
+                    const roomRef = doc(db, 'artifacts', appId, 'public', 'data', 'othello_rooms', code);
+                    const snap = await getDoc(roomRef);
+                    if (snap.exists()) {
+                        const data = snap.data();
+                        let assignedColor = -data.hostColor;
+                        if (data.hostId === currentUser.uid) {
+                            assignedColor = data.hostColor;
+                        } else {
+                            await updateDoc(roomRef, {
+                                guestId: currentUser.uid,
+                                status: 'playing',
+                                updatedAt: Date.now()
+                            });
+                        }
+                        game.size = data.size || 4;
+                        game.mode = 'online';
+                        game.myColor = assignedColor;
+                        game.roomCode = code;
+                        game.onlineStatus = 'playing';
+                        subscribeToRoomFirestore(code);
+                        joinedSuccess = true;
+                    }
+                } catch (e) {
+                    console.warn("Firestore join fallback:", e);
+                }
+            }
+
+            // Also setup BroadcastChannel (for instant multi-tab play)
+            setupBroadcastChannel(code, false);
+            if (localBroadcastChannel) {
+                localBroadcastChannel.postMessage({ type: 'GUEST_JOIN' });
+            }
+
+            // Connect via PeerJS WebRTC if not already joined via Firestore
+            if (!joinedSuccess && typeof Peer !== 'undefined') {
+                await new Promise((resolve) => {
+                    let resolved = false;
+                    const done = (ok) => {
+                        if (!resolved) {
+                            resolved = true;
+                            resolve(ok);
+                        }
+                    };
+                    const timer = setTimeout(() => done(false), 4500);
+
+                    try {
+                        peerInstance = new Peer();
+                        peerInstance.on('open', () => {
+                            const conn = peerInstance.connect(`othello3d-room-${code}`);
+                            peerConn = conn;
+                            conn.on('open', () => {
+                                joinedSuccess = true;
+                                clearTimeout(timer);
+                                done(true);
+                            });
+                            conn.on('data', (msg) => {
+                                if (msg && msg.type === 'HOST_WELCOME') {
+                                    game.myColor = msg.guestColor;
+                                    game.mode = 'online';
+                                    game.roomCode = code;
+                                    game.onlineStatus = 'playing';
+                                    applyRemoteState(msg.state);
+                                } else if (msg && msg.type === 'STATE_UPDATE') {
+                                    applyRemoteState(msg.state);
+                                }
+                            });
+                            conn.on('error', () => done(false));
+                        });
+                        peerInstance.on('error', () => done(false));
+                    } catch (e) {
+                        done(false);
+                    }
+                });
+            }
+
+            btn.disabled = false;
+            btn.innerHTML = '<i class="fa-solid fa-bolt"></i> <span>参加する</span>';
+
+            // Even if PeerJS timed out, BroadcastChannel might have connected in another tab
+            if (joinedSuccess || game.onlineStatus === 'playing') {
+                game.mode = 'online';
+                game.roomCode = code;
+                closeLobbyModal();
+                rebuild3DScene();
+                buildLayerFilterButtons();
+                build2DSlicesUI();
+                resetCameraPosition();
+                updateUI();
+                showToast(`ルーム ${code} に参加しました！`);
+            } else {
+                showOnlineError(`ルーム「${code}」が見つからないか、応答がありません。コードを確認してください。`);
+            }
+        }
+
+        function subscribeToRoomFirestore(roomCode) {
+            if (!db) return;
+            const roomRef = doc(db, 'artifacts', appId, 'public', 'data', 'othello_rooms', roomCode);
+            roomUnsubscribe = onSnapshot(roomRef, (snap) => {
+                if (!snap.exists()) return;
+                applyRemoteState(snap.data());
+            });
+        }
+
+        async function broadcastOnlineState(passNotice = null) {
+            const state = getSerializedState(passNotice);
+
+            if (localBroadcastChannel) {
+                localBroadcastChannel.postMessage({ type: 'STATE_UPDATE', state });
+            }
+            if (peerConn && peerConn.open) {
+                peerConn.send({ type: 'STATE_UPDATE', state });
+            }
+            if (db && currentUser && game.roomCode) {
+                try {
+                    const roomRef = doc(db, 'artifacts', appId, 'public', 'data', 'othello_rooms', game.roomCode);
+                    await updateDoc(roomRef, state);
+                } catch (e) {
+                    console.warn("Firestore sync warning:", e);
+                }
+            }
+        }
+
+        async function requestOnlineRematch() {
+            game.initBoard();
+            game.onlineStatus = 'playing';
+            clearHoverPreview();
+            updateUI();
+            await broadcastOnlineState('新しい対局が開始されました！');
+        }
+
+        function leaveOnlineRoom() {
+            cleanupOnlineConnections();
+            game.mode = 'cpu';
+            game.roomCode = null;
+            game.onlineStatus = null;
+            game.myColor = BLACK;
+            game.resetGame();
+            showToast('1人プレイ（CPU対戦）モードに切り替えました');
+        }
+
+        /**
+         * Three.js 3D Scene Setup (High-Visibility Obsidian & Pearl Stones + Cyan Glass Board)
+         */
+        let scene, camera, renderer, controls, raycaster, mouse;
+        let boardGroup;
+        let stoneMeshes = [];
+        let validMoveMeshes = [];
+        let layerPlanes = [];
+
+        let layerExpansion = 1.2;
+        let isolatedLayer = -1;
+        let showGuides = true;
+        let showFrame = true;
+        let hoveredCoord = null;
+
+        const CELL_SPACING = 2.2;
+
+        // High-Visibility Stone & Ring Materials
+        // 1. Black Stone: Glossy Obsidian / Dark Slate with Clearcoat & Subtle Emissive
+        const matBlackStone = new THREE.MeshPhysicalMaterial({
+            color: 0x26354d,
+            emissive: 0x111c30,
+            roughness: 0.14,
+            metalness: 0.28,
+            clearcoat: 1.0,
+            clearcoatRoughness: 0.06,
+            reflectivity: 1.0
+        });
+
+        // 2. White Stone: Lustrous Pearl White with Clearcoat
+        const matWhiteStone = new THREE.MeshPhysicalMaterial({
+            color: 0xf8fafc,
+            emissive: 0x1e293b,
+            roughness: 0.12,
+            metalness: 0.1,
+            clearcoat: 1.0,
+            clearcoatRoughness: 0.08,
+            reflectivity: 0.9
+        });
+
+        // 3. Glowing Gold Rim Ring for Black Stones (Ensures 100% silhouette visibility)
+        const matBlackRing = new THREE.MeshStandardMaterial({
+            color: 0xfbbf24,
+            emissive: 0xd97706,
+            emissiveIntensity: 0.8,
+            roughness: 0.2,
+            metalness: 0.85
+        });
+
+        // 4. Glowing Cyan-Silver Rim Ring for White Stones
+        const matWhiteRing = new THREE.MeshStandardMaterial({
+            color: 0x7dd3fc,
+            emissive: 0x0284c7,
+            emissiveIntensity: 0.55,
+            roughness: 0.2,
+            metalness: 0.8
+        });
+
+        // 5. Valid Move & Flip Preview Materials
+        const matValidMove = new THREE.MeshStandardMaterial({
+            color: 0x34d399,
+            emissive: 0x10b981,
+            emissiveIntensity: 0.75,
+            roughness: 0.15,
+            transparent: true,
+            opacity: 0.78
+        });
+        const matValidMoveHover = new THREE.MeshStandardMaterial({
+            color: 0x38bdf8,
+            emissive: 0x0ea5e9,
+            emissiveIntensity: 0.95,
+            roughness: 0.1,
+            transparent: true,
+            opacity: 0.95
+        });
+        const matFlipHighlight = new THREE.MeshPhysicalMaterial({
+            color: 0xf59e0b,
+            emissive: 0xd97706,
+            emissiveIntensity: 0.65,
+            roughness: 0.15,
+            clearcoat: 1.0
+        });
+
+        function initThreeJS() {
+            const container = document.getElementById('canvas-container');
+            if (!container) return;
+            scene = new THREE.Scene();
+
+            camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 1000);
+            resetCameraPosition();
+
+            renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+            renderer.setSize(container.clientWidth, container.clientHeight);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            container.appendChild(renderer.domElement);
+
+            controls = new THREE.OrbitControls(camera, renderer.domElement);
+            controls.enableDamping = true;
+            controls.dampingFactor = 0.06;
+            controls.maxDistance = 45;
+            controls.minDistance = 6;
+
+            // Multi-Lighting Rig for Strong Specular Highlights on Black Stones from Any Angle
+            const hemiLight = new THREE.HemisphereLight(0xe0f2fe, 0x1e293b, 0.95);
+            scene.add(hemiLight);
+
+            // Main Key Light (Top-Front-Right)
+            const dirLight1 = new THREE.DirectionalLight(0xffffff, 1.35);
+            dirLight1.position.set(18, 28, 22);
+            scene.add(dirLight1);
+
+            // Cyan Rim Light (Top-Back-Left)
+            const dirLight2 = new THREE.DirectionalLight(0x7dd3fc, 0.9);
+            dirLight2.position.set(-20, 18, -18);
+            scene.add(dirLight2);
+
+            // Under-Fill Light (Warm-Purple Bounce so undersides of black stones are visible)
+            const dirLight3 = new THREE.DirectionalLight(0xc084fc, 0.6);
+            dirLight3.position.set(10, -22, 12);
+            scene.add(dirLight3);
+
+            // Accent Point Lights for Acrylic Glass Glow & Clearcoat Speculars
+            const pointLightCyan = new THREE.PointLight(0x22d3ee, 0.85, 35);
+            pointLightCyan.position.set(-10, 6, 10);
+            scene.add(pointLightCyan);
+
+            const pointLightPurple = new THREE.PointLight(0xa855f7, 0.7, 35);
+            pointLightPurple.position.set(10, -6, -10);
+            scene.add(pointLightPurple);
+
+            raycaster = new THREE.Raycaster();
+            mouse = new THREE.Vector2();
+
+            boardGroup = new THREE.Group();
+            scene.add(boardGroup);
+
+            rebuild3DScene();
+
+            renderer.domElement.addEventListener('pointermove', onPointerMove);
+            renderer.domElement.addEventListener('pointerdown', onPointerDown);
+            renderer.domElement.addEventListener('pointerup', onPointerUp);
+            window.addEventListener('resize', onWindowResize);
+
+            animate();
+        }
+
+        function resetCameraPosition() {
+            const dist = game.size === 4 ? 14 : 21;
+            camera.position.set(dist * 0.85, dist * 0.75, dist);
+            camera.lookAt(0, 0, 0);
+            if (controls) controls.target.set(0, 0, 0);
+        }
+
+        function resetCamera() {
+            resetCameraPosition();
+            if (controls) controls.update();
+        }
+
+        function get3DPosition(y, z, x) {
+            const offset = (game.size - 1) / 2;
+            const px = (x - offset) * CELL_SPACING;
+            const pz = (z - offset) * CELL_SPACING;
+            const py = (y - offset) * CELL_SPACING * layerExpansion;
+            return new THREE.Vector3(px, py, pz);
+        }
+
+        function rebuild3DScene() {
+            if (!boardGroup) return;
+            while (boardGroup.children.length > 0) {
+                boardGroup.remove(boardGroup.children[0]);
+            }
+
+            stoneMeshes = Array.from({ length: game.size }, () =>
+                Array.from({ length: game.size }, () =>
+                    Array(game.size).fill(null)
+                )
+            );
+            layerPlanes = [];
+
+            const size = game.size;
+            const offset = (size - 1) / 2;
+            const totalSpan = (size - 1) * CELL_SPACING;
+            const plateSize = totalSpan + 1.5;
+
+            // Build Cyan Acrylic Glass Layer Plates
+            for (let y = 0; y < size; y++) {
+                const layerGroup = new THREE.Group();
+                const py = (y - offset) * CELL_SPACING * layerExpansion;
+                layerGroup.position.y = py;
+
+                // Translucent Cyan Glass Slab positioned just beneath the stones
+                const slabGeo = new THREE.BoxGeometry(plateSize, 0.08, plateSize);
+                const planeMat = new THREE.MeshPhysicalMaterial({
+                    color: 0x0ea5e9,
+                    emissive: 0x0369a1,
+                    emissiveIntensity: 0.25,
+                    roughness: 0.15,
+                    metalness: 0.1,
+                    transparent: true,
+                    opacity: 0.16,
+                    depthWrite: false
+                });
+                const slabMesh = new THREE.Mesh(slabGeo, planeMat);
+                slabMesh.position.y = -0.46;
+                layerGroup.add(slabMesh);
+
+                // Glowing Cyan Outer Rim of the Acrylic Glass Slab
+                const edgeGeo = new THREE.EdgesGeometry(slabGeo);
+                const edgeMat = new THREE.LineBasicMaterial({
+                    color: 0x22d3ee,
+                    transparent: true,
+                    opacity: 0.85
+                });
+                const edgeLines = new THREE.LineSegments(edgeGeo, edgeMat);
+                edgeLines.position.y = -0.46;
+                layerGroup.add(edgeLines);
+
+                // Inner Cyan Grid Lines
+                const lineMat = new THREE.LineBasicMaterial({
+                    color: 0x38bdf8,
+                    transparent: true,
+                    opacity: 0.52
+                });
+
+                const points = [];
+                const half = totalSpan / 2;
+                for (let i = 0; i < size; i++) {
+                    const pos = (i - offset) * CELL_SPACING;
+                    points.push(new THREE.Vector3(-half, -0.41, pos));
+                    points.push(new THREE.Vector3(half, -0.41, pos));
+                    points.push(new THREE.Vector3(pos, -0.41, -half));
+                    points.push(new THREE.Vector3(pos, -0.41, half));
+                }
+                const lineGeo = new THREE.BufferGeometry().setFromPoints(points);
+                const lineSegments = new THREE.LineSegments(lineGeo, lineMat);
+                layerGroup.add(lineSegments);
+
+                // Glowing Cyan Cell Pedestal Dots
+                const dotGeo = new THREE.CylinderGeometry(0.11, 0.11, 0.04, 16);
+                const dotMat = new THREE.MeshBasicMaterial({
+                    color: 0x38bdf8,
+                    transparent: true,
+                    opacity: 0.55
+                });
+                for (let z = 0; z < size; z++) {
+                    for (let x = 0; x < size; x++) {
+                        const dot = new THREE.Mesh(dotGeo, dotMat);
+                        dot.position.set((x - offset) * CELL_SPACING, -0.41, (z - offset) * CELL_SPACING);
+                        layerGroup.add(dot);
+                    }
+                }
+
+                boardGroup.add(layerGroup);
+                layerPlanes.push({ group: layerGroup, planeMat, lineMat, edgeMat });
+            }
+
+            // Build Stones with Equatorial & Pedestal Glowing Torus Rings
+            const stoneGeo = new THREE.SphereGeometry(0.68, 32, 32);
+            stoneGeo.scale(1, 0.72, 1);
+
+            // Equatorial Rim Ring
+            const eqRingGeo = new THREE.TorusGeometry(0.68, 0.042, 16, 48);
+            eqRingGeo.rotateX(Math.PI / 2);
+
+            // Lower Base Pedestal Ring
+            const baseRingGeo = new THREE.TorusGeometry(0.52, 0.032, 12, 40);
+            baseRingGeo.rotateX(Math.PI / 2);
+
+            const validGeo = new THREE.SphereGeometry(0.34, 20, 20);
+            validMoveMeshes = [];
+
+            for (let y = 0; y < size; y++) {
+                for (let z = 0; z < size; z++) {
+                    for (let x = 0; x < size; x++) {
+                        const pos = get3DPosition(y, z, x);
+
+                        const stoneMesh = new THREE.Mesh(stoneGeo, matBlackStone);
+                        stoneMesh.position.copy(pos);
+                        stoneMesh.visible = false;
+
+                        // Add Equatorial & Base Rings to the Stone
+                        const eqRingMesh = new THREE.Mesh(eqRingGeo, matBlackRing);
+                        eqRingMesh.position.y = -0.02;
+                        stoneMesh.add(eqRingMesh);
+
+                        const baseRingMesh = new THREE.Mesh(baseRingGeo, matBlackRing);
+                        baseRingMesh.position.y = -0.34;
+                        stoneMesh.add(baseRingMesh);
+
+                        stoneMesh.userData = {
+                            y, z, x,
+                            isStone: true,
+                            eqRingMesh,
+                            baseRingMesh
+                        };
+
+                        boardGroup.add(stoneMesh);
+                        stoneMeshes[y][z][x] = stoneMesh;
+
+                        const validMesh = new THREE.Mesh(validGeo, matValidMove.clone());
+                        validMesh.position.copy(pos);
+                        validMesh.visible = false;
+                        validMesh.userData = { y, z, x, isValidMove: true };
+                        boardGroup.add(validMesh);
+                        validMoveMeshes.push(validMesh);
+                    }
+                }
+            }
+
+            sync3DBoardState();
+        }
+
+        function sync3DBoardState() {
+            if (!boardGroup || layerPlanes.length === 0) return;
+
+            const validMoves = game.getValidMoves();
+            const validMap = new Map();
+            validMoves.forEach(m => validMap.set(`${m.y},${m.z},${m.x}`, m.flips));
+
+            const size = game.size;
+            const offset = (size - 1) / 2;
+
+            for (let y = 0; y < size; y++) {
+                const py = (y - offset) * CELL_SPACING * layerExpansion;
+                layerPlanes[y].group.position.y = py;
+                layerPlanes[y].group.visible = showFrame;
+
+                const isDimmed = (isolatedLayer !== -1 && isolatedLayer !== y);
+                layerPlanes[y].planeMat.opacity = isDimmed ? 0.03 : 0.16;
+                layerPlanes[y].lineMat.opacity = isDimmed ? 0.08 : 0.52;
+                layerPlanes[y].edgeMat.opacity = isDimmed ? 0.15 : 0.85;
+            }
+
+            for (let y = 0; y < size; y++) {
+                for (let z = 0; z < size; z++) {
+                    for (let x = 0; x < size; x++) {
+                        const val = game.board[y][z][x];
+                        const mesh = stoneMeshes[y][z][x];
+                        const pos = get3DPosition(y, z, x);
+                        mesh.position.copy(pos);
+
+                        const isDimmed = (isolatedLayer !== -1 && isolatedLayer !== y);
+
+                        if (val === EMPTY) {
+                            mesh.visible = false;
+                        } else {
+                            mesh.visible = true;
+                            const baseMat = (val === BLACK) ? matBlackStone : matWhiteStone;
+                            const baseRingMat = (val === BLACK) ? matBlackRing : matWhiteRing;
+
+                            if (isDimmed) {
+                                const dimMat = baseMat.clone();
+                                dimMat.transparent = true;
+                                dimMat.opacity = 0.18;
+                                mesh.material = dimMat;
+
+                                const dimRingMat = baseRingMat.clone();
+                                dimRingMat.transparent = true;
+                                dimRingMat.opacity = 0.22;
+                                mesh.userData.eqRingMesh.material = dimRingMat;
+                                mesh.userData.baseRingMesh.material = dimRingMat;
+                            } else {
+                                mesh.material = baseMat;
+                                mesh.userData.eqRingMesh.material = baseRingMat;
+                                mesh.userData.baseRingMesh.material = baseRingMat;
+                            }
+                            mesh.scale.set(1, 1, 1);
+                        }
+                    }
+                }
+            }
+
+            if (game.lastMove) {
+                const { y, z, x } = game.lastMove;
+                if (stoneMeshes[y] && stoneMeshes[y][z] && stoneMeshes[y][z][x]) {
+                    stoneMeshes[y][z][x].scale.set(1.12, 1.12, 1.12);
+                }
+            }
+
+            const canInteract = game.canLocalPlayerInteract();
+            validMoveMeshes.forEach(vMesh => {
+                const { y, z, x } = vMesh.userData;
+                vMesh.position.copy(get3DPosition(y, z, x));
+                const key = `${y},${z},${x}`;
+
+                const isLayerVisible = (isolatedLayer === -1 || isolatedLayer === y);
+                if (canInteract && showGuides && validMap.has(key) && isLayerVisible) {
+                    vMesh.visible = true;
+                    vMesh.userData.flips = validMap.get(key);
+                } else {
+                    vMesh.visible = false;
+                    vMesh.userData.flips = null;
+                }
+            });
+        }
+
+        let pointerDownPos = { x: 0, y: 0 };
+
+        function onPointerDown(event) {
+            pointerDownPos.x = event.clientX;
+            pointerDownPos.y = event.clientY;
+        }
+
+        function onPointerUp(event) {
+            const dx = event.clientX - pointerDownPos.x;
+            const dy = event.clientY - pointerDownPos.y;
+            if (Math.hypot(dx, dy) > 6) return;
+
+            const hit = getIntersectedValidMove(event);
+            if (hit) {
+                const { y, z, x } = hit.userData;
+                game.makeMove(y, z, x);
+            }
+        }
+
+        function onPointerMove(event) {
+            if (!game.canLocalPlayerInteract()) return;
+            const hit = getIntersectedValidMove(event);
+            if (hit) {
+                document.getElementById('canvas-container').style.cursor = 'pointer';
+                const { y, z, x, flips } = hit.userData;
+                setHoverPreview(y, z, x, flips);
+            } else {
+                document.getElementById('canvas-container').style.cursor = 'grab';
+                clearHoverPreview();
+            }
+        }
+
+        function getIntersectedValidMove(event) {
+            const rect = renderer.domElement.getBoundingClientRect();
+            mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+            mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
+
+            raycaster.setFromCamera(mouse, camera);
+            const activeValidMeshes = validMoveMeshes.filter(m => m.visible);
+            const intersects = raycaster.intersectObjects(activeValidMeshes);
+            return intersects.length > 0 ? intersects[0].object : null;
+        }
+
+        function setHoverPreview(y, z, x, flips) {
+            if (hoveredCoord && hoveredCoord.y === y && hoveredCoord.z === z && hoveredCoord.x === x) return;
+            clearHoverPreview();
+            hoveredCoord = { y, z, x, flips };
+
+            validMoveMeshes.forEach(m => {
+                if (m.userData.y === y && m.userData.z === z && m.userData.x === x) {
+                    m.material = matValidMoveHover;
+                    m.scale.set(1.35, 1.35, 1.35);
+                }
+            });
+
+            flips.forEach(([fy, fz, fx]) => {
+                const sMesh = stoneMeshes[fy][fz][fx];
+                if (sMesh) {
+                    sMesh.material = matFlipHighlight;
+                }
+                const cell2D = document.getElementById(`stone-2d-${fy}-${fz}-${fx}`);
+                if (cell2D) cell2D.classList.add('stone-flip-preview');
+            });
+
+            const infoEl = document.getElementById('hover-info');
+            infoEl.textContent = `層${y + 1} (列${x + 1}, 行${z + 1}) : ${flips.length}個の石を裏返せます`;
+            infoEl.classList.remove('hidden');
+        }
+
+        function clearHoverPreview() {
+            if (!hoveredCoord) return;
+            hoveredCoord = null;
+
+            validMoveMeshes.forEach(m => {
+                m.material = matValidMove;
+                m.scale.set(1, 1, 1);
+            });
+
+            sync3DBoardState();
+
+            document.querySelectorAll('.stone-flip-preview').forEach(el => {
+                el.classList.remove('stone-flip-preview');
+            });
+
+            document.getElementById('hover-info').classList.add('hidden');
+        }
+
+        function onWindowResize() {
+            const container = document.getElementById('canvas-container');
+            if (!container || !renderer || !camera) return;
+            camera.aspect = container.clientWidth / container.clientHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(container.clientWidth, container.clientHeight);
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+            if (controls) controls.update();
+
+            const time = performance.now() * 0.004;
+            const pulse = 1 + Math.sin(time) * 0.12;
+            validMoveMeshes.forEach(m => {
+                if (m.visible && (!hoveredCoord || m.userData.y !== hoveredCoord.y || m.userData.z !== hoveredCoord.z || m.userData.x !== hoveredCoord.x)) {
+                    m.scale.set(pulse, pulse, pulse);
+                }
+            });
+
+            if (renderer && scene && camera) {
+                renderer.render(scene, camera);
+            }
+        }
+
+        /**
+         * 2D Layer Slice UI & Synchronization
+         */
+        function buildLayerFilterButtons() {
+            const container = document.getElementById('layer-filter-buttons');
+            if (!container) return;
+            container.innerHTML = '';
+            container.style.gridTemplateColumns = `repeat(${game.size + 1}, minmax(0, 1fr))`;
+
+            const btnAll = document.createElement('button');
+            btnAll.textContent = '全層';
+            btnAll.className = `py-1 rounded text-[11px] font-semibold transition ${isolatedLayer === -1 ? 'bg-emerald-600 text-white' : 'bg-slate-800 text-slate-400 hover:bg-slate-700'}`;
+            btnAll.onclick = () => setIsolatedLayer(-1);
+            container.appendChild(btnAll);
+
+            for (let y = 0; y < game.size; y++) {
+                const btn = document.createElement('button');
+                btn.textContent = `層${y + 1}`;
+                btn.className = `py-1 rounded text-[11px] font-semibold transition ${isolatedLayer === y ? 'bg-emerald-600 text-white' : 'bg-slate-800 text-slate-400 hover:bg-slate-700'}`;
+                btn.onclick = () => setIsolatedLayer(y);
+                container.appendChild(btn);
+            }
+        }
+
+        function setIsolatedLayer(layerIndex) {
+            isolatedLayer = layerIndex;
+            const label = document.getElementById('filter-layer-label');
+            if (label) {
+                label.textContent = layerIndex === -1 ? 'すべて表示' : `層 ${layerIndex + 1} のみ強調`;
+            }
+            buildLayerFilterButtons();
+            sync3DBoardState();
+            update2DSlicesHighlight();
+        }
+
+        function build2DSlicesUI() {
+            const container = document.getElementById('slices-container');
+            if (!container) return;
+            container.innerHTML = '';
+
+            for (let y = game.size - 1; y >= 0; y--) {
+                const card = document.createElement('div');
+                card.id = `slice-card-${y}`;
+                card.className = 'bg-slate-950/80 border border-slate-800 rounded-xl p-2.5 flex flex-col space-y-2 transition-all';
+
+                const header = document.createElement('div');
+                header.className = 'flex items-center justify-between text-xs';
+                header.innerHTML = `
+                    <span class="font-bold text-slate-200 flex items-center gap-1.5">
+                        <span class="w-2 h-2 rounded-full bg-sky-400"></span>
+                        層 ${y + 1} <span class="text-[10px] font-normal text-slate-400">${y === game.size - 1 ? '(最上段)' : y === 0 ? '(最下段)' : ''}</span>
+                    </span>
+                    <button onclick="setIsolatedLayer(${isolatedLayer === y ? -1 : y})" class="text-[10px] text-slate-400 hover:text-sky-400 transition" title="3Dでこの層を強調">
+                        <i class="fa-solid fa-eye"></i>
+                    </button>
+                `;
+
+                const grid = document.createElement('div');
+                grid.className = 'grid gap-1 bg-slate-800/80 p-1.5 rounded-lg border border-cyan-500/30';
+                grid.style.gridTemplateColumns = `repeat(${game.size}, minmax(0, 1fr))`;
+
+                for (let z = 0; z < game.size; z++) {
+                    for (let x = 0; x < game.size; x++) {
+                        const cell = document.createElement('div');
+                        cell.id = `cell-2d-${y}-${z}-${x}`;
+                        cell.className = 'grid-2d-cell rounded flex items-center justify-center relative cursor-pointer';
+                        cell.onclick = () => game.makeMove(y, z, x);
+
+                        const stone = document.createElement('div');
+                        stone.id = `stone-2d-${y}-${z}-${x}`;
+                        stone.className = 'w-4/5 h-4/5 rounded-full transition-all duration-200';
+                        cell.appendChild(stone);
+
+                        grid.appendChild(cell);
+                    }
+                }
+
+                card.appendChild(header);
+                card.appendChild(grid);
+                container.appendChild(card);
+            }
+        }
+
+        function update2DSlicesHighlight() {
+            for (let y = 0; y < game.size; y++) {
+                const card = document.getElementById(`slice-card-${y}`);
+                if (!card) continue;
+                if (isolatedLayer === y) {
+                    card.classList.add('ring-2', 'ring-emerald-500');
+                } else {
+                    card.classList.remove('ring-2', 'ring-emerald-500');
+                }
+            }
+        }
+
+        function updateUI() {
+            sync3DBoardState();
+
+            const validMoves = game.getValidMoves();
+            const validMap = new Map();
+            validMoves.forEach(m => validMap.set(`${m.y},${m.z},${m.x}`, m.flips));
+
+            const canInteract = game.canLocalPlayerInteract();
+
+            // Update 2D Slices
+            for (let y = 0; y < game.size; y++) {
+                for (let z = 0; z < game.size; z++) {
+                    for (let x = 0; x < game.size; x++) {
+                        const val = game.board[y][z][x];
+                        const stoneEl = document.getElementById(`stone-2d-${y}-${z}-${x}`);
+                        const cellEl = document.getElementById(`cell-2d-${y}-${z}-${x}`);
+                        if (!stoneEl || !cellEl) continue;
+
+                        stoneEl.className = 'w-4/5 h-4/5 rounded-full transition-all duration-200';
+                        cellEl.onmouseenter = null;
+                        cellEl.onmouseleave = null;
+
+                        if (val === BLACK) {
+                            stoneEl.classList.add('stone-black');
+                        } else if (val === WHITE) {
+                            stoneEl.classList.add('stone-white');
+                        } else {
+                            const key = `${y},${z},${x}`;
+                            if (canInteract && validMap.has(key)) {
+                                stoneEl.classList.add('stone-valid');
+                                const flips = validMap.get(key);
+                                cellEl.onmouseenter = () => setHoverPreview(y, z, x, flips);
+                                cellEl.onmouseleave = () => clearHoverPreview();
+                            }
+                        }
+
+                        if (game.lastMove && game.lastMove.y === y && game.lastMove.z === z && game.lastMove.x === x) {
+                            stoneEl.classList.add('stone-last-move');
+                        }
+                    }
+                }
+            }
+
+            // Update Scoreboard & Labels
+            const counts = game.getCounts();
+            const scoreBlack = document.getElementById('score-black');
+            const scoreWhite = document.getElementById('score-white');
+            if (scoreBlack) scoreBlack.textContent = counts.black;
+            if (scoreWhite) scoreWhite.textContent = counts.white;
+
+            const blackLabel = document.getElementById('black-label');
+            const whiteLabel = document.getElementById('white-label');
+            const modePill = document.getElementById('mode-pill');
+            const headerRoomBadge = document.getElementById('header-room-badge');
+            const waitingOverlay = document.getElementById('waiting-room-overlay');
+
+            if (game.mode === 'cpu') {
+                const diffLabel = game.cpuDifficulty === 'easy' ? '初級' : game.cpuDifficulty === 'normal' ? '中級' : '上級';
+                if (modePill) {
+                    modePill.textContent = `1P vs CPU (${diffLabel})`;
+                    modePill.className = 'text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30';
+                }
+                if (blackLabel) blackLabel.textContent = game.myColor === BLACK ? '黒 (あなた)' : '黒 (CPU)';
+                if (whiteLabel) whiteLabel.textContent = game.myColor === WHITE ? '白 (あなた)' : '白 (CPU)';
+                if (headerRoomBadge) headerRoomBadge.classList.add('hidden');
+                if (waitingOverlay) waitingOverlay.classList.add('hidden');
+                const infoModeName = document.getElementById('info-mode-name');
+                if (infoModeName) infoModeName.textContent = `1P vs CPU (${diffLabel})`;
+                const infoRoomRow = document.getElementById('info-room-row');
+                if (infoRoomRow) infoRoomRow.classList.add('hidden');
+            } else if (game.mode === 'local') {
+                if (modePill) {
+                    modePill.textContent = '2P オフライン対戦';
+                    modePill.className = 'text-[10px] font-bold px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30';
+                }
+                if (blackLabel) blackLabel.textContent = '黒 (プレイヤー1)';
+                if (whiteLabel) whiteLabel.textContent = '白 (プレイヤー2)';
+                if (headerRoomBadge) headerRoomBadge.classList.add('hidden');
+                if (waitingOverlay) waitingOverlay.classList.add('hidden');
+                const infoModeName = document.getElementById('info-mode-name');
+                if (infoModeName) infoModeName.textContent = '2P オフライン (1台で交互)';
+                const infoRoomRow = document.getElementById('info-room-row');
+                if (infoRoomRow) infoRoomRow.classList.add('hidden');
+            } else if (game.mode === 'online') {
+                if (modePill) {
+                    modePill.textContent = '2P オンライン通信';
+                    modePill.className = 'text-[10px] font-bold px-2 py-0.5 rounded-full bg-sky-500/20 text-sky-300 border border-sky-500/30';
+                }
+                if (blackLabel) blackLabel.textContent = game.myColor === BLACK ? '黒 (あなた)' : '黒 (相手)';
+                if (whiteLabel) whiteLabel.textContent = game.myColor === WHITE ? '白 (あなた)' : '白 (相手)';
+
+                if (headerRoomBadge) headerRoomBadge.classList.remove('hidden');
+                const headerRoomCode = document.getElementById('header-room-code');
+                if (headerRoomCode) headerRoomCode.textContent = game.roomCode || '------';
+                const infoModeName = document.getElementById('info-mode-name');
+                if (infoModeName) infoModeName.textContent = '2P オンライン通信対戦';
+                const infoRoomRow = document.getElementById('info-room-row');
+                if (infoRoomRow) infoRoomRow.classList.remove('hidden');
+                const infoRoomCode = document.getElementById('info-room-code');
+                if (infoRoomCode) infoRoomCode.textContent = game.roomCode || '------';
+
+                if (game.onlineStatus === 'waiting') {
+                    if (waitingOverlay) waitingOverlay.classList.remove('hidden');
+                    const waitingRoomCode = document.getElementById('waiting-room-code');
+                    if (waitingRoomCode) waitingRoomCode.textContent = game.roomCode;
+                    const waitingBoardSize = document.getElementById('waiting-board-size');
+                    if (waitingBoardSize) waitingBoardSize.textContent = `${game.size}×${game.size}×${game.size}`;
+                    const waitingHostColor = document.getElementById('waiting-host-color');
+                    if (waitingHostColor) waitingHostColor.textContent = game.myColor === BLACK ? '黒 (先手)' : '白 (後手)';
+                } else {
+                    if (waitingOverlay) waitingOverlay.classList.add('hidden');
+                }
+            }
+
+            const infoBoardSize = document.getElementById('info-board-size');
+            if (infoBoardSize) infoBoardSize.textContent = `${game.size} × ${game.size} × ${game.size} (${Math.pow(game.size, 3)}マス)`;
+
+            // Turn Box Highlight
+            const blackBox = document.getElementById('turn-black-box');
+            const whiteBox = document.getElementById('turn-white-box');
+            if (blackBox && whiteBox) {
+                if (game.currentTurn === BLACK) {
+                    blackBox.className = 'flex items-center space-x-2 px-2 py-1 rounded-lg transition-all duration-300 ring-2 ring-emerald-500 bg-slate-700/60';
+                    whiteBox.className = 'flex items-center space-x-2 px-2 py-1 rounded-lg transition-all duration-300 opacity-60';
+                } else {
+                    whiteBox.className = 'flex items-center space-x-2 px-2 py-1 rounded-lg transition-all duration-300 ring-2 ring-emerald-500 bg-slate-700/60';
+                    blackBox.className = 'flex items-center space-x-2 px-2 py-1 rounded-lg transition-all duration-300 opacity-60';
+                }
+            }
+
+            // Status Banner
+            const statusText = document.getElementById('status-text');
+            const statusDot = document.getElementById('status-dot');
+            if (statusText && statusDot) {
+                if (game.isGameOver) {
+                    statusDot.className = 'w-2.5 h-2.5 rounded-full bg-amber-400 shrink-0';
+                    statusText.textContent = '対局終了！';
+                } else if (game.mode === 'online' && game.onlineStatus === 'waiting') {
+                    statusDot.className = 'w-2.5 h-2.5 rounded-full bg-sky-400 animate-ping shrink-0';
+                    statusText.textContent = `ルーム[${game.roomCode}]で対戦相手を待っています...`;
+                } else if (game.mode === 'online' && game.currentTurn !== game.myColor) {
+                    statusDot.className = 'w-2.5 h-2.5 rounded-full bg-sky-400 animate-ping shrink-0';
+                    const oppColor = game.currentTurn === BLACK ? '黒' : '白';
+                    statusText.textContent = `対戦相手（${oppColor}）が思考中です...`;
+                } else if (game.isCPUTurn()) {
+                    statusDot.className = 'w-2.5 h-2.5 rounded-full bg-sky-400 animate-ping shrink-0';
+                    statusText.textContent = 'CPUが思考中...';
+                } else {
+                    const turnName = game.currentTurn === BLACK ? '黒' : '白';
+                    const youSuffix = (game.mode !== 'local') ? '（あなた）' : '';
+                    statusDot.className = 'w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping shrink-0';
+                    statusText.textContent = `${turnName}${youSuffix}の番です（置ける場所: ${validMoves.length}ヶ所）`;
+                }
+            }
+
+            const btnUndo = document.getElementById('btn-undo');
+            if (btnUndo) {
+                btnUndo.disabled = (game.mode === 'online' || game.history.length === 0 || game.isCPUTurn());
+            }
+
+            const historyEl = document.getElementById('move-history');
+            if (historyEl) {
+                if (game.moveLog.length === 0) {
+                    historyEl.innerHTML = '<div class="text-slate-600 italic">まだ履歴がありません</div>';
+                } else {
+                    historyEl.innerHTML = game.moveLog.map((entry, idx) =>
+                        `<div class="${idx === 0 ? 'text-emerald-400 font-bold' : 'text-slate-400'}">${entry}</div>`
+                    ).join('');
+                }
+            }
+        }
+
+        /**
+         * Lobby & UI Controls
+         */
+        function openLobbyModal() {
+            hideOnlineError();
+            const modal = document.getElementById('lobby-modal');
+            if (modal) modal.classList.remove('hidden');
+        }
+
+        function closeLobbyModal() {
+            const modal = document.getElementById('lobby-modal');
+            if (modal) modal.classList.add('hidden');
+        }
+
+        function selectLobbyTab(tab) {
+            lobbyState.tab = tab;
+            const tabs = ['cpu', 'online', 'local'];
+            tabs.forEach(t => {
+                const btn = document.getElementById(`lobby-tab-${t}`);
+                const panel = document.getElementById(`lobby-panel-${t}`);
+                if (!btn || !panel) return;
+                if (t === tab) {
+                    btn.className = 'py-2 rounded-lg text-xs font-bold bg-emerald-600 text-white shadow transition flex items-center justify-center gap-1.5';
+                    panel.classList.remove('hidden');
+                } else {
+                    btn.className = 'py-2 rounded-lg text-xs font-bold text-slate-400 hover:text-white transition flex items-center justify-center gap-1.5';
+                    panel.classList.add('hidden');
+                }
+            });
+        }
+
+        function setLobbyBoardSize(size) {
+            lobbyState.boardSize = size;
+            const size4 = document.getElementById('lobby-size-4');
+            const size6 = document.getElementById('lobby-size-6');
+            if (size4) {
+                size4.className = size === 4
+                    ? 'p-3 rounded-xl border-2 border-emerald-500 bg-emerald-500/15 text-left transition'
+                    : 'p-3 rounded-xl border border-slate-700 bg-slate-800/60 hover:bg-slate-800 text-left transition';
+            }
+            if (size6) {
+                size6.className = size === 6
+                    ? 'p-3 rounded-xl border-2 border-emerald-500 bg-emerald-500/15 text-left transition'
+                    : 'p-3 rounded-xl border border-slate-700 bg-slate-800/60 hover:bg-slate-800 text-left transition';
+            }
+        }
+
+        function setLobbyCpuDiff(diff) {
+            lobbyState.cpuDiff = diff;
+            ['easy', 'normal', 'hard'].forEach(d => {
+                const btn = document.getElementById(`cpu-diff-${d}`);
+                if (!btn) return;
+                btn.className = (d === diff)
+                    ? 'py-2.5 px-3 rounded-xl border-2 border-emerald-500 bg-emerald-500/15 text-xs font-semibold text-white transition'
+                    : 'py-2.5 px-3 rounded-xl border border-slate-700 bg-slate-800 text-xs font-semibold text-slate-300 hover:bg-slate-700 transition';
+            });
+        }
+
+        function setLobbyPlayerColor(color) {
+            lobbyState.playerColor = color;
+            const btnBlack = document.getElementById('cpu-color-black');
+            const btnWhite = document.getElementById('cpu-color-white');
+            if (btnBlack) {
+                btnBlack.className = color === BLACK
+                    ? 'py-2.5 px-3 rounded-xl border-2 border-emerald-500 bg-emerald-500/15 flex items-center justify-center space-x-2 text-xs font-bold text-white transition'
+                    : 'py-2.5 px-3 rounded-xl border border-slate-700 bg-slate-800 flex items-center justify-center space-x-2 text-xs font-semibold text-slate-300 hover:bg-slate-700 transition';
+            }
+            if (btnWhite) {
+                btnWhite.className = color === WHITE
+                    ? 'py-2.5 px-3 rounded-xl border-2 border-emerald-500 bg-emerald-500/15 flex items-center justify-center space-x-2 text-xs font-bold text-white transition'
+                    : 'py-2.5 px-3 rounded-xl border border-slate-700 bg-slate-800 flex items-center justify-center space-x-2 text-xs font-semibold text-slate-300 hover:bg-slate-700 transition';
+            }
+        }
+
+        function setOnlineHostColor(color) {
+            lobbyState.hostColor = color;
+            const btnBlack = document.getElementById('host-color-black');
+            const btnWhite = document.getElementById('host-color-white');
+            if (btnBlack) {
+                btnBlack.className = color === BLACK
+                    ? 'px-2.5 py-1 rounded-lg border border-emerald-500 bg-emerald-500/20 text-white font-semibold'
+                    : 'px-2.5 py-1 rounded-lg border border-slate-700 bg-slate-800 text-slate-400';
+            }
+            if (btnWhite) {
+                btnWhite.className = color === WHITE
+                    ? 'px-2.5 py-1 rounded-lg border border-emerald-500 bg-emerald-500/20 text-white font-semibold'
+                    : 'px-2.5 py-1 rounded-lg border border-slate-700 bg-slate-800 text-slate-400';
+            }
+        }
+
+        function startSinglePlayerGame() {
+            cleanupOnlineConnections();
+            game.size = lobbyState.boardSize;
+            game.mode = 'cpu';
+            game.cpuDifficulty = lobbyState.cpuDiff;
+            game.myColor = lobbyState.playerColor;
+            game.roomCode = null;
+            isolatedLayer = -1;
+
+            closeLobbyModal();
+            resetCameraPosition();
+            game.resetGame();
+        }
+
+        function startLocal2PGame() {
+            cleanupOnlineConnections();
+            game.size = lobbyState.boardSize;
+            game.mode = 'local';
+            game.roomCode = null;
+            isolatedLayer = -1;
+
+            closeLobbyModal();
+            resetCameraPosition();
+            game.resetGame();
+        }
+
+        function handleResetButton() {
+            if (game.mode === 'online') {
+                requestOnlineRematch();
+            } else {
+                game.resetGame();
+            }
+        }
+
+        function copyRoomCode() {
+            if (!game.roomCode) return;
+            const tempInput = document.createElement('textarea');
+            tempInput.value = game.roomCode;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
+
+            const copyText = document.getElementById('copy-btn-text');
+            if (copyText) {
+                copyText.textContent = 'コピー完了!';
+                setTimeout(() => { copyText.textContent = 'コピー'; }, 2000);
+            }
+            showToast(`ルームコード「${game.roomCode}」をコピーしました`);
+        }
+
+        function updateLayerExpansion(val) {
+            layerExpansion = parseFloat(val);
+            const expVal = document.getElementById('explosion-val');
+            if (expVal) expVal.textContent = `${layerExpansion.toFixed(1)}x`;
+            sync3DBoardState();
+        }
+
+        function toggleGuides(checked) {
+            showGuides = checked;
+            sync3DBoardState();
+        }
+
+        function toggleFrame(checked) {
+            showFrame = checked;
+            sync3DBoardState();
+        }
+
+        function switchTab(tab) {
+            const tabSlices = document.getElementById('tab-slices');
+            const tabSettings = document.getElementById('tab-settings');
+            const btnSlices = document.getElementById('tab-btn-slices');
+            const btnSettings = document.getElementById('tab-btn-settings');
+            if (!tabSlices || !tabSettings || !btnSlices || !btnSettings) return;
+
+            if (tab === 'slices') {
+                tabSlices.classList.remove('hidden');
+                tabSettings.classList.add('hidden');
+                btnSlices.className = 'flex-1 py-1.5 text-xs font-semibold rounded-lg bg-slate-800 text-white shadow transition';
+                btnSettings.className = 'flex-1 py-1.5 text-xs font-semibold rounded-lg text-slate-400 hover:text-slate-200 transition';
+            } else {
+                tabSlices.classList.add('hidden');
+                tabSettings.classList.remove('hidden');
+                btnSettings.className = 'flex-1 py-1.5 text-xs font-semibold rounded-lg bg-slate-800 text-white shadow transition';
+                btnSlices.className = 'flex-1 py-1.5 text-xs font-semibold rounded-lg text-slate-400 hover:text-slate-200 transition';
+            }
+        }
+
+        function toggleSidePanel() {
+            const panel = document.getElementById('side-panel');
+            if (panel) panel.classList.toggle('translate-x-full');
+        }
+
+        let toastTimeout = null;
+        function showToast(message) {
+            const toast = document.getElementById('toast-pass');
+            const toastText = document.getElementById('toast-pass-text');
+            if (!toast || !toastText) return;
+            toastText.textContent = message;
+            toast.classList.remove('hidden');
+            toast.classList.add('flex');
+            if (toastTimeout) clearTimeout(toastTimeout);
+            toastTimeout = setTimeout(() => {
+                toast.classList.add('hidden');
+                toast.classList.remove('flex');
+            }, 3200);
+        }
+
+        function showGameOverModal() {
+            soundManager.playWin();
+            const counts = game.getCounts();
+            const modalScoreBlack = document.getElementById('modal-score-black');
+            const modalScoreWhite = document.getElementById('modal-score-white');
+            if (modalScoreBlack) modalScoreBlack.textContent = counts.black;
+            if (modalScoreWhite) modalScoreWhite.textContent = counts.white;
+
+            const subtitle = document.getElementById('modal-subtitle');
+            if (subtitle) {
+                if (counts.black > counts.white) {
+                    subtitle.textContent = `黒の勝利です！ (${counts.black - counts.white}石差)`;
+                } else if (counts.white > counts.black) {
+                    subtitle.textContent = `白の勝利です！ (${counts.white - counts.black}石差)`;
+                } else {
+                    subtitle.textContent = '引き分けです！';
+                }
+            }
+
+            const overlay = document.getElementById('modal-overlay');
+            const box = document.getElementById('modal-box');
+            if (!overlay || !box) return;
+            overlay.classList.remove('hidden');
+            requestAnimationFrame(() => {
+                overlay.classList.remove('opacity-0');
+                box.classList.remove('scale-95');
+                box.classList.add('scale-100');
+            });
+        }
+
+        function closeModal() {
+            const overlay = document.getElementById('modal-overlay');
+            const box = document.getElementById('modal-box');
+            if (!overlay || !box) return;
+            overlay.classList.add('opacity-0');
+            box.classList.remove('scale-100');
+            box.classList.add('scale-95');
+            setTimeout(() => overlay.classList.add('hidden'), 300);
+        }
+
+        function toggleBrowserFullscreen() {
+            if (!document.fullscreenElement) {
+                if (document.documentElement.requestFullscreen) {
+                    document.documentElement.requestFullscreen().catch(() => {});
+                }
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen().catch(() => {});
+                }
+            }
+        }
+
+        // Expose functions to global window for inline HTML onclick handlers
+        Object.assign(window, {
+            openLobbyModal,
+            closeLobbyModal,
+            selectLobbyTab,
+            setLobbyBoardSize,
+            setLobbyCpuDiff,
+            setLobbyPlayerColor,
+            setOnlineHostColor,
+            startSinglePlayerGame,
+            startLocal2PGame,
+            createOnlineRoom,
+            joinOnlineRoom,
+            leaveOnlineRoom,
+            copyRoomCode,
+            handleResetButton,
+            resetCamera,
+            updateLayerExpansion,
+            setIsolatedLayer,
+            toggleGuides,
+            toggleFrame,
+            switchTab,
+            toggleSidePanel,
+            toggleBrowserFullscreen,
+            closeModal
+        });
+
+        // Robust application initialization
+        async function startApp() {
+            // iframe内で表示されている場合、戻るボタンは非表示
+            const backBtn = document.getElementById('btn-back-to-site');
+            if (backBtn) {
+                if (window.self !== window.top) {
+                    backBtn.style.display = 'none';
+                } else {
+                    const path = window.location.pathname;
+                    if (path.includes('/othello/')) {
+                        backBtn.href = '../games/othello';
+                    } else {
+                        backBtn.href = './games/othello';
+                    }
+                }
+            }
+
+            // キーボードショートカット
+            window.addEventListener('keydown', (e) => {
+                if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+                const k = e.key.toLowerCase();
+                if (k === 'r') resetCamera();
+                else if (k === 'z') game.undo();
+                else if (k === 'f') toggleBrowserFullscreen();
+                else if (k === 's') soundManager.toggle();
+                else if (k === 'm') openLobbyModal();
+                else if (k === 'escape') closeModal();
+                else if (k >= '1' && k <= '6') {
+                    const l = parseInt(k) - 1;
+                    if (l < game.size) setIsolatedLayer(isolatedLayer === l ? -1 : l);
+                } else if (k === '0' || k === '`') {
+                    setIsolatedLayer(-1);
+                }
+            });
+
+            buildLayerFilterButtons();
+            build2DSlicesUI();
+            initThreeJS();
+            updateUI();
+            await initFirebase();
+        }
+
+        if (document.readyState === 'loading') {
+            window.addEventListener('DOMContentLoaded', startApp);
+        } else {
+            startApp();
+        }
+    </script>
+</body>
+</html>

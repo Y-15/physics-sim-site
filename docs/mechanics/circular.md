@@ -58,11 +58,56 @@ $$
 「速さが一定なのに、なぜ加速度があるのか？」  
 それは、**速度の向きが変わるから**です。加速度は「単位時間あたりの速度ベクトルの変化」$\vec{a} = \frac{\Delta\vec{v}}{\Delta t}$ で定義されます。
 
-```
-時刻 t の速度:      v(t)  ↗
-微小時間後の速度:   v(t+Δt) ↖
-速度の変化ベクトル: Δv = v(t+Δt) - v(t)  ← ★円の中心を向く！
-```
+<div class="vector-diagram-card">
+  <svg viewBox="0 0 520 200" class="academic-svg" aria-label="等速円運動における向心加速度と速度ベクトル変化の導出">
+    <defs>
+      <marker id="circ-arrow-blue" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+        <path d="M 0 1 L 10 5 L 0 9 z" fill="#38bdf8" />
+      </marker>
+      <marker id="circ-arrow-red" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+        <path d="M 0 1 L 10 5 L 0 9 z" fill="#ef4444" />
+      </marker>
+    </defs>
+
+    <!-- 左側: 円軌道上の2点 -->
+    <path d="M 160 170 A 90 90 0 0 0 160 30" fill="none" stroke="#475569" stroke-width="2" stroke-dasharray="4,4" />
+    <circle cx="160" cy="100" r="4" fill="#64748b" />
+    <text x="145" y="105" fill="#94a3b8" font-size="11">O (中心)</text>
+    <line x1="160" y1="100" x2="100" y2="100" stroke="#64748b" stroke-width="1.5" />
+    <line x1="160" y1="100" x2="115" y2="60" stroke="#64748b" stroke-width="1.5" />
+    <text x="135" y="85" fill="#fbbf24" font-size="11">Δθ</text>
+
+    <!-- 位置1における速度 v(t) -->
+    <circle cx="100" cy="100" r="5" fill="#38bdf8" />
+    <line x1="100" y1="100" x2="100" y2="40" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#circ-arrow-blue)" />
+    <text x="75" y="65" fill="#38bdf8" font-size="12" font-weight="bold">v(t)</text>
+
+    <!-- 位置2における速度 v(t+Δt) -->
+    <circle cx="115" cy="60" r="5" fill="#38bdf8" />
+    <line x1="115" y1="60" x2="65" y2="25" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#circ-arrow-blue)" />
+    <text x="60" y="15" fill="#38bdf8" font-size="12" font-weight="bold">v(t+Δt)</text>
+
+    <!-- 右側: 始点をそろえた速度ベクトル三角形 -->
+    <g transform="translate(340, 110)">
+      <!-- 始点 -->
+      <circle cx="0" cy="0" r="4" fill="#e2e8f0" />
+      <!-- v(t) -->
+      <line x1="0" y1="0" x2="0" y2="-70" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#circ-arrow-blue)" />
+      <text x="10" y="-35" fill="#38bdf8" font-size="12" font-weight="bold">v(t)</text>
+      <!-- v(t+Δt) -->
+      <line x1="0" y1="0" x2="-45" y2="-55" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#circ-arrow-blue)" />
+      <text x="-65" y="-35" fill="#38bdf8" font-size="12" font-weight="bold">v(t+Δt)</text>
+      <!-- なす角 Δθ -->
+      <path d="M 0 -25 A 25 25 0 0 0 -15 -20" fill="none" stroke="#fbbf24" stroke-width="2" />
+      <text x="-15" y="-10" fill="#fbbf24" font-size="11" font-weight="bold">Δθ</text>
+      <!-- 速度変化ベクトル Δv = v(t+Δt) - v(t) -->
+      <line x1="0" y1="-70" x2="-42" y2="-56" stroke="#ef4444" stroke-width="3" marker-end="url(#circ-arrow-red)" />
+      <text x="-18" y="-76" fill="#ef4444" font-size="12" font-weight="bold">Δv = a · Δt</text>
+    </g>
+    <text x="340" y="155" fill="#ef4444" font-size="12" font-weight="bold" text-anchor="middle">Δv は円の中心に向く！（向心加速度）</text>
+  </svg>
+  <div class="diagram-caption">図: 微小時間 Δt における速度ベクトルの差 Δv と向心加速度の幾何学的導出</div>
+</div>
 
 時間 $\Delta t$ の間に回転する角度を $\Delta\theta = \omega\Delta t$ とすると、速度ベクトルの長さはともに $v$ で、そのなす角は $\Delta\theta$ です。
 微小角近似により、速度変化の大きさ $|\Delta\vec{v}|$ は：
