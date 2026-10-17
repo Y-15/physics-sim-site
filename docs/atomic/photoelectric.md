@@ -229,14 +229,20 @@ $$
 $K_{\max} = \dfrac{1}{2}m v_{\max}^2$ より：
 
 $$
-v_{\max} = \sqrt{\frac{2 K_{\max}}{m}} = \sqrt{\frac{2 \times 1.81 \times 10^{-19}}{9.11 \times 10^{-31}}} = \sqrt{\frac{3.62 \times 10^{12}}{9.11}} = \sqrt{0.397 \times 10^{12}} \approx 0.630 \times 10^6 = 6.30 \times 10^5\,\text{m/s}
+\begin{aligned}
+v_{\max} &= \sqrt{\frac{2 K_{\max}}{m}} = \sqrt{\frac{2 \times 1.81 \times 10^{-19}}{9.11 \times 10^{-31}}} \\
+&= \sqrt{0.397 \times 10^{12}} \approx \mathbf{6.30 \times 10^5\,\text{m/s}}
+\end{aligned}
 $$
 
 **Step 4: 限界波長 $\lambda_0$ を求める**
 $W = \dfrac{hc}{\lambda_0}$ より：
 
 $$
-\lambda_0 = \frac{hc}{W} = \frac{1.989 \times 10^{-25}\,\text{J}\cdot\text{m}}{2.14 \times 1.60 \times 10^{-19}\,\text{J}} = \frac{1.989 \times 10^{-25}}{3.424 \times 10^{-19}} \approx 5.81 \times 10^{-7}\,\text{m} = 581\,\text{nm}
+\begin{aligned}
+\lambda_0 &= \frac{hc}{W} = \frac{1.989 \times 10^{-25}\,\text{J}\cdot\text{m}}{2.14 \times 1.60 \times 10^{-19}\,\text{J}} \\
+&= \frac{1.989 \times 10^{-25}}{3.424 \times 10^{-19}} \approx 5.81 \times 10^{-7}\,\text{m} = \mathbf{581\,\text{nm}}
+\end{aligned}
 $$
 
 ---
@@ -281,7 +287,10 @@ $$
 数値を代入：
 
 $$
-h = \frac{1.60 \times 10^{-19} \times (1.45 - 0.62)}{(8.0 - 6.0) \times 10^{14}} = \frac{1.60 \times 10^{-19} \times 0.83}{2.0 \times 10^{14}} = \frac{1.328 \times 10^{-19}}{2.0 \times 10^{14}} = 6.64 \times 10^{-34}\,\text{J}\cdot\text{s}
+\begin{aligned}
+h &= \frac{1.60 \times 10^{-19} \times (1.45 - 0.62)}{(8.0 - 6.0) \times 10^{14}} \\
+&= \frac{1.60 \times 10^{-19} \times 0.83}{2.0 \times 10^{14}} = \mathbf{6.64 \times 10^{-34}\,\text{J}\cdot\text{s}}
+\end{aligned}
 $$
 
 **Step 3: 仕事関数 $W$ を計算する**

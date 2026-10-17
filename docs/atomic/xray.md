@@ -173,9 +173,11 @@ $$
 #### 【解法と解説】
 
 **1. 最短波長 $\lambda_0$**
-デュアン＝ハントの法則 $\lambda_0 = \frac{hc}{eV}$ より：
 $$
-\lambda_0 = \frac{(6.6 \times 10^{-34}) \times (3.0 \times 10^8)}{(1.6 \times 10^{-19}) \times (50 \times 10^3)} = \frac{19.8 \times 10^{-26}}{80 \times 10^{-16}} = \frac{1.98 \times 10^{-25}}{8.0 \times 10^{-15}} = 0.2475 \times 10^{-10}\,\text{m} = 24.8 \times 10^{-12}\,\text{m} = 24.8\,\text{pm}
+\begin{aligned}
+\lambda_0 &= \frac{(6.6 \times 10^{-34}) \times (3.0 \times 10^8)}{(1.6 \times 10^{-19}) \times (50 \times 10^3)} \\
+&= \frac{1.98 \times 10^{-25}}{8.0 \times 10^{-15}} = 0.2475 \times 10^{-10}\,\text{m} = \mathbf{24.8\,\text{pm}}
+\end{aligned}
 $$
 
 **2. 電圧を半減させたとき**

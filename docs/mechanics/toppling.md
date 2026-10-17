@@ -117,7 +117,7 @@ description: 高校物理の剛体の力学最難関テーマ。水平面・斜�
 
 底面中央のまわりのモーメントのつり合いより：
 
-$$F \cdot h_F - N \cdot x_N = 0 \implies \boxed{x_N = \frac{F h_F}{N} = \frac{F h_F}{M g}}$$
+$$F \cdot h_F - N \cdot x_N = 0 \implies x_N = \frac{F h_F}{N} = \frac{F h_F}{M g}$$
 
 ---
 
@@ -126,9 +126,7 @@ $$F \cdot h_F - N \cdot x_N = 0 \implies \boxed{x_N = \frac{F h_F}{N} = \frac{F 
 ### ① 滑り出しの限界外力 $F_{\text{slip}}$
 床面との最大静止摩擦力は $f_{\max} = \mu_s N = \mu_s M g$ です。水平方向の力のつり合い $F = f$ より：
 
-$$
-\boxed{F_{\text{slip}} = \mu_s M g}
-$$
+$$F_{\text{slip}} = \mu_s M g$$
 
 外力 $F$ がこの値を超えると、物体は水平に滑り出します。
 
@@ -138,7 +136,7 @@ $$
 垂直抗力 $N$ が移動できるのは**直方体の底面の右端（点 A：$x_N = w/2$）まで**です！  
 作用点が右端に達したときが転倒の限界であり、右下端 A のまわりのモーメントのつり合いを立てると：
 
-$$F \cdot h_F = M g \cdot \frac{w}{2} \implies \boxed{F_{\text{topple}} = M g \frac{w}{2h_F}}$$
+$$F \cdot h_F = M g \cdot \frac{w}{2} \implies F_{\text{topple}} = M g \frac{w}{2h_F}$$
 
 外力 $F$ がこの値を超えると、垂直抗力はもはや右端を超えて外側へは出られないため、反時計回りの支えを失い、**点 A を軸としてコロンと倒れます**。
 
@@ -149,11 +147,11 @@ $$F \cdot h_F = M g \cdot \frac{w}{2} \implies \boxed{F_{\text{topple}} = M g \f
 外力 $F$ を $0$ から徐々に大きくしていくとき、**$F_{\text{slip}}$ と $F_{\text{topple}}$ のうち「値が小さい方」が先に発生**します！
 
 * **ケース A：先に滑り出す条件（倒れずにすべる）**:
-  $$F_{\text{slip}} < F_{\text{topple}} \iff \mu_s M g < M g \frac{w}{2h_F} \iff \boxed{\mu_s < \frac{w}{2h_F}}$$
+  $$F_{\text{slip}} < F_{\text{topple}} \iff \mu_s M g < M g \frac{w}{2h_F} \iff \mu_s < \frac{w}{2h_F}$$
   $\implies$ 摩擦が小さい（ツルツル）か、低い位置を押すとき。
 
 * **ケース B：先に倒れる条件（滑らずに転倒する）**:
-  $$F_{\text{topple}} < F_{\text{slip}} \iff \boxed{\mu_s > \frac{w}{2h_F}}$$
+  $$F_{\text{topple}} < F_{\text{slip}} \iff \mu_s > \frac{w}{2h_F}$$
   $\implies$ 摩擦が大きい（ザラザラ）か、高い位置を押すとき。
 
 ---

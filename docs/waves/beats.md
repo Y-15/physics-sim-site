@@ -32,7 +32,7 @@ $$
 重ね合わせの原理により、合成波 $y(t) = y_1(t) + y_2(t)$ は三角関数の**和積公式** $\sin \alpha + \sin \beta = 2 \cos\left(\frac{\alpha - \beta}{2}\right) \sin\left(\frac{\alpha + \beta}{2}\right)$ を用いて次のように変形できます。
 
 $$
-y(t) = \underbrace{2A \cos\left(2\pi \frac{f_1 - f_2}{2} t\right)}_{\text{ゆっくり変化する振幅（包絡線）}} \times \underbrace{\sin\left(2\pi \frac{f_1 + f_2}{2} t\right)}_{\text{高周波の基本振動（平均周波数）}}
+y(t) = \left[ 2A \cos\left(2\pi \frac{f_1 - f_2}{2} t\right) \right] \sin\left(2\pi \frac{f_1 + f_2}{2} t\right)
 $$
 
 ### ① 搬送波（耳に聞こえる音の高さ）

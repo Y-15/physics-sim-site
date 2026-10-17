@@ -27,6 +27,10 @@
   --academic-border: 1px solid rgba(203, 213, 225, 0.8);
   --academic-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.06);
 
+  /* デフォルトPC画面で数式や図解が見切れない十分なコンテンツ幅 */
+  --vp-layout-max-width: 1440px;
+  --vp-doc-max-width: 860px;
+
   /* ライトモード用セマンティックカラー（白背景で最高の視認性） */
   --academic-text-main: #1e293b;
   --academic-text-sub: #475569;
@@ -149,25 +153,29 @@
 }
 
 /* ==========================================================================
-   数式（MathJax）表示の最適化
-   行間が不自然に広がらず、スマホでもはみ出さず綺麗に横スクロール可能
+   数式（MathJax / KaTeX）表示の最適化
+   過剰な囲み枠や濃い背景を排し、PCデフォルト幅で見切れないスッキリした学術レイアウト
    ========================================================================== */
-mjx-container[display="true"] {
-  margin: 1.25rem 0 !important;
-  padding: 0.85rem 1.25rem !important;
-  background: var(--academic-math-bg) !important;
-  border: 1px solid var(--academic-math-border) !important;
-  border-radius: 10px !important;
+mjx-container[display="true"],
+.katex-display {
+  margin: 1rem 0 !important;
+  padding: 0.4rem 0 !important;
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
   overflow-x: auto !important;
   overflow-y: hidden !important;
   color: var(--academic-text-main) !important;
-  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+  max-width: 100% !important;
+  text-align: center;
 }
 
 /* インライン数式 */
-mjx-container:not([display="true"]) {
+mjx-container:not([display="true"]),
+.katex:not(.katex-display .katex) {
   padding: 0 0.15em;
-  font-size: 105%;
+  font-size: 100%;
   color: var(--academic-text-main);
 }
 
