@@ -88,6 +88,7 @@ export default defineConfig({
       '/games/': [
         {
           text: '特別企画・思考力トレーニング',
+          collapsed: false,
           items: [
             { text: '🎲 3次元オセロ（3D Reversi）', link: '/games/othello' },
             { text: '🏎️ 力学シミュレーション一覧', link: '/mechanics/index' },
@@ -98,6 +99,7 @@ export default defineConfig({
       '/problems/': [
         {
           text: '高校物理 演習問題集（全1000問）',
+          collapsed: false,
           items: [
             { text: '📝 問題集トップ（全1000問検索）', link: '/problems/index' },
             { text: '🏎️ 力学 演習問題（全320問）', link: '/problems/mechanics' },
@@ -110,65 +112,113 @@ export default defineConfig({
       ],
       '/mechanics/': [
         {
-          text: '力学（高校物理・全21テーマ）',
+          text: '📖 力学編トップ',
+          link: '/mechanics/index'
+        },
+        {
+          text: '🏎️ 運動の表し方・力と運動方程式',
+          collapsed: false,
           items: [
-            { text: '📖 力学編トップ', link: '/mechanics/index' },
             { text: '🏎️ 等加速度直線運動とv-tグラフ', link: '/mechanics/acceleration' },
             { text: '🚀 斜方投射（放物運動の公式）', link: '/mechanics/projectile' },
             { text: '📐 摩擦力と斜面上の運動（摩擦角）', link: '/mechanics/friction' },
             { text: '⚙️ 運動の法則・連結物体の運動方程式と滑車', link: '/mechanics/newton' },
+            { text: '🪂 空気抵抗と終端速度', link: '/mechanics/terminal-velocity' }
+          ]
+        },
+        {
+          text: '⚡ 仕事・エネルギー・運動量保存則',
+          collapsed: false,
+          items: [
             { text: '⚡ 仕事・仕事率と力学的エネルギー保存則', link: '/mechanics/energy' },
-            { text: '🔩 ばねの単振動（復元力とエネルギー）', link: '/mechanics/spring' },
             { text: '💥 運動量保存則と衝突（反発係数）', link: '/mechanics/momentum' },
             { text: '🎱 2次元平面衝突・斜め衝突と反発係数', link: '/mechanics/collision-2d' },
+            { text: '⚖️ 2体問題・重心運動と相対運動', link: '/mechanics/two-body' }
+          ]
+        },
+        {
+          text: '🔄 円運動・単振動・万有引力',
+          collapsed: false,
+          items: [
+            { text: '🔩 ばねの単振動（復元力とエネルギー）', link: '/mechanics/spring' },
             { text: '🕰️ 単振り子（等時性と周期公式）', link: '/mechanics/pendulum' },
             { text: '🔄 等速円運動・向心加速度・向心力', link: '/mechanics/circular' },
+            { text: '🎢 鉛直面内の円運動と宙返り・軌道離脱', link: '/mechanics/vertical-loop' },
             { text: '🚀 慣性力・見かけの重力・遠心力', link: '/mechanics/inertia' },
             { text: '🪐 万有引力と人工衛星・ケプラー則', link: '/mechanics/gravitation' },
-            { text: '🪐 惑星の楕円軌道・面積速度一定則とケプラー運動', link: '/mechanics/kepler-orbit' },
+            { text: '🪐 惑星の楕円軌道・面積速度一定則とケプラー運動', link: '/mechanics/kepler-orbit' }
+          ]
+        },
+        {
+          text: '🧱 剛体のつり合い・流体・束縛運動',
+          collapsed: false,
+          items: [
             { text: '⚖️ 剛体のつり合いと力のモーメント', link: '/mechanics/moment' },
             { text: '🧱 剛体の転倒条件と滑り出し限界', link: '/mechanics/toppling' },
             { text: '🌊 浮力とアルキメデスの原理・水圧', link: '/mechanics/buoyancy' },
-            { text: '⚖️ 2体問題・重心運動と相対運動', link: '/mechanics/two-body' },
-            { text: '🪂 空気抵抗と終端速度', link: '/mechanics/terminal-velocity' },
-            { text: '🎢 鉛直面内の円運動と宙返り・軌道離脱', link: '/mechanics/vertical-loop' },
             { text: '🪢 束縛運動と滑車・動く台上の運動', link: '/mechanics/constraint-motion' }
           ]
         }
       ],
       '/waves/': [
         {
-          text: '波動（高校物理・全13テーマ）',
+          text: '🌊 波動編トップ',
+          link: '/waves/index'
+        },
+        {
+          text: '🌊 波の基本・定常波・音波',
+          collapsed: false,
           items: [
             { text: '🌊 波の式とグラフ（y-xグラフとy-tグラフ）', link: '/waves/wave-equation' },
-            { text: '✅ 定常波・重ね合わせ・ドップラー効果', link: '/waves/index' },
             { text: '🔊 ドップラー効果の完全攻略', link: '/waves/doppler' },
             { text: '🔊 うなり（脈動）と音波の合成', link: '/waves/beats' },
             { text: '🎸 弦の振動と定常波・メルデの実験', link: '/waves/string-vibration' },
             { text: '📢 気柱の共鳴と開口端補正', link: '/waves/resonance' },
+            { text: '🌊 2波源の波の干渉と双曲線縞', link: '/waves/interference-2d' }
+          ]
+        },
+        {
+          text: '🌈 光の干渉・屈折・幾何光学',
+          collapsed: false,
+          items: [
             { text: '🌈 光の干渉・ヤングの二重スリット実験', link: '/waves/young' },
             { text: '✨ くさび形空気層の干渉・等厚干渉縞', link: '/waves/wedge-film' },
             { text: '✨ 薄膜干渉とニュートンリング', link: '/waves/thin-film' },
             { text: '🌈 回折格子とスペクトル分析', link: '/waves/diffraction-grating' },
             { text: '🔍 光の屈折・全反射とレンズの結像公式', link: '/waves/optics' },
-            { text: '🌊 2波源の波の干渉と双曲線縞', link: '/waves/interference-2d' },
             { text: '🪞 凹面鏡・凸面鏡と球面反射', link: '/waves/spherical-mirror' }
           ]
         }
       ],
       '/electromagnetism/': [
         {
-          text: '電磁気（高校物理・全15テーマ）',
+          text: '⚡ 電磁気学編トップ',
+          link: '/electromagnetism/index'
+        },
+        {
+          text: '⚡ 電場・電位・コンデンサー・直流回路',
+          collapsed: false,
           items: [
-            { text: '📖 電磁気学編トップ', link: '/electromagnetism/index' },
             { text: '⚡ クーロンの法則・電場と電位', link: '/electromagnetism/field' },
             { text: '🔋 コンデンサー回路と静電エネルギー・誘電体', link: '/electromagnetism/capacitor' },
-            { text: '💡 直流回路とキルヒホッフの法則・非オーム抵抗', link: '/electromagnetism/circuit' },
+            { text: '💡 直流回路とキルヒホッフの法則・非オーム抵抗', link: '/electromagnetism/circuit' }
+          ]
+        },
+        {
+          text: '🧲 電流と磁場・電磁力・電磁誘導',
+          collapsed: false,
+          items: [
             { text: '🌀 磁場中の荷電粒子の運動・ローレンツ力', link: '/electromagnetism/lorentz' },
             { text: '🧲 電磁力と平行電流間に働く力（アンペール力）', link: '/electromagnetism/magnetic-force' },
             { text: '🧲 電流がつくる磁場とアンペールの法則', link: '/electromagnetism/magnetic-field' },
             { text: '🧲 電磁誘導の法則と導線棒の運動', link: '/electromagnetism/induction' },
-            { text: '⚡ 自己誘導とコイルの過渡現象・RL回路', link: '/electromagnetism/self-induction' },
+            { text: '⚡ 自己誘導とコイルの過渡現象・RL回路', link: '/electromagnetism/self-induction' }
+          ]
+        },
+        {
+          text: '〰️ 交流回路・電磁振動・荷電粒子応用',
+          collapsed: false,
+          items: [
             { text: '〰️ 交流回路とRLC直列回路・共振', link: '/electromagnetism/ac-circuit' },
             { text: '⚡ LC振動回路と電磁振動', link: '/electromagnetism/lc-oscillation' },
             { text: '🧲 ホール効果とキャリア判定', link: '/electromagnetism/hall-effect' },
@@ -180,14 +230,24 @@ export default defineConfig({
       ],
       '/thermodynamics/': [
         {
-          text: '熱力学（高校物理・全10テーマ）',
+          text: '🔥 熱力学編トップ',
+          link: '/thermodynamics/index'
+        },
+        {
+          text: '🔥 気体の状態変化・分子運動論・熱サイクル',
+          collapsed: false,
           items: [
-            { text: '📖 熱力学編トップ', link: '/thermodynamics/index' },
             { text: '🔥 気体の状態変化・P-V図と熱力学第1法則', link: '/thermodynamics/gas-law' },
             { text: '🔬 気体分子運動論と二乗平均速度', link: '/thermodynamics/kinetic-theory' },
             { text: '🔥 カルノーサイクルと熱機関の熱効率', link: '/thermodynamics/carnot' },
             { text: '🚗 オットーサイクルと4行程内燃機関の熱効率', link: '/thermodynamics/otto-cycle' },
-            { text: '🔥 モル比熱とマイヤーの式・断熱変化', link: '/thermodynamics/heat-capacity' },
+            { text: '🔥 モル比熱とマイヤーの式・断熱変化', link: '/thermodynamics/heat-capacity' }
+          ]
+        },
+        {
+          text: '🧊 熱量・混合・気圧・浮力',
+          collapsed: false,
+          items: [
             { text: '🧊 熱量保存則・比熱・潜熱と相転移加熱曲線', link: '/thermodynamics/calorimetry' },
             { text: '🧪 気体の混合と可動ピストン', link: '/thermodynamics/gas-mixing' },
             { text: '🌡️ 水銀柱と大気圧・トリチェリの真空', link: '/thermodynamics/torricelli' },
@@ -197,9 +257,13 @@ export default defineConfig({
       ],
       '/atomic/': [
         {
-          text: '原子物理（高校物理・全13テーマ）',
+          text: '⚛️ 原子物理編トップ',
+          link: '/atomic/index'
+        },
+        {
+          text: '💡 光量子・電子・原子の構造',
+          collapsed: false,
           items: [
-            { text: '📖 原子物理編トップ', link: '/atomic/index' },
             { text: '💡 光電効果とアインシュタインの光量子仮説', link: '/atomic/photoelectric' },
             { text: '🔬 ミリカンの油滴実験と電気素量測定', link: '/atomic/millikan' },
             { text: '⚛️ ラザフォード散乱実験と原子核の発見', link: '/atomic/rutherford' },
@@ -207,7 +271,13 @@ export default defineConfig({
             { text: '💎 ブラッグ反射とX線結晶回折', link: '/atomic/bragg' },
             { text: '⚡ X線の発生とX線スペクトル', link: '/atomic/xray' },
             { text: '⚛️ 物質波（ド・ブロイ波）と電子線回折', link: '/atomic/matter-wave' },
-            { text: '⚛️ コンプトン効果と光子の運動量', link: '/atomic/compton' },
+            { text: '⚛️ コンプトン効果と光子の運動量', link: '/atomic/compton' }
+          ]
+        },
+        {
+          text: '☢️ 原子核・放射線・核反応',
+          collapsed: false,
+          items: [
             { text: '☢️ 放射性崩壊・半減期と放射線の性質', link: '/atomic/decay' },
             { text: '☢️ 放射平衡と壊変系列（過渡平衡・永続平衡）', link: '/atomic/equilibrium' },
             { text: '⚛️ 核反応・質量欠損と結合エネルギー', link: '/atomic/nuclear' },
