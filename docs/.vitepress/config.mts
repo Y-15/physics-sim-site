@@ -54,6 +54,16 @@ export default defineConfig({
     ['meta', { name: 'twitter:description', content: '高校物理・共通テスト・大学受験対応。動くシミュレーションと厳選例題で直感理解！' }],
     ['meta', { name: 'twitter:image', content: 'https://y-15.github.io/physics-sim-site/og-image.svg' }],
 
+    // Google AdSense 自動広告・基本タグ
+    [
+      'script',
+      {
+        async: '',
+        src: 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX',
+        crossorigin: 'anonymous'
+      }
+    ],
+
     // 構造化データ (JSON-LD: Schema.org EducationalOrganization)
     [
       'script',
@@ -71,6 +81,7 @@ export default defineConfig({
     ]
   ],
 
+
   themeConfig: {
     nav: [
       { text: 'ホーム', link: '/' },
@@ -81,7 +92,8 @@ export default defineConfig({
       { text: '原子', link: '/atomic/index' },
       { text: '演習問題', link: '/problems/index' },
       { text: '🎲 3Dオセロ', link: '/games/othello' },
-      { text: '受験・学習ガイド', link: '/about' }
+      { text: '受験・学習ガイド', link: '/about' },
+      { text: 'プライバシーポリシー', link: '/privacy' }
     ],
 
     sidebar: {
@@ -292,7 +304,7 @@ export default defineConfig({
     ],
 
     footer: {
-      message: '完全無料の物理インタラクティブ学習サイト',
+      message: '完全無料の高校物理インタラクティブ学習サイト | <a href="/physics-sim-site/privacy">プライバシーポリシー</a>',
       copyright: 'Copyright © 2026 Physics Lab'
     },
 

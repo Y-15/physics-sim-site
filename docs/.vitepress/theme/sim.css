@@ -366,3 +366,41 @@
   text-align: center;
 }
 
+/* ==========================================================
+   Google AdSense / 広告保護・UX安全スタイリング
+   ========================================================== */
+/* シミュレーター操作領域内への自動広告挿入・オーバーレイを厳格に遮断 */
+.sim-container,
+.sim-canvas-box,
+.sim-controls,
+.sim-controls-panel,
+.vector-diagram-card,
+.vector-graph-card,
+.playback-bar,
+.interactive-calc-card,
+.quiz-box {
+  isolation: isolate;
+  position: relative;
+}
+
+.sim-container .google-auto-placed,
+.sim-canvas-box .google-auto-placed,
+.sim-controls .google-auto-placed,
+.playback-bar .google-auto-placed {
+  display: none !important;
+}
+
+/* 広告表示エリアのスタイリング */
+.ad-unit-container {
+  contain: layout style;
+  box-sizing: border-box;
+}
+
+/* モバイル下部固定（アンカー広告）表示時のセーフマージン */
+@media (max-width: 768px) {
+  body {
+    padding-bottom: 50px;
+  }
+}
+
+
