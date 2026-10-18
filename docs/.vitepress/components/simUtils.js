@@ -177,11 +177,6 @@ export function useLoop(arg1, arg2) {
         ctx.save()
         ctx.setTransform(targetDpr, 0, 0, targetDpr, 0, 0)
         const payload = { ctx, canvas, width: logicalW, height: logicalH, dt }
-        ctx.ctx = ctx
-        ctx.canvas = canvas
-        ctx.width = logicalW
-        ctx.height = logicalH
-        ctx.dt = dt
         try {
           callback(payload, logicalW, logicalH, dt)
         } catch (e) {

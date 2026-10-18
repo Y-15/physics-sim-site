@@ -52,9 +52,9 @@
         </div>
       </div>
       <div class="stat-card highlight">
-        <div class="stat-label">前方受聴振動数 f'</div>
-        <div class="stat-value text-cyan">
-          {{ vs < V ? frontFreq.toFixed(1) : '衝撃波 (∞)' }} <span class="stat-unit">Hz</span>
+        <div class="stat-label">受聴振動数 f' (前方 / 後方)</div>
+        <div class="stat-value text-cyan" style="font-size: 1.1rem;">
+          {{ vs < V ? frontFreq.toFixed(1) : '衝撃波(∞)' }} / {{ rearFreq.toFixed(1) }} <span class="stat-unit">Hz</span>
         </div>
       </div>
     </div>
@@ -121,11 +121,16 @@ let lastEmitTime = 0
 let animId = null
 let lastTime = 0
 
-// 前方受聴周波数
+// 前方・後方の受聴周波数
 const frontFreq = computed(() => {
   if (vs.value >= V.value) return 9999
   const ratio = (V.value - vo.value) / (V.value - vs.value)
-  return Math.max(0, 440 * ratio)
+  return Math.max(0, f0.value * ratio)
+})
+
+const rearFreq = computed(() => {
+  const ratio = (V.value + vo.value) / (V.value + vs.value)
+  return Math.max(0, f0.value * ratio)
 })
 
 function togglePlay() {
@@ -198,6 +203,15 @@ function updateAndDraw(timestamp) {
   if (isRunning.value) {
     advancePhysics(dt * timeScale.value)
   }
+
+  const canvas = canvasRef.value
+  if (!canvas) {
+    animId = requestAnimationFrame(updateAndDraw)
+    return
+  }
+  const ctx = canvas.getContext('2d')
+  const width = canvas.width
+  const height = canvas.height
 
   // --- 描画処理 ---
   ctx.fillStyle = '#0f172a'

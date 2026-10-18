@@ -238,8 +238,9 @@ function draw() {
 
   const n = harmonicMode.value
   const amp = 55 // 最大振幅 px
-  // 角振動数（画面上の描画速度にスケーリング）
-  const omega = 4.2
+  // 視覚的角振動数: モード n と波の速さ v に応じてダイナミックに変化（高次モードほど速く振動）
+  const baseOmega = 2.6
+  const omega = baseOmega * (1 + 0.45 * (n - 1)) * Math.sqrt(Math.max(0.5, waveSpeedMs.value / 200))
   const timeFactor = Math.cos(omega * simTime)
 
   // 定常波のエンベロープ（包絡線）

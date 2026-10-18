@@ -76,7 +76,7 @@
       </div>
 
       <div class="stat-card">
-        <span class="label">全縞数（x=0 \sim L）</span>
+        <span class="label">全縞数 (x = 0 〜 L)</span>
         <span class="value">{{ totalFringes }} <span class="unit">本</span></span>
         <span class="subtext">N = 2 n D / λ</span>
       </div>

@@ -85,7 +85,7 @@
       </div>
 
       <div class="stat-card">
-        <span class="label">可視光の最大次数 <i>m</i><sub>\max</sub></span>
+        <span class="label">可視光の最大次数 <i>m</i><sub>max</sub></span>
         <span class="value">{{ maxOrder }}</span>
         <span class="subtext">sinθ ≤ 1 より</span>
       </div>
@@ -213,8 +213,9 @@ const draw = () => {
   ctx.fillText('m = 0 (中心)', screenCenterX, bandY + bandH + 14)
 
   // 回折光の描画
-  const d_nm = gratingD_nm.value
-  const L_cm = screenDistCm.value
+  try {
+    const d_nm = gratingD_nm.value
+    const L_cm = screenDistCm.value
 
   const drawSpectralLine = (nm, intensity, label) => {
     const color = nmToRgb(nm)
@@ -222,26 +223,26 @@ const draw = () => {
       const sinTh = (m * nm) / d_nm
       if (sinTh >= 0.98) continue
       const th = Math.asin(sinTh)
-      const x_cm = L_cm * Math.tan(th)
-      const pxOffset = x_cm * pxPerCm
+      const x_cm = L_cm * Math.tan(th);
+      const pxOffset = x_cm * pxPerCm;
 
       // 左右に対称に描画
-      [-1, 1].forEach(sign => {
-        const lineX = screenCenterX + sign * pxOffset
+      for (const sign of [-1, 1]) {
+        const lineX = screenCenterX + sign * pxOffset;
         if (lineX >= screenLeft + 4 && lineX <= screenRight - 4) {
-          ctx.fillStyle = color
-          ctx.shadowColor = color
-          ctx.shadowBlur = 8
-          ctx.fillRect(lineX - 1.5, bandY + 6, 3, bandH - 12)
-          ctx.shadowBlur = 0
+          ctx.fillStyle = color;
+          ctx.shadowColor = color;
+          ctx.shadowBlur = 8;
+          ctx.fillRect(lineX - 1.5, bandY + 6, 3, bandH - 12);
+          ctx.shadowBlur = 0;
 
           if (label && m === 1) {
-            ctx.fillStyle = '#cbd5e1'
-            ctx.font = '9px sans-serif'
-            ctx.fillText(label, lineX, bandY - 6)
+            ctx.fillStyle = '#cbd5e1';
+            ctx.font = '9px sans-serif';
+            ctx.fillText(label, lineX, bandY - 6);
           }
         }
-      })
+      }
     }
   }
 
@@ -262,16 +263,16 @@ const draw = () => {
         const sinTh = (m * nm) / d_nm
         if (sinTh >= 0.98) continue
         const th = Math.asin(sinTh)
-        const x_cm = L_cm * Math.tan(th)
-        const pxOffset = x_cm * pxPerCm
+        const x_cm = L_cm * Math.tan(th);
+        const pxOffset = x_cm * pxPerCm;
 
-        [-1, 1].forEach(sign => {
-          const lineX = screenCenterX + sign * pxOffset
+        for (const sign of [-1, 1]) {
+          const lineX = screenCenterX + sign * pxOffset;
           if (lineX >= screenLeft + 4 && lineX <= screenRight - 4) {
-            ctx.fillStyle = color
-            ctx.fillRect(lineX - 0.7, bandY + 8, 1.4, bandH - 16)
+            ctx.fillStyle = color;
+            ctx.fillRect(lineX - 0.7, bandY + 8, 1.4, bandH - 16);
           }
-        })
+        }
       }
     }
     // 次数ラベル
@@ -348,6 +349,9 @@ const draw = () => {
     ctx.lineTo(px, py)
   }
   ctx.stroke()
+  } catch (err) {
+    console.error('GRATING DRAW ERROR:', err)
+  }
 }
 
 onMounted(() => {
