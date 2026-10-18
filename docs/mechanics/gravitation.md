@@ -332,4 +332,4 @@ $$
 * 🔄 [等速円運動・向心加速度・向心力](/mechanics/circular)
 * ⚡ [仕事・仕事率と力学的エネルギー保存則](/mechanics/energy)
 * 🚀 [斜方投射（放物運動の公式・軌道シミュレーター）](/mechanics/projectile)
-* 📝 [力学 厳選演習問題集（全320問）](/problems/mechanics)
+* 📝 [力学 厳選演習問題集（解答解説付き）](/problems/mechanics)

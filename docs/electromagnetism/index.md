@@ -61,6 +61,6 @@ description: 高校物理の電磁気学分野（全14テーマ：電場と電�
 ---
 
 ## 📝 電磁気の入試対策と演習問題
-* **[⚡ 電磁気 厳選演習問題集（全250問・解答解説付き）](/problems/electromagnetism)**
+* **[⚡ 電磁気 厳選演習問題集（解答解説付き）](/problems/electromagnetism)**
 
 <!--@include: ../parts/notice.md-->

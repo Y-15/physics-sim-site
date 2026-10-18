@@ -488,4 +488,4 @@ $$
 * 📐 [摩擦力と斜面上の運動（摩擦角）](/mechanics/friction)
 * 💥 [運動量保存則と反発係数](/mechanics/momentum)
 * 🕰️ [単振り子の運動方程式と周期公式](/mechanics/pendulum)
-* 📝 [力学 厳選演習問題集（全320問）](/problems/mechanics)
+* 📝 [力学 厳選演習問題集（解答解説付き）](/problems/mechanics)

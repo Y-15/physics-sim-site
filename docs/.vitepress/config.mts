@@ -1,4 +1,32 @@
 import { defineConfig } from 'vitepress'
+import fs from 'node:fs'
+import path from 'node:path'
+
+// 実際に掲載されている演習問題を自動カウントするヘルパー関数
+function getProblemCounts() {
+  const defaults = { total: 0, mechanics: 0, waves: 0, electromagnetism: 0, thermodynamics: 0, atomic: 0 }
+  try {
+    const jsonPath = path.resolve(__dirname, '../public/data/problems.json')
+    if (fs.existsSync(jsonPath)) {
+      const data = JSON.parse(fs.readFileSync(jsonPath, 'utf-8'))
+      if (Array.isArray(data)) {
+        return {
+          total: data.length,
+          mechanics: data.filter((p: any) => p.unitId === 'mechanics').length,
+          waves: data.filter((p: any) => p.unitId === 'waves').length,
+          electromagnetism: data.filter((p: any) => p.unitId === 'electromagnetism').length,
+          thermodynamics: data.filter((p: any) => p.unitId === 'thermodynamics').length,
+          atomic: data.filter((p: any) => p.unitId === 'atomic').length,
+        }
+      }
+    }
+  } catch (e) {
+    console.warn('[config.mts] 問題数カウントの自動取得に失敗しました:', e)
+  }
+  return defaults
+}
+
+const pCounts = getProblemCounts()
 
 // GitHub Pages用のベースパス設定（GitHub Actionsビルド時にリポジトリ名から自動判定）
 const base = (process.env.BASE_PATH || (process.env.GITHUB_REPOSITORY ? `/${process.env.GITHUB_REPOSITORY.split('/')[1]}/` : '/')) as `/${string}/` | '/'
@@ -112,15 +140,15 @@ export default defineConfig({
       ],
       '/problems/': [
         {
-          text: '高校物理 厳選演習問題集（全197問）',
+          text: `高校物理 演習問題集（全${pCounts.total}問）`,
           collapsed: false,
           items: [
-            { text: '📝 問題集トップ（全問検索・演習システム）', link: '/problems/index' },
-            { text: '🏎️ 力学 演習問題（全68問）', link: '/problems/mechanics' },
-            { text: '🌊 波動 演習問題（全36問）', link: '/problems/waves' },
-            { text: '⚡ 電磁気 演習問題（全45問）', link: '/problems/electromagnetism' },
-            { text: '🔥 熱力学 演習問題（全24問）', link: '/problems/thermodynamics' },
-            { text: '⚛️ 原子物理 演習問題（全24問）', link: '/problems/atomic' }
+            { text: `📝 問題集トップ（全${pCounts.total}問検索）`, link: '/problems/index' },
+            { text: `🏎️ 力学 演習問題（全${pCounts.mechanics}問）`, link: '/problems/mechanics' },
+            { text: `🌊 波動 演習問題（全${pCounts.waves}問）`, link: '/problems/waves' },
+            { text: `⚡ 電磁気 演習問題（全${pCounts.electromagnetism}問）`, link: '/problems/electromagnetism' },
+            { text: `🔥 熱力学 演習問題（全${pCounts.thermodynamics}問）`, link: '/problems/thermodynamics' },
+            { text: `⚛️ 原子物理 演習問題（全${pCounts.atomic}問）`, link: '/problems/atomic' }
           ]
         }
       ],

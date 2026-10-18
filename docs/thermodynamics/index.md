@@ -48,6 +48,6 @@ description: 高校物理の熱力学分野（全9テーマ：気体の状態変
 ---
 
 ## 📝 熱力学の入試対策と演習問題
-* **[🔥 熱力学 厳選演習問題集（全130問・解答解説付き）](/problems/thermodynamics)**
+* **[🔥 熱力学 厳選演習問題集（解答解説付き）](/problems/thermodynamics)**
 
 <!--@include: ../parts/notice.md-->

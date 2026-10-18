@@ -183,4 +183,4 @@ $$
 * 🌊 [波の式とグラフ（y-xグラフとy-tグラフ）](/waves/wave-equation)
 * 🔊 [うなり（脈動）と音波の合成](/waves/beats)
 * 🌈 [光の干渉・ヤングの二重スリット実験](/waves/young)
-* 📝 [波動 厳選演習問題集（全180問）](/problems/waves)
+* 📝 [波動 厳選演習問題集（解答解説付き）](/problems/waves)

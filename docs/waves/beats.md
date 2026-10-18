@@ -168,5 +168,5 @@ $$
 * 🌊 [定常波・波の重ね合わせ・ドップラー効果](/waves/index)
 * 🎸 [弦の振動と定常波・メルデの実験](/waves/string-vibration)
 * 📢 [気柱の共鳴と開口端補正](/waves/resonance)
-* 📝 [波動 厳選演習問題集（全180問）](/problems/waves)
+* 📝 [波動 厳選演習問題集（解答解説付き）](/problems/waves)
 

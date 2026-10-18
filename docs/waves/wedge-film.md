@@ -174,4 +174,4 @@ $$
 * 🌈 [光の干渉・ヤングの二重スリット実験](/waves/young)
 * 🌈 [回折格子とスペクトル分析](/waves/diffraction-grating)
 * 🔍 [光の屈折・全反射とレンズの結像公式](/waves/optics)
-* 📝 [波動 厳選演習問題集（全180問）](/problems/waves)
+* 📝 [波動 厳選演習問題集（解答解説付き）](/problems/waves)
