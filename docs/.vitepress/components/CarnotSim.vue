@@ -152,6 +152,17 @@ function resetCycle() {
   stageProgress.value = 0
 }
 
+// 分子粒子のシミュレーション用
+const particles = []
+for (let i = 0; i < 30; i++) {
+  particles.push({
+    x: Math.random(),
+    y: Math.random(),
+    vx: (Math.random() - 0.5) * 2,
+    vy: (Math.random() - 0.5) * 2
+  })
+}
+
 function updateAndDraw(timestamp) {
   if (!lastTime) lastTime = timestamp
   const dt = (timestamp - lastTime) / 1000
@@ -191,12 +202,11 @@ function updateAndDraw(timestamp) {
   ctx.stroke()
 
   ctx.fillStyle = '#94a3b8'
-  ctx.font = '12px sans-serif'
-  ctx.fillText('体積 V', pvX + pvW - 35, pvY + pvH + 20)
-  ctx.fillText('圧力 P', pvX - 45, pvY + 15)
+  ctx.font = 'bold 12px sans-serif'
+  ctx.fillText('体積 V →', pvX + pvW - 45, pvY + pvH + 20)
+  ctx.fillText('↑ 圧力 P', pvX - 45, pvY + 15)
 
   // 4頂点の座標定義 (A, B, C, D)
-  // 温度比率により座標を動的計算
   const tRatio = TL.value / TH.value // 0.3..0.8
   const pA = { x: pvX + 45, y: pvY + 35 }
   const pB = { x: pvX + 130, y: pvY + 80 }
@@ -206,10 +216,10 @@ function updateAndDraw(timestamp) {
   // サイクル内部の塗り（仕事 W）
   ctx.beginPath()
   ctx.moveTo(pA.x, pA.y)
-  ctx.quadraticCurveTo((pA.x + pB.x) / 2, (pA.y + pB.y) / 2 - 8, pB.x, pB.y) // A->B
-  ctx.quadraticCurveTo((pB.x + pC.x) / 2 + 10, (pB.y + pC.y) / 2, pC.x, pC.y) // B->C
-  ctx.quadraticCurveTo((pC.x + pD.x) / 2, (pC.y + pD.y) / 2 + 8, pD.x, pD.y) // C->D
-  ctx.quadraticCurveTo((pD.x + pA.x) / 2 - 10, (pD.y + pA.y) / 2, pA.x, pA.y) // D->A
+  ctx.quadraticCurveTo((pA.x + pB.x) / 2, (pA.y + pB.y) / 2 - 8, pB.x, pB.y) // A->B (等温)
+  ctx.quadraticCurveTo((pB.x + pC.x) / 2 + 10, (pB.y + pC.y) / 2, pC.x, pC.y) // B->C (断熱)
+  ctx.quadraticCurveTo((pC.x + pD.x) / 2, (pC.y + pD.y) / 2 + 8, pD.x, pD.y) // C->D (等温)
+  ctx.quadraticCurveTo((pD.x + pA.x) / 2 - 10, (pD.y + pA.y) / 2, pA.x, pA.y) // D->A (断熱)
   ctx.closePath()
   ctx.fillStyle = 'rgba(251, 191, 36, 0.2)'
   ctx.fill()
@@ -219,33 +229,44 @@ function updateAndDraw(timestamp) {
 
   // 頂点ラベル
   ctx.fillStyle = '#f8fafc'
-  ctx.font = 'bold 12px sans-serif'
-  ctx.fillText('A (T_H)', pA.x - 15, pA.y - 8)
-  ctx.fillText('B (T_H)', pB.x + 8, pB.y - 6)
-  ctx.fillText('C (T_L)', pC.x + 8, pC.y + 12)
-  ctx.fillText('D (T_L)', pD.x - 25, pD.y + 14)
+  ctx.font = 'bold 11px sans-serif'
+  ctx.fillText(`A (${TH.value}K)`, pA.x - 20, pA.y - 8)
+  ctx.fillText(`B (${TH.value}K)`, pB.x + 8, pB.y - 6)
+  ctx.fillText(`C (${TL.value}K)`, pC.x + 8, pC.y + 14)
+  ctx.fillText(`D (${TL.value}K)`, pD.x - 28, pD.y + 14)
 
   ctx.fillStyle = '#fbbf24'
-  ctx.font = '12px sans-serif'
-  ctx.fillText('面積 ＝ 正味の仕事 W', pvX + 70, pvY + pvH / 2 + 15)
+  ctx.font = 'bold 12px sans-serif'
+  ctx.fillText('面積 ＝ 正味の仕事 W', pvX + 65, pvY + pvH / 2 + 15)
 
-  // 現在の状態点 (赤い球)
+  // 現在の状態点 (球)
   let curX = pA.x, curY = pA.y
+  let curTemp = TH.value
   const pr = stageProgress.value
+
   if (currentStage.value === 0) {
+    // A -> B: 等温膨張 (T = TH)
     curX = pA.x + (pB.x - pA.x) * pr
     curY = pA.y + (pB.y - pA.y) * pr
+    curTemp = TH.value
   } else if (currentStage.value === 1) {
+    // B -> C: 断熱膨張 (TH -> TL)
     curX = pB.x + (pC.x - pB.x) * pr
     curY = pB.y + (pC.y - pB.y) * pr
+    curTemp = TH.value + (TL.value - TH.value) * pr
   } else if (currentStage.value === 2) {
+    // C -> D: 等温圧縮 (T = TL)
     curX = pC.x + (pD.x - pC.x) * pr
     curY = pC.y + (pD.y - pC.y) * pr
+    curTemp = TL.value
   } else {
+    // D -> A: 断熱圧縮 (TL -> TH)
     curX = pD.x + (pA.x - pD.x) * pr
     curY = pD.y + (pA.y - pD.y) * pr
+    curTemp = TL.value + (TH.value - TL.value) * pr
   }
 
+  // 状態点プロット
   ctx.fillStyle = '#f43f5e'
   ctx.beginPath()
   ctx.arc(curX, curY, 7, 0, Math.PI * 2)
@@ -266,14 +287,35 @@ function updateAndDraw(timestamp) {
   ctx.strokeRect(cylX, cylY, cylW, cylH)
 
   // ピストン位置（体積に連動）
-  // curX (pvX+45 .. pvX+230) をピストン位置にマッピング
   const vNorm = (curX - (pvX + 45)) / (230 - 45) // 0..1
   const pistonX = cylX + 50 + vNorm * 130
 
-  // 気体内部 (色: 高温なら赤み、低温なら青み)
-  const isHighT = currentStage.value === 0 || (currentStage.value === 1 && pr < 0.5) || (currentStage.value === 3 && pr > 0.5)
-  ctx.fillStyle = isHighT ? 'rgba(244, 63, 94, 0.3)' : 'rgba(56, 189, 248, 0.3)'
+  // 気体内部背景 (温度に応じたグラデーション着色)
+  const tempFrac = Math.min(1, Math.max(0, (curTemp - TL.value) / Math.max(1, TH.value - TL.value)))
+  const gasR = Math.round(56 + tempFrac * 188)
+  const gasG = Math.round(189 - tempFrac * 126)
+  const gasB = Math.round(248 - tempFrac * 154)
+  ctx.fillStyle = `rgba(${gasR}, ${gasG}, ${gasB}, 0.22)`
   ctx.fillRect(cylX + 2, cylY + 2, pistonX - cylX - 2, cylH - 4)
+
+  // 気体分子の運動
+  const molSpeed = Math.sqrt(curTemp / 300) * 1.6
+  const gasWidth = pistonX - cylX - 10
+  ctx.fillStyle = `rgb(${gasR}, ${gasG}, ${gasB})`
+  particles.forEach(p => {
+    p.x += p.vx * molSpeed * dt * 0.8
+    p.y += p.vy * molSpeed * dt * 0.8
+    if (p.x < 0) { p.x = 0; p.vx *= -1 }
+    if (p.x > 1) { p.x = 1; p.vx *= -1 }
+    if (p.y < 0) { p.y = 0; p.vy *= -1 }
+    if (p.y > 1) { p.y = 1; p.vy *= -1 }
+
+    const px = cylX + 5 + p.x * gasWidth
+    const py = cylY + 5 + p.y * (cylH - 10)
+    ctx.beginPath()
+    ctx.arc(px, py, 3, 0, Math.PI * 2)
+    ctx.fill()
+  })
 
   // ピストンヘッド
   ctx.fillStyle = '#94a3b8'
@@ -287,30 +329,30 @@ function updateAndDraw(timestamp) {
   if (currentStage.value === 0) {
     // 高温熱源から吸熱
     ctx.fillStyle = '#ef4444'
-    ctx.fillRect(cylX + 20, heatY, 140, 30)
+    ctx.fillRect(cylX + 20, heatY, 150, 30)
     ctx.fillStyle = '#fff'
     ctx.font = 'bold 12px sans-serif'
-    ctx.fillText(`高温熱源 T_H (${TH.value}K) 吸熱 ↑`, cylX + 30, heatY + 20)
+    ctx.fillText(`高温熱源 T_H (${TH.value}K) 吸熱 ↑`, cylX + 26, heatY + 20)
   } else if (currentStage.value === 2) {
     // 低温熱源へ放熱
     ctx.fillStyle = '#3b82f6'
-    ctx.fillRect(cylX + 20, heatY, 140, 30)
+    ctx.fillRect(cylX + 20, heatY, 150, 30)
     ctx.fillStyle = '#fff'
     ctx.font = 'bold 12px sans-serif'
-    ctx.fillText(`低温熱源 T_L (${TL.value}K) 放熱 ↓`, cylX + 30, heatY + 20)
+    ctx.fillText(`低温熱源 T_L (${TL.value}K) 放熱 ↓`, cylX + 26, heatY + 20)
   } else {
     // 断熱壁
     ctx.fillStyle = '#334155'
-    ctx.fillRect(cylX + 20, heatY, 140, 30)
+    ctx.fillRect(cylX + 20, heatY, 150, 30)
     ctx.fillStyle = '#94a3b8'
     ctx.font = 'bold 12px sans-serif'
-    ctx.fillText('断熱壁 (Q ＝ 0)', cylX + 50, heatY + 20)
+    ctx.fillText('🛡️ 断熱壁 (熱の出入り Q ＝ 0)', cylX + 24, heatY + 20)
   }
 
   // 気体温度表示
-  ctx.fillStyle = isHighT ? '#f43f5e' : '#38bdf8'
+  ctx.fillStyle = `rgb(${gasR}, ${gasG}, ${gasB})`
   ctx.font = 'bold 14px sans-serif'
-  ctx.fillText(`気体温度: ${isHighT ? TH.value : TL.value} K`, cylX + 20, cylY - 14)
+  ctx.fillText(`気体温度: ${curTemp.toFixed(0)} K`, cylX + 20, cylY - 14)
 
   animId = requestAnimationFrame(updateAndDraw)
 }
@@ -524,5 +566,24 @@ onUnmounted(() => {
   padding: 10px 14px;
   border-radius: 6px;
   border-left: 3px solid #38bdf8;
+}
+
+.frac {
+  display: inline-flex;
+  flex-direction: column;
+  vertical-align: middle;
+  text-align: center;
+  font-size: 0.85em;
+  padding: 0 3px;
+  line-height: 1.1;
+}
+
+.frac .num {
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 1px;
+}
+
+.frac .den {
+  padding-top: 1px;
 }
 </style>

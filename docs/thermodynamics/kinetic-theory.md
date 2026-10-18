@@ -34,7 +34,7 @@ description: 高校物理の熱力学。気体分子運動論の完全導出（�
 * **マクロの世界（私たちが目にする世界）**: 圧力 $P$、体積 $V$、温度 $T$（状態方程式 $PV = nRT$）。
 * **ミクロの世界（分子の世界）**: 質量 $m$、速度 $v$、分子数 $N$（ニュートン力学 $ma = F$、力積 $\Delta p = F\Delta t$）。
 
-気体分子運動論は、一見まったく別の学問に見える「熱力学」と「ニュートン力学」が、実は**完全に同じ現象の表と裏**であることを証明する感動的な理論です。
+気体分子運動論は、一見まったく別の学問に見える「熱力学」と「ニュートン力学」が、実は **完全に同じ現象の表と裏** であることを証明する感動的な理論です。
 
 ---
 
@@ -105,11 +105,11 @@ description: 高校物理の熱力学。気体分子運動論の完全導出（�
 ---
 
 ### ステップ1：1回の衝突による力積
-ある1個の分子が、速度 $(v_x, v_y, v_z)$ で $x$ 軸に垂直な壁 $\text{S}$（$x = L$ の面）に**完全弾性衝突**（反発係数 $e = 1$）したとする。
+ある1個の分子が、速度 $(v_x, v_y, v_z)$ で $x$ 軸に垂直な壁 $\text{S}$（$x = L$ の面）に **完全弾性衝突** （反発係数 $e = 1$）したとする。
 * 衝突前の $x$ 方向の運動量: $+m v_x$
 * 衝突後の $x$ 方向の運動量: $-m v_x$
 * 分子の運動量の変化量: $\Delta p_x = (-m v_x) - (+m v_x) = -2m v_x$
-* 作用・反作用の法則より、**壁 $\text{S}$ が分子から受ける力積**は：
+* 作用・反作用の法則より、 **壁 $\text{S}$ が分子から受ける力積** は：
   $$I = +2 m v_x$$
 
 ---
@@ -145,7 +145,7 @@ $$F = \frac{N m \overline{v^2}}{3L}$$
 
 $$P = \frac{F}{L^2} = \frac{N m \overline{v^2}}{3 L^3} = \frac{N m \overline{v^2}}{3V}$$
 
-両辺に体積 $V$ をかけると、**分子運動論の基本方程式**が得られます：
+両辺に体積 $V$ をかけると、 **分子運動論の基本方程式** が得られます：
 
 $$P V = \frac{1}{3} N m \overline{v^2}$$
 
@@ -161,11 +161,10 @@ $$\frac{1}{3} N m \overline{v^2} = n R T = \frac{N}{N_A} R T$$
 
 $$\frac{1}{2} m \overline{v^2} = \frac{3}{2} \frac{R}{N_A} T = \frac{3}{2} k_B T$$
 
-ここで $k_B = \frac{R}{N_A} \approx 1.38 \times 10^{-23}\,\text{J/K}$ は**ボルツマン定数**です。
+ここで $k_B = \frac{R}{N_A} \approx 1.38 \times 10^{-23}\,\text{J/K}$ は **ボルツマン定数** です。
 
 > [!IMPORTANT]
-> **物理学上最大の結論**  
-> 分子1個の平均運動エネルギーは、**絶対温度 $T$ に完全に比例し、気体の種類（分子の質量 $m$）には一切依存しない！**  
+> **物理学上最大の結論 **> 分子1個の平均運動エネルギーは、** 絶対温度 $T$ に完全に比例し、気体の種類（分子の質量 $m$）には一切依存しない！**  
 > どんなに重い気体（キセノンなど）でも、どんなに軽い気体（水素など）でも、同じ温度であれば分子1個の平均運動エネルギーは完全に等しくなります。
 
 ---
@@ -173,14 +172,19 @@ $$\frac{1}{2} m \overline{v^2} = \frac{3}{2} \frac{R}{N_A} T = \frac{3}{2} k_B T
 ### ④ 二乗平均速度 $v_{\text{rms}}$
 気体1モルの質量（モル質量）を $M = m N_A\,[\text{kg/mol}]$ とすると：
 
-$$\frac{1}{2} m \overline{v^2} = \frac{3}{2} \frac{R}{N_A} T \implies \frac{1}{2} (m N_A) \overline{v^2} = \frac{3}{2} R T \implies \frac{1}{2} M \overline{v^2} = \frac{3}{2} R T$$
+$$
+\begin{aligned}
+\frac{1}{2} m \overline{v^2} = \frac{3}{2} \frac{R}{N_A} T &\implies \frac{1}{2} (m N_A) \overline{v^2} = \frac{3}{2} R T \\
+&\implies \frac{1}{2} M \overline{v^2} = \frac{3}{2} R T
+\end{aligned}
+$$
 
-両辺を解くと、**二乗平均速度（Root Mean Square Speed）**が求まります：
+両辺を解くと、 **二乗平均速度（Root Mean Square Speed）** が求まります：
 
 $$v_{\text{rms}} = \sqrt{\overline{v^2}} = \sqrt{\frac{3RT}{M}}$$
 
-* **温度 $T$ が高いほど速い**（$\sqrt{T}$ に比例）
-* **モル質量 $M$ が小さい（軽い）気体ほど猛スピード**（$1/\sqrt{M}$ に反比例）
+* **温度 $T$ が高いほど速い** （$\sqrt{T}$ に比例）
+* **モル質量 $M$ が小さい（軽い）気体ほど猛スピード** （$1/\sqrt{M}$ に反比例）
 
 ---
 
@@ -201,7 +205,9 @@ $$v_{\text{rms}} = \sqrt{\overline{v^2}} = \sqrt{\frac{3RT}{M}}$$
 下の実験室では、左側に容器内を跳ね回る気体分子、右側に速度分布ヒストグラム（マクスウェル＝ボルツマン分布）をリアルタイム表示します。
 温度 $T$ スライダーを動かしたり、水素・ヘリウム・窒素・酸素のプリセットを切り替えて観察してください。
 
-<KineticSim />
+<ClientOnly>
+  <KineticSim />
+</ClientOnly>
 
 ### 観察のポイント
 1. **温度とスピードの関係**:
@@ -234,7 +240,12 @@ $$v_{\text{rms}} = \sqrt{\overline{v^2}} = \sqrt{\frac{3RT}{M}}$$
 * **着眼点**: 二乗平均速度の公式 $v_{\text{rms}} = \sqrt{\frac{3RT}{M}}$ を用いる。
   モル質量の単位を必ず $\text{kg/mol}$ に換算して代入する（$M = 4.0 \times 10^{-3}\,\text{kg/mol}$）。
 * **計算**:
-  $$v_{\text{rms}} = \sqrt{\frac{3 \times 8.3 \times 300}{4.0 \times 10^{-3}}} = \sqrt{\frac{7470}{4.0 \times 10^{-3}}} = \sqrt{1867.5 \times 10^3} = \sqrt{1.8675 \times 10^6} \approx 1.37 \times 10^3\,\text{m/s}$$
+  $$
+  \begin{aligned}
+  v_{\text{rms}} &= \sqrt{\frac{3 \times 8.3 \times 300}{4.0 \times 10^{-3}}} = \sqrt{\frac{7470}{4.0 \times 10^{-3}}} \\
+  &= \sqrt{1.8675 \times 10^6} \approx 1.37 \times 10^3\,\text{m/s}
+  \end{aligned}
+  $$
 
 **答**: $1.4 \times 10^3\,\text{m/s}$（約 $1370\,\text{m/s}$）
 
@@ -243,7 +254,12 @@ $$v_{\text{rms}} = \sqrt{\overline{v^2}} = \sqrt{\frac{3RT}{M}}$$
 ##### 設問(2)
 * **着眼点**: 分子1個の平均運動エネルギーは $\overline{E_k} = \frac{3}{2} k_B T = \frac{3}{2} \frac{R}{N_A} T$。
 * **計算**:
-  $$\overline{E_k} = \frac{3}{2} \times \frac{8.3}{6.0 \times 10^{23}} \times 300 = \frac{3 \times 8.3 \times 300}{12.0 \times 10^{23}} = \frac{7470}{1.2 \times 10^{24}} = 6.225 \times 10^{-21}\,\text{J}$$
+  $$
+  \begin{aligned}
+  \overline{E_k} &= \frac{3}{2} \times \frac{8.3}{6.0 \times 10^{23}} \times 300 \\
+  &= \frac{7470}{1.2 \times 10^{24}} = 6.225 \times 10^{-21}\,\text{J}
+  \end{aligned}
+  $$
 
 **答**: $6.2 \times 10^{-21}\,\text{J}$
 
@@ -252,7 +268,7 @@ $$v_{\text{rms}} = \sqrt{\overline{v^2}} = \sqrt{\frac{3RT}{M}}$$
 ##### 設問(3)
 * **物質量 $n$**:
   状態方程式 $PV = nRT$ より：
-  $$n = \frac{PV}{RT} = \frac{(1.0 \times 10^5) \times (8.3 \times 10^{-3})}{8.3 \times 300} = \frac{830}{8.3 \times 300} = \frac{100}{300} = \frac{1}{3} \approx 0.33\,\text{mol}$$
+  $$n = \frac{PV}{RT} = \frac{(1.0 \times 10^5) \times (8.3 \times 10^{-3})}{8.3 \times 300} = \frac{100}{300} = \frac{1}{3} \approx 0.33\,\text{mol}$$
 * **全内部エネルギー $U$**:
   単原子分子理想気体全体の内部エネルギーは $U = \frac{3}{2}nRT$（$= \frac{3}{2}PV$）：
   $$U = \frac{3}{2} P V = \frac{3}{2} \times (1.0 \times 10^5) \times (8.3 \times 10^{-3}) = 1.5 \times 830 = 1245 \approx 1.2 \times 10^3\,\text{J}$$
@@ -265,7 +281,12 @@ $$v_{\text{rms}} = \sqrt{\overline{v^2}} = \sqrt{\frac{3RT}{M}}$$
 * **着眼点**: 温度 $T$ が等しいとき、二乗平均速度はモル質量の平方根に反比例する：
   $$v_{\text{rms}} \propto \frac{1}{\sqrt{M}}$$
 * **比の計算**:
-  $$\frac{v_{\text{酸素}}}{v_{\text{ヘリウム}}} = \sqrt{\frac{M_{\text{ヘリウム}}}{M_{\text{酸素}}}} = \sqrt{\frac{4.0}{32}} = \sqrt{\frac{1}{8}} = \frac{1}{2\sqrt{2}} = \frac{\sqrt{2}}{4} \approx \frac{1.414}{4} \approx 0.35$$
+  $$
+  \begin{aligned}
+  \frac{v_{\text{酸素}}}{v_{\text{ヘリウム}}} &= \sqrt{\frac{M_{\text{ヘリウム}}}{M_{\text{酸素}}}} = \sqrt{\frac{4.0}{32}} \\
+  &= \sqrt{\frac{1}{8}} = \frac{1}{2\sqrt{2}} \approx 0.35
+  \end{aligned}
+  $$
   （ヘリウムの約 $0.35$ 倍、すなわち約 $\frac{1}{2.8}$ に遅くなります）
 
 **答**: $\frac{1}{2\sqrt{2}}$ 倍（約 $0.35$ 倍）
@@ -276,8 +297,8 @@ $$v_{\text{rms}} = \sqrt{\overline{v^2}} = \sqrt{\frac{3RT}{M}}$$
 
 ### 誤解1：「分子量が重い気体ほど平均運動エネルギーが大きい」
 * **最大の思い込みです！**
-  * 重い分子は**スピードが遅い**ため、$\frac{1}{2}mv^2$ を計算すると完全に相殺されます。
-  * 「温度が同じなら、分子1個の平均運動エネルギー $\frac{1}{2}m\overline{v^2} = \frac{3}{2}k_BT$ は、**どんな種類の気体でも完全に同一**」という原理を肝に銘じましょう。
+  * 重い分子は **スピードが遅い** ため、$\frac{1}{2}mv^2$ を計算すると完全に相殺されます。
+  * 「温度が同じなら、分子1個の平均運動エネルギー $\frac{1}{2}m\overline{v^2} = \frac{3}{2}k_BT$ は、 **どんな種類の気体でも完全に同一**」という原理を肝に銘じましょう。
 
 ### 誤解2：「モル質量 $M$ の単位を g/mol のまま代入してしまう」
 * 二乗平均速度 $v = \sqrt{\frac{3RT}{M}}$ の計算で、気体定数 $R = 8.31\,\text{J/(mol}\cdot\text{K)}$ はSI単位系（$\text{kg}$ ベース）です。

@@ -31,15 +31,15 @@
         <div class="control-group">
           <label>
             <span>比熱比 γ = <i>C</i><sub>p</sub> / <i>C</i><sub>v</sub>: <strong>{{ gammaRatio.toFixed(2) }}</strong></span>
-            <div class="btn-group">
-              <button class="select-btn" :class="{ active: Math.abs(gammaRatio - 1.40) < 0.01 }" @click="gammaRatio = 1.40">
-                2原子分子 (空気/排気 γ=1.40)
-              </button>
-              <button class="select-btn" :class="{ active: Math.abs(gammaRatio - 1.67) < 0.01 }" @click="gammaRatio = 1.67">
-                単原子分子 (γ=1.67)
-              </button>
-            </div>
           </label>
+          <div class="btn-group">
+            <button class="select-btn" :class="{ active: Math.abs(gammaRatio - 1.40) < 0.01 }" @click="gammaRatio = 1.40">
+              2原子分子 (空気/排気 γ=1.40)
+            </button>
+            <button class="select-btn" :class="{ active: Math.abs(gammaRatio - 1.67) < 0.01 }" @click="gammaRatio = 1.67">
+              単原子分子 (γ=1.67)
+            </button>
+          </div>
         </div>
 
         <div class="control-group">
@@ -440,6 +440,49 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
+.sim-container {
+  background: var(--vp-c-bg-soft, #18181b);
+  border: 1px solid var(--vp-c-divider, rgba(255, 255, 255, 0.1));
+  border-radius: 12px;
+  padding: 18px;
+  margin: 24px 0;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+}
+
+.sim-header h3 {
+  margin: 0 0 6px 0;
+  font-size: 1.15rem;
+  color: var(--vp-c-text-1, #f4f4f5);
+}
+
+.title-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.subtitle {
+  font-size: 0.88rem;
+  color: var(--vp-c-text-2, #a1a1aa);
+  line-height: 1.5;
+  margin-bottom: 14px;
+}
+
+.canvas-wrapper {
+  position: relative;
+  width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: #0b0f19;
+}
+
 .stroke-badge {
   position: absolute;
   top: 14px;
@@ -472,5 +515,125 @@ onUnmounted(() => {
 @keyframes pulseCombustion {
   0% { transform: scale(1); box-shadow: 0 0 10px rgba(239, 68, 68, 0.4); }
   100% { transform: scale(1.04); box-shadow: 0 0 20px rgba(239, 68, 68, 0.8); }
+}
+
+.control-panel {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  padding: 14px;
+  margin-top: 14px;
+}
+
+.control-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 14px;
+}
+
+.control-group label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 0.84rem;
+  color: var(--vp-c-text-1, #e4e4e7);
+}
+
+.control-group input[type='range'] {
+  width: 100%;
+  accent-color: #38bdf8;
+}
+
+.btn-group {
+  display: flex;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.select-btn {
+  padding: 5px 12px;
+  font-size: 0.8rem;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--vp-c-text-2, #a1a1aa);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.select-btn.active {
+  background: #0284c7;
+  color: #ffffff;
+  border-color: #38bdf8;
+  font-weight: 600;
+}
+
+.button-row {
+  display: flex;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.btn {
+  padding: 6px 14px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s ease;
+}
+
+.btn-secondary {
+  background: rgba(255, 255, 255, 0.1);
+  color: #e4e4e7;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.stats-monitor {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.stat-card {
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-card .label {
+  font-size: 0.76rem;
+  color: var(--vp-c-text-2, #a1a1aa);
+  margin-bottom: 4px;
+}
+
+.stat-card .value {
+  font-size: 1.15rem;
+  font-weight: bold;
+  color: var(--vp-c-text-1, #f4f4f5);
+}
+
+.stat-card .value.highlight {
+  color: #38bdf8;
+}
+
+.stat-card .unit {
+  font-size: 0.8rem;
+  font-weight: normal;
+  color: #94a3b8;
+}
+
+.stat-card .subtext {
+  font-size: 0.72rem;
+  color: #71717a;
+  margin-top: 2px;
 }
 </style>

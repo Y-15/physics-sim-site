@@ -34,7 +34,9 @@ description: 高校物理の熱力学最重要応用テーマ。熱機関の熱�
 
 高温熱源 $T_H$ や低温熱源 $T_L$ を動かして、ピストンの往復運動と $P$-$V$ インジケーター図の閉曲線がどのように連動するか観察してみましょう。
 
-<CarnotSim />
+<ClientOnly>
+  <CarnotSim />
+</ClientOnly>
 
 ---
 
@@ -83,7 +85,7 @@ description: 高校物理の熱力学最重要応用テーマ。熱機関の熱�
 
 $$W = Q_{\text{in}} - Q_{\text{out}}$$
 
-投入した熱エネルギー $Q_{\text{in}}$ のうち、どれだけの割合を仕事 $W$ に変換できたかを表す指標を**熱効率 $e$** と呼びます：
+投入した熱エネルギー $Q_{\text{in}}$ のうち、どれだけの割合を仕事 $W$ に変換できたかを表す指標を **熱効率 $e$** と呼びます：
 
 $$
 \boxed{e = \frac{W}{Q_{\text{in}}} = \frac{Q_{\text{in}} - Q_{\text{out}}}{Q_{\text{in}}} = 1 - \frac{Q_{\text{out}}}{Q_{\text{in}}}}
@@ -139,7 +141,7 @@ $$
 
 ### 工程 ②：$\text{B} \to \text{C}$ 断熱膨張（$Q = 0$）
 熱源を離し、シリンダー全体を断熱壁で覆ってさらに気体を膨張させます。
-* 気体が外部に仕事をするため内部エネルギーが減少し、**温度が $T_H \to T_L$ へと低下**します。
+* 気体が外部に仕事をするため内部エネルギーが減少し、 **温度が $T_H \to T_L$ へと低下** します。
 * ポアソンの法則より: $T_H V_B^{\gamma-1} = T_L V_C^{\gamma-1}$
 
 ### 工程 ③：$\text{C} \to \text{D}$ 等温圧縮（温度 $T_L$ で一定）
@@ -149,7 +151,7 @@ $$
 
 ### 工程 ④：$\text{D} \to \text{A}$ 断熱圧縮（$Q = 0$）
 再び断熱壁で覆い、外部から仕事を加えて気体を最初の状態 A まで圧縮します。
-* 気体が仕事をされるため内部エネルギーが増加し、**温度が $T_L \to T_H$ へと回復**して1巡します。
+* 気体が仕事をされるため内部エネルギーが増加し、 **温度が $T_L \to T_H$ へと回復** して1巡します。
 * ポアソンの法則より: $T_L V_D^{\gamma-1} = T_H V_A^{\gamma-1}$
 
 ---
@@ -158,10 +160,15 @@ $$
 
 工程②と④のポアソンの法則の式を辺々割り算すると：
 
-$$\frac{T_H V_B^{\gamma-1}}{T_H V_A^{\gamma-1}} = \frac{T_L V_C^{\gamma-1}}{T_L V_D^{\gamma-1}} \implies \left(\frac{V_B}{V_A}\right)^{\gamma-1} = \left(\frac{V_C}{V_D}\right)^{\gamma-1} \implies \boxed{\frac{V_B}{V_A} = \frac{V_C}{V_D}}$$
+$$
+\begin{aligned}
+\frac{T_H V_B^{\gamma-1}}{T_H V_A^{\gamma-1}} = \frac{T_L V_C^{\gamma-1}}{T_L V_D^{\gamma-1}} &\implies \left(\frac{V_B}{V_A}\right)^{\gamma-1} = \left(\frac{V_C}{V_D}\right)^{\gamma-1} \\
+&\implies \boxed{\frac{V_B}{V_A} = \frac{V_C}{V_D}}
+\end{aligned}
+$$
 
-なんと、**等温膨張での体積比 $\frac{V_B}{V_A}$ と等温圧縮での体積比 $\frac{V_C}{V_D}$ が完全に一致**します！  
-したがって、吸熱量と放熱量の比は対数部分が美しく約分され、**温度の比そのもの**になります：
+なんと、 **等温膨張での体積比 $\frac{V_B}{V_A}$ と等温圧縮での体積比 $\frac{V_C}{V_D}$ が完全に一致** します！  
+したがって、吸熱量と放熱量の比は対数部分が美しく約分され、 **温度の比そのもの** になります：
 
 $$\frac{Q_{\text{out}}}{Q_{\text{in}}} = \frac{n R T_L \ln(V_C / V_D)}{n R T_H \ln(V_B / V_A)} = \frac{T_L}{T_H}$$
 
@@ -172,7 +179,7 @@ $$
 $$
 
 ::: important カルノーの定理（熱力学第2法則）
-同じ温度 $T_H, T_L$ の熱源の間で働くすべての熱機関の中で、**カルノーサイクルの熱効率を超える機関は宇宙に存在しない**（$e_{\text{実在}} \le e_{\text{Carnot}}$）。
+同じ温度 $T_H, T_L$ の熱源の間で働くすべての熱機関の中で、 **カルノーサイクルの熱効率を超える機関は宇宙に存在しない** （$e_{\text{実在}} \le e_{\text{Carnot}}$）。
 :::
 
 ---
@@ -202,7 +209,9 @@ $$e_{\max} = 1 - \frac{T_L}{T_H} = 1 - \frac{300}{873} \approx 1 - 0.3436 = 0.65
 どんなにロスをなくしても、熱エネルギーの約 $34.4\%$ は絶対に海へ捨てなければなりません。
 
 **Step 2: (2) 最大発電出力を計算する**  
-$$P_{\max} = \frac{W_{\max}}{\Delta t} = e_{\max} \frac{Q_{\text{in}}}{\Delta t} = 0.6564 \times (1.0 \times 10^9\,\text{W}) \approx 656\,\text{MW}$$
+$$
+P_{\max} = \frac{W_{\max}}{\Delta t} = e_{\max} \frac{Q_{\text{in}}}{\Delta t} = 0.6564 \times (1.0 \times 10^9\,\text{W}) \approx 656\,\text{MW}
+$$
 
 **Step 3: (3) 実際の排熱量を計算する**  
 実効率 $e = 0.42$ より、仕事に変わる割合が $42\%$ なので、排熱に回る割合は $1 - e = 58\%$ です：

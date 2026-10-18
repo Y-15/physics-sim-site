@@ -9,9 +9,9 @@
 
     <div class="lab-controls">
       <div class="lab-ctrl">
-        <label>絶対温度 T: <strong>{{ tempK }} K</strong> ({{ (tempK - 273.15).toFixed(0) }} °C)</label>
+        <label>絶対温度 <i>T</i>: <strong>{{ tempK }} K</strong> ({{ (tempK - 273.15).toFixed(0) }} °C)</label>
         <input type="range" v-model.number="tempK" min="100" max="800" step="25" />
-        <div class="lab-note">温度が4倍になると、分子の速さ v_rms は2倍に増加</div>
+        <div class="lab-note">温度が4倍になると、分子の二乗平均速度 <i>v</i><sub>rms</sub> は2倍に増加</div>
       </div>
 
       <div class="lab-ctrl">
@@ -33,27 +33,27 @@
 
     <div class="lab-stats">
       <div class="lab-stat hl">
-        <div class="k">二乗平均速度 v_rms</div>
+        <div class="k">二乗平均速度 <i>v</i><sub>rms</sub></div>
         <div class="v" style="color:#f59e0b">{{ vRms.toFixed(0) }} <small>m/s</small></div>
-        <div class="f">v_rms = √(3RT / M)（新幹線やジェット機より猛スピード！）</div>
+        <div class="f"><i>v</i><sub>rms</sub> = √(3<i>RT</i> / <i>M</i>)（新幹線やジェット機より猛スピード！）</div>
       </div>
 
       <div class="lab-stat">
         <div class="k">分子1個の平均運動エネルギー</div>
         <div class="v" style="color:#ef4444">{{ (avgKineticEnergy_zJ).toFixed(2) }} <small>zJ (10⁻²¹ J)</small></div>
-        <div class="f">½m&lt;v²&gt; = ³⁄₂ k_B T（分子の種類によらず温度だけで決まる！）</div>
+        <div class="f">½<i>m</i>⟨<i>v</i>²⟩ = <sup>3</sup>⁄<sub>2</sub> <i>k</i><sub>B</sub><i>T</i>（分子の種類によらず温度だけで決まる！）</div>
       </div>
 
       <div class="lab-stat">
         <div class="k">容器壁への衝突頻度</div>
         <div class="v" style="color:#38bdf8">{{ (collisionRate).toFixed(0) }} <small>回/秒</small></div>
-        <div class="f">衝突積力の総和が「気体の圧力 P」を生み出す</div>
+        <div class="f">衝突力積の総和が「気体の圧力 <i>P</i>」を生み出す</div>
       </div>
 
       <div class="lab-stat">
         <div class="k">音速（近似）</div>
         <div class="v" style="color:#10b981">{{ soundSpeed.toFixed(0) }} <small>m/s</small></div>
-        <div class="f">c = √(γRT / M) ≈ 0.74 · v_rms</div>
+        <div class="f"><i>c</i> = √(<i>γRT</i> / <i>M</i>) ≈ 0.74 <i>v</i><sub>rms</sub></div>
       </div>
     </div>
   </div>

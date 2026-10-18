@@ -42,7 +42,7 @@
       <div class="lab-ctrl">
         <label>気体の種類（単原子分子理想気体）</label>
         <div class="lab-row">
-          <span style="font-size:12px;color:#94a3b8">モル数 n = 1.0 mol, 定積モル比熱 Cᵥ = ³⁄₂R, 比熱比 γ = ⁵⁄₃ (≈1.67)</span>
+          <span style="font-size:12px;color:#94a3b8">モル数 <i>n</i> = 1.0 mol, 定積モル比熱 <i>C</i><sub><i>V</i></sub> = (3/2)<i>R</i>, 比熱比 <i>γ</i> = 5/3 (≈ 1.67)</span>
         </div>
       </div>
     </div>
@@ -50,13 +50,13 @@
     <div class="lab-stats">
       <div class="lab-stat hl">
         <div class="k">熱力学第1法則</div>
-        <div class="v" style="font-size:17px;color:#f97316">Q = ΔU + W'</div>
+        <div class="v" style="font-size:17px;color:#f97316"><i>Q</i> = Δ<i>U</i> + <i>W'</i></div>
         <div class="f">吸収熱 = 内部エネルギー増加 + 気体が外部にした仕事</div>
       </div>
       <div class="lab-stat">
         <div class="k">圧力 P</div>
         <div class="v" style="color:#ef4444">{{ currentP.toFixed(1) }} <small>kPa</small></div>
-        <div class="f">PV = nRT より計算</div>
+        <div class="f"><i>PV</i> = <i>nRT</i> より計算</div>
       </div>
       <div class="lab-stat">
         <div class="k">体積 V</div>
@@ -66,7 +66,7 @@
       <div class="lab-stat">
         <div class="k">絶対温度 T</div>
         <div class="v" style="color:#f59e0b">{{ currentT.toFixed(0) }} <small>K</small></div>
-        <div class="f">内部エネルギー U = ³⁄₂nRT</div>
+        <div class="f">内部エネルギー <i>U</i> = (3/2)<i>nRT</i></div>
       </div>
       <div class="lab-stat">
         <div class="k">気体がした仕事 W'</div>
@@ -313,14 +313,22 @@ function drawCylinder(ctx, ox, oy, w, h, dt) {
   ctx.fillRect(pistonX + 16, cy - 8, cylW * 0.35, 16)
   ctx.strokeRect(pistonX + 16, cy - 8, cylW * 0.35, 16)
 
-  // 下部の加熱ヒーター（温度が上がっている時または定圧膨張時）
-  if (currentQ.value > 100) {
-    drawFlame(ctx, cx - 40, cylTop + cylH + 10)
-    text(ctx, '🔥 加熱中 (熱 Q 流入)', cx, cylTop + cylH + 45, { color: '#f97316', font: 'bold 12px sans-serif' })
-  } else if (currentQ.value < -100) {
-    text(ctx, '❄️ 冷却中 (熱 Q 放出)', cx, cylTop + cylH + 25, { color: '#38bdf8', font: 'bold 12px sans-serif' })
+  // 下部の加熱ヒーターまたは断熱表示
+  if (procMode.value === 'adiabatic') {
+    // 断熱モード：周囲に断熱材ジャケット表示
+    ctx.strokeStyle = '#94a3b8'
+    ctx.lineWidth = 4
+    ctx.strokeRect(cylLeft - 6, cylTop - 6, cylW + 12, cylH + 12)
+    text(ctx, '🛡️ 断熱容器 (Q = 0, 熱の出入り遮断)', cx, cylTop + cylH + 28, { color: '#94a3b8', font: 'bold 12px sans-serif' })
   } else {
-    text(ctx, '🛡️ 断熱 (Q = 0)', cx, cylTop + cylH + 25, { color: '#94a3b8', font: '12px sans-serif' })
+    if (currentQ.value > 15) {
+      drawFlame(ctx, cx - 40, cylTop + cylH + 10)
+      text(ctx, `🔥 加熱中 (熱量 Q = +${currentQ.value.toFixed(0)} J 流入)`, cx, cylTop + cylH + 45, { color: '#f97316', font: 'bold 12px sans-serif' })
+    } else if (currentQ.value < -15) {
+      text(ctx, `❄️ 冷却中 (熱量 Q = ${currentQ.value.toFixed(0)} J 放出)`, cx, cylTop + cylH + 25, { color: '#38bdf8', font: 'bold 12px sans-serif' })
+    } else {
+      text(ctx, '⚖️ 熱平衡状態 (Q ≈ 0)', cx, cylTop + cylH + 25, { color: '#a1a1aa', font: '12px sans-serif' })
+    }
   }
 
   // シリンダー上部ラベル
@@ -412,6 +420,66 @@ function drawPVGraph(ctx, ox, oy, w, h) {
     text(ctx, 'B', pts[1].sx + 10, pts[1].sy - 6, { color: '#fff', font: 'bold 11px sans-serif' })
     text(ctx, 'C', pts[2].sx + 10, pts[2].sy + 14, { color: '#fff', font: 'bold 11px sans-serif' })
     text(ctx, 'D', pts[3].sx - 10, pts[3].sy + 14, { color: '#fff', font: 'bold 11px sans-serif' })
+  } else {
+    // 単一変化モード：初期状態から現在点までの軌跡と仕事（下面積）の塗りつぶし
+    const vStart = V0
+    const vEnd = currentV.value
+    const steps = 40
+    const areaPts = []
+
+    for (let i = 0; i <= steps; i++) {
+      const frac = i / steps
+      const vCur = vStart + (vEnd - vStart) * frac
+      let pCur = P0
+      if (procMode.value === 'isochoric') {
+        pCur = P0 * ((200 + (progress.value / 100) * 400 * frac) / T0)
+      } else if (procMode.value === 'isobaric') {
+        pCur = P0
+      } else if (procMode.value === 'isothermal') {
+        pCur = P0 * (V0 / vCur)
+      } else if (procMode.value === 'adiabatic') {
+        pCur = P0 * Math.pow(V0 / vCur, gamma)
+      }
+      areaPts.push(toScreen(vCur, pCur))
+    }
+
+    // 仕事の面積塗りつぶし (V1 -> V2 -> V軸)
+    if (procMode.value !== 'isochoric' && Math.abs(currentW.value) > 2) {
+      ctx.save()
+      ctx.fillStyle = currentW.value >= 0 ? 'rgba(16, 185, 129, 0.18)' : 'rgba(168, 85, 247, 0.18)'
+      ctx.beginPath()
+      ctx.moveTo(areaPts[0].sx, gy + gh)
+      for (let p of areaPts) {
+        ctx.lineTo(p.sx, p.sy)
+      }
+      ctx.lineTo(areaPts[areaPts.length - 1].sx, gy + gh)
+      ctx.closePath()
+      ctx.fill()
+      ctx.restore()
+
+      const midPt = areaPts[Math.floor(steps / 2)]
+      text(ctx, `仕事 W' = ${currentW.value.toFixed(0)} J`, midPt.sx, gy + gh - 16, {
+        color: currentW.value >= 0 ? '#10b981' : '#c084fc',
+        font: 'bold 11px sans-serif'
+      })
+    }
+
+    // 軌跡ライン
+    ctx.save()
+    ctx.strokeStyle = '#f97316'
+    ctx.lineWidth = 3
+    ctx.beginPath()
+    for (let i = 0; i < areaPts.length; i++) {
+      if (i === 0) ctx.moveTo(areaPts[i].sx, areaPts[i].sy)
+      else ctx.lineTo(areaPts[i].sx, areaPts[i].sy)
+    }
+    ctx.stroke()
+    ctx.restore()
+
+    // 始点プロット
+    const startPt = areaPts[0]
+    dot(ctx, startPt.sx, startPt.sy, 4, '#94a3b8', '#fff', 1.5)
+    text(ctx, '始点', startPt.sx - 14, startPt.sy - 8, { color: '#94a3b8', font: '10px sans-serif' })
   }
 
   // 現在の状態点 (V, P) のプロット

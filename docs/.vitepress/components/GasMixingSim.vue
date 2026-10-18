@@ -4,15 +4,15 @@
       <div class="title-row">
         <span class="icon">🧪</span>
         <h3>気体の混合・可動ピストンのつり合いシミュレーター</h3>
+        <div class="mode-badge">
+          {{ mode === 'valve' ? (isValveOpen ? 'コック開通 (混合中)' : 'コック閉 (分離状態)') : '可動ピストン (圧力平衡)' }}
+        </div>
       </div>
       <p class="subtitle">断熱容器内での気体混合（内部エネルギー保存則とドルトンの分圧則）および可動ピストンで仕切られた2気体の力学的つり合い（<i>P</i><sub><i>A</i></sub> = <i>P</i><sub><i>B</i></sub>）をリアルタイムに体験できます。</p>
     </div>
 
     <div class="canvas-wrapper">
       <canvas ref="canvasRef" width="700" height="280"></canvas>
-      <div class="mode-badge">
-        モード: {{ mode === 'valve' ? (isValveOpen ? 'コック開通 (混合中)' : 'コック閉 (分離状態)') : '可動ピストン (圧力平衡)' }}
-      </div>
     </div>
 
     <!-- コントロールパネル -->
@@ -70,13 +70,15 @@
     <!-- 物理量モニター -->
     <div class="stats-monitor">
       <div class="stat-card">
-        <span class="label">{{ mode === 'valve' && isValveOpen ? '混合後温度 T' : '気体A 圧力 P_A' }}</span>
+        <span class="label" v-if="mode === 'valve' && isValveOpen">混合後温度 <i>T</i></span>
+        <span class="label" v-else>気体A 圧力 <i>P</i><sub><i>A</i></sub></span>
         <span class="value">{{ mode === 'valve' && isValveOpen ? mixedT.toFixed(1) + ' K' : PA.toFixed(1) + ' kPa' }}</span>
         <span class="subtext">{{ mode === 'valve' && isValveOpen ? '(nA TA + nB TB) / (nA+nB)' : 'nA R TA / VA' }}</span>
       </div>
 
       <div class="stat-card">
-        <span class="label">{{ mode === 'valve' && isValveOpen ? '全圧 P_total' : '気体B 圧力 P_B' }}</span>
+        <span class="label" v-if="mode === 'valve' && isValveOpen">全圧 <i>P</i><sub>total</sub></span>
+        <span class="label" v-else>気体B 圧力 <i>P</i><sub><i>B</i></sub></span>
         <span class="value" :class="{ highlight: mode === 'piston' && Math.abs(PA - PB) < 1 }">
           {{ mode === 'valve' && isValveOpen ? mixedP.toFixed(1) + ' kPa' : PB.toFixed(1) + ' kPa' }}
         </span>
@@ -477,17 +479,15 @@ canvas {
 }
 
 .mode-badge {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  font-size: 0.75rem;
-  padding: 4px 10px;
+  margin-left: auto;
+  font-size: 0.8rem;
+  padding: 4px 12px;
   border-radius: 20px;
   font-weight: bold;
-  background: rgba(30, 41, 59, 0.8);
+  background: rgba(15, 23, 42, 0.85);
   color: #38bdf8;
   border: 1px solid #334155;
-  backdrop-filter: blur(4px);
+  white-space: nowrap;
 }
 
 .control-panel {

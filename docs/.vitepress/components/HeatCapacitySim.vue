@@ -19,34 +19,30 @@
     <div class="control-panel">
       <div class="control-grid">
         <div class="control-group">
-          <label>
-            <span>気体の種類（分子構造）:</span>
-            <div class="btn-group">
-              <button class="select-btn" :class="{ active: gasType === 'mono' }" @click="gasType = 'mono'">
-                単原子 (He, Ar)
-              </button>
-              <button class="select-btn" :class="{ active: gasType === 'di' }" @click="gasType = 'di'">
-                2原子 (N₂, O₂)
-              </button>
-              <button class="select-btn" :class="{ active: gasType === 'poly' }" @click="gasType = 'poly'">
-                多原子 (CO₂)
-              </button>
-            </div>
-          </label>
+          <span class="control-label">気体の種類（分子構造）:</span>
+          <div class="btn-group">
+            <button class="select-btn" :class="{ active: gasType === 'mono' }" @click="gasType = 'mono'">
+              単原子 (He, Ar)
+            </button>
+            <button class="select-btn" :class="{ active: gasType === 'di' }" @click="gasType = 'di'">
+              2原子 (N₂, O₂)
+            </button>
+            <button class="select-btn" :class="{ active: gasType === 'poly' }" @click="gasType = 'poly'">
+              多原子 (CO₂)
+            </button>
+          </div>
         </div>
 
         <div class="control-group">
-          <label>
-            <span>状態変化の種類:</span>
-            <div class="btn-group">
-              <button class="select-btn" :class="{ active: processType === 'isochoric' }" @click="processType = 'isochoric'">
-                定積変化 (ΔV = 0)
-              </button>
-              <button class="select-btn" :class="{ active: processType === 'isobaric' }" @click="processType = 'isobaric'">
-                定圧変化 (ΔP = 0)
-              </button>
-            </div>
-          </label>
+          <span class="control-label">状態変化の種類:</span>
+          <div class="btn-group">
+            <button class="select-btn" :class="{ active: processType === 'isochoric' }" @click="processType = 'isochoric'">
+              定積変化 (ΔV = 0)
+            </button>
+            <button class="select-btn" :class="{ active: processType === 'isobaric' }" @click="processType = 'isobaric'">
+              定圧変化 (ΔP = 0)
+            </button>
+          </div>
         </div>
 
         <div class="control-group">
@@ -144,7 +140,7 @@ const gamma = computed(() => Cp_factor.value / Cv_factor.value)
 const gammaFraction = computed(() => {
   if (gasType.value === 'mono') return '5/3 ≈ 1.67'
   if (gasType.value === 'di') return '7/5 = 1.40'
-  return '8/6 ≈ 1.33'
+  return '4/3 ≈ 1.33'
 })
 
 const Cv_text = computed(() => {
@@ -483,7 +479,8 @@ canvas {
   gap: 0.8rem;
 }
 
-.control-group label {
+.control-group label,
+.control-label {
   display: flex;
   flex-direction: column;
   gap: 0.3rem;

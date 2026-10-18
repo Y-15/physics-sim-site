@@ -5,7 +5,7 @@ description: 気体の状態方程式による空気密度の温度依存性 ρ 
 
 # 気球の浮力と大気の高度・熱気球の浮上条件
 
-1783年、フランスのモンゴルフィエ兄弟が人類初の有人飛行を成功させた「熱気球」は、高校物理において**「気体の状態方程式（ボイル・シャルルの法則）」**と**「力学の浮力（アルキメデスの原理）」**が完璧に融合する代表的な総合入試問題です。
+1783年、フランスのモンゴルフィエ兄弟が人類初の有人飛行を成功させた「熱気球」は、高校物理において「**気体の状態方程式（ボイル・シャルルの法則） **」と「** 力学の浮力（アルキメデスの原理）**」が完璧に融合する代表的な総合入試問題です。
 
 本項では、熱気球の内部気圧が外気圧と等しく保たれる理由、空気密度 $\rho$ と絶対温度 $T$ の反比例関係、浮上に必要な最低内部温度の導出、および上空での大気圧低下に伴う最高到達高度の定石解法を体系的に解説します。
 
@@ -24,8 +24,8 @@ description: 気体の状態方程式による空気密度の温度依存性 ρ 
 ## 2. 熱気球の物理原理と空気密度
 
 ### 2.1 気球の下部が「開いている」ことの物理的意味
-熱気球はゴム風船のように密閉されておらず、**下部に大きな開口部**があり、そこからバーナーで炎を吹き込みます。
-したがって、**「気球内部の気圧 $P_{\text{in}}$ は、外部の大気圧 $P_{\text{out}} = P_0$ と常に等しい」**という極めて重要な前提が成り立ちます。
+熱気球はゴム風船のように密閉されておらず、 **下部に大きな開口部** があり、そこからバーナーで炎を吹き込みます。
+したがって、「**気球内部の気圧 $P_{\text{in}}$ は、外部の大気圧 $P_{\text{out}} = P_0$ と常に等しい**」という極めて重要な前提が成り立ちます。
 
 $$P_{\text{in}} = P_{\text{out}} = P_0$$
 
@@ -71,7 +71,7 @@ $$P_0 V = n R T = \left( \frac{m}{M_{\text{mol}}} \right) R T$$
 
 $$\mathbf{\rho(T) = \frac{P_0 M_{\text{mol}}}{R T}}$$
 
-大気圧 $P_0$ が一定であるとき、**気体の密度 $\rho$ は絶対温度 $T$ に反比例します**。
+大気圧 $P_0$ が一定であるとき、 **気体の密度 $\rho$ は絶対温度 $T$ に反比例します**。
 内部の空気を加熱して温度を $T_{\text{in}} > T_{\text{out}}$ に引き上げると、余分な空気が下部の開口部から外へと逃げ出し、気球内の空気密度が外気よりも低くなります（$\rho_{\text{in}} < \rho_{\text{out}}$）。
 
 ---
@@ -98,7 +98,7 @@ $$F_B \ge W \iff \rho_{\text{out}} V g \ge (M_{\text{balloon}} + \rho_{\text{in}
 
 $$\mathbf{(\rho_{\text{out}} - \rho_{\text{in}}) V \ge M_{\text{balloon}}}$$
 
-> 💡 **物理的意味**：
+> 💡 **物理的意味** ：
 > 「内外の空気の密度差 $\Delta \rho = \rho_{\text{out}} - \rho_{\text{in}}$ に体積 $V$ をかけた正味の揚力」が、気球本体の質量 $M_{\text{balloon}}$ を超えた瞬間に気球は浮上します。
 
 ### 3.3 最低内部温度 $T_{\text{in}}$ の導出
@@ -139,7 +139,12 @@ $$\mathbf{\frac{1}{T_{\text{in}}} \le \frac{1}{T_{\text{out}}} - \frac{R M_{\tex
 
 **1. 外気の密度 $\rho_{\text{out}}$**
 状態方程式より：
-$$\rho_{\text{out}} = \frac{P_0 M_{\text{mol}}}{R T_{\text{out}}} = \frac{1.0 \times 10^5 \times 2.9 \times 10^{-2}}{8.3 \times 290} = \frac{2900}{2407} \approx \mathbf{1.20\text{ kg/m}^3}$$
+$$
+\begin{aligned}
+\rho_{\text{out}} &= \frac{P_0 M_{\text{mol}}}{R T_{\text{out}}} = \frac{1.0 \times 10^5 \times 2.9 \times 10^{-2}}{8.3 \times 290} \\
+&= \frac{2900}{2407} \approx \mathbf{1.20\text{ kg/m}^3}
+\end{aligned}
+$$
 
 **2. 浮上時の内部空気の最大密度 $\rho_{\text{in}}$**
 浮上条件式 $(\rho_{\text{out}} - \rho_{\text{in}}) V \ge M$ より：
@@ -149,7 +154,12 @@ $$\rho_{\text{in}} \le \rho_{\text{out}} - 0.20 = 1.20 - 0.20 = \mathbf{1.00\tex
 **3. 最低内部温度 $T_{\text{in}}$**
 内部の圧力は大気圧 $P_0$ と等しいため：
 $$\rho_{\text{in}} = \frac{P_0 M_{\text{mol}}}{R T_{\text{in}}} \le 1.00$$
-$$T_{\text{in}} \ge \frac{P_0 M_{\text{mol}}}{R \times 1.00} = \frac{1.0 \times 10^5 \times 2.9 \times 10^{-2}}{8.3 \times 1.00} = \frac{2900}{8.3} \approx \mathbf{349.4\text{ K}} \quad (350\text{ K})$$
+$$
+\begin{aligned}
+T_{\text{in}} &\ge \frac{P_0 M_{\text{mol}}}{R \times 1.00} = \frac{1.0 \times 10^5 \times 2.9 \times 10^{-2}}{8.3 \times 1.00} \\
+&= \frac{2900}{8.3} \approx \mathbf{349.4\text{ K}} \quad (350\text{ K})
+\end{aligned}
+$$
 セルシウス温度に換算すると：
 $$t_{\text{in}} = 349.4 - 273.15 \approx \mathbf{76.3^\circ\text{C}} \quad (約 76^\circ\text{C})$$
 
