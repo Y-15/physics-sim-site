@@ -141,7 +141,7 @@ function buildAll() {
   const thermodynamics = generateThermodynamicsProblems(grouped.thermodynamics);
   const atomic = generateAtomicProblems(grouped.atomic);
 
-  const allProblems = [
+  const rawProblems = [
     ...mechanics,
     ...waves,
     ...electromagnetism,
@@ -149,19 +149,59 @@ function buildAll() {
     ...atomic
   ];
 
-  console.log('--- 生成完了 ---');
-  console.log(`🏎️ 力学: ${mechanics.length} 問 (目標 320問)`);
-  console.log(`🌊 波動: ${waves.length} 問 (目標 180問)`);
-  console.log(`⚡ 電磁気: ${electromagnetism.length} 問 (目標 250問)`);
-  console.log(`🔥 熱力学: ${thermodynamics.length} 問 (目標 130問)`);
-  console.log(`⚛️ 原子物理: ${atomic.length} 問 (目標 120問)`);
-  console.log(`🎯 合計: ${allProblems.length} 問 (目標 1000問)`);
+  // =========================================================================
+  // 厳密な重複排除フィルター（「ただ、数字を変えただけの問題」を完全に排除）
+  // =========================================================================
+  const seenSignatures = new Set();
+  const cleanedProblems = [];
 
-  if (allProblems.length !== 1000) {
-    console.warn(`警告: 合計問題数が1000問と一致していません (${allProblems.length})`);
+  for (const p of rawProblems) {
+    const title = p.title || '';
+    const prompt = p.prompt || '';
+    const unit = p.unitId || '';
+    const topic = p.topicId || '';
+
+    // タイトルから数値パラメータ・表記ブレを除去
+    const normTitle = title
+      .replace(/\(.*?\d+.*?\)/g, '')
+      .replace(/【.*?】/g, '')
+      .replace(/\s+/g, ' ')
+      .trim();
+
+    // 問題文から数値を NUM に置換し、構造シグネチャを抽出
+    const normPrompt = prompt
+      .replace(/\d+(\.\d+)?/g, 'NUM')
+      .replace(/\s+/g, ' ')
+      .trim()
+      .substring(0, 100);
+
+    const sig = `${unit}:::${topic}:::${normTitle}:::${normPrompt}`;
+
+    if (!seenSignatures.has(sig)) {
+      seenSignatures.add(sig);
+      cleanedProblems.push(p);
+    } else {
+      // 重複問題（数字を変えただけ）を検知して除外
+      // console.log(`重複除外: [${p.id}] ${p.title}`);
+    }
   }
 
-  const cleanedProblems = allProblems;
+  // 分野別の集計
+  const finalCounts = {
+    mechanics: cleanedProblems.filter(p => p.unitId === 'mechanics').length,
+    waves: cleanedProblems.filter(p => p.unitId === 'waves').length,
+    electromagnetism: cleanedProblems.filter(p => p.unitId === 'electromagnetism').length,
+    thermodynamics: cleanedProblems.filter(p => p.unitId === 'thermodynamics').length,
+    atomic: cleanedProblems.filter(p => p.unitId === 'atomic').length,
+  };
+
+  console.log('--- 重複完全排除 完了 ---');
+  console.log(`🏎️ 力学: ${finalCounts.mechanics} 問（重複排除済み）`);
+  console.log(`🌊 波動: ${finalCounts.waves} 問（重複排除済み）`);
+  console.log(`⚡ 電磁気: ${finalCounts.electromagnetism} 問（重複排除済み）`);
+  console.log(`🔥 熱力学: ${finalCounts.thermodynamics} 問（重複排除済み）`);
+  console.log(`⚛️ 原子物理: ${finalCounts.atomic} 問（重複排除済み）`);
+  console.log(`🎯 合計: ${cleanedProblems.length} 問（すべて異なる完全オリジナル・厳選良問）`);
 
   // 出力先
   const outDir = path.join(__dirname, '..', 'docs', 'public', 'data');

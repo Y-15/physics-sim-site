@@ -112,15 +112,15 @@ export default defineConfig({
       ],
       '/problems/': [
         {
-          text: '高校物理 演習問題集（全1000問）',
+          text: '高校物理 厳選演習問題集（全197問）',
           collapsed: false,
           items: [
-            { text: '📝 問題集トップ（全1000問検索）', link: '/problems/index' },
-            { text: '🏎️ 力学 演習問題（全320問）', link: '/problems/mechanics' },
-            { text: '🌊 波動 演習問題（全180問）', link: '/problems/waves' },
-            { text: '⚡ 電磁気 演習問題（全250問）', link: '/problems/electromagnetism' },
-            { text: '🔥 熱力学 演習問題（全130問）', link: '/problems/thermodynamics' },
-            { text: '⚛️ 原子物理 演習問題（全120問）', link: '/problems/atomic' }
+            { text: '📝 問題集トップ（全問検索・演習システム）', link: '/problems/index' },
+            { text: '🏎️ 力学 演習問題（全68問）', link: '/problems/mechanics' },
+            { text: '🌊 波動 演習問題（全36問）', link: '/problems/waves' },
+            { text: '⚡ 電磁気 演習問題（全45問）', link: '/problems/electromagnetism' },
+            { text: '🔥 熱力学 演習問題（全24問）', link: '/problems/thermodynamics' },
+            { text: '⚛️ 原子物理 演習問題（全24問）', link: '/problems/atomic' }
           ]
         }
       ],

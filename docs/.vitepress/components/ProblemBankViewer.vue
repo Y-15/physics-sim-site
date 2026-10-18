@@ -30,14 +30,26 @@ const userStatus = ref({}) // { [id]: 'solved' | 'review' }
 const expandedHints = ref({}) // { [id]: boolean }
 const expandedSolutions = ref({}) // { [id]: boolean }
 
-const units = [
-  { id: 'all', name: '全分野', icon: '📚', count: 1000 },
-  { id: 'mechanics', name: '力学', icon: '🏎️', count: 320 },
-  { id: 'waves', name: '波動', icon: '🌊', count: 180 },
-  { id: 'electromagnetism', name: '電磁気', icon: '⚡', count: 250 },
-  { id: 'thermodynamics', name: '熱力学', icon: '🔥', count: 130 },
-  { id: 'atomic', name: '原子物理', icon: '⚛️', count: 120 }
+const unitDefinitions = [
+  { id: 'all', name: '全分野', icon: '📚' },
+  { id: 'mechanics', name: '力学', icon: '🏎️' },
+  { id: 'waves', name: '波動', icon: '🌊' },
+  { id: 'electromagnetism', name: '電磁気', icon: '⚡' },
+  { id: 'thermodynamics', name: '熱力学', icon: '🔥' },
+  { id: 'atomic', name: '原子物理', icon: '⚛️' }
 ]
+
+const units = computed(() => {
+  return unitDefinitions.map(u => {
+    let count = 0
+    if (u.id === 'all') {
+      count = allProblems.value.length
+    } else {
+      count = allProblems.value.filter(p => p.unitId === u.id).length
+    }
+    return { ...u, count }
+  })
+})
 
 // Load data
 onMounted(async () => {
@@ -246,7 +258,7 @@ function formatMathText(text) {
     <!-- Header Progress Bar -->
     <div class="progress-bar-banner">
       <div class="progress-meta">
-        <span class="meta-title">🎯 厳選1000問 演習進捗状況</span>
+        <span class="meta-title">🎯 厳選{{ allProblems.length }}問 演習進捗状況</span>
         <span class="meta-counts">
           正解: <strong>{{ progressStats.solved }}</strong> / {{ progressStats.total }} 問
           <span v-if="progressStats.review > 0" class="review-count">（要復習: {{ progressStats.review }}問）</span>

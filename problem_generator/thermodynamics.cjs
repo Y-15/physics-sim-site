@@ -115,12 +115,9 @@ function generateThermodynamicsProblems(existingThermo = []) {
     }
   ];
 
-  // 目標数 (130問) まで自動生成
-  let genIndex = 0;
-  while (problems.length < targetTotal) {
-    const gen = generators[genIndex % generators.length];
+  // 各ジェネレーターから重複なしのユニーク良問を1問ずつ生成
+  for (const gen of generators) {
     problems.push(gen());
-    genIndex++;
   }
 
   return problems;
