@@ -72,12 +72,12 @@
         <div class="control-group">
           <label>インダクタンス <i>L</i>: <strong>{{ fmt(L * 1000, 0) }} mH</strong></label>
           <input type="range" v-model.number="L" min="0.01" max="0.20" step="0.01" />
-          <span class="sub-info">誘導リアクタンス <i>X</i><sub><i>L</i></sub> = {{ fmt(XL, 1) }}\,Ω</span>
+          <span class="sub-info">誘導リアクタンス <i>X</i><sub><i>L</i></sub> = {{ fmt(XL, 1) }} Ω</span>
         </div>
         <div class="control-group">
           <label>静電容量 <i>C</i>: <strong>{{ fmt(C * 1e6, 0) }} μ<i>F</i></strong></label>
           <input type="range" v-model.number="C" min="10e-6" max="200e-6" step="5e-6" />
-          <span class="sub-info">容量リアクタンス <i>X</i><sub><i>C</i></sub> = {{ fmt(XC, 1) }}\,Ω</span>
+          <span class="sub-info">容量リアクタンス <i>X</i><sub><i>C</i></sub> = {{ fmt(XC, 1) }} Ω</span>
         </div>
         <div class="control-group button-group">
           <button class="resonance-btn" @click="setResonance">

@@ -337,12 +337,12 @@ function drawKirchhoff(ctx, w, h) {
   ctx.fillRect(20, 20, 240, 52)
   ctx.strokeRect(20, 20, 240, 52)
   text(ctx, '【第1法則 (接合点 P)】', 30, 38, '#e4e4e7', 'bold 11px sans-serif')
-  text(ctx, `I₁ + I₂ = I₃  (${fmt(I1, 2)} + ${fmt(I2, 2)} = ${fmt(I3, 2)} A)`, 30, 58, '#38bdf8', '11px monospace')
-
+  ctx.fillStyle = 'rgba(24, 24, 27, 0.85)'
+  ctx.strokeStyle = '#3f3f46'
   ctx.fillRect(520, 20, 240, 52)
   ctx.strokeRect(520, 20, 240, 52)
   text(ctx, '【電位関係】', 530, 38, '#e4e4e7', 'bold 11px sans-serif')
-  text(ctx, `接地 0V 基準: V_P = ${fmt(VP, 2)} V`, 530, 58, '#34d399', '11px monospace')
+  text(ctx, `接地 0V 基準: V_P = ${fmt(VP, 2)} V`, 530, 58, '#38bdf8', '11px monospace')
 }
 
 // -------------------------------------------------------------------

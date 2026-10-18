@@ -6,8 +6,8 @@
         <h3>トムソンの比電荷測定と速度セレクターシミュレーター</h3>
       </div>
       <p class="subtitle">
-        1897年にJ.J.トムソンが電子を発見し、その比電荷 e/m approx 1.76 times 10<sup>11</sup>,C/kg を測定した陰極線実験。
-        直交する電場 <i>E</i> と磁場 <i>B</i> による静電力 eE とローレンツ力 evB のつり合い（速度セレクター v = E/B）と、蛍光板上の輝点変位をリアルタイム追跡できます。
+        1897年にJ.J.トムソンが電子を発見し、その比電荷 <i>e</i>/<i>m</i> ≈ 1.76 × 10<sup>11</sup> C/kg を測定した陰極線実験。
+        直交する電場 <i>E</i> と磁場 <i>B</i> による静電力 <i>eE</i> とローレンツ力 <i>evB</i> のつり合い（速度セレクター <i>v</i> = <i>E</i>/<i>B</i>）と、蛍光板上の輝点変位をリアルタイム追跡できます。
       </p>
     </div>
 
@@ -69,7 +69,7 @@
       <div class="stat-card">
         <span class="label">粒子の入射初速 <i>v</i><sub>0</sub></span>
         <span class="value highlight">{{ (speedMs / 1e6).toFixed(2) }} <span class="unit">× 10⁶ m/s</span></span>
-        <span class="subtext"><i>v</i><sub>0</sub> = sqrt{2 q / m <i>V</i><sub>0</sub>} (光速の {{ (speedMs / 3e8 * 100).toFixed(1) }}%)</span>
+        <span class="subtext"><i>v</i><sub>0</sub> = √(2|<i>q</i>|<i>V</i><sub>0</sub> / <i>m</i>) (光速の {{ (speedMs / 3e8 * 100).toFixed(1) }}%)</span>
       </div>
 
       <div class="stat-card">
@@ -87,7 +87,7 @@
       <div class="stat-card">
         <span class="label">スクリーン上の変位 <i>y</i></span>
         <span class="value">{{ screenYMm.toFixed(1) }} <span class="unit">mm</span></span>
-        <span class="subtext">比電荷 e/m = {{ (ratioEM / 1e11).toFixed(2) }} times 10<sup>11</sup></span>
+        <span class="subtext">比電荷 <i>e</i>/<i>m</i> = {{ (ratioEM / 1e11).toFixed(2) }} × 10¹¹ C/kg</span>
       </div>
     </div>
   </div>
@@ -144,18 +144,26 @@ const isVelocitySelected = computed(() => {
 })
 
 const netDeflection = computed(() => {
-  // y加速度 ay = (q * E - q * v * B) / m
+  // 鉛直上向きを +y とする。
+  // 上極板(+)・下極板(-)のとき、E > 0 で電場は下向き (-y)。
+  // 電荷 q が受ける静電力: Fy_E = -q * E (電子 q < 0 なら上向き +eE)
+  // 磁場 B > 0 (紙面奥向き -z) のとき、右向き速度 v0 (+x) の電荷が受けるローレンツ力:
+  // v × B は上向き (+y) なので、Fy_B = q * v0 * B (電子 q < 0 なら下向き -ev0B)
+  // 合力 Fy = -q * E + q * v0 * B = -q * (E - v0 * B)
+  // 電子の場合 (q = -e): Fy = e * (E - v0 * B)
   const q = currentConst.value.q
   const m = currentConst.value.m
-  const fy = q * EVpm.value - q * speedMs.value * BT.value
+  const fy = -q * (EVpm.value - speedMs.value * BT.value)
   return fy / m
 })
 
 // スクリーン上変位 (mm)
+// L1 = 偏向部 0.08m, L2 = 偏向部出口からスクリーンまで 0.12m
 const screenYMm = computed(() => {
-  // L1 = 偏向部 0.1m, L2 = スクリーンまで 0.15m
-  const t1 = 0.1 / speedMs.value
-  const t2 = 0.15 / speedMs.value
+  const L1 = 0.08
+  const L2 = 0.12
+  const t1 = L1 / speedMs.value
+  const t2 = L2 / speedMs.value
   const ay = netDeflection.value
   const y1 = 0.5 * ay * t1 ** 2
   const vy1 = ay * t1
@@ -232,28 +240,28 @@ function draw() {
   ctx.fillRect(plateStartX, botPlateY, plateEndX - plateStartX, 12)
   ctx.strokeRect(plateStartX, botPlateY, plateEndX - plateStartX, 12)
 
-  // 電場ベクトル矢印の描画
+  // 電場ベクトル矢印の描画 (上極板+ / 下極板- のとき下向き E > 0)
   if (Math.abs(electricFieldKVpm.value) > 0.2) {
-    const isUp = electricFieldKVpm.value > 0
+    const isDown = electricFieldKVpm.value > 0
     ctx.strokeStyle = 'rgba(56, 189, 248, 0.35)'
     ctx.lineWidth = 1
     for (let px = plateStartX + 30; px < plateEndX; px += 45) {
-      const yFrom = isUp ? botPlateY - 4 : topPlateY + 4
-      const yTo = isUp ? topPlateY + 4 : botPlateY - 4
+      const yFrom = isDown ? topPlateY + 4 : botPlateY - 4
+      const yTo = isDown ? botPlateY - 4 : topPlateY + 4
       ctx.beginPath()
       ctx.moveTo(px, yFrom); ctx.lineTo(px, yTo)
       ctx.stroke()
       // 矢尻
       ctx.beginPath()
       ctx.moveTo(px, yTo)
-      ctx.lineTo(px - 4, yTo + (isUp ? 8 : -8))
-      ctx.lineTo(px + 4, yTo + (isUp ? 8 : -8))
+      ctx.lineTo(px - 4, yTo + (isDown ? -8 : 8))
+      ctx.lineTo(px + 4, yTo + (isDown ? -8 : 8))
       ctx.fillStyle = 'rgba(56, 189, 248, 0.5)'
       ctx.fill()
     }
     ctx.fillStyle = '#38bdf8'
     ctx.font = 'bold 11px sans-serif'
-    ctx.fillText(`電場 E (${electricFieldKVpm.value} kV/m)`, (plateStartX + plateEndX) / 2, topPlateY - 20)
+    ctx.fillText(`電場 E (${electricFieldKVpm.value} kV/m ${electricFieldKVpm.value > 0 ? '↓' : '↑'})`, (plateStartX + plateEndX) / 2, topPlateY - 20)
   }
 
   // 3. 磁場領域マーク (×: 画面奥向き, •: 画面手前向き)
@@ -292,10 +300,13 @@ function draw() {
   ctx.fillText('蛍光板', screenX + 8, gunY - 120)
 
   // 5. 陰極線ビーム軌道の描画
-  // 軌道計算
-  const scaleDeflect = 0.000000000000015 // 描画スケーリング
-  // 偏向部加速度
-  const ay = netDeflection.value * scaleDeflect
+  // 物理変位 screenYMm [mm] に基づく描画ピクセル変位
+  // スクリーン最大偏向 ±100px に適度なスケーリング (約 3.5 px/mm)
+  const pxPerMm = 3.5
+  const finalDeflectPx = Math.max(-100, Math.min(100, screenYMm.value * pxPerMm))
+  
+  // 偏向部出口での変位比率 (幾何学的比率: y1 / (y1 + y2) = 0.5*t1 / (0.5*t1 + t2) ≈ 0.25)
+  const plateExitDispPx = finalDeflectPx * 0.25
 
   ctx.save()
   ctx.strokeStyle = '#34d399'
@@ -308,22 +319,16 @@ function draw() {
   // 区間1: 電子銃から偏向板入口まで (直進)
   ctx.lineTo(plateStartX, gunY)
 
-  // 区間2: 偏向板内部 (放物線軌道)
-  let curY = gunY
-  let curVy = 0
+  // 区間2: 偏向板内部 (放物線 y ∝ x^2)
   const plateLen = plateEndX - plateStartX
   for (let px = 0; px <= plateLen; px += 4) {
     const t = px / plateLen
-    // y = 0.5 * ay * t^2
-    const yDisp = 0.5 * ay * (t * 80) ** 2
-    curY = gunY - yDisp
-    ctx.lineTo(plateStartX + px, curY)
+    const yDisp = plateExitDispPx * (t ** 2)
+    ctx.lineTo(plateStartX + px, gunY - yDisp)
   }
-  curVy = ay * (80)
 
   // 区間3: 偏向板出口からスクリーンまで (等速直線運動)
-  const freeLen = screenX - plateEndX
-  const finalY = Math.max(gunY - 105, Math.min(gunY + 105, curY - curVy * (freeLen / 80)))
+  const finalY = gunY - finalDeflectPx
   ctx.lineTo(screenX, finalY)
   ctx.stroke()
   ctx.restore()

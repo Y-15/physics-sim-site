@@ -91,7 +91,7 @@
 
       <div class="stat-card">
         <span class="label">作用・反作用の法則</span>
-        <span class="value">vec{F}_1 = -vec{F}_2</span>
+        <span class="value"><i>F</i><sub>1</sub> = -<i>F</i><sub>2</sub></span>
         <span class="subtext">常に大きさが等しく逆向き</span>
       </div>
     </div>
@@ -234,16 +234,16 @@ function draw() {
 
   if (isAttractive.value) {
     // 引力: 互いに相手に向かう
-    // F1: wire1 から右向き
-    drawForceArrow(ctx, wire1X + wireR + 2, centerY, wire1X + wireR + 2 + forceScale, centerY, '#ec4899', 'F₁ (引力)')
-    // F2: wire2 から左向き
-    drawForceArrow(ctx, wire2X - wireR - 2, centerY, wire2X - wireR - 2 - forceScale, centerY, '#ec4899', 'F₂ (引力)')
+    // F1: wire1 から右向き (ラベル上側)
+    drawForceArrow(ctx, wire1X + wireR + 2, centerY, wire1X + wireR + 2 + forceScale, centerY, '#ec4899', 'F₁ (引力)', -10)
+    // F2: wire2 から左向き (ラベル下側にして重なり防止)
+    drawForceArrow(ctx, wire2X - wireR - 2, centerY, wire2X - wireR - 2 - forceScale, centerY, '#ec4899', 'F₂ (引力)', 18)
   } else {
     // 斥力: 互いに外側に向かう
     // F1: wire1 から左向き
-    drawForceArrow(ctx, wire1X - wireR - 2, centerY, wire1X - wireR - 2 - forceScale, centerY, '#ef4444', 'F₁ (斥力)')
+    drawForceArrow(ctx, wire1X - wireR - 2, centerY, wire1X - wireR - 2 - forceScale, centerY, '#ef4444', 'F₁ (斥力)', -10)
     // F2: wire2 から右向き
-    drawForceArrow(ctx, wire2X + wireR + 2, centerY, wire2X + wireR + 2 + forceScale, centerY, '#ef4444', 'F₂ (斥力)')
+    drawForceArrow(ctx, wire2X + wireR + 2, centerY, wire2X + wireR + 2 + forceScale, centerY, '#ef4444', 'F₂ (斥力)', -10)
   }
   ctx.restore()
 
@@ -290,7 +290,7 @@ function drawCurrentArrow(ctx, x, yFrom, yTo, color, label) {
   ctx.restore()
 }
 
-function drawForceArrow(ctx, x1, y1, x2, y2, color, label) {
+function drawForceArrow(ctx, x1, y1, x2, y2, color, label, labelOffsetY = -10) {
   const dx = x2 - x1
   ctx.save()
   ctx.strokeStyle = color
@@ -313,7 +313,7 @@ function drawForceArrow(ctx, x1, y1, x2, y2, color, label) {
 
   ctx.font = 'bold 11px sans-serif'
   ctx.textAlign = 'center'
-  ctx.fillText(label, (x1 + x2) / 2, y1 - 10)
+  ctx.fillText(label, (x1 + x2) / 2, y1 + labelOffsetY)
   ctx.restore()
 }
 
@@ -351,5 +351,33 @@ onUnmounted(() => {
 
 .mt-2 {
   margin-top: 6px;
+}
+
+.btn-group {
+  display: flex;
+  gap: 6px;
+}
+
+.select-btn {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #94a3b8;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.select-btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: #f8fafc;
+}
+
+.select-btn.active {
+  background: rgba(56, 189, 248, 0.2);
+  border-color: #38bdf8;
+  color: #38bdf8;
+  font-weight: bold;
 }
 </style>

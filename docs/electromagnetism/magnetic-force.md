@@ -6,15 +6,14 @@ description: 高校物理・共通テスト・二次試験頻出「電磁力と�
 # 電磁力と平行電流間に働く力（アンペール力）
 
 磁場の中に置かれた導線に電流を流すと、導線は磁場から力を受けます。
-この力を**「電磁力（アンペール力 / Ampère force）」**と呼びます。
+この力を「**電磁力（アンペール力 / Ampère force）**」と呼びます。
 
 この原理を応用して、2本の長い平行な導線に電流を流すと、それぞれの電流がつくる磁場によって、導線同士が互いに力を及ぼし合います。
 
 驚くべきことに、
 - **同じ向きに流れる電流同士は「引き合い（引力）」**
 - **逆向きに流れる電流同士は「反発し合う（斥力）」**
-
-という性質をもちます。これは電荷のクーロン力（同種電荷は反発、異種電荷は引き合う）と**真逆の振る舞い**をするため、初学者が最も混乱しやすい重要テーマです。
+という性質をもちます。これは電荷のクーロン力（同種電荷は反発、異種電荷は引き合う）と **真逆の振る舞い** をするため、初学者が最も混乱しやすい重要テーマです。
 
 <ClientOnly>
   <MagneticForceSim />
@@ -37,7 +36,7 @@ $$
 F = I B L
 $$
 
-力の向きは**「フレミングの左手の法則」**（中指：電流 $I$、人差し指：磁場 $B$、親指：力 $F$）または**「右手のひらの法則」**によって決まります。
+力の向きは「**フレミングの左手の法則 **」（中指：電流 $I$、人差し指：磁場 $B$、親指：力 $F$）または「** 右手のひらの法則**」によって決まります。
 
 ---
 
@@ -134,20 +133,20 @@ $$
 
 ### 作用・反作用の法則（$\vec{F}_1 = -\vec{F}_2$）
 導線2の電流 $I_2$ もまた導線1の位置に磁場 $B_2 = \frac{\mu_0 I_2}{2\pi r}$ をつくります。
-導線1が受ける力 $F_1$ を計算すると、全く同一の式 $\frac{\mu_0 I_1 I_2 L}{2\pi r}$ となり、**向きは真逆**になります。
-したがって、2本の導線に働く力は常に**作用・反作用のペア**（大きさが等しく逆向き）です。
+導線1が受ける力 $F_1$ を計算すると、全く同一の式 $\frac{\mu_0 I_1 I_2 L}{2\pi r}$ となり、 **向きは真逆** になります。
+したがって、2本の導線に働く力は常に **作用・反作用のペア** （大きさが等しく逆向き）です。
 
 ---
 
 ## 4. 引力と斥力の物理的メカニズム（なぜ引き合うのか？）
 
 ### ① 同方向の電流 $\implies$ 引力（引き合う）
-2本の導線の間にできる磁場に注目すると、2つの右ねじの回転が**中央部で互いに逆向きになり打ち消し合います**。
-その結果、導線の間（内側）の磁場が弱くなり、外側の磁場が強くなるため、**磁力線の張力によって2本の導線は引き寄せられます（引力）**。
+2本の導線の間にできる磁場に注目すると、2つの右ねじの回転が **中央部で互いに逆向きになり打ち消し合います**。
+その結果、導線の間（内側）の磁場が弱くなり、外側の磁場が強くなるため、 **磁力線の張力によって2本の導線は引き寄せられます（引力）**。
 
 ### ② 逆方向の電流 $\implies$ 斥力（反発する）
-中央部で2つの右ねじの磁場が**同じ向きに重なり合って強め合います**。
-導線の間（内側）の磁場が極めて高密度になるため、**磁力線同士の横方向の反発圧力によって導線は押し広げられます（斥力）**。
+中央部で2つの右ねじの磁場が **同じ向きに重なり合って強め合います**。
+導線の間（内側）の磁場が極めて高密度になるため、 **磁力線同士の横方向の反発圧力によって導線は押し広げられます（斥力）**。
 
 ---
 
@@ -220,36 +219,39 @@ $$
 
 ### 【最難関大・発展演習】重力場と一様磁場中における荷電粒子のサイクロイド運動と床面衝突
 
-高校物理（「物理基礎」および「物理」）の学習指導要領の範囲内で解くことができるものの、**微積分を使わずに解くには深い物理的洞察力（座標系の変換・力積と運動量・エネルギー保存則の有機的な結合）が求められる難関大入試レベルの記述式難問**です。
+高校物理（「物理基礎」および「物理」）の学習指導要領の範囲内で解くことができるものの、 **微積分を使わずに解くには深い物理的洞察力（座標系の変換・力積と運動量・エネルギー保存則の有機的な結合）が求められる難関大入試レベルの記述式難問** です。
 
-<div style="text-align: center; margin: 20px 0;">
-  <svg viewBox="0 0 700 240" style="max-width: 100%; height: auto; background: #0c0e14; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1);">
+<div class="vector-diagram-card">
+  <svg viewBox="0 0 700 240" class="academic-svg" aria-label="重力場と一様磁場中のサイクロイド運動と床面衝突">
     <!-- Grid lines -->
     <defs>
-      <pattern id="gridPattern" width="40" height="40" patternUnits="userSpaceOnUse">
+      <pattern id="cycloidGridPattern" width="40" height="40" patternUnits="userSpaceOnUse">
         <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
       </pattern>
-      <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <marker id="cycloid-arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
         <path d="M 0 1 L 10 5 L 0 9 z" fill="#38bdf8" />
       </marker>
-      <marker id="arrowRed" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <marker id="cycloid-arrow-red" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
         <path d="M 0 1 L 10 5 L 0 9 z" fill="#f43f5e" />
       </marker>
+      <marker id="cycloid-arrow-green" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+        <path d="M 0 1 L 10 5 L 0 9 z" fill="#10b981" />
+      </marker>
     </defs>
-    <rect width="700" height="240" fill="url(#gridPattern)" />
+    <rect width="700" height="240" fill="url(#cycloidGridPattern)" />
     
     <!-- Axes -->
-    <line x1="50" y1="70" x2="660" y2="70" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" marker-end="url(#arrow)" />
+    <line x1="50" y1="70" x2="660" y2="70" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" marker-end="url(#cycloid-arrow)" />
     <text x="665" y="74" fill="#a1a1aa" font-size="12" font-family="sans-serif">x</text>
-    <line x1="90" y1="220" x2="90" y2="20" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" marker-end="url(#arrow)" />
+    <line x1="90" y1="220" x2="90" y2="20" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" marker-end="url(#cycloid-arrow)" />
     <text x="86" y="16" fill="#a1a1aa" font-size="12" font-family="sans-serif">y</text>
     <circle cx="90" cy="70" r="3" fill="#fff" />
     <text x="70" y="65" fill="#a1a1aa" font-size="11" font-family="sans-serif">O(0,0)</text>
 
     <!-- Gravity & B field symbols -->
-    <line x1="600" y1="25" x2="600" y2="55" stroke="#f43f5e" stroke-width="2" marker-end="url(#arrowRed)" />
+    <line x1="600" y1="25" x2="600" y2="55" stroke="#f43f5e" stroke-width="2" marker-end="url(#cycloid-arrow-red)" />
     <text x="612" y="44" fill="#f43f5e" font-size="11" font-weight="bold" font-family="sans-serif">g (重力)</text>
-    <text x="560" y="25" fill="#38bdf8" font-size="12" font-weight="bold" font-family="monospace">⊗ B (紙面奥向き)</text>
+    <text x="540" y="25" fill="#38bdf8" font-size="12" font-weight="bold" font-family="monospace">⊗ B (紙面奥向き)</text>
     <text x="240" y="35" fill="#38bdf8" font-size="12" font-family="monospace">⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗</text>
 
     <!-- Floor line y = -R -->
@@ -259,13 +261,11 @@ $$
     <text x="55" y="115" fill="#f59e0b" font-size="11" font-family="sans-serif">R</text>
 
     <!-- Cycloid arc 1: O to P1 -->
-    <!-- R = 80px. omega*t1 = pi/2 -> x1 = R*(pi/2 - 1) = 80*(0.5708) = 45.6px. cx = 90 + 45.6 = 135.6, cy = 150 -->
     <path d="M 90 70 C 90 110, 110 150, 135.6 150" fill="none" stroke="#22d3ee" stroke-width="2.5" />
     <circle cx="135.6" cy="150" r="4" fill="#f59e0b" />
     <text x="125" y="168" fill="#f59e0b" font-size="11" font-weight="bold" font-family="sans-serif">P₁ (第1衝突)</text>
 
     <!-- Bounce 1: P1 to P2 -->
-    <!-- Delta X = (pi - 2)*R = 80*1.1416 = 91.3px. cx2 = 135.6 + 91.3 = 226.9, cy2 = 150. Max height reaches y = 0 (cy = 70) -->
     <path d="M 135.6 150 C 145 90, 160 70, 181.2 70 C 202 70, 218 90, 226.9 150" fill="none" stroke="#22d3ee" stroke-width="2.5" stroke-dasharray="4,2" />
     <circle cx="226.9" cy="150" r="4" fill="#f59e0b" />
     <text x="216" y="168" fill="#f59e0b" font-size="11" font-weight="bold" font-family="sans-serif">P₂ (第2衝突)</text>
@@ -277,13 +277,14 @@ $$
 
     <!-- Settling arrow -->
     <path d="M 305 150 Q 340 150, 480 150" fill="none" stroke="#10b981" stroke-width="2" stroke-dasharray="2,2" />
-    <line x1="480" y1="150" x2="520" y2="150" stroke="#10b981" stroke-width="3" marker-end="url(#arrow)" />
+    <line x1="480" y1="150" x2="520" y2="150" stroke="#10b981" stroke-width="3" marker-end="url(#cycloid-arrow-green)" />
     <text x="350" y="138" fill="#10b981" font-size="11" font-weight="bold" font-family="sans-serif">n → ∞：床面上を速さ V₀ で等速直線運動（垂直抗力 N = 0）</text>
 
     <!-- Initial particle -->
     <circle cx="90" cy="70" r="5" fill="#38bdf8" stroke="#fff" stroke-width="1.5" />
     <text x="98" y="85" fill="#38bdf8" font-size="11" font-weight="bold" font-family="sans-serif">q, m (静止放流)</text>
   </svg>
+  <div class="diagram-caption">図: 重力場と一様磁場中の荷電粒子のサイクロイド運動と床面での反発・収束挙動</div>
 </div>
 
 <ClientOnly>
@@ -323,8 +324,7 @@ $$
 <details class="tip">
 <summary><strong>💡 思考のヒント・着眼点（クリックして開く）</strong></summary>
 
-1. **設問 (2) の座標変換（ドリフト系への移行）**
-   静止系（実験室系 $\mathrm{S}$）での粒子の速度 $\vec{v} = (v_x, v_y)$ を、速さ $V_0$ で $+x$ 向きに動く慣性系 $\mathrm{S}'$ から見た相対速度 $\vec{u} = (u_x, u_y)$ を用いて $v_x = V_0 + u_x, \, v_y = u_y$ と表してみましょう。運動方程式に代入すると、重力項 $mg$ がローレンツ力の定数項 $q V_0 B$ と完全に相殺し、系 $\mathrm{S}'$ では**単純な等速円運動**になります。
+1. **設問 (2) の座標変換（ドリフト系への移行） ** 静止系（実験室系 $\mathrm{S}$）での粒子の速度 $\vec{v} = (v_x, v_y)$ を、速さ $V_0$ で $+x$ 向きに動く慣性系 $\mathrm{S}'$ から見た相対速度 $\vec{u} = (u_x, u_y)$ を用いて $v_x = V_0 + u_x, \, v_y = u_y$ と表してみましょう。運動方程式に代入すると、重力項 $mg$ がローレンツ力の定数項 $q V_0 B$ と完全に相殺し、系 $\mathrm{S}'$ では**単純な等速円運動** になります。
 2. **設問 (4) の衝突直後の相対速度ベクトル**
    床（$y = -R$）で跳ね返った直後の速度 $(v_{1x}', v_{1y}')$ を、動く慣性系 $\mathrm{S}'$ から見た相対速度 $\vec{u}_1' = (v_{1x}' - V_0, \, v_{1y}')$ に変換してみてください。$\vec{u}_1'$ がどの向きを向いているかに気づけば、衝突後の軌道が一目瞭然になります。
 3. **設問 (5) の $x$ 方向運動量と高さ $y$ の関係**
@@ -376,7 +376,7 @@ $$
 m a_y = q B (V_0 + u_x) - mg = q B u_x
 $$
 
-となる。これは、**慣性系 $\mathrm{S}'$ から見ると重力が消え、相対速度 $\vec{u}$ に対して常に垂直（反時計回り方向）に大きさ $q B u$ のローレンツ力のみがはたらく等速円運動**であることを示している。
+となる。これは、 **慣性系 $\mathrm{S}'$ から見ると重力が消え、相対速度 $\vec{u}$ に対して常に垂直（反時計回り方向）に大きさ $q B u$ のローレンツ力のみがはたらく等速円運動** であることを示している。
 
 時刻 $t = 0$ において、実験室系での初速度は $(0, 0)$ なので、慣性系 $\mathrm{S}'$ における初速度は、
 
@@ -466,7 +466,7 @@ $$
 u_{1x}' = v_{1x}' - V_0 = 0, \quad u_{1y}' = +V_0
 $$
 
-となる。すなわち、**系 $\mathrm{S}'$ において粒子は速さ $V_0$ で鉛直上向き（$+y$ 向き）に打ち出される**。
+となる。すなわち、 **系 $\mathrm{S}'$ において粒子は速さ $V_0$ で鉛直上向き（$+y$ 向き）に打ち出される**。
 
 したがって、系 $\mathrm{S}'$ における衝突後の軌道は、衝突点から半径 $R = \dfrac{V_0}{\omega}$ の円（中心の $y$ 座標は床と同じ $y = -R$ で、衝突点より $R$ だけ左側の点）を反時計回りに描く運動となる。
 
@@ -522,7 +522,7 @@ $$
 (a) の結果より、任意の $k$ 回目の衝突において、床（$y = -R$）に衝突する直前・直後の速度の $x$ 成分は常に $v_x = V_0$ である。すなわち、慣性系 $\mathrm{S}'$ における相対速度の $x$ 成分は、床面では常に $u_x = v_x - V_0 = 0$ となる。
 
 1回目の衝突直前の $y$ 方向速度は $v_{1y} = -V_0$ であったから、1回目の衝突直後は $u_{1y}' = e V_0$ である。系 $\mathrm{S}'$ では相対速度 $(0, e V_0)$ で真上に打ち出され、半径 $R_1 = \dfrac{e V_0}{\omega} = e R$ の半円を描いて、2回目の衝突直前には $(0, -e V_0)$ で床に戻ってくる。
-これを繰り返すと、**$n$ 回目の衝突直後の系 $\mathrm{S}'$ における相対速度は $(0, e^n V_0)$** となり、粒子は系 $\mathrm{S}'$ において半径
+これを繰り返すと、 **$n$ 回目の衝突直後の系 $\mathrm{S}'$ における相対速度は $(0, e^n V_0)$** となり、粒子は系 $\mathrm{S}'$ において半径
 
 $$
 R_n = \frac{e^n V_0}{\omega} = e^n R
@@ -546,13 +546,12 @@ $$
 
 - **十分時間が経過した後の運動（$n \to \infty$）：**  
   $e$ は $0$ より大きく $1$ より小さいため、$n \to \infty$ で $e^n \to 0$ となり、鉛直方向の跳ね返り高さ $R_n = e^n R \to 0$、鉛直方向の速度成分 $v_y \to 0$ に収束する。  
-  したがって、十分時間が経過した後は、**床面（$y = -R$）上を $+x$ 向きに一定の速さ $V_0 = \dfrac{mg}{qB}$ で等速直線運動する**。このとき、鉛直上向きのローレンツ力 $q V_0 B = mg$ が重力と完全につり合っているため、**床から受ける垂直抗力の大きさは $0$** となる。
+  したがって、十分時間が経過した後は、 **床面（$y = -R$）上を $+x$ 向きに一定の速さ $V_0 = \dfrac{mg}{qB}$ で等速直線運動する**。このとき、鉛直上向きのローレンツ力 $q V_0 B = mg$ が重力と完全につり合っているため、 ** 床から受ける垂直抗力の大きさは $0$** となる。
 
 ::: tip 🌟 物理的本質のまとめと洞察
 1. **重力とローレンツ力の相殺によるドリフト系：**  
    重力 $mg$ と直交磁場 $B$ が存在する空間では、速さ $V_0 = \frac{mg}{qB}$ の水平ドリフト速度で進む慣性系 $\mathrm{S}'$ に乗ると、外見上の重力が完全に打ち消され、単なる「一様磁場中の等速円運動」へと還元されます。
-2. **滞空時間 $\Delta T_n$ が一定である理由：**  
-   通常の重力下での斜方投射バウンドでは、最高到達高度が $e^{2n}$ で減衰すると滞空時間も $e^n$ で短くなり、有限時間でバウンドが停止します。しかし磁場中では、サイクロトロン角振動数 $\omega = \frac{qB}{m}$ が速さに一切依存しないため、**跳ね返る高さ $e^n R$ がどれほど微小になっても、1回あたりの滞空時間 $\Delta T_n = \frac{\pi m}{qB}$ は永久に変化しません**。
+2. **滞空時間 $\Delta T_n$ が一定である理由： ** 通常の重力下での斜方投射バウンドでは、最高到達高度が $e^{2n}$ で減衰すると滞空時間も $e^n$ で短くなり、有限時間でバウンドが停止します。しかし磁場中では、サイクロトロン角振動数 $\omega = \frac{qB}{m}$ が速さに一切依存しないため、**跳ね返る高さ $e^n R$ がどれほど微小になっても、1回あたりの滞空時間 $\Delta T_n = \frac{\pi m}{qB}$ は永久に変化しません**。
 3. **床からの離脱（垂直抗力 $0$）：**  
    跳ね返りが収束した極限（$n \to \infty$）では、粒子は床の上に乗っているように見えますが、上向きのローレンツ力 $q V_0 B$ が重力 $mg$ と完璧にバランスしているため、床をまったく押しません（垂直抗力 $N = 0$）。
 :::
