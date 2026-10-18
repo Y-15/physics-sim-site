@@ -12,7 +12,7 @@ const props = withDefaults(
     label?: string
   }>(),
   {
-    client: 'ca-pub-XXXXXXXXXXXXXXXX',
+    client: 'ca-pub-6690428870593129',
     slotId: '',
     format: 'auto',
     responsive: true,

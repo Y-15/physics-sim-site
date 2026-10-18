@@ -54,12 +54,13 @@ export default defineConfig({
     ['meta', { name: 'twitter:description', content: '高校物理・共通テスト・大学受験対応。動くシミュレーションと厳選例題で直感理解！' }],
     ['meta', { name: 'twitter:image', content: 'https://y-15.github.io/physics-sim-site/og-image.svg' }],
 
-    // Google AdSense 自動広告・基本タグ
+    // Google AdSense アカウント所有権確認メタタグ＆自動広告スクリプト
+    ['meta', { name: 'google-adsense-account', content: 'ca-pub-6690428870593129' }],
     [
       'script',
       {
         async: '',
-        src: 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX',
+        src: 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6690428870593129',
         crossorigin: 'anonymous'
       }
     ],

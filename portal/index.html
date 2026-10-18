@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>高校物理シミュレーションラボ 公式ポータル | 動くシミュレーターと数式で完全理解</title>
+  <meta name="description" content="高校物理・共通テスト・大学受験対応。動くシミュレーション全79テーマと演習問題全1000問で直感的に完全攻略できる無料学習サイト。">
+  <meta name="keywords" content="高校物理, 物理シミュレーション, 共通テスト 物理, 大学受験, 力学, 波動, 電磁気, 熱力学, 原子物理">
+  <meta name="author" content="高校物理シミュレーションラボ">
+  <link rel="icon" type="image/svg+xml" href="https://y-15.github.io/physics-sim-site/favicon.svg">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <!-- Google AdSense 基本・審査タグ＆アカウント所有権確認メタタグ -->
+  <meta name="google-adsense-account" content="ca-pub-6690428870593129">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6690428870593129" crossorigin="anonymous"></script>
+
+  <!-- OGP メタタグ -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="高校物理シミュレーションラボ">
+  <meta property="og:title" content="高校物理シミュレーションラボ 公式ポータル">
+  <meta property="og:description" content="全79テーマの対話型シミュレーターと全1000問の厳選演習問題で高校物理を完全制覇。">
+  <meta property="og:url" content="https://y-15.github.io/">
+
+  <style>
+    :root {
+      --bg-dark: #090d16;
+      --card-bg: rgba(22, 28, 45, 0.75);
+      --card-border: rgba(56, 189, 248, 0.18);
+      --primary: #38bdf8;
+      --primary-hover: #0ea5e9;
+      --accent: #818cf8;
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', 'Noto Sans JP', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      line-height: 1.65;
+      overflow-x: hidden;
+      background-image: 
+        radial-gradient(circle at 15% 15%, rgba(56, 189, 248, 0.12) 0%, transparent 40%),
+        radial-gradient(circle at 85% 60%, rgba(129, 140, 248, 0.1) 0%, transparent 45%);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ナビゲーションバー */
+    header {
+      background: rgba(9, 13, 22, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      padding: 0.9rem 1.5rem;
+    }
+
+    .nav-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-weight: 800;
+      font-size: 1.15rem;
+      color: #fff;
+      text-decoration: none;
+      letter-spacing: -0.02em;
+    }
+
+    .brand span {
+      background: linear-gradient(135deg, #38bdf8, #818cf8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.2rem;
+      align-items: center;
+    }
+
+    .nav-link {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .nav-link:hover {
+      color: var(--primary);
+    }
+
+    .btn-launch {
+      background: linear-gradient(135deg, #0284c7, #38bdf8);
+      color: #fff;
+      padding: 0.5rem 1.1rem;
+      border-radius: 9999px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-decoration: none;
+      box-shadow: 0 4px 15px rgba(2, 132, 199, 0.35);
+      transition: all 0.2s;
+    }
+
+    .btn-launch:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(56, 189, 248, 0.45);
+    }
+
+    /* ヒーローセクション */
+    .hero {
+      text-align: center;
+      padding: 4.5rem 1.5rem 3rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      padding: 0.3rem 0.9rem;
+      background: rgba(56, 189, 248, 0.12);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      border-radius: 9999px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 1.2rem;
+    }
+
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 800;
+      line-height: 1.25;
+      letter-spacing: -0.03em;
+      margin-bottom: 1.2rem;
+    }
+
+    .hero h1 .highlight {
+      background: linear-gradient(135deg, #38bdf8 20%, #818cf8 80%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero p {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      max-width: 680px;
+      margin: 0 auto 2rem;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-main {
+      background: linear-gradient(135deg, #0284c7, #38bdf8);
+      color: #fff;
+      padding: 0.85rem 2rem;
+      border-radius: 12px;
+      font-size: 1.05rem;
+      font-weight: 700;
+      text-decoration: none;
+      box-shadow: 0 10px 25px rgba(2, 132, 199, 0.4);
+      transition: all 0.2s;
+    }
+
+    .btn-main:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 15px 30px rgba(56, 189, 248, 0.5);
+    }
+
+    .btn-sub {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #fff;
+      padding: 0.85rem 1.8rem;
+      border-radius: 12px;
+      font-size: 1.05rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    .btn-sub:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+
+    /* フィーチャーグリッド */
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 4rem;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 1.7rem;
+      font-weight: 700;
+      margin-bottom: 2rem;
+      letter-spacing: -0.02em;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 1.6rem;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      transition: all 0.25s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(56, 189, 248, 0.45);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
+    }
+
+    .card-icon {
+      font-size: 2.2rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .card-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+      color: #fff;
+    }
+
+    .card-desc {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+      flex-grow: 1;
+    }
+
+    .card-meta {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    /* 広告枠 */
+    .ad-slot-box {
+      margin: 3rem auto 1rem;
+      max-width: 800px;
+      text-align: center;
+    }
+
+    .ad-label {
+      font-size: 0.72rem;
+      color: #64748b;
+      margin-bottom: 0.4rem;
+      letter-spacing: 0.05em;
+    }
+
+    .ad-wrapper {
+      min-height: 120px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px dashed rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* フッター */
+    footer {
+      background: rgba(5, 8, 15, 0.95);
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 3rem 1.5rem 2rem;
+      margin-top: auto;
+      font-size: 0.88rem;
+      color: var(--text-muted);
+    }
+
+    .footer-content {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 2rem;
+    }
+
+    .footer-col h4 {
+      color: #fff;
+      font-size: 0.95rem;
+      margin-bottom: 0.8rem;
+      font-weight: 600;
+    }
+
+    .footer-col ul {
+      list-style: none;
+    }
+
+    .footer-col ul li {
+      margin-bottom: 0.5rem;
+    }
+
+    .footer-col ul li a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-col ul li a:hover {
+      color: var(--primary);
+    }
+
+    .footer-bottom {
+      max-width: 1100px;
+      margin: 2rem auto 0;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      text-align: center;
+      font-size: 0.8rem;
+      color: #64748b;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ナビゲーション -->
+  <header>
+    <div class="nav-container">
+      <a href="https://y-15.github.io/physics-sim-site/" class="brand">
+        ⚛️ <span>高校物理ラボ</span>
+      </a>
+      <nav class="nav-links">
+        <a href="https://y-15.github.io/physics-sim-site/mechanics/index" class="nav-link">力学</a>
+        <a href="https://y-15.github.io/physics-sim-site/waves/index" class="nav-link">波動</a>
+        <a href="https://y-15.github.io/physics-sim-site/electromagnetism/index" class="nav-link">電磁気</a>
+        <a href="https://y-15.github.io/physics-sim-site/thermodynamics/index" class="nav-link">熱力学</a>
+        <a href="https://y-15.github.io/physics-sim-site/atomic/index" class="nav-link">原子</a>
+        <a href="https://y-15.github.io/physics-sim-site/problems/index" class="nav-link">演習問題</a>
+        <a href="https://y-15.github.io/physics-sim-site/" class="btn-launch">ラボを開く →</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ヒーローセクション -->
+  <section class="hero">
+    <div class="hero-badge">完全無料・高校生・大学受験生対応</div>
+    <h1>動くシミュレーションで<br><span class="highlight">高校物理を直感的に完全制覇</span></h1>
+    <p>全79テーマの対話型シミュレーター、公式の完全導出、全1000問の厳選演習データベース。抽象的な数式をその場で動かして体感できる新しい学習体験を提供します。</p>
+    <div class="hero-cta">
+      <a href="https://y-15.github.io/physics-sim-site/" class="btn-main">🚀 シミュレーターラボへ入場</a>
+      <a href="https://y-15.github.io/physics-sim-site/problems/index" class="btn-sub">📝 演習問題集（全1,000問）</a>
+    </div>
+  </section>
+
+  <!-- 分野一覧グリッド -->
+  <main class="container">
+    <h2 class="section-title">全5分野・79テーマの対話型シミュレーター</h2>
+    <div class="grid">
+      
+      <!-- 力学 -->
+      <a href="https://y-15.github.io/physics-sim-site/mechanics/index" class="card">
+        <div class="card-icon">🏎️</div>
+        <div class="card-title">力学（Mechanics）</div>
+        <div class="card-desc">等加速度直線運動、斜方投射、摩擦角、運動方程式、単振動、衝突・反発係数、万有引力・ケプラー軌道など全21テーマ。</div>
+        <div class="card-meta">全21シミュレーター・320問 →</div>
+      </a>
+
+      <!-- 波動 -->
+      <a href="https://y-15.github.io/physics-sim-site/waves/index" class="card">
+        <div class="card-icon">🌊</div>
+        <div class="card-title">波動（Waves）</div>
+        <div class="card-desc">y-x / y-tグラフ変換、ドップラー効果、うなり、定常波、ヤングの二重スリット、薄膜干渉・ニュートンリングなど全13テーマ。</div>
+        <div class="card-meta">全13シミュレーター・180問 →</div>
+      </a>
+
+      <!-- 電磁気 -->
+      <a href="https://y-15.github.io/physics-sim-site/electromagnetism/index" class="card">
+        <div class="card-icon">⚡</div>
+        <div class="card-title">電磁気（Electromagnetism）</div>
+        <div class="card-desc">電場と電位、コンデンサー回路、キルヒホッフ則、ローレンツ力、電磁誘導、RLC交流共振回路、サイクロトロンなど全15テーマ。</div>
+        <div class="card-meta">全15シミュレーター・250問 →</div>
+      </a>
+
+      <!-- 熱力学 -->
+      <a href="https://y-15.github.io/physics-sim-site/thermodynamics/index" class="card">
+        <div class="card-icon">🔥</div>
+        <div class="card-title">熱力学（Thermodynamics）</div>
+        <div class="card-desc">気体の状態変化・P-V図、気体分子運動論、カルノーサイクル、オットーサイクル、モル比熱、熱量保存など全10テーマ。</div>
+        <div class="card-meta">全10シミュレーター・130問 →</div>
+      </a>
+
+      <!-- 原子 -->
+      <a href="https://y-15.github.io/physics-sim-site/atomic/index" class="card">
+        <div class="card-icon">⚛️</div>
+        <div class="card-title">原子物理（Atomic Physics）</div>
+        <div class="card-desc">光電効果、ミリカンの油滴実験、ボーアの水素原子模型、ブラッグ反射、X線スペクトル、ド・ブロイ物質波、放射性崩壊など全13テーマ。</div>
+        <div class="card-meta">全13シミュレーター・120問 →</div>
+      </a>
+
+      <!-- 3Dオセロ -->
+      <a href="https://y-15.github.io/physics-sim-site/games/othello" class="card">
+        <div class="card-icon">🎲</div>
+        <div class="card-title">3次元オセロ（空間思考）</div>
+        <div class="card-desc">4×4×4の立体盤面で全26方向を探索。物理シミュレーションと連動した空間認識力・思考力トレーニング企画。</div>
+        <div class="card-meta">CPU対戦 & オンライン対戦 →</div>
+      </a>
+
+    </div>
+
+    <!-- 広告プレースホルダー枠 -->
+    <div class="ad-slot-box">
+      <div class="ad-label">スポンサーリンク</div>
+      <div class="ad-wrapper">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-6690428870593129"
+             data-ad-slot=""
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+      </div>
+    </div>
+  </main>
+
+  <!-- フッター -->
+  <footer>
+    <div class="footer-content">
+      <div class="footer-col">
+        <h4>高校物理シミュレーションラボ</h4>
+        <p style="max-width: 320px; font-size: 0.85rem;">高校生・受験生の自学自習や学校授業で活用できる完全無料の対話型教育プラットフォームです。</p>
+      </div>
+      <div class="footer-col">
+        <h4>各分野のシミュレーター</h4>
+        <ul>
+          <li><a href="https://y-15.github.io/physics-sim-site/mechanics/index">力学編</a></li>
+          <li><a href="https://y-15.github.io/physics-sim-site/waves/index">波動編</a></li>
+          <li><a href="https://y-15.github.io/physics-sim-site/electromagnetism/index">電磁気編</a></li>
+          <li><a href="https://y-15.github.io/physics-sim-site/thermodynamics/index">熱力学編</a></li>
+          <li><a href="https://y-15.github.io/physics-sim-site/atomic/index">原子物理編</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>利用規約・ポリシー</h4>
+        <ul>
+          <li><a href="https://y-15.github.io/physics-sim-site/about">このサイトについて</a></li>
+          <li><a href="https://y-15.github.io/physics-sim-site/privacy">プライバシーポリシー（広告配信・Cookieについて）</a></li>
+          <li><a href="https://github.com/Y-15/physics-sim-site/issues">お問い合わせ（GitHub Issues）</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      Copyright &copy; 2026 高校物理シミュレーションラボ All Rights Reserved.
+    </div>
+  </footer>
+
+  <script>
+    (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+</body>
+</html>

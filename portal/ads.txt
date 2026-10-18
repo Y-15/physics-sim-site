@@ -1,0 +1,2 @@
+# Google AdSense ads.txt for y-15.github.io
+google.com, pub-6690428870593129, DIRECT, f08c47fec0942fa0
