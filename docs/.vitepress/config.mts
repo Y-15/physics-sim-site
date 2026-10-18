@@ -94,7 +94,8 @@ export default defineConfig({
       { text: '演習問題', link: '/problems/index' },
       { text: '🎲 3Dオセロ', link: '/games/othello' },
       { text: '受験・学習ガイド', link: '/about' },
-      { text: 'プライバシーポリシー', link: '/privacy' }
+      { text: 'プライバシーポリシー', link: '/privacy' },
+      { text: '✉️ お問い合わせ', link: '/contact' }
     ],
 
     sidebar: {
@@ -305,7 +306,7 @@ export default defineConfig({
     ],
 
     footer: {
-      message: '完全無料の高校物理インタラクティブ学習サイト | <a href="/physics-sim-site/privacy">プライバシーポリシー</a>',
+      message: '完全無料の高校物理インタラクティブ学習サイト | <a href="/physics-sim-site/privacy">プライバシーポリシー</a> | <a href="/physics-sim-site/contact">お問い合わせ</a>',
       copyright: 'Copyright © 2026 Physics Lab'
     },
 

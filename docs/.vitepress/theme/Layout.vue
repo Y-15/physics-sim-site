@@ -16,14 +16,14 @@ const { page, frontmatter } = useData()
 
     <!-- 記事末尾の広告（各解説・シミュレータ・演習問題の直下） -->
     <template #doc-after>
-      <div v-if="!frontmatter.noAds && page.relativePath !== 'privacy.md'" class="doc-ad-slot">
+      <div v-if="!frontmatter.noAds && page.relativePath !== 'privacy.md' && page.relativePath !== 'contact.md'" class="doc-ad-slot">
         <AdUnit :min-height="160" label="スポンサーリンク" />
       </div>
     </template>
 
     <!-- PC表示時: 右側目次（TOC）下のサイドバー広告 -->
     <template #aside-ads-after>
-      <div v-if="!frontmatter.noAds && page.relativePath !== 'privacy.md'" class="aside-ad-slot">
+      <div v-if="!frontmatter.noAds && page.relativePath !== 'privacy.md' && page.relativePath !== 'contact.md'" class="aside-ad-slot">
         <AdUnit :min-height="250" format="rectangle" label="スポンサーリンク" />
       </div>
     </template>

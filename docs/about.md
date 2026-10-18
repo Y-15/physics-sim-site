@@ -80,5 +80,5 @@ description: 高校物理シミュレーションラボの運営理念、共通�
 * **広告配信**: 当サイトでは第三者配信事業者（Google AdSense等）による広告配信を行っています。Cookieを利用してユーザーのアクセス履歴に基づく適切なパーソナライズ広告が表示される場合があります。
 * **パーソナライズ広告の無効化**: [Google 広告設定](https://www.google.com/settings/ads) または [aboutads.info](https://www.aboutads.info/choices/) よりいつでもCookieによるパーソナライズを無効化できます。
 * **完全リンクフリー**: 学校・学習塾の授業や教育ブログ等での教材活用・紹介は事前連絡不要で自由に行っていただけます。
-* **お問い合わせ**: ご意見や数式等のご指摘は [GitHub Issues](https://github.com/Y-15/physics-sim-site/issues) にて受け付けております。
+* **お問い合わせ**: シミュレーターの不具合報告、数式の誤植、解説へのご質問、機能リクエストは **[お問い合わせフォーム](/contact)** または [GitHub Issues](https://github.com/Y-15/physics-sim-site/issues) にて受け付けております。
 

@@ -60,6 +60,8 @@ description: 高校物理シミュレーションラボのプライバシーポ�
 
 当サイトに関するご質問、シミュレーション計算や数式の誤りのご指摘、その他お問い合わせは、以下の窓口までお願いいたします：
 
+* **お問い合わせフォーム**:  
+  当サイトの **[専用お問い合わせフォーム](/contact)** より直接メッセージをお送りいただけます。
 * **GitHub リポジトリ（Issues / Discussions）**:  
   [https://github.com/Y-15/physics-sim-site/issues](https://github.com/Y-15/physics-sim-site/issues)
 * **運営者**: y0711（高校物理シミュレーションラボ 運営）
