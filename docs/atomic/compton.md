@@ -33,7 +33,9 @@ description: 高校物理の原子物理最頻出テーマ。光子の運動量 
 
 散乱角 $\theta$ や入射X線の波長 $\lambda_0$ をスライダーで動かし、散乱光子の波長の伸びや反跳電子の飛ぶ向き（角 $\phi$）をリアルタイムに観察してみましょう。
 
-<ComptonSim />
+<ClientOnly>
+  <ComptonSim />
+</ClientOnly>
 
 ---
 

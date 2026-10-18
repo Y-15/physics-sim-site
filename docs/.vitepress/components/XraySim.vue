@@ -19,20 +19,18 @@
     <div class="control-panel">
       <div class="control-grid">
         <div class="control-group">
-          <label>
-            <span>ターゲット金属:</span>
-            <div class="btn-group">
-              <button class="select-btn" :class="{ active: targetKey === 'Mo' }" @click="targetKey = 'Mo'">
-                モリブデン (Mo)
-              </button>
-              <button class="select-btn" :class="{ active: targetKey === 'Cu' }" @click="targetKey = 'Cu'">
-                銅 (Cu)
-              </button>
-              <button class="select-btn" :class="{ active: targetKey === 'W' }" @click="targetKey = 'W'">
-                タングステン (W)
-              </button>
-            </div>
-          </label>
+          <span class="control-label">ターゲット金属:</span>
+          <div class="btn-group">
+            <button class="select-btn" :class="{ active: targetKey === 'Mo' }" @click="targetKey = 'Mo'">
+              モリブデン (Mo)
+            </button>
+            <button class="select-btn" :class="{ active: targetKey === 'Cu' }" @click="targetKey = 'Cu'">
+              銅 (Cu)
+            </button>
+            <button class="select-btn" :class="{ active: targetKey === 'W' }" @click="targetKey = 'W'">
+              タングステン (W)
+            </button>
+          </div>
         </div>
 
         <div class="control-group">
@@ -72,13 +70,13 @@
       </div>
 
       <div class="stat-card">
-        <span class="label">特性X線 K_α 波長</span>
+        <span class="label">特性X線 K<sub>α</sub> 波長</span>
         <span class="value">{{ targetData.kAlphaPm }} <span class="unit">pm</span></span>
         <span class="subtext">固有エネルギー差で一定</span>
       </div>
 
       <div class="stat-card">
-        <span class="label">特性X線 K_β 波長</span>
+        <span class="label">特性X線 K<sub>β</sub> 波長</span>
         <span class="value">{{ targetData.kBetaPm }} <span class="unit">pm</span></span>
         <span class="subtext">M殻 → K殻 遷移</span>
       </div>
@@ -359,6 +357,26 @@ onUnmounted(() => {
   line-height: 1.4;
 }
 
+.frac {
+  display: inline-flex;
+  flex-direction: column;
+  vertical-align: middle;
+  text-align: center;
+  padding: 0 0.15em;
+  line-height: 1;
+}
+
+.frac .num {
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 0.1em;
+  font-size: 0.85em;
+}
+
+.frac .den {
+  padding-top: 0.1em;
+  font-size: 0.85em;
+}
+
 .canvas-wrapper {
   position: relative;
   border-radius: 8px;
@@ -398,6 +416,11 @@ canvas {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 0.8rem;
+}
+
+.control-label {
+  font-size: 0.85rem;
+  color: #cbd5e1;
 }
 
 .control-group label {

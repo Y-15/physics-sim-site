@@ -6,8 +6,8 @@
         <h3>ミリカンの油滴実験（電気素量の測定）シミュレーター</h3>
       </div>
       <p class="subtitle">
-        1909年にロバート・ミリカンが電荷の最小単位「電気素量 e approx 1.602 times 10<sup>-19</sup>,C」の存在を実証した実験。
-        微小油滴に働く重力 mg、電場による静電力 qE、空気の粘性抵抗（ストークスの法則 6πη r v）のつり合いと、電荷の離散性（量子化 q = ne）をリアルタイム顕微鏡視野で観察できます。
+        1909年にロバート・ミリカンが電荷の最小単位「電気素量 <i>e</i> ≈ 1.602 × 10<sup>-19</sup> C」の存在を実証した実験。
+        微小油滴に働く重力 <i>mg</i>、電場による静電力 <i>qE</i>、空気の粘性抵抗（ストークスの法則 6<i>πηrv</i>）のつり合いと、電荷の離散性（量子化 <i>q</i> = <i>ne</i>）をリアルタイム顕微鏡視野で観察できます。
       </p>
     </div>
 
@@ -23,26 +23,24 @@
       <div class="control-grid">
         <div class="control-group">
           <label>
-            <span>極板間電圧 <i>V</i>: <strong>{{ plateVoltageV }} V</strong> (電場 E = {{ (plateVoltageV / 0.01).toFixed(0) }}  V/m)</span>
+            <span>極板間電圧 <i>V</i>: <strong>{{ plateVoltageV }} V</strong> (電場 <i>E</i> = {{ (plateVoltageV / 0.01).toFixed(0) }} V/m)</span>
             <input type="range" v-model.number="plateVoltageV" min="0" max="400" step="2" />
           </label>
         </div>
 
         <div class="control-group">
-          <label>
-            <span>選択中の油滴の電荷 <i>q</i>:</span>
-            <div class="btn-group">
-              <button
-                v-for="n in [1, 2, 3, 4, 5]"
-                :key="n"
-                class="select-btn"
-                :class="{ active: selectedChargeN === n }"
-                @click="selectedChargeN = n"
-              >
-                q = -{{ n }}e
-              </button>
-            </div>
-          </label>
+          <span class="control-label">選択中の油滴の電荷 <i>q</i>:</span>
+          <div class="btn-group">
+            <button
+              v-for="n in [1, 2, 3, 4, 5]"
+              :key="n"
+              class="select-btn"
+              :class="{ active: selectedChargeN === n }"
+              @click="selectedChargeN = n"
+            >
+              <i>q</i> = -{{ n }}<i>e</i>
+            </button>
+          </div>
         </div>
 
         <div class="control-group">
@@ -53,14 +51,12 @@
         </div>
 
         <div class="control-group">
-          <label>
-            <span>X線照射（イオン付着による電荷変化）:</span>
-            <div class="button-row">
-              <button class="select-btn highlight-btn" @click="ionizeDroplets">
-                ⚡ X線を照射して電荷をランダム変化
-              </button>
-            </div>
-          </label>
+          <span class="control-label">X線照射（イオン付着による電荷変化）:</span>
+          <div class="button-row" style="margin-top: 0">
+            <button class="btn select-btn highlight-btn" @click="ionizeDroplets">
+              ⚡ X線を照射して電荷をランダム変化
+            </button>
+          </div>
         </div>
       </div>
 
@@ -79,19 +75,19 @@
       <div class="stat-card">
         <span class="label">選択油滴の電気量 <i>q</i></span>
         <span class="value highlight">-{{ (selectedChargeN * 1.602).toFixed(3) }} <span class="unit">× 10⁻¹⁹ C</span></span>
-        <span class="subtext">q = -{{ selectedChargeN }} e（電気素量 {{ selectedChargeN }} 個分）</span>
+        <span class="subtext"><i>q</i> = -{{ selectedChargeN }}<i>e</i>（電気素量 {{ selectedChargeN }} 個分）</span>
       </div>
 
       <div class="stat-card">
         <span class="label">油滴の質量 <i>m</i></span>
         <span class="value">{{ (dropletMassKg * 1e15).toFixed(2) }} <span class="unit">fg</span></span>
-        <span class="subtext">m = 4 / 3π r<sup>3</sup> ρ (油の密度 890 kg/m³)</span>
+        <span class="subtext"><i>m</i> = (4/3)<i>πr</i><sup>3</sup><i>ρ</i> (密度 890 kg/m³)</span>
       </div>
 
       <div class="stat-card">
         <span class="label">静止つり合い電圧 <i>V</i><sub>bal</sub></span>
         <span class="value">{{ balanceVoltageV.toFixed(1) }} <span class="unit">V</span></span>
-        <span class="subtext"><i>V</i><sub>bal</sub> = mgd / q(d = 1.0,cm)</span>
+        <span class="subtext"><i>V</i><sub>bal</sub> = <i>mgd</i> / <i>q</i> (<i>d</i> = 1.0 cm)</span>
       </div>
 
       <div class="stat-card">
@@ -383,6 +379,48 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
+.sim-container {
+  background: var(--vp-c-bg-soft, #18181b);
+  border: 1px solid var(--vp-c-divider, rgba(255, 255, 255, 0.1));
+  border-radius: 12px;
+  padding: 18px;
+  margin: 24px 0;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+}
+
+.sim-header h3 {
+  margin: 0 0 6px 0;
+  font-size: 1.15rem;
+  color: var(--vp-c-text-1, #f4f4f5);
+}
+
+.title-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.subtitle {
+  font-size: 0.88rem;
+  color: var(--vp-c-text-2, #a1a1aa);
+  line-height: 1.5;
+  margin-bottom: 14px;
+}
+
+.canvas-wrapper {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #090d16;
+  border: 1px solid #334155;
+}
+
+canvas {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
 .droplet-badge {
   position: absolute;
   top: 14px;
@@ -400,11 +438,153 @@ onUnmounted(() => {
   border-color: #fbbf24;
   color: #fbbf24;
   background: rgba(251, 191, 36, 0.2);
+  font-weight: bold;
+}
+
+.control-panel {
+  margin-top: 16px;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid var(--vp-c-divider, rgba(255, 255, 255, 0.08));
+  border-radius: 8px;
+  padding: 14px;
+}
+
+.control-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+}
+
+.control-group label,
+.control-label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 0.82rem;
+  color: #cbd5e1;
+}
+
+.control-group input[type="range"] {
+  width: 100%;
+  accent-color: #38bdf8;
+}
+
+.btn-group {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.select-btn {
+  padding: 5px 10px;
+  font-size: 0.75rem;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 6px;
+  color: #cbd5e1;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.select-btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: #38bdf8;
+}
+
+.select-btn.active {
+  background: rgba(56, 189, 248, 0.25);
+  border-color: #38bdf8;
+  color: #38bdf8;
+  font-weight: bold;
 }
 
 .highlight-btn {
-  background: rgba(168, 85, 247, 0.2) !important;
+  background: rgba(168, 85, 247, 0.3) !important;
   border-color: #c084fc !important;
   color: #f3e8ff !important;
+  font-weight: bold;
+}
+
+.highlight-btn:hover {
+  background: rgba(168, 85, 247, 0.45) !important;
+}
+
+.button-row {
+  display: flex;
+  gap: 10px;
+  margin-top: 14px;
+  flex-wrap: wrap;
+}
+
+.btn {
+  padding: 6px 14px;
+  font-size: 0.82rem;
+  border-radius: 6px;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: all 0.2s ease;
+  font-weight: 500;
+}
+
+.btn-primary {
+  background: #0284c7;
+  color: #fff;
+}
+.btn-primary:hover {
+  background: #0369a1;
+}
+
+.btn-secondary {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.15);
+  color: #e2e8f0;
+}
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.stats-monitor {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.stat-card {
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid var(--vp-c-divider, rgba(255, 255, 255, 0.08));
+  border-radius: 8px;
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-card .label {
+  font-size: 0.72rem;
+  color: #94a3b8;
+  margin-bottom: 4px;
+}
+
+.stat-card .value {
+  font-size: 1.15rem;
+  font-weight: bold;
+  font-family: monospace;
+  color: var(--vp-c-text-1, #f4f4f5);
+}
+
+.stat-card .value.highlight {
+  color: #f43f5e;
+}
+
+.stat-card .unit {
+  font-size: 0.8rem;
+  font-weight: normal;
+  color: #94a3b8;
+}
+
+.stat-card .subtext {
+  font-size: 0.72rem;
+  color: #71717a;
+  margin-top: 2px;
 }
 </style>

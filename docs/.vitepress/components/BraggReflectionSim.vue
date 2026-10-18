@@ -43,14 +43,12 @@
         </div>
 
         <div class="control-group">
-          <label>
-            <span>プリセット結晶:</span>
-            <div class="btn-group">
-              <button class="select-btn" @click="setPreset('nacl')">NaCl (食塩 d=0.282nm)</button>
-              <button class="select-btn" @click="setPreset('si')">Si (シリコン d=0.314nm)</button>
-              <button class="select-btn" @click="setPreset('cu')">Cu (銅 d=0.208nm)</button>
-            </div>
-          </label>
+          <span class="control-label">プリセット結晶:</span>
+          <div class="btn-group">
+            <button class="select-btn" :class="{ active: Math.abs(latticeSpacingNm - 0.282) < 0.005 }" @click="setPreset('nacl')">NaCl (食塩 0.282nm)</button>
+            <button class="select-btn" :class="{ active: Math.abs(latticeSpacingNm - 0.314) < 0.005 }" @click="setPreset('si')">Si (シリコン 0.314nm)</button>
+            <button class="select-btn" :class="{ active: Math.abs(latticeSpacingNm - 0.208) < 0.005 }" @click="setPreset('cu')">Cu (銅 0.208nm)</button>
+          </div>
         </div>
       </div>
 
@@ -198,18 +196,18 @@ function draw() {
   ctx.strokeStyle = '#38bdf8'
   ctx.lineWidth = 1.5
   ctx.beginPath()
-  ctx.moveTo(70, layer1Y); ctx.lineTo(70, layer2Y)
-  ctx.moveTo(66, layer1Y); ctx.lineTo(74, layer1Y)
-  ctx.moveTo(66, layer2Y); ctx.lineTo(74, layer2Y)
+  ctx.moveTo(28, layer1Y); ctx.lineTo(28, layer2Y)
+  ctx.moveTo(24, layer1Y); ctx.lineTo(32, layer1Y)
+  ctx.moveTo(24, layer2Y); ctx.lineTo(32, layer2Y)
   ctx.stroke()
   ctx.fillStyle = '#38bdf8'
   ctx.font = 'bold 11px sans-serif'
-  ctx.textAlign = 'right'
-  ctx.fillText(`d = ${latticeSpacingNm.value.toFixed(3)} nm`, 62, (layer1Y + layer2Y) / 2 + 4)
+  ctx.textAlign = 'left'
+  ctx.fillText(`d = ${latticeSpacingNm.value.toFixed(3)} nm`, 36, (layer1Y + layer2Y) / 2 + 4)
 
   // 原子の描画（結晶格子点）
   const atomSpacing = 65
-  for (let ax = 120; ax <= w - 140; ax += atomSpacing) {
+  for (let ax = 135; ax <= w - 140; ax += atomSpacing) {
     // 第1層原子
     drawAtom(ctx, ax, layer1Y, '#38bdf8')
     // 第2層原子
@@ -345,6 +343,48 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
+.sim-container {
+  background: var(--vp-c-bg-soft, #18181b);
+  border: 1px solid var(--vp-c-divider, rgba(255, 255, 255, 0.1));
+  border-radius: 12px;
+  padding: 18px;
+  margin: 24px 0;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+}
+
+.sim-header h3 {
+  margin: 0 0 6px 0;
+  font-size: 1.15rem;
+  color: var(--vp-c-text-1, #f4f4f5);
+}
+
+.title-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.subtitle {
+  font-size: 0.88rem;
+  color: var(--vp-c-text-2, #a1a1aa);
+  line-height: 1.5;
+  margin-bottom: 14px;
+}
+
+.canvas-wrapper {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #090d16;
+  border: 1px solid #334155;
+}
+
+canvas {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
 .bragg-status-badge {
   position: absolute;
   top: 14px;
@@ -362,5 +402,142 @@ onUnmounted(() => {
   background: rgba(52, 211, 153, 0.2);
   border-color: #34d399;
   color: #34d399;
+  font-weight: bold;
+}
+
+.control-panel {
+  margin-top: 16px;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid var(--vp-c-divider, rgba(255, 255, 255, 0.08));
+  border-radius: 8px;
+  padding: 14px;
+}
+
+.control-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+}
+
+.control-group label,
+.control-label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 0.82rem;
+  color: #cbd5e1;
+}
+
+.control-group input[type="range"] {
+  width: 100%;
+  accent-color: #38bdf8;
+}
+
+.btn-group {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.select-btn {
+  padding: 5px 10px;
+  font-size: 0.75rem;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 6px;
+  color: #cbd5e1;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.select-btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: #38bdf8;
+}
+
+.select-btn.active {
+  background: rgba(56, 189, 248, 0.25);
+  border-color: #38bdf8;
+  color: #38bdf8;
+  font-weight: bold;
+}
+
+.button-row {
+  display: flex;
+  gap: 10px;
+  margin-top: 14px;
+  flex-wrap: wrap;
+}
+
+.btn {
+  padding: 6px 14px;
+  font-size: 0.82rem;
+  border-radius: 6px;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: all 0.2s ease;
+  font-weight: 500;
+}
+
+.btn-primary {
+  background: #0284c7;
+  color: #fff;
+}
+.btn-primary:hover {
+  background: #0369a1;
+}
+
+.btn-secondary {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.15);
+  color: #e2e8f0;
+}
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.stats-monitor {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.stat-card {
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid var(--vp-c-divider, rgba(255, 255, 255, 0.08));
+  border-radius: 8px;
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-card .label {
+  font-size: 0.72rem;
+  color: #94a3b8;
+  margin-bottom: 4px;
+}
+
+.stat-card .value {
+  font-size: 1.15rem;
+  font-weight: bold;
+  font-family: monospace;
+  color: var(--vp-c-text-1, #f4f4f5);
+}
+
+.stat-card .value.highlight {
+  color: #f43f5e;
+}
+
+.stat-card .unit {
+  font-size: 0.8rem;
+  font-weight: normal;
+  color: #94a3b8;
+}
+
+.stat-card .subtext {
+  font-size: 0.72rem;
+  color: #71717a;
+  margin-top: 2px;
 }
 </style>

@@ -6,7 +6,7 @@
         <span class="badge">Photoelectric Effect</span>
       </div>
       <p class="desc">
-        光の波長 λ（振動数 ν）、光の強さ（光子数）、逆電圧 <i>V</i>、金属の仕事関数 <i>W</i> を変え、光量子仮説 <i>E</i>=<i>h</i>ν とアインシュタインの光電方程式 eV<sub>0</sub> = <i>h</i>ν - <i>W</i> をインタラクティブに検証できます。
+        光の波長 λ（振動数 ν）、光の強さ（光子数）、逆電圧 <i>V</i>、金属の仕事関数 <i>W</i> を変え、光量子仮説 <i>E</i> = <i>h</i>ν とアインシュタインの光電方程式 <i>e</i><i>V</i><sub>0</sub> = <i>h</i>ν - <i>W</i> をインタラクティブに検証できます。
       </p>
     </div>
 
@@ -19,7 +19,7 @@
       <div class="controls-grid">
         <!-- 金属の種類 -->
         <div class="control-group">
-          <label>金属の種類 (仕事関数 <i>W</i>):</label>
+          <label><span>金属の種類 (仕事関数 <i>W</i>):</span></label>
           <select v-model="selectedMetal" class="metal-select">
             <option v-for="(m, idx) in metals" :key="idx" :value="idx">
               {{ m.name }} (W = {{ m.W.toFixed(2) }} eV)
@@ -30,8 +30,11 @@
         <!-- 波長 λ -->
         <div class="control-group">
           <label>
-            光の波長 λ: <strong>{{ wavelength }} nm</strong>
-            <span class="color-chip" :style="{ backgroundColor: lightColor }"></span>
+            <span>光の波長 λ:</span>
+            <span>
+              <strong>{{ wavelength }} nm</strong>
+              <span class="color-chip" :style="{ backgroundColor: lightColor }"></span>
+            </span>
           </label>
           <input type="range" v-model.number="wavelength" min="200" max="750" step="5" />
           <span class="sub-info">振動数 ν = {{ fmt(freq * 1e-14, 2) }}× 10<sup>14</sup> Hz</span>
@@ -39,13 +42,13 @@
 
         <!-- 光の強さ -->
         <div class="control-group">
-          <label>光の強さ (光子数/秒): <strong>{{ intensity }} %</strong></label>
+          <label><span>光の強さ (光子数/秒):</span> <strong>{{ intensity }} %</strong></label>
           <input type="range" v-model.number="intensity" min="10" max="100" step="5" />
         </div>
 
         <!-- 電圧 V -->
         <div class="control-group">
-          <label>印加電圧 <i>V</i>: <strong>{{ fmt(voltage, 2) }} V</strong></label>
+          <label><span>印加電圧 <i>V</i>:</span> <strong>{{ fmt(voltage, 2) }} V</strong></label>
           <input type="range" v-model.number="voltage" min="-4.0" max="4.0" step="0.05" />
           <span class="sub-info">負電圧: 減速・阻止方向 / 正電圧: 加速方向</span>
         </div>
@@ -566,6 +569,26 @@ function drawV0NuGraph(ctx, w, h) {
   color: #a1a1aa;
   margin: 6px 0 0 0;
   line-height: 1.5;
+}
+
+.frac {
+  display: inline-flex;
+  flex-direction: column;
+  vertical-align: middle;
+  text-align: center;
+  padding: 0 0.15em;
+  line-height: 1;
+}
+
+.frac .num {
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 0.1em;
+  font-size: 0.85em;
+}
+
+.frac .den {
+  padding-top: 0.1em;
+  font-size: 0.85em;
 }
 
 .canvas-wrap {

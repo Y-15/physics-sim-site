@@ -268,7 +268,7 @@ onUnmounted(() => {
         <span class="val highlight">{{ currentTime.toFixed(1) }}</span>
       </div>
       <div class="status-card">
-        <span class="lbl">娘核種極大時刻 <i>t</i><sub>\max</sub>:</span>
+        <span class="lbl">娘核種極大時刻 <i>t</i><sub>max</sub>:</span>
         <span class="val">{{ tMax ? tMax.toFixed(1) : 'なし' }}</span>
       </div>
       <div class="status-card">
@@ -302,15 +302,15 @@ onUnmounted(() => {
 
       <div class="control-row">
         <div class="control-group">
-          <label>親核種の半減期 <i>T</i><sub><i>A</i></sub>: <span>{{ halfLifeA.toFixed(1) }}</span></label>
+          <label><span>親核種の半減期 <i>T</i><sub><i>A</i></sub>:</span> <span>{{ halfLifeA.toFixed(1) }}</span></label>
           <input type="range" v-model.number="halfLifeA" min="2.0" max="45.0" step="0.5" />
         </div>
         <div class="control-group">
-          <label>娘核種の半減期 <i>T</i><sub><i>B</i></sub>: <span>{{ halfLifeB.toFixed(1) }}</span></label>
+          <label><span>娘核種の半減期 <i>T</i><sub><i>B</i></sub>:</span> <span>{{ halfLifeB.toFixed(1) }}</span></label>
           <input type="range" v-model.number="halfLifeB" min="1.0" max="25.0" step="0.5" />
         </div>
         <div class="control-group">
-          <label>進行速度: <span>{{ simSpeed.toFixed(1) }}x</span></label>
+          <label><span>進行速度:</span> <span>{{ simSpeed.toFixed(1) }}x</span></label>
           <input type="range" v-model.number="simSpeed" min="0.5" max="3.0" step="0.1" />
         </div>
       </div>

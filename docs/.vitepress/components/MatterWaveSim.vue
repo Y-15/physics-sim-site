@@ -180,19 +180,19 @@ const draw = () => {
   // 格子面間隔 d の寸法線
   ctx.strokeStyle = '#38bdf8'
   ctx.lineWidth = 1.5
-  const dimX = startX - 25
+  const dimX = 26
   ctx.beginPath()
   ctx.moveTo(dimX, firstRowY)
   ctx.lineTo(dimX, firstRowY + spacingY)
-  ctx.moveTo(dimX - 5, firstRowY)
-  ctx.lineTo(dimX + 5, firstRowY)
-  ctx.moveTo(dimX - 5, firstRowY + spacingY)
-  ctx.lineTo(dimX + 5, firstRowY + spacingY)
+  ctx.moveTo(dimX - 4, firstRowY)
+  ctx.lineTo(dimX + 4, firstRowY)
+  ctx.moveTo(dimX - 4, firstRowY + spacingY)
+  ctx.lineTo(dimX + 4, firstRowY + spacingY)
   ctx.stroke()
   ctx.fillStyle = '#38bdf8'
-  ctx.font = '11px sans-serif'
-  ctx.textAlign = 'right'
-  ctx.fillText(`d = ${d_nm.value.toFixed(2)}nm`, dimX - 8, firstRowY + spacingY / 2 + 4)
+  ctx.font = 'bold 11px sans-serif'
+  ctx.textAlign = 'left'
+  ctx.fillText(`d = ${d_nm.value.toFixed(2)} nm`, dimX + 6, firstRowY + spacingY / 2 + 4)
 
   // 原子球の描画
   for (let r = 0; r < atomRows; r++) {

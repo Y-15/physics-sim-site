@@ -29,11 +29,11 @@
       <!-- モード1: 崩壊 -->
       <div v-if="mode === 'decay'" class="controls-grid">
         <div class="control-group">
-          <label>半減期 <i>T</i>: <strong>{{ halfLife }} 秒</strong></label>
+          <label><span>半減期 <i>T</i>:</span> <strong>{{ halfLife }} 秒</strong></label>
           <input type="range" v-model.number="halfLife" min="2" max="15" step="1" />
         </div>
         <div class="control-group">
-          <label>初期原子核数 <i>N</i><sub>0</sub>: <strong>{{ initialCount }} 個</strong></label>
+          <label><span>初期原子核数 <i>N</i><sub>0</sub>:</span> <strong>{{ initialCount }} 個</strong></label>
           <input type="range" v-model.number="initialCount" min="100" max="600" step="50" @change="resetDecay" />
         </div>
         <div class="control-group button-group">
@@ -475,6 +475,26 @@ function drawPenetrationSim(ctx, w, h) {
   color: #a1a1aa;
   margin: 6px 0 0 0;
   line-height: 1.5;
+}
+
+.frac {
+  display: inline-flex;
+  flex-direction: column;
+  vertical-align: middle;
+  text-align: center;
+  padding: 0 0.15em;
+  line-height: 1;
+}
+
+.frac .num {
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 0.1em;
+  font-size: 0.85em;
+}
+
+.frac .den {
+  padding-top: 0.1em;
+  font-size: 0.85em;
 }
 
 .mode-tabs {

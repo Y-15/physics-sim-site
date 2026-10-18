@@ -19,7 +19,7 @@
       <div class="controls-grid">
         <!-- 主量子数 n の選択 -->
         <div class="control-group">
-          <label>現在の電子の軌道 (主量子数 <i>n</i>): <strong>n = {{ currentN }}</strong></label>
+          <label><span>現在の電子の軌道 (主量子数 <i>n</i>):</span> <strong>n = {{ currentN }}</strong></label>
           <div class="n-buttons">
             <button
               v-for="n in 5"
@@ -330,8 +330,8 @@ function drawAtom(ctx, w, h) {
 // 描画: エネルギー準位図 (右側: x: 500 ~ 750)
 // -------------------------------------------------------------------
 function drawEnergyLevels(ctx, w, h) {
-  const lx0 = 510
-  const lx1 = 740
+  const lx0 = 490
+  const lx1 = 670
   const y0 = 360 // E = -13.6 eV (n=1)
   const yInf = 80 // E = 0 eV (n=∞)
   const totalH = y0 - yInf
@@ -340,7 +340,7 @@ function drawEnergyLevels(ctx, w, h) {
 
   // E=0 線 (電離限界)
   line(ctx, lx0, yInf, lx1, yInf, '#f43f5e', 2)
-  text(ctx, 'n = ∞ (E = 0 eV: 電離)', lx1 + 8, yInf + 4, '#f43f5e', '11px sans-serif')
+  text(ctx, 'n = ∞ (0 eV: 電離)', 770, yInf + 4, '#f43f5e', '10px sans-serif', 'right')
 
   // 各準位の y 座標: En = E1 / n^2
   // E1 = -13.6 eV -> y0, 0 eV -> yInf
@@ -355,13 +355,13 @@ function drawEnergyLevels(ctx, w, h) {
     line(ctx, lx0, y, lx1, y, isCur ? '#38bdf8' : '#71717a', isCur ? 3 : 1.5)
 
     // ラベル
-    text(ctx, `n = ${n}`, lx0 - 32, y + 4, isCur ? '#38bdf8' : '#a1a1aa', isCur ? 'bold 11px sans-serif' : '11px sans-serif')
-    text(ctx, `${enVal.toFixed(2)} eV`, lx1 + 8, y + 4, isCur ? '#38bdf8' : '#a1a1aa', isCur ? 'bold 11px monospace' : '11px monospace')
+    text(ctx, `n = ${n}`, lx0 - 8, y + 4, isCur ? '#38bdf8' : '#a1a1aa', isCur ? 'bold 11px sans-serif' : '11px sans-serif', 'right')
+    text(ctx, `${enVal.toFixed(2)} eV`, 770, y + 4, isCur ? '#38bdf8' : '#a1a1aa', isCur ? 'bold 10px monospace' : '10px monospace', 'right')
 
     // 現在の準位に電子マーカー
     if (isCur) {
-      dot(ctx, (lx0 + lx1) / 2, y, 7, '#38bdf8', '#ffffff')
-      text(ctx, '● 現在の電子', (lx0 + lx1) / 2 + 14, y + 4, '#38bdf8', 'bold 11px sans-serif')
+      dot(ctx, (lx0 + lx1) / 2, y, 6, '#38bdf8', '#ffffff')
+      text(ctx, '● 現在の電子', (lx0 + lx1) / 2 + 10, y + 4, '#38bdf8', 'bold 10px sans-serif')
     }
   }
 

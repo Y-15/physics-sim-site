@@ -7,7 +7,7 @@
       </div>
       <p class="subtitle">
         1911年にラザフォードが「原子核（Nucleus）」を発見した歴史的実験。
-        薄い金箔（原子番号 Z=79）に向けて照射された高速 α 粒子が、クーロン反発力 F = 1 / 4<i>πε</i><sub>02Ze</sub>^2 / r<sup>2</sup>により描く双曲線軌道と、散乱角の角度分布N(θ) ∝ 1 / sin<sup>4</sup>(θ/2) をリアルタイム追跡します。
+        薄い金箔（原子番号 <i>Z</i> = 79）に向けて照射された高速 α 粒子が、クーロン反発力 <i>F</i> = (1 / 4<i>πε</i><sub>0</sub>) · (2<i>Ze</i><sup>2</sup> / <i>r</i><sup>2</sup>) により描く双曲線軌道と、散乱角の角度分布 <i>N</i>(<i>θ</i>) ∝ 1 / sin<sup>4</sup>(<i>θ</i>/2) をリアルタイム追跡します。
       </p>
     </div>
 
@@ -22,14 +22,12 @@
     <div class="control-panel">
       <div class="control-grid">
         <div class="control-group">
-          <label>
-            <span>標的原子核の原子番号 <i>Z</i>: <strong>{{ targetName }} (Z = {{ targetZ }})</strong></span>
-            <div class="btn-group">
-              <button class="select-btn" :class="{ active: targetZ === 79 }" @click="targetZ = 79">金 Au (Z=79)</button>
-              <button class="select-btn" :class="{ active: targetZ === 47 }" @click="targetZ = 47">銀 Ag (Z=47)</button>
-              <button class="select-btn" :class="{ active: targetZ === 13 }" @click="targetZ = 13">アルミニウム Al (Z=13)</button>
-            </div>
-          </label>
+          <span class="control-label">標的原子核の原子番号 <i>Z</i>: <strong>{{ targetName }} (Z = {{ targetZ }})</strong></span>
+          <div class="btn-group">
+            <button class="select-btn" :class="{ active: targetZ === 79 }" @click="targetZ = 79">金 Au (Z=79)</button>
+            <button class="select-btn" :class="{ active: targetZ === 47 }" @click="targetZ = 47">銀 Ag (Z=47)</button>
+            <button class="select-btn" :class="{ active: targetZ === 13 }" @click="targetZ = 13">アルミニウム Al (Z=13)</button>
+          </div>
         </div>
 
         <div class="control-group">
@@ -40,28 +38,24 @@
         </div>
 
         <div class="control-group">
-          <label>
-            <span>ビーム照射モード:</span>
-            <div class="btn-group">
-              <button class="select-btn" :class="{ active: isContinuousBeam }" @click="isContinuousBeam = true">
-                連続ビーム照射
-              </button>
-              <button class="select-btn" :class="{ active: !isContinuousBeam }" @click="fireSingleParticle">
-                単一粒子発射
-              </button>
-            </div>
-          </label>
+          <span class="control-label">ビーム照射モード:</span>
+          <div class="btn-group">
+            <button class="select-btn" :class="{ active: isContinuousBeam }" @click="isContinuousBeam = true">
+              連続ビーム照射
+            </button>
+            <button class="select-btn" :class="{ active: !isContinuousBeam }" @click="fireSingleParticle">
+              単一粒子発射
+            </button>
+          </div>
         </div>
 
         <div class="control-group">
-          <label>
-            <span>散乱軌跡のクリア:</span>
-            <div class="button-row">
-              <button class="select-btn highlight-btn" @click="clearTrails">
-                🧹 散乱軌跡と検出器データをリセット
-              </button>
-            </div>
-          </label>
+          <span class="control-label">散乱軌跡のクリア:</span>
+          <div class="button-row" style="margin-top: 0">
+            <button class="btn select-btn highlight-btn" @click="clearTrails">
+              🧹 散乱軌跡と検出器データをリセット
+            </button>
+          </div>
         </div>
       </div>
 
@@ -77,13 +71,13 @@
       <div class="stat-card">
         <span class="label">正面衝突時の最接近距離 <i>r</i><sub>min</sub></span>
         <span class="value highlight">{{ closestDistanceFm.toFixed(1) }} <span class="unit">fm</span></span>
-        <span class="subtext"><i>r</i><sub>min</sub> = 1 / 4<i>πε</i><sub>02Ze</sub>^2 / <i>E</i><sub>k</sub> (1 fm = 10⁻¹⁵ m)</span>
+        <span class="subtext"><i>r</i><sub>min</sub> = (1 / 4<i>πε</i><sub>0</sub>) · (2<i>Ze</i><sup>2</sup> / <i>E</i><sub>k</sub>)</span>
       </div>
 
       <div class="stat-card">
         <span class="label">原子核の推定サイズ</span>
         <span class="value">&lt; {{ closestDistanceFm.toFixed(0) }} <span class="unit">fm</span></span>
-        <span class="subtext">原子全体 (10<sup>5</sup>,fm) の約10万分の1</span>
+        <span class="subtext">原子全体 (10<sup>5</sup> fm) の約10万分の1</span>
       </div>
 
       <div class="stat-card">
@@ -293,10 +287,27 @@ function draw() {
   ctx.fill()
 
   ctx.fillStyle = '#fbbf24'
+  // 原子核ラベル（半透明バッジで軌道通過時も鮮明）
+  ctx.save()
+  const labelText1 = `+${targetZ.value}e`
+  const labelText2 = `${targetName.value} 原子核`
   ctx.font = 'bold 11px sans-serif'
+  const textW = Math.max(ctx.measureText(labelText1).width, ctx.measureText(labelText2).width) + 14
+
+  ctx.fillStyle = 'rgba(15, 23, 42, 0.8)'
+  ctx.strokeStyle = 'rgba(251, 191, 36, 0.5)'
+  ctx.lineWidth = 1
+  ctx.beginPath()
+  ctx.roundRect(nucleusX - textW / 2, nucleusY + 14, textW, 32, 5)
+  ctx.fill()
+  ctx.stroke()
+
+  ctx.fillStyle = '#fbbf24'
   ctx.textAlign = 'center'
-  ctx.fillText(`+${targetZ.value}e`, nucleusX, nucleusY + 22)
-  ctx.fillText(`${targetName.value} 原子核`, nucleusX, nucleusY + 36)
+  ctx.fillText(labelText1, nucleusX, nucleusY + 27)
+  ctx.fillStyle = '#f8fafc'
+  ctx.font = '10px sans-serif'
+  ctx.fillText(labelText2, nucleusX, nucleusY + 41)
   ctx.restore()
 
   // 3. α粒子の軌道と現在位置の描画
@@ -350,6 +361,48 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
+.sim-container {
+  background: var(--vp-c-bg-soft, #18181b);
+  border: 1px solid var(--vp-c-divider, rgba(255, 255, 255, 0.1));
+  border-radius: 12px;
+  padding: 18px;
+  margin: 24px 0;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+}
+
+.sim-header h3 {
+  margin: 0 0 6px 0;
+  font-size: 1.15rem;
+  color: var(--vp-c-text-1, #f4f4f5);
+}
+
+.title-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.subtitle {
+  font-size: 0.88rem;
+  color: var(--vp-c-text-2, #a1a1aa);
+  line-height: 1.5;
+  margin-bottom: 14px;
+}
+
+.canvas-wrapper {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #090d16;
+  border: 1px solid #334155;
+}
+
+canvas {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
 .scatter-badge {
   position: absolute;
   top: 14px;
@@ -363,9 +416,141 @@ onUnmounted(() => {
   backdrop-filter: blur(8px);
 }
 
+.control-panel {
+  margin-top: 16px;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid var(--vp-c-divider, rgba(255, 255, 255, 0.08));
+  border-radius: 8px;
+  padding: 14px;
+}
+
+.control-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+}
+
+.control-group label,
+.control-label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 0.82rem;
+  color: #cbd5e1;
+}
+
+.control-group input[type="range"] {
+  width: 100%;
+  accent-color: #38bdf8;
+}
+
+.btn-group {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.select-btn {
+  padding: 5px 10px;
+  font-size: 0.75rem;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 6px;
+  color: #cbd5e1;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.select-btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: #38bdf8;
+}
+
+.select-btn.active {
+  background: rgba(56, 189, 248, 0.25);
+  border-color: #38bdf8;
+  color: #38bdf8;
+  font-weight: bold;
+}
+
 .highlight-btn {
   background: rgba(239, 68, 68, 0.2) !important;
   border-color: #ef4444 !important;
   color: #fca5a5 !important;
+}
+
+.highlight-btn:hover {
+  background: rgba(239, 68, 68, 0.35) !important;
+}
+
+.button-row {
+  display: flex;
+  gap: 10px;
+  margin-top: 14px;
+  flex-wrap: wrap;
+}
+
+.btn {
+  padding: 6px 14px;
+  font-size: 0.82rem;
+  border-radius: 6px;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: all 0.2s ease;
+  font-weight: 500;
+}
+
+.btn-secondary {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.15);
+  color: #e2e8f0;
+}
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.stats-monitor {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.stat-card {
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid var(--vp-c-divider, rgba(255, 255, 255, 0.08));
+  border-radius: 8px;
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-card .label {
+  font-size: 0.72rem;
+  color: #94a3b8;
+  margin-bottom: 4px;
+}
+
+.stat-card .value {
+  font-size: 1.15rem;
+  font-weight: bold;
+  font-family: monospace;
+  color: var(--vp-c-text-1, #f4f4f5);
+}
+
+.stat-card .value.highlight {
+  color: #fbbf24;
+}
+
+.stat-card .unit {
+  font-size: 0.8rem;
+  font-weight: normal;
+  color: #94a3b8;
+}
+
+.stat-card .subtext {
+  font-size: 0.72rem;
+  color: #71717a;
+  margin-top: 2px;
 }
 </style>
