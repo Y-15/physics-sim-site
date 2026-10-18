@@ -58,71 +58,7 @@ $$m a = F$$
 ### ② 鉛直アトウッドの器械
 定滑車に糸をかけ、両端に質量 $M$（大）と $m$（小）のおもりを吊り下げた場合：
 
-<div class="vector-diagram-card">
-  <svg viewBox="0 0 460 220" class="academic-svg" aria-label="アトウッドの器械の力の図解">
-    <defs>
-      <marker id="atwood-arrow-red" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto">
-        <path d="M 0 1 L 10 5 L 0 9 z" fill="#ef4444" />
-      </marker>
-      <marker id="atwood-arrow-blue" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto">
-        <path d="M 0 1 L 10 5 L 0 9 z" fill="#38bdf8" />
-      </marker>
-      <marker id="atwood-arrow-amber" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto">
-        <path d="M 0 1 L 10 5 L 0 9 z" fill="#fbbf24" />
-      </marker>
-    </defs>
-    <!-- 天井 -->
-    <line x1="160" y1="20" x2="300" y2="20" stroke="#64748b" stroke-width="4" stroke-linecap="round" />
-    <g stroke="rgba(100, 116, 139, 0.4)" stroke-width="1.5">
-      <line x1="180" y1="20" x2="170" y2="10" />
-      <line x1="210" y1="20" x2="200" y2="10" />
-      <line x1="240" y1="20" x2="230" y2="10" />
-      <line x1="270" y1="20" x2="260" y2="10" />
-      <line x1="290" y1="20" x2="280" y2="10" />
-    </g>
-    <!-- 滑車支持金具 -->
-    <line x1="230" y1="20" x2="230" y2="50" stroke="#94a3b8" stroke-width="3" />
-    <!-- 滑車 -->
-    <circle cx="230" cy="65" r="22" fill="#1e293b" stroke="#38bdf8" stroke-width="2.5" />
-    <circle cx="230" cy="65" r="4" fill="#38bdf8" />
-    <text x="230" y="38" fill="#94a3b8" font-size="11" text-anchor="middle">定滑車</text>
-
-    <!-- 糸 -->
-    <path d="M 208 65 L 208 120" stroke="#e2e8f0" stroke-width="2" />
-    <path d="M 252 65 L 252 140" stroke="#e2e8f0" stroke-width="2" />
-
-    <!-- 物体 A (大, M) -->
-    <rect x="188" y="120" width="40" height="35" rx="4" fill="rgba(239, 68, 68, 0.2)" stroke="#ef4444" stroke-width="2" />
-    <text x="208" y="142" fill="#ef4444" font-size="12" font-weight="bold" text-anchor="middle">A (M)</text>
-
-    <!-- 物体 B (小, m) -->
-    <rect x="236" y="140" width="32" height="28" rx="4" fill="rgba(56, 189, 248, 0.2)" stroke="#38bdf8" stroke-width="2" />
-    <text x="252" y="158" fill="#38bdf8" font-size="11" font-weight="bold" text-anchor="middle">B (m)</text>
-
-    <!-- 物体Aの力ベクトル -->
-    <!-- 張力 T -->
-    <line x1="198" y1="120" x2="198" y2="90" stroke="#38bdf8" stroke-width="2" marker-end="url(#atwood-arrow-blue)" />
-    <text x="175" y="105" fill="#38bdf8" font-size="12" font-weight="bold">T</text>
-    <!-- 重力 Mg -->
-    <line x1="208" y1="155" x2="208" y2="205" stroke="#ef4444" stroke-width="2.5" marker-end="url(#atwood-arrow-red)" />
-    <text x="208" y="218" fill="#ef4444" font-size="12" font-weight="bold" text-anchor="middle">Mg (重力)</text>
-    <!-- 加速度 a 向き -->
-    <line x1="160" y1="125" x2="160" y2="165" stroke="#fbbf24" stroke-width="2" stroke-dasharray="3,3" marker-end="url(#atwood-arrow-amber)" />
-    <text x="145" y="150" fill="#fbbf24" font-size="11" font-weight="bold">a (下降)</text>
-
-    <!-- 物体Bの力ベクトル -->
-    <!-- 張力 T -->
-    <line x1="262" y1="140" x2="262" y2="100" stroke="#38bdf8" stroke-width="2" marker-end="url(#atwood-arrow-blue)" />
-    <text x="272" y="115" fill="#38bdf8" font-size="12" font-weight="bold">T</text>
-    <!-- 重力 mg -->
-    <line x1="252" y1="168" x2="252" y2="200" stroke="#ef4444" stroke-width="2" marker-end="url(#atwood-arrow-red)" />
-    <text x="252" y="213" fill="#ef4444" font-size="11" font-weight="bold" text-anchor="middle">mg</text>
-    <!-- 加速度 a 向き -->
-    <line x1="295" y1="160" x2="295" y2="125" stroke="#fbbf24" stroke-width="2" stroke-dasharray="3,3" marker-end="url(#atwood-arrow-amber)" />
-    <text x="310" y="145" fill="#fbbf24" font-size="11" font-weight="bold">a (上昇)</text>
-  </svg>
-  <div class="diagram-caption">図: アトウッドの器械における各物体の力のつり合いと加速度の向き</div>
-</div>
+<AtwoodDiagram />
 
 * 物体A（下向きに加速、下向きを正）：
   $$M a = M g - T \quad \cdots\text{①}$$
