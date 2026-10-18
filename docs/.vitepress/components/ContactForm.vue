@@ -181,7 +181,7 @@ const errorMessage = ref('')
 
 // 受信用エンドポイント（FormSubmit API: 静的サイト向け無料セキュアゲートウェイ）
 // フォールバック付き
-const ENDPOINT_EMAIL = 'y0711.physics.sim@gmail.com'
+const ENDPOINT_EMAIL = 'kingphysics.kp@gmail.com'
 
 // mailto リンク自動生成（クライアント側メーラー用）
 const mailtoLink = computed(() => {

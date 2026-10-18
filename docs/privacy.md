@@ -62,6 +62,7 @@ description: 高校物理シミュレーションラボのプライバシーポ�
 
 * **お問い合わせフォーム**:  
   当サイトの **[専用お問い合わせフォーム](/contact)** より直接メッセージをお送りいただけます。
+* **連絡先メールアドレス**: kingphysics.kp@gmail.com
 * **GitHub リポジトリ（Issues / Discussions）**:  
   [https://github.com/Y-15/physics-sim-site/issues](https://github.com/Y-15/physics-sim-site/issues)
 * **運営者**: y0711（高校物理シミュレーションラボ 運営）
