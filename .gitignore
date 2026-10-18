@@ -10,5 +10,10 @@ yarn-debug.log*
 yarn-error.log*
 *.png
 screenshots/
+screenshots_*/
+capture*.cjs
+check_*.cjs
+find_*.cjs
+fix_*.cjs
+normalize_*.cjs
 .cache/
-

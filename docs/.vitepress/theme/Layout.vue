@@ -11,7 +11,7 @@ const { page, frontmatter } = useData()
 <template>
   <Layout>
     <template #layout-top>
-      <PhysicsIntro />
+      <PhysicsIntro v-if="frontmatter.layout === 'home'" />
     </template>
 
     <!-- 記事末尾の広告（各解説・シミュレータ・演習問題の直下） -->

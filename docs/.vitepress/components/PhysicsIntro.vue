@@ -317,9 +317,10 @@ onMounted(async () => {
     return
   }
 
-  // ホーム画面判定（frontmatter.layout === 'home' または ルートURL）
-  const isHome = forceIntro || frontmatter.value?.layout === 'home' ||
-    (typeof window !== 'undefined' && (window.location.pathname === '/' || window.location.pathname.endsWith('/index.html') || window.location.pathname === ''))
+  // ホーム画面判定（サイト全体のトップページのみを対象とし、/mechanics/index.html などの各単元インデックスは除外）
+  const path = typeof window !== 'undefined' ? window.location.pathname.replace(/\/+$/, '') : ''
+  const isSiteRoot = path === '' || path === '/index.html' || path.endsWith('/physics-sim-site') || path.endsWith('/physics-sim-site/index.html')
+  const isHome = forceIntro || frontmatter.value?.layout === 'home' || isSiteRoot
 
   if (!isHome) {
     isVisible.value = false
