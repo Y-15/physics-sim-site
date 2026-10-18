@@ -13,7 +13,9 @@ description: 等速円運動の周期 T = 2π/ω、速度 v = rω、向心加速
 
 ## 🧪 インタラクティブ実験室
 
-<CircularSim />
+<ClientOnly>
+  <CircularSim />
+</ClientOnly>
 
 ::: tip 実験のポイント
 1. **速度ベクトルと加速度ベクトルの直交**:

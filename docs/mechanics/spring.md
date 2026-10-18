@@ -12,7 +12,9 @@ description: フックの法則、復元力、運動方程式、周期公式 T =
 
 ## 🧪 インタラクティブ実験室
 
-<SpringSim />
+<ClientOnly>
+  <SpringSim />
+</ClientOnly>
 
 ::: tip 実験のポイント
 1. **ばね定数 $k$ と質量 $m$**:

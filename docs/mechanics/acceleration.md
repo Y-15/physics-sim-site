@@ -15,7 +15,9 @@ description: 等加速度直線運動の定義、3公式（v = v₀ + at, x = v�
 
 ## 🧪 インタラクティブ実験室
 
-<AccelerationSim />
+<ClientOnly>
+  <AccelerationSim />
+</ClientOnly>
 
 ::: tip 実験のポイント
 1. **$v$-$t$ グラフの傾き**:

@@ -51,15 +51,15 @@
       <!-- モード1: 台車 -->
       <div v-if="mode === 'cart'" class="controls-grid">
         <div class="control-group">
-          <label>台車の加速度 <i>a</i>: <strong>{{ fmt(cartA, 1) }} <i>m</i>/<i>s</i>²</strong></label>
+          <label><span>台車の加速度 <i>a</i>:</span> <strong>{{ fmt(cartA, 1) }} <i>m</i>/<i>s</i>²</strong></label>
           <input type="range" v-model.number="cartA" min="-9.8" max="9.8" step="0.2" />
         </div>
         <div class="control-group">
-          <label>おもりの質量 <i>m</i>: <strong>{{ cartM }} kg</strong></label>
+          <label><span>おもりの質量 <i>m</i>:</span> <strong>{{ cartM }} kg</strong></label>
           <input type="range" v-model.number="cartM" min="0.5" max="5.0" step="0.5" />
         </div>
         <div class="control-group">
-          <label>重力加速度 <i>g</i>: <strong>9.8 <i>m</i>/<i>s</i>²</strong></label>
+          <label><span>重力加速度 <i>g</i>:</span> <strong>9.8 <i>m</i>/<i>s</i>²</strong></label>
           <span class="sub-info">傾き角 tanθ = <i>a</i>/<i>g</i></span>
         </div>
       </div>
@@ -67,11 +67,11 @@
       <!-- モード2: エレベーター -->
       <div v-if="mode === 'elevator'" class="controls-grid">
         <div class="control-group">
-          <label>鉛直加速度 <i>a</i> (上向き正): <strong>{{ fmt(elevA, 1) }} <i>m</i>/<i>s</i>²</strong></label>
+          <label><span>鉛直加速度 <i>a</i> (上向き正):</span> <strong>{{ fmt(elevA, 1) }} <i>m</i>/<i>s</i>²</strong></label>
           <input type="range" v-model.number="elevA" min="-9.8" max="9.8" step="0.2" />
         </div>
         <div class="control-group">
-          <label>人の質量 <i>m</i>: <strong>{{ elevM }} kg</strong></label>
+          <label><span>人の質量 <i>m</i>:</span> <strong>{{ elevM }} kg</strong></label>
           <input type="range" v-model.number="elevM" min="30" max="100" step="5" />
         </div>
         <div class="preset-buttons">
@@ -85,15 +85,15 @@
       <!-- モード3: 遠心力 -->
       <div v-if="mode === 'centrifugal'" class="controls-grid">
         <div class="control-group">
-          <label>回転角速度 ω: <strong>{{ fmt(rotOmega, 2) }} rad/s</strong></label>
+          <label><span>回転角速度 ω:</span> <strong>{{ fmt(rotOmega, 2) }} rad/s</strong></label>
           <input type="range" v-model.number="rotOmega" min="0" max="5.0" step="0.1" />
         </div>
         <div class="control-group">
-          <label>回転半径 <i>r</i>: <strong>{{ fmt(rotR, 2) }} m</strong></label>
+          <label><span>回転半径 <i>r</i>:</span> <strong>{{ fmt(rotR, 2) }} m</strong></label>
           <input type="range" v-model.number="rotR" min="0.5" max="3.0" step="0.1" />
         </div>
         <div class="control-group">
-          <label>静止摩擦係数 μ: <strong>{{ rotMu }}</strong></label>
+          <label><span>静止摩擦係数 μ:</span> <strong>{{ rotMu }}</strong></label>
           <input type="range" v-model.number="rotMu" min="0.1" max="0.8" step="0.05" />
         </div>
       </div>

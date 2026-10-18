@@ -36,21 +36,21 @@
     <div class="controls-grid">
       <div class="control-item">
         <label>
-          初速度 <i>v</i><sub>0</sub>: <strong>{{ v0 }} m/s</strong>
+          <span>初速度 <i>v</i><sub>0</sub>:</span> <strong>{{ v0 }} m/s</strong>
         </label>
         <input type="range" v-model.number="v0" min="5" max="35" step="1" @input="onParamChange" />
       </div>
 
       <div class="control-item">
         <label>
-          発射角 θ: <strong>{{ angle }}°</strong>
+          <span>発射角 θ:</span> <strong>{{ angle }}°</strong>
         </label>
         <input type="range" v-model.number="angle" min="5" max="85" step="1" @input="onParamChange" />
       </div>
 
       <div class="control-item">
         <label>
-          重力加速度 <i>g</i>: <strong>{{ g }} m/s²</strong>
+          <span>重力加速度 <i>g</i>:</span> <strong>{{ g }} m/s²</strong>
         </label>
         <input type="range" v-model.number="g" min="1.6" max="25" step="0.1" @input="onParamChange" />
       </div>

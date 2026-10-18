@@ -321,15 +321,15 @@ onUnmounted(() => {
     <div class="controls-panel">
       <div class="control-row">
         <div class="control-group">
-          <label>斜面台の質量 <i>M</i>: <span>{{ wedgeMass.toFixed(1) }} kg</span></label>
+          <label><span>斜面台の質量 <i>M</i>:</span> <span>{{ wedgeMass.toFixed(1) }} kg</span></label>
           <input type="range" v-model.number="wedgeMass" min="1.0" max="8.0" step="0.5" @input="resetSim" />
         </div>
         <div class="control-group">
-          <label>小球の質量 <i>m</i>: <span>{{ ballMass.toFixed(1) }} kg</span></label>
+          <label><span>小球の質量 <i>m</i>:</span> <span>{{ ballMass.toFixed(1) }} kg</span></label>
           <input type="range" v-model.number="ballMass" min="0.5" max="4.0" step="0.5" @input="resetSim" />
         </div>
         <div class="control-group">
-          <label>斜面角度 θ: <span>{{ slopeAngleDeg }}°</span></label>
+          <label><span>斜面角度 θ:</span> <span>{{ slopeAngleDeg }}°</span></label>
           <input type="range" v-model.number="slopeAngleDeg" min="20" max="50" step="5" @input="resetSim" />
         </div>
       </div>

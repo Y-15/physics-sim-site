@@ -33,7 +33,9 @@ description: 高校物理の力学超頻出テーマ。水圧 P=P0+ρgh の導�
 
 物体の深さや密度 $\rho$、流体の密度 $\rho_0$ をスライダーで操作して、上面・下面の水圧矢印と浮力・重力のつり合いをリアルタイムに観察してみましょう。
 
-<BuoyancySim />
+<ClientOnly>
+  <BuoyancySim />
+</ClientOnly>
 
 ---
 

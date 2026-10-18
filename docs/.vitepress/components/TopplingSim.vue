@@ -511,7 +511,9 @@ function render() {
   drawArrowHead(ctx, gx, gy + mgLen, Math.PI / 2, '#38bdf8')
   ctx.fillStyle = '#38bdf8'
   ctx.font = 'bold 12px sans-serif'
-  ctx.fillText(`重力 Mg = ${weight.value.toFixed(1)} N (鉛直真下)`, gx + 8, gy + 45)
+  ctx.textAlign = 'right'
+  ctx.fillText(`重力 Mg = ${weight.value.toFixed(1)} N (鉛直真下)`, gx - 10, gy + 45)
+  ctx.textAlign = 'left'
 
   // 傾きがある場合 (0 < angle < 90度): 支点まわりの水平腕 d とモーメント τ_G の変化を可視化
   if (angle > 0 && angle < Math.PI / 2 - 0.02) {

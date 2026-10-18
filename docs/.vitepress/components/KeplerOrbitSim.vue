@@ -36,25 +36,21 @@
         </div>
 
         <div class="control-group">
-          <label>
-            <span>等時間扇形（面積速度）の表示:</span>
-            <div class="btn-group">
-              <button class="select-btn" :class="{ active: showSectors }" @click="showSectors = !showSectors">
-                {{ showSectors ? '等面積扇形を表示中' : '扇形を非表示' }}
-              </button>
-            </div>
-          </label>
+          <span class="control-label">等時間扇形（面積速度）の表示:</span>
+          <div class="btn-group">
+            <button class="select-btn" :class="{ active: showSectors }" @click="showSectors = !showSectors">
+              {{ showSectors ? '等面積扇形を表示中' : '扇形を非表示' }}
+            </button>
+          </div>
         </div>
 
         <div class="control-group">
-          <label>
-            <span>プリセット天体:</span>
-            <div class="btn-group">
-              <button class="select-btn" @click="setPreset('earth')">地球 (e=0.02)</button>
-              <button class="select-btn" @click="setPreset('mars')">火星 (e=0.09)</button>
-              <button class="select-btn" @click="setPreset('comet')">ハレー彗星型 (e=0.65)</button>
-            </div>
-          </label>
+          <span class="control-label">プリセット天体:</span>
+          <div class="btn-group">
+            <button class="select-btn" @click="setPreset('earth')">地球 (e=0.02)</button>
+            <button class="select-btn" @click="setPreset('mars')">火星 (e=0.09)</button>
+            <button class="select-btn" @click="setPreset('comet')">ハレー彗星型 (e=0.65)</button>
+          </div>
         </div>
       </div>
 
@@ -373,16 +369,218 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
+.sim-container {
+  background: var(--vp-c-bg-soft);
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 12px;
+  padding: 18px;
+  margin: 1.5rem 0;
+}
+
+.sim-header {
+  margin-bottom: 12px;
+}
+
+.title-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.title-row h3 {
+  margin: 0;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--vp-c-text-1);
+}
+
+.title-row .icon {
+  font-size: 1.4rem;
+}
+
+.subtitle {
+  margin: 6px 0 0 0;
+  font-size: 0.85rem;
+  color: var(--vp-c-text-2);
+  line-height: 1.5;
+}
+
+.canvas-wrapper {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #334155;
+  background: #060913;
+}
+
+canvas {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
 .orbit-badge {
   position: absolute;
-  top: 14px;
-  right: 14px;
+  top: 12px;
+  right: 12px;
   background: rgba(15, 23, 42, 0.85);
   border: 1px solid rgba(56, 189, 248, 0.5);
   color: #38bdf8;
-  padding: 6px 14px;
+  padding: 5px 12px;
   border-radius: 9999px;
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   backdrop-filter: blur(8px);
+}
+
+.control-panel {
+  margin-top: 14px;
+  background: #1e293b;
+  padding: 14px;
+  border-radius: 8px;
+}
+
+.control-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+}
+
+.control-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.control-group label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 0.85rem;
+  color: #cbd5e1;
+}
+
+.control-group label span {
+  display: flex;
+  justify-content: space-between;
+}
+
+.control-group strong {
+  color: #38bdf8;
+}
+
+.control-label {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #94a3b8;
+}
+
+.btn-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.select-btn {
+  padding: 6px 12px;
+  font-size: 0.8rem;
+  border-radius: 6px;
+  border: 1px solid #475569;
+  background: #0f172a;
+  color: #cbd5e1;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.select-btn:hover {
+  border-color: #38bdf8;
+  color: #ffffff;
+}
+
+.select-btn.active {
+  background: #0284c7;
+  border-color: #38bdf8;
+  color: #ffffff;
+}
+
+input[type="range"] {
+  accent-color: #38bdf8;
+  cursor: pointer;
+  width: 100%;
+}
+
+.button-row {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.btn {
+  padding: 7px 16px;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-secondary {
+  background: #334155;
+  color: #e2e8f0;
+  border: 1px solid #475569;
+}
+
+.btn-secondary:hover {
+  background: #475569;
+  color: #ffffff;
+  border-color: #38bdf8;
+}
+
+.stats-monitor {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.stat-card {
+  background: #1e293b;
+  padding: 10px 14px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-left: 3px solid #38bdf8;
+  text-align: center;
+}
+
+.stat-card .label {
+  font-size: 0.75rem;
+  color: #94a3b8;
+  margin-bottom: 4px;
+}
+
+.stat-card .value {
+  font-size: 0.95rem;
+  font-weight: bold;
+  color: #f8fafc;
+  word-break: break-all;
+}
+
+.stat-card .value.highlight {
+  color: #38bdf8;
+}
+
+.stat-card .unit {
+  font-size: 0.75rem;
+  font-weight: normal;
+  color: #94a3b8;
+}
+
+.stat-card .subtext {
+  font-size: 0.68rem;
+  color: #64748b;
+  margin-top: 4px;
 }
 </style>

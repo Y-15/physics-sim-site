@@ -202,9 +202,12 @@ function render() {
   ctx.moveTo(tankX, waterSurfaceY)
   ctx.lineTo(tankX + tankW, waterSurfaceY)
   ctx.stroke()
+
   ctx.fillStyle = '#38bdf8'
   ctx.font = '12px sans-serif'
-  ctx.fillText(`水面 (大気圧 P₀, 密度 ρ₀ = ${fluidDensity.value.toFixed(2)} g/cm³)`, tankX + 15, waterSurfaceY - 8)
+  ctx.textAlign = 'right'
+  ctx.fillText(`水面 (大気圧 P₀, 密度 ρ₀ = ${fluidDensity.value.toFixed(2)} g/cm³)`, tankX + tankW - 15, waterSurfaceY - 8)
+  ctx.textAlign = 'left'
 
   // 水槽の壁
   ctx.strokeStyle = '#475569'
@@ -216,7 +219,7 @@ function render() {
   const scale = 6
   const bw = blockWidth * scale // 60px
   const bh = blockHeight * scale // 60px
-  const bx = 320 - bw / 2
+  const bx = 340 - bw / 2
   const by = waterSurfaceY + depthTop.value * scale
 
   // 直方体の塗り
@@ -285,7 +288,7 @@ function render() {
   }
 
   // 4. 合成ベクトル表示 (左側)
-  const vecX = 160
+  const vecX = 140
   const vecY = 220
 
   // 重力ベクトル (下向き)
@@ -303,6 +306,7 @@ function render() {
   ctx.lineTo(vecX + 5, vecY + gLen - 8)
   ctx.closePath()
   ctx.fill()
+  ctx.font = '11px sans-serif'
   ctx.fillText(`重力 W = ${gravityForce.value.toFixed(2)} N`, vecX + 12, vecY + gLen - 4)
 
   // 浮力ベクトル (上向き)
@@ -321,6 +325,7 @@ function render() {
     ctx.lineTo(vecX + 5, vecY - bLen + 8)
     ctx.closePath()
     ctx.fill()
+    ctx.font = 'bold 11px sans-serif'
     ctx.fillText(`浮力 F_B = ${buoyancyForce.value.toFixed(2)} N`, vecX + 12, vecY - bLen + 14)
   }
 }

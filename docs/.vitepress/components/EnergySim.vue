@@ -62,7 +62,7 @@
       <div class="lab-stat">
         <div class="k">運動エネルギー K</div>
         <div class="v" style="color:#38bdf8">{{ curK.toFixed(1) }} <small>J</small></div>
-        <div class="f">K = <span class="frac"><span class="num">1</span><span class="den">2</span></span>mv² (速さ {{ curV.toFixed(2) }} m/s)</div>
+        <div class="f">K = ½mv² (速さ {{ curV.toFixed(2) }} m/s)</div>
       </div>
       <div class="lab-stat">
         <div class="k">重力位置エネルギー U</div>
@@ -77,7 +77,7 @@
       <div class="lab-stat">
         <div class="k">最下点での理論速さ</div>
         <div class="v">{{ Math.sqrt(2 * g * h0).toFixed(2) }} <small>m/s</small></div>
-        <div class="f">v = <span class="math-radical">√</span><span class="math-radicand">2gh</span> (質量によらない！)</div>
+        <div class="f">v = √(2gh) (質量によらない！)</div>
       </div>
     </div>
   </div>
@@ -120,11 +120,11 @@ const curQ = ref(0)
 const scale = 65
 const groundY = 250 // 地面のy座標
 const slopeAngle = 35 * Math.PI / 180
+const slopeStartX = 95
 
 function getPos(dist) {
   // 斜面区間の長さ
   const slopeLen = h0.value / Math.sin(slopeAngle)
-  const slopeStartX = 70
   const slopeStartY = groundY - h0.value * scale
   const slopeEndX = slopeStartX + h0.value / Math.tan(slopeAngle) * scale
 
@@ -200,7 +200,6 @@ function step(dt) {
 function draw() {
   clearGrid(ctx, W, H)
 
-  const slopeStartX = 70
   const slopeStartY = groundY - h0.value * scale
   const slopeEndX = slopeStartX + h0.value / Math.tan(slopeAngle) * scale
 
@@ -244,10 +243,10 @@ function draw() {
   }
 
   // 高さマーカー
-  line(ctx, slopeStartX - 25, slopeStartY, slopeStartX - 25, groundY, '#71717a', 1, [3, 3])
-  arrow(ctx, slopeStartX - 25, groundY, slopeStartX - 25, slopeStartY, '#10b981', 1.5)
-  arrow(ctx, slopeStartX - 25, slopeStartY, slopeStartX - 25, groundY, '#10b981', 1.5)
-  text(ctx, `h = ${h0.value.toFixed(1)} m`, slopeStartX - 32, (slopeStartY + groundY) / 2, '#10b981', 'bold 11px sans-serif', 'right')
+  line(ctx, slopeStartX - 20, slopeStartY, slopeStartX - 20, groundY, '#71717a', 1, [3, 3])
+  arrow(ctx, slopeStartX - 20, groundY, slopeStartX - 20, slopeStartY, '#10b981', 1.5)
+  arrow(ctx, slopeStartX - 20, slopeStartY, slopeStartX - 20, groundY, '#10b981', 1.5)
+  text(ctx, `h = ${h0.value.toFixed(1)} m`, slopeStartX - 28, (slopeStartY + groundY) / 2, '#10b981', 'bold 11px sans-serif', 'right')
 
   // 移動する物体（ブロック）
   const pos = getPos(s)

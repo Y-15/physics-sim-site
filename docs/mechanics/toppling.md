@@ -33,7 +33,9 @@ description: 高校物理の剛体の力学最難関テーマ。水平面・斜�
 
 外力の大きさ $F$ や加える高さ $h_F$、摩擦係数 $\mu_s$ を動かし、直方体が「静止安定」「横滑り」「転倒」のどれになるかシミュレーションしてみましょう。
 
-<TopplingSim />
+<ClientOnly>
+  <TopplingSim />
+</ClientOnly>
 
 ---
 

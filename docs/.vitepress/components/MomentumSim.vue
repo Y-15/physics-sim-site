@@ -146,24 +146,25 @@ function draw(rawT) {
   ctx.beginPath(); ctx.moveTo(0, groundY); ctx.lineTo(w, groundY); ctx.stroke()
 
   const r1 = getBlockR(m1.value), r2 = getBlockR(m2.value)
-  const collisionX = w * 0.5
-  const speed1 = 90 * (u1.value / 10)
-  const speed2after = 90 * (Math.abs(v2.value) / 10)
+  const collisionX = w * 0.52
+  const pxPerM = 28 // 1 m/s あたりのピクセル移動スケール
 
   let x1, x2
 
   if (phase.value === "before") {
-    x1 = Math.min(collisionX - r1 - r2, w * 0.08 + animT.value * speed1 / 60)
-    x2 = collisionX + r2 * 1.5
-    if (x1 >= collisionX - r1 - r2) { phase.value = "collide"; animT.value = 0 }
+    const contactX1 = collisionX - r1 - r2
+    const startX1 = w * 0.08
+    x1 = Math.min(contactX1, startX1 + (animT.value / 60) * u1.value * pxPerM)
+    x2 = collisionX
+    if (x1 >= contactX1) { phase.value = "collide"; animT.value = 0 }
   } else if (phase.value === "collide") {
     x1 = collisionX - r1 - r2
-    x2 = collisionX + r2 * 1.5
-    if (animT.value > 18) { phase.value = "after"; animT.value = 0 }
+    x2 = collisionX
+    if (animT.value > 12) { phase.value = "after"; animT.value = 0 }
   } else {
     const afterT = animT.value / 60
-    x1 = (collisionX - r1 - r2) + v1.value * afterT * speed1
-    x2 = (collisionX + r2 * 1.5) + v2.value * afterT * speed2after
+    x1 = (collisionX - r1 - r2) + v1.value * afterT * pxPerM
+    x2 = collisionX + v2.value * afterT * pxPerM
     x1 = Math.max(r1, Math.min(w - r1, x1))
     x2 = Math.max(r2, Math.min(w - r2, x2))
   }
