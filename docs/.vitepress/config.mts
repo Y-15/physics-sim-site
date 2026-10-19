@@ -26,7 +26,31 @@ function getProblemCounts() {
   return defaults
 }
 
+// 大学物理の演習問題数を自動カウントするヘルパー関数
+function getUnivProblemCounts() {
+  const defaults = { total: 0, mechanics: 0, electromagnetism: 0, thermodynamics: 0, quantum: 0 }
+  try {
+    const jsonPath = path.resolve(__dirname, '../public/data/university_problems.json')
+    if (fs.existsSync(jsonPath)) {
+      const data = JSON.parse(fs.readFileSync(jsonPath, 'utf-8'))
+      if (Array.isArray(data)) {
+        return {
+          total: data.length,
+          mechanics: data.filter((p: any) => p.unitId === 'mechanics').length,
+          electromagnetism: data.filter((p: any) => p.unitId === 'electromagnetism').length,
+          thermodynamics: data.filter((p: any) => p.unitId === 'thermodynamics').length,
+          quantum: data.filter((p: any) => p.unitId === 'quantum').length,
+        }
+      }
+    }
+  } catch (e) {
+    console.warn('[config.mts] 大学問題数カウントの自動取得に失敗しました:', e)
+  }
+  return defaults
+}
+
 const pCounts = getProblemCounts()
+const univCounts = getUnivProblemCounts()
 
 // GitHub Pages用のベースパス設定（GitHub Actionsビルド時にリポジトリ名から自動判定）
 const base = (process.env.BASE_PATH || (process.env.GITHUB_REPOSITORY ? `/${process.env.GITHUB_REPOSITORY.split('/')[1]}/` : '/')) as `/${string}/` | '/'
@@ -34,8 +58,8 @@ const base = (process.env.BASE_PATH || (process.env.GITHUB_REPOSITORY ? `/${proc
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   base,
-  title: '高校物理シミュレーションラボ',
-  description: '高校物理・共通テスト・大学受験対応。動くシミュレーションと数式で直感的に完全理解できる無料学習サイト',
+  title: '物理シミュレーションラボ | 高校物理・大学物理',
+  description: '高校物理（共通テスト・大学受験）と大学物理（力学・電磁気・熱統計・量子力学）を完全分離して体系化。動くシミュレーションと厳密な演習問題集完備。',
   lang: 'ja-JP',
   ignoreDeadLinks: true,
   cleanUrls: false,
@@ -114,19 +138,109 @@ export default defineConfig({
   themeConfig: {
     nav: [
       { text: 'ホーム', link: '/' },
-      { text: '力学', link: '/mechanics/index' },
-      { text: '波動', link: '/waves/index' },
-      { text: '電磁気', link: '/electromagnetism/index' },
-      { text: '熱力学', link: '/thermodynamics/index' },
-      { text: '原子', link: '/atomic/index' },
-      { text: '演習問題', link: '/problems/index' },
+      {
+        text: '🏫 高校物理',
+        items: [
+          { text: '🏎️ 力学（全20テーマ）', link: '/mechanics/index' },
+          { text: '🌊 波動（全12テーマ）', link: '/waves/index' },
+          { text: '⚡ 電磁気（全14テーマ）', link: '/electromagnetism/index' },
+          { text: '🔥 熱力学（全9テーマ）', link: '/thermodynamics/index' },
+          { text: '⚛️ 原子物理（全12テーマ）', link: '/atomic/index' },
+          { text: `📝 高校物理 演習問題集（全${pCounts.total}問）`, link: '/problems/index' }
+        ]
+      },
+      {
+        text: '🎓 大学物理',
+        items: [
+          { text: '🏛️ 大学物理ポータル＆マップ', link: '/university/index' },
+          { text: '🏎️ 大学力学・解析力学', link: '/university/mechanics/index' },
+          { text: '⚡ 大学電磁気学（マクスウェル）', link: '/university/electromagnetism/index' },
+          { text: '🔥 熱力学・統計力学', link: '/university/thermodynamics/index' },
+          { text: '⚛️ 大学量子力学', link: '/university/quantum/index' },
+          { text: `📝 大学物理 演習問題集（全${univCounts.total}問・院試対応）`, link: '/university/problems/index' }
+        ]
+      },
+      {
+        text: '📝 演習問題',
+        items: [
+          { text: `🏫 高校物理 演習問題集（全${pCounts.total}問・5分野）`, link: '/problems/index' },
+          { text: `🎓 大学物理 演習問題集（全${univCounts.total}問・院試対応）`, link: '/university/problems/index' }
+        ]
+      },
       { text: '🎲 3Dオセロ', link: '/games/othello' },
       { text: '受験・学習ガイド', link: '/about' },
-      { text: 'プライバシーポリシー', link: '/privacy' },
       { text: '✉️ お問い合わせ', link: '/contact' }
     ],
 
     sidebar: {
+      '/university/problems/': [
+        {
+          text: `🎓 大学物理 演習問題集（全${univCounts.total}問）`,
+          collapsed: false,
+          items: [
+            { text: '📝 大学問題集トップ（検索・進捗管理）', link: '/university/problems/index' },
+            { text: `🏎️ 力学・解析力学（全${univCounts.mechanics}問）`, link: '/university/problems/mechanics' },
+            { text: `⚡ 電磁気学（全${univCounts.electromagnetism}問）`, link: '/university/problems/electromagnetism' },
+            { text: `🔥 熱・統計力学（全${univCounts.thermodynamics}問）`, link: '/university/problems/thermodynamics' },
+            { text: `⚛️ 量子力学（全${univCounts.quantum}問）`, link: '/university/problems/quantum' }
+          ]
+        },
+        {
+          text: '🏛️ 大学物理 講義編',
+          collapsed: false,
+          items: [
+            { text: '🏛️ 大学物理ポータル', link: '/university/index' },
+            { text: '🏎️ 大学力学・解析力学', link: '/university/mechanics/index' },
+            { text: '⚡ 大学電磁気学', link: '/university/electromagnetism/index' },
+            { text: '🔥 熱力学・統計力学', link: '/university/thermodynamics/index' },
+            { text: '⚛️ 大学量子力学', link: '/university/quantum/index' }
+          ]
+        },
+        {
+          text: '🏫 高校物理コースへ移動',
+          collapsed: true,
+          items: [
+            { text: `📝 高校物理 演習問題集（全${pCounts.total}問）`, link: '/problems/index' },
+            { text: '🏎️ 高校物理 力学トップ', link: '/mechanics/index' }
+          ]
+        }
+      ],
+      '/university/': [
+        {
+          text: '🎓 大学物理カリキュラム体系',
+          collapsed: false,
+          items: [
+            { text: '🏛️ 大学物理ポータル＆マップ', link: '/university/index' },
+            { text: '🏎️ 大学力学・解析力学', link: '/university/mechanics/index' },
+            { text: '⚡ 大学電磁気学（マクスウェル）', link: '/university/electromagnetism/index' },
+            { text: '🔥 熱力学・統計力学', link: '/university/thermodynamics/index' },
+            { text: '⚛️ 大学量子力学', link: '/university/quantum/index' }
+          ]
+        },
+        {
+          text: `📝 大学物理 演習問題集（全${univCounts.total}問）`,
+          collapsed: false,
+          items: [
+            { text: '📝 大学問題集トップ（検索・進捗管理）', link: '/university/problems/index' },
+            { text: `🏎️ 力学・解析力学演習`, link: '/university/problems/mechanics' },
+            { text: `⚡ 電磁気学演習`, link: '/university/problems/electromagnetism' },
+            { text: `🔥 熱・統計力学演習`, link: '/university/problems/thermodynamics' },
+            { text: `⚛️ 量子力学演習`, link: '/university/problems/quantum' }
+          ]
+        },
+        {
+          text: '🏫 高校物理コースへ移動',
+          collapsed: true,
+          items: [
+            { text: '🏎️ 高校物理 力学トップ', link: '/mechanics/index' },
+            { text: '🌊 高校物理 波動トップ', link: '/waves/index' },
+            { text: '⚡ 高校物理 電磁気トップ', link: '/electromagnetism/index' },
+            { text: '🔥 高校物理 熱力学トップ', link: '/thermodynamics/index' },
+            { text: '⚛️ 高校物理 原子物理トップ', link: '/atomic/index' },
+            { text: `📝 高校物理 演習問題集（全${pCounts.total}問）`, link: '/problems/index' }
+          ]
+        }
+      ],
       '/games/': [
         {
           text: '特別企画・思考力トレーニング',
@@ -140,15 +254,26 @@ export default defineConfig({
       ],
       '/problems/': [
         {
-          text: `高校物理 演習問題集（全${pCounts.total}問）`,
+          text: `🏫 高校物理 演習問題集（全${pCounts.total}問）`,
           collapsed: false,
           items: [
-            { text: `📝 問題集トップ（全${pCounts.total}問検索）`, link: '/problems/index' },
+            { text: `📝 高校問題集トップ（全${pCounts.total}問検索）`, link: '/problems/index' },
             { text: `🏎️ 力学 演習問題（全${pCounts.mechanics}問）`, link: '/problems/mechanics' },
             { text: `🌊 波動 演習問題（全${pCounts.waves}問）`, link: '/problems/waves' },
             { text: `⚡ 電磁気 演習問題（全${pCounts.electromagnetism}問）`, link: '/problems/electromagnetism' },
             { text: `🔥 熱力学 演習問題（全${pCounts.thermodynamics}問）`, link: '/problems/thermodynamics' },
             { text: `⚛️ 原子物理 演習問題（全${pCounts.atomic}問）`, link: '/problems/atomic' }
+          ]
+        },
+        {
+          text: `🎓 大学物理 演習問題（微積・院試）`,
+          collapsed: false,
+          items: [
+            { text: `📝 大学物理 演習問題集トップ（全${univCounts.total}問）`, link: '/university/problems/index' },
+            { text: '🏎️ 大学力学・解析力学 演習', link: '/university/problems/mechanics' },
+            { text: '⚡ 大学電磁気学 演習', link: '/university/problems/electromagnetism' },
+            { text: '🔥 熱・統計力学 演習', link: '/university/problems/thermodynamics' },
+            { text: '⚛️ 大学量子力学 演習', link: '/university/problems/quantum' }
           ]
         }
       ],

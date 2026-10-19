@@ -1,45 +1,39 @@
 ---
 layout: home
-title: 高校物理シミュレーションラボ | 動くシミュレーションと入試問題で完全理解
-description: 高校物理・共通テスト・国公立二次試験対応。力学・波動・電磁気・熱力学・原子物理の全79テーマを動く対話型シミュレーションと公式完全導出、厳選入試例題で直感的にマスターできる完全無料学習サイト。
+title: 物理シミュレーションラボ | 高校物理・大学物理 完全分離
+description: 高校物理（共通テスト・大学受験・全79シミュレーター・197問演習）と大学物理（力学・電磁気学・熱統計力学・量子力学・院試演習問題）を完全分離して体系化。動くシミュレーションと厳密な数理展開。
 
 hero:
-  name: "高校物理シミュレーションラボ"
-  text: "動かして納得、見て解ける物理"
-  tagline: "共通テスト・定期テスト・大学入試対応。教科書の図や公式がリアルタイムに動く！完全無料の高校物理インタラクティブ学習サイト（全79テーマ完備）"
+  name: "物理シミュレーションラボ"
+  text: "高校物理と大学物理を完全体系化"
+  tagline: "高校物理（共通テスト・2次試験・直感理解）と大学物理（微積分・ベクトル解析・マクスウェル・量子力学）を完全に分離。動くシミュレーターと厳選問題集を完備。"
   actions:
     - theme: brand
-      text: 📝 厳選演習問題集（全197問）
-      link: /problems/index
-    - theme: brand
-      text: 🏎️ 力学（全20テーマ）
+      text: 🏫 高校物理コース（全79テーマ）
       link: /mechanics/index
-    - theme: alt
-      text: 🌊 波動（全12テーマ）
-      link: /waves/index
-    - theme: alt
-      text: ⚡ 電磁気（全14テーマ）
-      link: /electromagnetism/index
-    - theme: alt
-      text: 🔥 熱力学（全9テーマ）
-      link: /thermodynamics/index
-    - theme: alt
-      text: ⚛️ 原子（全12テーマ）
-      link: /atomic/index
     - theme: brand
-      text: 🎲 3次元オセロ（空間思考対戦）
+      text: 🎓 大学物理コース（微積・院試）
+      link: /university/index
+    - theme: alt
+      text: 📝 高校 演習問題集（197問）
+      link: /problems/index
+    - theme: alt
+      text: 📝 大学 演習問題集（専門・院試）
+      link: /university/problems/index
+    - theme: alt
+      text: 🎲 3Dオセロ
       link: /games/othello
 
 features:
-  - icon: 🎯
-    title: 高校物理の公式が目の前で動く
-    details: 初速・角度・質量・ばね定数・音速などをスライダーで自由に変更。教科書の静止画ではピンとこなかった現象が直感的にイメージできます。
-  - icon: 📝
-    title: 共通テスト・入試頻出の完全導出
-    details: なぜその公式になるのか？を丁寧なステップで解説。丸暗記から脱却し、思考力・応用問題に強い得点力を養成します。
+  - icon: 🏫
+    title: 高校物理：動く実験室と197問
+    details: 初速・角度・質量・ばね定数を自由に変更。共通テスト・難関大二次試験の頻出テーマを動くシミュレーションと197問の完全オリジナル例題で直感マスター。
+  - icon: 🎓
+    title: 大学物理：微積分・偏微分方程式
+    details: ニュートン力学の再構築からマクスウェル方程式、統計力学、シュレーディンガー方程式まで。数学的ごまかしを排した本格的講義と大学演習問題。
   - icon: 📱
-    title: スマホ対応・完全無料
-    details: 通学電車やスキマ時間にスマホでサクサク操作可能。登録不要・完全無料でいつでもどこでも物理をマスターできます。
+    title: 完全無料・スマホ対応・進捗管理
+    details: 通学時間やスキマ時間にスマホでサクサク操作。演習問題のチェック保存機能（ローカルストレージ）も完備。
 ---
 
 <div style="max-width: 960px; margin: 20px auto 0; padding: 0 24px;">
@@ -48,9 +42,58 @@ features:
   <PhysicsIntroTrigger />
 </div>
 
-## 📚 公開中のシミュレーター・学習テーマ一覧
+<!-- Dual Course Selection Section -->
+<div class="dual-course-portal">
+  <div class="portal-header">
+    <h2>🎯 あなたに合わせた2大学習コース</h2>
+    <p>当サイトでは、対象者と学習目的に応じて「高校物理」と「大学物理」を完全に分けて構成しています。</p>
+  </div>
 
-高校物理の重要分野ごとに、動くシミュレーターと入試対策の完全解説を順次公開しています。
+  <div class="portal-cards">
+    <div class="portal-card high-school">
+      <div class="portal-card-badge">🏫 高校・大学受験生向け</div>
+      <h3>高校物理コース</h3>
+      <p class="portal-card-desc">
+        共通テスト・国公立大学2次試験・定期テスト対応。数式暗記ではなく、79の対話型シミュレーターと図解、厳選197問の演習問題で「見て解ける」直感力を養います。
+      </p>
+      <div class="portal-card-tags">
+        <span>🏎️ 力学（20）</span>
+        <span>🌊 波動（12）</span>
+        <span>⚡ 電磁気（14）</span>
+        <span>🔥 熱力学（9）</span>
+        <span>⚛️ 原子（12）</span>
+      </div>
+      <div class="portal-card-actions">
+        <a class="btn-primary" href="/mechanics/index">講義・シミュレーター一覧 →</a>
+        <a class="btn-secondary" href="/problems/index">高校 演習問題集（全197問） →</a>
+      </div>
+    </div>
+
+    <div class="portal-card university">
+      <div class="portal-card-badge">🎓 理工系学部・大学院入試・学び直し</div>
+      <h3>大学物理コース</h3>
+      <p class="portal-card-desc">
+        理工系教養・専門課程・大学院入試（院試）対応。常微分方程式、ベクトル解析（grad/div/rot）、ルジャンドル変換、演算子法を用いた厳密な数理体系と大学演習問題。
+      </p>
+      <div class="portal-card-tags">
+        <span>🏎️ 力学・解析力学</span>
+        <span>⚡ 電磁気（マクスウェル）</span>
+        <span>🔥 熱・統計力学</span>
+        <span>⚛️ 量子力学</span>
+      </div>
+      <div class="portal-card-actions">
+        <a class="btn-primary univ-btn" href="/university/index">大学物理ポータル＆マップ →</a>
+        <a class="btn-secondary" href="/university/problems/index">大学 演習問題集（院試対応） →</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+---
+
+## 🏫 高校物理コース（全79テーマ シミュレーター＆解説）
+
+高校物理の重要分野ごとに、動くシミュレーターと入試対策の完全解説を公開しています。
 
 ### 🏎️ 力学（Mechanics）
 * **[🏎️ 等加速度直線運動とv-tグラフ](/mechanics/acceleration)**  
@@ -224,9 +267,49 @@ features:
 
 ---
 
+## 🎓 大学物理コース（専門講義＆専門演習問題）
+
+理工系学部生・大学院入試（院試）受験生のための、微分積分・ベクトル解析・偏微分方程式に基づく本格的物理カリキュラムです。
+
+### 🏎️ [大学力学・解析力学（Classical & Analytical Mechanics）](/university/mechanics/index)
+* **ニュートン力学の再構築**: 微積分による速度・加速度の定義、保存力とポテンシャル勾配 $\vec{F} = -\nabla U$、エネルギー保存則の導出。
+* **減衰・強制振動**: 粘性抵抗による2階常微分方程式、過減衰・臨界減衰・減衰振動、外力による共振現象。
+* **中心力場と軌道方程式**: 2次元極座標系の加速度、角運動量保存則、ビネの公式によるケプラー楕円軌道導出。
+* **剛体の回転力学**: 慣性モーメントの重積分計算（円柱 $\frac{1}{2}MR^2$、球 $\frac{2}{5}MR^2$）、平行軸の定理。
+* **解析力学**: 一般化座標、ラグランジアン $L = T - U$、オイラー＝ラグランジュ方程式、ハミルトニアンと正準方程式。
+* 👉 **[大学力学・解析力学 演習問題集へ](/university/problems/mechanics)**
+
+### ⚡ [大学電磁気学（Electromagnetism & Maxwell Equations）](/university/electromagnetism/index)
+* **ベクトル解析の基礎**: 勾配（$\text{grad}$）、発散（$\text{div}$）、回転（$\text{rot}$）、ガウスの発散定理、ストークスの定理。
+* **マクスウェル方程式（全4式）**: 微分形と積分形の物理的意味、電荷保存則、変位電流の導入。
+* **ポテンシャル論**: ポアソン方程式 $\nabla^2 \phi = -\rho/\varepsilon_0$、ラプラス方程式、ベクトルポテンシャル $\vec{A}$。
+* **電磁波と光速度**: 真空中のマクスウェル方程式から3次元波動方程式導出、光速 $c = 1/\sqrt{\varepsilon_0\mu_0}$、ポインティングベクトル $\vec{S} = \vec{E}\times\vec{H}$。
+* 👉 **[大学電磁気学 演習問題集へ](/university/problems/electromagnetism)**
+
+### 🔥 [大学熱力学・統計力学（Thermodynamics & Statistical Mechanics）](/university/thermodynamics/index)
+* **熱力学4大ポテンシャル**: 内部エネルギー $U$、エンタルピー $H$、ヘルムホルツ自由エネルギー $F$、ギブズ自由エネルギー $G$ とルジャンドル変換。
+* **マクスウェル関係式**: 4つの相反関係式と熱力学的状態方程式 $\left(\frac{\partial U}{\partial V}\right)_T = T\left(\frac{\partial P}{\partial T}\right)_V - P$ の導出。
+* **統計力学の基礎**: ボルツマンの原理 $S = k_B \ln W$、カノニカル分布と分配関数 $Z = \sum_i e^{-\beta E_i}$。
+* **古典単原子理想気体**: 多次元ガウス積分による分配関数計算、状態方程式 $PV = Nk_B T$ と内部エネルギー $U = \frac{3}{2}Nk_B T$ の完全演繹。
+* 👉 **[大学熱力学・統計力学 演習問題集へ](/university/problems/thermodynamics)**
+
+### ⚛️ [大学量子力学（Quantum Mechanics）](/university/quantum/index)
+* **量子力学の公理系**: 状態ベクトル、波動関数、ボルンの確率解釈、エルミート演算子と固有値問題。
+* **不確定性関係**: 正準交換関係 $[\hat{x}, \hat{p}] = i\hbar$、コーシー＝シュワルツ不等式による $\Delta x \Delta p \ge \frac{\hbar}{2}$ の厳密証明。
+* **シュレーディンガー方程式**: 時間に依存する方程式と定常状態のエネルギー固有値問題。
+* **厳密解の体系**: 1次元無限井戸型ポテンシャルの離散エネルギー、昇降演算子法による調和振動子（零点エネルギー $\frac{1}{2}\hbar\omega$）、ポテンシャル障壁と量子トンネル効果。
+* 👉 **[大学量子力学 演習問題集へ](/university/problems/quantum)**
+
+### 📝 [大学物理 演習問題集トップ（学部・院試対策アーカイブ）](/university/problems/index)
+* 全問に「必要数学ツール」「考え方のヒント」「完全解答・詳細導出プロセス」「学習進捗管理（ローカル保存）」を完備。
+* キーワード検索＆難易度フィルター対応のインタラクティブ問題バンク。
+* 👉 **[大学物理 演習問題集トップを開く →](/university/problems/index)**
+
+---
+
 ### 🎲 特別企画・思考力トレーニング
 * **[🎲 3次元オセロ（3D Reversi）〜26方向探索・オンライン通信対戦〜](/games/othello)**  
-  高校物理の3次元力学・電磁場・結晶格子で不可欠な「立体空間把握力」をゲームで鍛える！立体対角線を含む全26方向探索、1P CPU対戦（3段階難易度）・2Pオフライン・ルームコード通信対戦に対応。
+  高校物理・大学物理の3次元力学・電磁場・結晶格子で不可欠な「立体空間把握力」をゲームで鍛える！立体対角線を含む全26方向探索、1P CPU対戦（3段階難易度）・2Pオフライン・ルームコード通信対戦に対応。
 
 ---
 
@@ -235,3 +318,117 @@ features:
   共通テスト物理の攻略法、シミュレーター活用術、プライバシーポリシー。
 
 </div>
+
+<style scoped>
+.dual-course-portal {
+  margin: 1.5rem 0 2.5rem;
+}
+.portal-header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+.portal-header h2 {
+  border: none;
+  margin: 0 0 6px 0;
+  font-size: 1.5rem;
+  font-weight: 800;
+}
+.portal-header p {
+  margin: 0;
+  color: var(--vp-c-text-2);
+  font-size: 0.95rem;
+}
+.portal-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.5rem;
+}
+.portal-card {
+  border-radius: 14px;
+  padding: 24px;
+  border: 1px solid var(--vp-c-border);
+  background: var(--vp-c-bg-soft);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+.portal-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+.portal-card.high-school {
+  border-top: 5px solid #38bdf8;
+}
+.portal-card.university {
+  border-top: 5px solid #818cf8;
+  background: linear-gradient(180deg, rgba(129, 140, 248, 0.07), transparent);
+}
+.portal-card-badge {
+  font-size: 0.8rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: #38bdf8;
+}
+.portal-card.university .portal-card-badge {
+  color: #818cf8;
+}
+.portal-card h3 {
+  margin: 0 0 10px 0;
+  font-size: 1.35rem;
+  font-weight: 800;
+}
+.portal-card-desc {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--vp-c-text-2);
+  margin: 0 0 16px 0;
+  flex: 1;
+}
+.portal-card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 18px;
+}
+.portal-card-tags span {
+  font-size: 0.78rem;
+  padding: 3px 8px;
+  border-radius: 6px;
+  background: var(--vp-c-bg-mute);
+  border: 1px solid var(--vp-c-border);
+  color: var(--vp-c-text-1);
+}
+.portal-card-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.btn-primary, .btn-secondary {
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  text-decoration: none;
+  text-align: center;
+  transition: all 0.2s ease;
+}
+.btn-primary {
+  background: #38bdf8;
+  color: #fff !important;
+}
+.btn-primary:hover {
+  opacity: 0.9;
+}
+.btn-primary.univ-btn {
+  background: #6366f1;
+}
+.btn-secondary {
+  background: var(--vp-c-bg-mute);
+  border: 1px solid var(--vp-c-border);
+  color: var(--vp-c-text-1);
+}
+.btn-secondary:hover {
+  border-color: var(--vp-c-brand-1);
+  color: var(--vp-c-brand-1);
+}
+</style>
