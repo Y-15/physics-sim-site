@@ -34,11 +34,9 @@ description: 高校物理・難関大学入試最重要テーマ「2次元平面
     <!-- 接線方向 t -->
     <line x1="270" y1="165" x2="270" y2="15" stroke="#10b981" stroke-width="2.5" stroke-dasharray="4,4" marker-end="url(#arrow-t)" />
     <text x="282" y="24" fill="#10b981" font-size="13" font-weight="bold">接線方向 t（外力ゼロ・速度成分保存）</text>
-    
     <!-- 法線方向 n -->
     <line x1="40" y1="90" x2="500" y2="90" stroke="#ef4444" stroke-width="2.5" marker-end="url(#arrow-n)" />
     <text x="505" y="94" fill="#ef4444" font-size="13" font-weight="bold">法線方向 n</text>
-    
     <!-- 2球の図解 -->
     <circle cx="210" cy="90" r="50" fill="rgba(56, 189, 248, 0.2)" stroke="#38bdf8" stroke-width="2" />
     <circle cx="330" cy="90" r="50" fill="rgba(251, 191, 36, 0.2)" stroke="#fbbf24" stroke-width="2" />
@@ -46,7 +44,6 @@ description: 高校物理・難関大学入試最重要テーマ「2次元平面
     <circle cx="330" cy="90" r="4" fill="#fbbf24" />
     <text x="210" y="95" fill="#38bdf8" font-size="12" font-weight="bold" text-anchor="middle">球1 (m₁)</text>
     <text x="330" y="95" fill="#fbbf24" font-size="12" font-weight="bold" text-anchor="middle">球2 (m₂)</text>
-
     <!-- 撃力ベクトル -->
     <line x1="260" y1="78" x2="190" y2="78" stroke="#ef4444" stroke-width="2" marker-end="url(#arrow-n)" />
     <text x="220" y="70" fill="#ef4444" font-size="11" font-weight="bold" text-anchor="middle">撃力 -N</text>
@@ -139,7 +136,6 @@ $$
         <path d="M 0 1 L 10 5 L 0 9 z" fill="#fbbf24" />
       </marker>
     </defs>
-
     <!-- 壁面 -->
     <line x1="40" y1="170" x2="500" y2="170" stroke="#64748b" stroke-width="3" />
     <line x1="40" y1="170" x2="500" y2="170" stroke="#94a3b8" stroke-width="1" />
@@ -155,27 +151,22 @@ $$
       <line x1="480" y1="170" x2="470" y2="185" />
     </g>
     <text x="495" y="162" fill="#94a3b8" font-size="12" font-weight="bold" text-anchor="end">なめらかな壁面（接線 t 軸）</text>
-
     <!-- 法線 n -->
     <line x1="270" y1="20" x2="270" y2="170" stroke="#ef4444" stroke-width="1.8" stroke-dasharray="4,4" />
     <text x="278" y="30" fill="#ef4444" font-size="12" font-weight="bold">法線（n 軸）</text>
-
     <!-- 入射ベクトル v0 -->
     <line x1="160" y1="50" x2="265" y2="165" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arrow-wall)" />
     <circle cx="150" cy="40" r="14" fill="#38bdf8" />
     <text x="150" y="44" fill="#0f172a" font-size="11" font-weight="bold" text-anchor="middle">m</text>
     <text x="195" y="95" fill="#38bdf8" font-size="13" font-weight="bold">初速 v₀</text>
-
     <!-- 入射角 α の円弧 -->
     <path d="M 235 130 A 50 50 0 0 1 270 120" fill="none" stroke="#38bdf8" stroke-width="1.8" />
     <text x="245" y="112" fill="#38bdf8" font-size="12" font-weight="bold">入射角 α</text>
-
     <!-- 反射ベクトル v' -->
     <line x1="270" y1="170" x2="410" y2="80" stroke="#fbbf24" stroke-width="2.5" marker-end="url(#arrow-reflected)" />
     <circle cx="420" cy="72" r="14" fill="#fbbf24" />
     <text x="420" y="76" fill="#0f172a" font-size="11" font-weight="bold" text-anchor="middle">m</text>
     <text x="360" y="110" fill="#fbbf24" font-size="13" font-weight="bold">反射速度 v'</text>
-
     <!-- 反射角 β の円弧 -->
     <path d="M 270 110 A 60 60 0 0 1 315 125" fill="none" stroke="#fbbf24" stroke-width="1.8" />
     <text x="290" y="100" fill="#fbbf24" font-size="12" font-weight="bold">反射角 β</text>

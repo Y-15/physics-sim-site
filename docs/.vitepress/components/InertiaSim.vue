@@ -122,17 +122,17 @@
 
       <template v-if="mode === 'elevator'">
         <div class="stat-card">
-          <span class="label">体重計の指示値 (垂直抗力 $N$)</span>
+          <span class="label">体重計の指示値 (垂直抗力 <i>N</i>)</span>
           <span class="val" :class="{ 'zero-g': elevN <= 0.1 }">
             {{ fmt(elevN, 1) }} N ({{ fmt(elevApparentKg, 1) }} kg重)
           </span>
         </div>
         <div class="stat-card">
-          <span class="label">見かけの重力加速度 $g' = g + a$</span>
-          <span class="val highlight">{{ fmt(elevGprime, 2) }} $\text{m/s}^2$</span>
+          <span class="label">見かけの重力加速度 <i>g</i>' = <i>g</i> + <i>a</i></span>
+          <span class="val highlight">{{ fmt(elevGprime, 2) }} m/s²</span>
         </div>
         <div class="stat-card">
-          <span class="label">慣性力 $f = -ma$</span>
+          <span class="label">慣性力 <i>f</i> = -<i>ma</i></span>
           <span class="val highlight-alt">{{ fmt(-elevM * elevA, 1) }} N</span>
         </div>
         <div class="stat-card">
@@ -145,11 +145,11 @@
 
       <template v-if="mode === 'centrifugal'">
         <div class="stat-card">
-          <span class="label">遠心力 $F_{\text{cf}} = mr\omega^2$</span>
+          <span class="label">遠心力 <i>F</i><sub>cf</sub> = <i>mrω</i>²</span>
           <span class="val highlight">{{ fmt(rotFcf, 1) }} N</span>
         </div>
         <div class="stat-card">
-          <span class="label">最大静止摩擦力 $f_{\max} = \mu mg$</span>
+          <span class="label">最大静止摩擦力 <i>f</i><sub>max</sub> = <i>μmg</i></span>
           <span class="val">{{ fmt(rotFmax, 1) }} N</span>
         </div>
         <div class="stat-card">
@@ -159,7 +159,7 @@
           </span>
         </div>
         <div class="stat-card">
-          <span class="label">限界角速度 $\omega_0 = \sqrt{\mu g/r}$</span>
+          <span class="label">限界角速度 <i>ω</i><sub>0</sub> = √(<i>μg</i>/<i>r</i>)</span>
           <span class="val">{{ fmt(rotOmegaLimit, 2) }} rad/s</span>
         </div>
       </template>
@@ -252,8 +252,16 @@ function drawCartSim(ctx, w, h, dt) {
   const cx = 390
   const cy = 230
 
-  // 床レール
-  line(ctx, 40, cy + cartH / 2 + 25, 740, cy + cartH / 2 + 25, '#3f3f46', 3)
+  // 床レールと枕木スクロールアニメーション（台車の加速移動を視覚化）
+  cartX = (cartX + a * dt * 28) % 60
+  const railY = cy + cartH / 2 + 25
+  line(ctx, 40, railY, 740, railY, '#3f3f46', 3)
+  for (let sx = 40; sx <= 740; sx += 60) {
+    const tieX = sx - cartX
+    if (tieX >= 40 && tieX <= 740) {
+      line(ctx, tieX, railY, tieX - 10, railY + 10, '#52525b', 2)
+    }
+  }
 
   // 台車本体
   ctx.fillStyle = 'rgba(39, 39, 42, 0.7)'
@@ -262,9 +270,13 @@ function drawCartSim(ctx, w, h, dt) {
   ctx.strokeRect(cx - cartW / 2, cy - cartH / 2, cartW, cartH)
   ctx.fillRect(cx - cartW / 2, cy - cartH / 2, cartW, cartH)
 
-  // 車輪
-  dot(ctx, cx - cartW / 3, cy + cartH / 2 + 12, 12, '#27272a', '#a1a1aa')
-  dot(ctx, cx + cartW / 3, cy + cartH / 2 + 12, 12, '#27272a', '#a1a1aa')
+  // 車輪（回転スポーク付き）
+  const wheelAng = (cartX / 12)
+  for (const wx of [cx - cartW / 3, cx + cartW / 3]) {
+    const wy = cy + cartH / 2 + 12
+    dot(ctx, wx, wy, 12, '#27272a', '#a1a1aa')
+    line(ctx, wx - 10 * Math.cos(wheelAng), wy - 10 * Math.sin(wheelAng), wx + 10 * Math.cos(wheelAng), wy + 10 * Math.sin(wheelAng), '#71717a', 1.5)
+  }
 
   // 加速度矢印 (台車上部)
   if (Math.abs(a) > 0.05) {
@@ -307,8 +319,8 @@ function drawCartSim(ctx, w, h, dt) {
   dot(ctx, bobX, bobY, 14, '#f43f5e', '#ffffff')
   text(ctx, `m = ${m}kg`, bobX, bobY + 4, '#ffffff', 'bold 10px sans-serif', 'center')
 
-  // 力のベクトル描画
-  const scale = 5.0
+  // 力のベクトル描画（キャンバス外にはみ出さないようスケール調整）
+  const scale = Math.min(3.2, 115 / Math.max(20, cartTension.value))
   // 重力 mg (真下)
   const Fg = m * g
   arrow(ctx, bobX, bobY, bobX, bobY + Fg * scale, '#38bdf8', 2.5, `mg = ${fmt(Fg, 1)} N`, { align: 'left', lx: 6 })

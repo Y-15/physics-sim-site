@@ -17,7 +17,7 @@ description: 状態ベクトル、波動関数の確率解釈、エルミート�
 量子力学は、以下の数理的公理系（基本原理）の上に美しく構築されています。
 
 ### ① 状態の記述（第1原理）
-物理系の純粋状態は、複素ヒルベルト空間の単位ベクトル（または空間座標表現である **波動関数 $\psi(\vec{r}, t)$**）によって完全に表されます。
+物理系の純粋状態は、複素ヒルベルト空間の単位ベクトル（または空間座標表現である <strong>波動関数 $\psi(\vec{r}, t)$</strong>）によって完全に表されます。
 
 #### ボルンの確率解釈（Born's Statistical Interpretation）
 時刻 $t$ において位置 $\vec{r}$ の微小体積要素 $dV$ に粒子が見出される確率 $dP$ は、波動関数の絶対値の2乗に比例します：
@@ -29,7 +29,7 @@ $$dP = |\psi(\vec{r}, t)|^2 dV$$
 $$\iiint_{-\infty}^\infty |\psi(\vec{r}, t)|^2 dV = 1$$
 
 ### ② 物理量とエルミート演算子（第2原理）
-観測可能なすべての物理量（オブザーバブル）は、ヒルベルト空間上の **エルミート演算子（自己共役演算子 $\hat{A} = \hat{A}^\dagger$）** に対応します。
+観測可能なすべての物理量（オブザーバブル）は、ヒルベルト空間上の <strong>エルミート演算子（自己共役演算子 $\hat{A} = \hat{A}^\dagger$）</strong> に対応します。
 
 * **位置演算子**: $\hat{\vec{r}} = \vec{r}$（単なる掛け算）
 * **運動量演算子**: $\hat{\vec{p}} = -i\hbar \nabla = -i\hbar \left( \frac{\partial}{\partial x}\vec{e}_x + \frac{\partial}{\partial y}\vec{e}_y + \frac{\partial}{\partial z}\vec{e}_z \right)$
@@ -37,7 +37,7 @@ $$\iiint_{-\infty}^\infty |\psi(\vec{r}, t)|^2 dV = 1$$
   $$\hat{H} = \frac{\hat{\vec{p}}^2}{2m} + V(\hat{\vec{r}}) = -\frac{\hbar^2}{2m}\nabla^2 + V(\vec{r})$$
 
 ### ③ 測定と固有値（第3原理）
-物理量 $\hat{A}$ を測定したとき、得られる測定値は必ず $\hat{A}$ の固有方程式の **固有値 $a_n$** のいずれかです：
+物理量 $\hat{A}$ を測定したとき、得られる測定値は必ず $\hat{A}$ の固有方程式の <strong>固有値 $a_n$</strong> のいずれかです：
 
 $$\hat{A} \phi_n(\vec{r}) = a_n \phi_n(\vec{r})$$
 

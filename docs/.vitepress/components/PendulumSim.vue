@@ -41,7 +41,7 @@
         @touchmove.passive="onTouchMove"
         @touchend="onTouchEnd"
       ></canvas>
-      <div v-if="isDragging" class="drag-hint">角度: {{ (theta * 180 / Math.PI).toFixed(1) }}°</div>
+      <div v-if="isDragging" class="drag-hint">角度: {{ currentAngleDeg.toFixed(1) }}°</div>
       <div class="canvas-tip">💡 おもりをドラッグして好きな角度から離せます</div>
     </div>
 
@@ -141,7 +141,7 @@
       <div class="stat-card">
         <div class="stat-label">現在角度 <i>θ</i></div>
         <div class="stat-value">{{ currentAngleDeg.toFixed(1) }} <span class="unit">°</span></div>
-        <div class="stat-formula">角速度 <i>ω</i> = {{ omega.toFixed(2) }} rad/s</div>
+        <div class="stat-formula">角速度 <i>ω</i> = {{ omegaDisplay.toFixed(2) }} rad/s</div>
       </div>
       <div class="stat-card">
         <div class="stat-label">現在速度 <i>v</i></div>
@@ -193,13 +193,14 @@ const theoreticalPeriod = computed(() => {
 
 // 位置エネルギー (最下点を基準 h = 0)
 const potentialEnergy = computed(() => {
-  const h = length.value * (1 - Math.cos(theta))
+  const thRad = (currentAngleDeg.value * Math.PI) / 180
+  const h = length.value * (1 - Math.cos(thRad))
   return mass.value * g.value * h
 })
 
 // 運動エネルギー
 const kineticEnergy = computed(() => {
-  const v = length.value * omega
+  const v = length.value * omegaDisplay.value
   return 0.5 * mass.value * v * v
 })
 
@@ -449,33 +450,6 @@ function drawScene() {
   ctx.lineWidth = 2
   ctx.stroke()
 
-  // 速度ベクトルの描画（接線方向）
-  if (showVectors.value) {
-    const v = length.value * omega
-    const vectorScale = 18
-    const vx = v * Math.cos(theta) * vectorScale
-    const vy = -v * Math.sin(theta) * vectorScale
-
-    if (Math.abs(v) > 0.05) {
-      ctx.strokeStyle = '#10b981'
-      ctx.fillStyle = '#10b981'
-      ctx.lineWidth = 3
-      ctx.beginPath()
-      ctx.moveTo(bobX, bobY)
-      ctx.lineTo(bobX + vx, bobY + vy)
-      ctx.stroke()
-
-      // 矢じり
-      const angleV = Math.atan2(vy, vx)
-      ctx.beginPath()
-      ctx.moveTo(bobX + vx, bobY + vy)
-      ctx.lineTo(bobX + vx - 10 * Math.cos(angleV - Math.PI / 6), bobY + vy - 10 * Math.sin(angleV - Math.PI / 6))
-      ctx.lineTo(bobX + vx - 10 * Math.cos(angleV + Math.PI / 6), bobY + vy - 10 * Math.sin(angleV + Math.PI / 6))
-      ctx.closePath()
-      ctx.fill()
-    }
-  }
-
   // おもりの描画（リッチなグラデーション球）
   const grad = ctx.createRadialGradient(
     bobX - bobRadius * 0.3,
@@ -502,6 +476,36 @@ function drawScene() {
   ctx.beginPath()
   ctx.arc(bobX - bobRadius * 0.3, bobY - bobRadius * 0.3, bobRadius * 0.25, 0, Math.PI * 2)
   ctx.fill()
+
+  // 速度ベクトルの描画（接線方向・おもりの前面に描画）
+  if (showVectors.value) {
+    const v = length.value * omega
+    const vectorScale = 28
+    const vx = v * Math.cos(theta) * vectorScale
+    const vy = -v * Math.sin(theta) * vectorScale
+
+    if (Math.abs(v) > 0.05) {
+      ctx.strokeStyle = '#10b981'
+      ctx.fillStyle = '#10b981'
+      ctx.lineWidth = 3
+      ctx.beginPath()
+      ctx.moveTo(bobX, bobY)
+      ctx.lineTo(bobX + vx, bobY + vy)
+      ctx.stroke()
+
+      // 矢じり
+      const angleV = Math.atan2(vy, vx)
+      ctx.beginPath()
+      ctx.moveTo(bobX + vx, bobY + vy)
+      ctx.lineTo(bobX + vx - 10 * Math.cos(angleV - Math.PI / 6), bobY + vy - 10 * Math.sin(angleV - Math.PI / 6))
+      ctx.lineTo(bobX + vx - 10 * Math.cos(angleV + Math.PI / 6), bobY + vy - 10 * Math.sin(angleV + Math.PI / 6))
+      ctx.closePath()
+      ctx.fill()
+
+      ctx.font = 'bold 11px sans-serif'
+      ctx.fillText(`v=${Math.abs(v).toFixed(2)}m/s`, bobX + vx + (vx >= 0 ? 8 : -58), bobY + vy - 6)
+    }
+  }
 
   // 表示用ステートの同期
   currentAngleDeg.value = (theta * 180) / Math.PI

@@ -84,17 +84,17 @@ const animRunning = ref(true)
 
 const waveSpeed = computed(() => wavelength.value / periodT.value)
 
-let curTime = 0
+const curTime = ref(0)
 
 // 観測点 x0 における現在の y と速度 vy
 const curObsY = computed(() => {
-  const phase = 2 * Math.PI * (curTime / periodT.value - direction.value * (observeX.value / wavelength.value))
+  const phase = 2 * Math.PI * (curTime.value / periodT.value - direction.value * (observeX.value / wavelength.value))
   return amplitude.value * Math.sin(phase)
 })
 
 const curObsVy = computed(() => {
   const omega = (2 * Math.PI) / periodT.value
-  const phase = 2 * Math.PI * (curTime / periodT.value - direction.value * (observeX.value / wavelength.value))
+  const phase = 2 * Math.PI * (curTime.value / periodT.value - direction.value * (observeX.value / wavelength.value))
   return amplitude.value * omega * Math.cos(phase)
 })
 
@@ -103,7 +103,7 @@ const canvasRef = ref(null)
 useLoop(canvasRef, ({ ctx, width, height, dt }) => {
   clearGrid(ctx, width, height, 40)
   if (animRunning.value) {
-    curTime += dt
+    curTime.value += dt
   }
 
   const splitY = height * 0.48
@@ -126,14 +126,14 @@ function drawYXGraph(ctx, ox, oy, w, h) {
   const gh = (h - padT - padB) / 2
 
   // タイトル
-  text(ctx, '📷 y-x グラフ（ある瞬間の空間全体の写真）', ox + 15, oy + 20, { align: 'left', color: '#06b6d4', font: 'bold 12px sans-serif' })
-  text(ctx, `時刻 t = ${curTime.toFixed(2)} s`, ox + w - 20, oy + 20, { align: 'right', color: '#94a3b8', font: '11px sans-serif' })
+  text(ctx, '📷 y-x グラフ（ある瞬間の空間全体の写真）', gx + 8, oy + 18, { align: 'left', color: '#06b6d4', font: 'bold 12px sans-serif' })
+  text(ctx, `時刻 t = ${curTime.value.toFixed(2)} s`, ox + w - 20, oy + 18, { align: 'right', color: '#94a3b8', font: '11px sans-serif' })
 
   // 軸
   line(ctx, gx, gy, gx + gw, gy, { color: '#64748b', width: 1.5 }) // x軸
   line(ctx, gx, oy + padT, gx, oy + h - padB, { color: '#64748b', width: 1.5 }) // y軸
   text(ctx, '位置 x [m] →', gx + gw - 10, gy + 16, { align: 'right', color: '#94a3b8', font: '10px sans-serif' })
-  text(ctx, '↑ 変位 y [m]', gx - 8, oy + padT, { align: 'right', color: '#94a3b8', font: '10px sans-serif' })
+  text(ctx, '↑ 変位 y [m]', gx - 6, oy + padT + 6, { align: 'right', color: '#94a3b8', font: '10px sans-serif' })
 
   // スケール: x 0〜7m, y -2〜+2m
   const xMax = 7.0
@@ -147,7 +147,7 @@ function drawYXGraph(ctx, ox, oy, w, h) {
 
   for (let px = 0; px <= gw; px += 2) {
     const xm = px / pxPerM
-    const phase = 2 * Math.PI * (curTime / periodT.value - direction.value * (xm / wavelength.value))
+    const phase = 2 * Math.PI * (curTime.value / periodT.value - direction.value * (xm / wavelength.value))
     const ym = amplitude.value * Math.sin(phase)
     const sy = gy - ym * pyPerM
 
@@ -165,7 +165,7 @@ function drawYXGraph(ctx, ox, oy, w, h) {
   const aheadDt = 0.15
   for (let px = 0; px <= gw; px += 2) {
     const xm = px / pxPerM
-    const phase = 2 * Math.PI * ((curTime + aheadDt) / periodT.value - direction.value * (xm / wavelength.value))
+    const phase = 2 * Math.PI * ((curTime.value + aheadDt) / periodT.value - direction.value * (xm / wavelength.value))
     const ym = amplitude.value * Math.sin(phase)
     const sy = gy - ym * pyPerM
     if (px === 0) ctx.moveTo(gx + px, sy)
@@ -186,7 +186,7 @@ function drawYXGraph(ctx, ox, oy, w, h) {
 
   // 観測点 x0 のプロット
   const obsPx = gx + observeX.value * pxPerM
-  const obsPhase = 2 * Math.PI * (curTime / periodT.value - direction.value * (observeX.value / wavelength.value))
+  const obsPhase = 2 * Math.PI * (curTime.value / periodT.value - direction.value * (observeX.value / wavelength.value))
   const obsYm = amplitude.value * Math.sin(obsPhase)
   const obsPy = gy - obsYm * pyPerM
 
@@ -202,7 +202,7 @@ function drawYXGraph(ctx, ox, oy, w, h) {
 
   // 赤い観測点ボール
   dot(ctx, obsPx, obsPy, 7, '#ef4444', '#fff', 2)
-  text(ctx, `着目点 x₀ = ${observeX.value.toFixed(1)}m`, obsPx, oy + h - padB + 16, { color: '#ef4444', font: 'bold 11px sans-serif' })
+  text(ctx, `着目点 x₀ = ${observeX.value.toFixed(1)}m`, obsPx, oy + h - padB + 16, { align: 'center', color: '#ef4444', font: 'bold 11px sans-serif' })
 }
 
 function drawYTGraph(ctx, ox, oy, w, h) {
@@ -216,13 +216,13 @@ function drawYTGraph(ctx, ox, oy, w, h) {
   const gh = (h - padT - padB) / 2
 
   // タイトル
-  text(ctx, `📹 y-t グラフ（位置 x₀ = ${observeX.value.toFixed(1)}m の媒質粒子の時間変化・ビデオ）`, ox + 15, oy + 20, { align: 'left', color: '#f59e0b', font: 'bold 12px sans-serif' })
+  text(ctx, `📹 y-t グラフ（位置 x₀ = ${observeX.value.toFixed(1)}m の媒質粒子の時間変化・ビデオ）`, gx + 8, oy + 18, { align: 'left', color: '#f59e0b', font: 'bold 12px sans-serif' })
 
   // 軸
   line(ctx, gx, gy, gx + gw, gy, { color: '#64748b', width: 1.5 }) // t軸
   line(ctx, gx, oy + padT, gx, oy + h - padB, { color: '#64748b', width: 1.5 }) // y軸
-  text(ctx, '時刻 t [s] →', gx + gw - 10, gy + 16, { align: 'right', color: '#94a3b8', font: '10px sans-serif' })
-  text(ctx, '↑ 変位 y [m]', gx - 8, oy + padT, { align: 'right', color: '#94a3b8', font: '10px sans-serif' })
+  text(ctx, '時刻 t [s] →', gx + gw - 12, gy + 16, { align: 'right', color: '#94a3b8', font: '10px sans-serif' })
+  text(ctx, '↑ 変位 y [m]', gx - 6, oy + padT + 6, { align: 'right', color: '#94a3b8', font: '10px sans-serif' })
 
   // スケール: t 過去 6秒間〜現在
   const tSpan = 6.0
@@ -235,7 +235,7 @@ function drawYTGraph(ctx, ox, oy, w, h) {
   ctx.beginPath()
 
   for (let pt = 0; pt <= gw; pt += 2) {
-    const tVal = (curTime - tSpan) + (pt / pxPerS)
+    const tVal = (curTime.value - tSpan) + (pt / pxPerS)
     const phase = 2 * Math.PI * (tVal / periodT.value - direction.value * (observeX.value / wavelength.value))
     const ym = amplitude.value * Math.sin(phase)
     const sy = gy - ym * pyPerM
@@ -247,12 +247,12 @@ function drawYTGraph(ctx, ox, oy, w, h) {
 
   // 現在時刻 t の先端点（一番右側）
   const curPtX = gx + gw
-  const curPhase = 2 * Math.PI * (curTime / periodT.value - direction.value * (observeX.value / wavelength.value))
+  const curPhase = 2 * Math.PI * (curTime.value / periodT.value - direction.value * (observeX.value / wavelength.value))
   const curYm = amplitude.value * Math.sin(curPhase)
   const curPtY = gy - curYm * pyPerM
 
   dot(ctx, curPtX, curPtY, 6, '#ef4444', '#fff', 2)
-  text(ctx, `現在 (y = ${curYm.toFixed(2)}m)`, curPtX - 10, curPtY - 12, { align: 'right', color: '#ef4444', font: 'bold 10px sans-serif' })
+  text(ctx, `現在 (y = ${curYm.toFixed(2)}m)`, ox + w - 20, oy + 18, { align: 'right', color: '#ef4444', font: 'bold 11px sans-serif' })
 
   // 周期 T の寸法線
   const tPx = periodT.value * pxPerS
@@ -263,7 +263,7 @@ function drawYTGraph(ctx, ox, oy, w, h) {
     line(ctx, refX1, refY, refX2, refY, { color: '#38bdf8', width: 1.5 })
     line(ctx, refX1, refY - 4, refX1, refY + 4, { color: '#38bdf8', width: 1.5 })
     line(ctx, refX2, refY - 4, refX2, refY + 4, { color: '#38bdf8', width: 1.5 })
-    text(ctx, `周期 T = ${periodT.value.toFixed(1)}s`, (refX1 + refX2) / 2, refY + 14, { color: '#38bdf8', font: '10px sans-serif' })
+    text(ctx, `周期 T = ${periodT.value.toFixed(1)}s`, (refX1 + refX2) / 2, refY + 14, { align: 'center', color: '#38bdf8', font: '10px sans-serif' })
   }
 }
 </script>

@@ -233,6 +233,18 @@ function togglePlay() {
     return
   }
   isPlaying.value = !isPlaying.value
+  if (isPlaying.value) {
+    if (mode.value === 'lever') {
+      // つり合い状態でも「実験スタート」時に軽く揺らして復元・つり合いを視覚化
+      if (Math.abs(angleVel.value) < 0.05) {
+        angleVel.value = isLeverBalanced.value ? 0.45 : (tauNet.value > 0 ? -0.5 : 0.5)
+      }
+    } else if (mode.value === 'ladder') {
+      if (isLadderSafe.value && !climberAutoClimb.value) {
+        climberAutoClimb.value = true
+      }
+    }
+  }
 }
 
 function resetSim() {
@@ -307,7 +319,7 @@ function drawLever(ctx, w, h, dt) {
 
   // 支点の回転ピン
   dot(ctx, cx, cy, 6, '#f59e0b', '#fff', 2)
-  text(ctx, '支点 O', cx, cy + 65, { color: '#94a3b8', font: '11px sans-serif' })
+  text(ctx, '支点 O', cx, cy + 65, { align: 'center', color: '#94a3b8', font: '11px sans-serif' })
 
   // 支点の垂直抗力矢印 N
   arrow(ctx, cx, cy, cx, cy - 65, { color: '#a855f7', width: 3, head: 9 })
@@ -347,7 +359,7 @@ function drawLever(ctx, w, h, dt) {
   ctx.strokeStyle = '#fff'
   ctx.lineWidth = 1.5
   ctx.strokeRect(x1 - size1 / 2, -8 - size1, size1, size1)
-  text(ctx, `${m1.value}kg`, x1, -8 - size1 / 2, { color: '#000', font: 'bold 11px sans-serif' })
+  text(ctx, `${m1.value}kg`, x1, -8 - size1 / 2, { align: 'center', base: 'middle', color: '#000', font: 'bold 11px sans-serif' })
 
   // 右のおもり位置 x2 = d2 * pxPerM
   const x2 = d2.value * pxPerM
@@ -357,7 +369,7 @@ function drawLever(ctx, w, h, dt) {
   ctx.strokeStyle = '#fff'
   ctx.lineWidth = 1.5
   ctx.strokeRect(x2 - size2 / 2, -8 - size2, size2, size2)
-  text(ctx, `${m2.value}kg`, x2, -8 - size2 / 2, { color: '#000', font: 'bold 11px sans-serif' })
+  text(ctx, `${m2.value}kg`, x2, -8 - size2 / 2, { align: 'center', base: 'middle', color: '#000', font: 'bold 11px sans-serif' })
 
   ctx.restore()
 
@@ -381,10 +393,10 @@ function drawLever(ctx, w, h, dt) {
 
   // 腕の長さの寸法線
   line(ctx, cx, cy - 35, cx - d1.value * pxPerM, cy - 35, { color: 'rgba(245,158,11,0.6)', width: 1.5, dash: [4, 4] })
-  text(ctx, `d₁ = ${d1.value.toFixed(1)} m`, cx - (d1.value * pxPerM) / 2, cy - 42, { color: '#f59e0b', font: '11px sans-serif' })
+  text(ctx, `d₁ = ${d1.value.toFixed(1)} m`, cx - (d1.value * pxPerM) / 2, cy - 42, { align: 'center', color: '#f59e0b', font: '11px sans-serif' })
 
   line(ctx, cx, cy - 35, cx + d2.value * pxPerM, cy - 35, { color: 'rgba(56,189,248,0.6)', width: 1.5, dash: [4, 4] })
-  text(ctx, `d₂ = ${d2.value.toFixed(1)} m`, cx + (d2.value * pxPerM) / 2, cy - 42, { color: '#38bdf8', font: '11px sans-serif' })
+  text(ctx, `d₂ = ${d2.value.toFixed(1)} m`, cx + (d2.value * pxPerM) / 2, cy - 42, { align: 'center', color: '#38bdf8', font: '11px sans-serif' })
 
   // モーメントバランスバー
   drawBalanceMeter(ctx, cx, 40, tauLeft.value, tauRight.value)
@@ -600,21 +612,21 @@ function drawLadder(ctx, w, h, dt) {
     ctx.lineWidth = 2
     ctx.fillRect(w * 0.22, 20, w * 0.72, 42)
     ctx.strokeRect(w * 0.22, 20, w * 0.72, 42)
-    text(ctx, '💥 摩擦限界超過：足元が外側に滑り落ちて床に倒れ込みました！', w * 0.58, 46, { color: '#fca5a5', font: 'bold 13px sans-serif' })
+    text(ctx, '💥 摩擦限界超過：足元が外側に滑り落ちて床に倒れ込みました！', w * 0.58, 46, { align: 'center', color: '#fca5a5', font: 'bold 13px sans-serif' })
   } else if (isSlidingLadder.value) {
     ctx.fillStyle = 'rgba(245, 158, 11, 0.25)'
     ctx.strokeStyle = '#f59e0b'
     ctx.lineWidth = 2
     ctx.fillRect(w * 0.28, 20, w * 0.6, 40)
     ctx.strokeRect(w * 0.28, 20, w * 0.6, 40)
-    text(ctx, '⚠️ スリップ中！足元が滑り出しています…', w * 0.58, 45, { color: '#fde68a', font: 'bold 13px sans-serif' })
+    text(ctx, '⚠️ スリップ中！足元が滑り出しています…', w * 0.58, 45, { align: 'center', color: '#fde68a', font: 'bold 13px sans-serif' })
   } else if (!isLadderSafe.value) {
     ctx.fillStyle = 'rgba(239, 68, 68, 0.2)'
     ctx.strokeStyle = '#ef4444'
     ctx.lineWidth = 2
     ctx.fillRect(w * 0.28, 20, w * 0.6, 40)
     ctx.strokeRect(w * 0.28, 20, w * 0.6, 40)
-    text(ctx, '⚠️ 摩擦限界超過！「実験スタート」で滑り落ちます', w * 0.58, 45, { color: '#fca5a5', font: 'bold 13px sans-serif' })
+    text(ctx, '⚠️ 摩擦限界超過！「実験スタート」で滑り落ちます', w * 0.58, 45, { align: 'center', color: '#fca5a5', font: 'bold 13px sans-serif' })
   }
 }
 </script>

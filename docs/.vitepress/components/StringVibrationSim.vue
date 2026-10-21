@@ -6,8 +6,8 @@
         <h3>弦の振動と定常波（メルデの実験）シミュレーター</h3>
       </div>
       <p class="subtitle">
-        両端を固定した弦を伝わる横波の重ね合わせ。弦の張力 <i>S</i>、線密度 ρ、弦の長さ <i>L</i> による波の速さ v = sqrt{S/ρ} と、
-        基本振動・倍振動（n=1, 2, 3, \dots）の定常波の腹・節、固有振動数 <i>f</i><sub>n</sub> = n / 2Lsqrt{S / ρ} をリアルタイム体感できます。
+        両端を固定した弦を伝わる横波の重ね合わせ。弦の張力 <i>S</i>、線密度 ρ、弦の長さ <i>L</i> による波の速さ <i>v</i> = √(<i>S</i> / ρ) と、
+        基本振動・倍振動（<i>n</i> = 1, 2, 3, …）の定常波の腹・節、固有振動数 <i>f</i><sub>n</sub> = (<i>n</i> / 2<i>L</i>)√(<i>S</i> / ρ) をリアルタイム体感できます。
       </p>
     </div>
 
@@ -81,7 +81,7 @@
       <div class="stat-card">
         <span class="label">弦を伝わる波の速さ <i>v</i></span>
         <span class="value">{{ waveSpeedMs.toFixed(1) }} <span class="unit">m/s</span></span>
-        <span class="subtext">v = sqrt{S / ρ}</span>
+        <span class="subtext"><i>v</i> = √(<i>S</i> / ρ)</span>
       </div>
 
       <div class="stat-card">
@@ -341,6 +341,54 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
+.sim-container {
+  background: #0f172a;
+  border-radius: 12px;
+  padding: 1.2rem;
+  color: #e2e8f0;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  margin: 1.5rem 0;
+  border: 1px solid #1e293b;
+}
+
+.sim-header .title-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.3rem;
+}
+
+.sim-header .icon {
+  font-size: 1.5rem;
+}
+
+.sim-header h3 {
+  margin: 0;
+  font-size: 1.25rem;
+  color: #38bdf8;
+}
+
+.subtitle {
+  font-size: 0.85rem;
+  color: #94a3b8;
+  margin: 0 0 1rem 0;
+  line-height: 1.4;
+}
+
+.canvas-wrapper {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #334155;
+  background: #000;
+}
+
+canvas {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
 .mode-badge {
   position: absolute;
   top: 14px;
@@ -352,5 +400,139 @@ onUnmounted(() => {
   border-radius: 9999px;
   font-size: 0.85rem;
   backdrop-filter: blur(8px);
+}
+
+.control-panel {
+  margin-top: 1rem;
+  background: #1e293b;
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+.control-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 0.8rem;
+}
+
+.control-group label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  font-size: 0.85rem;
+  color: #cbd5e1;
+}
+
+.control-group strong {
+  color: #38bdf8;
+}
+
+.btn-group {
+  display: flex;
+  gap: 0.3rem;
+  flex-wrap: wrap;
+}
+
+.select-btn {
+  flex: 1;
+  min-width: 60px;
+  padding: 0.35rem 0.4rem;
+  background: #334155;
+  color: #cbd5e1;
+  border: 1px solid #475569;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.select-btn.active {
+  background: #0284c7;
+  color: #fff;
+  border-color: #38bdf8;
+  font-weight: bold;
+}
+
+input[type="range"] {
+  accent-color: #38bdf8;
+  cursor: pointer;
+}
+
+.button-row {
+  display: flex;
+  gap: 0.6rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+}
+
+.btn {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-primary {
+  background: #0284c7;
+  color: #ffffff;
+}
+.btn-primary:hover {
+  background: #0369a1;
+}
+
+.btn-secondary {
+  background: #334155;
+  color: #e2e8f0;
+}
+.btn-secondary:hover {
+  background: #475569;
+}
+
+.stats-monitor {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 0.6rem;
+  margin-top: 1rem;
+}
+
+.stat-card {
+  background: #1e293b;
+  padding: 0.7rem;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-left: 3px solid #38bdf8;
+}
+
+.stat-card .label {
+  font-size: 0.75rem;
+  color: #94a3b8;
+  margin-bottom: 0.2rem;
+}
+
+.stat-card .value {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #f8fafc;
+}
+
+.stat-card .value.highlight {
+  color: #38bdf8;
+}
+
+.stat-card .unit {
+  font-size: 0.8rem;
+  font-weight: normal;
+  color: #94a3b8;
+}
+
+.stat-card .subtext {
+  font-size: 0.68rem;
+  color: #94a3b8;
+  margin-top: 0.2rem;
 }
 </style>

@@ -268,8 +268,8 @@ function drawKirchhoff(ctx, w, h) {
   const xLeft = 140
   const xMid = 390
   const xRight = 640
-  const yTop = 90
-  const yBottom = 330
+  const yTop = 112
+  const yBottom = 334
 
   // 外枠・配線を描画
   ctx.strokeStyle = '#52525b'
@@ -290,17 +290,17 @@ function drawKirchhoff(ctx, w, h) {
 
   // 素子シンボルを描画
   // 左枝: 電源 E1 (左縦線の中央)
-  drawBattery(ctx, xLeft, 210, E1.value, 'E₁')
+  drawBattery(ctx, xLeft, 223, E1.value, 'E₁')
   // 左上枝: 抵抗 R1
   drawResistor(ctx, (xLeft + xMid) / 2, yTop, R1.value, 'R₁', true)
 
   // 右枝: 電源 E2 (右縦線の中央)
-  drawBattery(ctx, xRight, 210, E2.value, 'E₂')
+  drawBattery(ctx, xRight, 223, E2.value, 'E₂')
   // 右上枝: 抵抗 R2
   drawResistor(ctx, (xMid + xRight) / 2, yTop, R2.value, 'R₂', true)
 
   // 中央枝: 抵抗 R3 (中央縦線の中央)
-  drawResistor(ctx, xMid, 210, R3.value, 'R₃', false)
+  drawResistor(ctx, xMid, 223, R3.value, 'R₃', false)
 
   // 接地点 (下部レールを 0V 接地とする)
   drawGround(ctx, xMid, yBottom)
@@ -331,18 +331,19 @@ function drawKirchhoff(ctx, w, h) {
   ], I3, 'I₃', '#34d399')
 
   // 注記パネル (キルヒホッフ第1法則と第2法則の式)
-  ctx.fillStyle = 'rgba(24, 24, 27, 0.85)'
+  ctx.fillStyle = 'rgba(24, 24, 27, 0.88)'
   ctx.strokeStyle = '#3f3f46'
   ctx.lineWidth = 1
-  ctx.fillRect(20, 20, 240, 52)
-  ctx.strokeRect(20, 20, 240, 52)
-  text(ctx, '【第1法則 (接合点 P)】', 30, 38, '#e4e4e7', 'bold 11px sans-serif')
-  ctx.fillStyle = 'rgba(24, 24, 27, 0.85)'
+  ctx.fillRect(16, 14, 232, 48)
+  ctx.strokeRect(16, 14, 232, 48)
+  text(ctx, '【第1法則 (接合点 P)】', 26, 32, '#e4e4e7', 'bold 11px sans-serif')
+  text(ctx, `I₁+I₂=I₃ (${fmt(I1, 2)}+${fmt(I2, 2)}=${fmt(I3, 2)}A)`, 26, 50, '#fbbf24', '11px monospace')
+  ctx.fillStyle = 'rgba(24, 24, 27, 0.88)'
   ctx.strokeStyle = '#3f3f46'
-  ctx.fillRect(520, 20, 240, 52)
-  ctx.strokeRect(520, 20, 240, 52)
-  text(ctx, '【電位関係】', 530, 38, '#e4e4e7', 'bold 11px sans-serif')
-  text(ctx, `接地 0V 基準: V_P = ${fmt(VP, 2)} V`, 530, 58, '#38bdf8', '11px monospace')
+  ctx.fillRect(532, 14, 232, 48)
+  ctx.strokeRect(532, 14, 232, 48)
+  text(ctx, '【電位関係】', 542, 32, '#e4e4e7', 'bold 11px sans-serif')
+  text(ctx, `接地 0V 基準: V_P = ${fmt(VP, 2)} V`, 542, 50, '#38bdf8', '11px monospace')
 }
 
 // -------------------------------------------------------------------

@@ -63,10 +63,11 @@ const accelerations = computed(() => {
 const ballPos = computed(() => {
   const s = state.value.ballS
   const th = thetaRad.value
+  const curH = wedgeW * Math.tan(th)
   // 台の右側が頂点、左下に向かって傾斜している三角形
-  // 頂点: (wedgeX + wedgeW, floorY - wedgeH)
+  // 頂点: (wedgeX + wedgeW, floorY - curH)
   const topX = state.value.wedgeX + wedgeW
-  const topY = floorY - wedgeH
+  const topY = floorY - curH
   // 斜面ベクトル: 左下方向 (-cos(th), sin(th))
   const bx = topX - s * Math.cos(th)
   const by = topY + s * Math.sin(th)
@@ -97,14 +98,17 @@ function stepForward() {
   updatePhysics(0.04)
 }
 
+let endWait = 0
+
 function updatePhysics(dtOverride = null) {
   if (!isPlaying.value && !dtOverride) return
 
   const dt = (dtOverride || 0.03) * timeScale.value
   const th = thetaRad.value
-  const maxS = wedgeH / Math.sin(th)
+  const maxS = wedgeW / Math.cos(th)
 
-  if (state.value.ballS < maxS - 10) {
+  if (state.value.ballS < maxS - 16) {
+    endWait = 0
     const acc = accelerations.value
     state.value.wedgeVx += acc.wedgeAx * dt
     state.value.wedgeX += state.value.wedgeVx * dt
@@ -118,6 +122,11 @@ function updatePhysics(dtOverride = null) {
     state.value.trail.push({ x: ballPos.value.x, y: ballPos.value.y })
     if (state.value.trail.length > 300) {
       state.value.trail.shift()
+    }
+  } else if (!dtOverride) {
+    endWait += dt
+    if (endWait > 1.0) {
+      resetSim()
     }
   }
 }
@@ -400,8 +409,8 @@ onUnmounted(() => {
 .overlay-stats {
   position: absolute;
   top: 10px;
-  right: 10px;
-  background: rgba(15, 23, 42, 0.85);
+  left: 10px;
+  background: rgba(15, 23, 42, 0.88);
   backdrop-filter: blur(8px);
   padding: 0.5rem 0.75rem;
   border-radius: 8px;

@@ -9,7 +9,7 @@ description: 高校物理・共通テスト・二次試験頻出「熱量保存�
 
 この過程で最も興味深いのは、「**氷が水に溶けている最中（融解中）や、水が沸騰している最中（蒸発中）は、いくら熱を加え続けても温度が全く上がらない**」という事実です。
 
-この温度上昇を伴わない熱「**潜熱（Latent heat） **」の正体と、外部と熱の出入りがない閉じた系において成り立つ「** 熱量保存則 $Q_{\text{得}} = Q_{\text{失}}$**」は、大学入試の熱力学分野で極めて高い出題頻度を誇る基礎必須テーマです。
+この温度上昇を伴わない熱「**潜熱（Latent heat）**」の正体と、外部と熱の出入りがない閉じた系において成り立つ「**熱量保存則 $Q_{\text{得}} = Q_{\text{失}}$**」は、大学入試の熱力学分野で極めて高い出題頻度を誇る基礎必須テーマです。
 
 <ClientOnly>
   <CalorimetrySim />
@@ -37,10 +37,10 @@ $$
 
 | 物質 | 比熱 $c$ [J/(g·K)] | 特徴 |
 | :--- | :--- | :--- |
-| **水（液体） **|** $4.18$** | きわめて比熱が大きく、温まりにくく冷めにくい（気候の緩和効果） |
-| **氷（固体） **|** $2.10$** | 水の約半分の熱量で温まる |
-| **水蒸気（気体） **|** $2.00$** | 氷とほぼ同等の比熱 |
-| **鉄・銅などの金属 **|** $0.38 \sim 0.45$** | 比熱が小さく、熱を加えると瞬時に温度が上がる |
+| **水（液体）** | **$4.18$** | きわめて比熱が大きく、温まりにくく冷めにくい（気候の緩和効果） |
+| **氷（固体）** | **$2.10$** | 水の約半分の熱量で温まる |
+| **水蒸気（気体）** | **$2.00$** | 氷とほぼ同等の比熱 |
+| **鉄・銅などの金属** | **$0.38 \sim 0.45$** | 比熱が小さく、熱を加えると瞬時に温度が上がる |
 
 ---
 
@@ -92,18 +92,15 @@ $-T_{ice}^\circ\text{C}$ の氷 $m_{ice}$ [g] と、$T_w^\circ\text{C}$ の温�
         <path d="M 0 1 L 10 5 L 0 9 z" fill="#94a3b8" />
       </marker>
     </defs>
-
     <!-- ルート: 温水が放出可能な熱量 -->
     <rect x="135" y="15" width="350" height="42" rx="8" fill="rgba(56, 189, 248, 0.15)" stroke="#38bdf8" stroke-width="2" />
     <text x="310" y="33" fill="#38bdf8" font-size="12" font-weight="bold" text-anchor="middle">温水が0℃までに放出可能な最大熱量</text>
     <text x="310" y="49" fill="#e2e8f0" font-size="13" font-family="monospace" text-anchor="middle">Q_avail = m_w · c_w · T_w</text>
-
     <!-- 分岐線 -->
     <path d="M 310 57 L 310 80" stroke="#94a3b8" stroke-width="2" />
     <path d="M 160 80 L 460 80" stroke="#94a3b8" stroke-width="2" />
     <line x1="160" y1="80" x2="160" y2="105" stroke="#94a3b8" stroke-width="2" marker-end="url(#flow-arrow)" />
     <line x1="460" y1="80" x2="460" y2="105" stroke="#94a3b8" stroke-width="2" marker-end="url(#flow-arrow)" />
-
     <!-- 左分岐: Q_avail >= Q_melt -->
     <rect x="40" y="105" width="240" height="95" rx="8" fill="rgba(16, 185, 129, 0.12)" stroke="#10b981" stroke-width="2" />
     <text x="160" y="125" fill="#10b981" font-size="13" font-weight="bold" text-anchor="middle">Q_avail ≥ Q_melt</text>
@@ -111,7 +108,6 @@ $-T_{ice}^\circ\text{C}$ の氷 $m_{ice}$ [g] と、$T_w^\circ\text{C}$ の温�
     <line x1="55" y1="152" x2="265" y2="152" stroke="rgba(16, 185, 129, 0.3)" stroke-width="1" />
     <text x="160" y="172" fill="#38bdf8" font-size="13" font-weight="bold" text-anchor="middle">【ケース A】すべて水になる</text>
     <text x="160" y="190" fill="#f8fafc" font-size="12" font-weight="bold" text-anchor="middle">最終温度: T_f &gt; 0 ℃</text>
-
     <!-- 右分岐: Q_avail < Q_melt -->
     <rect x="340" y="105" width="240" height="95" rx="8" fill="rgba(251, 191, 36, 0.12)" stroke="#fbbf24" stroke-width="2" />
     <text x="460" y="125" fill="#fbbf24" font-size="13" font-weight="bold" text-anchor="middle">Q_avail &lt; Q_melt</text>

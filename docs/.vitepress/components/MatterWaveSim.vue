@@ -96,7 +96,7 @@ import { ref, onMounted, onUnmounted, computed } from 'vue'
 const canvasRef = ref(null)
 const voltage = ref(100) // V
 const d_nm = ref(0.215) // nm (例: ニッケル結晶格子)
-const thetaDeg = ref(30.0) // 度
+const thetaDeg = ref(16.6) // 度 (1次ブラッグ角)
 const showRings = ref(true)
 
 // ド・ブロイ波長計算:
@@ -131,7 +131,7 @@ const snapToBragg = () => {
 const resetDefaults = () => {
   voltage.value = 100
   d_nm.value = 0.215
-  thetaDeg.value = 30.0
+  thetaDeg.value = 16.6
 }
 
 let animId = null
@@ -177,22 +177,24 @@ const draw = () => {
   }
   ctx.setLineDash([])
 
-  // 格子面間隔 d の寸法線
+  // 格子面間隔 d の寸法線 (第2層〜第3層間に表示して入射波との重なりを回避)
   ctx.strokeStyle = '#38bdf8'
   ctx.lineWidth = 1.5
   const dimX = 26
+  const dimY1 = firstRowY + spacingY
+  const dimY2 = firstRowY + spacingY * 2
   ctx.beginPath()
-  ctx.moveTo(dimX, firstRowY)
-  ctx.lineTo(dimX, firstRowY + spacingY)
-  ctx.moveTo(dimX - 4, firstRowY)
-  ctx.lineTo(dimX + 4, firstRowY)
-  ctx.moveTo(dimX - 4, firstRowY + spacingY)
-  ctx.lineTo(dimX + 4, firstRowY + spacingY)
+  ctx.moveTo(dimX, dimY1)
+  ctx.lineTo(dimX, dimY2)
+  ctx.moveTo(dimX - 4, dimY1)
+  ctx.lineTo(dimX + 4, dimY1)
+  ctx.moveTo(dimX - 4, dimY2)
+  ctx.lineTo(dimX + 4, dimY2)
   ctx.stroke()
   ctx.fillStyle = '#38bdf8'
   ctx.font = 'bold 11px sans-serif'
   ctx.textAlign = 'left'
-  ctx.fillText(`d = ${d_nm.value.toFixed(2)} nm`, dimX + 6, firstRowY + spacingY / 2 + 4)
+  ctx.fillText(`d = ${d_nm.value.toFixed(2)} nm`, dimX + 6, (dimY1 + dimY2) / 2 + 4)
 
   // 原子球の描画
   for (let r = 0; r < atomRows; r++) {
@@ -239,9 +241,9 @@ const draw = () => {
   const bRefX = targetBx + refVx * rayLen
   const bRefY = targetBy + refVy * rayLen
 
-  // 入射波
-  ctx.strokeStyle = '#38bdf8'
-  ctx.lineWidth = 2
+  // 入射波 (ベースライン + ド・ブロイ物質波アニメーション)
+  ctx.strokeStyle = 'rgba(56, 189, 248, 0.3)'
+  ctx.lineWidth = 1.5
   ctx.beginPath()
   ctx.moveTo(aInX, aInY)
   ctx.lineTo(targetAx, targetAy)
@@ -249,15 +251,50 @@ const draw = () => {
   ctx.lineTo(targetBx, targetBy)
   ctx.stroke()
 
-  // 反射波（ブラッグ一致時は強く光る）
-  ctx.strokeStyle = isBraggMatched.value ? '#34d399' : '#64748b'
-  ctx.lineWidth = isBraggMatched.value ? 3.5 : 1.5
+  // 反射波ベースライン
+  ctx.strokeStyle = isBraggMatched.value ? 'rgba(52, 211, 153, 0.35)' : 'rgba(100, 116, 139, 0.3)'
+  ctx.lineWidth = 1.5
   ctx.beginPath()
   ctx.moveTo(targetAx, targetAy)
   ctx.lineTo(aRefX, aRefY)
   ctx.moveTo(targetBx, targetBy)
   ctx.lineTo(bRefX, bRefY)
   ctx.stroke()
+
+  // ド・ブロイ波の正弦波形描画
+  const waveLambdaPx = Math.max(14, (lambda_nm.value / 0.1226) * 26)
+  const kWave = (2 * Math.PI) / waveLambdaPx
+  const ampIn = 5.5
+  const ampOut = isBraggMatched.value ? 6.5 : 2.2
+  const phaseDiffRad = braggRatio.value * 2 * Math.PI
+  const refColor = isBraggMatched.value ? '#34d399' : '#64748b'
+
+  const drawWaveSegment = (x1, y1, x2, y2, phase, amp, color, lw) => {
+    const dx = x2 - x1
+    const dy = y2 - y1
+    const len = Math.hypot(dx, dy)
+    if (len < 1) return
+    const ux = dx / len
+    const uy = dy / len
+    const nx = -uy
+    const ny = ux
+    ctx.strokeStyle = color
+    ctx.lineWidth = lw
+    ctx.beginPath()
+    for (let s = 0; s <= len; s += 2) {
+      const w = Math.sin(kWave * s + phase) * amp
+      const px = x1 + ux * s + nx * w
+      const py = y1 + uy * s + ny * w
+      if (s === 0) ctx.moveTo(px, py)
+      else ctx.lineTo(px, py)
+    }
+    ctx.stroke()
+  }
+
+  drawWaveSegment(aInX, aInY, targetAx, targetAy, -waveTime * 2.5, ampIn, '#38bdf8', 2)
+  drawWaveSegment(bInX, bInY, targetBx, targetBy, -waveTime * 2.5, ampIn, '#38bdf8', 2)
+  drawWaveSegment(targetAx, targetAy, aRefX, aRefY, -waveTime * 2.5, ampOut, refColor, isBraggMatched.value ? 2.5 : 1.5)
+  drawWaveSegment(targetBx, targetBy, bRefX, bRefY, -waveTime * 2.5 + phaseDiffRad, ampOut, refColor, isBraggMatched.value ? 2.5 : 1.5)
 
   // 経路差（幾何学的補助線）
   // targetA から 線2 への垂線の足 P, Q

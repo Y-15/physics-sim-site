@@ -185,8 +185,10 @@ const curForce_uN = computed(() => {
 })
 
 const canvasRef = ref(null)
+let flowPhase = 0
 
-useLoop(canvasRef, ({ ctx, width, height }) => {
+useLoop(canvasRef, ({ ctx, width, height, dt }) => {
+  flowPhase = (flowPhase + (dt || 0.016) * 0.85) % 1
   clearGrid(ctx, width, height, 40)
 
   const cx = width * 0.48
@@ -248,8 +250,8 @@ function drawCircuit(ctx, cx, cy, topY, botY, pw) {
     // 直流電源記号（長い棒がプラス、短い太い棒がマイナス）
     line(ctx, wireX - 16, cy - 10, wireX + 16, cy - 10, { color: '#ef4444', width: 3 }) // ＋極
     line(ctx, wireX - 10, cy + 10, wireX + 10, cy + 10, { color: '#38bdf8', width: 4.5 }) // －極
-    text(ctx, '+', wireX - 25, cy - 8, { color: '#ef4444', font: 'bold 13px sans-serif' })
-    text(ctx, '-', wireX - 25, cy + 12, { color: '#38bdf8', font: 'bold 15px sans-serif' })
+    text(ctx, '+', wireX - 25, cy - 6, { align: 'center', color: '#ef4444', font: 'bold 13px sans-serif' })
+    text(ctx, '-', wireX - 25, cy + 14, { align: 'center', color: '#38bdf8', font: 'bold 15px sans-serif' })
     text(ctx, `V₀ = ${batteryV.value}V`, wireX - 32, cy + 32, { align: 'right', color: '#f59e0b', font: 'bold 11px sans-serif' })
   } else {
     // 開いたスイッチ記号
@@ -274,7 +276,7 @@ function drawDielectric(ctx, cx, cy, topY, botY, pw) {
   ctx.strokeRect(leftX, topY + 2, insW, dH)
 
   if (insW > 40) {
-    text(ctx, `誘電体 (εᵣ=${epsR})`, leftX + insW / 2, cy + 4, { color: '#a7f3d0', font: 'bold 11px sans-serif' })
+    text(ctx, `誘電体 (εᵣ=${epsR})`, leftX + insW / 2, cy + 4, { align: 'center', color: '#a7f3d0', font: 'bold 11px sans-serif' })
   }
 }
 
@@ -290,9 +292,14 @@ function drawElectricField(ctx, cx, topY, botY, pw) {
     const x = cx - pw / 2 + i * spacing
     // 誘電体内部は電場が弱まる（色を薄く）
     const isInsideDielectric = (x < cx - pw / 2 + pw * dielectricRatio.value)
-    const color = isInsideDielectric ? 'rgba(56, 189, 248, 0.3)' : 'rgba(239, 68, 68, 0.55)'
+    const color = isInsideDielectric ? 'rgba(56, 189, 248, 0.35)' : 'rgba(239, 68, 68, 0.55)'
 
     arrow(ctx, x, topY + 6, x, botY - 6, { color, width: 1.5, head: 5 })
+
+    // 電場の向きを示すアニメーション光点
+    const pFrac = (flowPhase + (i % 2) * 0.5) % 1
+    const py = (topY + 8) + pFrac * Math.max(8, (botY - 8) - (topY + 8))
+    dot(ctx, x, py, 2.4, isInsideDielectric ? '#7dd3fc' : '#fda4af')
   }
 }
 
@@ -317,12 +324,12 @@ function drawPlates(ctx, cx, topY, botY, pw, ph) {
 
   for (let i = 1; i <= signCount; i++) {
     const sx = leftX + i * signStep
-    text(ctx, '+', sx, topY - 3, { color: '#fff', font: 'bold 11px sans-serif' })
-    text(ctx, '-', sx, botY + 11, { color: '#000', font: 'bold 13px sans-serif' })
+    text(ctx, '+', sx, topY - 2, { align: 'center', color: '#fff', font: 'bold 11px sans-serif' })
+    text(ctx, '-', sx, botY + 10, { align: 'center', color: '#000', font: 'bold 13px sans-serif' })
   }
 
   // 極板ラベル
-  text(ctx, `上極板 (+Q = +${curCharge_nC.value.toFixed(2)} nC)`, cx, topY - ph - 8, { color: '#ef4444', font: 'bold 11px sans-serif' })
-  text(ctx, `下極板 (-Q = -${curCharge_nC.value.toFixed(2)} nC)`, cx, botY + ph + 18, { color: '#38bdf8', font: 'bold 11px sans-serif' })
+  text(ctx, `上極板 (+Q = +${curCharge_nC.value.toFixed(2)} nC)`, cx, topY - ph - 8, { align: 'center', color: '#ef4444', font: 'bold 11px sans-serif' })
+  text(ctx, `下極板 (-Q = -${curCharge_nC.value.toFixed(2)} nC)`, cx, botY + ph + 18, { align: 'center', color: '#38bdf8', font: 'bold 11px sans-serif' })
 }
 </script>

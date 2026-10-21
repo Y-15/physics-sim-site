@@ -362,18 +362,19 @@ onUnmounted(() => {
 
 <style scoped>
 .sim-container {
-  background: var(--vp-c-bg-soft, #18181b);
-  border: 1px solid var(--vp-c-divider, rgba(255, 255, 255, 0.1));
+  background: #0f172a;
+  border: 1px solid #1e293b;
   border-radius: 12px;
   padding: 18px;
   margin: 24px 0;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+  color: #f8fafc;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
 }
 
 .sim-header h3 {
   margin: 0 0 6px 0;
   font-size: 1.15rem;
-  color: var(--vp-c-text-1, #f4f4f5);
+  color: #f8fafc;
 }
 
 .title-row {
@@ -384,7 +385,7 @@ onUnmounted(() => {
 
 .subtitle {
   font-size: 0.88rem;
-  color: var(--vp-c-text-2, #a1a1aa);
+  color: #94a3b8;
   line-height: 1.5;
   margin-bottom: 14px;
 }
@@ -418,8 +419,8 @@ canvas {
 
 .control-panel {
   margin-top: 16px;
-  background: rgba(0, 0, 0, 0.2);
-  border: 1px solid var(--vp-c-divider, rgba(255, 255, 255, 0.08));
+  background: #1e293b;
+  border: 1px solid #334155;
   border-radius: 8px;
   padding: 14px;
 }
@@ -453,8 +454,8 @@ canvas {
 .select-btn {
   padding: 5px 10px;
   font-size: 0.75rem;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: #0f172a;
+  border: 1px solid #475569;
   border-radius: 6px;
   color: #cbd5e1;
   cursor: pointer;
@@ -462,7 +463,7 @@ canvas {
 }
 
 .select-btn:hover {
-  background: rgba(255, 255, 255, 0.12);
+  background: #334155;
   border-color: #38bdf8;
 }
 
@@ -501,12 +502,12 @@ canvas {
 }
 
 .btn-secondary {
-  background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(255, 255, 255, 0.15);
+  background: #334155;
+  border-color: #475569;
   color: #e2e8f0;
 }
 .btn-secondary:hover {
-  background: rgba(255, 255, 255, 0.14);
+  background: #475569;
 }
 
 .stats-monitor {
@@ -517,8 +518,8 @@ canvas {
 }
 
 .stat-card {
-  background: rgba(0, 0, 0, 0.25);
-  border: 1px solid var(--vp-c-divider, rgba(255, 255, 255, 0.08));
+  background: #1e293b;
+  border: 1px solid #334155;
   border-radius: 8px;
   padding: 10px 12px;
   display: flex;
@@ -535,7 +536,7 @@ canvas {
   font-size: 1.15rem;
   font-weight: bold;
   font-family: monospace;
-  color: var(--vp-c-text-1, #f4f4f5);
+  color: #f8fafc;
 }
 
 .stat-card .value.highlight {
@@ -550,7 +551,7 @@ canvas {
 
 .stat-card .subtext {
   font-size: 0.72rem;
-  color: #71717a;
+  color: #94a3b8;
   margin-top: 2px;
 }
 </style>

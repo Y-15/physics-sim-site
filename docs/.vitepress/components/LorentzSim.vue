@@ -200,8 +200,8 @@ function clearTrails() {
 }
 
 function emitParticle() {
-  const startX = simMode.value === 'circle' ? 120 : 40
-  const startY = 200
+  const startX = simMode.value === 'circle' ? 160 : 40
+  const startY = 210
   particles.value = [{
     x: startX,
     y: startY,
@@ -210,6 +210,9 @@ function emitParticle() {
     trail: []
   }]
 }
+
+// 初期状態で粒子を発射し運動を開始する
+emitParticle()
 
 const canvasRef = ref(null)
 
@@ -266,12 +269,12 @@ function drawFields(ctx, w, h) {
     // 上極板 (プラス)
     ctx.fillStyle = '#ef4444'
     ctx.fillRect(pLeft, 40, pW, 8)
-    text(ctx, '+ + + + + 上極板 (+極) + + + + +', pLeft + pW / 2, 32, { color: '#ef4444', font: '10px sans-serif' })
+    text(ctx, '+ + + + + 上極板 (+極) + + + + +', pLeft + pW / 2, 32, { align: 'center', color: '#ef4444', font: '10px sans-serif' })
 
     // 下極板 (マイナス)
     ctx.fillStyle = '#38bdf8'
     ctx.fillRect(pLeft, h - 48, pW, 8)
-    text(ctx, '- - - - - 下極板 (-極) - - - - -', pLeft + pW / 2, h - 26, { color: '#38bdf8', font: '10px sans-serif' })
+    text(ctx, '- - - - - 下極板 (-極) - - - - -', pLeft + pW / 2, h - 26, { align: 'center', color: '#38bdf8', font: '10px sans-serif' })
 
     // 電場下向き矢印
     const eStep = 70
@@ -292,10 +295,6 @@ function updateAndDrawParticles(ctx, w, h, dt) {
     // 磁場領域内 (x > 80)
     if (p.x > 80 && p.x < w - 20 && p.y > 40 && p.y < h - 40) {
       // ローレンツ力: F = q(v x B)
-      // v = (vx, vy, 0), B = (0, 0, b)
-      // v x B = (vy * b, -vx * b, 0)
-      // a_x = q * vy * b * scale
-      // a_y = -q * vx * b * scale
       const forceScale = 4.5
       let ax = qSign * p.vy * b * forceScale
       let ay = -qSign * p.vx * b * forceScale
@@ -306,8 +305,16 @@ function updateAndDrawParticles(ctx, w, h, dt) {
         ay += eForce
       }
 
+      const targetSpeed = speedV_kms.value * 2.2
       p.vx += ax * safeDt
       p.vy += ay * safeDt
+      if (simMode.value === 'circle') {
+        const curSpd = Math.hypot(p.vx, p.vy)
+        if (curSpd > 0.001) {
+          p.vx = (p.vx / curSpd) * targetSpeed
+          p.vy = (p.vy / curSpd) * targetSpeed
+        }
+      }
     }
 
     p.x += p.vx * safeDt
@@ -341,18 +348,21 @@ function updateAndDrawParticles(ctx, w, h, dt) {
       arrow(ctx, p.x, p.y, p.x + vxNorm, p.y + vyNorm, { color: '#10b981', width: 2, head: 5 })
     }
 
-    // 画面外に出たら自動再発射
-    if (p.x < -20 || p.x > w + 20 || p.y < -20 || p.y > h + 20) {
+    // 磁場領域外または画面外に出たら自動再発射
+    if (
+      (simMode.value === 'circle' && (p.x < 78 || p.x > w - 18 || p.y < 38 || p.y > h - 38)) ||
+      p.x < -20 || p.x > w + 20 || p.y < -20 || p.y > h + 20
+    ) {
       emitParticle()
     }
   })
 
   // 粒子発射銃
-  const startX = simMode.value === 'circle' ? 120 : 40
+  const startX = simMode.value === 'circle' ? 160 : 40
   ctx.fillStyle = '#475569'
-  ctx.fillRect(startX - 25, 192, 25, 16)
+  ctx.fillRect(startX - 25, 202, 25, 16)
   ctx.strokeStyle = '#94a3b8'
-  ctx.strokeRect(startX - 25, 192, 25, 16)
-  text(ctx, '粒子源', startX - 12, 184, { color: '#94a3b8', font: '10px sans-serif' })
+  ctx.strokeRect(startX - 25, 202, 25, 16)
+  text(ctx, '粒子源', startX - 12, 196, { align: 'center', color: '#94a3b8', font: '10px sans-serif' })
 }
 </script>

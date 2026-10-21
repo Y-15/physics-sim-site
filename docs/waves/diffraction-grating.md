@@ -201,7 +201,9 @@ $$
   - 最短（紫 $400\,\text{nm}$）: $\sin\theta_{3,\text{min}} = \frac{3 \times 400}{d} = \frac{1200}{d}$
   - 最長（赤 $700\,\text{nm}$）: $\sin\theta_{3,\text{max}} = \frac{3 \times 700}{d} = \frac{2100}{d}$
 
-$\sin\theta_{3,\text{min}} = \frac{1200}{d} < \sin\theta_{2,\text{max}} = \frac{1400}{d}$ であるため、 **2次スペクトルの赤側と3次スペクトルの紫側が同じ回折角の領域に重なって観測**されます！**2. 重なり合う波長の範囲**
+$\sin\theta_{3,\text{min}} = \frac{1200}{d} < \sin\theta_{2,\text{max}} = \frac{1400}{d}$ であるため、 **2次スペクトルの赤側と3次スペクトルの紫側が同じ回折角の領域に重なって観測**されます！
+
+**2. 重なり合う波長の範囲**
 同じ角 $\theta$ で重なる条件は：
 $$
 2 \lambda_2 = 3 \lambda_3

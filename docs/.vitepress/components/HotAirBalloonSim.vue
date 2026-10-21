@@ -4,12 +4,13 @@ import { ref, onMounted, onUnmounted, computed } from 'vue'
 const canvasRef = ref(null)
 
 // 物理パラメータ
-const insideTempC = ref(70) // 内部空気温度 [℃] (20 ~ 120)
+const insideTempC = ref(88) // 内部空気温度 [℃] (20 ~ 120, 初期状態で浮上可能)
 const outsideTempC = ref(15) // 外気温度 [℃] (-10 ~ 35)
 const balloonVolume = ref(2000) // 気球体積 V [m³] (1000 ~ 4000)
 const balloonMass = ref(400) // 気球本体+カゴ+乗員質量 M [kg] (200 ~ 800)
 
 let animationFrameId = null
+let animTime = 0
 
 const width = 500
 const height = 400
@@ -64,15 +65,16 @@ const balloonAltitude = ref(0) // [m] (0 ~ 150)
 const balloonVelocity = ref(0)
 
 function updatePhysics() {
-  const dt = 0.03
+  animTime += 0.06
+  const dt = 0.25
   const net = simData.value.netForce
   const totalM = balloonMass.value + parseFloat(simData.value.rhoIn) * balloonVolume.value
 
-  // 加速度 a = net / totalM
-  let a = net / totalM
+  // 加速度 a = net / totalM (視覚的に分かりやすいスケール)
+  let a = (net / totalM) * 18
 
   // 空気抵抗による減衰 -k * v
-  a -= balloonVelocity.value * 0.4
+  a -= balloonVelocity.value * 0.45
 
   balloonVelocity.value += a * dt
   balloonAltitude.value += balloonVelocity.value * dt
@@ -80,8 +82,9 @@ function updatePhysics() {
   if (balloonAltitude.value < 0) {
     balloonAltitude.value = 0
     balloonVelocity.value = 0
-  } else if (balloonAltitude.value > 120) {
-    balloonAltitude.value = 120
+  } else if (balloonAltitude.value > 95) {
+    // 最高到達高度付近で緩やかにホバリング振動
+    balloonAltitude.value = 95 + Math.sin(animTime * 1.5) * 4
     balloonVelocity.value = 0
   }
 }
@@ -142,15 +145,25 @@ function draw() {
   ctx.ellipse(bCenterX, bCenterY, bRadius * 0.5, bRadius, 0, 0, Math.PI * 2)
   ctx.stroke()
 
-  // 2. バーナーの炎（内部温度が高いほど激しい）
+  // 2. バーナーの炎（内部温度が高いほど激しい）と熱気粒子
   if (insideTempC.value > outsideTempC.value + 10) {
-    const flameH = Math.min(22, (insideTempC.value - outsideTempC.value) * 0.3)
+    const flameH = Math.min(24, (insideTempC.value - outsideTempC.value) * 0.3) + Math.sin(animTime * 5) * 4
     ctx.fillStyle = '#fbbf24'
     ctx.beginPath()
     ctx.moveTo(bCenterX - 6, bCenterY + bRadius + 14)
     ctx.quadraticCurveTo(bCenterX, bCenterY + bRadius + 14 - flameH, bCenterX + 6, bCenterY + bRadius + 14)
     ctx.closePath()
     ctx.fill()
+
+    // 気球内部の熱運動粒子
+    ctx.fillStyle = 'rgba(254, 240, 138, 0.75)'
+    for (let k = 0; k < 8; k++) {
+      const px = bCenterX + Math.sin(animTime * 2 + k * 1.3) * (bRadius * 0.55)
+      const py = bCenterY + Math.cos(animTime * 1.7 + k * 2.1) * (bRadius * 0.55)
+      ctx.beginPath()
+      ctx.arc(px, py, 2.5, 0, Math.PI * 2)
+      ctx.fill()
+    }
   }
 
   // 3. カゴ（ゴンドラ）と吊りロープ
@@ -207,7 +220,7 @@ function drawArrow(ctx, fromX, fromY, toX, toY, color, label) {
 }
 
 function resetSim() {
-  insideTempC.value = 70
+  insideTempC.value = 88
   outsideTempC.value = 15
   balloonVolume.value = 2000
   balloonMass.value = 400

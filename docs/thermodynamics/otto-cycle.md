@@ -43,51 +43,40 @@ $$
         <path d="M 0 1 L 10 5 L 0 9 z" fill="#38bdf8" />
       </marker>
     </defs>
-
     <!-- 座標軸 -->
     <line x1="70" y1="240" x2="490" y2="240" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow-axis)" />
     <text x="500" y="244" fill="#94a3b8" font-size="13" font-weight="bold">体積 V</text>
     <line x1="70" y1="240" x2="70" y2="20" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow-axis)" />
     <text x="70" y="14" fill="#94a3b8" font-size="13" font-weight="bold" text-anchor="middle">圧力 P</text>
-
     <!-- 体積補助線 V2 (上死点), V1 (下死点) -->
     <line x1="170" y1="240" x2="170" y2="40" stroke="rgba(148, 163, 184, 0.25)" stroke-dasharray="3,3" />
     <text x="170" y="258" fill="#94a3b8" font-size="12" font-weight="bold" text-anchor="middle">V₂（上死点）</text>
     <line x1="400" y1="240" x2="400" y2="120" stroke="rgba(148, 163, 184, 0.25)" stroke-dasharray="3,3" />
     <text x="400" y="258" fill="#94a3b8" font-size="12" font-weight="bold" text-anchor="middle">V₁（下死点）</text>
-
     <!-- サイクル閉領域（塗りつぶし・正味の仕事） -->
     <path d="M 400 220 C 300 200, 210 150, 170 120 L 170 45 C 230 75, 330 130, 400 155 Z" fill="rgba(56, 189, 248, 0.15)" stroke="none" />
     <text x="280" y="135" fill="#38bdf8" font-size="13" font-weight="bold" text-anchor="middle">正味の仕事 W_net</text>
-
     <!-- ① -> ② 断熱圧縮 -->
     <path d="M 400 220 C 300 200, 210 150, 170 120" fill="none" stroke="#38bdf8" stroke-width="2.5" />
     <text x="260" y="195" fill="#38bdf8" font-size="11" font-weight="bold">①→② 断熱圧縮 (Win)</text>
-
     <!-- ② -> ③ 定積加熱 (吸熱 Qin) -->
     <line x1="170" y1="120" x2="170" y2="45" stroke="#ef4444" stroke-width="3" />
     <line x1="125" y1="82" x2="160" y2="82" stroke="#ef4444" stroke-width="2" marker-end="url(#arrow-path)" />
     <text x="120" y="86" fill="#ef4444" font-size="12" font-weight="bold" text-anchor="end">吸熱 Q_in (燃焼)</text>
-
     <!-- ③ -> ④ 断熱膨張 (仕事 Wout) -->
     <path d="M 170 45 C 230 75, 330 130, 400 155" fill="none" stroke="#10b981" stroke-width="2.5" />
     <text x="310" y="90" fill="#10b981" font-size="11" font-weight="bold">③→④ 断熱膨張 (Wout)</text>
-
     <!-- ④ -> ① 定積冷却 (放熱 Qout) -->
     <line x1="400" y1="155" x2="400" y2="220" stroke="#3b82f6" stroke-width="3" />
     <line x1="400" y1="187" x2="445" y2="187" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow-path)" />
     <text x="450" y="191" fill="#3b82f6" font-size="12" font-weight="bold">放熱 Q_out (排気)</text>
-
     <!-- 各状態点 ①, ②, ③, ④ -->
     <circle cx="400" cy="220" r="5" fill="#38bdf8" />
     <text x="412" y="226" fill="#38bdf8" font-size="12" font-weight="bold">① (V₁, P₁, T₁)</text>
-
     <circle cx="170" cy="120" r="5" fill="#38bdf8" />
     <text x="158" y="125" fill="#38bdf8" font-size="12" font-weight="bold" text-anchor="end">② (V₂, P₂, T₂)</text>
-
     <circle cx="170" cy="45" r="5" fill="#ef4444" />
     <text x="158" y="48" fill="#ef4444" font-size="12" font-weight="bold" text-anchor="end">③ (V₂, P₃, T₃)</text>
-
     <circle cx="400" cy="155" r="5" fill="#10b981" />
     <text x="412" y="152" fill="#10b981" font-size="12" font-weight="bold">④ (V₁, P₄, T₄)</text>
   </svg>

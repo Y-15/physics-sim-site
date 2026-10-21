@@ -36,15 +36,12 @@ description: 高校物理・大学入試超頻出「トムソンの比電荷測�
         <path d="M 0 1 L 10 5 L 0 9 z" fill="#fbbf24" />
       </marker>
     </defs>
-
     <!-- 上極板 (+) -->
     <rect x="60" y="25" width="420" height="12" rx="3" fill="#ef4444" opacity="0.8" />
     <text x="270" y="20" fill="#ef4444" font-size="12" font-weight="bold" text-anchor="middle">上極板（正電位 ＋）</text>
-
     <!-- 下極板 (-) -->
     <rect x="60" y="175" width="420" height="12" rx="3" fill="#38bdf8" opacity="0.8" />
     <text x="270" y="205" fill="#38bdf8" font-size="12" font-weight="bold" text-anchor="middle">下極板（負電位 −）</text>
-
     <!-- 電場ベクトル E (下向き) -->
     <g stroke="#38bdf8" stroke-width="1.5" stroke-dasharray="3,3">
       <line x1="120" y1="40" x2="120" y2="165" marker-end="url(#thomson-arrow-blue)" />
@@ -53,7 +50,6 @@ description: 高校物理・大学入試超頻出「トムソンの比電荷測�
       <line x1="420" y1="40" x2="420" y2="165" marker-end="url(#thomson-arrow-blue)" />
     </g>
     <text x="445" y="105" fill="#38bdf8" font-size="12" font-weight="bold">電場 E (↓)</text>
-
     <!-- 磁場 B (奥向き ⊗) グリッド -->
     <g stroke="#a78bfa" stroke-width="1.5">
       <g transform="translate(160, 70)"><circle cx="0" cy="0" r="8" fill="none"/><line x1="-5" y1="-5" x2="5" y2="5"/><line x1="5" y1="-5" x2="-5" y2="5"/></g>
@@ -62,21 +58,17 @@ description: 高校物理・大学入試超頻出「トムソンの比電荷測�
       <g transform="translate(380, 140)"><circle cx="0" cy="0" r="8" fill="none"/><line x1="-5" y1="-5" x2="5" y2="5"/><line x1="5" y1="-5" x2="-5" y2="5"/></g>
     </g>
     <text x="395" y="60" fill="#a78bfa" font-size="11" font-weight="bold">磁場 B (⊗)</text>
-
     <!-- 電子の軌道（直進軌道） -->
     <line x1="30" y1="105" x2="510" y2="105" stroke="#fbbf24" stroke-width="2" stroke-dasharray="4,4" />
     <line x1="30" y1="105" x2="245" y2="105" stroke="#fbbf24" stroke-width="2.5" marker-end="url(#thomson-arrow-amber)" />
-
     <!-- 電子粒子本体 -->
     <circle cx="270" cy="105" r="9" fill="#1e293b" stroke="#fbbf24" stroke-width="2.5" />
     <text x="270" y="109" fill="#fbbf24" font-size="11" font-weight="bold" text-anchor="middle">−</text>
     <text x="270" y="125" fill="#f8fafc" font-size="11" text-anchor="middle">電子 -e</text>
-
     <!-- 力のつり合いベクトル -->
     <!-- 上向き: 静電気力 Fe = eE -->
     <line x1="270" y1="96" x2="270" y2="52" stroke="#ef4444" stroke-width="2.5" marker-end="url(#thomson-arrow-red)" />
     <text x="282" y="65" fill="#ef4444" font-size="12" font-weight="bold">F_E = eE (上向き)</text>
-
     <!-- 下向き: ローレンツ力 Fb = evB -->
     <line x1="270" y1="114" x2="270" y2="158" stroke="#a78bfa" stroke-width="2.5" marker-end="url(#thomson-arrow-blue)" />
     <text x="282" y="152" fill="#a78bfa" font-size="12" font-weight="bold">F_B = evB (下向き)</text>

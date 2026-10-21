@@ -91,13 +91,15 @@
 </template>
 
 <script setup>
-import { ref, watch, onMounted } from 'vue'
+import { ref, watch, onMounted, onUnmounted } from 'vue'
 
 const canvasRef = ref(null)
 const mode = ref('straight') // 'straight' | 'circular' | 'solenoid'
 const currentI = ref(8) // A
 const currentDir = ref(1) // 1: 手前 (dot), -1: 奥 (cross)
 const showCompass = ref(true)
+let animPhase = 0
+let rafId = null
 
 function toggleDir() {
   currentDir.value *= -1
@@ -107,31 +109,33 @@ function drawStraight(ctx, width, height) {
   const cx = width / 2
   const cy = height / 2
 
-  // 同心円状の磁力線
+  // 同心円状の磁力線 (電流Iに応じて太さ・輝度・半径間隔が変化)
   const dir = currentDir.value
-  const radii = [40, 75, 115, 160]
+  const iRatio = currentI.value / 20
+  const radii = [36 + iRatio * 8, 72 + iRatio * 10, 112 + iRatio * 12, 155 + iRatio * 14]
 
-  radii.forEach(r => {
+  radii.forEach((r, idx) => {
     ctx.beginPath()
     ctx.arc(cx, cy, r, 0, Math.PI * 2)
-    ctx.strokeStyle = 'rgba(56, 189, 248, 0.45)'
-    ctx.lineWidth = 1.8
+    ctx.strokeStyle = `rgba(56, 189, 248, ${0.3 + iRatio * 0.45 - idx * 0.05})`
+    ctx.lineWidth = 1.4 + iRatio * 2.2
     ctx.stroke()
 
-    // 矢印マーク (反時計回り dir=1, 時計回り dir=-1)
+    // 回転アニメーションする磁場光点と矢印マーク (反時計回り dir=1, 時計回り dir=-1)
     for (let a = 0; a < Math.PI * 2; a += Math.PI / 2) {
-      const arrowAngle = a + (dir === 1 ? Math.PI / 2 : -Math.PI / 2)
-      const ax = cx + r * Math.cos(a)
-      const ay = cy + r * Math.sin(a)
+      const rotA = a - dir * animPhase * (1.2 - idx * 0.15)
+      const arrowAngle = rotA - dir * (Math.PI / 2)
+      const ax = cx + r * Math.cos(rotA)
+      const ay = cy + r * Math.sin(rotA)
 
       ctx.save()
       ctx.translate(ax, ay)
       ctx.rotate(arrowAngle)
       ctx.fillStyle = '#38bdf8'
       ctx.beginPath()
-      ctx.moveTo(6, 0)
-      ctx.lineTo(-4, -4)
-      ctx.lineTo(-4, 4)
+      ctx.moveTo(7, 0)
+      ctx.lineTo(-4, -4.5)
+      ctx.lineTo(-4, 4.5)
       ctx.closePath()
       ctx.fill()
       ctx.restore()
@@ -190,7 +194,7 @@ function drawStraight(ctx, width, height) {
     ctx.arc(cx, cy, 6, 0, Math.PI * 2)
     ctx.fill()
     ctx.font = 'bold 13px sans-serif'
-    ctx.fillText('⊙ 電流 I (手前向き)', cx - 55, cy - 28)
+    ctx.fillText(`⊙ 電流 I = ${currentI.value}A (手前向き)`, cx - 75, cy - 28)
   } else {
     // ⊗ (奥)
     ctx.lineWidth = 3
@@ -202,7 +206,7 @@ function drawStraight(ctx, width, height) {
     ctx.lineTo(cx - 8, cy + 8)
     ctx.stroke()
     ctx.font = 'bold 13px sans-serif'
-    ctx.fillText('⊗ 電流 I (奥向き)', cx - 50, cy - 28)
+    ctx.fillText(`⊗ 電流 I = ${currentI.value}A (奥向き)`, cx - 70, cy - 28)
   }
 }
 
@@ -210,29 +214,49 @@ function drawCircular(ctx, width, height) {
   const cx = width / 2
   const cy = height / 2
   const dir = currentDir.value
+  const iRatio = currentI.value / 20
 
   // 円形コイル (楕円透視図)
   ctx.strokeStyle = '#fbbf24'
-  ctx.lineWidth = 4
+  ctx.lineWidth = 3.5 + iRatio * 2
   ctx.beginPath()
   ctx.ellipse(cx, cy, 180, 50, 0, 0, Math.PI * 2)
   ctx.stroke()
 
+  // コイル上を周回する電流粒子アニメーション
+  for (let k = 0; k < 6; k++) {
+    const th = (k / 6) * Math.PI * 2 - dir * animPhase
+    const px = cx + 180 * Math.cos(th)
+    const py = cy + 50 * Math.sin(th)
+    ctx.fillStyle = '#fef3c7'
+    ctx.beginPath()
+    ctx.arc(px, py, 3.5, 0, Math.PI * 2)
+    ctx.fill()
+  }
+
   // コイル上の電流矢印
   ctx.fillStyle = '#fbbf24'
   ctx.font = 'bold 12px sans-serif'
-  ctx.fillText(dir === 1 ? '電流 I (反時計回り)' : '電流 I (時計回り)', cx - 65, cy + 70)
+  ctx.fillText(dir === 1 ? `電流 I = ${currentI.value}A (反時計回り)` : `電流 I = ${currentI.value}A (時計回り)`, cx - 78, cy + 72)
 
   // 中心を貫く直線的磁力線
-  const bDir = dir === 1 ? -1 : 1 // 1: 上向き, -1: 下向き
+  const bDir = dir === 1 ? -1 : 1 // -1: 上向き, 1: 下向き
   ctx.strokeStyle = '#38bdf8'
-  ctx.lineWidth = 3
+  ctx.lineWidth = 2 + iRatio * 2
 
   for (let offset = -80; offset <= 80; offset += 40) {
     ctx.beginPath()
     ctx.moveTo(cx + offset, cy - 120 * bDir)
     ctx.lineTo(cx + offset, cy + 120 * bDir)
     ctx.stroke()
+
+    // 磁力線上の移動光点
+    const flowFrac = (animPhase * 0.5) % 1
+    const dotY = (cy - 120 * bDir) + flowFrac * (240 * bDir)
+    ctx.fillStyle = '#7dd3fc'
+    ctx.beginPath()
+    ctx.arc(cx + offset, dotY, 3, 0, Math.PI * 2)
+    ctx.fill()
 
     // 矢印
     const endY = cy + 120 * bDir
@@ -271,14 +295,23 @@ function drawSolenoid(ctx, width, height) {
 
   // ソレノイド内部の一様平行磁力線
   const bDir = dir === 1 ? 1 : -1 // 1: 右向き, -1: 左向き
+  const iRatio = currentI.value / 20
   ctx.strokeStyle = '#38bdf8'
-  ctx.lineWidth = 2.5
+  ctx.lineWidth = 1.8 + iRatio * 2
 
   for (let y = top + 15; y <= top + solH - 15; y += 20) {
     ctx.beginPath()
     ctx.moveTo(left - 40, y)
     ctx.lineTo(left + solW + 40, y)
     ctx.stroke()
+
+    // 磁力線上の移動光点
+    const f = ((animPhase * 0.4) % 1)
+    const dotX = bDir === 1 ? (left - 40) + f * (solW + 80) : (left + solW + 40) - f * (solW + 80)
+    ctx.fillStyle = '#7dd3fc'
+    ctx.beginPath()
+    ctx.arc(dotX, y, 3, 0, Math.PI * 2)
+    ctx.fill()
 
     // 矢印
     const arrowX = bDir === 1 ? left + solW + 40 : left - 40
@@ -341,22 +374,33 @@ function render() {
   }
 }
 
+function loop() {
+  animPhase = (animPhase + 0.025 * (0.4 + currentI.value / 10)) % (Math.PI * 20)
+  render()
+  rafId = requestAnimationFrame(loop)
+}
+
 watch([mode, currentI, currentDir, showCompass], () => {
   render()
 })
 
 onMounted(() => {
-  render()
+  loop()
+})
+
+onUnmounted(() => {
+  if (rafId) cancelAnimationFrame(rafId)
 })
 </script>
 
 <style scoped>
 .sim-container {
-  background: var(--vp-c-bg-soft);
-  border: 1px solid var(--vp-c-divider);
+  background: #0f172a;
+  border: 1px solid #334155;
   border-radius: 12px;
   padding: 18px;
   margin: 20px 0;
+  color: #f8fafc;
 }
 
 .sim-header {
@@ -372,15 +416,16 @@ onMounted(() => {
   margin: 0;
   font-size: 1.15rem;
   font-weight: 700;
-  color: var(--vp-c-text-1);
+  color: #f8fafc;
 }
 
 .sim-tabs {
   display: flex;
   gap: 6px;
-  background: var(--vp-c-bg-mute);
+  background: #1e293b;
   padding: 4px;
   border-radius: 8px;
+  border: 1px solid #334155;
 }
 
 .tab-btn {
@@ -390,7 +435,7 @@ onMounted(() => {
   border-radius: 6px;
   border: none;
   background: transparent;
-  color: var(--vp-c-text-2);
+  color: #94a3b8;
   cursor: pointer;
   transition: all 0.2s ease;
 }
@@ -405,6 +450,7 @@ onMounted(() => {
   overflow-x: auto;
   border-radius: 8px;
   background: #0f172a;
+  border: 1px solid #1e293b;
 }
 
 .sim-canvas {
@@ -423,10 +469,10 @@ onMounted(() => {
 }
 
 .stat-card {
-  background: var(--vp-c-bg-mute);
+  background: #1e293b;
   padding: 10px;
   border-radius: 8px;
-  border: 1px solid var(--vp-c-divider);
+  border: 1px solid #334155;
   text-align: center;
 }
 
@@ -437,20 +483,20 @@ onMounted(() => {
 
 .stat-label {
   font-size: 0.75rem;
-  color: var(--vp-c-text-2);
+  color: #94a3b8;
   margin-bottom: 4px;
 }
 
 .stat-value {
   font-size: 1.1rem;
   font-weight: 700;
-  color: var(--vp-c-text-1);
+  color: #f8fafc;
 }
 
 .stat-unit {
   font-size: 0.8rem;
   font-weight: normal;
-  color: var(--vp-c-text-2);
+  color: #94a3b8;
 }
 
 .text-blue { color: #38bdf8; }
@@ -459,7 +505,8 @@ onMounted(() => {
 
 .controls-panel {
   margin-top: 16px;
-  background: var(--vp-c-bg-mute);
+  background: #1e293b;
+  border: 1px solid #334155;
   padding: 14px;
   border-radius: 8px;
 }
@@ -482,7 +529,7 @@ onMounted(() => {
   justify-content: space-between;
   font-size: 0.85rem;
   font-weight: 600;
-  color: var(--vp-c-text-1);
+  color: #e2e8f0;
 }
 
 .control-val {
@@ -514,19 +561,19 @@ onMounted(() => {
 .sim-btn.secondary {
   background: #334155;
   color: #f8fafc;
-  border: none;
+  border: 1px solid #475569;
 }
 .sim-btn.secondary:hover {
   background: #475569;
 }
 
 .sim-btn.outline {
-  background: transparent;
-  color: var(--vp-c-text-1);
-  border: 1px solid var(--vp-c-divider);
+  background: #0f172a;
+  color: #e2e8f0;
+  border: 1px solid #475569;
 }
 .sim-btn.outline:hover {
-  background: var(--vp-c-bg-soft);
+  background: #1e293b;
   border-color: #38bdf8;
   color: #38bdf8;
 }
@@ -535,8 +582,8 @@ onMounted(() => {
   margin-top: 12px;
   font-size: 0.85rem;
   line-height: 1.5;
-  color: var(--vp-c-text-2);
-  background: rgba(30, 41, 59, 0.4);
+  color: #cbd5e1;
+  background: rgba(30, 41, 59, 0.7);
   padding: 10px 14px;
   border-radius: 6px;
   border-left: 3px solid #38bdf8;

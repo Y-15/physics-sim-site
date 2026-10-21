@@ -48,30 +48,24 @@ description: 万有引力 F=GMm/r²、位置エネルギー U=-GMm/rの完全導
       <path d="M0,0 L0,6 L7,3 z" fill="#10b981"/>
     </marker>
   </defs>
-
   <!-- 地球 (中心 (160, 130), 半径 R=55) -->
   <circle cx="160" cy="130" r="55" fill="url(#grav-earth-grad)" stroke="#0ea5e9" stroke-width="2"/>
   <text x="160" y="125" fill="#ffffff" font-size="13" font-weight="700" text-anchor="middle">地球 M</text>
   <text x="160" y="142" fill="#bae6fd" font-size="10" text-anchor="middle">半径 R</text>
   <circle cx="160" cy="130" r="3" fill="#ffffff"/>
-
   <!-- 軌道円 (点線 半径 r=180) -->
   <circle cx="160" cy="130" r="180" fill="none" stroke="#475569" stroke-width="1.5" stroke-dasharray="4,4"/>
-
   <!-- 距離 r の矢印線 -->
   <line x1="160" y1="130" x2="340" y2="130" stroke="#fbbf24" stroke-width="1.8"/>
   <rect x="220" y="115" width="60" height="18" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
   <text x="250" y="128" fill="#fbbf24" font-size="11" font-weight="700" text-anchor="middle">距離 r</text>
-
   <!-- 人工衛星 m (340, 130) -->
   <circle cx="340" cy="130" r="8" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
   <text x="340" y="115" fill="#f8fafc" font-size="11" font-weight="700" text-anchor="middle">衛星 m</text>
-
   <!-- 万有引力 F (地球の中心向き) -->
   <line x1="340" y1="130" x2="260" y2="130" stroke="#f43f5e" stroke-width="2.5" marker-end="url(#arr-grav)"/>
   <rect x="270" y="138" width="120" height="20" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
   <text x="330" y="152" fill="#f43f5e" font-size="11" font-weight="700" text-anchor="middle">万有引力 F = G(Mm/r²)</text>
-
   <!-- 速度ベクトル v (接線方向上向き) -->
   <line x1="340" y1="130" x2="340" y2="55" stroke="#10b981" stroke-width="2.5" marker-end="url(#arr-sat-v)"/>
   <rect x="350" y="70" width="85" height="20" rx="3" fill="#0f172a" stroke="#10b981" stroke-width="1"/>

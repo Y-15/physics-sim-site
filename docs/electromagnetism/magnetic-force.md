@@ -36,7 +36,7 @@ $$
 F = I B L
 $$
 
-力の向きは「**フレミングの左手の法則 **」（中指：電流 $I$、人差し指：磁場 $B$、親指：力 $F$）または「** 右手のひらの法則**」によって決まります。
+力の向きは「**フレミングの左手の法則**」（中指：電流 $I$、人差し指：磁場 $B$、親指：力 $F$）または「**右手のひらの法則**」によって決まります。
 
 ---
 
@@ -70,25 +70,21 @@ $$
         <path d="M 0 1 L 10 5 L 0 9 z" fill="#94a3b8" />
       </marker>
     </defs>
-
     <!-- 導線1 -->
     <line x1="140" y1="20" x2="140" y2="200" stroke="#38bdf8" stroke-width="4" stroke-linecap="round" />
     <line x1="140" y1="110" x2="140" y2="60" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#wire-arrow-blue)" />
     <text x="140" y="45" fill="#38bdf8" font-size="13" font-weight="bold" text-anchor="middle">I₁ (上向き)</text>
     <text x="140" y="215" fill="#94a3b8" font-size="11" font-weight="bold" text-anchor="middle">導線1</text>
-
     <!-- 導線2 -->
     <line x1="380" y1="20" x2="380" y2="200" stroke="#38bdf8" stroke-width="4" stroke-linecap="round" />
     <line x1="380" y1="110" x2="380" y2="60" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#wire-arrow-blue)" />
     <text x="380" y="45" fill="#38bdf8" font-size="13" font-weight="bold" text-anchor="middle">I₂ (上向き)</text>
     <text x="380" y="215" fill="#94a3b8" font-size="11" font-weight="bold" text-anchor="middle">導線2</text>
-
     <!-- 距離 r 寸法線 -->
     <line x1="140" y1="150" x2="380" y2="150" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="3,3" />
     <line x1="140" y1="150" x2="160" y2="150" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#dim-arrow)" />
     <line x1="380" y1="150" x2="360" y2="150" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#dim-arrow)" />
     <text x="260" y="142" fill="#94a3b8" font-size="13" font-weight="bold" text-anchor="middle">距離 r</text>
-
     <!-- 導線1が導線2の位置につくる磁場 B1 (奥向き ⊗) -->
     <g transform="translate(380, 100)">
       <circle cx="0" cy="0" r="14" fill="rgba(239, 68, 68, 0.15)" stroke="#ef4444" stroke-width="2" />
@@ -97,11 +93,9 @@ $$
     </g>
     <text x="410" y="105" fill="#ef4444" font-size="12" font-weight="bold">B₁ = μ₀I₁ / (2πr)</text>
     <text x="410" y="122" fill="#94a3b8" font-size="11">（紙面奥向き ⊗）</text>
-
     <!-- 導線2が受ける引力 F2 -->
     <line x1="380" y1="100" x2="300" y2="100" stroke="#ef4444" stroke-width="2.5" marker-end="url(#wire-arrow-red)" />
     <text x="330" y="90" fill="#ef4444" font-size="12" font-weight="bold" text-anchor="middle">引力 F₂</text>
-
     <!-- 導線1が受ける反作用引力 F1 -->
     <line x1="140" y1="100" x2="220" y2="100" stroke="#ef4444" stroke-width="2.5" marker-end="url(#wire-arrow-red)" />
     <text x="180" y="90" fill="#ef4444" font-size="12" font-weight="bold" text-anchor="middle">引力 F₁</text>
@@ -239,7 +233,6 @@ $$
       </marker>
     </defs>
     <rect width="700" height="240" fill="url(#cycloidGridPattern)" />
-    
     <!-- Axes -->
     <line x1="50" y1="70" x2="660" y2="70" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" marker-end="url(#cycloid-arrow)" />
     <text x="665" y="74" fill="#a1a1aa" font-size="12" font-family="sans-serif">x</text>
@@ -247,39 +240,32 @@ $$
     <text x="86" y="16" fill="#a1a1aa" font-size="12" font-family="sans-serif">y</text>
     <circle cx="90" cy="70" r="3" fill="#fff" />
     <text x="70" y="65" fill="#a1a1aa" font-size="11" font-family="sans-serif">O(0,0)</text>
-
     <!-- Gravity & B field symbols -->
     <line x1="600" y1="25" x2="600" y2="55" stroke="#f43f5e" stroke-width="2" marker-end="url(#cycloid-arrow-red)" />
     <text x="612" y="44" fill="#f43f5e" font-size="11" font-weight="bold" font-family="sans-serif">g (重力)</text>
     <text x="540" y="25" fill="#38bdf8" font-size="12" font-weight="bold" font-family="monospace">⊗ B (紙面奥向き)</text>
     <text x="240" y="35" fill="#38bdf8" font-size="12" font-family="monospace">⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗</text>
-
     <!-- Floor line y = -R -->
     <line x1="50" y1="150" x2="660" y2="150" stroke="#f59e0b" stroke-width="2.5" />
     <text x="520" y="142" fill="#f59e0b" font-size="12" font-weight="bold" font-family="sans-serif">床面 y = -R</text>
     <line x1="70" y1="70" x2="70" y2="150" stroke="#f59e0b" stroke-width="1" stroke-dasharray="3,3" />
     <text x="55" y="115" fill="#f59e0b" font-size="11" font-family="sans-serif">R</text>
-
     <!-- Cycloid arc 1: O to P1 -->
     <path d="M 90 70 C 90 110, 110 150, 135.6 150" fill="none" stroke="#22d3ee" stroke-width="2.5" />
     <circle cx="135.6" cy="150" r="4" fill="#f59e0b" />
     <text x="125" y="168" fill="#f59e0b" font-size="11" font-weight="bold" font-family="sans-serif">P₁ (第1衝突)</text>
-
     <!-- Bounce 1: P1 to P2 -->
     <path d="M 135.6 150 C 145 90, 160 70, 181.2 70 C 202 70, 218 90, 226.9 150" fill="none" stroke="#22d3ee" stroke-width="2.5" stroke-dasharray="4,2" />
     <circle cx="226.9" cy="150" r="4" fill="#f59e0b" />
     <text x="216" y="168" fill="#f59e0b" font-size="11" font-weight="bold" font-family="sans-serif">P₂ (第2衝突)</text>
-
     <!-- Bounce 2: P2 to P3 (with e < 1 damping) -->
     <path d="M 226.9 150 C 235 110, 250 95, 268 95 C 285 95, 298 110, 305 150" fill="none" stroke="#38bdf8" stroke-width="2" />
     <circle cx="305" cy="150" r="3.5" fill="#f59e0b" />
     <text x="296" y="168" fill="#f59e0b" font-size="11" font-family="sans-serif">P₃</text>
-
     <!-- Settling arrow -->
     <path d="M 305 150 Q 340 150, 480 150" fill="none" stroke="#10b981" stroke-width="2" stroke-dasharray="2,2" />
     <line x1="480" y1="150" x2="520" y2="150" stroke="#10b981" stroke-width="3" marker-end="url(#cycloid-arrow-green)" />
     <text x="350" y="138" fill="#10b981" font-size="11" font-weight="bold" font-family="sans-serif">n → ∞：床面上を速さ V₀ で等速直線運動（垂直抗力 N = 0）</text>
-
     <!-- Initial particle -->
     <circle cx="90" cy="70" r="5" fill="#38bdf8" stroke="#fff" stroke-width="1.5" />
     <text x="98" y="85" fill="#38bdf8" font-size="11" font-weight="bold" font-family="sans-serif">q, m (静止放流)</text>
@@ -324,7 +310,8 @@ $$
 <details class="tip">
 <summary><strong>💡 思考のヒント・着眼点（クリックして開く）</strong></summary>
 
-1. **設問 (2) の座標変換（ドリフト系への移行） ** 静止系（実験室系 $\mathrm{S}$）での粒子の速度 $\vec{v} = (v_x, v_y)$ を、速さ $V_0$ で $+x$ 向きに動く慣性系 $\mathrm{S}'$ から見た相対速度 $\vec{u} = (u_x, u_y)$ を用いて $v_x = V_0 + u_x, \, v_y = u_y$ と表してみましょう。運動方程式に代入すると、重力項 $mg$ がローレンツ力の定数項 $q V_0 B$ と完全に相殺し、系 $\mathrm{S}'$ では**単純な等速円運動** になります。
+1. **設問 (2) の座標変換（ドリフト系への移行）**  
+   静止系（実験室系 $\mathrm{S}$）での粒子の速度 $\vec{v} = (v_x, v_y)$ を、速さ $V_0$ で $+x$ 向きに動く慣性系 $\mathrm{S}'$ から見た相対速度 $\vec{u} = (u_x, u_y)$ を用いて $v_x = V_0 + u_x, \, v_y = u_y$ と表してみましょう。運動方程式に代入すると、重力項 $mg$ がローレンツ力の定数項 $q V_0 B$ と完全に相殺し、系 $\mathrm{S}'$ では **単純な等速円運動** になります。
 2. **設問 (4) の衝突直後の相対速度ベクトル**
    床（$y = -R$）で跳ね返った直後の速度 $(v_{1x}', v_{1y}')$ を、動く慣性系 $\mathrm{S}'$ から見た相対速度 $\vec{u}_1' = (v_{1x}' - V_0, \, v_{1y}')$ に変換してみてください。$\vec{u}_1'$ がどの向きを向いているかに気づけば、衝突後の軌道が一目瞭然になります。
 3. **設問 (5) の $x$ 方向運動量と高さ $y$ の関係**
@@ -546,12 +533,13 @@ $$
 
 - **十分時間が経過した後の運動（$n \to \infty$）：**  
   $e$ は $0$ より大きく $1$ より小さいため、$n \to \infty$ で $e^n \to 0$ となり、鉛直方向の跳ね返り高さ $R_n = e^n R \to 0$、鉛直方向の速度成分 $v_y \to 0$ に収束する。  
-  したがって、十分時間が経過した後は、 **床面（$y = -R$）上を $+x$ 向きに一定の速さ $V_0 = \dfrac{mg}{qB}$ で等速直線運動する**。このとき、鉛直上向きのローレンツ力 $q V_0 B = mg$ が重力と完全につり合っているため、 ** 床から受ける垂直抗力の大きさは $0$** となる。
+  したがって、十分時間が経過した後は、**床面（$y = -R$）上を $+x$ 向きに一定の速さ $V_0 = \dfrac{mg}{qB}$ で等速直線運動する**。このとき、鉛直上向きのローレンツ力 $q V_0 B = mg$ が重力と完全につり合っているため、**床から受ける垂直抗力の大きさは $0$** となる。
 
 ::: tip 🌟 物理的本質のまとめと洞察
 1. **重力とローレンツ力の相殺によるドリフト系：**  
    重力 $mg$ と直交磁場 $B$ が存在する空間では、速さ $V_0 = \frac{mg}{qB}$ の水平ドリフト速度で進む慣性系 $\mathrm{S}'$ に乗ると、外見上の重力が完全に打ち消され、単なる「一様磁場中の等速円運動」へと還元されます。
-2. **滞空時間 $\Delta T_n$ が一定である理由： ** 通常の重力下での斜方投射バウンドでは、最高到達高度が $e^{2n}$ で減衰すると滞空時間も $e^n$ で短くなり、有限時間でバウンドが停止します。しかし磁場中では、サイクロトロン角振動数 $\omega = \frac{qB}{m}$ が速さに一切依存しないため、**跳ね返る高さ $e^n R$ がどれほど微小になっても、1回あたりの滞空時間 $\Delta T_n = \frac{\pi m}{qB}$ は永久に変化しません**。
+2. **滞空時間 $\Delta T_n$ が一定である理由：**  
+   通常の重力下での斜方投射バウンドでは、最高到達高度が $e^{2n}$ で減衰すると滞空時間も $e^n$ で短くなり、有限時間でバウンドが停止します。しかし磁場中では、サイクロトロン角振動数 $\omega = \frac{qB}{m}$ が速さに一切依存しないため、**跳ね返る高さ $e^n R$ がどれほど微小になっても、1回あたりの滞空時間 $\Delta T_n = \frac{\pi m}{qB}$ は永久に変化しません**。
 3. **床からの離脱（垂直抗力 $0$）：**  
    跳ね返りが収束した極限（$n \to \infty$）では、粒子は床の上に乗っているように見えますが、上向きのローレンツ力 $q V_0 B$ が重力 $mg$ と完璧にバランスしているため、床をまったく押しません（垂直抗力 $N = 0$）。
 :::

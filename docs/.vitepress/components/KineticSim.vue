@@ -150,11 +150,11 @@ useLoop(canvasRef, ({ ctx, width, height, dt }) => {
 })
 
 function drawBox(ctx, ox, oy, w, h, dt) {
-  const pad = 30
+  const pad = 38
   const bx = ox + pad
   const by = oy + pad
   const bw = w - pad * 1.5
-  const bh = h - pad * 2
+  const bh = h - pad * 2.1
 
   // 容器外枠
   ctx.fillStyle = '#0f172a'
@@ -163,7 +163,7 @@ function drawBox(ctx, ox, oy, w, h, dt) {
   ctx.lineWidth = 4
   ctx.strokeRect(bx, by, bw, bh)
 
-  text(ctx, '📦 気体容器（容積 V 一定）', bx + 12, by + 20, { align: 'left', color: '#94a3b8', font: 'bold 11px sans-serif' })
+  text(ctx, '📦 気体容器（容積 V 一定）', bx + bw / 2, by + bh + 34, { align: 'center', color: '#94a3b8', font: 'bold 11px sans-serif' })
 
   // 分子運動速度スケール (vRms に連動)
   const speedScale = (vRms.value / 500) * 0.35
@@ -185,18 +185,18 @@ function drawBox(ctx, ox, oy, w, h, dt) {
   })
 
   // 壁が受ける圧力 P の矢印（四方）
-  const arrLen = 22
+  const arrLen = 18
   arrow(ctx, bx + bw / 2, by, bx + bw / 2, by - arrLen, { color: '#ef4444', width: 2, head: 5 })
   arrow(ctx, bx + bw / 2, by + bh, bx + bw / 2, by + bh + arrLen, { color: '#ef4444', width: 2, head: 5 })
   arrow(ctx, bx, by + bh / 2, bx - arrLen, by + bh / 2, { color: '#ef4444', width: 2, head: 5 })
   arrow(ctx, bx + bw, by + bh / 2, bx + bw + arrLen, by + bh / 2, { color: '#ef4444', width: 2, head: 5 })
-  text(ctx, '壁への圧力 P', bx + bw / 2, by - arrLen - 6, { color: '#ef4444', font: 'bold 11px sans-serif' })
+  text(ctx, '壁への圧力 P', bx + bw / 2, by - arrLen - 5, { align: 'center', color: '#ef4444', font: 'bold 11px sans-serif' })
 }
 
 function drawMaxwellDistribution(ctx, ox, oy, w, h) {
   const padL = 45
   const padR = 25
-  const padT = 35
+  const padT = 50
   const padB = 40
   const gx = ox + padL
   const gy = oy + padT
@@ -204,13 +204,13 @@ function drawMaxwellDistribution(ctx, ox, oy, w, h) {
   const gh = h - padT - padB
 
   // タイトル
-  text(ctx, '📊 マクスウェル＝ボルツマン速度分布 f(v)', ox + 15, oy + 20, { align: 'left', color: '#f59e0b', font: 'bold 12px sans-serif' })
+  text(ctx, '📊 マクスウェル＝ボルツマン速度分布 f(v)', ox + 15, oy + 18, { align: 'left', color: '#f59e0b', font: 'bold 12px sans-serif' })
 
   // 軸
   line(ctx, gx, gy + gh, gx + gw, gy + gh, { color: '#64748b', width: 1.5 })
   line(ctx, gx, gy + gh, gx, gy, { color: '#64748b', width: 1.5 })
   text(ctx, '分子の速さ v [m/s] →', gx + gw - 10, gy + gh + 26, { align: 'right', color: '#94a3b8', font: '10px sans-serif' })
-  text(ctx, '↑ 存在確率 f(v)', gx - 6, gy - 10, { align: 'left', color: '#94a3b8', font: '10px sans-serif' })
+  text(ctx, '↑ 存在確率 f(v)', gx - 6, gy - 8, { align: 'left', color: '#94a3b8', font: '10px sans-serif' })
 
   // スケール: v 0〜2500 m/s
   const vMax = 2200

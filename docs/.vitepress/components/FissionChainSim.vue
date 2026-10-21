@@ -96,8 +96,9 @@ function updatePhysics() {
     }
 
     // 制御棒による吸収判定（上部から吊り下げられている制御棒）
-    // 制御棒は垂直バーとして配置
-    const rodAbsorbProb = rodRate * 0.08
+    const rodHeight = (controlRodDepth.value / 100) * (height - 60)
+    const nearRod = n.y < rodHeight && Math.abs(((n.x - 50) % 55 + 55) % 55) < 7
+    const rodAbsorbProb = nearRod ? 0.35 : rodRate * 0.008
     if (Math.random() < rodAbsorbProb) {
       s.neutrons.splice(i, 1)
       continue
@@ -156,23 +157,27 @@ function updatePhysics() {
     }
   }
 
-  // 原子核のフラッシュ減衰
+  // 原子核のフラッシュ減衰と燃料の緩やかな再生（連続観察用）
   for (const nuc of s.nuclei) {
     if (nuc.flash > 0) {
       nuc.flash -= 0.05
+    } else if (nuc.isFissioned && Math.random() < 0.004) {
+      nuc.isFissioned = false
     }
   }
 
-  // もし中性子が全滅したら、自動で1本補給（定常観察用）
-  if (s.neutrons.length === 0 && Math.random() < 0.04) {
-    const angle = (Math.random() - 0.5) * 0.8
-    s.neutrons.push({
-      x: 10,
-      y: height * 0.3 + Math.random() * height * 0.4,
-      vx: 3.0 * Math.cos(angle),
-      vy: 3.0 * Math.sin(angle),
-      life: 180
-    })
+  // もし中性子が全滅したら、自動で2本補給（定常観察用）
+  if (s.neutrons.length === 0) {
+    for (let j = 0; j < 2; j++) {
+      const angle = (Math.random() - 0.5) * 0.6
+      s.neutrons.push({
+        x: 15,
+        y: height * 0.25 + Math.random() * height * 0.5,
+        vx: 3.2 * Math.cos(angle),
+        vy: 3.2 * Math.sin(angle),
+        life: 180
+      })
+    }
   }
 
   // 中性子数が多すぎる場合の安全リミッター (ブラウザ負荷軽減)

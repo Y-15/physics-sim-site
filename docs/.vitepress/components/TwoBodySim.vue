@@ -207,15 +207,15 @@ const step = (dt) => {
     x2.value += v2.value * subDt
   }
 
-  // 画面外への極端な移動に対する周期的ラップ (実験室系)
-  if (xG.value > 8.0) {
-    const shift = 6.0
+  // 画面外への移動に対する周期的ラップ (実験室系)
+  if (xG.value > 4.2) {
+    const shift = 3.2
     x1.value -= shift
     x2.value -= shift
-  } else if (xG.value < -2.0) {
-    const shift = 6.0
-    x1.value -= shift
-    x2.value -= shift
+  } else if (xG.value < 0.2) {
+    const shift = 3.2
+    x1.value += shift
+    x2.value += shift
   }
 }
 

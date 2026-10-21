@@ -266,7 +266,7 @@ useLoop(canvasRef, ({ ctx, width, height, dt }) => {
       ctx.lineTo(hx - 8, floorP.py + 10)
       ctx.stroke()
     }
-    text(ctx, `床面 y = -R = -${rRadius.value.toFixed(2)}m`, 20, floorP.py - 8, '#f59e0b', 'bold 12px sans-serif')
+    text(ctx, `床面 y = -R = -${rRadius.value.toFixed(2)}m`, 20, floorP.py + 24, '#f59e0b', 'bold 12px sans-serif')
   }
 
   // 3. ドリフト慣性系 S' の円ガイド（破線円）
@@ -329,18 +329,19 @@ useLoop(canvasRef, ({ ctx, width, height, dt }) => {
 
 <style scoped>
 .sim-container {
-  background: var(--vp-c-bg-soft, #18181b);
-  border: 1px solid var(--vp-c-divider, rgba(255, 255, 255, 0.1));
+  background: #0f172a;
+  border: 1px solid #334155;
   border-radius: 12px;
   padding: 18px;
   margin: 24px 0;
+  color: #f8fafc;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
 }
 
 .sim-header h3 {
   margin: 0 0 6px 0;
   font-size: 1.15rem;
-  color: var(--vp-c-text-1, #f4f4f5);
+  color: #f8fafc;
 }
 
 .title-row {
@@ -351,7 +352,7 @@ useLoop(canvasRef, ({ ctx, width, height, dt }) => {
 
 .subtitle {
   font-size: 0.88rem;
-  color: var(--vp-c-text-2, #a1a1aa);
+  color: #94a3b8;
   line-height: 1.5;
   margin-bottom: 14px;
 }
@@ -392,7 +393,8 @@ canvas {
 }
 
 .control-panel {
-  background: rgba(0, 0, 0, 0.2);
+  background: #1e293b;
+  border: 1px solid #334155;
   border-radius: 8px;
   padding: 14px;
   margin-top: 14px;
@@ -409,7 +411,7 @@ canvas {
   flex-direction: column;
   gap: 6px;
   font-size: 0.84rem;
-  color: var(--vp-c-text-1, #e4e4e7);
+  color: #e2e8f0;
 }
 
 .control-group input[type='range'] {
@@ -428,7 +430,7 @@ canvas {
   border-radius: 6px;
   border: 1px solid rgba(255, 255, 255, 0.15);
   background: rgba(255, 255, 255, 0.05);
-  color: var(--vp-c-text-2, #a1a1aa);
+  color: #cbd5e1;
   cursor: pointer;
   transition: all 0.2s ease;
 }
@@ -465,13 +467,13 @@ canvas {
 }
 
 .btn-secondary {
-  background: rgba(255, 255, 255, 0.1);
-  color: #e4e4e7;
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: #334155;
+  color: #f8fafc;
+  border: 1px solid #475569;
 }
 
 .btn-secondary:hover:not(:disabled) {
-  background: rgba(255, 255, 255, 0.18);
+  background: #475569;
 }
 
 .btn-secondary:disabled {
@@ -487,8 +489,8 @@ canvas {
 }
 
 .stat-card {
-  background: rgba(0, 0, 0, 0.25);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: #1e293b;
+  border: 1px solid #334155;
   border-radius: 8px;
   padding: 10px 12px;
   display: flex;
@@ -497,14 +499,14 @@ canvas {
 
 .stat-card .label {
   font-size: 0.76rem;
-  color: var(--vp-c-text-2, #a1a1aa);
+  color: #94a3b8;
   margin-bottom: 4px;
 }
 
 .stat-card .value {
   font-size: 1.15rem;
   font-weight: bold;
-  color: var(--vp-c-text-1, #f4f4f5);
+  color: #f8fafc;
 }
 
 .stat-card .value.highlight {

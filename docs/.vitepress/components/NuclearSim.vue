@@ -47,9 +47,21 @@
 
     <!-- コントロール群 -->
     <div class="controls-panel">
+      <div class="control-row">
+        <div class="control-group">
+          <label class="control-label">
+            <span>アニメーション進行速度:</span>
+            <span class="control-val">{{ simSpeed.toFixed(1) }}x</span>
+          </label>
+          <input type="range" v-model.number="simSpeed" min="0.4" max="2.0" step="0.2" class="sim-slider" />
+        </div>
+      </div>
       <div class="btn-group">
         <button @click="triggerReaction" class="sim-btn primary">
-          💥 反応を開始（{{ mode === 'fission' ? '中性子照射' : '超高温衝突' }}）
+          💥 反応を再スタート（{{ mode === 'fission' ? '中性子照射' : '超高温衝突' }}）
+        </button>
+        <button @click="isReacting = !isReacting" class="sim-btn secondary">
+          {{ isReacting ? '⏸ 一時停止' : '▶ 再開' }}
         </button>
         <button @click="resetReaction" class="sim-btn secondary">🔄 リセット</button>
       </div>
@@ -70,7 +82,8 @@ import { ref, computed, onMounted, onUnmounted } from 'vue'
 const canvasRef = ref(null)
 const mode = ref('fission') // 'fission' | 'fusion'
 const animProgress = ref(0) // 0..1
-const isReacting = ref(false)
+const isReacting = ref(true)
+const simSpeed = ref(1.0)
 
 let animId = null
 let lastTime = 0
@@ -97,7 +110,7 @@ const currentReaction = computed(() => reactions[mode.value])
 
 function setMode(newMode) {
   mode.value = newMode
-  resetReaction()
+  triggerReaction()
 }
 
 function triggerReaction() {
@@ -262,13 +275,13 @@ function drawFusion(ctx, width, height, p) {
 
 function updateAndDraw(timestamp) {
   if (!lastTime) lastTime = timestamp
-  const dt = (timestamp - lastTime) / 1000
+  const dt = Math.min(0.05, (timestamp - lastTime) / 1000)
   lastTime = timestamp
 
   if (isReacting.value) {
-    animProgress.value += dt * 0.6
-    if (animProgress.value >= 1.0) {
-      animProgress.value = 1.0
+    animProgress.value += dt * 0.45 * simSpeed.value
+    if (animProgress.value >= 1.25) {
+      animProgress.value = 0
     }
   }
 
@@ -278,10 +291,11 @@ function updateAndDraw(timestamp) {
   ctx.fillStyle = '#0f172a'
   ctx.fillRect(0, 0, canvas.width, canvas.height)
 
+  const p = Math.min(1.0, animProgress.value)
   if (mode.value === 'fission') {
-    drawFission(ctx, canvas.width, canvas.height, animProgress.value)
+    drawFission(ctx, canvas.width, canvas.height, p)
   } else {
-    drawFusion(ctx, canvas.width, canvas.height, animProgress.value)
+    drawFusion(ctx, canvas.width, canvas.height, p)
   }
 
   animId = requestAnimationFrame(updateAndDraw)
@@ -298,11 +312,13 @@ onUnmounted(() => {
 
 <style scoped>
 .sim-container {
-  background: var(--vp-c-bg-soft);
-  border: 1px solid var(--vp-c-divider);
+  background: #0f172a;
+  border: 1px solid #1e293b;
   border-radius: 12px;
   padding: 18px;
   margin: 20px 0;
+  color: #f8fafc;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
 }
 
 .sim-header {
@@ -318,15 +334,16 @@ onUnmounted(() => {
   margin: 0;
   font-size: 1.15rem;
   font-weight: 700;
-  color: var(--vp-c-text-1);
+  color: #f8fafc;
 }
 
 .sim-tabs {
   display: flex;
   gap: 6px;
-  background: var(--vp-c-bg-mute);
+  background: #1e293b;
   padding: 4px;
   border-radius: 8px;
+  border: 1px solid #334155;
 }
 
 .tab-btn {
@@ -336,7 +353,7 @@ onUnmounted(() => {
   border-radius: 6px;
   border: none;
   background: transparent;
-  color: var(--vp-c-text-2);
+  color: #94a3b8;
   cursor: pointer;
   transition: all 0.2s ease;
 }
@@ -351,6 +368,7 @@ onUnmounted(() => {
   overflow-x: auto;
   border-radius: 8px;
   background: #0f172a;
+  border: 1px solid #334155;
 }
 
 .sim-canvas {
@@ -369,34 +387,34 @@ onUnmounted(() => {
 }
 
 .stat-card {
-  background: var(--vp-c-bg-mute);
+  background: #1e293b;
   padding: 10px;
   border-radius: 8px;
-  border: 1px solid var(--vp-c-divider);
+  border: 1px solid #334155;
   text-align: center;
 }
 
 .stat-card.highlight {
-  background: rgba(56, 189, 248, 0.08);
-  border-color: rgba(56, 189, 248, 0.4);
+  background: rgba(56, 189, 248, 0.12);
+  border-color: rgba(56, 189, 248, 0.45);
 }
 
 .stat-label {
   font-size: 0.75rem;
-  color: var(--vp-c-text-2);
+  color: #94a3b8;
   margin-bottom: 4px;
 }
 
 .stat-value {
   font-size: 1.1rem;
   font-weight: 700;
-  color: var(--vp-c-text-1);
+  color: #f8fafc;
 }
 
 .stat-unit {
   font-size: 0.8rem;
   font-weight: normal;
-  color: var(--vp-c-text-2);
+  color: #94a3b8;
 }
 
 .text-blue { color: #38bdf8; }
@@ -406,9 +424,39 @@ onUnmounted(() => {
 
 .controls-panel {
   margin-top: 16px;
-  background: var(--vp-c-bg-mute);
+  background: #1e293b;
+  border: 1px solid #334155;
   padding: 14px;
   border-radius: 8px;
+}
+
+.control-row {
+  margin-bottom: 12px;
+}
+
+.control-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.control-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #e2e8f0;
+}
+
+.control-val {
+  color: #38bdf8;
+  font-family: monospace;
+}
+
+.sim-slider {
+  width: 100%;
+  accent-color: #38bdf8;
+  cursor: pointer;
 }
 
 .btn-group {
@@ -448,8 +496,8 @@ onUnmounted(() => {
   margin-top: 12px;
   font-size: 0.85rem;
   line-height: 1.5;
-  color: var(--vp-c-text-2);
-  background: rgba(30, 41, 59, 0.4);
+  color: #cbd5e1;
+  background: #1e293b;
   padding: 10px 14px;
   border-radius: 6px;
   border-left: 3px solid #38bdf8;

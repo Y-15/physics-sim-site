@@ -125,7 +125,8 @@ const heatInputJ = ref(800)
 const R = 8.31 // 気体定数 J/(mol*K)
 
 const initialTemp = 300.0 // K
-const tempK = ref(300.0)
+const heatProgress = ref(1.0)
+let isHeatingAnim = false
 
 // モル比熱係数
 const Cv_factor = computed(() => {
@@ -155,6 +156,8 @@ const deltaT = computed(() => {
   return heatInputJ.value / (mol.value * C_effective)
 })
 
+const tempK = computed(() => initialTemp + deltaT.value * heatProgress.value)
+
 const deltaU = computed(() => {
   return mol.value * (Cv_factor.value * R) * deltaT.value
 })
@@ -168,11 +171,13 @@ const deltaUPercent = computed(() => (deltaU.value / heatInputJ.value) * 100)
 const workPercent = computed(() => (workOut.value / heatInputJ.value) * 100)
 
 const applyHeat = () => {
-  tempK.value = initialTemp + deltaT.value
+  heatProgress.value = 0
+  isHeatingAnim = true
 }
 
 const resetSim = () => {
-  tempK.value = initialTemp
+  heatProgress.value = 0
+  isHeatingAnim = false
 }
 
 // 分子描画パーティクル
@@ -389,6 +394,10 @@ const draw = () => {
 
 const animate = () => {
   flameTime += 0.05
+  if (isHeatingAnim && heatProgress.value < 1.0) {
+    heatProgress.value = Math.min(1.0, heatProgress.value + 0.025)
+    if (heatProgress.value >= 1.0) isHeatingAnim = false
+  }
   draw()
   animId = requestAnimationFrame(animate)
 }

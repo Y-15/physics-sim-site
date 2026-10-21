@@ -10,7 +10,7 @@ description: 高校物理・大学入試最頻出「自己誘導とRL回路の�
 
 自分自身の電流変化によって自分自身に誘導起電力を生じさせるこの現象を「**自己誘導（Self-induction）**」と呼びます。
 
-コイルは、力学における「**質量（慣性） **」と全く同じ役割を果たし、「** 電流が急に増えるのも、急に減るのも許さない**」という強い電流の慣性を生み出します。
+コイルは、力学における「**質量（慣性）**」と全く同じ役割を果たし、「**電流が急に増えるのも、急に減るのも許さない**」という強い電流の慣性を生み出します。
 
 <ClientOnly>
   <SelfInductionSim />
@@ -26,8 +26,8 @@ $$
 V_L = -L \frac{\Delta I}{\Delta t} \quad \left( = -L \frac{dI}{dt} \right)
 $$
 
-- **$L$ **:** 自己インダクタンス（Self-inductance） **。単位は** ヘンリー [H]**。
-- **負の符号（$-$） **:** レンツの法則**を表し、電流の変化を妨げる向き（逆起電力）に生じることを意味します。
+- **$L$**: **自己インダクタンス（Self-inductance）**。単位は **ヘンリー [H]**。
+- **負の符号（$-$）**: **レンツの法則**を表し、電流の変化を妨げる向き（逆起電力）に生じることを意味します。
 
 ### ソレノイドコイルの自己インダクタンスの公式
 断面積 $S$ [$\text{m}^2$]、長さ $l$ [m]、総巻き数 $N$、芯の透磁率 $\mu$ のソレノイドの場合：
@@ -132,7 +132,6 @@ $$
     <circle cx="260" cy="40" r="3.5" fill="#38bdf8" />
     <text x="240" y="18" fill="#38bdf8" font-size="12" font-weight="bold" text-anchor="middle">スイッチ S</text>
     <path d="M 260 40 L 380 40 L 380 70" stroke="#94a3b8" stroke-width="2.5" fill="none" />
-
     <!-- 左側: 直流電源 E -->
     <line x1="120" y1="40" x2="120" y2="85" stroke="#94a3b8" stroke-width="2.5" />
     <!-- 電源記号 (長線+, 短線-) -->
@@ -142,25 +141,21 @@ $$
     <text x="90" y="103" fill="#94a3b8" font-size="12" font-weight="bold">-</text>
     <text x="75" y="93" fill="#38bdf8" font-size="14" font-weight="bold">E</text>
     <line x1="120" y1="95" x2="120" y2="190" stroke="#94a3b8" stroke-width="2.5" />
-
     <!-- ノード点 -->
     <circle cx="120" cy="135" r="4.5" fill="#e2e8f0" />
     <circle cx="380" cy="135" r="4.5" fill="#e2e8f0" />
     <circle cx="380" cy="70" r="4" fill="#e2e8f0" />
-
     <!-- 右上枝: 抵抗 R1 -->
     <line x1="380" y1="40" x2="380" y2="65" stroke="#94a3b8" stroke-width="2.5" />
     <rect x="368" y="65" width="24" height="45" rx="3" fill="rgba(251, 191, 36, 0.15)" stroke="#fbbf24" stroke-width="2" />
     <text x="408" y="92" fill="#fbbf24" font-size="13" font-weight="bold">R₁ (4.0 Ω)</text>
     <line x1="380" y1="110" x2="380" y2="135" stroke="#94a3b8" stroke-width="2.5" />
-
     <!-- 中央枝: コイル L -->
     <line x1="120" y1="135" x2="200" y2="135" stroke="#94a3b8" stroke-width="2.5" />
     <!-- インダクタ記号 (4連半円) -->
     <path d="M 200 135 A 12 12 0 0 1 224 135 A 12 12 0 0 1 248 135 A 12 12 0 0 1 272 135 A 12 12 0 0 1 296 135" stroke="#a78bfa" stroke-width="2.5" fill="none" />
     <text x="248" y="115" fill="#a78bfa" font-size="13" font-weight="bold" text-anchor="middle">コイル L (2.0 H)</text>
     <line x1="296" y1="135" x2="380" y2="135" stroke="#94a3b8" stroke-width="2.5" />
-
     <!-- 下部枝: 抵抗 R2 -->
     <line x1="120" y1="135" x2="120" y2="190" stroke="#94a3b8" stroke-width="2.5" />
     <line x1="120" y1="190" x2="225" y2="190" stroke="#94a3b8" stroke-width="2.5" />

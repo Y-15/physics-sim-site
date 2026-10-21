@@ -150,8 +150,8 @@ const resistance = ref(2.0) // Ω
 const rodMass = ref(0.2) // kg
 const rodLength = 0.5 // m (固定レール幅)
 
-const running = ref(false)
-const rodPos = ref(0.1) // m (レール上の位置 0〜1.2m)
+const running = ref(true)
+const rodPos = ref(0.05) // m (レール上の位置 0〜1.2m)
 const curSpeed = ref(0) // m/s
 
 function reset() {
@@ -224,9 +224,9 @@ useLoop(canvasRef, ({ ctx, width, height, dt }) => {
       if (curSpeed.value < 0) curSpeed.value = 0
       rodPos.value += curSpeed.value * safeDt * 0.4 // スケール調整
 
-      if (rodPos.value > 1.1) {
-        rodPos.value = 1.1
-        running.value = false
+      if (rodPos.value > 1.05) {
+        rodPos.value = 0.05
+        curSpeed.value = 0
       }
     }
     drawRailSystem(ctx, width, height)
@@ -274,7 +274,7 @@ function drawRailSystem(ctx, w, h) {
       line(ctx, x - 3.5, y + 3.5, x + 3.5, y - 3.5, { color: 'rgba(56, 189, 248, 0.35)', width: 1 })
     }
   }
-  text(ctx, `一様磁場 B = ${bField.value.toFixed(2)} T (⊗ 画面奥向き)`, padL + railW / 2, topY - 38, { color: '#38bdf8', font: 'bold 11px sans-serif' })
+  text(ctx, `一様磁場 B = ${bField.value.toFixed(2)} T (⊗ 画面奥向き)`, padL + railW / 2, topY - 38, { align: 'center', color: '#38bdf8', font: 'bold 11px sans-serif' })
 
   // 2. 導電レール (上下2本)
   ctx.strokeStyle = '#cbd5e1'
@@ -296,6 +296,7 @@ function drawRailSystem(ctx, w, h) {
 
   // 4. 移動する導線棒
   const rodX = padL + 30 + rodPos.value * pxPerM
+  const nearRight = rodX > w - 190
   ctx.fillStyle = '#38bdf8'
   ctx.strokeStyle = '#fff'
   ctx.lineWidth = 2
@@ -305,7 +306,7 @@ function drawRailSystem(ctx, w, h) {
   // 導線棒の起電力矢印（下から上向き）
   if (curEmf.value > 0.05) {
     arrow(ctx, rodX, botY - 15, rodX, topY + 15, { color: '#f59e0b', width: 3, head: 7 })
-    text(ctx, `起電力 V = ${curEmf.value.toFixed(2)}V ↑`, rodX + 10, (topY + botY) / 2 - 12, { align: 'left', color: '#f59e0b', font: 'bold 11px sans-serif' })
+    text(ctx, `起電力 V = ${curEmf.value.toFixed(2)}V ↑`, nearRight ? rodX - 10 : rodX + 10, (topY + botY) / 2 - 12, { align: nearRight ? 'right' : 'left', color: '#f59e0b', font: 'bold 11px sans-serif' })
   }
 
   // 電流の周回矢印（反時計回り）
@@ -314,25 +315,27 @@ function drawRailSystem(ctx, w, h) {
     arrow(ctx, (padL + rodX) / 2 + 20, topY, (padL + rodX) / 2 - 20, topY, { color: '#10b981', width: 2, head: 5 })
     // 下レール（右向き）
     arrow(ctx, (padL + rodX) / 2 - 20, botY, (padL + rodX) / 2 + 20, botY, { color: '#10b981', width: 2, head: 5 })
-    text(ctx, `誘導電流 I = ${curCurrent.value.toFixed(2)}A`, (padL + rodX) / 2, botY + 22, { color: '#10b981', font: 'bold 11px sans-serif' })
+    text(ctx, `誘導電流 I = ${curCurrent.value.toFixed(2)}A`, (padL + rodX) / 2, botY + 22, { align: 'center', color: '#10b981', font: 'bold 11px sans-serif' })
   }
 
   // 力の矢印
   // 外力 F_ext (右向き)
   if (extForce.value > 0) {
-    arrow(ctx, rodX + 6, (topY + botY) / 2 + 15, rodX + 6 + extForce.value * 30, (topY + botY) / 2 + 15, { color: '#38bdf8', width: 3, head: 7 })
-    text(ctx, `F_ext = ${extForce.value.toFixed(2)}N →`, rodX + 16 + extForce.value * 30, (topY + botY) / 2 + 19, { align: 'left', color: '#38bdf8', font: 'bold 11px sans-serif' })
+    const fExtEnd = Math.min(w - 14, rodX + 6 + extForce.value * 30)
+    arrow(ctx, rodX + 6, (topY + botY) / 2 + 15, fExtEnd, (topY + botY) / 2 + 15, { color: '#38bdf8', width: 3, head: 7 })
+    text(ctx, `F_ext = ${extForce.value.toFixed(2)}N →`, Math.min(w - 12, fExtEnd + 8), (topY + botY) / 2 + 34, { align: nearRight ? 'right' : 'left', color: '#38bdf8', font: 'bold 11px sans-serif' })
   }
 
   // 電磁気力 F_mag (左向きブレーキ)
   if (curMagForce.value > 0.02) {
     const fLen = Math.min(80, curMagForce.value * 30)
     arrow(ctx, rodX - 6, (topY + botY) / 2 + 15, rodX - 6 - fLen, (topY + botY) / 2 + 15, { color: '#ec4899', width: 2.5, head: 7 })
-    text(ctx, `← F_mag = ${curMagForce.value.toFixed(2)}N`, rodX - 16 - fLen, (topY + botY) / 2 + 19, { align: 'right', color: '#ec4899', font: 'bold 11px sans-serif' })
+    const magTextX = Math.max(padL + 16, rodX - 10 - fLen / 2)
+    text(ctx, `← F_mag = ${curMagForce.value.toFixed(2)}N`, magTextX, (topY + botY) / 2 + 34, { align: 'center', color: '#ec4899', font: 'bold 11px sans-serif' })
   }
 
   // 速度表示
-  text(ctx, `速さ v = ${curSpeed.value.toFixed(2)} m/s`, rodX, topY - 20, { color: '#10b981', font: 'bold 12px sans-serif' })
+  text(ctx, `速さ v = ${curSpeed.value.toFixed(2)} m/s`, Math.min(w - 75, Math.max(75, rodX)), topY - 18, { align: 'center', color: '#10b981', font: 'bold 12px sans-serif' })
 }
 
 function drawMagnetCoilSystem(ctx, w, h) {

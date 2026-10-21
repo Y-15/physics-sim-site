@@ -285,7 +285,10 @@ function updatePhysics(dt) {
   const state = currentState.value
 
   if (state === 'stable') {
-    // 安定静止
+    // 実験再生中に静止状態なら外力 F を徐々に増加させて限界突破を実演
+    if (isPlaying.value) {
+      F.value = Math.min(60, Number((F.value + 6.0 * scaledDt).toFixed(1)))
+    }
     simX.value = 0
     simAngle.value = 0
     return
@@ -478,7 +481,7 @@ function render() {
   if (angle > 0 || currentState.value === 'toppled') {
     ctx.fillStyle = '#fca5a5'
     ctx.font = 'bold 11px sans-serif'
-    ctx.fillText('支点 P', pivotX + 6, pivotY + 16)
+    ctx.fillText('支点 P', pivotX + 6, angle === 0 ? pivotY + 32 : pivotY + 16)
   }
 
   // 重心 G の描画（ワールド座標）
@@ -564,13 +567,14 @@ function render() {
     ctx.font = 'bold 12px sans-serif'
     ctx.fillText(`垂直抗力 N = ${weight.value.toFixed(1)} N`, nx + 8, floorY - 50)
 
-    // 作用点マーカー
+    // 作用点マーカー（右側へ配置して摩擦力ラベルとの重なりを防止）
     ctx.fillStyle = '#10b981'
     ctx.beginPath()
     ctx.arc(nx, floorY, 4, 0, Math.PI * 2)
     ctx.fill()
-    ctx.font = '10px sans-serif'
-    ctx.fillText('作用点', nx - 12, floorY + 16)
+    ctx.font = 'bold 10px sans-serif'
+    ctx.textAlign = 'left'
+    ctx.fillText(`作用点 (+${shiftClamped.toFixed(1)}cm)`, nx + 6, floorY + 18)
 
     // 摩擦力 f ベクトル (底面、左向き)
     const frictionLen = Math.min(60, Math.max(15, (F.value / 60) * 80))
@@ -582,8 +586,10 @@ function render() {
     ctx.stroke()
     drawArrowHead(ctx, bx + bw / 2 - frictionLen, floorY, Math.PI, '#fbbf24')
     ctx.fillStyle = '#fbbf24'
-    ctx.font = '11px sans-serif'
-    ctx.fillText(isSliding ? '動摩擦力 μ_k N' : '静止摩擦力 f', bx + bw / 2 - frictionLen - 10, floorY + 18)
+    ctx.font = 'bold 11px sans-serif'
+    ctx.textAlign = 'right'
+    ctx.fillText(isSliding ? '動摩擦力 μ_k N' : '静止摩擦力 f', bx + bw / 2 - 4, floorY + 18)
+    ctx.textAlign = 'left'
   }
 
   // 床に倒れ込んだ後 (angle >= Math.PI / 2 - 0.02)
@@ -662,8 +668,9 @@ watch([F, forceHeight, mu_s, width_w], () => {
 
 <style scoped>
 .sim-container {
-  background: var(--vp-c-bg-soft);
-  border: 1px solid var(--vp-c-divider);
+  background: #0f172a;
+  color: #f8fafc;
+  border: 1px solid #334155;
   border-radius: 12px;
   padding: 16px;
   margin: 18px 0;
@@ -682,7 +689,7 @@ watch([F, forceHeight, mu_s, width_w], () => {
   font-size: 1.1rem;
   font-weight: 700;
   margin: 0;
-  color: var(--vp-c-text-1);
+  color: #f8fafc;
 }
 
 .sim-badges {
@@ -741,34 +748,34 @@ watch([F, forceHeight, mu_s, width_w], () => {
 }
 
 .stat-card {
-  background: var(--vp-c-bg-alt);
-  border: 1px solid var(--vp-c-divider);
+  background: #1e293b;
+  border: 1px solid #334155;
   border-radius: 8px;
   padding: 8px 12px;
   text-align: center;
 }
 
 .stat-card.highlight {
-  background: rgba(56, 189, 248, 0.08);
-  border-color: rgba(56, 189, 248, 0.4);
+  background: rgba(56, 189, 248, 0.12);
+  border-color: rgba(56, 189, 248, 0.45);
 }
 
 .stat-label {
   font-size: 0.75rem;
-  color: var(--vp-c-text-2);
+  color: #cbd5e1;
   margin-bottom: 4px;
 }
 
 .stat-value {
   font-size: 1.1rem;
   font-weight: 700;
-  color: var(--vp-c-text-1);
+  color: #f8fafc;
 }
 
 .stat-unit {
   font-size: 0.8rem;
   font-weight: normal;
-  color: var(--vp-c-text-2);
+  color: #94a3b8;
 }
 
 .text-blue { color: #38bdf8; }
@@ -778,7 +785,8 @@ watch([F, forceHeight, mu_s, width_w], () => {
 
 .controls-panel {
   margin-top: 16px;
-  background: var(--vp-c-bg-mute);
+  background: #1e293b;
+  border: 1px solid #334155;
   padding: 14px;
   border-radius: 8px;
 }
@@ -801,7 +809,7 @@ watch([F, forceHeight, mu_s, width_w], () => {
   justify-content: space-between;
   font-size: 0.85rem;
   font-weight: 600;
-  color: var(--vp-c-text-1);
+  color: #e2e8f0;
 }
 
 .control-val {
@@ -841,12 +849,12 @@ watch([F, forceHeight, mu_s, width_w], () => {
 }
 
 .sim-btn.outline {
-  background: transparent;
-  color: var(--vp-c-text-1);
-  border: 1px solid var(--vp-c-divider);
+  background: rgba(15, 23, 42, 0.6);
+  color: #e2e8f0;
+  border: 1px solid #475569;
 }
 .sim-btn.outline:hover {
-  background: var(--vp-c-bg-soft);
+  background: rgba(56, 189, 248, 0.15);
   border-color: #38bdf8;
   color: #38bdf8;
 }
@@ -855,8 +863,8 @@ watch([F, forceHeight, mu_s, width_w], () => {
   margin-top: 12px;
   font-size: 0.85rem;
   line-height: 1.5;
-  color: var(--vp-c-text-2);
-  background: rgba(30, 41, 59, 0.4);
+  color: #cbd5e1;
+  background: rgba(30, 41, 59, 0.7);
   padding: 10px 14px;
   border-radius: 6px;
   border-left: 3px solid #38bdf8;

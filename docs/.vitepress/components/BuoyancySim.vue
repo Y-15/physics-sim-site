@@ -7,6 +7,19 @@
       </div>
     </div>
 
+    <!-- 再生コントロールバー -->
+    <div class="playback-bar">
+      <button class="sim-btn primary" @click="togglePlay">
+        {{ isPlaying ? '⏸ 一時停止' : '▶ 手を離して浮沈アニメーション' }}
+      </button>
+      <button class="sim-btn secondary" @click="dropFromSurface">
+        🔄 水面付近から再ドロップ
+      </button>
+      <button class="sim-btn secondary" @click="autoBalance">
+        ⚖️ つり合い深さへ即移動
+      </button>
+    </div>
+
     <!-- メインCanvas -->
     <div class="canvas-wrap">
       <canvas ref="canvasRef" width="700" height="380" class="sim-canvas"></canvas>
@@ -86,7 +99,7 @@
 </template>
 
 <script setup>
-import { ref, computed, watch, onMounted } from 'vue'
+import { ref, computed, watch, onMounted, onUnmounted } from 'vue'
 
 const canvasRef = ref(null)
 
@@ -100,6 +113,27 @@ const depthTop = ref(5.0) // 上面の水深 [cm] (0が水面、負なら水面�
 const objectDensity = ref(0.7) // g/cm^3
 const fluidDensity = ref(1.0) // g/cm^3 (水)
 const g = 9.8 // m/s^2
+
+const isPlaying = ref(true)
+let velY = 0 // 鉛直速度 (下向き正 [cm/s])
+let waveTime = 0
+let animId = null
+let lastTime = 0
+
+function togglePlay() {
+  isPlaying.value = !isPlaying.value
+  if (isPlaying.value && Math.abs(netForce.value) < 0.05 && Math.abs(velY) < 0.5) {
+    // つり合い状態で再生ボタンを押した場合は少し押し込んで単振動減衰を実演
+    depthTop.value = Math.min(20, depthTop.value + 5.0)
+    velY = 0
+  }
+}
+
+function dropFromSurface() {
+  depthTop.value = 4.0
+  velY = 0
+  isPlaying.value = true
+}
 
 // 浸水深さ [cm]
 const submergedDepth = computed(() => {
@@ -149,28 +183,33 @@ const stateBadgeClass = computed(() => {
 })
 
 function setPreset(type) {
+  velY = 0
   if (type === 'wood') {
     objectDensity.value = 0.6
     fluidDensity.value = 1.0
-    autoBalance()
+    depthTop.value = 4.0
+    isPlaying.value = true
   } else if (type === 'water') {
     objectDensity.value = 1.0
     fluidDensity.value = 1.0
-    depthTop.value = 5.0
+    depthTop.value = 6.0
+    isPlaying.value = true
   } else if (type === 'iron') {
     objectDensity.value = 1.8
     fluidDensity.value = 1.0
-    depthTop.value = 15.0
+    depthTop.value = 0.0
+    isPlaying.value = true
   }
 }
 
 function autoBalance() {
+  velY = 0
   // つり合い浸水深さ: h_sub = (rho / rho0) * blockHeight
   if (objectDensity.value >= fluidDensity.value) {
-    depthTop.value = 15.0 // 底に沈む
+    depthTop.value = 18.0 // 底に沈む
   } else {
     const h_sub = (objectDensity.value / fluidDensity.value) * blockHeight
-    depthTop.value = -(blockHeight - h_sub)
+    depthTop.value = Number((-(blockHeight - h_sub)).toFixed(1))
   }
 }
 
@@ -195,12 +234,15 @@ function render() {
   ctx.fillStyle = 'rgba(14, 116, 144, 0.3)'
   ctx.fillRect(tankX, waterSurfaceY, tankW, tankH - (waterSurfaceY - tankY))
 
-  // 水面波線
+  // 水面波線（リップルアニメーション付き）
   ctx.strokeStyle = '#38bdf8'
   ctx.lineWidth = 2.5
   ctx.beginPath()
-  ctx.moveTo(tankX, waterSurfaceY)
-  ctx.lineTo(tankX + tankW, waterSurfaceY)
+  for (let wx = tankX; wx <= tankX + tankW; wx += 8) {
+    const wy = waterSurfaceY + Math.sin(wx * 0.04 + waveTime * 3.5) * 1.8
+    if (wx === tankX) ctx.moveTo(wx, wy)
+    else ctx.lineTo(wx, wy)
+  }
   ctx.stroke()
 
   ctx.fillStyle = '#38bdf8'
@@ -330,19 +372,60 @@ function render() {
   }
 }
 
+function stepPhysics(dt) {
+  waveTime += dt
+  if (!isPlaying.value) return
+
+  const massKg = (objectDensity.value * blockTotalVol) / 1000
+  // 下向き正の加速度: (W - F_B - c*v) / m
+  const damping = 3.2
+  const fDown = -netForce.value - damping * (velY * 0.1)
+  const accCm = (fDown / Math.max(0.1, massKg)) * 18 // 表示スケール加速度 [cm/s^2]
+
+  velY += accCm * dt
+  let nextDepth = depthTop.value + velY * dt
+
+  // 水槽底（depthTop = 22cm）および上端（-8cm）での制限
+  if (nextDepth > 22.0) {
+    nextDepth = 22.0
+    velY = -velY * 0.2
+    if (Math.abs(velY) < 0.5) velY = 0
+  } else if (nextDepth < -8.0) {
+    nextDepth = -8.0
+    velY = 0
+  }
+
+  depthTop.value = Number(nextDepth.toFixed(2))
+}
+
+function animate(ts) {
+  if (!lastTime) lastTime = ts
+  const dt = Math.min(0.05, (ts - lastTime) / 1000)
+  lastTime = ts
+  stepPhysics(dt)
+  render()
+  animId = requestAnimationFrame(animate)
+}
+
 watch([depthTop, objectDensity, fluidDensity], () => {
   render()
 })
 
 onMounted(() => {
   render()
+  animId = requestAnimationFrame(animate)
+})
+
+onUnmounted(() => {
+  if (animId) cancelAnimationFrame(animId)
 })
 </script>
 
 <style scoped>
 .sim-container {
-  background: var(--vp-c-bg-soft);
-  border: 1px solid var(--vp-c-divider);
+  background: #0f172a;
+  color: #f8fafc;
+  border: 1px solid #334155;
   border-radius: 12px;
   padding: 18px;
   margin: 20px 0;
@@ -361,7 +444,7 @@ onMounted(() => {
   margin: 0;
   font-size: 1.15rem;
   font-weight: 700;
-  color: var(--vp-c-text-1);
+  color: #f8fafc;
 }
 
 .sim-badges {
@@ -417,34 +500,34 @@ onMounted(() => {
 }
 
 .stat-card {
-  background: var(--vp-c-bg-mute);
+  background: #1e293b;
   padding: 10px;
   border-radius: 8px;
-  border: 1px solid var(--vp-c-divider);
+  border: 1px solid #334155;
   text-align: center;
 }
 
 .stat-card.highlight {
-  background: rgba(56, 189, 248, 0.08);
-  border-color: rgba(56, 189, 248, 0.4);
+  background: rgba(56, 189, 248, 0.12);
+  border-color: rgba(56, 189, 248, 0.45);
 }
 
 .stat-label {
   font-size: 0.75rem;
-  color: var(--vp-c-text-2);
+  color: #cbd5e1;
   margin-bottom: 4px;
 }
 
 .stat-value {
   font-size: 1.1rem;
   font-weight: 700;
-  color: var(--vp-c-text-1);
+  color: #f8fafc;
 }
 
 .stat-unit {
   font-size: 0.8rem;
   font-weight: normal;
-  color: var(--vp-c-text-2);
+  color: #94a3b8;
 }
 
 .text-blue { color: #38bdf8; }
@@ -454,7 +537,8 @@ onMounted(() => {
 
 .controls-panel {
   margin-top: 16px;
-  background: var(--vp-c-bg-mute);
+  background: #1e293b;
+  border: 1px solid #334155;
   padding: 14px;
   border-radius: 8px;
 }
@@ -477,7 +561,7 @@ onMounted(() => {
   justify-content: space-between;
   font-size: 0.85rem;
   font-weight: 600;
-  color: var(--vp-c-text-1);
+  color: #e2e8f0;
 }
 
 .control-val {
@@ -507,6 +591,15 @@ onMounted(() => {
   transition: all 0.2s ease;
 }
 
+.sim-btn.primary {
+  background: #0284c7;
+  color: #ffffff;
+  border: none;
+}
+.sim-btn.primary:hover {
+  background: #0369a1;
+}
+
 .sim-btn.secondary {
   background: #334155;
   color: #f8fafc;
@@ -517,12 +610,12 @@ onMounted(() => {
 }
 
 .sim-btn.outline {
-  background: transparent;
-  color: var(--vp-c-text-1);
-  border: 1px solid var(--vp-c-divider);
+  background: rgba(15, 23, 42, 0.6);
+  color: #e2e8f0;
+  border: 1px solid #475569;
 }
 .sim-btn.outline:hover {
-  background: var(--vp-c-bg-soft);
+  background: rgba(56, 189, 248, 0.15);
   border-color: #38bdf8;
   color: #38bdf8;
 }
@@ -531,8 +624,8 @@ onMounted(() => {
   margin-top: 12px;
   font-size: 0.85rem;
   line-height: 1.5;
-  color: var(--vp-c-text-2);
-  background: rgba(30, 41, 59, 0.4);
+  color: #cbd5e1;
+  background: rgba(30, 41, 59, 0.7);
   padding: 10px 14px;
   border-radius: 6px;
   border-left: 3px solid #38bdf8;

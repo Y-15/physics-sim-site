@@ -70,7 +70,6 @@ $$
         <path d="M 0 1 L 10 5 L 0 9 z" fill="#ef4444" />
       </marker>
     </defs>
-
     <!-- 左側: 円軌道上の2点 -->
     <path d="M 160 170 A 90 90 0 0 0 160 30" fill="none" stroke="#475569" stroke-width="2" stroke-dasharray="4,4" />
     <circle cx="160" cy="100" r="4" fill="#64748b" />
@@ -78,17 +77,14 @@ $$
     <line x1="160" y1="100" x2="100" y2="100" stroke="#64748b" stroke-width="1.5" />
     <line x1="160" y1="100" x2="115" y2="60" stroke="#64748b" stroke-width="1.5" />
     <text x="135" y="85" fill="#fbbf24" font-size="11">Δθ</text>
-
     <!-- 位置1における速度 v(t) -->
     <circle cx="100" cy="100" r="5" fill="#38bdf8" />
     <line x1="100" y1="100" x2="100" y2="40" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#circ-arrow-blue)" />
     <text x="75" y="65" fill="#38bdf8" font-size="12" font-weight="bold">v(t)</text>
-
     <!-- 位置2における速度 v(t+Δt) -->
     <circle cx="115" cy="60" r="5" fill="#38bdf8" />
     <line x1="115" y1="60" x2="65" y2="25" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#circ-arrow-blue)" />
     <text x="60" y="15" fill="#38bdf8" font-size="12" font-weight="bold">v(t+Δt)</text>
-
     <!-- 右側: 始点をそろえた速度ベクトル三角形 -->
     <g transform="translate(340, 110)">
       <!-- 始点 -->

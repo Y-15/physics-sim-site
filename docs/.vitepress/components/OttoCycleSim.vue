@@ -284,9 +284,9 @@ function draw() {
 
   // ---------- 右側: P-V 線図 ----------
   const pvX = 350
-  const pvY = 50
+  const pvY = 64
   const pvW = 330
-  const pvH = 220
+  const pvH = 215
 
   ctx.fillStyle = '#0f172a'
   ctx.fillRect(pvX, pvY, pvW, pvH)
@@ -298,18 +298,21 @@ function draw() {
   ctx.strokeStyle = '#94a3b8'
   ctx.lineWidth = 1.5
   ctx.beginPath()
-  ctx.moveTo(pvX + 30, pvY + 15); ctx.lineTo(pvX + 30, pvY + pvH - 25)
+  ctx.moveTo(pvX + 30, pvY + 18); ctx.lineTo(pvX + 30, pvY + pvH - 25)
   ctx.lineTo(pvX + pvW - 15, pvY + pvH - 25)
   ctx.stroke()
 
   ctx.fillStyle = '#94a3b8'
   ctx.font = 'bold 11px sans-serif'
-  ctx.fillText('圧力 P', pvX + 30, pvY + 10)
-  ctx.fillText('体積 V →', pvX + pvW - 35, pvY + pvH - 10)
+  ctx.textAlign = 'left'
+  ctx.fillText('↑ 圧力 P', pvX + 10, pvY + 14)
+  ctx.textAlign = 'right'
+  ctx.fillText('体積 V →', pvX + pvW - 12, pvY + pvH - 8)
+  ctx.textAlign = 'left'
 
   // P-V 座標点
   // 状態1 (V1, P1): 右下
-  const v1X = pvX + pvW - 55
+  const v1X = pvX + pvW - 72
   const v2X = pvX + 75 // 圧縮後 V2
   const p1Y = pvY + pvH - 45
 
@@ -441,18 +444,19 @@ onUnmounted(() => {
 
 <style scoped>
 .sim-container {
-  background: var(--vp-c-bg-soft, #18181b);
-  border: 1px solid var(--vp-c-divider, rgba(255, 255, 255, 0.1));
+  background: #0f172a;
+  border: 1px solid #334155;
   border-radius: 12px;
   padding: 18px;
   margin: 24px 0;
+  color: #f8fafc;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
 }
 
 .sim-header h3 {
   margin: 0 0 6px 0;
   font-size: 1.15rem;
-  color: var(--vp-c-text-1, #f4f4f5);
+  color: #38bdf8;
 }
 
 .title-row {
@@ -463,7 +467,7 @@ onUnmounted(() => {
 
 .subtitle {
   font-size: 0.88rem;
-  color: var(--vp-c-text-2, #a1a1aa);
+  color: #cbd5e1;
   line-height: 1.5;
   margin-bottom: 14px;
 }
@@ -473,7 +477,7 @@ onUnmounted(() => {
   width: 100%;
   border-radius: 8px;
   overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid #334155;
 }
 
 canvas {
@@ -485,29 +489,29 @@ canvas {
 
 .stroke-badge {
   position: absolute;
-  top: 14px;
+  top: 10px;
   right: 14px;
-  padding: 6px 14px;
+  padding: 5px 14px;
   border-radius: 9999px;
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   backdrop-filter: blur(8px);
 }
 
 .stroke-badge.normal {
-  background: rgba(56, 189, 248, 0.2);
+  background: rgba(15, 23, 42, 0.85);
   border: 1px solid #38bdf8;
   color: #38bdf8;
 }
 
 .stroke-badge.combustion {
-  background: rgba(239, 68, 68, 0.25);
+  background: rgba(15, 23, 42, 0.9);
   border: 1px solid #ef4444;
   color: #fca5a5;
   animation: pulseCombustion 0.6s infinite alternate;
 }
 
 .stroke-badge.power {
-  background: rgba(245, 158, 11, 0.25);
+  background: rgba(15, 23, 42, 0.9);
   border: 1px solid #fbbf24;
   color: #fef08a;
 }
@@ -518,7 +522,8 @@ canvas {
 }
 
 .control-panel {
-  background: rgba(0, 0, 0, 0.2);
+  background: #1e293b;
+  border: 1px solid #334155;
   border-radius: 8px;
   padding: 14px;
   margin-top: 14px;
@@ -535,7 +540,11 @@ canvas {
   flex-direction: column;
   gap: 6px;
   font-size: 0.84rem;
-  color: var(--vp-c-text-1, #e4e4e7);
+  color: #f8fafc;
+}
+
+.control-group strong {
+  color: #38bdf8;
 }
 
 .control-group input[type='range'] {
@@ -553,9 +562,9 @@ canvas {
   padding: 5px 12px;
   font-size: 0.8rem;
   border-radius: 6px;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  background: rgba(255, 255, 255, 0.05);
-  color: var(--vp-c-text-2, #a1a1aa);
+  border: 1px solid #475569;
+  background: #334155;
+  color: #e2e8f0;
   cursor: pointer;
   transition: all 0.2s ease;
 }
@@ -584,13 +593,13 @@ canvas {
 }
 
 .btn-secondary {
-  background: rgba(255, 255, 255, 0.1);
-  color: #e4e4e7;
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: #334155;
+  color: #f8fafc;
+  border: 1px solid #475569;
 }
 
 .btn-secondary:hover {
-  background: rgba(255, 255, 255, 0.18);
+  background: #475569;
 }
 
 .stats-monitor {
@@ -601,8 +610,8 @@ canvas {
 }
 
 .stat-card {
-  background: rgba(0, 0, 0, 0.25);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: #1e293b;
+  border: 1px solid #334155;
   border-radius: 8px;
   padding: 10px 12px;
   display: flex;
@@ -611,14 +620,14 @@ canvas {
 
 .stat-card .label {
   font-size: 0.76rem;
-  color: var(--vp-c-text-2, #a1a1aa);
+  color: #cbd5e1;
   margin-bottom: 4px;
 }
 
 .stat-card .value {
   font-size: 1.15rem;
   font-weight: bold;
-  color: var(--vp-c-text-1, #f4f4f5);
+  color: #f8fafc;
 }
 
 .stat-card .value.highlight {
@@ -633,7 +642,7 @@ canvas {
 
 .stat-card .subtext {
   font-size: 0.72rem;
-  color: #71717a;
+  color: #94a3b8;
   margin-top: 2px;
 }
 </style>

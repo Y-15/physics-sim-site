@@ -175,17 +175,19 @@ function draw() {
     const sign2 = dir2.value
 
     ctx.save()
-    ctx.lineWidth = 1
+    ctx.lineWidth = 1.2
     const numRings = 9
+    const ringShift = (currentPulse * 0.35) % 1
     for (let i = 1; i <= numRings; i++) {
-      const r1 = 15 + i * (dPx * 0.12)
-      ctx.strokeStyle = `rgba(56, 189, 248, ${Math.max(0.08, 0.35 - i * 0.03)})`
+      const idx = i - 1 + ringShift
+      const r1 = 15 + idx * (dPx * 0.12)
+      ctx.strokeStyle = `rgba(56, 189, 248, ${Math.max(0.06, 0.38 - idx * 0.032)})`
       ctx.beginPath()
       ctx.arc(wire1X, centerY, r1, 0, Math.PI * 2)
       ctx.stroke()
 
-      const r2 = 15 + i * (dPx * 0.12)
-      ctx.strokeStyle = `rgba(245, 158, 11, ${Math.max(0.08, 0.35 - i * 0.03)})`
+      const r2 = 15 + idx * (dPx * 0.12)
+      ctx.strokeStyle = `rgba(245, 158, 11, ${Math.max(0.06, 0.38 - idx * 0.032)})`
       ctx.beginPath()
       ctx.arc(wire2X, centerY, r2, 0, Math.PI * 2)
       ctx.stroke()
@@ -213,6 +215,28 @@ function draw() {
   grad2.addColorStop(1, '#b45309')
   ctx.fillStyle = grad2
   ctx.fillRect(wire2X - wireR, centerY - wireH / 2, wireR * 2, wireH)
+
+  // 導線内を流れる電流キャリア粒子アニメーション
+  const numDots = 5
+  for (let k = 0; k < numDots; k++) {
+    const f1 = ((k / numDots) + currentPulse * 0.18 * (current1.value / 5)) % 1
+    const py1 = dir1.value > 0
+      ? (centerY + wireH / 2 - f1 * wireH)
+      : (centerY - wireH / 2 + f1 * wireH)
+    ctx.fillStyle = '#e0f2fe'
+    ctx.beginPath()
+    ctx.arc(wire1X, py1, 3, 0, Math.PI * 2)
+    ctx.fill()
+
+    const f2 = ((k / numDots) + currentPulse * 0.18 * (current2.value / 5)) % 1
+    const py2 = dir2.value > 0
+      ? (centerY + wireH / 2 - f2 * wireH)
+      : (centerY - wireH / 2 + f2 * wireH)
+    ctx.fillStyle = '#fef3c7'
+    ctx.beginPath()
+    ctx.arc(wire2X, py2, 3, 0, Math.PI * 2)
+    ctx.fill()
+  }
   ctx.restore()
 
   // 3. 電流の向き矢印（動的アニメーション）
@@ -327,6 +351,146 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
+.sim-container {
+  background: #0f172a;
+  border: 1px solid #334155;
+  border-radius: 12px;
+  padding: 18px;
+  margin: 24px 0;
+  color: #f8fafc;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+.sim-header h3 {
+  margin: 0 0 6px 0;
+  font-size: 1.15rem;
+  color: #f8fafc;
+}
+
+.title-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.subtitle {
+  font-size: 0.88rem;
+  color: #94a3b8;
+  line-height: 1.5;
+  margin-bottom: 14px;
+}
+
+.canvas-wrapper {
+  position: relative;
+  width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: #090d16;
+}
+
+canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.control-panel {
+  background: #1e293b;
+  border: 1px solid #334155;
+  border-radius: 8px;
+  padding: 14px;
+  margin-top: 14px;
+}
+
+.control-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 14px;
+}
+
+.control-group label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 0.84rem;
+  color: #e2e8f0;
+}
+
+.control-group input[type='range'] {
+  width: 100%;
+  accent-color: #38bdf8;
+}
+
+.button-row {
+  display: flex;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.btn {
+  padding: 6px 14px;
+  font-size: 0.84rem;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-secondary {
+  background: #334155;
+  color: #f8fafc;
+  border: 1px solid #475569;
+}
+
+.btn-secondary:hover {
+  background: #475569;
+}
+
+.stats-monitor {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.stat-card {
+  background: #1e293b;
+  border: 1px solid #334155;
+  border-radius: 8px;
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-card .label {
+  font-size: 0.76rem;
+  color: #94a3b8;
+  margin-bottom: 4px;
+}
+
+.stat-card .value {
+  font-size: 1.12rem;
+  font-weight: bold;
+  color: #f8fafc;
+}
+
+.stat-card .value.highlight {
+  color: #38bdf8;
+}
+
+.stat-card .unit {
+  font-size: 0.8rem;
+  font-weight: normal;
+  color: #94a3b8;
+}
+
+.stat-card .subtext {
+  font-size: 0.72rem;
+  color: #64748b;
+  margin-top: 2px;
+}
+
 .force-badge {
   position: absolute;
   top: 14px;

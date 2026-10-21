@@ -245,25 +245,52 @@ function drawPhasor(ctx, w, h) {
 
   // 電流ベクトル I (基準または位相差 -phi)
   const iAngle = currentAngle - phaseRad.value
-  const iLen = Math.min(130, I0.value * 120) // 電流表示スケール
+  const iLen = Math.min(115, I0.value * 110) // 電流表示スケール
   const ix = cx + iLen * Math.cos(iAngle)
   const iy = cy - iLen * Math.sin(iAngle)
-  arrow(ctx, cx, cy, ix, iy, '#34d399', 3, `I (${fmt(I0.value, 2)}A)`, { align: 'left', lx: 6 })
+  arrow(ctx, cx, cy, ix, iy, '#34d399', 3)
+  text(
+    ctx,
+    `I (${fmt(I0.value, 2)}A)`,
+    cx + (iLen + 22) * Math.cos(iAngle),
+    cy - (iLen + 22) * Math.sin(iAngle),
+    '#34d399',
+    'bold 11px sans-serif',
+    'center'
+  )
 
   // 全体電圧ベクトル V (角度 currentAngle)
   const vLen = V0.value * rScale
   const vx = cx + vLen * Math.cos(currentAngle)
   const vy = cy - vLen * Math.sin(currentAngle)
-  arrow(ctx, cx, cy, vx, vy, '#f43f5e', 3, `V (${V0.value}V)`, { align: 'left', lx: 6 })
+  arrow(ctx, cx, cy, vx, vy, '#f43f5e', 3)
+  text(
+    ctx,
+    `V (${V0.value}V)`,
+    cx + (vLen + 22) * Math.cos(currentAngle),
+    cy - (vLen + 22) * Math.sin(currentAngle),
+    '#f43f5e',
+    'bold 11px sans-serif',
+    'center'
+  )
 
   // 位相差の弧
   ctx.beginPath()
   ctx.strokeStyle = '#fbbf24'
   ctx.lineWidth = 1.5
-  const arcR = 40
+  const arcR = 32
   ctx.arc(cx, cy, arcR, -currentAngle, -iAngle, phaseRad.value > 0)
   ctx.stroke()
-  text(ctx, `φ = ${fmt(phaseDeg.value, 1)}°`, cx + 45 * Math.cos((currentAngle + iAngle) / 2), cy - 45 * Math.sin((currentAngle + iAngle) / 2), '#fbbf24', 'bold 11px sans-serif')
+  const midAng = (currentAngle + iAngle) / 2
+  text(
+    ctx,
+    `φ = ${fmt(phaseDeg.value, 1)}°`,
+    cx + (arcR + 22) * Math.cos(midAng),
+    cy - (arcR + 22) * Math.sin(midAng),
+    '#fbbf24',
+    'bold 11px sans-serif',
+    'center'
+  )
 
   // 注記
   const stateNote = phaseDeg.value > 1 ? '誘導性（電流が遅れる）' : phaseDeg.value < -1 ? '容量性（電流が進む）' : '共振状態（同位相・力率1）'

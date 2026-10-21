@@ -185,7 +185,7 @@ function resetDefaults() {
 }
 
 let animId = null
-const beamParticles = []
+let beamPhase = 0
 
 function draw() {
   const canvas = canvasRef.value
@@ -329,8 +329,29 @@ function draw() {
 
   // 区間3: 偏向板出口からスクリーンまで (等速直線運動)
   const finalY = gunY - finalDeflectPx
+  const plateExitY = gunY - plateExitDispPx
   ctx.lineTo(screenX, finalY)
   ctx.stroke()
+
+  // ビーム上を高速走行する荷電粒子アニメーション
+  beamPhase = (beamPhase + 0.035) % 1
+  const totalSpan = screenX - gunX
+  for (let k = 0; k < 7; k++) {
+    const u = (beamPhase + k / 7) % 1
+    const bx = gunX + u * totalSpan
+    let by = gunY
+    if (bx >= plateStartX && bx <= plateEndX) {
+      const t = (bx - plateStartX) / plateLen
+      by = gunY - plateExitDispPx * (t ** 2)
+    } else if (bx > plateEndX) {
+      const u2 = (bx - plateEndX) / (screenX - plateEndX)
+      by = plateExitY + u2 * (finalY - plateExitY)
+    }
+    ctx.fillStyle = '#ecfdf5'
+    ctx.beginPath()
+    ctx.arc(bx, by, 3, 0, Math.PI * 2)
+    ctx.fill()
+  }
   ctx.restore()
 
   // スクリーン上の輝点（発光スポット）
@@ -342,12 +363,12 @@ function draw() {
   ctx.fill()
   ctx.shadowBlur = 0
 
-  // 輝点の中心からのズレ注記
+  // 輝点の中心からのズレ注記 (画面右端で切れないようスクリーン左側に右揃え描画)
   ctx.fillStyle = '#a7f3d0'
   ctx.font = 'bold 11px sans-serif'
-  ctx.textAlign = 'left'
+  ctx.textAlign = 'right'
   const dispText = `${(gunY - finalY > 0 ? '+' : '')}${((gunY - finalY) * 0.4).toFixed(1)} mm`
-  ctx.fillText(`輝点変位: ${dispText}`, screenX + 22, finalY + 4)
+  ctx.fillText(`輝点変位: ${dispText}`, screenX - 10, finalY - 10)
 
   animId = requestAnimationFrame(draw)
 }
@@ -362,6 +383,156 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
+.sim-container {
+  background: #0f172a;
+  border: 1px solid #334155;
+  border-radius: 12px;
+  padding: 18px;
+  margin: 24px 0;
+  color: #f8fafc;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+.sim-header h3 {
+  margin: 0 0 6px 0;
+  font-size: 1.15rem;
+  color: #f8fafc;
+}
+
+.title-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.subtitle {
+  font-size: 0.88rem;
+  color: #94a3b8;
+  line-height: 1.5;
+  margin-bottom: 14px;
+}
+
+.canvas-wrapper {
+  position: relative;
+  width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: #090d16;
+}
+
+canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.control-panel {
+  background: #1e293b;
+  border: 1px solid #334155;
+  border-radius: 8px;
+  padding: 14px;
+  margin-top: 14px;
+}
+
+.control-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 14px;
+}
+
+.control-group label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 0.84rem;
+  color: #e2e8f0;
+}
+
+.control-group input[type='range'] {
+  width: 100%;
+  accent-color: #38bdf8;
+}
+
+.button-row {
+  display: flex;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.btn {
+  padding: 6px 14px;
+  font-size: 0.84rem;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-primary {
+  background: #0284c7;
+  color: #fff;
+  border: 1px solid #38bdf8;
+}
+
+.btn-primary:hover {
+  background: #0369a1;
+}
+
+.btn-secondary {
+  background: #334155;
+  color: #f8fafc;
+  border: 1px solid #475569;
+}
+
+.btn-secondary:hover {
+  background: #475569;
+}
+
+.stats-monitor {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.stat-card {
+  background: #1e293b;
+  border: 1px solid #334155;
+  border-radius: 8px;
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-card .label {
+  font-size: 0.76rem;
+  color: #94a3b8;
+  margin-bottom: 4px;
+}
+
+.stat-card .value {
+  font-size: 1.12rem;
+  font-weight: bold;
+  color: #f8fafc;
+}
+
+.stat-card .value.highlight {
+  color: #34d399;
+}
+
+.stat-card .unit {
+  font-size: 0.8rem;
+  font-weight: normal;
+  color: #94a3b8;
+}
+
+.stat-card .subtext {
+  font-size: 0.72rem;
+  color: #64748b;
+  margin-top: 2px;
+}
+
 .beam-badge {
   position: absolute;
   top: 14px;

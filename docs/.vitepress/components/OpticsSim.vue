@@ -192,9 +192,20 @@ const imageInfo = computed(() => {
 })
 
 const canvasRef = ref(null)
+let animPhase = 0
 
-useLoop(canvasRef, ({ ctx, width, height }) => {
+function drawRayPulses(ctx, x1, y1, x2, y2, color, speedScale = 1.0) {
+  for (let i = 0; i < 3; i++) {
+    const t = ((animPhase * speedScale + i / 3) % 1 + 1) % 1
+    const px = x1 + (x2 - x1) * t
+    const py = y1 + (y2 - y1) * t
+    dot(ctx, px, py, 3.2, color)
+  }
+}
+
+useLoop(canvasRef, ({ ctx, width, height, dt }) => {
   clearGrid(ctx, width, height, 40)
+  animPhase += dt * 0.65
 
   if (mode.value === 'refract') {
     drawRefraction(ctx, width, height)
@@ -235,6 +246,7 @@ function drawRefraction(ctx, w, h) {
   ctx.lineWidth = 3
   line(ctx, inX, inY, cx, cy, { color: '#f43f5e', width: 3 })
   arrow(ctx, (inX + cx) / 2, (inY + cy) / 2, ((inX + cx) / 2) + Math.sin(rad1) * 15, ((inY + cy) / 2) + Math.cos(rad1) * 15, { color: '#f43f5e', width: 3, head: 7 })
+  drawRayPulses(ctx, inX, inY, cx, cy, '#fda4af', 1.0 / n1.value)
 
   // 入射角 θ1 の円弧
   ctx.strokeStyle = '#f43f5e'
@@ -242,7 +254,7 @@ function drawRefraction(ctx, w, h) {
   ctx.beginPath()
   ctx.arc(cx, cy, 35, -Math.PI / 2 - rad1, -Math.PI / 2)
   ctx.stroke()
-  text(ctx, `θ₁ = ${incAngleDeg.value}°`, cx - 30, cy - 42, { color: '#f43f5e', font: 'bold 11px sans-serif' })
+  text(ctx, `θ₁ = ${incAngleDeg.value}°`, cx - 10, cy - 42, { align: 'right', color: '#f43f5e', font: 'bold 11px sans-serif' })
 
   // 3. 反射光線（右上へ）
   const refX = cx + rayLen * Math.sin(rad1)
@@ -250,7 +262,10 @@ function drawRefraction(ctx, w, h) {
   const refAlpha = isTotalReflection.value ? 1.0 : 0.4
   line(ctx, cx, cy, refX, refY, { color: `rgba(244, 63, 94, ${refAlpha})`, width: isTotalReflection.value ? 3 : 1.5 })
   arrow(ctx, cx, cy, (cx + refX) / 2, (cy + refY) / 2, { color: `rgba(244, 63, 94, ${refAlpha})`, width: 2, head: 6 })
-  text(ctx, isTotalReflection.value ? '全反射光 (100%反射)' : '一部反射光', refX, refY - 10, { color: '#f43f5e', font: '11px sans-serif' })
+  if (isTotalReflection.value) {
+    drawRayPulses(ctx, cx, cy, refX, refY, '#fda4af', 1.0 / n1.value)
+  }
+  text(ctx, isTotalReflection.value ? '全反射光 (100%反射)' : '一部反射光', refX, refY - 10, { align: 'center', color: '#f43f5e', font: '11px sans-serif' })
 
   // 4. 屈折光線（右下へ、全反射時はなし）
   if (!isTotalReflection.value) {
@@ -260,6 +275,7 @@ function drawRefraction(ctx, w, h) {
 
     line(ctx, cx, cy, outX, outY, { color: '#10b981', width: 3 })
     arrow(ctx, cx, cy, (cx + outX) / 2, (cy + outY) / 2, { color: '#10b981', width: 3, head: 7 })
+    drawRayPulses(ctx, cx, cy, outX, outY, '#6ee7b7', 1.0 / n2.value)
 
     // 屈折角 θ2 の円弧
     ctx.strokeStyle = '#10b981'
@@ -267,8 +283,8 @@ function drawRefraction(ctx, w, h) {
     ctx.beginPath()
     ctx.arc(cx, cy, 35, Math.PI / 2 - rad2, Math.PI / 2)
     ctx.stroke()
-    text(ctx, `θ₂ = ${refrAngleDeg.value.toFixed(1)}°`, cx + 25, cy + 45, { color: '#10b981', font: 'bold 11px sans-serif' })
-    text(ctx, '屈折光', outX, outY + 16, { color: '#10b981', font: 'bold 11px sans-serif' })
+    text(ctx, `θ₂ = ${refrAngleDeg.value.toFixed(1)}°`, cx + 15, cy + 45, { align: 'left', color: '#10b981', font: 'bold 11px sans-serif' })
+    text(ctx, '屈折光', outX, outY + 16, { align: 'center', color: '#10b981', font: 'bold 11px sans-serif' })
   } else {
     // 全反射警告バナー
     ctx.fillStyle = 'rgba(236, 72, 153, 0.2)'
@@ -276,7 +292,7 @@ function drawRefraction(ctx, w, h) {
     ctx.lineWidth = 2
     ctx.fillRect(cx - 150, cy + 30, 300, 36)
     ctx.strokeRect(cx - 150, cy + 30, 300, 36)
-    text(ctx, '⚡ 臨界角超過：光は媒質2に入らず全反射します', cx, cy + 52, { color: '#fbcfe8', font: 'bold 12px sans-serif' })
+    text(ctx, '⚡ 臨界角超過：光は媒質2に入らず全反射します', cx, cy + 52, { align: 'center', color: '#fbcfe8', font: 'bold 12px sans-serif' })
   }
 }
 
@@ -302,7 +318,7 @@ function drawLens(ctx, w, h) {
     ctx.fillStyle = 'rgba(56, 189, 248, 0.2)'
     ctx.fill()
     ctx.stroke()
-    text(ctx, '凸レンズ', cx, cy - lensH / 2 - 12, { color: '#38bdf8', font: 'bold 11px sans-serif' })
+    text(ctx, '凸レンズ', cx, cy - lensH / 2 - 12, { align: 'center', color: '#38bdf8', font: 'bold 11px sans-serif' })
   } else {
     // 凹レンズ形状（中央くぼみ）
     ctx.strokeStyle = '#38bdf8'
@@ -316,29 +332,29 @@ function drawLens(ctx, w, h) {
     ctx.fillStyle = 'rgba(56, 189, 248, 0.2)'
     ctx.fill()
     ctx.stroke()
-    text(ctx, '凹レンズ', cx, cy - lensH / 2 - 12, { color: '#38bdf8', font: 'bold 11px sans-serif' })
+    text(ctx, '凹レンズ', cx, cy - lensH / 2 - 12, { align: 'center', color: '#38bdf8', font: 'bold 11px sans-serif' })
   }
 
   // 3. 焦点 F, F' のプロット
   const fPx = focalF.value * pxPerCm
   // 前方焦点 F (左)
   dot(ctx, cx - fPx, cy, 4, '#f59e0b')
-  text(ctx, 'F', cx - fPx, cy + 16, { color: '#f59e0b', font: 'bold 11px sans-serif' })
+  text(ctx, 'F', cx - fPx, cy + 16, { align: 'center', color: '#f59e0b', font: 'bold 11px sans-serif' })
   // 後方焦点 F' (右)
   dot(ctx, cx + fPx, cy, 4, '#f59e0b')
-  text(ctx, "F'", cx + fPx, cy + 16, { color: '#f59e0b', font: 'bold 11px sans-serif' })
+  text(ctx, "F'", cx + fPx, cy + 16, { align: 'center', color: '#f59e0b', font: 'bold 11px sans-serif' })
 
   // 2f の位置（等倍参照点）
   dot(ctx, cx - 2 * fPx, cy, 3, '#64748b')
-  text(ctx, '2F', cx - 2 * fPx, cy + 16, { color: '#64748b', font: '10px sans-serif' })
+  text(ctx, '2F', cx - 2 * fPx, cy + 16, { align: 'center', color: '#64748b', font: '10px sans-serif' })
   dot(ctx, cx + 2 * fPx, cy, 3, '#64748b')
-  text(ctx, "2F'", cx + 2 * fPx, cy + 16, { color: '#64748b', font: '10px sans-serif' })
+  text(ctx, "2F'", cx + 2 * fPx, cy + 16, { align: 'center', color: '#64748b', font: '10px sans-serif' })
 
   // 4. 物体（左側の赤い矢印）
   const objX = cx - objDistA.value * pxPerCm
   const objH_px = objHeight.value * pxPerCm
   arrow(ctx, objX, cy, objX, cy - objH_px, { color: '#ef4444', width: 3.5, head: 8 })
-  text(ctx, '物体', objX, cy - objH_px - 8, { color: '#ef4444', font: 'bold 11px sans-serif' })
+  text(ctx, '物体', objX, cy - objH_px - 8, { align: 'center', color: '#ef4444', font: 'bold 11px sans-serif' })
 
   // 5. 光線作図 (3本の代表光線)
   const tipX = objX
@@ -349,10 +365,12 @@ function drawLens(ctx, w, h) {
     // 光線①: 光軸に平行な光線 -> レンズで屈折して後方焦点 F' を通る
     line(ctx, tipX, tipY, cx, tipY, { color: 'rgba(234, 179, 8, 0.75)', width: 1.8 })
     line(ctx, cx, tipY, cx + w, tipY + (tipY - cy) * -1.8, { color: 'rgba(234, 179, 8, 0.75)', width: 1.8 })
+    drawRayPulses(ctx, tipX, tipY, cx, tipY, '#fde047', 1.0)
 
     // 光線②: レンズの中心 O を直進する光線
     line(ctx, tipX, tipY, cx, cy, { color: 'rgba(56, 189, 248, 0.75)', width: 1.8 })
     line(ctx, cx, cy, cx + (cx - tipX) * 1.5, cy + (cy - tipY) * 1.5, { color: 'rgba(56, 189, 248, 0.75)', width: 1.8 })
+    drawRayPulses(ctx, tipX, tipY, cx, cy, '#7dd3fc', 1.0)
 
     // 像の描画
     const b = imageInfo.value.b
@@ -364,13 +382,15 @@ function drawLens(ctx, w, h) {
       if (isReal) {
         // 実像（倒立・下向き矢印）
         arrow(ctx, imgX, cy, imgX, cy + imgH_px, { color: '#10b981', width: 3.5, head: 8 })
-        text(ctx, `実像 (m=${Math.abs(imageInfo.value.m).toFixed(2)})`, imgX, cy + imgH_px + 16, { color: '#10b981', font: 'bold 11px sans-serif' })
+        text(ctx, `実像 (m=${Math.abs(imageInfo.value.m).toFixed(2)})`, imgX, cy + imgH_px + 16, { align: 'center', color: '#10b981', font: 'bold 11px sans-serif' })
+        drawRayPulses(ctx, cx, tipY, imgX, cy + imgH_px, '#fde047', 1.0)
+        drawRayPulses(ctx, cx, cy, imgX, cy + imgH_px, '#7dd3fc', 1.0)
       } else {
         // 虚像（正立・点線矢印）
         ctx.save()
         line(ctx, imgX, cy, imgX, cy - imgH_px, { color: '#f59e0b', width: 3.5, dash: [4, 4] })
         arrow(ctx, imgX, cy, imgX, cy - imgH_px, { color: '#f59e0b', width: 3.5, head: 8 })
-        text(ctx, `虚像 (m=${Math.abs(imageInfo.value.m).toFixed(2)})`, imgX, cy - imgH_px - 8, { color: '#f59e0b', font: 'bold 11px sans-serif' })
+        text(ctx, `虚像 (m=${Math.abs(imageInfo.value.m).toFixed(2)})`, imgX, cy - imgH_px - 8, { align: 'center', color: '#f59e0b', font: 'bold 11px sans-serif' })
         ctx.restore()
       }
     }
@@ -383,7 +403,7 @@ function drawLens(ctx, w, h) {
     // 虚像矢印
     line(ctx, imgX, cy, imgX, cy - imgH_px, { color: '#f59e0b', width: 3, dash: [4, 4] })
     arrow(ctx, imgX, cy, imgX, cy - imgH_px, { color: '#f59e0b', width: 3, head: 7 })
-    text(ctx, `虚像 (縮小)`, imgX, cy - imgH_px - 8, { color: '#f59e0b', font: 'bold 11px sans-serif' })
+    text(ctx, `虚像 (縮小)`, imgX, cy - imgH_px - 8, { align: 'center', color: '#f59e0b', font: 'bold 11px sans-serif' })
   }
 }
 </script>

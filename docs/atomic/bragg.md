@@ -22,7 +22,7 @@ description: 高校物理・大学入試超頻出「ブラッグ反射とX線結
 
 高校物理の光学（スネルの法則やレンズ）では、入射角は「境界面の法線とのなす角」として定義されます。
 
-しかし、**X線回折におけるブラッグ角 $\theta$ は、「結晶面そのものとX線のなす角（すれすれ角 / Glancing angle）」**として定義されます！
+しかし、<strong>X線回折におけるブラッグ角 $\theta$ は、「結晶面そのものとX線のなす角（すれすれ角 / Glancing angle）」</strong>として定義されます！
 
 <div class="vector-diagram-card">
   <svg viewBox="0 0 540 180" class="academic-svg" aria-label="X線結晶回折におけるブラッグ角（すれすれ角）の定義">
@@ -31,7 +31,6 @@ description: 高校物理・大学入試超頻出「ブラッグ反射とX線結
         <path d="M 0 1 L 10 5 L 0 9 z" fill="#38bdf8" />
       </marker>
     </defs>
-
     <!-- 結晶格子面 (原子列) -->
     <line x1="50" y1="120" x2="490" y2="120" stroke="#64748b" stroke-width="2.5" />
     <!-- 原子ビーズ列 -->
@@ -42,24 +41,19 @@ description: 高校物理・大学入試超頻出「ブラッグ反射とX線結
     <circle cx="380" cy="120" r="7" fill="#1e293b" stroke="#38bdf8" stroke-width="2" />
     <circle cx="450" cy="120" r="7" fill="#1e293b" stroke="#38bdf8" stroke-width="2" />
     <text x="495" y="124" fill="#94a3b8" font-size="12" font-weight="bold">結晶格子面</text>
-
     <!-- 法線 (光学での基準) -->
     <line x1="240" y1="20" x2="240" y2="120" stroke="#ef4444" stroke-width="1.5" stroke-dasharray="4,4" />
     <text x="245" y="35" fill="#ef4444" font-size="11" font-weight="bold">法線（光学基準）</text>
-
     <!-- X線入射光 -->
     <line x1="100" y1="35" x2="235" y2="117" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#bragg-ray-arrow)" />
     <text x="110" y="30" fill="#38bdf8" font-size="13" font-weight="bold">X線入射光</text>
-
     <!-- X線反射光 -->
     <line x1="240" y1="120" x2="375" y2="38" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#bragg-ray-arrow)" />
     <text x="375" y="30" fill="#38bdf8" font-size="13" font-weight="bold">反射光</text>
-
     <!-- すれすれ角 θ (結晶面と入射光のなす角) -->
     <path d="M 190 120 A 50 50 0 0 0 205 100" fill="none" stroke="#fbbf24" stroke-width="2.5" />
     <text x="175" y="112" fill="#fbbf24" font-size="14" font-weight="bold">θ</text>
     <text x="140" y="145" fill="#fbbf24" font-size="11" font-weight="bold">すれすれ角（ブラッグ角 θ）</text>
-
     <!-- 光学の入射角 (90° - θ) -->
     <path d="M 240 70 A 50 50 0 0 0 215 78" fill="none" stroke="#ef4444" stroke-width="1.5" />
     <text x="205" y="65" fill="#ef4444" font-size="11">90° - θ</text>
@@ -69,7 +63,7 @@ description: 高校物理・大学入試超頻出「ブラッグ反射とX線結
 
 > **最大の頻出ひっかけ！**:
 > - 光学の通常の入射角（法線基準）: $i = 90^\circ - \theta$
-> - X線回折のブラッグ角: **結晶面となす角 $\theta$**
+> - X線回折のブラッグ角: <strong>結晶面となす角 $\theta$</strong>
 >
 > 入試問題で「法線とX線のなす角が $\phi$ であった」と書かれていた場合、ブラッグ条件に代入する角度は $\theta = 90^\circ - \phi$ と置き換えなければなりません。
 
@@ -91,60 +85,49 @@ description: 高校物理・大学入試超頻出「ブラッグ反射とX線結
         <path d="M 0 1 L 10 5 L 0 9 z" fill="#fbbf24" />
       </marker>
     </defs>
-
     <!-- 第1格子面 -->
     <line x1="40" y1="70" x2="520" y2="70" stroke="#475569" stroke-width="2" stroke-dasharray="4,4" />
     <circle cx="160" cy="70" r="5" fill="#334155" />
     <circle cx="280" cy="70" r="7" fill="#38bdf8" stroke="#0284c7" stroke-width="2" />
     <text x="280" y="55" fill="#38bdf8" font-size="12" font-weight="bold" text-anchor="middle">原子 A (第1層)</text>
     <circle cx="400" cy="70" r="5" fill="#334155" />
-
     <!-- 第2格子面 -->
     <line x1="40" y1="180" x2="520" y2="180" stroke="#475569" stroke-width="2" stroke-dasharray="4,4" />
     <circle cx="160" cy="180" r="5" fill="#334155" />
     <circle cx="280" cy="180" r="7" fill="#fbbf24" stroke="#d97706" stroke-width="2" />
     <text x="280" y="202" fill="#fbbf24" font-size="12" font-weight="bold" text-anchor="middle">原子 B (第2層)</text>
     <circle cx="400" cy="180" r="5" fill="#334155" />
-
     <!-- 面間隔 d 寸法線 -->
     <line x1="280" y1="70" x2="280" y2="180" stroke="#94a3b8" stroke-width="2" stroke-dasharray="3,3" />
     <text x="268" y="130" fill="#94a3b8" font-size="13" font-weight="bold" text-anchor="end">間隔 d</text>
-
     <!-- 光線① (Aで反射) -->
     <line x1="80" y1="10" x2="275" y2="68" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#bragg-path-arrow)" />
     <text x="80" y="25" fill="#38bdf8" font-size="12" font-weight="bold">光線①</text>
     <line x1="280" y1="70" x2="475" y2="12" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#bragg-path-arrow)" />
     <text x="475" y="25" fill="#38bdf8" font-size="12" font-weight="bold">反射光①</text>
-
     <!-- 光線② (Bで反射) -->
     <!-- 入射光② (〜点Pまで) -->
     <line x1="40" y1="108" x2="195" y2="154" stroke="#38bdf8" stroke-width="2.5" />
     <text x="40" y="100" fill="#38bdf8" font-size="12" font-weight="bold">光線②</text>
-    
     <!-- 垂線 AP (Aから光線②への垂線) -->
     <line x1="280" y1="70" x2="195" y2="154" stroke="#ef4444" stroke-width="2" />
     <circle cx="195" cy="154" r="3.5" fill="#ef4444" />
     <text x="180" y="152" fill="#ef4444" font-size="12" font-weight="bold">点 P</text>
     <!-- 直角マーク -->
     <path d="M 203 146 L 211 154 L 203 162" fill="none" stroke="#ef4444" stroke-width="1.2" />
-
     <!-- 光路差区間 PB (d sinθ) -->
     <line x1="195" y1="154" x2="275" y2="178" stroke="#fbbf24" stroke-width="4" marker-end="url(#bragg-path-amber)" />
     <text x="220" y="180" fill="#fbbf24" font-size="11" font-weight="bold">PB = d sinθ</text>
-
     <!-- 光路差区間 BQ (d sinθ) -->
     <line x1="280" y1="180" x2="360" y2="156" stroke="#fbbf24" stroke-width="4" marker-end="url(#bragg-path-amber)" />
     <text x="325" y="180" fill="#fbbf24" font-size="11" font-weight="bold">BQ = d sinθ</text>
-
     <!-- 垂線 AQ (Aから反射線②への垂線) -->
     <line x1="280" y1="70" x2="365" y2="154" stroke="#ef4444" stroke-width="2" />
     <circle cx="365" cy="154" r="3.5" fill="#ef4444" />
     <text x="375" y="152" fill="#ef4444" font-size="12" font-weight="bold">点 Q</text>
-
     <!-- 反射光② (Q以降) -->
     <line x1="365" y1="154" x2="515" y2="110" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#bragg-path-arrow)" />
     <text x="515" y="100" fill="#38bdf8" font-size="12" font-weight="bold">反射光②</text>
-
     <!-- 光路差のまとめ表示 -->
     <rect x="170" y="215" width="220" height="28" rx="6" fill="rgba(251, 191, 36, 0.15)" stroke="#fbbf24" stroke-width="1.5" />
     <text x="280" y="233" fill="#fbbf24" font-size="12" font-weight="bold" text-anchor="middle">光路差 ΔL = PB + BQ = 2d sinθ</text>
@@ -162,7 +145,7 @@ description: 高校物理・大学入試超頻出「ブラッグ反射とX線結
    $$
    \text{BQ} = d \sin\theta
    $$
-3. 光線①と光線②の**幾何学的光路差 $\Delta$** は、$\text{PB}$ と $\text{BQ}$ の和となります。
+3. 光線①と光線②の<strong>幾何学的光路差 $\Delta$</strong> は、$\text{PB}$ と $\text{BQ}$ の和となります。
 
 $$
 \Delta = \text{PB} + \text{BQ} = d \sin\theta + d \sin\theta = 2 d \sin\theta
@@ -247,5 +230,5 @@ $$
 n \le \frac{1}{0.273} \approx 3.66
 $$
 
-次数 $n$ は整数であるため、観測可能な最大次数は **$n_{max} = 3$**（3次反射まで）となります。
+次数 $n$ は整数であるため、観測可能な最大次数は <strong>$n_{\max} = 3$</strong>（3次反射まで）となります。
 （4次反射を起こすには $\sin\theta > 1$ となってしまうため物理的に存在できません）。

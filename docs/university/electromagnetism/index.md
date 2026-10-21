@@ -52,49 +52,19 @@ $$\oint_C \vec{A} \cdot d\vec{r} = \iint_S (\nabla \times \vec{A}) \cdot d\vec{S
 
 電磁気学の全現象を統べる4大基礎方程式です。微分形と積分形を対比して理解します。
 
-<table class="standard-table">
-  <thead>
-    <tr>
-      <th>法則名</th>
-      <th>微分形（局所法則）</th>
-      <th>積分形（巨視法則）</th>
-      <th>物理的意味</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><strong>① ガウスの法則（電場）</strong></td>
-      <td>$$\nabla \cdot \vec{E} = \frac{\rho}{\varepsilon_0}$$</td>
-      <td>$$\iint_S \vec{E} \cdot d\vec{S} = \frac{Q_{\text{enclosed}}}{\varepsilon_0}$$</td>
-      <td>電場の湧き出し源は電荷密度 $\rho$ である。正電荷から電気力線が出て負電荷に入る。</td>
-    </tr>
-    <tr>
-      <td><strong>② ガウスの法則（磁場）</strong></td>
-      <td>$$\nabla \cdot \vec{B} = 0$$</td>
-      <td>$$\iint_S \vec{B} \cdot d\vec{S} = 0$$</td>
-      <td>磁場の湧き出し・吸い込みは存在しない。孤立した磁気単極子（モノポール）は存在せず、磁力線は必ずループを描く。</td>
-    </tr>
-    <tr>
-      <td><strong>③ ファラデーの電磁誘導則</strong></td>
-      <td>$$\nabla \times \vec{E} = -\frac{\partial \vec{B}}{\partial t}$$</td>
-      <td>$$\oint_C \vec{E} \cdot d\vec{r} = -\frac{d\Phi_B}{dt}$$</td>
-      <td>時間変化する磁場は、その周囲に渦を巻く電場（誘導起電力）を生成する。</td>
-    </tr>
-    <tr>
-      <td><strong>④ アンペール・マクスウェル則</strong></td>
-      <td>$$\nabla \times \vec{B} = \mu_0 \vec{j} + \mu_0 \varepsilon_0 \frac{\partial \vec{E}}{\partial t}$$</td>
-      <td>$$\oint_C \vec{B} \cdot d\vec{r} = \mu_0 I + \mu_0 \varepsilon_0 \frac{d\Phi_E}{dt}$$</td>
-      <td>電流 $\vec{j}$ だけでなく、時間変化する電場（変位電流 $\varepsilon_0 \frac{\partial \vec{E}}{\partial t}$）も渦状の磁場を生成する。</td>
-    </tr>
-  </tbody>
-</table>
+| 法則名 | 微分形（局所法則） | 積分形（巨視法則） | 物理的意味 |
+| :--- | :--- | :--- | :--- |
+| **① ガウスの法則（電場）** | $\displaystyle \nabla \cdot \vec{E} = \frac{\rho}{\varepsilon_0}$ | $\displaystyle \iint_S \vec{E} \cdot d\vec{S} = \frac{Q_{\text{enclosed}}}{\varepsilon_0}$ | 電場の湧き出し源は電荷密度 $\rho$ である。正電荷から電気力線が出て負電荷に入る。 |
+| **② ガウスの法則（磁場）** | $\displaystyle \nabla \cdot \vec{B} = 0$ | $\displaystyle \iint_S \vec{B} \cdot d\vec{S} = 0$ | 磁場の湧き出し・吸い込みは存在しない。孤立した磁気単極子（モノポール）は存在せず、磁力線は必ずループを描く。 |
+| **③ ファラデーの電磁誘導則** | $\displaystyle \nabla \times \vec{E} = -\frac{\partial \vec{B}}{\partial t}$ | $\displaystyle \oint_C \vec{E} \cdot d\vec{r} = -\frac{d\Phi_B}{dt}$ | 時間変化する磁場は、その周囲に渦を巻く電場（誘導起電力）を生成する。 |
+| **④ アンペール・マクスウェル則** | $\displaystyle \nabla \times \vec{B} = \mu_0 \vec{j} + \mu_0 \varepsilon_0 \frac{\partial \vec{E}}{\partial t}$ | $\displaystyle \oint_C \vec{B} \cdot d\vec{r} = \mu_0 I + \mu_0 \varepsilon_0 \frac{d\Phi_E}{dt}$ | 電流 $\vec{j}$ だけでなく、時間変化する電場（変位電流 $\varepsilon_0 \frac{\partial \vec{E}}{\partial t}$）も渦状の磁場を生成する。 |
 
 ---
 
 ## 3. ポテンシャル論と静電場・静磁場
 
 ### 静電ポテンシャルとポアソン方程式
-静電場では $\frac{\partial \vec{B}}{\partial t} = 0$ より $\nabla \times \vec{E} = 0$ となり、電位（スカラーポテンシャル）$\\phi$ が定義されます：
+静電場では $\frac{\partial \vec{B}}{\partial t} = 0$ より $\nabla \times \vec{E} = 0$ となり、電位（スカラーポテンシャル）$\phi$ が定義されます：
 
 $$\vec{E} = -\nabla \phi$$
 
@@ -102,10 +72,10 @@ $$\vec{E} = -\nabla \phi$$
 
 $$\nabla \cdot (-\nabla \phi) = -\nabla^2 \phi = \frac{\rho}{\varepsilon_0} \implies \nabla^2 \phi = -\frac{\rho}{\varepsilon_0} \quad (\text{ポアソン方程式})$$
 
-電荷のない真空領域（$\rho = 0$）では **ラプラス方程式 $\nabla^2 \phi = 0$** に簡約され、ディリクレ境界条件やノイマン境界条件のもとで解が一意に決定されます。
+電荷のない真空領域（$\rho = 0$）では <strong>ラプラス方程式 $\nabla^2 \phi = 0$</strong> に簡約され、ディリクレ境界条件やノイマン境界条件のもとで解が一意に決定されます。
 
 ### ベクトルポテンシャル $\vec{A}$
-磁場は常に $\nabla \cdot \vec{B} = 0$ を満たすため、任意のベクトル場の回転の発散がゼロになる公式（$\nabla \cdot (\nabla \times \vec{A}) = 0$）より、**ベクトルポテンシャル $\vec{A}$** が存在します：
+磁場は常に $\nabla \cdot \vec{B} = 0$ を満たすため、任意のベクトル場の回転の発散がゼロになる公式（$\nabla \cdot (\nabla \times \vec{A}) = 0$）より、<strong>ベクトルポテンシャル $\vec{A}$</strong> が存在します：
 
 $$\vec{B} = \nabla \times \vec{A}$$
 

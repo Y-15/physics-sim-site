@@ -49,47 +49,37 @@ description: 水平方向の等速運動と鉛直方向の等加速度運動の�
       <path d="M0,0 L0,6 L7,3 z" fill="#fbbf24" />
     </marker>
   </defs>
-
   <!-- 地面 -->
   <line x1="40" y1="240" x2="500" y2="240" stroke="#475569" stroke-width="2"/>
   <rect x="40" y="240" width="460" height="20" fill="rgba(71, 85, 105, 0.15)"/>
-
   <!-- 放物線軌道（点線） -->
   <path d="M 60,240 Q 240,40 420,240" fill="none" stroke="#64748b" stroke-width="2" stroke-dasharray="4,4"/>
-
   <!-- 座標軸 -->
   <line x1="60" y1="250" x2="60" y2="30" stroke="#94a3b8" stroke-width="1.8" marker-end="url(#proj-arrow-blue)"/>
   <text x="50" y="25" fill="#38bdf8" font-size="13" font-weight="700">y (鉛直)</text>
   <line x1="50" y1="240" x2="490" y2="240" stroke="#94a3b8" stroke-width="1.8" marker-end="url(#proj-arrow-blue)"/>
   <text x="495" y="244" fill="#38bdf8" font-size="13" font-weight="700">x (水平)</text>
   <text x="48" y="256" fill="#94a3b8" font-size="12" font-family="sans-serif">O</text>
-
   <!-- 原点での小球 -->
   <circle cx="60" cy="240" r="7" fill="#0284c7" stroke="#38bdf8" stroke-width="2"/>
-
   <!-- 初速度ベクトル v0 (合成) -->
   <line x1="60" y1="240" x2="160" y2="120" stroke="#f43f5e" stroke-width="3" marker-end="url(#proj-arrow-rose)"/>
   <rect x="110" y="105" width="85" height="22" rx="4" fill="#0f172a" stroke="#f43f5e" stroke-width="1.2"/>
   <text x="152" y="120" fill="#f43f5e" font-size="12" font-weight="700" text-anchor="middle">初速度 v₀</text>
-
   <!-- 初速度の水平成分 v0x -->
   <line x1="60" y1="240" x2="160" y2="240" stroke="#10b981" stroke-width="2.5" marker-end="url(#proj-arrow-green)"/>
   <rect x="75" y="248" width="105" height="20" rx="3" fill="#0f172a" stroke="#10b981" stroke-width="1"/>
   <text x="127" y="262" fill="#10b981" font-size="11" font-weight="700" text-anchor="middle">v₀ₓ = v₀ cos θ</text>
-
   <!-- 初速度の鉛直成分 v0y -->
   <line x1="60" y1="240" x2="60" y2="120" stroke="#fbbf24" stroke-width="2.5" marker-end="url(#proj-arrow-yellow)"/>
   <rect x="2" y="170" width="100" height="20" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
   <text x="52" y="184" fill="#fbbf24" font-size="11" font-weight="700" text-anchor="middle">v₀ᵧ = v₀ sin θ</text>
-
   <!-- 分解平行四辺形 -->
   <line x1="60" y1="120" x2="160" y2="120" stroke="#71717a" stroke-width="1.2" stroke-dasharray="3,3"/>
   <line x1="160" y1="240" x2="160" y2="120" stroke="#71717a" stroke-width="1.2" stroke-dasharray="3,3"/>
-
   <!-- 角度 θ -->
   <path d="M 100,240 A 40,40 0 0,0 92,201" fill="none" stroke="#fbbf24" stroke-width="2"/>
   <text x="108" y="226" fill="#fbbf24" font-size="13" font-weight="700">θ</text>
-
   <!-- 最高点 P(x_H, H) -->
   <circle cx="240" cy="90" r="6" fill="#fbbf24"/>
   <line x1="240" y1="90" x2="310" y2="90" stroke="#10b981" stroke-width="2.2" marker-end="url(#proj-arrow-green)"/>
@@ -97,7 +87,6 @@ description: 水平方向の等速運動と鉛直方向の等加速度運動の�
   <line x1="240" y1="90" x2="240" y2="240" stroke="#64748b" stroke-width="1.2" stroke-dasharray="3,3"/>
   <rect x="200" y="150" width="65" height="20" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
   <text x="232" y="164" fill="#fbbf24" font-size="11" font-weight="700" text-anchor="middle">最高点 H</text>
-
   <!-- 落下地点 (R, 0) -->
   <circle cx="420" cy="240" r="6" fill="#f43f5e"/>
   <rect x="360" y="248" width="120" height="20" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>

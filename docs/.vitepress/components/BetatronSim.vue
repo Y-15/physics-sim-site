@@ -5,7 +5,7 @@ const canvasRef = ref(null)
 
 // 物理パラメータ
 const dBdt = ref(2.0) // 磁場上昇率 [T/s] (0.5 ~ 5.0)
-const orbitRadiusTarget = ref(130) // 設計軌道半径 R0 [px]
+const orbitRadiusTarget = ref(110) // 設計軌道半径 R0 [px]
 const fieldProfileRatio = ref(2.0) // 平均磁場と軌道磁場の比 (B_bar / B0) -> 2.0 で安定
 const isPlaying = ref(true)
 const timeScale = ref(0.4) // 誘導加速と軌道安定性が追える0.4x推奨
@@ -14,7 +14,7 @@ let animationFrameId = null
 
 const width = 500
 const height = 380
-const centerX = width / 2
+const centerX = 175
 const centerY = height / 2
 
 // 電子状態
@@ -364,15 +364,68 @@ onUnmounted(() => {
   position: absolute;
   top: 10px;
   right: 10px;
-  background: rgba(15, 23, 42, 0.85);
+  background: rgba(15, 23, 42, 0.88);
   backdrop-filter: blur(8px);
-  padding: 0.5rem 0.75rem;
+  padding: 0.45rem 0.65rem;
   border-radius: 8px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  font-size: 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  font-size: 0.72rem;
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
+  gap: 0.22rem;
+}
+
+.playback-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+  padding: 8px 10px;
+  background: rgba(15, 23, 42, 0.7);
+  border: 1px solid rgba(56, 189, 248, 0.2);
+  border-radius: 8px;
+}
+
+.speed-control-group {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.speed-label {
+  font-size: 0.78rem;
+  color: #94a3b8;
+}
+
+.speed-btn-group {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+
+.speed-btn-group button {
+  background: #1e293b;
+  color: #cbd5e1;
+  border: 1px solid #334155;
+  padding: 4px 8px;
+  font-size: 0.74rem;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.speed-btn-group button.active {
+  background: #0284c7;
+  color: #fff;
+  border-color: #38bdf8;
+  font-weight: 700;
+}
+
+.btn-primary {
+  background: #0284c7;
+  color: #ffffff;
+  border: 1px solid #38bdf8;
 }
 
 .stat-row {

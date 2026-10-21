@@ -116,11 +116,11 @@ import { ref, onMounted, onUnmounted, computed } from 'vue'
 
 const canvasRef = ref(null)
 const isRunning = ref(true)
-const timeScale = ref(0.5) // 空気抵抗と加速度の推移が追える0.5x推奨
+const timeScale = ref(1.0) // 終端速度への漸近が観察しやすい1.0x標準再生
 
-const mass = ref(3.0) // kg
+const mass = ref(1.5) // kg
 const dragModel = ref('linear') // 'linear' or 'quadratic'
-const dragCoeff = ref(0.6) // k or kappa
+const dragCoeff = ref(1.0) // k or kappa
 const isChuteOpen = ref(false)
 
 const g = 9.8 // m/s^2
@@ -142,9 +142,10 @@ const theoreticalVterm = computed(() => {
 })
 
 // シミュレーション状態量
-const posY = ref(20.0) // 画面上ピクセル対応
+const posY = ref(85.0) // 画面上ピクセル対応（上端クリップ防止のため85px開始）
 const velocity = ref(0.0) // m/s
 const acceleration = ref(9.8) // m/s^2
+let windOffset = 0.0
 
 const dragForceRatio = computed(() => {
   const m = mass.value
@@ -175,9 +176,10 @@ const toggleChute = () => {
 }
 
 const resetSim = () => {
-  posY.value = 20.0
+  posY.value = 85.0
   velocity.value = 0.0
   acceleration.value = g
+  windOffset = 0.0
   history.length = 0
 }
 
@@ -196,15 +198,15 @@ const step = (dt) => {
     dragF = k * (v ** 2)
   }
 
-  const a = Math.max(0, g - dragF / m)
-  acceleration.value = a
-  velocity.value += a * dt
+  const a = (m * g - dragF) / m
+  acceleration.value = Math.max(-30, a)
+  velocity.value = Math.max(0.1, velocity.value + a * dt)
 
-  // 落下位置更新（周期的リセット）
-  posY.value += velocity.value * dt * 8 // スケール調整
-  if (posY.value > 260) {
-    posY.value = 30
+  // カメラ追従型の落下表現: 初期は85pxから185pxまで降下し、以後は気流のスクロールで落下感を表現
+  if (posY.value < 185) {
+    posY.value = Math.min(185, posY.value + velocity.value * dt * 6)
   }
+  windOffset = (windOffset + velocity.value * dt * 18) % 60
 
   // 履歴更新
   history.push({
@@ -236,18 +238,21 @@ const draw = () => {
   // 右半分: v-t グラフ (x: 350〜670)
 
   // 空気の流れ（落下を示す上昇パーティクル風背景）
-  ctx.strokeStyle = 'rgba(56, 189, 248, 0.15)'
+  ctx.strokeStyle = 'rgba(56, 189, 248, 0.22)'
   ctx.lineWidth = 1.5
   for (let i = 0; i < 6; i++) {
-    const lx = 40 + i * 45
-    ctx.beginPath()
-    ctx.moveTo(lx, 20)
-    ctx.lineTo(lx, height - 20)
-    ctx.stroke()
+    const lx = 40 + i * 48
+    for (let yBase = -30; yBase < height + 30; yBase += 60) {
+      const y1 = yBase - windOffset + (i % 2) * 25
+      ctx.beginPath()
+      ctx.moveTo(lx, Math.max(15, y1))
+      ctx.lineTo(lx, Math.min(height - 15, y1 + 22))
+      ctx.stroke()
+    }
   }
 
   // 落下物体の中心
-  const objX = 160
+  const objX = 180
   const objY = posY.value
   const objR = 14 + mass.value * 1.5
 

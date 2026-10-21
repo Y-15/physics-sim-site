@@ -340,7 +340,7 @@ function drawEnergyLevels(ctx, w, h) {
 
   // E=0 線 (電離限界)
   line(ctx, lx0, yInf, lx1, yInf, '#f43f5e', 2)
-  text(ctx, 'n = ∞ (0 eV: 電離)', 770, yInf + 4, '#f43f5e', '10px sans-serif', 'right')
+  text(ctx, 'n = ∞ (0 eV: 電離)', 770, yInf - 6, '#f43f5e', '10px sans-serif', 'right')
 
   // 各準位の y 座標: En = E1 / n^2
   // E1 = -13.6 eV -> y0, 0 eV -> yInf
@@ -354,14 +354,19 @@ function drawEnergyLevels(ctx, w, h) {
     // レベル線
     line(ctx, lx0, y, lx1, y, isCur ? '#38bdf8' : '#71717a', isCur ? 3 : 1.5)
 
+    // 密集する n=4, 5 のラベル重なりを防止するためオフセット調整
+    const yOffset = n === 5 ? 1 : n === 4 ? 7 : 4
+
     // ラベル
-    text(ctx, `n = ${n}`, lx0 - 8, y + 4, isCur ? '#38bdf8' : '#a1a1aa', isCur ? 'bold 11px sans-serif' : '11px sans-serif', 'right')
-    text(ctx, `${enVal.toFixed(2)} eV`, 770, y + 4, isCur ? '#38bdf8' : '#a1a1aa', isCur ? 'bold 10px monospace' : '10px monospace', 'right')
+    text(ctx, `n = ${n}`, lx0 - 8, y + yOffset, isCur ? '#38bdf8' : '#a1a1aa', isCur ? 'bold 11px sans-serif' : '11px sans-serif', 'right')
+    if (n <= 3 || isCur || (n === 4 && currentN.value !== 5)) {
+      text(ctx, `${enVal.toFixed(2)} eV`, 770, y + yOffset, isCur ? '#38bdf8' : '#a1a1aa', isCur ? 'bold 10px monospace' : '10px monospace', 'right')
+    }
 
     // 現在の準位に電子マーカー
     if (isCur) {
       dot(ctx, (lx0 + lx1) / 2, y, 6, '#38bdf8', '#ffffff')
-      text(ctx, '● 現在の電子', (lx0 + lx1) / 2 + 10, y + 4, '#38bdf8', 'bold 10px sans-serif')
+      text(ctx, '● 現在の電子', (lx0 + lx1) / 2 + 10, y + yOffset, '#38bdf8', 'bold 10px sans-serif')
     }
   }
 

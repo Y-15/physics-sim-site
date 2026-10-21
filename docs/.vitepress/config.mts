@@ -136,6 +136,7 @@ export default defineConfig({
 
 
   themeConfig: {
+    siteTitle: '物理シミュレーションラボ',
     nav: [
       { text: 'ホーム', link: '/' },
       {

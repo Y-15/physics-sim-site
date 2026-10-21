@@ -326,28 +326,31 @@ function updateAndDraw(timestamp) {
 
   // 熱源の配置（底面）
   const heatY = cylY + cylH + 12
+  ctx.save()
+  ctx.textAlign = 'center'
   if (currentStage.value === 0) {
     // 高温熱源から吸熱
     ctx.fillStyle = '#ef4444'
-    ctx.fillRect(cylX + 20, heatY, 150, 30)
+    ctx.fillRect(cylX + 10, heatY, 180, 30)
     ctx.fillStyle = '#fff'
     ctx.font = 'bold 12px sans-serif'
-    ctx.fillText(`高温熱源 T_H (${TH.value}K) 吸熱 ↑`, cylX + 26, heatY + 20)
+    ctx.fillText(`高温熱源 T_H (${TH.value}K) 吸熱 ↑`, cylX + 100, heatY + 20)
   } else if (currentStage.value === 2) {
     // 低温熱源へ放熱
     ctx.fillStyle = '#3b82f6'
-    ctx.fillRect(cylX + 20, heatY, 150, 30)
+    ctx.fillRect(cylX + 10, heatY, 180, 30)
     ctx.fillStyle = '#fff'
     ctx.font = 'bold 12px sans-serif'
-    ctx.fillText(`低温熱源 T_L (${TL.value}K) 放熱 ↓`, cylX + 26, heatY + 20)
+    ctx.fillText(`低温熱源 T_L (${TL.value}K) 放熱 ↓`, cylX + 100, heatY + 20)
   } else {
     // 断熱壁
     ctx.fillStyle = '#334155'
-    ctx.fillRect(cylX + 20, heatY, 150, 30)
+    ctx.fillRect(cylX + 10, heatY, 180, 30)
     ctx.fillStyle = '#94a3b8'
     ctx.font = 'bold 12px sans-serif'
-    ctx.fillText('🛡️ 断熱壁 (熱の出入り Q ＝ 0)', cylX + 24, heatY + 20)
+    ctx.fillText('🛡️ 断熱壁 (熱の出入り Q ＝ 0)', cylX + 100, heatY + 20)
   }
+  ctx.restore()
 
   // 気体温度表示
   ctx.fillStyle = `rgb(${gasR}, ${gasG}, ${gasB})`
@@ -368,11 +371,12 @@ onUnmounted(() => {
 
 <style scoped>
 .sim-container {
-  background: var(--vp-c-bg-soft);
-  border: 1px solid var(--vp-c-divider);
+  background: #0f172a;
+  border: 1px solid #334155;
   border-radius: 12px;
   padding: 18px;
   margin: 20px 0;
+  color: #f8fafc;
 }
 
 .sim-header {
@@ -388,7 +392,65 @@ onUnmounted(() => {
   margin: 0;
   font-size: 1.15rem;
   font-weight: 700;
-  color: var(--vp-c-text-1);
+  color: #f8fafc;
+}
+
+.playback-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 14px;
+  padding: 10px 12px;
+  background: #1e293b;
+  border-radius: 8px;
+  border: 1px solid #334155;
+}
+
+.btn {
+  border: 1px solid #475569;
+  background: #334155;
+  color: #f8fafc;
+}
+
+.btn-primary {
+  background: #0284c7;
+  border-color: #38bdf8;
+  color: #fff;
+}
+
+.speed-control-group {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.speed-label {
+  font-size: 0.8rem;
+  color: #cbd5e1;
+  font-weight: 600;
+}
+
+.speed-btn-group {
+  display: flex;
+  gap: 4px;
+}
+
+.speed-btn-group button {
+  padding: 4px 10px;
+  font-size: 0.75rem;
+  border-radius: 6px;
+  background: #0f172a;
+  color: #cbd5e1;
+  border: 1px solid #334155;
+  cursor: pointer;
+}
+
+.speed-btn-group button.active {
+  background: #0284c7;
+  color: #fff;
+  border-color: #38bdf8;
+  font-weight: 700;
 }
 
 .sim-badges {
@@ -420,6 +482,7 @@ onUnmounted(() => {
   overflow-x: auto;
   border-radius: 8px;
   background: #0f172a;
+  border: 1px solid #1e293b;
 }
 
 .sim-canvas {
@@ -438,10 +501,10 @@ onUnmounted(() => {
 }
 
 .stat-card {
-  background: var(--vp-c-bg-mute);
+  background: #1e293b;
   padding: 10px;
   border-radius: 8px;
-  border: 1px solid var(--vp-c-divider);
+  border: 1px solid #334155;
   text-align: center;
 }
 
@@ -452,20 +515,20 @@ onUnmounted(() => {
 
 .stat-label {
   font-size: 0.75rem;
-  color: var(--vp-c-text-2);
+  color: #cbd5e1;
   margin-bottom: 4px;
 }
 
 .stat-value {
   font-size: 1.1rem;
   font-weight: 700;
-  color: var(--vp-c-text-1);
+  color: #f8fafc;
 }
 
 .stat-unit {
   font-size: 0.8rem;
   font-weight: normal;
-  color: var(--vp-c-text-2);
+  color: #94a3b8;
 }
 
 .text-blue { color: #38bdf8; }
@@ -475,9 +538,10 @@ onUnmounted(() => {
 
 .controls-panel {
   margin-top: 16px;
-  background: var(--vp-c-bg-mute);
+  background: #1e293b;
   padding: 14px;
   border-radius: 8px;
+  border: 1px solid #334155;
 }
 
 .control-row {
@@ -498,7 +562,7 @@ onUnmounted(() => {
   justify-content: space-between;
   font-size: 0.85rem;
   font-weight: 600;
-  color: var(--vp-c-text-1);
+  color: #f8fafc;
 }
 
 .control-val {
@@ -548,11 +612,11 @@ onUnmounted(() => {
 
 .sim-btn.outline {
   background: transparent;
-  color: var(--vp-c-text-1);
-  border: 1px solid var(--vp-c-divider);
+  color: #f8fafc;
+  border: 1px solid #475569;
 }
 .sim-btn.outline:hover {
-  background: var(--vp-c-bg-soft);
+  background: #1e293b;
   border-color: #38bdf8;
   color: #38bdf8;
 }
@@ -561,8 +625,8 @@ onUnmounted(() => {
   margin-top: 12px;
   font-size: 0.85rem;
   line-height: 1.5;
-  color: var(--vp-c-text-2);
-  background: rgba(30, 41, 59, 0.4);
+  color: #cbd5e1;
+  background: #1e293b;
   padding: 10px 14px;
   border-radius: 6px;
   border-left: 3px solid #38bdf8;

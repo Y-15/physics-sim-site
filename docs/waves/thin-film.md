@@ -32,7 +32,9 @@ description: 高校物理の光の干渉最頻出分野。固定端反射によ�
 
 薄膜の厚さ $d$ や屈折率 $n$ をスライダーで動かし、反射光の干渉色やニュートンリングの同心円縞がどのように変化するか観察してみましょう。
 
-<ThinFilmSim />
+<ClientOnly>
+  <ThinFilmSim />
+</ClientOnly>
 
 ---
 

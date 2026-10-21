@@ -253,7 +253,10 @@ function calcPotential(x, y) {
   return v
 }
 
-useLoop(canvasRef, ({ ctx, width, height }) => {
+let pulsePhase = 0
+
+useLoop(canvasRef, ({ ctx, width, height, dt }) => {
+  pulsePhase = (pulsePhase + (dt || 0.016) * 1.8) % 1
   clearGrid(ctx, width, height, 40)
   const cx = width / 2
   const cy = height / 2
@@ -280,7 +283,7 @@ useLoop(canvasRef, ({ ctx, width, height }) => {
   drawCharge(ctx, cx, cy, p2.value, q2.value, 'Q₂')
 
   // ドラッグ案内テキスト
-  text(ctx, '💡 電荷を直接ドラッグして位置を移動できます', cx, height - 15, { color: '#94a3b8', font: '11px sans-serif' })
+  text(ctx, '💡 電荷を直接ドラッグして位置を移動できます', cx, height - 15, { align: 'center', color: '#94a3b8', font: '11px sans-serif' })
 })
 
 // 等電位線の描画（簡易サンプリング輪郭線）
@@ -361,6 +364,8 @@ function drawFieldLines(ctx, cx, cy, w, h) {
       const dt = 0.015 * sign
       let alive = true
       let steps = 0
+      const pulseStep = Math.floor(pulsePhase * 20)
+      const pulsePts = []
 
       while (alive && steps < 120) {
         steps++
@@ -377,6 +382,11 @@ function drawFieldLines(ctx, cx, cy, w, h) {
         const scrY = cy + curY * scale
         ctx.lineTo(scrX, scrY)
 
+        const stepIdx = isPositive ? (steps - pulseStep + 200) % 20 : (steps + pulseStep) % 20
+        if (stepIdx === 0) {
+          pulsePts.push({ x: scrX, y: scrY })
+        }
+
         // 画面外または他の電荷に近づきすぎたら終了
         if (scrX < -20 || scrX > w + 20 || scrY < -20 || scrY > h + 20) break
         const dOther1 = Math.hypot(curX - p1.value.x, curY - p1.value.y)
@@ -387,6 +397,11 @@ function drawFieldLines(ctx, cx, cy, w, h) {
       ctx.strokeStyle = isPositive ? 'rgba(244, 63, 94, 0.65)' : 'rgba(56, 189, 248, 0.65)'
       ctx.lineWidth = 1.6
       ctx.stroke()
+
+      // 電気力線上のアニメーション光点（電場の向きを可視化）
+      pulsePts.forEach(pt => {
+        dot(ctx, pt.x, pt.y, 2.6, isPositive ? '#fda4af' : '#7dd3fc')
+      })
     }
   })
 }
@@ -412,8 +427,8 @@ function drawCharge(ctx, cx, cy, p, q, label) {
 
   // 符号テキスト
   const signText = isZero ? '0' : (isPos ? `+${q.toFixed(1)}` : `${q.toFixed(1)}`)
-  text(ctx, signText, scrX, scrY - 2, { color: '#fff', font: 'bold 12px sans-serif' })
-  text(ctx, `${label} (μC)`, scrX, scrY + radius + 14, { color, font: 'bold 11px sans-serif' })
+  text(ctx, signText, scrX, scrY + 4, { align: 'center', color: '#fff', font: 'bold 12px sans-serif' })
+  text(ctx, `${label} (μC)`, scrX, scrY + radius + 16, { align: 'center', color, font: 'bold 11px sans-serif' })
 
   ctx.restore()
 }

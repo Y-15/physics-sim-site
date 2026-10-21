@@ -7,8 +7,8 @@
 
     <!-- 再生速度・アニメーションコントロールバー -->
     <div class="playback-bar">
-      <button class="lab-btn primary" @click="playing = !playing" style="padding: 6px 16px; font-weight: 700; border-radius: 8px; cursor: pointer;">
-        {{ playing ? '⏸ 一時停止' : '▶ 再生' }}
+      <button class="lab-btn primary" @click="togglePlay" style="padding: 6px 16px; font-weight: 700; border-radius: 8px; cursor: pointer;">
+        {{ playing && !stopped ? '⏸ 一時停止' : '▶ 再生' }}
       </button>
       <div class="speed-control-group">
         <span class="speed-label">⏱️ 再生速度:</span>
@@ -116,11 +116,21 @@ const curU = ref(0)
 const curQ = ref(0)
 
 // 軌道幾何（斜面〜なめらかな接続〜水平面）
-// 画面スケール: 1m = 65px
-const scale = 65
-const groundY = 250 // 地面のy座標
+// 画面スケール: 1m = 52px（最大高さ h0 = 4.0m でも上端に余裕を持たせる）
+const scale = 52
+const groundY = 278 // 地面のy座標
 const slopeAngle = 35 * Math.PI / 180
 const slopeStartX = 95
+let stopTimer = 0
+
+function togglePlay() {
+  if (stopped) {
+    reset()
+    playing.value = true
+  } else {
+    playing.value = !playing.value
+  }
+}
 
 function getPos(dist) {
   // 斜面区間の長さ
@@ -147,6 +157,7 @@ function reset() {
   v = 0
   heatQ = 0
   stopped = false
+  stopTimer = 0
   updateStats()
 }
 
@@ -162,7 +173,13 @@ function updateStats() {
 }
 
 function step(dt) {
-  if (stopped) return
+  if (stopped) {
+    stopTimer += dt
+    if (stopTimer > 1.2) {
+      reset()
+    }
+    return
+  }
 
   const slopeLen = h0.value / Math.sin(slopeAngle)
 

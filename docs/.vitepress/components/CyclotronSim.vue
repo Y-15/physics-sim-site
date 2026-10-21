@@ -71,8 +71,18 @@ function resetSim() {
   }
 }
 
+let emittedWait = 0
+
 function updatePhysics() {
-  if (state.value.isEmitted || !isPlaying.value) return
+  if (!isPlaying.value) return
+  if (state.value.isEmitted) {
+    emittedWait++
+    if (emittedWait > 50) {
+      emittedWait = 0
+      resetSim()
+    }
+    return
+  }
 
   const p = particles[particleType.value]
   const B = magneticField.value
@@ -186,11 +196,13 @@ function draw() {
   ctx.stroke()
   ctx.restore()
 
-  // 電極ラベル
+  // 電極ラベル (左上オーバーレイと重ならないよう下部に配置)
   ctx.fillStyle = '#94a3b8'
-  ctx.font = 'bold 15px sans-serif'
-  ctx.fillText('D₁ (ディー1)', centerX - R * 0.7, centerY - R * 0.6)
-  ctx.fillText('D₂ (ディー2)', centerX + R * 0.35, centerY - R * 0.6)
+  ctx.font = 'bold 14px sans-serif'
+  ctx.textAlign = 'center'
+  ctx.fillText('D₁ (ディー1)', centerX - R * 0.52, centerY + R * 0.65)
+  ctx.fillText('D₂ (ディー2)', centerX + R * 0.52, centerY + R * 0.65)
+  ctx.textAlign = 'left'
 
   // 3. ギャップ間の電場矢印
   const eDir = state.value.gapEFieldDirection
@@ -430,17 +442,64 @@ onUnmounted(() => {
 
 .overlay-stats {
   position: absolute;
-  top: 10px;
-  left: 10px;
-  background: rgba(15, 23, 42, 0.85);
+  top: 8px;
+  left: 8px;
+  background: rgba(15, 23, 42, 0.88);
   backdrop-filter: blur(8px);
-  padding: 0.5rem 0.75rem;
+  padding: 0.4rem 0.65rem;
   border-radius: 8px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  font-size: 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  font-size: 0.72rem;
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
+  gap: 0.2rem;
+}
+
+.playback-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+  padding: 8px 10px;
+  background: rgba(15, 23, 42, 0.7);
+  border: 1px solid rgba(56, 189, 248, 0.2);
+  border-radius: 8px;
+}
+
+.speed-control-group {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.speed-label {
+  font-size: 0.78rem;
+  color: #94a3b8;
+}
+
+.speed-btn-group {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+
+.speed-btn-group button {
+  background: #1e293b;
+  color: #cbd5e1;
+  border: 1px solid #334155;
+  padding: 4px 8px;
+  font-size: 0.74rem;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.speed-btn-group button.active {
+  background: #0284c7;
+  color: #fff;
+  border-color: #38bdf8;
+  font-weight: 700;
 }
 
 .stat-item {

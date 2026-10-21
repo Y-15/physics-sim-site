@@ -24,7 +24,7 @@ description: 放射性同位元素の連続壊変、放射能（ベクレル）�
 ## 2. 壊変の基本方程式と放射能
 
 ### 2.1 崩壊の法則と放射能（ベクレル）
-ある放射性核種が $N$ 個存在するとき、微小時間 $\Delta t$ の間に崩壊する原子数 $\Delta N$ は、$N$ に比例します。比例定数を**崩壊定数 $\lambda$** とすると：
+ある放射性核種が $N$ 個存在するとき、微小時間 $\Delta t$ の間に崩壊する原子数 $\Delta N$ は、$N$ に比例します。比例定数を<strong>崩壊定数 $\lambda$</strong> とすると：
 
 $$\frac{dN}{dt} = -\lambda N$$
 
@@ -32,10 +32,10 @@ $$\frac{dN}{dt} = -\lambda N$$
 
 $$N(t) = N_0 e^{-\lambda t}$$
 
-原子数が半分（$\frac{1}{2}N_0$）になる時間（**半減期 $T$**）との関係は：
+原子数が半分（$\frac{1}{2}N_0$）になる時間（<strong>半減期 $T$</strong>）との関係は：
 $$\frac{1}{2} = e^{-\lambda T} \implies \mathbf{T = \frac{\ln 2}{\lambda} \approx \frac{0.693}{\lambda}}$$
 
-単位時間（1秒間）あたりに崩壊する原子の個数を**放射能（Activity）$A(t)$** と呼び、単位は**ベクレル $[\text{Bq}]$**（$1\text{ Bq} = 1\text{ 回/秒}$ の崩壊）で表されます：
+単位時間（1秒間）あたりに崩壊する原子の個数を<strong>放射能（Activity）$A(t)$</strong> と呼び、単位は<strong>ベクレル $[\text{Bq}]$</strong>（$1\text{ Bq} = 1\text{ 回/秒}$ の崩壊）で表されます：
 
 $$A(t) = \left| \frac{dN}{dt} \right| = \mathbf{\lambda N(t)}$$
 
@@ -152,7 +152,7 @@ $$\mathbf{\frac{N_A}{T_A} = \frac{N_B}{T_B} \iff \frac{N_A}{N_B} = \frac{T_A}{T_
 $t \gg T_B$ において $e^{-\lambda_B t} \ll e^{-\lambda_A t}$ となるため、娘核種は：
 $$N_B(t) \approx \frac{\lambda_A}{\lambda_B - \lambda_A} N_A(t)$$
 
-両辺の放射能比は一定となり、娘核種は**自身の半減期 $T_B$ ではなく、親核種の半減期 $T_A$ に引っ張られて一緒に減衰**していきます。
+両辺の放射能比は一定となり、娘核種は<strong>自身の半減期 $T_B$ ではなく、親核種の半減期 $T_A$ に引っ張られて一緒に減衰</strong>していきます。
 
 ---
 

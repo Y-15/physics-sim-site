@@ -139,8 +139,8 @@ function draw(timestamp) {
   for (let y = 0; y <= h; y += 40) { ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(w, y); ctx.stroke() }
 
   const centerX = w * 0.45
-  const centerY = h * 0.5
-  const pxPerMeter = 90
+  const centerY = 160
+  const pxPerMeter = 54
   const radiusPx = r.value * pxPerMeter
 
   // 座標軸 (x, y)

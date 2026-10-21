@@ -160,6 +160,7 @@ const nmToRgb = (nm) => {
 }
 
 let animId = null
+let simTime = 0
 
 const draw = () => {
   const canvas = canvasRef.value
@@ -168,6 +169,7 @@ const draw = () => {
   const width = canvas.width
   const height = canvas.height
 
+  simTime += 0.025
   ctx.clearRect(0, 0, width, height)
 
   // 背景
@@ -349,6 +351,46 @@ const draw = () => {
     ctx.lineTo(px, py)
   }
   ctx.stroke()
+
+  // 回折格子からスクリーンへ向かう光線・波面パルスのアニメーション (y: 105〜160)
+  const gratingY = 152
+  ctx.strokeStyle = '#64748b'
+  ctx.lineWidth = 2
+  ctx.setLineDash([4, 3])
+  ctx.beginPath()
+  ctx.moveTo(screenCenterX - 60, gratingY)
+  ctx.lineTo(screenCenterX + 60, gratingY)
+  ctx.stroke()
+  ctx.setLineDash([])
+  ctx.fillStyle = '#94a3b8'
+  ctx.font = '10px sans-serif'
+  ctx.textAlign = 'center'
+  ctx.fillText(`回折格子 (d = ${gratingD_um.value.toFixed(2)} μm)`, screenCenterX, gratingY + 11)
+
+  const pulseFrac = (simTime * 0.7) % 1
+  const rays = [{ x: screenCenterX, color: sourceType.value === 'laser' ? nmToRgb(wavelengthNm.value) : '#ffffff' }]
+  const sin1Ref = refWaveNm.value / d_nm
+  if (sin1Ref < 0.96) {
+    const dx1 = L_cm * Math.tan(Math.asin(sin1Ref)) * pxPerCm
+    const rayCol = sourceType.value === 'laser' ? nmToRgb(wavelengthNm.value) : '#38bdf8'
+    if (screenCenterX - dx1 > screenLeft + 10) rays.push({ x: screenCenterX - dx1, color: rayCol })
+    if (screenCenterX + dx1 < screenRight - 10) rays.push({ x: screenCenterX + dx1, color: rayCol })
+  }
+  rays.forEach((r) => {
+    ctx.strokeStyle = 'rgba(148, 163, 184, 0.25)'
+    ctx.lineWidth = 1.2
+    ctx.beginPath()
+    ctx.moveTo(screenCenterX, gratingY)
+    ctx.lineTo(r.x, bandY + bandH)
+    ctx.stroke()
+
+    const px = screenCenterX + (r.x - screenCenterX) * pulseFrac
+    const py = gratingY + ((bandY + bandH) - gratingY) * pulseFrac
+    ctx.fillStyle = r.color
+    ctx.beginPath()
+    ctx.arc(px, py, 3, 0, Math.PI * 2)
+    ctx.fill()
+  })
   } catch (err) {
     console.error('GRATING DRAW ERROR:', err)
   }

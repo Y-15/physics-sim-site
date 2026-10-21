@@ -95,7 +95,7 @@
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 
 const canvasRef = ref(null)
-const glancingAngleDeg = ref(25.0)   // θ = 25.0°
+const glancingAngleDeg = ref(15.9)   // θ = 15.9° (NaCl 1次ブラッグ角)
 const latticeSpacingNm = ref(0.282)   // d = 0.282 nm (NaCl)
 const xRayWavelengthNm = ref(0.154)   // λ = 0.154 nm (Cu-Kα線)
 
@@ -233,19 +233,31 @@ function draw() {
   const out2X = centerX + rayLen * cosT
   const out2Y = layer2Y - rayLen * sinT
 
-  // 光線1 (第1層反射)
-  ctx.strokeStyle = '#38bdf8'
-  ctx.lineWidth = 2.2
+  // 光線1 (第1層反射: ベースライン + 進行するX線正弦波)
+  ctx.strokeStyle = 'rgba(56, 189, 248, 0.35)'
+  ctx.lineWidth = 1.5
   ctx.beginPath()
   ctx.moveTo(in1X, in1Y); ctx.lineTo(centerX, layer1Y); ctx.lineTo(out1X, out1Y)
   ctx.stroke()
 
-  // 光線2 (第2層反射)
-  ctx.strokeStyle = '#fbbf24'
-  ctx.lineWidth = 2.2
+  // 光線2 (第2層反射: ベースライン)
+  ctx.strokeStyle = 'rgba(251, 191, 36, 0.35)'
+  ctx.lineWidth = 1.5
   ctx.beginPath()
   ctx.moveTo(in2X, in2Y); ctx.lineTo(centerX, layer2Y); ctx.lineTo(out2X, out2Y)
   ctx.stroke()
+
+  // 進行するX線波形の描画 (波長 λ に比例した空間周期でアニメーション)
+  const waveLambdaPx = Math.max(18, (xRayWavelengthNm.value / 0.154) * 32)
+  const kWave = (2 * Math.PI) / waveLambdaPx
+  const ampIn = 6.5
+  const ampOut = 2.0 + 5.5 * reflectionIntensity.value
+  const phaseDiffRad = ratio.value * 2 * Math.PI
+
+  drawWaveRay(ctx, in1X, in1Y, centerX, layer1Y, kWave, -waveTime * 2.5, ampIn, '#38bdf8', 2.2)
+  drawWaveRay(ctx, centerX, layer1Y, out1X, out1Y, kWave, -waveTime * 2.5, ampOut, '#38bdf8', 2.2)
+  drawWaveRay(ctx, in2X, in2Y, centerX, layer2Y, kWave, -waveTime * 2.5, ampIn, '#fbbf24', 2.2)
+  drawWaveRay(ctx, centerX, layer2Y, out2X, out2Y, kWave, -waveTime * 2.5 + phaseDiffRad, ampOut, '#fbbf24', 2.2)
 
   // 3. 幾何学的光路差の垂線と赤色ハイライト
   // 点Aから光線2への垂線足 P, Q
@@ -322,6 +334,30 @@ function draw() {
   animId = requestAnimationFrame(draw)
 }
 
+function drawWaveRay(ctx, x1, y1, x2, y2, k, phase, amp, color, lw) {
+  const dx = x2 - x1
+  const dy = y2 - y1
+  const len = Math.hypot(dx, dy)
+  if (len < 1) return
+  const ux = dx / len
+  const uy = dy / len
+  const nx = -uy
+  const ny = ux
+  ctx.save()
+  ctx.strokeStyle = color
+  ctx.lineWidth = lw
+  ctx.beginPath()
+  for (let s = 0; s <= len; s += 2) {
+    const w = Math.sin(k * s + phase) * amp
+    const px = x1 + ux * s + nx * w
+    const py = y1 + uy * s + ny * w
+    if (s === 0) ctx.moveTo(px, py)
+    else ctx.lineTo(px, py)
+  }
+  ctx.stroke()
+  ctx.restore()
+}
+
 function drawAtom(ctx, x, y, color) {
   ctx.save()
   ctx.fillStyle = color
@@ -344,18 +380,19 @@ onUnmounted(() => {
 
 <style scoped>
 .sim-container {
-  background: var(--vp-c-bg-soft, #18181b);
-  border: 1px solid var(--vp-c-divider, rgba(255, 255, 255, 0.1));
+  background: #0f172a;
+  border: 1px solid #1e293b;
   border-radius: 12px;
   padding: 18px;
   margin: 24px 0;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+  color: #f8fafc;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
 }
 
 .sim-header h3 {
   margin: 0 0 6px 0;
   font-size: 1.15rem;
-  color: var(--vp-c-text-1, #f4f4f5);
+  color: #f8fafc;
 }
 
 .title-row {
@@ -366,7 +403,7 @@ onUnmounted(() => {
 
 .subtitle {
   font-size: 0.88rem;
-  color: var(--vp-c-text-2, #a1a1aa);
+  color: #94a3b8;
   line-height: 1.5;
   margin-bottom: 14px;
 }
@@ -407,8 +444,8 @@ canvas {
 
 .control-panel {
   margin-top: 16px;
-  background: rgba(0, 0, 0, 0.2);
-  border: 1px solid var(--vp-c-divider, rgba(255, 255, 255, 0.08));
+  background: #1e293b;
+  border: 1px solid #334155;
   border-radius: 8px;
   padding: 14px;
 }
@@ -442,8 +479,8 @@ canvas {
 .select-btn {
   padding: 5px 10px;
   font-size: 0.75rem;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: #0f172a;
+  border: 1px solid #475569;
   border-radius: 6px;
   color: #cbd5e1;
   cursor: pointer;
@@ -451,7 +488,7 @@ canvas {
 }
 
 .select-btn:hover {
-  background: rgba(255, 255, 255, 0.12);
+  background: #334155;
   border-color: #38bdf8;
 }
 
@@ -488,12 +525,12 @@ canvas {
 }
 
 .btn-secondary {
-  background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(255, 255, 255, 0.15);
+  background: #334155;
+  border-color: #475569;
   color: #e2e8f0;
 }
 .btn-secondary:hover {
-  background: rgba(255, 255, 255, 0.14);
+  background: #475569;
 }
 
 .stats-monitor {
@@ -504,8 +541,8 @@ canvas {
 }
 
 .stat-card {
-  background: rgba(0, 0, 0, 0.25);
-  border: 1px solid var(--vp-c-divider, rgba(255, 255, 255, 0.08));
+  background: #1e293b;
+  border: 1px solid #334155;
   border-radius: 8px;
   padding: 10px 12px;
   display: flex;
@@ -522,7 +559,7 @@ canvas {
   font-size: 1.15rem;
   font-weight: bold;
   font-family: monospace;
-  color: var(--vp-c-text-1, #f4f4f5);
+  color: #f8fafc;
 }
 
 .stat-card .value.highlight {
@@ -537,7 +574,7 @@ canvas {
 
 .stat-card .subtext {
   font-size: 0.72rem;
-  color: #71717a;
+  color: #94a3b8;
   margin-top: 2px;
 }
 </style>

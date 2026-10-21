@@ -75,22 +75,18 @@ $$
         <path d="M 0 1 L 10 5 L 0 9 z" fill="#ef4444" />
       </marker>
     </defs>
-
     <!-- ステージ1: 衝突前 -->
     <text x="30" y="42" fill="#94a3b8" font-size="12" font-weight="bold">【衝突前】</text>
     <circle cx="160" cy="38" r="18" fill="rgba(56, 189, 248, 0.2)" stroke="#38bdf8" stroke-width="2" />
     <text x="160" y="43" fill="#38bdf8" font-size="11" font-weight="bold" text-anchor="middle">m₁</text>
     <line x1="180" y1="38" x2="230" y2="38" stroke="#38bdf8" stroke-width="2" marker-end="url(#mom-arrow-blue)" />
     <text x="205" y="30" fill="#38bdf8" font-size="11" font-weight="bold">u₁</text>
-
     <circle cx="360" cy="38" r="22" fill="rgba(251, 191, 36, 0.2)" stroke="#fbbf24" stroke-width="2" />
     <text x="360" y="43" fill="#fbbf24" font-size="11" font-weight="bold" text-anchor="middle">m₂</text>
     <line x1="385" y1="38" x2="425" y2="38" stroke="#fbbf24" stroke-width="2" marker-end="url(#mom-arrow-amber)" />
     <text x="405" y="30" fill="#fbbf24" font-size="11" font-weight="bold">u₂</text>
-
     <!-- 分割点線 -->
     <line x1="30" y1="75" x2="510" y2="75" stroke="#334155" stroke-dasharray="2,2" />
-
     <!-- ステージ2: 衝突中 (作用・反作用) -->
     <text x="30" y="112" fill="#ef4444" font-size="12" font-weight="bold">【衝突中】</text>
     <!-- 接触する2球 -->
@@ -98,24 +94,19 @@ $$
     <text x="232" y="115" fill="#38bdf8" font-size="11" font-weight="bold" text-anchor="middle">m₁</text>
     <circle cx="272" cy="110" r="22" fill="rgba(251, 191, 36, 0.2)" stroke="#fbbf24" stroke-width="2" />
     <text x="272" y="115" fill="#fbbf24" font-size="11" font-weight="bold" text-anchor="middle">m₂</text>
-
     <!-- 作用・反作用の力ベクトル (内力) -->
     <line x1="220" y1="110" x2="165" y2="110" stroke="#ef4444" stroke-width="2.5" marker-end="url(#mom-arrow-red)" />
     <text x="190" y="100" fill="#ef4444" font-size="11" font-weight="bold" text-anchor="middle">-F (反作用)</text>
-
     <line x1="285" y1="110" x2="340" y2="110" stroke="#ef4444" stroke-width="2.5" marker-end="url(#mom-arrow-red)" />
     <text x="315" y="100" fill="#ef4444" font-size="11" font-weight="bold" text-anchor="middle">+F (作用)</text>
-
     <!-- 分割点線 -->
     <line x1="30" y1="148" x2="510" y2="148" stroke="#334155" stroke-dasharray="2,2" />
-
     <!-- ステージ3: 衝突後 -->
     <text x="30" y="185" fill="#10b981" font-size="12" font-weight="bold">【衝突後】</text>
     <circle cx="160" cy="182" r="18" fill="rgba(56, 189, 248, 0.2)" stroke="#38bdf8" stroke-width="2" />
     <text x="160" y="187" fill="#38bdf8" font-size="11" font-weight="bold" text-anchor="middle">m₁</text>
     <line x1="180" y1="182" x2="220" y2="182" stroke="#38bdf8" stroke-width="2" marker-end="url(#mom-arrow-blue)" />
     <text x="200" y="174" fill="#38bdf8" font-size="11" font-weight="bold">v₁</text>
-
     <circle cx="360" cy="182" r="22" fill="rgba(251, 191, 36, 0.2)" stroke="#fbbf24" stroke-width="2" />
     <text x="360" y="187" fill="#fbbf24" font-size="11" font-weight="bold" text-anchor="middle">m₂</text>
     <line x1="385" y1="182" x2="445" y2="182" stroke="#fbbf24" stroke-width="2" marker-end="url(#mom-arrow-amber)" />
@@ -249,47 +240,37 @@ $$
       </marker>
     </defs>
     <rect width="700" height="240" fill="url(#gridPatGalperin)" />
-
     <!-- Split line -->
     <line x1="330" y1="15" x2="330" y2="225" stroke="rgba(255,255,255,0.15)" stroke-width="1.5" stroke-dasharray="4,4" />
-
     <!-- Left side: Real space -->
     <text x="25" y="32" fill="#e4e4e7" font-size="12" font-weight="bold" font-family="sans-serif">【実空間】x軸上の完全弾性衝突</text>
-    
     <!-- Wall -->
     <line x1="40" y1="50" x2="40" y2="180" stroke="#f59e0b" stroke-width="4" />
     <text x="20" y="196" fill="#f59e0b" font-size="11" font-weight="bold" font-family="sans-serif">壁 x = 0</text>
     <line x1="40" y1="175" x2="310" y2="175" stroke="rgba(255,255,255,0.4)" stroke-width="2" marker-end="url(#arrAxis)" />
     <text x="312" y="179" fill="#a1a1aa" font-size="11" font-family="sans-serif">x</text>
-
     <!-- Block A -->
     <rect x="90" y="145" width="30" height="30" fill="#22d3ee" stroke="#38bdf8" stroke-width="1.5" />
     <text x="100" y="165" fill="#0c0e14" font-size="12" font-weight="bold" font-family="sans-serif">A</text>
     <text x="92" y="138" fill="#22d3ee" font-size="11" font-family="sans-serif">m (静止)</text>
-
     <!-- Block B -->
     <rect x="180" y="125" width="50" height="50" fill="#ec4899" stroke="#f472b6" stroke-width="1.5" />
     <text x="200" y="155" fill="#ffffff" font-size="14" font-weight="bold" font-family="sans-serif">B</text>
     <text x="175" y="118" fill="#ec4899" font-size="11" font-weight="bold" font-family="sans-serif">M = 100ᵏm</text>
     <line x1="205" y1="98" x2="165" y2="98" stroke="#ec4899" stroke-width="2.5" marker-end="url(#arrPink)" />
     <text x="175" y="92" fill="#ec4899" font-size="11" font-family="sans-serif">初速 -v₀</text>
-
     <!-- Right side: Phase space -->
     <text x="355" y="32" fill="#e4e4e7" font-size="12" font-weight="bold" font-family="sans-serif">【相空間】エネルギー保存円 X² + Y² = R²</text>
-    
     <!-- Axes in Phase space -->
     <line x1="360" y1="130" x2="675" y2="130" stroke="rgba(255,255,255,0.3)" stroke-width="1.5" marker-end="url(#arrAxis)" />
     <text x="635" y="122" fill="#a1a1aa" font-size="10" font-family="sans-serif">X = √MV</text>
     <line x1="515" y1="215" x2="515" y2="45" stroke="rgba(255,255,255,0.3)" stroke-width="1.5" marker-end="url(#arrAxis)" />
     <text x="522" y="55" fill="#a1a1aa" font-size="10" font-family="sans-serif">Y = √mv</text>
-
     <!-- Circle -->
     <circle cx="515" cy="130" r="75" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1.5" />
-
     <!-- Sector (0 <= Y <= X tan theta) -->
     <path d="M 515 130 L 590 130 A 75 75 0 0 0 584 94 Z" fill="rgba(16,185,129,0.25)" stroke="#10b981" stroke-width="1.5" />
     <text x="596" y="112" fill="#10b981" font-size="10" font-weight="bold" font-family="sans-serif">終了領域 (幅 θ)</text>
-
     <!-- Points and reflection chord -->
     <circle cx="440" cy="130" r="4" fill="#f43f5e" />
     <text x="400" y="125" fill="#f43f5e" font-size="10" font-family="sans-serif">P₀(-R,0)</text>
@@ -299,7 +280,6 @@ $$
     <line x1="465" y1="198" x2="465" y2="62" stroke="#38bdf8" stroke-width="1.5" stroke-dasharray="3,3" />
     <circle cx="465" cy="62" r="3.5" fill="#38bdf8" />
     <text x="468" y="58" fill="#38bdf8" font-size="10" font-family="sans-serif">P₂</text>
-
     <!-- Arc 2 theta indicator -->
     <path d="M 440 130 A 75 75 0 0 0 465 198" fill="none" stroke="#fbbf24" stroke-width="2" />
     <text x="415" y="172" fill="#fbbf24" font-size="10" font-weight="bold" font-family="sans-serif">中心角 2θ</text>

@@ -120,7 +120,8 @@ const mode = ref('decay')
 const halfLife = ref(6) // 秒
 const initialCount = ref(400)
 const nuclei = []
-let simTime = 0
+const simTime = ref(0)
+const activeNucleiCount = ref(400)
 const historyData = [] // { t, count }
 
 // モード2: 透過力パラメーター
@@ -154,7 +155,7 @@ const radiationInfo = computed(() => {
 
 // 原子核の初期化
 function resetDecay() {
-  simTime = 0
+  simTime.value = 0
   nuclei.length = 0
   historyData.length = 0
 
@@ -170,17 +171,13 @@ function resetDecay() {
       decayTime: null
     })
   }
+  activeNucleiCount.value = n
   historyData.push({ t: 0, count: n })
 }
 
-// 残存核の数
-const activeNucleiCount = computed(() => {
-  return nuclei.filter((n) => !n.decayed).length
-})
-
 // 理論残存数
 const theoryCount = computed(() => {
-  return initialCount.value * Math.pow(0.5, simTime / halfLife.value)
+  return initialCount.value * Math.pow(0.5, simTime.value / halfLife.value)
 })
 
 // 初回初期化
@@ -206,23 +203,30 @@ useLoop((dt) => {
 
 // 崩壊更新
 function updateDecay(dt) {
-  simTime += dt
+  simTime.value += dt
+  if (simTime.value > halfLife.value * 3.5) {
+    resetDecay()
+    return
+  }
 
   // 単位時間あたりの崩壊確率: P(dt) = 1 - 2^(-dt / T) ≈ ln(2)/T * dt
   const lambda = Math.LN2 / halfLife.value
   const prob = 1 - Math.exp(-lambda * dt)
 
+  let alive = 0
   for (const n of nuclei) {
     if (!n.decayed && Math.random() < prob) {
       n.decayed = true
-      n.decayTime = simTime
+      n.decayTime = simTime.value
     }
+    if (!n.decayed) alive++
   }
+  activeNucleiCount.value = alive
 
-  // グラフデータ記録 (0.1秒ごと)
+  // グラフデータ記録 (0.15秒ごと)
   const lastT = historyData.length > 0 ? historyData[historyData.length - 1].t : 0
-  if (simTime - lastT >= 0.15 && simTime <= halfLife.value * 3.5) {
-    historyData.push({ t: simTime, count: activeNucleiCount.value })
+  if (simTime.value - lastT >= 0.15 && simTime.value <= halfLife.value * 3.5) {
+    historyData.push({ t: simTime.value, count: activeNucleiCount.value })
   }
 }
 
@@ -258,9 +262,9 @@ function drawDecaySim(ctx, w, h) {
   dot(ctx, boxX + 160, boxY + boxH + 20, 4, '#3b82f6')
   text(ctx, `娘核 (崩壊済): ${initialCount.value - activeNucleiCount.value}`, boxX + 172, boxY + boxH + 24, '#60a5fa', '11px sans-serif')
 
-  // 右側: 減衰曲線グラフ (x: 390 ~ 740, y: 70 ~ 360)
-  const gx0 = 410, gy0 = 340
-  const gw = 320, gh = 250
+  // 右側: 減衰曲線グラフ (x: 390 ~ 700, y: 70 ~ 360)
+  const gx0 = 395, gy0 = 340
+  const gw = 295, gh = 250
   const maxT = halfLife.value * 3.2
 
   const toX = (t) => gx0 + (t / maxT) * gw
@@ -269,7 +273,7 @@ function drawDecaySim(ctx, w, h) {
   text(ctx, '【残存核数の時間変化 N(t)】', gx0, 56, '#e4e4e7', 'bold 12px sans-serif')
 
   // 軸
-  arrow(ctx, gx0, gy0, gx0 + gw + 15, gy0, '#71717a', 2, '時間 t [秒]', { align: 'left', lx: 6 })
+  arrow(ctx, gx0, gy0, gx0 + gw + 15, gy0, '#71717a', 2, '時間 t [秒]', { align: 'left', lx: 5 })
   arrow(ctx, gx0, gy0, gx0, gy0 - gh - 15, '#71717a', 2, '原子核数 N', { align: 'center', ly: -10 })
 
   // 半減期の縦点線 (T, 2T, 3T)
@@ -313,7 +317,7 @@ function drawDecaySim(ctx, w, h) {
   ctx.stroke()
 
   // 現在のプロット点
-  const curX = toX(simTime)
+  const curX = toX(simTime.value)
   const curY = toY(activeNucleiCount.value)
   if (curX <= gx0 + gw) {
     dot(ctx, curX, curY, 6, '#f43f5e', '#ffffff')

@@ -32,7 +32,9 @@ description: 高校物理の波動最頻出テーマ。音源移動による波�
 
 音源速度 $v_s$ や観測者速度 $v_o$ を動かして、音波の円形波面がどのように圧縮・伸長されるか観察してみましょう。
 
-<DopplerSim />
+<ClientOnly>
+  <DopplerSim />
+</ClientOnly>
 
 ---
 

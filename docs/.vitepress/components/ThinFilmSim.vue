@@ -115,6 +115,19 @@ const filmIndex = ref(1.33) // 水/油
 const lensRadius = ref(15) // m
 
 let animId = null
+let simTime = 0
+
+function drawRayPulses(ctx, x1, y1, x2, y2, color, phaseOffset = 0) {
+  for (let i = 0; i < 3; i++) {
+    const t = ((simTime * 0.8 + phaseOffset + i / 3) % 1 + 1) % 1
+    const px = x1 + (x2 - x1) * t
+    const py = y1 + (y2 - y1) * t
+    ctx.fillStyle = color
+    ctx.beginPath()
+    ctx.arc(px, py, 3.2, 0, Math.PI * 2)
+    ctx.fill()
+  }
+}
 
 // 波長からRGBへの変換
 const waveColor = computed(() => {
@@ -222,6 +235,13 @@ function drawFilmMode(ctx, width, height) {
   ctx.stroke()
   ctx.fillStyle = '#10b981'
   ctx.fillText('反射光② (膜内往復)', outX1 + 30, 55)
+
+  // 光線上の進行波パルス描画
+  drawRayPulses(ctx, inX, 40, hitX1, hitY1, waveColor.value, 0)
+  drawRayPulses(ctx, hitX1, hitY1, hitX1 + 80, 40, '#f43f5e', 0.5)
+  drawRayPulses(ctx, hitX1, hitY1, hitX2, hitY2, waveColor.value, 0.2)
+  drawRayPulses(ctx, hitX2, hitY2, outX1, outY1, waveColor.value, 0.4)
+  drawRayPulses(ctx, outX1, outY1, outX1 + 80, 40, '#10b981', 0.6)
 
   // 干渉強度の計算 (垂直入射近似: 光路差 Δ = 2nd)
   const delta = 2 * filmIndex.value * filmThickness.value
@@ -339,32 +359,43 @@ function drawNewtonMode(ctx, width, height) {
   ctx.stroke()
   ctx.fillStyle = '#94a3b8'
   ctx.fillText('平板ガラス (上面反射で反転)', diagX + 15, diagY + 98)
+
+  // 断面図内の入射・反射光パルス
+  drawRayPulses(ctx, diagX + 65, diagY + 25, diagX + 65, diagY + 80, waveColor.value, 0)
+  drawRayPulses(ctx, diagX + 125, diagY + 80, diagX + 125, diagY + 25, '#38bdf8', 0.4)
 }
 
 function render() {
   const canvas = canvasRef.value
   if (!canvas) return
   const ctx = canvas.getContext('2d')
+  simTime += 0.016
   if (mode.value === 'film') {
     drawFilmMode(ctx, canvas.width, canvas.height)
   } else {
     drawNewtonMode(ctx, canvas.width, canvas.height)
   }
+  animId = requestAnimationFrame(render)
 }
 
 watch([mode, wavelength, filmThickness, filmIndex, lensRadius], () => {
-  render()
+  // 自動再描画はアニメーションループで処理
 })
 
 onMounted(() => {
-  render()
+  animId = requestAnimationFrame(render)
+})
+
+onUnmounted(() => {
+  if (animId) cancelAnimationFrame(animId)
 })
 </script>
 
 <style scoped>
 .sim-container {
-  background: var(--vp-c-bg-soft);
-  border: 1px solid var(--vp-c-divider);
+  background: #0f172a;
+  color: #f8fafc;
+  border: 1px solid #334155;
   border-radius: 12px;
   padding: 18px;
   margin: 20px 0;
@@ -383,13 +414,13 @@ onMounted(() => {
   margin: 0;
   font-size: 1.15rem;
   font-weight: 700;
-  color: var(--vp-c-text-1);
+  color: #f8fafc;
 }
 
 .sim-tabs {
   display: flex;
   gap: 6px;
-  background: var(--vp-c-bg-mute);
+  background: #1e293b;
   padding: 4px;
   border-radius: 8px;
 }
@@ -401,7 +432,7 @@ onMounted(() => {
   border-radius: 6px;
   border: none;
   background: transparent;
-  color: var(--vp-c-text-2);
+  color: #cbd5e1;
   cursor: pointer;
   transition: all 0.2s ease;
 }
@@ -434,34 +465,34 @@ onMounted(() => {
 }
 
 .stat-card {
-  background: var(--vp-c-bg-mute);
+  background: #1e293b;
   padding: 10px;
   border-radius: 8px;
-  border: 1px solid var(--vp-c-divider);
+  border: 1px solid #334155;
   text-align: center;
 }
 
 .stat-card.highlight {
-  background: rgba(56, 189, 248, 0.08);
-  border-color: rgba(56, 189, 248, 0.4);
+  background: rgba(56, 189, 248, 0.12);
+  border-color: rgba(56, 189, 248, 0.45);
 }
 
 .stat-label {
   font-size: 0.75rem;
-  color: var(--vp-c-text-2);
+  color: #cbd5e1;
   margin-bottom: 4px;
 }
 
 .stat-value {
   font-size: 1.1rem;
   font-weight: 700;
-  color: var(--vp-c-text-1);
+  color: #f8fafc;
 }
 
 .stat-unit {
   font-size: 0.8rem;
   font-weight: normal;
-  color: var(--vp-c-text-2);
+  color: #94a3b8;
 }
 
 .text-blue { color: #38bdf8; }
@@ -471,7 +502,8 @@ onMounted(() => {
 
 .controls-panel {
   margin-top: 16px;
-  background: var(--vp-c-bg-mute);
+  background: #1e293b;
+  border: 1px solid #334155;
   padding: 14px;
   border-radius: 8px;
 }
@@ -494,7 +526,7 @@ onMounted(() => {
   justify-content: space-between;
   font-size: 0.85rem;
   font-weight: 600;
-  color: var(--vp-c-text-1);
+  color: #e2e8f0;
 }
 
 .control-val {
@@ -511,8 +543,8 @@ onMounted(() => {
   margin-top: 12px;
   font-size: 0.85rem;
   line-height: 1.5;
-  color: var(--vp-c-text-2);
-  background: rgba(30, 41, 59, 0.4);
+  color: #cbd5e1;
+  background: rgba(30, 41, 59, 0.7);
   padding: 10px 14px;
   border-radius: 6px;
   border-left: 3px solid #38bdf8;

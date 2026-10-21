@@ -11,9 +11,10 @@ const gasAmount = ref(0) // 封入気体の量 [任意単位: 0ならトリチ�
 const gasTemperature = ref(300) // 気体温度 T [K] (250 ~ 400)
 
 let animationFrameId = null
+let animTime = 0
 
-const width = 480
-const height = 440
+const width = 640
+const height = 420
 
 // 物理計算
 // 水銀槽液面を基準 y = 0 とする。
@@ -71,17 +72,19 @@ function draw() {
   const canvas = canvasRef.value
   if (!canvas) return
   const ctx = canvas.getContext('2d')
+  animTime += 0.05
 
   // 背景
   ctx.fillStyle = '#0f172a'
   ctx.fillRect(0, 0, width, height)
 
   // スケール変換: 1000 mm を 300 px 程度に対応させる
-  const mmToPx = 0.32
+  const mmToPx = 0.31
   const basinY = 320 // 水銀槽液面のキャンバス y 座標
-  const basinLeft = 80
-  const basinRight = 400
-  const basinBottom = 390
+  const basinLeft = 55
+  const basinRight = 355
+  const basinBottom = 385
+  const centerX = (basinLeft + basinRight) / 2
 
   // 1. 水銀槽の容器
   ctx.strokeStyle = '#94a3b8'
@@ -103,7 +106,10 @@ function draw() {
   ctx.fillStyle = hgGradient
   ctx.beginPath()
   ctx.moveTo(basinLeft, basinY)
-  ctx.lineTo(basinRight, basinY)
+  for (let px = basinLeft; px <= basinRight; px += 12) {
+    const wy = basinY + Math.sin(animTime * 2 + px * 0.08) * 1.2
+    ctx.lineTo(px, wy)
+  }
   ctx.lineTo(basinRight - 5, basinBottom - 2)
   ctx.lineTo(basinLeft + 5, basinBottom - 2)
   ctx.closePath()
@@ -113,7 +119,8 @@ function draw() {
   ctx.strokeStyle = '#38bdf8'
   ctx.fillStyle = '#38bdf8'
   ctx.lineWidth = 2
-  for (const ax of [120, 160, 320, 360]) {
+  const pulseOffset = (animTime * 15) % 28
+  for (const ax of [90, 135, 275, 320]) {
     ctx.beginPath()
     ctx.moveTo(ax, basinY - 40)
     ctx.lineTo(ax, basinY - 5)
@@ -124,14 +131,23 @@ function draw() {
     ctx.lineTo(ax - 4, basinY - 14)
     ctx.lineTo(ax + 4, basinY - 14)
     ctx.fill()
+    // 圧力パルス粒子
+    ctx.save()
+    ctx.fillStyle = '#7dd3fc'
+    ctx.beginPath()
+    ctx.arc(ax, basinY - 38 + pulseOffset, 2.5, 0, Math.PI * 2)
+    ctx.fill()
+    ctx.restore()
   }
   ctx.fillStyle = '#38bdf8'
   ctx.font = 'bold 12px sans-serif'
-  ctx.fillText(`大気圧 P₀ (${atmosphericPressure.value} mmHg)`, 105, basinY - 48)
+  ctx.textAlign = 'center'
+  ctx.fillText(`大気圧 P₀ (${atmosphericPressure.value} mmHg)`, 112, basinY - 48)
+  ctx.textAlign = 'left'
 
   // 2. ガラス管の配置
   const tubeWidth = 28
-  const tubeX = width / 2 - tubeWidth / 2
+  const tubeX = centerX - tubeWidth / 2
   const H = tubePullUp.value
   const tubeTopY = basinY - H * mmToPx
   const totalTubePx = tubeTotalLength.value * mmToPx
@@ -152,7 +168,7 @@ function draw() {
   // 3. ガラス管内の水銀柱
   const hVal = parseFloat(simData.value.h)
   const hPx = hVal * mmToPx
-  const hgTopY = basinY - hPx
+  const hgTopY = basinY - hPx + Math.sin(animTime * 2) * 0.8
 
   // ガラス管内の水銀
   ctx.fillStyle = hgGradient
@@ -173,14 +189,28 @@ function draw() {
       ctx.fillRect(tubeX + 1, tubeTopY + 1, tubeWidth - 2, hgTopY - tubeTopY)
       ctx.fillStyle = '#e2e8f0'
       ctx.font = 'bold 11px sans-serif'
-      ctx.fillText('真空', tubeX - 35, tubeTopY + (hgTopY - tubeTopY) / 2 + 4)
+      ctx.textAlign = 'right'
+      ctx.fillText('真空 (P=0)', tubeX - 8, tubeTopY + (hgTopY - tubeTopY) / 2 + 4)
+      ctx.textAlign = 'left'
     } else {
       // 封入気体（薄いエメラルドグリーン）
       ctx.fillStyle = 'rgba(16, 185, 129, 0.25)'
       ctx.fillRect(tubeX + 1, tubeTopY + 1, tubeWidth - 2, hgTopY - tubeTopY)
+      // 封入気体分子の運動描画
+      const colH = Math.max(10, hgTopY - tubeTopY - 6)
+      ctx.fillStyle = '#34d399'
+      for (let k = 0; k < gasAmount.value * 2; k++) {
+        const gx = tubeX + 5 + ((Math.sin(animTime * 2.3 + k * 1.7) + 1) * 0.5) * (tubeWidth - 10)
+        const gy = tubeTopY + 3 + ((Math.cos(animTime * 1.9 + k * 2.3) + 1) * 0.5) * colH
+        ctx.beginPath()
+        ctx.arc(gx, gy, 2, 0, Math.PI * 2)
+        ctx.fill()
+      }
       ctx.fillStyle = '#10b981'
       ctx.font = 'bold 11px sans-serif'
-      ctx.fillText('気体', tubeX - 35, tubeTopY + (hgTopY - tubeTopY) / 2 + 4)
+      ctx.textAlign = 'right'
+      ctx.fillText('封入気体', tubeX - 8, tubeTopY + (hgTopY - tubeTopY) / 2 + 4)
+      ctx.textAlign = 'left'
     }
   }
 
@@ -192,30 +222,36 @@ function draw() {
   // 液面基準線
   ctx.beginPath()
   ctx.moveTo(tubeX + tubeWidth, basinY)
-  ctx.lineTo(tubeX + tubeWidth + 50, basinY)
+  ctx.lineTo(tubeX + tubeWidth + 42, basinY)
   ctx.moveTo(tubeX + tubeWidth, hgTopY)
-  ctx.lineTo(tubeX + tubeWidth + 50, hgTopY)
+  ctx.lineTo(tubeX + tubeWidth + 42, hgTopY)
   ctx.stroke()
   ctx.setLineDash([])
 
   // 矢印 h
   ctx.beginPath()
-  ctx.moveTo(tubeX + tubeWidth + 40, basinY)
-  ctx.lineTo(tubeX + tubeWidth + 40, hgTopY)
+  ctx.moveTo(tubeX + tubeWidth + 32, basinY)
+  ctx.lineTo(tubeX + tubeWidth + 32, hgTopY)
   ctx.stroke()
   ctx.fillStyle = '#fbbf24'
   ctx.font = 'bold 12px monospace'
-  ctx.fillText(`h = ${simData.value.h} mm`, tubeX + tubeWidth + 48, (basinY + hgTopY) / 2 + 4)
+  ctx.fillText(`h = ${simData.value.h} mm`, tubeX + tubeWidth + 38, (basinY + hgTopY) / 2 + 4)
 
   // ガラス管上端までの高さ H
   ctx.strokeStyle = '#94a3b8'
   ctx.beginPath()
-  ctx.moveTo(tubeX + tubeWidth + 120, basinY)
-  ctx.lineTo(tubeX + tubeWidth + 120, tubeTopY)
+  ctx.moveTo(tubeX - 24, basinY)
+  ctx.lineTo(tubeX - 24, tubeTopY)
+  ctx.moveTo(tubeX - 30, basinY)
+  ctx.lineTo(tubeX - 18, basinY)
+  ctx.moveTo(tubeX - 30, tubeTopY)
+  ctx.lineTo(tubeX - 18, tubeTopY)
   ctx.stroke()
   ctx.fillStyle = '#94a3b8'
   ctx.font = '11px monospace'
-  ctx.fillText(`H = ${tubePullUp.value} mm`, tubeX + tubeWidth + 125, (basinY + tubeTopY) / 2 + 4)
+  ctx.textAlign = 'right'
+  ctx.fillText(`H = ${tubePullUp.value} mm`, tubeX - 30, (basinY + tubeTopY) / 2 + 4)
+  ctx.textAlign = 'left'
 
   animationFrameId = requestAnimationFrame(draw)
 }
@@ -356,9 +392,9 @@ onUnmounted(() => {
 
 .sim-canvas {
   width: 100%;
-  max-width: 480px;
+  max-width: 640px;
   height: auto;
-  aspect-ratio: 480 / 440;
+  aspect-ratio: 640 / 420;
   display: block;
 }
 

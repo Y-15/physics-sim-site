@@ -8,20 +8,21 @@
       <p class="subtitle">
         壁と小物体 A（質量 <i>m</i>）、大物体 B（質量 <i>M</i> = 100<sup><i>k</i></sup><i>m</i>）の完全弾性衝突において、
         総衝突回数が 3, 31, 314, 3141... と円周率 π の桁数を刻む神秘の数理物理現象。
-        実空間での衝突（左）と、エネルギー保存則が描く相空間の真円 $X^2 + Y^2 = R^2$ における幾何学的等角反射（右）を完全同期描画します。
+        実空間での衝突（左）と、エネルギー保存則が描く相空間の真円 <i>X</i>² + <i>Y</i>² = <i>R</i>² における幾何学的等角反射（右）を完全同期描画します。
       </p>
     </div>
 
+    <div class="pi-badge-bar">
+      <span>総衝突回数: <strong class="counter">{{ collisionCount }}</strong> 回</span>
+      <span class="separator">/</span>
+      <span>理論値: <strong>{{ theoreticalN }}</strong> 回</span>
+      <span class="status-tag" :class="{ finished: isTerminated }">
+        {{ isTerminated ? '✅ 衝突終了 (0 ≤ v ≤ V)' : '⚡ 衝突進行中...' }}
+      </span>
+    </div>
+
     <div class="canvas-wrapper">
-      <canvas ref="canvasRef" width="760" height="380"></canvas>
-      <div class="pi-badge">
-        <span>総衝突回数: <strong class="counter">{{ collisionCount }}</strong> 回</span>
-        <span class="separator">/</span>
-        <span>理論値: <strong>{{ theoreticalN }}</strong> 回</span>
-        <span class="status-tag" :class="{ finished: isTerminated }">
-          {{ isTerminated ? '✅ 衝突終了 (0 ≤ v ≤ V)' : '⚡ 衝突中...' }}
-        </span>
-      </div>
+      <canvas ref="canvasRef" width="760" height="360"></canvas>
     </div>
 
     <!-- コントロールパネル -->
@@ -108,7 +109,7 @@ const presets = [
 ]
 
 const currentPreset = ref(presets[2]) // 初期値 M = 100m (N = 31)
-const playbackSpeed = ref(5)
+const playbackSpeed = ref(4)
 const isRunning = ref(true)
 
 // 物理パラメータ
@@ -129,6 +130,17 @@ const collisionCount = ref(0)
 const isTerminated = ref(false)
 let phasePoints = []
 let simAccumTime = 0
+let endPauseTimer = 0
+
+function computeNextEventTime() {
+  if (velA >= -1e-9 && velB >= velA - 1e-9) return Infinity
+  let dtWall = Infinity
+  if (velA < -1e-9) dtWall = -posA / velA
+  let dtAB = Infinity
+  const relV = velA - velB
+  if (relV > 1e-9) dtAB = (posB - posA) / relV
+  return Math.min(dtWall, dtAB)
+}
 
 function resetSim() {
   posA = 3.0
@@ -138,6 +150,7 @@ function resetSim() {
   collisionCount.value = 0
   isTerminated.value = false
   simAccumTime = 0
+  endPauseTimer = 0
 
   const X0 = Math.sqrt(massB.value) * velB
   const Y0 = Math.sqrt(massA) * velA
@@ -150,7 +163,12 @@ function selectPreset(preset) {
 }
 
 function togglePlay() {
-  isRunning.value = !isRunning.value
+  if (isTerminated.value) {
+    resetSim()
+    isRunning.value = true
+  } else {
+    isRunning.value = !isRunning.value
+  }
 }
 
 // 厳密なイベント駆動衝突判定
@@ -218,22 +236,33 @@ function stepCollision() {
 resetSim()
 
 useLoop(canvasRef, ({ ctx, width, height, dt }) => {
-  if (isRunning.value && !isTerminated.value) {
-    simAccumTime += dt * playbackSpeed.value
-    const stepsToRun = Math.min(25, Math.floor(simAccumTime * 12))
-    if (stepsToRun > 0) {
-      for (let s = 0; s < stepsToRun; s++) {
-        if (!isTerminated.value) {
-          advanceNextCollision()
+  if (isRunning.value) {
+    if (!isTerminated.value) {
+      // 次のイベントまでの補間を伴う進行（1秒あたり playbackSpeed 回の衝突ペース）
+      simAccumTime += dt * playbackSpeed.value * 1.2
+      if (simAccumTime >= 1.0) {
+        const stepsToRun = Math.min(20, Math.floor(simAccumTime))
+        for (let s = 0; s < stepsToRun; s++) {
+          if (!isTerminated.value) {
+            advanceNextCollision()
+          }
         }
+        simAccumTime -= stepsToRun
       }
-      simAccumTime = 0
+    } else {
+      // 終了後は数秒間結果を表示してから自動ループ再生
+      posA = Math.min(12, posA + velA * dt * 2)
+      posB = Math.min(13.5, posB + velB * dt * 2)
+      endPauseTimer += dt
+      if (endPauseTimer > 2.8) {
+        resetSim()
+      }
     }
   }
 
   clearGrid(ctx, width, height, 40, '#0c0e14')
 
-  const midX = width * 0.48
+  const midX = width * 0.47
 
   // 左右の分割線
   line(ctx, midX, 10, midX, height - 10, 'rgba(255,255,255,0.12)', 1.5, [4, 4])
@@ -243,70 +272,84 @@ useLoop(canvasRef, ({ ctx, width, height, dt }) => {
   // ==========================================
   const realW = midX - 30
   const wallX = 35
-  const floorY = height * 0.68
+  const floorY = height * 0.72
 
-  text(ctx, '実空間 (x軸上の完全弾性衝突)', wallX, 30, '#e4e4e7', 'bold 13px sans-serif')
+  text(ctx, '実空間 (x軸上の完全弾性衝突)', wallX, 28, '#e4e4e7', 'bold 13px sans-serif')
   text(ctx, `壁 x = 0`, wallX - 10, floorY + 22, '#f59e0b', 'bold 11px sans-serif')
 
   // 壁
   ctx.strokeStyle = '#f59e0b'
   ctx.lineWidth = 4
   ctx.beginPath()
-  ctx.moveTo(wallX, 50)
+  ctx.moveTo(wallX, 46)
   ctx.lineTo(wallX, floorY + 10)
   ctx.stroke()
 
   // 床
   line(ctx, wallX, floorY, midX - 15, floorY, 'rgba(255,255,255,0.4)', 2)
 
+  // 次の衝突までの連続位置補間
+  let drawPosA = posA
+  let drawPosB = posB
+  if (!isTerminated.value) {
+    const dtNext = computeNextEventTime()
+    if (dtNext < Infinity && dtNext > 0) {
+      const frac = Math.min(0.95, Math.max(0, simAccumTime))
+      drawPosA = posA + velA * dtNext * frac
+      drawPosB = posB + velB * dtNext * frac
+    }
+  }
+
   // 描画座標へのスケーリング
-  const maxDisplayX = 14
-  const realScale = (realW - 20) / maxDisplayX
-  const pxA = wallX + Math.min(maxDisplayX - 1, Math.max(0, posA)) * realScale
-  const pxB = wallX + Math.min(maxDisplayX, Math.max(posA + 0.5, posB)) * realScale
+  const maxDisplayX = 12
+  const realScale = (realW - 24) / maxDisplayX
+  const sizeA = 26
+  const sizeB = 46
+  const pxA = wallX + Math.min(maxDisplayX - 2.5, Math.max(0, drawPosA)) * realScale
+  const pxB = Math.max(pxA + sizeA + 2, wallX + Math.min(maxDisplayX - 1.2, Math.max(drawPosA, drawPosB)) * realScale)
 
   // 小物体 A (質量 m)
-  const sizeA = 24
   ctx.fillStyle = '#22d3ee'
   ctx.strokeStyle = '#38bdf8'
   ctx.lineWidth = 2
   ctx.fillRect(pxA, floorY - sizeA, sizeA, sizeA)
   ctx.strokeRect(pxA, floorY - sizeA, sizeA, sizeA)
   text(ctx, 'A', pxA + 8, floorY - sizeA / 2 + 4, '#0c0e14', 'bold 12px sans-serif')
-  text(ctx, `m = ${massA}`, pxA - 2, floorY - sizeA - 6, '#22d3ee', '11px sans-serif')
+  text(ctx, `m=${massA}`, pxA, floorY - sizeA - 8, '#22d3ee', 'bold 10px sans-serif')
 
   // 速度ベクトル A
   if (Math.abs(velA) > 0.05) {
-    arrow(ctx, pxA + sizeA / 2, floorY - sizeA / 2, pxA + sizeA / 2 + velA * 15, floorY - sizeA / 2, '#22d3ee', 2, '', { head: 5 })
+    const vLenA = Math.sign(velA) * Math.min(45, Math.max(14, Math.abs(velA) * 8))
+    arrow(ctx, pxA + sizeA / 2, floorY - sizeA / 2, pxA + sizeA / 2 + vLenA, floorY - sizeA / 2, '#22d3ee', 2, '', { head: 5 })
   }
 
   // 大物体 B (質量 M)
-  const sizeB = 44
   ctx.fillStyle = '#ec4899'
   ctx.strokeStyle = '#f472b6'
   ctx.lineWidth = 2
   ctx.fillRect(pxB, floorY - sizeB, sizeB, sizeB)
   ctx.strokeRect(pxB, floorY - sizeB, sizeB, sizeB)
-  text(ctx, 'B', pxB + 16, floorY - sizeB / 2 + 5, '#ffffff', 'bold 14px sans-serif')
-  text(ctx, `M = ${massB.value}m`, pxB, floorY - sizeB - 6, '#ec4899', 'bold 11px sans-serif')
+  text(ctx, 'B', pxB + 17, floorY - sizeB / 2 + 5, '#ffffff', 'bold 14px sans-serif')
+  text(ctx, `M=${massB.value}m`, pxB + 4, floorY - sizeB - 8, '#f472b6', 'bold 11px sans-serif')
 
   // 速度ベクトル B
   if (Math.abs(velB) > 0.05) {
-    arrow(ctx, pxB + sizeB / 2, floorY - sizeB / 2, pxB + sizeB / 2 + velB * 15, floorY - sizeB / 2, '#ec4899', 2.5, '', { head: 6 })
+    const vLenB = Math.sign(velB) * Math.min(45, Math.max(16, Math.abs(velB) * 20))
+    arrow(ctx, pxB + sizeB / 2, floorY - sizeB / 2, pxB + sizeB / 2 + vLenB, floorY - sizeB / 2, '#ec4899', 2.5, '', { head: 6 })
   }
 
   // ==========================================
   // 右画面：相空間 (X = √M V, Y = √m v)
   // ==========================================
-  const phaseCenterX = midX + (width - midX) / 2
-  const phaseCenterY = height / 2 + 10
-  const phaseRadiusPx = Math.min((width - midX) * 0.38, height * 0.36)
+  const phaseCenterX = midX + (width - midX) * 0.46
+  const phaseCenterY = height / 2 + 12
+  const phaseRadiusPx = Math.min((width - midX) * 0.31, height * 0.33)
 
-  text(ctx, '相空間 (エネルギー保存円 X² + Y² = R²)', midX + 25, 30, '#e4e4e7', 'bold 13px sans-serif')
+  text(ctx, '相空間 (エネルギー保存円 X² + Y² = R²)', midX + 18, 28, '#e4e4e7', 'bold 13px sans-serif')
 
   // 相空間の座標軸
-  arrow(ctx, phaseCenterX - phaseRadiusPx - 25, phaseCenterY, phaseCenterX + phaseRadiusPx + 28, phaseCenterY, 'rgba(255,255,255,0.35)', 1.5, 'X = √MV', { head: 6, lx: 6 })
-  arrow(ctx, phaseCenterX, phaseCenterY + phaseRadiusPx + 20, phaseCenterX, phaseCenterY - phaseRadiusPx - 24, 'rgba(255,255,255,0.35)', 1.5, 'Y = √mv', { head: 6, ly: -8 })
+  arrow(ctx, phaseCenterX - phaseRadiusPx - 20, phaseCenterY, phaseCenterX + phaseRadiusPx + 20, phaseCenterY, 'rgba(255,255,255,0.35)', 1.5, 'X=√MV', { head: 6, lx: 4 })
+  arrow(ctx, phaseCenterX, phaseCenterY + phaseRadiusPx + 18, phaseCenterX, phaseCenterY - phaseRadiusPx - 20, 'rgba(255,255,255,0.35)', 1.5, 'Y = √mv', { head: 6, ly: -8 })
 
   // 終了領域（0 <= Y <= X tanθ）の扇形ハイライト
   ctx.save()
@@ -365,18 +408,19 @@ useLoop(canvasRef, ({ ctx, width, height, dt }) => {
 
 <style scoped>
 .sim-container {
-  background: var(--vp-c-bg-soft, #18181b);
-  border: 1px solid var(--vp-c-divider, rgba(255, 255, 255, 0.1));
+  background: #0f172a;
+  border: 1px solid #1e293b;
   border-radius: 12px;
   padding: 18px;
   margin: 24px 0;
+  color: #e2e8f0;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
 }
 
 .sim-header h3 {
   margin: 0 0 6px 0;
   font-size: 1.15rem;
-  color: var(--vp-c-text-1, #f4f4f5);
+  color: #38bdf8;
 }
 
 .title-row {
@@ -387,9 +431,23 @@ useLoop(canvasRef, ({ ctx, width, height, dt }) => {
 
 .subtitle {
   font-size: 0.88rem;
-  color: var(--vp-c-text-2, #a1a1aa);
+  color: #94a3b8;
   line-height: 1.5;
-  margin-bottom: 14px;
+  margin-bottom: 12px;
+}
+
+.pi-badge-bar {
+  background: rgba(30, 41, 59, 0.9);
+  border: 1px solid rgba(245, 158, 11, 0.4);
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-size: 0.86rem;
+  color: #fef3c7;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
 }
 
 .canvas-wrapper {
@@ -397,7 +455,7 @@ useLoop(canvasRef, ({ ctx, width, height, dt }) => {
   width: 100%;
   border-radius: 8px;
   overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid #334155;
 }
 
 canvas {
@@ -405,22 +463,6 @@ canvas {
   width: 100%;
   height: auto;
   background: #0c0e14;
-}
-
-.pi-badge {
-  position: absolute;
-  top: 10px;
-  left: 12px;
-  background: rgba(15, 23, 42, 0.88);
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(245, 158, 11, 0.4);
-  padding: 6px 14px;
-  border-radius: 20px;
-  font-size: 0.84rem;
-  color: #fef3c7;
-  display: flex;
-  align-items: center;
-  gap: 8px;
 }
 
 .counter {
@@ -446,7 +488,7 @@ canvas {
 }
 
 .control-panel {
-  background: rgba(0, 0, 0, 0.2);
+  background: #1e293b;
   border-radius: 8px;
   padding: 14px;
   margin-top: 14px;
@@ -463,7 +505,7 @@ canvas {
   flex-direction: column;
   gap: 6px;
   font-size: 0.84rem;
-  color: var(--vp-c-text-1, #e4e4e7);
+  color: #cbd5e1;
 }
 
 .control-group input[type='range'] {
@@ -480,9 +522,9 @@ canvas {
   padding: 5px 10px;
   font-size: 0.78rem;
   border-radius: 6px;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  background: rgba(255, 255, 255, 0.05);
-  color: var(--vp-c-text-2, #a1a1aa);
+  border: 1px solid #475569;
+  background: #334155;
+  color: #cbd5e1;
   cursor: pointer;
   transition: all 0.2s ease;
 }
@@ -519,17 +561,17 @@ canvas {
 }
 
 .btn-secondary {
-  background: rgba(255, 255, 255, 0.1);
-  color: #e4e4e7;
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: #334155;
+  color: #e2e8f0;
+  border: 1px solid #475569;
 }
 
 .btn-secondary:hover:not(:disabled) {
-  background: rgba(255, 255, 255, 0.18);
+  background: #475569;
 }
 
 .btn-secondary:disabled {
-  opacity: 0.4;
+  opacity: 0.5;
   cursor: not-allowed;
 }
 
@@ -541,8 +583,8 @@ canvas {
 }
 
 .stat-card {
-  background: rgba(0, 0, 0, 0.25);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: #1e293b;
+  border: 1px solid #334155;
   border-radius: 8px;
   padding: 10px 12px;
   display: flex;
@@ -551,14 +593,14 @@ canvas {
 
 .stat-card .label {
   font-size: 0.76rem;
-  color: var(--vp-c-text-2, #a1a1aa);
+  color: #94a3b8;
   margin-bottom: 4px;
 }
 
 .stat-card .value {
   font-size: 1.15rem;
   font-weight: bold;
-  color: var(--vp-c-text-1, #f4f4f5);
+  color: #f8fafc;
 }
 
 .stat-card .value.highlight {

@@ -110,7 +110,7 @@ description: 高校物理の電磁気学最頻出テーマ。ファラデーの�
 $$V = - N \frac{\Delta \Phi}{\Delta t}$$
 
 * $\Phi = B S$: 磁束（磁力線の総本数）$[\text{Wb}] = [\text{T}\cdot\text{m}^2]$
-* **マイナス符号（$-$） **: 磁束の変化を妨げる向きに起電力が発生すること（** レンツの法則**）を表す。
+* **マイナス符号（$-$）**: 磁束の変化を妨げる向きに起電力が発生すること（**レンツの法則**）を表す。
 
 ---
 
@@ -147,7 +147,7 @@ $$P_{\text{ext}} = F_{\text{ext}} \cdot v_{\text{terminal}} = \left( \frac{B^2 l
 
 $$P_{\text{joule}} = I^2 R = \left( \frac{v B l}{R} \right)^2 R = \frac{B^2 l^2 v^2}{R}$$
 
-見事に **$P_{\text{ext}} = P_{\text{joule}}$ ** となり、**外力が注入した力学的仕事が、100%電気エネルギーを経由してジュール熱へと変換されている** ことが証明されます！
+見事に **$P_{\text{ext}} = P_{\text{joule}}$** となり、**外力が注入した力学的仕事が、100%電気エネルギーを経由してジュール熱へと変換されている** ことが証明されます！
 
 ---
 
@@ -218,7 +218,7 @@ $$P_{\text{joule}} = I^2 R = \left( \frac{v B l}{R} \right)^2 R = \frac{B^2 l^2 
   * 大きさ: オームの法則より
     $$I = \frac{V}{R} = \frac{1.0}{2.0} = 0.50\,\text{A}$$
   * 向きの判定:
-    * **レンツの法則から **: 棒が下に落下すると、回路が囲む面積が広がり、紙面奥向き（$\otimes$）の磁束が増加する。コイル（回路）はこれを妨げるため、手前向き（$\odot$）の磁界を作ろうとする。右ねじの法則より、電流は反時計回りに流れる。したがって棒の部分では** $\text{Q} \to \text{P}$（右から左）** に流れる。
+    * **レンツの法則から**: 棒が下に落下すると、回路が囲む面積が広がり、紙面奥向き（$\otimes$）の磁束が増加する。コイル（回路）はこれを妨げるため、手前向き（$\odot$）の磁界を作ろうとする。右ねじの法則より、電流は反時計回りに流れる。したがって棒の部分では **$\text{Q} \to \text{P}$（右から左）** に流れる。
     * **フレミングの左手から**: 親指を下（速度）、人さし指を奥（磁場）に向けると、正電荷が受ける力（中指）は左（$\text{Q} \to \text{P}$）を向く。
 * **小問(c)：電磁気力**
   $$F_{\text{mag}} = I B L = 0.50 \times 0.80 \times 0.50 = 0.20\,\text{N}$$
@@ -259,7 +259,7 @@ $$P_{\text{joule}} = I^2 R = \left( \frac{v B l}{R} \right)^2 R = \frac{B^2 l^2 
 
 ### 【最難関大・発展演習】自己相似な無限はしご型コンデンサー回路と磁場中を落下する導体棒
 
-高校物理（「物理基礎」および「物理」）の範囲内で解くことができ、「**空間的な無限（自己相似性をもつ無限はしご型コンデンサー回路） **」と「** 時間的な無限（$t \to \infty$ における導体棒の漸近挙動）**」の2つの「無限」が交差する、難関大入試レベルの融合難問です。
+高校物理（「物理基礎」および「物理」）の範囲内で解くことができ、「**空間的な無限（自己相似性をもつ無限はしご型コンデンサー回路）**」と「**時間的な無限（$t \to \infty$ における導体棒の漸近挙動）**」の2つの「無限」が交差する、難関大入試レベルの融合難問です。
 
 微積分や微分方程式を一切使わずに、「**自己相似性」「無限等比級数」「力積と運動量の関係」「キルヒホッフの法則**」を組み合わせることで、直感に反する物理現象まで厳密に導き出せる構成になっています。
 
@@ -273,7 +273,6 @@ $$P_{\text{joule}} = I^2 R = \left( \frac{v B l}{R} \right)^2 R = \frac{B^2 l^2 
         <path d="M 0 1 L 10 5 L 0 9 z" fill="#f43f5e" />
       </marker>
     </defs>
-
     <!-- Magnetic field B symbols -->
     <text x="40" y="30" fill="#38bdf8" font-size="12" font-family="monospace">⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗</text>
     <text x="40" y="60" fill="#38bdf8" font-size="12" font-family="monospace">⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗</text>
@@ -283,23 +282,19 @@ $$P_{\text{joule}} = I^2 R = \left( \frac{v B l}{R} \right)^2 R = \frac{B^2 l^2 
     <text x="40" y="180" fill="#38bdf8" font-size="12" font-family="monospace">⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗</text>
     <text x="40" y="210" fill="#38bdf8" font-size="12" font-family="monospace">⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗ ⊗</text>
     <text x="560" y="30" fill="#38bdf8" font-size="12" font-weight="bold" font-family="monospace">⊗ B (紙面奥向き)</text>
-
     <!-- Rails M1, M2 -->
     <line x1="80" y1="50" x2="80" y2="230" stroke="#a1a1aa" stroke-width="4" />
     <text x="65" y="235" fill="#a1a1aa" font-size="11" font-weight="bold" font-family="sans-serif">M₁</text>
     <line x1="200" y1="50" x2="200" y2="230" stroke="#a1a1aa" stroke-width="4" />
     <text x="205" y="235" fill="#a1a1aa" font-size="11" font-weight="bold" font-family="sans-serif">M₂</text>
-
     <!-- Rail width L -->
     <line x1="80" y1="40" x2="200" y2="40" stroke="#e4e4e7" stroke-width="1.5" />
     <text x="135" y="35" fill="#e4e4e7" font-size="11" font-family="sans-serif">間隔 L</text>
-
     <!-- Terminals X, Y -->
     <circle cx="80" cy="50" r="4" fill="#38bdf8" />
     <text x="60" y="48" fill="#38bdf8" font-size="12" font-weight="bold" font-family="sans-serif">X (N₀)</text>
     <circle cx="200" cy="50" r="4" fill="#38bdf8" />
     <text x="210" y="48" fill="#38bdf8" font-size="12" font-weight="bold" font-family="sans-serif">Y (基準電位0)</text>
-
     <!-- Falling rod PQ -->
     <rect x="75" y="125" width="130" height="12" fill="#f59e0b" stroke="#fbbf24" stroke-width="1.5" rx="3" />
     <text x="95" y="120" fill="#f59e0b" font-size="11" font-weight="bold" font-family="sans-serif">導体棒 PQ (質量 m, 抵抗 R)</text>
@@ -307,14 +302,12 @@ $$P_{\text{joule}} = I^2 R = \left( \frac{v B l}{R} \right)^2 R = \frac{B^2 l^2 
     <text x="148" y="170" fill="#f43f5e" font-size="11" font-weight="bold" font-family="sans-serif">mg (重力)</text>
     <line x1="140" y1="120" x2="140" y2="90" stroke="#10b981" stroke-width="2" marker-end="url(#arrInd)" />
     <text x="148" y="105" fill="#10b981" font-size="10" font-weight="bold" font-family="sans-serif">I BL (電磁ブレーキ)</text>
-
     <!-- Connection from X, Y to Ladder circuit on the right -->
     <line x1="80" y1="50" x2="270" y2="50" stroke="#38bdf8" stroke-width="2" />
     <line x1="200" y1="50" x2="200" y2="65" stroke="#38bdf8" stroke-width="2" />
     <line x1="200" y1="65" x2="270" y2="65" stroke="#38bdf8" stroke-width="2" />
     <line x1="270" y1="65" x2="270" y2="170" stroke="#38bdf8" stroke-width="2" />
     <line x1="270" y1="170" x2="680" y2="170" stroke="#38bdf8" stroke-width="2" />
-
     <!-- Ladder Network: Stage 1 -->
     <!-- Cap A1 on upper wire -->
     <line x1="270" y1="50" x2="310" y2="50" stroke="#38bdf8" stroke-width="2" />
@@ -330,7 +323,6 @@ $$P_{\text{joule}} = I^2 R = \left( \frac{v B l}{R} \right)^2 R = \frac{B^2 l^2 
     <line x1="350" y1="101" x2="370" y2="101" stroke="#fff" stroke-width="2.5" />
     <text x="375" y="102" fill="#fff" font-size="10" font-family="sans-serif">B₁ (C)</text>
     <line x1="360" y1="101" x2="360" y2="170" stroke="#38bdf8" stroke-width="2" />
-
     <!-- Stage 2 -->
     <line x1="360" y1="50" x2="410" y2="50" stroke="#38bdf8" stroke-width="2" />
     <line x1="410" y1="40" x2="410" y2="60" stroke="#fff" stroke-width="2.5" />
@@ -345,7 +337,6 @@ $$P_{\text{joule}} = I^2 R = \left( \frac{v B l}{R} \right)^2 R = \frac{B^2 l^2 
     <line x1="450" y1="101" x2="470" y2="101" stroke="#fff" stroke-width="2.5" />
     <text x="475" y="102" fill="#fff" font-size="10" font-family="sans-serif">B₂ (C)</text>
     <line x1="460" y1="101" x2="460" y2="170" stroke="#38bdf8" stroke-width="2" />
-
     <!-- Stage 3 -->
     <line x1="460" y1="50" x2="510" y2="50" stroke="#38bdf8" stroke-width="2" />
     <line x1="510" y1="40" x2="510" y2="60" stroke="#fff" stroke-width="2.5" />
@@ -360,7 +351,6 @@ $$P_{\text{joule}} = I^2 R = \left( \frac{v B l}{R} \right)^2 R = \frac{B^2 l^2 
     <line x1="550" y1="101" x2="570" y2="101" stroke="#fff" stroke-width="2.5" />
     <text x="575" y="102" fill="#fff" font-size="10" font-family="sans-serif">B₃</text>
     <line x1="560" y1="101" x2="560" y2="170" stroke="#38bdf8" stroke-width="2" />
-
     <!-- Infinite continuation dots -->
     <text x="590" y="55" fill="#38bdf8" font-size="20" font-family="sans-serif">…</text>
     <text x="590" y="175" fill="#38bdf8" font-size="20" font-family="sans-serif">…</text>
@@ -413,7 +403,8 @@ $$
 <details class="tip">
 <summary><strong>💡 思考のヒント・着眼点（クリックして開く）</strong></summary>
 
-1. **設問 (1)・(2) の代数計算の工夫 ** $\alpha = \dfrac{C_\infty}{C} = \dfrac{\sqrt{5}-1}{2}$ を毎回根号の分数で代入すると計算が大変になります。$\alpha$ が二次方程式 $\alpha^2 + \alpha - 1 = 0$ の解であることを利用し、**「$\alpha^2 = 1 - \alpha$」という次数下げ公式** を使うと、分圧比や等比級数の和が鮮やかに約分できます。
+1. **設問 (1)・(2) の代数計算の工夫**  
+   $\alpha = \dfrac{C_\infty}{C} = \dfrac{\sqrt{5}-1}{2}$ を毎回根号の分数で代入すると計算が大変になります。$\alpha$ が二次方程式 $\alpha^2 + \alpha - 1 = 0$ の解であることを利用し、**「$\alpha^2 = 1 - \alpha$」という次数下げ公式** を使うと、分圧比や等比級数の和が鮮やかに約分できます。
 2. **設問 (3) の $t \to \infty$ におけるキルヒホッフの法則**  
    無限はしご回路全体は、端子 $\mathrm{X}, \mathrm{Y}$ から見れば単一の電気容量 $C_\infty$ のコンデンサーと完全に等価です。微小時間 $\Delta t$ の間に速度が $\Delta v = a_\infty \Delta t$、電荷が $\Delta Q = I_\infty \Delta t$ 変化し、電流が一定（$\Delta I = 0$）になることから、抵抗での電圧降下 $R I_\infty$ の変化量が $0$ になることに着目します。
 3. **設問 (4) の力積と電荷の関係**  
@@ -582,7 +573,9 @@ $$
 \mathbf{\Delta v_\infty = \lim_{t \to \infty} \left\{ v(t) - a_\infty t \right\} = \frac{C_\infty^2 B^2 L^2 R m g}{(m + C_\infty B^2 L^2)^2} > 0}
 $$
 
-- **結論と定性的理由： ** $\Delta v_\infty > 0$ であるため、電気抵抗 $R$ がある場合の実際の速さ $v(t)$ は、**$R = 0$ の理想的な速さ $a_\infty t$ よりも $\Delta v_\infty$ だけ速くなる **。** 【理由】**  
+- **結論と定性的理由：**  
+  $\Delta v_\infty > 0$ であるため、電気抵抗 $R$ がある場合の実際の速さ $v(t)$ は、**$R = 0$ の理想的な速さ $a_\infty t$ よりも $\Delta v_\infty$ だけ速くなる**。  
+  **【理由】**  
   抵抗 $R$ がある場合、運動初期（$t=0$）で電流が $0$ から立ち上がるまでに遅れが生じ、導体棒に働く電磁ブレーキ力 $I(t) B L$ が $R=0$ の場合よりも一時的に弱くなります。その間に初期加速度が重力加速度 $g$ 近くまで大きくなって余分にスピードを獲得し、その先行した速度のズレが終端等加速度運動へと移行した後も $\Delta v_\infty$ の下駄（シフト）として永久に残るためです。
 
 ---

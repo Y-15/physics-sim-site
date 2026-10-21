@@ -105,9 +105,9 @@
       <div class="stat-card">
         <span class="label">最高点速度 <i>v</i><sub>top</sub> (予想)</span>
         <span class="value" :class="{ positive: predictedVtop > 0, negative: predictedVtop <= 0 }">
-          {{ predictedVtop > 0 ? predictedVtop.toFixed(2) + ' m/s' : '到達不可' }}
+          {{ predictedVtop > 0 ? predictedVtop.toFixed(2) + ' m/s' : '到達不可 (途中離脱)' }}
         </span>
-        <span class="subtext">√(<i>v</i><sub>0</sub>² - 4gR)</span>
+        <span class="subtext"><i>v</i><sub>0</sub> ≥ √(5gR) で √(<i>v</i><sub>0</sub>² - 4gR)</span>
       </div>
     </div>
   </div>
@@ -129,8 +129,9 @@ const g = 9.8
 // 一周限界速度 v_crit = sqrt(5 * g * R)
 const vCritical = computed(() => Math.sqrt(5 * g * radius.value))
 
-// 最高点速度の予測 sqrt(v0^2 - 4gR)
+// 最高点速度の予測 sqrt(v0^2 - 4gR)（ただし糸・外枠レールでは v0 >= sqrt(5gR) でなければ途中で離脱する）
 const predictedVtop = computed(() => {
+  if (v0.value < vCritical.value - 1e-6) return 0
   const inside = (v0.value ** 2) - 4 * g * radius.value
   return inside > 0 ? Math.sqrt(inside) : 0
 })
@@ -144,6 +145,8 @@ const ballX = ref(0)
 const ballY = ref(0)
 const ballVx = ref(0)
 const ballVy = ref(0)
+let detachedTrail = []
+let oscDir = 1 // 低速時の振り子往復方向 (+1 or -1)
 
 const currentV = ref(0)
 const currentN = ref(0)
@@ -171,7 +174,9 @@ const togglePlay = () => {
 
 const resetSim = () => {
   theta.value = 0.0
+  oscDir = 1
   isDetached.value = false
+  detachedTrail = []
   currentV.value = v0.value
   currentN.value = (mass.value * (v0.value ** 2) / radius.value) + mass.value * g
 }
@@ -188,29 +193,26 @@ const step = (dt) => {
     // 力学的エネルギー保存: (1/2)m v0^2 = (1/2)m v^2 + mg R (1 - cos theta)
     const vSquared = (v0.value ** 2) - 2 * g * R * (1 - Math.cos(theta.value))
 
-    if (vSquared <= 0) {
-      // 速度ゼロに達した（最下点付近の振り子振動で反転）
-      theta.value -= 0.01
+    if (vSquared <= 0.02) {
+      // 速度ゼロに達した（最下点付近の振り子振動で折り返し）
+      oscDir = -oscDir
+      theta.value += oscDir * 0.02
+      currentV.value = 0
+      currentN.value = Math.max(0, m * g * Math.cos(theta.value))
       return
     }
 
     const v = Math.sqrt(vSquared)
     currentV.value = v
 
-    // 法線方向の運動方程式: m v^2 / R = N - mg cos theta
-    // N = m v^2 / R + mg cos theta (θ=0 で最下点 cos=1, θ=π で最高点 cos=-1)
-    // 鉛直上向きとなす角 φ = π - θ と置いた場合、N = m v^2 / R - mg cos φ
-    // ここでは最下点基準 θ なので、重力の法線内向き成分は mg cos(theta) (最下点 θ=0 で cos=1)
-    // 正確には向心力 = N - mg cos(θ) ⇒ N = m v^2 / R + mg cos(θ)
-    // θ = π (最高点) のとき: N = m v^2 / R - mg
     const N = (m * vSquared / R) + m * g * Math.cos(theta.value)
     currentN.value = Math.max(0, N)
 
-    // 離脱条件判定 (上面側 π/2 < θ < 3π/2 で N <= 0)
-    const isInUpperHalf = (theta.value > Math.PI / 2 && theta.value < 1.5 * Math.PI)
+    // 離脱条件判定 (上面側 π/2 < |θ| < 3π/2 で N <= 0)
+    const absTh = ((theta.value % (Math.PI * 2)) + Math.PI * 2) % (Math.PI * 2)
+    const isInUpperHalf = (absTh > Math.PI / 2 && absTh < 1.5 * Math.PI)
     if (isInUpperHalf && N <= 0) {
       isDetached.value = true
-      // 放物運動の初期位置・初速度をセット
       const centerX = 350
       const centerY = 160
       const scale = 55
@@ -218,17 +220,16 @@ const step = (dt) => {
 
       ballX.value = centerX - radPx * Math.sin(theta.value)
       ballY.value = centerY + radPx * Math.cos(theta.value)
+      detachedTrail = [{ x: ballX.value, y: ballY.value }]
 
-      // 接線方向の速度ベクトル (反時計回り)
-      // 位置ベクトル: (-R sin θ, R cos θ)
-      // 接線ベクトル: (-cos θ, -sin θ)
-      ballVx.value = -v * Math.cos(theta.value) * scale
-      ballVy.value = -v * Math.sin(theta.value) * scale
+      // 接線方向の速度ベクトル
+      ballVx.value = -oscDir * v * Math.cos(theta.value) * scale
+      ballVy.value = -oscDir * v * Math.sin(theta.value) * scale
       return
     }
 
-    // 角速度 dθ/dt = v / R
-    const omega = v / R
+    // 角速度 dθ/dt = oscDir * v / R
+    const omega = (oscDir * v) / R
     theta.value += omega * dt
 
     // 1周したらリセットして周回
@@ -238,14 +239,15 @@ const step = (dt) => {
   } else {
     // 放物運動中 (重力のみ)
     ballX.value += ballVx.value * dt
-    ballVy.value += ballVy.value * dt
+    ballY.value += ballVy.value * dt
     ballVy.value += g * 55 * dt // 重力加速度 (ピクセルスケール)
+    detachedTrail.push({ x: ballX.value, y: ballY.value })
 
     currentV.value = Math.sqrt((ballVx.value / 55) ** 2 + (ballVy.value / 55) ** 2)
     currentN.value = 0
 
-    // 画面外落下でリセット
-    if (ballY.value > 300) {
+    // 円底部または画面外落下でリセット
+    if (ballY.value > 290 || ballX.value < 40 || ballX.value > 660) {
       resetSim()
     }
   }
@@ -304,6 +306,20 @@ const draw = () => {
   } else {
     px = ballX.value
     py = ballY.value
+
+    // 離脱後の放物軌跡を描画
+    if (detachedTrail.length > 1) {
+      ctx.strokeStyle = 'rgba(239, 68, 68, 0.7)'
+      ctx.lineWidth = 2
+      ctx.setLineDash([4, 4])
+      ctx.beginPath()
+      for (let i = 0; i < detachedTrail.length; i++) {
+        if (i === 0) ctx.moveTo(detachedTrail[i].x, detachedTrail[i].y)
+        else ctx.lineTo(detachedTrail[i].x, detachedTrail[i].y)
+      }
+      ctx.stroke()
+      ctx.setLineDash([])
+    }
   }
 
   // 3. 小球の描画

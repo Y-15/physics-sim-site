@@ -75,7 +75,7 @@
 </template>
 
 <script setup>
-import { ref, computed, watch, onMounted } from 'vue'
+import { ref, computed, watch, onMounted, onUnmounted } from 'vue'
 
 const canvasRef = ref(null)
 
@@ -83,6 +83,9 @@ const canvasRef = ref(null)
 const thetaDeg = ref(60)
 // 入射波長 λ0 [pm = 10^-12 m]
 const lambda0 = ref(20.0)
+
+let animId = null
+let wavePhase = 0
 
 // コンプトン波長 h / (m_e * c) ≈ 2.426 pm
 const comptonWavelength = 2.4263
@@ -151,21 +154,31 @@ function render() {
   ctx.setLineDash([])
 
   // 1. 入射光子 (左から中心へ進む波形と矢印)
+  const k0 = 0.35 * (20 / lambda0.value)
   ctx.strokeStyle = '#38bdf8'
   ctx.lineWidth = 2.5
   ctx.beginPath()
-  // 正弦波で描画
+  // 正弦波で描画 (時間とともに進行)
   for (let x = 60; x <= cx - 15; x += 2) {
-    const waveY = cy + Math.sin((x - 60) * 0.25) * 12
+    const waveY = cy + Math.sin((x - 60) * k0 - wavePhase) * 11
     if (x === 60) ctx.moveTo(x, waveY)
     else ctx.lineTo(x, waveY)
   }
   ctx.stroke()
 
+  // 進行する入射光子パケット
+  const inProg = ((wavePhase * 0.18) % 1)
+  const inPktX = 60 + inProg * (cx - 75)
+  const inPktY = cy + Math.sin((inPktX - 60) * k0 - wavePhase) * 11
+  ctx.fillStyle = '#bae6fd'
+  ctx.beginPath()
+  ctx.arc(inPktX, inPktY, 4.5, 0, Math.PI * 2)
+  ctx.fill()
+
   ctx.fillStyle = '#38bdf8'
   ctx.font = 'bold 12px sans-serif'
-  ctx.fillText(`入射X線光子 (λ₀ = ${lambda0.value} pm)`, 60, cy - 25)
-  ctx.fillText('運動量 p₀ ＝ h / λ₀', 60, cy - 10)
+  ctx.fillText(`入射X線光子 (λ₀ = ${lambda0.value} pm)`, 60, cy - 28)
+  ctx.fillText('運動量 p₀ ＝ h / λ₀', 60, cy - 12)
 
   // 2. ターゲット電子 (衝突点: cx, cy)
   ctx.fillStyle = '#fbbf24'
@@ -180,17 +193,37 @@ function render() {
   ctx.font = '11px sans-serif'
   ctx.fillText('静止電子 e⁻', cx - 28, cy + 24)
 
-  // 3. 散乱光子 (角度 θ 上方)
+  // 3. 散乱光子 (角度 θ 上方、波長 λ' > λ₀ の正弦波 + 進行波束)
   const radTheta = (thetaDeg.value * Math.PI) / 180
-  const rayLen = 170
-  const photonEndX = cx + rayLen * Math.cos(radTheta)
-  const photonEndY = cy - rayLen * Math.sin(radTheta)
+  const rayLen = 165
+  const cosT = Math.cos(radTheta)
+  const sinT = -Math.sin(radTheta)
+  const photonEndX = cx + rayLen * cosT
+  const photonEndY = cy + rayLen * sinT
 
-  ctx.strokeStyle = '#22d3ee'
-  ctx.lineWidth = 2.5
+  // 散乱方向ガイド破線
+  ctx.strokeStyle = 'rgba(34, 211, 238, 0.3)'
+  ctx.lineWidth = 1.5
   ctx.beginPath()
   ctx.moveTo(cx, cy)
   ctx.lineTo(photonEndX, photonEndY)
+  ctx.stroke()
+
+  // 散乱X線の正弦波 (波長が伸びて空間周期が長くなる)
+  const lp = lambda0.value + deltaLambda.value
+  const kp = k0 * (lambda0.value / lp)
+  const nx = -sinT
+  const ny = cosT
+  ctx.strokeStyle = '#22d3ee'
+  ctx.lineWidth = 2.5
+  ctx.beginPath()
+  for (let s = 14; s <= rayLen; s += 2) {
+    const w = Math.sin(s * kp - wavePhase) * 10
+    const px = cx + cosT * s + nx * w
+    const py = cy + sinT * s + ny * w
+    if (s === 14) ctx.moveTo(px, py)
+    else ctx.lineTo(px, py)
+  }
   ctx.stroke()
 
   // 矢印先端
@@ -199,11 +232,15 @@ function render() {
   ctx.arc(photonEndX, photonEndY, 5, 0, Math.PI * 2)
   ctx.fill()
 
+  const labelAlignRight = photonEndX < cx - 30
+  ctx.textAlign = labelAlignRight ? 'right' : 'left'
+  const labelOffsetX = labelAlignRight ? -12 : 12
   ctx.font = 'bold 12px sans-serif'
-  ctx.fillText(`散乱光子 (λ' = ${(lambda0.value + deltaLambda.value).toFixed(2)} pm)`, photonEndX + 10, photonEndY - 10)
+  ctx.fillText(`散乱光子 (λ' = ${lp.toFixed(2)} pm)`, photonEndX + labelOffsetX, Math.max(24, photonEndY - 8))
   ctx.font = '11px sans-serif'
   ctx.fillStyle = '#94a3b8'
-  ctx.fillText(`運動量 p' ＝ h / λ'`, photonEndX + 10, photonEndY + 6)
+  ctx.fillText(`運動量 p' ＝ h / λ'`, photonEndX + labelOffsetX, Math.max(40, photonEndY + 8))
+  ctx.textAlign = 'left'
 
   // 散乱角 θ の円弧
   if (thetaDeg.value > 5) {
@@ -217,7 +254,7 @@ function render() {
     ctx.fillText(`θ = ${thetaDeg.value}°`, cx + 52, cy - 15)
   }
 
-  // 4. 反跳電子 (角度 φ 下方)
+  // 4. 反跳電子 (角度 φ 下方 + 飛び出す電子アニメーション)
   const radPhi = (phiDeg.value * Math.PI) / 180
   const elecLen = 140
   const elecEndX = cx + elecLen * Math.cos(radPhi)
@@ -229,6 +266,17 @@ function render() {
   ctx.moveTo(cx, cy)
   ctx.lineTo(elecEndX, elecEndY)
   ctx.stroke()
+
+  // 運動する反跳電子球
+  if (thetaDeg.value > 0) {
+    const eProg = ((wavePhase * 0.14) % 1)
+    const eCurX = cx + eProg * elecLen * Math.cos(radPhi)
+    const eCurY = cy + eProg * elecLen * Math.sin(radPhi)
+    ctx.fillStyle = '#fbbf24'
+    ctx.beginPath()
+    ctx.arc(eCurX, eCurY, 6, 0, Math.PI * 2)
+    ctx.fill()
+  }
 
   // 矢じり
   ctx.fillStyle = '#f43f5e'
@@ -255,22 +303,34 @@ function render() {
   }
 }
 
+function animate() {
+  wavePhase += 0.12
+  render()
+  animId = requestAnimationFrame(animate)
+}
+
 watch([thetaDeg, lambda0], () => {
   render()
 })
 
 onMounted(() => {
-  render()
+  animId = requestAnimationFrame(animate)
+})
+
+onUnmounted(() => {
+  if (animId) cancelAnimationFrame(animId)
 })
 </script>
 
 <style scoped>
 .sim-container {
-  background: var(--vp-c-bg-soft);
-  border: 1px solid var(--vp-c-divider);
+  background: #0f172a;
+  border: 1px solid #1e293b;
   border-radius: 12px;
   padding: 18px;
   margin: 20px 0;
+  color: #f8fafc;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
 }
 
 .sim-header {
@@ -286,7 +346,7 @@ onMounted(() => {
   margin: 0;
   font-size: 1.15rem;
   font-weight: 700;
-  color: var(--vp-c-text-1);
+  color: #f8fafc;
 }
 
 .sim-badges {
@@ -318,6 +378,7 @@ onMounted(() => {
   overflow-x: auto;
   border-radius: 8px;
   background: #0f172a;
+  border: 1px solid #334155;
 }
 
 .sim-canvas {
@@ -336,34 +397,34 @@ onMounted(() => {
 }
 
 .stat-card {
-  background: var(--vp-c-bg-mute);
+  background: #1e293b;
   padding: 10px;
   border-radius: 8px;
-  border: 1px solid var(--vp-c-divider);
+  border: 1px solid #334155;
   text-align: center;
 }
 
 .stat-card.highlight {
-  background: rgba(56, 189, 248, 0.08);
-  border-color: rgba(56, 189, 248, 0.4);
+  background: rgba(56, 189, 248, 0.12);
+  border-color: rgba(56, 189, 248, 0.45);
 }
 
 .stat-label {
   font-size: 0.75rem;
-  color: var(--vp-c-text-2);
+  color: #94a3b8;
   margin-bottom: 4px;
 }
 
 .stat-value {
   font-size: 1.1rem;
   font-weight: 700;
-  color: var(--vp-c-text-1);
+  color: #f8fafc;
 }
 
 .stat-unit {
   font-size: 0.8rem;
   font-weight: normal;
-  color: var(--vp-c-text-2);
+  color: #94a3b8;
 }
 
 .text-blue { color: #38bdf8; }
@@ -373,7 +434,8 @@ onMounted(() => {
 
 .controls-panel {
   margin-top: 16px;
-  background: var(--vp-c-bg-mute);
+  background: #1e293b;
+  border: 1px solid #334155;
   padding: 14px;
   border-radius: 8px;
 }
@@ -396,7 +458,7 @@ onMounted(() => {
   justify-content: space-between;
   font-size: 0.85rem;
   font-weight: 600;
-  color: var(--vp-c-text-1);
+  color: #e2e8f0;
 }
 
 .control-val {
@@ -427,12 +489,12 @@ onMounted(() => {
 }
 
 .sim-btn.outline {
-  background: transparent;
-  color: var(--vp-c-text-1);
-  border: 1px solid var(--vp-c-divider);
+  background: #0f172a;
+  color: #e2e8f0;
+  border: 1px solid #475569;
 }
 .sim-btn.outline:hover {
-  background: var(--vp-c-bg-soft);
+  background: #334155;
   border-color: #38bdf8;
   color: #38bdf8;
 }
@@ -441,8 +503,8 @@ onMounted(() => {
   margin-top: 12px;
   font-size: 0.85rem;
   line-height: 1.5;
-  color: var(--vp-c-text-2);
-  background: rgba(30, 41, 59, 0.4);
+  color: #cbd5e1;
+  background: #1e293b;
   padding: 10px 14px;
   border-radius: 6px;
   border-left: 3px solid #38bdf8;

@@ -17,8 +17,8 @@
 
     <!-- 再生コントロールバー -->
     <div class="playback-bar">
-      <button class="lab-btn primary" @click="running = !running" style="padding: 6px 16px; font-weight: 700; border-radius: 8px; cursor: pointer;">
-        {{ running ? '⏸️ 一時停止' : '▶️ 運動開始' }}
+      <button class="lab-btn primary" @click="toggleRun" style="padding: 6px 16px; font-weight: 700; border-radius: 8px; cursor: pointer;">
+        {{ running ? '⏸️ 一時停止' : (Math.abs(posOffset) >= maxLimit ? '🔄 最初から再生' : '▶️ 運動開始') }}
       </button>
       <div class="speed-control-group">
         <span class="speed-label">⏱️ 速度:</span>
@@ -204,6 +204,16 @@ const motionDirectionText = computed(() => {
 
 const canvasRef = ref(null)
 
+const maxLimit = computed(() => configMode.value === 'atwood' ? 0.9 : 1.0)
+
+function toggleRun() {
+  if (!running.value && Math.abs(posOffset.value) >= maxLimit.value - 0.01) {
+    posOffset.value = 0
+    curSpeed.value = 0
+  }
+  running.value = !running.value
+}
+
 function stepSim(delta = 0.04) {
   updateMotion(delta)
 }
@@ -213,8 +223,8 @@ function updateMotion(dt) {
   curSpeed.value += curAcc.value * dt
   posOffset.value += curSpeed.value * dt
 
-  // 移動限界の判定（床面や滑車への衝突）
-  const limit = configMode.value === 'atwood' ? 1.4 : 1.5
+  // 移動限界の判定（床面や滑車への衝突の手前で停止）
+  const limit = maxLimit.value
   if (Math.abs(posOffset.value) >= limit) {
     posOffset.value = Math.sign(posOffset.value) * limit
     curSpeed.value = 0
@@ -240,10 +250,10 @@ useLoop(canvasRef, ({ ctx, width, height, dt }) => {
 
 function drawAtwood(ctx, w, h) {
   const cx = w * 0.5
-  const topY = 65
-  const pulleyR = 36
-  const pxPerM = 70
-  const floorY = h - 30
+  const topY = 54
+  const pulleyR = 32
+  const pxPerM = 50
+  const floorY = h - 22
 
   // 床面
   ctx.strokeStyle = '#475569'
@@ -259,8 +269,8 @@ function drawAtwood(ctx, w, h) {
   }
 
   // 天井ブラケットと滑車支柱
-  line(ctx, cx - 60, 16, cx + 60, 16, { color: '#64748b', width: 4 })
-  line(ctx, cx, 16, cx, topY, { color: '#94a3b8', width: 4 })
+  line(ctx, cx - 60, 14, cx + 60, 14, { color: '#64748b', width: 4 })
+  line(ctx, cx, 14, cx, topY, { color: '#94a3b8', width: 4 })
 
   // 定滑車
   dot(ctx, cx, topY, pulleyR, '#1e293b', '#38bdf8', 2.5)
@@ -269,11 +279,11 @@ function drawAtwood(ctx, w, h) {
   // 糸の左右位置
   const leftX = cx - pulleyR
   const rightX = cx + pulleyR
-  const baseLen = 100 // 初期吊り下げ長 [px]
+  const baseLen = 104 // 初期吊り下げ長 [px]
 
   // 物体サイズ
-  const sizeA = Math.min(50, 28 + massA.value * 3.5)
-  const sizeB = Math.min(50, 28 + massB.value * 3.5)
+  const sizeA = Math.min(44, 26 + massA.value * 2.5)
+  const sizeB = Math.min(44, 26 + massB.value * 2.5)
 
   // 変位 s (posOffset: Aが下降する向き正)
   // 軽くて伸びない糸の条件: L_A + L_B = 2 * baseLen (常に一定！)
@@ -478,24 +488,24 @@ function drawIncline(ctx, w, h) {
   align-items: center;
   gap: 10px;
   padding: 10px 16px;
-  background: var(--vp-c-bg-soft);
-  border-bottom: 1px solid var(--vp-c-divider);
+  background: rgba(255, 255, 255, 0.04);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .speed-control-group {
   display: flex;
   align-items: center;
   gap: 6px;
-  background: rgba(0, 0, 0, 0.25);
+  background: rgba(0, 0, 0, 0.35);
   padding: 4px 10px;
   border-radius: 8px;
-  border: 1px solid var(--vp-c-divider);
+  border: 1px solid rgba(255, 255, 255, 0.12);
 }
 
 .speed-label {
   font-size: 0.8rem;
   font-weight: 600;
-  color: var(--vp-c-text-2);
+  color: #cbd5e1;
 }
 
 .speed-btn-group {
@@ -509,14 +519,14 @@ function drawIncline(ctx, w, h) {
   border-radius: 6px;
   background: transparent;
   border: 1px solid transparent;
-  color: var(--vp-c-text-2);
+  color: #94a3b8;
   cursor: pointer;
   font-weight: 600;
   transition: all 0.15s;
 }
 
 .speed-btn-group button:hover {
-  color: var(--vp-c-text-1);
+  color: #ffffff;
 }
 
 .speed-btn-group button.active {
@@ -530,7 +540,7 @@ function drawIncline(ctx, w, h) {
   justify-content: space-between;
   align-items: center;
   font-size: 0.82rem;
-  color: var(--vp-c-text-2);
+  color: #cbd5e1;
   margin-bottom: 4px;
 }
 
@@ -542,16 +552,16 @@ function drawIncline(ctx, w, h) {
   padding: 4px 10px;
   font-size: 0.75rem;
   border-radius: 6px;
-  border: 1px solid var(--vp-c-divider);
-  background: var(--vp-c-bg-soft);
-  color: var(--vp-c-text-2);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.05);
+  color: #cbd5e1;
   cursor: pointer;
   transition: all 0.15s;
 }
 
 .lab-chip:hover {
   border-color: #6366f1;
-  color: var(--vp-c-text-1);
+  color: #ffffff;
 }
 
 .lab-chip.on {

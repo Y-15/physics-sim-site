@@ -48,30 +48,25 @@ description: 高校物理・大学入試最重要「ラザフォード散乱実�
         <path d="M 0 1 L 10 5 L 0 9 z" fill="#fbbf24" />
       </marker>
     </defs>
-
     <!-- 中心軸（衝突線） -->
     <line x1="30" y1="100" x2="510" y2="100" stroke="#64748b" stroke-width="1.5" stroke-dasharray="4,4" />
-
     <!-- α粒子 (無限遠〜接近中) -->
     <circle cx="80" cy="100" r="12" fill="rgba(56, 189, 248, 0.25)" stroke="#38bdf8" stroke-width="2" />
     <text x="80" y="104" fill="#38bdf8" font-size="11" font-weight="bold" text-anchor="middle">+2e</text>
     <text x="80" y="75" fill="#38bdf8" font-size="12" font-weight="bold" text-anchor="middle">α粒子（m_α）</text>
     <line x1="95" y1="100" x2="160" y2="100" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#ruth-arrow-blue)" />
     <text x="130" y="90" fill="#38bdf8" font-size="11" font-weight="bold">初速 v₀</text>
-
     <!-- 最接近点 (v = 0, 一瞬静止) -->
     <circle cx="320" cy="100" r="12" fill="rgba(239, 68, 68, 0.15)" stroke="#ef4444" stroke-width="2" stroke-dasharray="3,3" />
     <text x="320" y="75" fill="#ef4444" font-size="11" font-weight="bold" text-anchor="middle">最接近点（v = 0）</text>
     <!-- クーロン反発力 F_c -->
     <line x1="305" y1="100" x2="235" y2="100" stroke="#ef4444" stroke-width="2.5" marker-end="url(#ruth-arrow-red)" />
     <text x="270" y="90" fill="#ef4444" font-size="11" font-weight="bold" text-anchor="middle">クーロン反発力 F_c</text>
-
     <!-- 金箔原子核 (+Ze) -->
     <circle cx="450" cy="100" r="24" fill="rgba(251, 191, 36, 0.25)" stroke="#fbbf24" stroke-width="3" />
     <circle cx="450" cy="100" r="6" fill="#fbbf24" />
     <text x="450" y="105" fill="#fbbf24" font-size="13" font-weight="bold" text-anchor="middle">+Ze</text>
     <text x="450" y="65" fill="#fbbf24" font-size="12" font-weight="bold" text-anchor="middle">金箔原子核（Z = 79）</text>
-
     <!-- 最接近距離 r_min の寸法線 -->
     <line x1="320" y1="140" x2="450" y2="140" stroke="#fbbf24" stroke-width="1.5" />
     <line x1="320" y1="130" x2="320" y2="150" stroke="#fbbf24" stroke-width="1.5" />
@@ -129,7 +124,7 @@ $$
 N(\theta) \propto \frac{Z^2}{E_k^2 \sin^4\left(\frac{\theta}{2}\right)}
 $$
 
-この公式の最大の特徴は、分母に **$\sin^4(\theta/2)$** があることです！
+この公式の最大の特徴は、分母に <strong>$\sin^4(\theta/2)$</strong> があることです！
 
 - $\theta \approx 0^\circ$（直進方向）: $\sin(\theta/2) \to 0$ となるため、$N(\theta)$ は爆発的に巨大（大半の粒子はそのまま素通り）。
 - $\theta = 180^\circ$（真後ろ後方散乱）: $\sin(90^\circ) = 1$ となり最小値をとりますが、**ゼロではなく有限の確率で確実に跳ね返ってくる**。
@@ -146,7 +141,7 @@ $$
 円運動する電子は向心加速度をもつため、マクスウェルの電磁気学によれば**電磁波（光）を放出してエネルギーを失い、わずか $10^{-11}$ 秒で原子核に墜落して原子が崩壊してしまう**はずでした。
 
 なぜ電子はエネルギーを失わずに安定して回り続けられるのか？
-この謎を解決するために、1913年にニールス・ボーア（Niels Bohr）がプランクの量子仮説を取り入れ、「**ボーアの量子条件 $2\pi r p = nh$**」を提唱することになります。
+この謎を解決するために、1913年にニールス・ボーア（Niels Bohr）がプランクの量子仮説を取り入れ、「<strong>ボーアの量子条件 $2\pi r p = nh$</strong>」を提唱することになります。
 
 ---
 

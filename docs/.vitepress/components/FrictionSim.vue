@@ -63,10 +63,12 @@
     </div>
 
     <div class="action-buttons">
-      <button class="btn btn-primary" @click="resetBlock">⏮ ブロックを最上部に戻す</button>
-      <button :class="['preset-btn', { active: thetaDeg === Math.round(critAngleDeg) }]" @click="setExactCritical">
+      <button class="btn btn-primary" @click="startSlideDemo">▶ 滑走スタート (θ = {{ Math.min(60, Math.ceil(critAngleDeg + 8)) }}°)</button>
+      <button class="preset-btn" @click="startTiltExperiment">📐 傾斜角を0°から徐々に上げる実験</button>
+      <button :class="['preset-btn', { active: Math.abs(thetaDeg - critAngleDeg) < 0.6 }]" @click="setExactCritical">
         🎯 限界角に合わせる ({{ critAngleDeg.toFixed(1) }}°)
       </button>
+      <button class="preset-btn" @click="resetBlock">⏮ 最上部に戻す</button>
     </div>
   </div>
 </template>
@@ -109,15 +111,31 @@ let animId = null
 let blockS = 0 // 斜面に沿った移動距離 (px)
 let blockVel = 0 // 斜面に沿った速度
 let lastTime = null
+let pauseAtBottom = 0
+let isTilting = false
 
 function setExactCritical() {
+  isTilting = false
   thetaDeg.value = Math.round(critAngleDeg.value * 10) / 10
   resetBlock()
+}
+
+function startSlideDemo() {
+  isTilting = false
+  thetaDeg.value = Math.min(60, Math.ceil(critAngleDeg.value + 8))
+  resetBlock()
+}
+
+function startTiltExperiment() {
+  thetaDeg.value = 5
+  resetBlock()
+  isTilting = true
 }
 
 function resetBlock() {
   blockS = 0
   blockVel = 0
+  pauseAtBottom = 0
 }
 
 function draw(timestamp) {
@@ -125,17 +143,47 @@ function draw(timestamp) {
   const dt = Math.min(0.05, (timestamp - lastTime) / 1000)
   lastTime = timestamp
 
-  const maxSlideDist = 340 // 斜面の最大長さ (px)
+  if (isTilting) {
+    if (!isSliding.value && thetaDeg.value < 65) {
+      thetaDeg.value = Math.min(65, Math.round((thetaDeg.value + dt * 8) * 10) / 10)
+    } else {
+      isTilting = false
+    }
+  }
+
+  const rad = thetaRad.value
+  const slopeBaseX = 90
+  const slopeBaseY = 335
+  // 斜面の高さがキャンバス上部をはみ出さないように斜辺長を自動調整
+  const maxSlopeH = 225
+  const maxSlopeW = 470
+  const slopeL = Math.min(
+    maxSlopeW / Math.max(0.2, Math.cos(rad)),
+    maxSlopeH / Math.max(0.1, Math.sin(rad)),
+    440
+  )
+  const initialOffset = 65
+  const maxSlideDist = Math.max(80, slopeL - initialOffset - 45)
 
   if (isSliding.value) {
-    blockVel += accel.value * dt * 45 // スケール係数
-    blockS += blockVel * dt
-    if (blockS > maxSlideDist) {
-      blockS = maxSlideDist
-      blockVel = 0
+    if (blockS >= maxSlideDist) {
+      pauseAtBottom += dt
+      if (pauseAtBottom > 0.9) {
+        blockS = 0
+        blockVel = 0
+        pauseAtBottom = 0
+      }
+    } else {
+      blockVel += accel.value * dt * 45 // スケール係数
+      blockS += blockVel * dt
+      if (blockS >= maxSlideDist) {
+        blockS = maxSlideDist
+        blockVel = 0
+      }
     }
   } else {
     blockVel = 0
+    pauseAtBottom = 0
   }
 
   const canvas = canvasRef.value
@@ -151,12 +199,6 @@ function draw(timestamp) {
   ctx.lineWidth = 1
   for (let x = 0; x <= w; x += 40) { ctx.beginPath(); ctx.moveTo(x,0); ctx.lineTo(x,h); ctx.stroke() }
   for (let y = 0; y <= h; y += 40) { ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(w,y); ctx.stroke() }
-
-  // 斜面の基準位置
-  const slopeBaseX = 80
-  const slopeBaseY = 320
-  const slopeL = 460
-  const rad = thetaRad.value
 
   const slopeEndX = slopeBaseX + slopeL * Math.cos(rad)
   const slopeEndY = slopeBaseY - slopeL * Math.sin(rad)
@@ -187,7 +229,6 @@ function draw(timestamp) {
   ctx.fillText(`θ = ${thetaDeg.value}°`, slopeBaseX + 54, slopeBaseY - 8)
 
   // ブロック位置（斜面上端から blockS だけ下った位置）
-  const initialOffset = 70
   const currentOffset = initialOffset + blockS
   const centerSlopeDist = slopeL - currentOffset
 
@@ -225,7 +266,7 @@ function draw(timestamp) {
   // -------------------------
   // 力のベクトル矢印
   // -------------------------
-  const vecScale = 2.4
+  const vecScale = Math.min(2.2, 68 / (m.value * g))
 
   // 1. 重力 mg (鉛直下向き、グレー点線 & 実線)
   const mgLen = m.value * g * vecScale

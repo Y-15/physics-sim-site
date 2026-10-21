@@ -16,4 +16,6 @@ check_*.cjs
 find_*.cjs
 fix_*.cjs
 normalize_*.cjs
+audit_*.cjs
+verify_*.cjs
 .cache/

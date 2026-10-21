@@ -319,20 +319,20 @@ function drawCylinder(ctx, ox, oy, w, h, dt) {
     ctx.strokeStyle = '#94a3b8'
     ctx.lineWidth = 4
     ctx.strokeRect(cylLeft - 6, cylTop - 6, cylW + 12, cylH + 12)
-    text(ctx, '🛡️ 断熱容器 (Q = 0, 熱の出入り遮断)', cx, cylTop + cylH + 28, { color: '#94a3b8', font: 'bold 12px sans-serif' })
+    text(ctx, '🛡️ 断熱容器 (Q = 0, 熱の出入り遮断)', cx, cylTop + cylH + 28, { align: 'center', color: '#94a3b8', font: 'bold 12px sans-serif' })
   } else {
     if (currentQ.value > 15) {
-      drawFlame(ctx, cx - 40, cylTop + cylH + 10)
-      text(ctx, `🔥 加熱中 (熱量 Q = +${currentQ.value.toFixed(0)} J 流入)`, cx, cylTop + cylH + 45, { color: '#f97316', font: 'bold 12px sans-serif' })
+      drawFlame(ctx, cx - 33, cylTop + cylH + 10)
+      text(ctx, `🔥 加熱中 (熱量 Q = +${currentQ.value.toFixed(0)} J 流入)`, cx, cylTop + cylH + 45, { align: 'center', color: '#f97316', font: 'bold 12px sans-serif' })
     } else if (currentQ.value < -15) {
-      text(ctx, `❄️ 冷却中 (熱量 Q = ${currentQ.value.toFixed(0)} J 放出)`, cx, cylTop + cylH + 25, { color: '#38bdf8', font: 'bold 12px sans-serif' })
+      text(ctx, `❄️ 冷却中 (熱量 Q = ${currentQ.value.toFixed(0)} J 放出)`, cx, cylTop + cylH + 25, { align: 'center', color: '#38bdf8', font: 'bold 12px sans-serif' })
     } else {
-      text(ctx, '⚖️ 熱平衡状態 (Q ≈ 0)', cx, cylTop + cylH + 25, { color: '#a1a1aa', font: '12px sans-serif' })
+      text(ctx, '⚖️ 熱平衡状態 (Q ≈ 0)', cx, cylTop + cylH + 25, { align: 'center', color: '#a1a1aa', font: '12px sans-serif' })
     }
   }
 
   // シリンダー上部ラベル
-  text(ctx, `シリンダー内圧 P = ${currentP.value.toFixed(1)} kPa`, cx, cylTop - 18, { color: '#ef4444', font: 'bold 12px sans-serif' })
+  text(ctx, `シリンダー内圧 P = ${currentP.value.toFixed(1)} kPa`, cx, cylTop - 18, { align: 'center', color: '#ef4444', font: 'bold 12px sans-serif' })
 }
 
 function drawFlame(ctx, x, y) {
@@ -459,6 +459,7 @@ function drawPVGraph(ctx, ox, oy, w, h) {
 
       const midPt = areaPts[Math.floor(steps / 2)]
       text(ctx, `仕事 W' = ${currentW.value.toFixed(0)} J`, midPt.sx, gy + gh - 16, {
+        align: 'center',
         color: currentW.value >= 0 ? '#10b981' : '#c084fc',
         font: 'bold 11px sans-serif'
       })
@@ -479,7 +480,7 @@ function drawPVGraph(ctx, ox, oy, w, h) {
     // 始点プロット
     const startPt = areaPts[0]
     dot(ctx, startPt.sx, startPt.sy, 4, '#94a3b8', '#fff', 1.5)
-    text(ctx, '始点', startPt.sx - 14, startPt.sy - 8, { color: '#94a3b8', font: '10px sans-serif' })
+    text(ctx, '始点', startPt.sx - 10, startPt.sy - 10, { align: 'right', color: '#94a3b8', font: '10px sans-serif' })
   }
 
   // 現在の状態点 (V, P) のプロット

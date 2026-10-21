@@ -1,7 +1,21 @@
 <script setup>
-import { ref, onMounted, computed } from 'vue'
+import { ref, onMounted, onUnmounted, computed } from 'vue'
 
 const canvasRef = ref(null)
+let animId = null
+let simTime = 0
+
+function drawRayPulses(ctx, x1, y1, x2, y2, color, offset = 0) {
+  for (let i = 0; i < 2; i++) {
+    const t = ((simTime * 0.7 + offset + i * 0.5) % 1 + 1) % 1
+    const px = x1 + (x2 - x1) * t
+    const py = y1 + (y2 - y1) * t
+    ctx.fillStyle = color
+    ctx.beginPath()
+    ctx.arc(px, py, 3, 0, Math.PI * 2)
+    ctx.fill()
+  }
+}
 
 // 鏡の種類: 'concave' (凹面鏡) or 'convex' (凸面鏡)
 const mirrorType = ref('concave')
@@ -178,6 +192,7 @@ function drawRayTraces(ctx, ox, oy, ix, iy, fx, cx, isConcave) {
   ctx.moveTo(ox, oy)
   ctx.lineTo(mirrorX, oy) // 鏡の主平面
   ctx.stroke()
+  drawRayPulses(ctx, ox, oy, mirrorX, oy, '#7dd3fc', 0)
 
   if (isConcave) {
     // 凹面鏡: 反射光は焦点 F を通って像へ
@@ -187,6 +202,7 @@ function drawRayTraces(ctx, ox, oy, ix, iy, fx, cx, isConcave) {
     const slope = (iy - oy) / (ix - mirrorX)
     ctx.lineTo(mirrorX - 400, oy - 400 * slope)
     ctx.stroke()
+    drawRayPulses(ctx, mirrorX, oy, mirrorX - 300, oy - 300 * slope, '#38bdf8', 0.35)
 
     // 虚像の場合は奥へ点線
     if (imageDist.value < 0) {
@@ -204,6 +220,7 @@ function drawRayTraces(ctx, ox, oy, ix, iy, fx, cx, isConcave) {
     ctx.moveTo(mirrorX, oy)
     ctx.lineTo(mirrorX - 300, oy - 300 * slope)
     ctx.stroke()
+    drawRayPulses(ctx, mirrorX, oy, mirrorX - 300, oy - 300 * slope, '#38bdf8', 0.35)
 
     // 焦点 F からの虚延長線
     ctx.setLineDash([3, 3])
@@ -220,12 +237,14 @@ function drawRayTraces(ctx, ox, oy, ix, iy, fx, cx, isConcave) {
   ctx.moveTo(ox, oy)
   ctx.lineTo(mirrorX, axisY)
   ctx.stroke()
+  drawRayPulses(ctx, ox, oy, mirrorX, axisY, '#fde047', 0.15)
 
   const vSlope = (axisY - oy) / (mirrorX - ox)
   ctx.beginPath()
   ctx.moveTo(mirrorX, axisY)
   ctx.lineTo(mirrorX - 300, axisY + 300 * vSlope)
   ctx.stroke()
+  drawRayPulses(ctx, mirrorX, axisY, mirrorX - 300, axisY + 300 * vSlope, '#fbbf24', 0.5)
 
   if (imageDist.value < 0) {
     ctx.setLineDash([3, 3])
@@ -276,8 +295,18 @@ function resetSim() {
   objectHeight.value = 60
 }
 
-onMounted(() => {
+function loop() {
+  simTime += 0.016
   draw()
+  animId = requestAnimationFrame(loop)
+}
+
+onMounted(() => {
+  animId = requestAnimationFrame(loop)
+})
+
+onUnmounted(() => {
+  if (animId) cancelAnimationFrame(animId)
 })
 </script>
 

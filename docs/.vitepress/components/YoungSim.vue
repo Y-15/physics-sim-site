@@ -171,7 +171,7 @@ function drawLaserSource(ctx, slitX, cy) {
     ctx.stroke()
   }
 
-  text(ctx, `単色レーザー (${wavelengthNm.value} nm)`, 40, cy - 25, { color: laserColorHex.value, font: 'bold 11px sans-serif' })
+  text(ctx, `単色レーザー (${wavelengthNm.value} nm)`, 20, cy - 52, { align: 'left', color: laserColorHex.value, font: 'bold 11px sans-serif' })
 }
 
 function drawSlitPlate(ctx, x, cy, h) {
@@ -215,7 +215,7 @@ function drawSlitPlate(ctx, x, cy, h) {
     ctx.lineWidth = 1.5
     ctx.fillRect(x + 2, s1Y - 10, 8, 20)
     ctx.strokeRect(x + 2, s1Y - 10, 8, 20)
-    text(ctx, '薄膜', x + 6, s1Y - 16, { color: '#eab308', font: '10px sans-serif' })
+    text(ctx, '薄膜', x + 6, s1Y - 16, { align: 'center', color: '#eab308', font: '10px sans-serif' })
   }
 }
 
@@ -253,7 +253,7 @@ function drawWaveFronts(ctx, sx, scrX, cy) {
   line(ctx, sx, cy + 120, scrX, cy + 120, { color: '#94a3b8', width: 1.5, dash: [4, 4] })
   line(ctx, sx, cy + 115, sx, cy + 125, { color: '#94a3b8', width: 1.5 })
   line(ctx, scrX, cy + 115, scrX, cy + 125, { color: '#94a3b8', width: 1.5 })
-  text(ctx, `スクリーン間距離 L = ${distL_m.value.toFixed(2)} m`, (sx + scrX) / 2, cy + 138, { color: '#e2e8f0', font: '11px sans-serif' })
+  text(ctx, `スクリーン間距離 L = ${distL_m.value.toFixed(2)} m`, (sx + scrX) / 2, cy + 138, { align: 'center', color: '#e2e8f0', font: '11px sans-serif' })
 }
 
 function drawScreenAndFringes(ctx, scrX, cy, availW, h) {
@@ -264,7 +264,7 @@ function drawScreenAndFringes(ctx, scrX, cy, availW, h) {
   ctx.fillRect(scrX, 25, 12, h - 50)
   ctx.strokeRect(scrX, 25, 12, h - 50)
 
-  text(ctx, 'スクリーン', scrX + 6, 16, { color: '#94a3b8', font: '11px sans-serif' })
+  text(ctx, 'スクリーン', scrX + 6, 16, { align: 'center', color: '#94a3b8', font: '11px sans-serif' })
 
   // 干渉縞パターン（スクリーン右側のビューイングエリア）
   const fringeW = Math.min(80, availW * 0.35)

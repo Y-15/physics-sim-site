@@ -410,31 +410,184 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
+.sim-container {
+  background: #0f172a;
+  border: 1px solid #334155;
+  border-radius: 12px;
+  padding: 18px;
+  margin: 24px 0;
+  color: #f8fafc;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+.sim-header h3 {
+  margin: 0 0 6px 0;
+  font-size: 1.15rem;
+  color: #38bdf8;
+}
+
+.title-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.icon {
+  font-size: 1.4rem;
+}
+
+.subtitle {
+  font-size: 0.86rem;
+  color: #cbd5e1;
+  line-height: 1.5;
+  margin: 0 0 14px 0;
+}
+
+.canvas-wrapper {
+  position: relative;
+  width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #334155;
+  background: #090d16;
+}
+
+canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
 .state-badge {
   position: absolute;
-  top: 14px;
-  right: 14px;
-  padding: 6px 14px;
+  top: 12px;
+  right: 12px;
+  padding: 5px 14px;
   border-radius: 9999px;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   backdrop-filter: blur(8px);
 }
 
 .state-badge.water {
-  background: rgba(56, 189, 248, 0.2);
+  background: rgba(15, 23, 42, 0.85);
   border: 1px solid #38bdf8;
   color: #38bdf8;
 }
 
 .state-badge.coexist {
-  background: rgba(251, 191, 36, 0.2);
+  background: rgba(15, 23, 42, 0.85);
   border: 1px solid #fbbf24;
   color: #fbbf24;
 }
 
 .state-badge.ice {
-  background: rgba(148, 163, 184, 0.2);
+  background: rgba(15, 23, 42, 0.85);
   border: 1px solid #94a3b8;
   color: #cbd5e1;
+}
+
+.control-panel {
+  background: #1e293b;
+  border: 1px solid #334155;
+  border-radius: 8px;
+  padding: 14px;
+  margin-top: 14px;
+}
+
+.control-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+}
+
+.control-group label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 0.84rem;
+  color: #f8fafc;
+}
+
+.control-group strong {
+  color: #38bdf8;
+}
+
+.control-group input[type='range'] {
+  width: 100%;
+  accent-color: #38bdf8;
+  cursor: pointer;
+}
+
+.button-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.btn {
+  padding: 7px 14px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-secondary {
+  background: #334155;
+  color: #f8fafc;
+  border: 1px solid #475569;
+}
+
+.btn-secondary:hover {
+  background: #475569;
+}
+
+.stats-monitor {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.stat-card {
+  background: #1e293b;
+  border: 1px solid #334155;
+  border-left: 3px solid #38bdf8;
+  border-radius: 8px;
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.stat-card .label {
+  font-size: 0.75rem;
+  color: #cbd5e1;
+  margin-bottom: 4px;
+}
+
+.stat-card .value {
+  font-size: 1.15rem;
+  font-weight: bold;
+  color: #f8fafc;
+}
+
+.stat-card .value.highlight {
+  color: #f43f5e;
+}
+
+.stat-card .unit {
+  font-size: 0.8rem;
+  font-weight: normal;
+  color: #94a3b8;
+}
+
+.stat-card .subtext {
+  font-size: 0.7rem;
+  color: #94a3b8;
+  margin-top: 2px;
 }
 </style>

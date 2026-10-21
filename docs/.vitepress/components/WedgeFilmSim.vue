@@ -207,6 +207,7 @@ function draw() {
 
   ctx.fillStyle = '#bae6fd'
   ctx.font = 'bold 12px sans-serif'
+  ctx.textAlign = 'left'
   ctx.fillText('上側ガラス板 (屈折率 n_g ≈ 1.5)', marginX + 10, glassTopY + 15)
   ctx.restore()
 
@@ -220,6 +221,7 @@ function draw() {
 
   ctx.fillStyle = '#bae6fd'
   ctx.font = 'bold 12px sans-serif'
+  ctx.textAlign = 'left'
   ctx.fillText('下側ガラス板 (屈折率 n_g ≈ 1.5)', marginX + 10, glassBottomY + 17)
   ctx.restore()
 
@@ -246,7 +248,8 @@ function draw() {
   ctx.fill()
   ctx.font = 'bold 11px sans-serif'
   ctx.fillStyle = '#fca5a5'
-  ctx.fillText('接触点 O (x=0)', marginX - 10, glassBottomY - 8)
+  ctx.textAlign = 'left'
+  ctx.fillText('接触点 O (x=0)', marginX + 8, glassBottomY - 6)
 
   // 媒質の注記
   ctx.fillStyle = refractiveIndex.value > 1.0 ? '#34d399' : '#94a3b8'
@@ -254,6 +257,51 @@ function draw() {
   ctx.textAlign = 'center'
   const mediumName = refractiveIndex.value === 1.0 ? '空気層 (n = 1.00)' : (refractiveIndex.value === 1.333 ? '水層 (n = 1.333)' : 'グリセリン (n = 1.470)')
   ctx.fillText(`薄膜層: ${mediumName}`, marginX + viewW * 0.45, glassBottomY - maxWedgeGap * 0.4)
+
+  // 入射光と上面・下面反射光のアニメーション描画
+  phaseShift += 0.06
+  const rgbRay = wavelengthToRGB(wavelengthNm.value)
+  const rayColor = `rgb(${rgbRay.r}, ${rgbRay.g}, ${rgbRay.b})`
+  const sampleFracs = [0.22, 0.48, 0.74]
+  sampleFracs.forEach((frac) => {
+    const rx = marginX + viewW * frac
+    const upperBotY = (glassTopY + 25) - maxWedgeGap * frac
+    const lowerTopY = glassBottomY
+    // 入射光（上から下へ）
+    ctx.strokeStyle = rayColor
+    ctx.lineWidth = 1.5
+    ctx.beginPath()
+    ctx.moveTo(rx - 4, 12)
+    ctx.lineTo(rx - 4, lowerTopY)
+    ctx.stroke()
+    // 反射光（上ガラス下面 ＆ 下ガラス上面から上へ）
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.65)'
+    ctx.beginPath()
+    ctx.moveTo(rx + 4, lowerTopY)
+    ctx.lineTo(rx + 4, 12)
+    ctx.stroke()
+    // 光子パルスアニメーション
+    const pulseT = (phaseShift + frac * 2) % 1
+    const downY = 12 + pulseT * (lowerTopY - 12)
+    const upY = lowerTopY - pulseT * (lowerTopY - 12)
+    ctx.fillStyle = rayColor
+    ctx.beginPath()
+    ctx.arc(rx - 4, downY, 3, 0, Math.PI * 2)
+    ctx.fill()
+    ctx.fillStyle = '#ffffff'
+    ctx.beginPath()
+    ctx.arc(rx + 4, upY, 3, 0, Math.PI * 2)
+    ctx.fill()
+    // 反射点ドット
+    ctx.fillStyle = '#38bdf8'
+    ctx.beginPath()
+    ctx.arc(rx, upperBotY, 2.5, 0, Math.PI * 2)
+    ctx.fill()
+    ctx.fillStyle = '#f43f5e'
+    ctx.beginPath()
+    ctx.arc(rx, lowerTopY, 2.5, 0, Math.PI * 2)
+    ctx.fill()
+  })
 
   // ---------- 区切り線 ----------
   ctx.strokeStyle = 'rgba(148, 163, 184, 0.25)'
@@ -350,8 +398,56 @@ watch([thicknessUm, lengthMm, wavelengthNm, refractiveIndex], () => {
 </script>
 
 <style scoped>
+.sim-container {
+  background: #0f172a;
+  border-radius: 12px;
+  padding: 1.2rem;
+  color: #e2e8f0;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  margin: 1.5rem 0;
+  border: 1px solid #1e293b;
+}
+
+.sim-header .title-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.3rem;
+}
+
+.sim-header .icon {
+  font-size: 1.5rem;
+}
+
+.sim-header h3 {
+  margin: 0;
+  font-size: 1.25rem;
+  color: #38bdf8;
+}
+
+.subtitle {
+  font-size: 0.85rem;
+  color: #94a3b8;
+  margin: 0 0 1rem 0;
+  line-height: 1.4;
+}
+
+.canvas-wrapper {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #334155;
+  background: #000;
+}
+
+canvas {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
 .custom-select {
-  background: #1e293b;
+  background: #0f172a;
   border: 1px solid rgba(148, 163, 184, 0.3);
   color: #f8fafc;
   padding: 6px 12px;
@@ -372,6 +468,106 @@ watch([thicknessUm, lengthMm, wavelengthNm, refractiveIndex], () => {
   border-radius: 9999px;
   font-size: 0.85rem;
   backdrop-filter: blur(8px);
+}
+
+.control-panel {
+  margin-top: 1rem;
+  background: #1e293b;
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+.control-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 0.8rem;
+}
+
+.control-group label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  font-size: 0.85rem;
+  color: #cbd5e1;
+}
+
+.control-group strong {
+  color: #38bdf8;
+}
+
+input[type="range"] {
+  accent-color: #38bdf8;
+  cursor: pointer;
+}
+
+.button-row {
+  display: flex;
+  gap: 0.6rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+}
+
+.btn {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-secondary {
+  background: #334155;
+  color: #e2e8f0;
+}
+.btn-secondary:hover {
+  background: #475569;
+}
+
+.stats-monitor {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 0.6rem;
+  margin-top: 1rem;
+}
+
+.stat-card {
+  background: #1e293b;
+  padding: 0.7rem;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-left: 3px solid #38bdf8;
+}
+
+.stat-card .label {
+  font-size: 0.75rem;
+  color: #94a3b8;
+  margin-bottom: 0.2rem;
+}
+
+.stat-card .value {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #f8fafc;
+}
+
+.stat-card .value.highlight {
+  color: #fbbf24;
+}
+
+.stat-card .unit {
+  font-size: 0.8rem;
+  font-weight: normal;
+  color: #94a3b8;
+}
+
+.stat-card .subtext {
+  font-size: 0.68rem;
+  color: #94a3b8;
+  margin-top: 0.2rem;
 }
 
 .dark-val {

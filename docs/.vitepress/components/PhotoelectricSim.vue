@@ -389,8 +389,8 @@ function drawAmmeter(ctx, x, y, val) {
 // グラフ描画: ① I-V 特性曲線
 // -------------------------------------------------------------------
 function drawIVGraph(ctx, w, h) {
-  const gx0 = 430, gy0 = 340
-  const gw = 310, gh = 250
+  const gx0 = 420, gy0 = 340
+  const gw = 295, gh = 250
 
   const minV = -4.0, maxV = 4.0
   const toX = (v) => gx0 + ((v - minV) / (maxV - minV)) * gw
@@ -399,7 +399,7 @@ function drawIVGraph(ctx, w, h) {
   const xZero = toX(0)
 
   // 軸
-  arrow(ctx, gx0, gy0, gx0 + gw + 15, gy0, '#71717a', 2, 'V [V]', { align: 'left', lx: 8 })
+  arrow(ctx, gx0, gy0, gx0 + gw + 15, gy0, '#71717a', 2, 'V [V]', { align: 'left', lx: 6 })
   arrow(ctx, xZero, gy0, xZero, gy0 - gh - 15, '#71717a', 2, 'I [μA]', { align: 'center', ly: -10 })
 
   // 目盛り
@@ -438,7 +438,7 @@ function drawIVGraph(ctx, w, h) {
   if (KmaxEV.value > 0 && vStop >= minV) {
     const xStop = toX(vStop)
     dot(ctx, xStop, gy0, 5, '#f43f5e')
-    text(ctx, `-V₀ (${fmt(vStop, 2)}V)`, xStop, gy0 - 10, '#f43f5e', 'bold 11px sans-serif', 'center')
+    text(ctx, `-V₀ (${fmt(vStop, 2)}V)`, xStop - 6, gy0 - 10, '#f43f5e', 'bold 11px sans-serif', 'right')
   }
 
   // 飽和電流線

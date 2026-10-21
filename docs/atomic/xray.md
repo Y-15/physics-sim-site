@@ -134,8 +134,8 @@ $$
 
 これが**特性X線（固有X線）**です！
 
-- **$K_\alpha$ 線**: **L殻 $\to$ K殻** の遷移で生じるX線（最も強度が大きい）。
-- **$K_\beta$ 線**: **M殻 $\to$ K殻** の遷移で生じるX線（エネルギー差が大きいため、$K_\alpha$ より波長が短い）。
+- <strong>$K_\alpha$ 線</strong>: <strong>L殻 $\to$ K殻</strong> の遷移で生じるX線（最も強度が大きい）。
+- <strong>$K_\beta$ 線</strong>: <strong>M殻 $\to$ K殻</strong> の遷移で生じるX線（エネルギー差が大きいため、$K_\alpha$ より波長が短い）。
 
 $$
 h \nu_{K\alpha} = h \frac{c}{\lambda_{K\alpha}} = E_L - E_K
@@ -218,4 +218,4 @@ $E_K = -20.0\,\text{keV}$ を代入すると：
 $$
 E_L - (-20.0) = 17.6 \implies E_L = 17.6 - 20.0 = -2.4\,\text{keV}
 $$
-L殻のエネルギー準位は **$-2.4\,\text{keV}$** と求まります！
+L殻のエネルギー準位は $\mathbf{-2.4\,\text{keV}}$ と求まります！
