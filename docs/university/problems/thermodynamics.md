@@ -1,27 +1,29 @@
+# 熱力学・統計力学 演習問題（全6問）
+
+<div class="level-badge" style="display:inline-block; background:#eff6ff; color:#1d4ed8; padding:4px 12px; border-radius:20px; font-weight:700; font-size:0.85rem; margin-bottom:16px;">
+  対象：大学1〜3年次・大学院入試対策 ／ 範囲：熱力学ポテンシャル・マクスウェルの関係式・実在気体・相転移・カノニカル分配関数・量子統計
+</div>
+
+熱力学の基本関係式 $dU = T\,dS - P\,dV + \mu\,dN$ とルジャンドル変換、マクスウェルの関係式を用いた $C_P - C_V$ やファン・デル・ワールス気体の解析、クラペイロン・クラウジウスの式、そしてカノニカル分配関数 $Z = \sum_i e^{-\beta E_i}$・位相空間積分・フェルミ統計までを体系的に演習する全6問です。
+
+## 解答のポイントと必須公式チェック
+
+- **熱力学ポテンシャルの全微分とマクスウェルの関係式**：
+  $$dU = T\,dS - P\,dV \implies \left(\frac{\partial T}{\partial V}\right)_S = -\left(\frac{\partial P}{\partial S}\right)_V, \qquad dF = -S\,dT - P\,dV \implies \left(\frac{\partial S}{\partial V}\right)_T = \left(\frac{\partial P}{\partial T}\right)_V$$
+- **エネルギー方程式と熱容量差**：
+  $$\left(\frac{\partial U}{\partial V}\right)_T = T\left(\frac{\partial P}{\partial T}\right)_V - P, \qquad C_P - C_V = T\left(\frac{\partial P}{\partial T}\right)_V\left(\frac{\partial V}{\partial T}\right)_P = \frac{TV\alpha^2}{\kappa_T}$$
+- **カノニカル分配関数 $Z$ と熱力学量**：
+  $$Z = \sum_i e^{-\beta E_i}, \qquad F = -k_B T \ln Z, \qquad U = -\frac{\partial \ln Z}{\partial \beta}, \qquad S = k_B \ln Z + \frac{U}{T}, \qquad C_V = k_B \beta^2 \frac{\partial^2 \ln Z}{\partial \beta^2}$$
+
 ---
-title: 大学熱力学・統計力学 演習問題集（ルジャンドル変換・分配関数・院試対策）
-description: 大学物理の熱力学・統計力学演習問題。ルジャンドル変換と4大マクスウェル関係式、古典理想気体のカノニカル分配関数重積分、状態方程式と内部エネルギーの完全導出。
----
 
-# 🔥 大学熱力学・統計力学 厳選演習問題
+<UniversityProblemViewer category="thermodynamics" />
 
-理工系学部および大学院入試（院試）を想定した、大学熱力学・統計力学の厳選演習問題集です。
-熱力学ポテンシャル（$U, H, F, G$）の全微分形式、ルジャンドル変換、マクスウェル関係式を用いた物性値の導出、カノニカル分配関数の多次元位相空間積分を演習します。
-
-<ClientOnly>
-  <UniversityProblemViewer defaultUnit="thermodynamics" />
-</ClientOnly>
-
----
-
-## 🧭 学習の指針・必須数学ツール
-
-1. **多変数関数の全微分とルジャンドル変換**:
-   - $dU = TdS - PdV \implies dH = TdS + VdP, \; dF = -SdT - PdV, \; dG = -SdT + VdP$
-   - シュワルツの定理によるマクスウェル関係式の導出：
-     $$\left(\frac{\partial S}{\partial V}\right)_T = \left(\frac{\partial P}{\partial T}\right)_V, \quad \left(\frac{\partial S}{\partial P}\right)_T = -\left(\frac{\partial V}{\partial T}\right)_P$$
-2. **統計力学の分配関数**:
-   - カノニカル分配関数 $Z = \sum_i e^{-\beta E_i} \iff \frac{1}{N! h^{3N}}\int d^{3N}q d^{3N}p e^{-\beta \mathcal{H}}$
-   - ガウス積分公式 $\int_{-\infty}^\infty e^{-\alpha x^2} dx = \sqrt{\frac{\pi}{\alpha}}$
-   - スターリングの公式 $\ln N! \approx N\ln N - N$
-   - 自由エネルギー $F = -k_B T \ln Z$ と圧力 $P = -\left(\frac{\partial F}{\partial V}\right)_T$、内部エネルギー $U = -\frac{\partial}{\partial \beta}\ln Z$ の微分操作。
+<div style="margin-top:24px; display:flex; gap:12px; flex-wrap:wrap;">
+  <a href="/university/thermodynamics/index" style="display:inline-block; background:#f8fafc; color:#334155; border:1px solid #cbd5e1; padding:10px 20px; border-radius:8px; text-decoration:none; font-weight:700;">
+    ← 熱・統計力学の講義ページに戻る
+  </a>
+  <a href="/university/problems/quantum" style="display:inline-block; background:#1d4ed8; color:white; padding:10px 20px; border-radius:8px; text-decoration:none; font-weight:700;">
+    次の演習：量子力学（全6問）へ →
+  </a>
+</div>

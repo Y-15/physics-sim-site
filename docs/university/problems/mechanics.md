@@ -1,31 +1,29 @@
+# 力学・解析力学 演習問題（全6問）
+
+<div class="level-badge" style="display:inline-block; background:#eff6ff; color:#1d4ed8; padding:4px 12px; border-radius:20px; font-weight:700; font-size:0.85rem; margin-bottom:16px;">
+  対象：大学1〜2年次・大学院入試対策 ／ 範囲：ニュートン力学（微分方程式）・中心力場・回転座標系・剛体・ラグランジュ＆ハミルトン解析力学
+</div>
+
+ニュートンの運動方程式 $m\ddot{\boldsymbol{r}} = \boldsymbol{F}(\boldsymbol{r}, \dot{\boldsymbol{r}}, t)$ を微分方程式として解く手法から、極座標基底ベクトル $\boldsymbol{e}_r, \boldsymbol{e}_\theta$ によるケプラー問題の完全導出、回転座標系におけるコリオリ力 $-2m\boldsymbol{\omega}\times\boldsymbol{v}'$、そしてオイラー・ラグランジュ方程式とハミルトン正準方程式・ポアソン括弧までを網羅した全6問です。
+
+## 解答のポイントと必須公式チェック
+
+- **2次元極座標 $(r, \theta)$ の速度・加速度ベクトル**：
+  $$\boldsymbol{v} = \dot{r}\boldsymbol{e}_r + r\dot{\theta}\boldsymbol{e}_\theta, \qquad \boldsymbol{a} = (\ddot{r} - r\dot{\theta}^2)\boldsymbol{e}_r + \frac{1}{r}\frac{d}{dt}(r^2\dot{\theta})\boldsymbol{e}_\theta$$
+- **回転座標系（角速度 $\boldsymbol{\omega}$）の運動方程式**：
+  $$m\ddot{\boldsymbol{r}}' = \boldsymbol{F} - 2m\boldsymbol{\omega}\times\dot{\boldsymbol{r}}' - m\boldsymbol{\omega}\times(\boldsymbol{\omega}\times\boldsymbol{r}') - m\dot{\boldsymbol{\omega}}\times\boldsymbol{r}'$$
+- **オイラー・ラグランジュ方程式とハミルトン正準方程式**：
+  $$\frac{d}{dt}\left(\frac{\partial L}{\partial \dot{q}_i}\right) - \frac{\partial L}{\partial q_i} = 0, \qquad \dot{q}_i = \frac{\partial H}{\partial p_i}, \qquad \dot{p}_i = -\frac{\partial H}{\partial q_i}$$
+
 ---
-title: 大学力学・解析力学 演習問題集（詳細解答・院試対策）
-description: 大学物理の力学・解析力学演習問題。減衰振動の2階常微分方程式、ビネの公式とケプラー楕円軌道、球の慣性モーメント重積分、オイラー＝ラグランジュ方程式の完全導出。
----
 
-# 🏎️ 大学力学・解析力学 厳選演習問題
+<UniversityProblemViewer category="mechanics" />
 
-大学の理工系学部1〜3年次、および大学院入試（院試）を想定した、力学・解析力学の厳選演習問題集です。
-微分方程式の解法、極座標での運動方程式、多重積分による慣性モーメントの導出、ラグランジアンを用いた運動方程式の導出をステップ・バイ・ステップで演習できます。
-
-<ClientOnly>
-  <UniversityProblemViewer defaultUnit="mechanics" />
-</ClientOnly>
-
----
-
-## 🧭 学習の指針・必須数学ツール
-
-1. **2階線形常微分方程式（特性方程式法）**:
-   - 斉次方程式 $\ddot{x} + 2\gamma\dot{x} + \omega_0^2 x = 0$ の特性根 $\lambda = -\gamma \pm \sqrt{\gamma^2 - \omega_0^2}$ による解の分類（過減衰、臨界減衰、減衰振動）。
-   - 非斉次方程式の特解（未定係数法）と過渡解の重ね合わせ。
-2. **極座標系の加速度と中心力**:
-   - 基底ベクトルの時間微分 $\dot{\vec{e}}_r = \dot{\theta}\vec{e}_\theta$, $\dot{\vec{e}}_\theta = -\dot{\theta}\vec{e}_r$。
-   - 角運動量保存則 $L = mr^2\dot{\theta} = \text{const}$ と有効ポテンシャル $U_{\text{eff}}(r) = U(r) + \frac{L^2}{2mr^2}$。
-3. **多重積分（重積分）と慣性モーメント**:
-   - 円柱座標・球座標のヤコビアン（$dV = r dr d\theta dz$, $dV = r^2\sin\theta dr d\theta d\phi$）。
-   - 平行軸の定理 $I = I_G + Md^2$。
-4. **解析力学（ラグランジュ形式）**:
-   - 一般化座標の選定と拘束条件の解消。
-   - ラグランジアン $L = T - U$ の立式とオイラー＝ラグランジュ方程式 $\frac{d}{dt}\frac{\partial L}{\partial \dot{q}_i} - \frac{\partial L}{\partial q_i} = 0$。
-   - 循環座標と保存量（ネーターの定理）。
+<div style="margin-top:24px; display:flex; gap:12px; flex-wrap:wrap;">
+  <a href="/university/mechanics/index" style="display:inline-block; background:#f8fafc; color:#334155; border:1px solid #cbd5e1; padding:10px 20px; border-radius:8px; text-decoration:none; font-weight:700;">
+    ← 力学・解析力学の講義ページに戻る
+  </a>
+  <a href="/university/problems/electromagnetism" style="display:inline-block; background:#1d4ed8; color:white; padding:10px 20px; border-radius:8px; text-decoration:none; font-weight:700;">
+    次の演習：電磁気学（全6問）へ →
+  </a>
+</div>

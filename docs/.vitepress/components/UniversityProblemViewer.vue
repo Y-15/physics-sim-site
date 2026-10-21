@@ -1,10 +1,15 @@
 <script setup>
-import { ref, computed, onMounted, watch, nextTick } from 'vue'
+import { ref, computed, onMounted, nextTick } from 'vue'
+import katex from 'katex'
 
 const props = defineProps({
   defaultUnit: {
     type: String,
-    default: 'all' // 'all' | 'mechanics' | 'electromagnetism' | 'thermodynamics' | 'quantum'
+    default: '' // 'all' | 'mechanics' | 'electromagnetism' | 'thermodynamics' | 'quantum'
+  },
+  category: {
+    type: String,
+    default: ''
   }
 })
 
@@ -13,7 +18,7 @@ const allProblems = ref([])
 const loading = ref(true)
 const error = ref(null)
 
-const selectedUnit = ref(props.defaultUnit)
+const selectedUnit = ref(props.defaultUnit || props.category || 'all')
 const selectedLevel = ref('all') // 'all', '学部教養', '学部専門', '院試基礎'
 const searchQuery = ref('')
 const solvedFilter = ref('all') // 'all', 'solved', 'review', 'unsolved'
@@ -148,18 +153,90 @@ const totalCount = computed(() => allProblems.value.length)
 const solvedCount = computed(() => Object.values(userStatus.value).filter(v => v === 'solved').length)
 const reviewCount = computed(() => Object.values(userStatus.value).filter(v => v === 'review').length)
 
-// Format Markdown text to simple HTML with KaTeX math spans preserved
-function formatText(text) {
-  if (!text) return ''
-  let html = text
+function renderLatexToHtml(latex, displayMode = false) {
+  if (!latex) return ''
+  const cleaned = latex.trim().replace(/\\+$/, '')
+  try {
+    return katex.renderToString(cleaned, {
+      displayMode,
+      throwOnError: false,
+      strict: false
+    })
+  } catch (e) {
+    return `<code>${escapeHtml(latex)}</code>`
+  }
+}
+
+function escapeHtml(str) {
+  return (str || '')
     .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;')
-    .replace(/\n\n/g, '<br><br>')
-    .replace(/\n/g, '<br>')
+}
+
+function formatInlineMath(text) {
+  if (!text) return ''
+  const mathBlocks = []
+  let s = String(text).replace(/\$([^\$\n\r]+?)\$/g, (_, math) => {
+    const idx = mathBlocks.length
+    mathBlocks.push(renderLatexToHtml(math, false))
+    return `\x00MATH${idx}\x00`
+  })
+  s = escapeHtml(s).replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+  return s.replace(/\x00MATH(\d+)\x00/g, (_, idx) => mathBlocks[Number(idx)])
+}
+
+// Format Markdown text to HTML with KaTeX math rendered
+function formatText(text) {
+  if (!text) return ''
+  const mathBlocks = []
+  let str = String(text)
+
+  // 1. Extract display math $$...$$
+  str = str.replace(/\$\$([\s\S]+?)\$\$/g, (_, math) => {
+    const idx = mathBlocks.length
+    mathBlocks.push(`<div class="katex-display-wrapper">${renderLatexToHtml(math, true)}</div>`)
+    return `\n\x00MATH${idx}\x00\n`
+  })
+
+  // 2. Extract inline math $...$
+  str = str.replace(/\$([^\$\n\r]+?)\$/g, (_, math) => {
+    const idx = mathBlocks.length
+    mathBlocks.push(renderLatexToHtml(math, false))
+    return `\x00MATH${idx}\x00`
+  })
+
+  // 3. Escape HTML on non-math text
+  str = escapeHtml(str)
+
+  // 4. Process line-by-line Markdown (headings, horizontal rules, bullet lists)
+  const lines = str.split('\n')
+  const outLines = []
+  for (const line of lines) {
+    const trimmed = line.trim()
+    if (trimmed === '---') {
+      outLines.push('<hr class="sol-divider" />')
+    } else if (trimmed.startsWith('#### ')) {
+      outLines.push(`<h5 class="sol-h4">${trimmed.slice(5)}</h5>`)
+    } else if (trimmed.startsWith('### ')) {
+      outLines.push(`<h4 class="sol-h3">${trimmed.slice(4)}</h4>`)
+    } else if (trimmed.startsWith('- ')) {
+      outLines.push(`<div class="sol-bullet">・${trimmed.slice(2)}</div>`)
+    } else {
+      outLines.push(line)
+    }
+  }
+
+  let html = outLines
+    .join('\n')
     .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-    .replace(/\*(.*?)\*/g, '<em>$1</em>')
-  return html
+    .replace(/\n\n+/g, '<br><br>')
+    .replace(/\n/g, '<br>')
+    .replace(/(?:<br>\s*)+(<(?:div|h4|h5|hr)\b)/g, '$1')
+    .replace(/(<\/(?:div|h4|h5)>|<hr[^>]*>)(?:\s*<br>)+/g, '$1')
+
+  // 5. Restore KaTeX HTML blocks
+  return html.replace(/\x00MATH(\d+)\x00/g, (_, idx) => mathBlocks[Number(idx)])
 }
 </script>
 
@@ -285,13 +362,13 @@ function formatText(text) {
 
         <!-- Problem Title -->
         <h3 class="problem-title">
-          <span class="num">Q{{ index + 1 }}.</span> {{ p.title }}
+          <span class="num">Q{{ index + 1 }}.</span> <span v-html="formatInlineMath(p.title)"></span>
         </h3>
 
         <!-- Mathematical Tools Needed -->
         <div v-if="p.mathTools && p.mathTools.length" class="math-tools-row">
           <span class="math-tools-label">🛠️ 必要数学ツール:</span>
-          <span v-for="t in p.mathTools" :key="t" class="math-tag">{{ t }}</span>
+          <span v-for="t in p.mathTools" :key="t" class="math-tag" v-html="formatInlineMath(t)"></span>
         </div>
 
         <!-- Prompt Text -->
@@ -700,6 +777,43 @@ function formatText(text) {
 .full-explanation {
   background: var(--vp-c-bg);
   padding-top: 8px;
+}
+
+.full-explanation :deep(.katex-display-wrapper),
+.problem-prompt :deep(.katex-display-wrapper),
+.answer-box :deep(.katex-display-wrapper),
+.hint-body :deep(.katex-display-wrapper) {
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 6px 0;
+  margin: 6px 0;
+}
+
+.full-explanation :deep(.sol-h3) {
+  margin: 14px 0 10px 0;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--vp-c-brand-1, #38bdf8);
+  border-bottom: 1px solid var(--vp-c-border);
+  padding-bottom: 6px;
+}
+
+.full-explanation :deep(.sol-h4) {
+  margin: 14px 0 8px 0;
+  font-size: 0.96rem;
+  font-weight: 700;
+  color: var(--vp-c-text-1);
+}
+
+.full-explanation :deep(.sol-divider) {
+  border: none;
+  border-top: 1px dashed var(--vp-c-border);
+  margin: 14px 0;
+}
+
+.full-explanation :deep(.sol-bullet) {
+  padding-left: 8px;
+  margin: 4px 0;
 }
 
 .future-expansion-banner {

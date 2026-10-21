@@ -1,134 +1,29 @@
----
-title: 大学物理 演習問題集（学部専門・大学院入試・完全解答）
-description: 大学物理の全分野（力学・解析力学、電磁気学、熱力学・統計力学、量子力学）を網羅した専門演習問題集。常微分方程式、多重積分、ベクトル解析、演算子法を用いた完全導出と詳細解説。
----
+# 大学物理 演習問題集（全24問・完全導出解説付き）
 
-# 📝 大学物理 演習問題集（学部試験・院試対策）
+<div class="level-badge" style="display:inline-block; background:#eff6ff; color:#1d4ed8; padding:4px 12px; border-radius:20px; font-weight:700; font-size:0.85rem; margin-bottom:16px;">
+  対象：大学教養〜専門課程・理系大学院入試対策 ／ 全24問（各分野6問）・ステップバイステップ完全導出
+</div>
 
-高校物理の演習問題集（全197問）とは**完全に独立した、大学物理専用の演習問題アーカイブ**です。
+大学の定期試験・編入試験・大学院入試で頻出する標準〜発展レベルの典型問題を厳選した**全24問の演習問題バンク**です。
+各問題には、使用する数学ツール（常微分方程式・ベクトル解析・全微分・ルジャンドル変換・演算子代数など）、思考の糸口となる「ヒント」、および途中の式変形を一切省略しない「完全解答・導出」が収録されています。
 
-理工系学部の定期試験対策から、東京大学・京都大学・東京工業大学（東京科学大）・東北大学など難関大学院の入試（院試）対策まで、**「微積分・微分方程式・多重積分・ベクトル解析・演算子法」** を駆使して自力で導出・計算する真の物理的思考力を養います。
-
-> [!NOTE]
-> 🏫 **高校物理の演習問題をお探しの方へ**  
-> 共通テストや高校範囲・大学入試二次試験の演習問題は、[高校物理 演習問題集（全197問）](/problems/index) をご利用ください。高校物理と大学物理は学習目的および数学的基盤が異なるため、完全に分離して提供しています。
+> **表記ルール（ISO 80000-2 準拠）**：すべての問題文・ヒント・解説において、ベクトル量は太字（$\boldsymbol{r}, \boldsymbol{v}, \boldsymbol{F}, \boldsymbol{p}, \boldsymbol{L}, \boldsymbol{E}, \boldsymbol{B}, \boldsymbol{A}, \boldsymbol{j}, \boldsymbol{S}, \boldsymbol{\nabla}, \boldsymbol{e}_r$ 等）で表記しています。
 
 ---
 
-## 🎯 大学物理 インタラクティブ問題バンク（検索・学習進捗管理）
+## 分野別 演習問題ページ
 
-下記のインタラクティブ問題バンクでは、キーワード検索、分野別・難易度別フィルター、解答済み・要復習チェック機能をご利用いただけます。
-
-<ClientOnly>
-  <UniversityProblemViewer defaultUnit="all" />
-</ClientOnly>
-
----
-
-## 📚 分野別 大学物理 演習問題集
-
-分野ごとの特化ページでじっくり問題演習を行うこともできます：
-
-<div class="univ-problems-grid">
-
-<div class="univ-prob-card">
-  <h3>🏎️ <a href="/university/problems/mechanics">力学・解析力学 演習問題</a></h3>
-  <p class="meta">減衰振動、強制振動、中心力場と軌道方程式、慣性モーメント多重積分、オイラー＝ラグランジュ方程式、ハミルトン形式</p>
-  <a class="card-btn" href="/university/problems/mechanics">力学の問題を解く →</a>
-</div>
-
-<div class="univ-prob-card">
-  <h3>⚡ <a href="/university/problems/electromagnetism">電磁気学 演習問題</a></h3>
-  <p class="meta">ガウスの法則微分形、球対称・円柱対称電場、ポアソン・ラプラス方程式、ビオ・サバール積分、電磁波の波動方程式導出、ポインティングベクトル</p>
-  <a class="card-btn" href="/university/problems/electromagnetism">電磁気の問題を解く →</a>
-</div>
-
-<div class="univ-prob-card">
-  <h3>🔥 <a href="/university/problems/thermodynamics">熱力学・統計力学 演習問題</a></h3>
-  <p class="meta">ルジャンドル変換、4大マクスウェル関係式、実在気体の内部エネルギー、カノニカル分配関数の多重積分、理想気体の状態方程式導出、ショットキー比熱</p>
-  <a class="card-btn" href="/university/problems/thermodynamics">熱・統計力学の問題を解く →</a>
-</div>
-
-<div class="univ-prob-card">
-  <h3>⚛️ <a href="/university/problems/quantum">量子力学 演習問題</a></h3>
-  <p class="meta">シュレーディンガー方程式、1次元無限井戸の固有値と規格化、不確定性関係の厳密証明、昇降演算子法による調和振動子、ポテンシャル障壁とトンネル効果</p>
-  <a class="card-btn" href="/university/problems/quantum">量子力学の問題を解く →</a>
-</div>
-
-</div>
+| 分野ページ | 収録問題（各6問・計24問）の主なテーマ |
+| :--- | :--- |
+| 📐 **[力学・解析力学の演習（全6問）](/university/problems/mechanics)** | 減衰・強制振動と共振、2次元極座標とケプラー問題（ビネの公式）、回転座標系とコリオリ力 $-2m\boldsymbol{\omega}\times\dot{\boldsymbol{r}}'$、剛体の慣性テンソルとオイラーの運動方程式、ラグランジアンと循環座標、電磁場中のハミルトニアンとポアソン括弧 |
+| ⚡ **[電磁気学の演習（全6問）](/university/problems/electromagnetism)** | 一様帯電球のガウスの法則・ポアソン方程式・静電場エネルギー、導体平面の鏡像法、電気双極子 $\boldsymbol{p}$ の電場とトルク、円形電流のビオ・サバール則と磁気モーメント $\boldsymbol{m}$、同軸ケーブルのベクトルポテンシャル $\boldsymbol{A}$ と自己インダクタンス、電磁波とポインティングベクトル $\boldsymbol{S}$ |
+| 🔥 **[熱力学・統計力学の演習（全6問）](/university/problems/thermodynamics)** | ルジャンドル変換・マクスウェルの関係式と $C_P - C_V$ 一般公式、ファン・デル・ワールス気体と断熱自由膨張、クラペイロン・クラウジウス式と光子気体、古典理想気体の位相空間積分とザックール・テトロード式、2準位ショットキー比熱とキュリー則、量子統計と縮退フェルミ気体 |
+| ⚛️ **[量子力学の演習（全6問）](/university/problems/quantum)** | 1次元無限井戸型ポテンシャルと不確定性積、正準交換関係・ロバートソン不等式と最小不確定ガウス波束、調和振動子の生成・消滅演算子 $\hat{a}, \hat{a}^\dagger$ とビリアル定理、確率流密度 $\boldsymbol{j}$ と階段型ポテンシャル散乱、角運動量 $\hat{\boldsymbol{L}}$ とパウリ行列 $\hat{\boldsymbol{\sigma}}$、水素原子 $1\text{s}$ 軌道と摂動論・変分法 |
 
 ---
 
-## 🚀 今後の問題追加ロードマップ
+## 全分野 総合問題ビューア（全24問）
 
-当サイトの大学物理演習問題バンクは、今後さらに以下の発展的テーマ・院試典型題を拡充していきます：
+分野タブを切り替えて、すべての演習問題に取り組むことができます。
 
-1. **力学・解析力学**:
-   - 二重振り子・連成振動子の固有振動モード解析と永年方程式
-   - リジッドボディ（コマ）のオイラー角と歳差運動方程式
-   - 正準変換とポアソン括弧式、ハミルトン＝ヤコビ方程式
-2. **電磁気学**:
-   - 導体表面の境界値問題と鏡像法（平面・球面導体）
-   - 遅延ポテンシャル（リエナール＝ヴィーヒェルト・ポテンシャル）と制動放射
-   - 導波管内の電磁波モード（TEモード・TMモード）と遮断周波数
-3. **熱・統計力学**:
-   - グランドカノニカル分布と化学ポテンシャル、大分配関数 $\Xi$
-   - フェルミ＝ディラック統計とゾンマーフェルト展開（電子比熱）
-   - ボース＝アインシュタイン凝縮（BEC）とプランクの放射公式導出
-   - 1次元イジング模型と転送行列法
-4. **量子力学**:
-   - 中心力場と水素原子のシュレーディンガー方程式（球面調和関数・動径波動関数）
-   - スピン角運動量とパウリ行列、クレブシュ＝ゴルダン係数
-   - 時間を含まない微擾論（摂動論）とゼーマン効果・シュタルク効果
-   - 変分法とヘリウム原子基底エネルギーの近似計算
-
-<style scoped>
-.univ-problems-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1.25rem;
-  margin: 1.5rem 0 2rem;
-}
-
-.univ-prob-card {
-  background: var(--vp-c-bg-soft);
-  border: 1px solid var(--vp-c-border);
-  border-radius: 12px;
-  padding: 20px 22px;
-  display: flex;
-  flex-direction: column;
-}
-
-.univ-prob-card h3 {
-  margin: 0 0 10px 0;
-  font-size: 1.15rem;
-}
-
-.univ-prob-card .meta {
-  font-size: 0.88rem;
-  line-height: 1.6;
-  color: var(--vp-c-text-2);
-  margin: 0 0 16px 0;
-  flex: 1;
-}
-
-.card-btn {
-  display: inline-block;
-  padding: 8px 14px;
-  background: var(--vp-c-bg-mute);
-  border: 1px solid var(--vp-c-border);
-  color: var(--vp-c-text-1);
-  font-size: 0.88rem;
-  font-weight: 600;
-  border-radius: 6px;
-  text-decoration: none;
-  text-align: center;
-  transition: all 0.2s ease;
-}
-
-.card-btn:hover {
-  background: #6366f1;
-  color: #fff;
-  border-color: #6366f1;
-}
-</style>
+<UniversityProblemViewer />

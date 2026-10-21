@@ -1,28 +1,29 @@
+# 量子力学 演習問題（全6問）
+
+<div class="level-badge" style="display:inline-block; background:#eff6ff; color:#1d4ed8; padding:4px 12px; border-radius:20px; font-weight:700; font-size:0.85rem; margin-bottom:16px;">
+  対象：大学2〜3年次・大学院入試対策 ／ 範囲：正準交換関係・不確定性原理・1次元井戸型＆障壁ポテンシャル・調和振動子（昇降演算子）・角運動量＆スピン・水素原子と摂動論
+</div>
+
+シュレーディンガー方程式の境界値問題、正準交換関係 $[\hat{r}_\alpha, \hat{p}_\beta] = i\hbar\delta_{\alpha\beta}$ と最小不確定ガウス波束、調和振動子の生成・消滅演算子 $\hat{a}^\dagger, \hat{a}$ による代数計算、確率流密度ベクトル $\boldsymbol{j}$ とトンネル効果、角運動量演算子 $\hat{\boldsymbol{L}}$ とパウリ行列 $\hat{\boldsymbol{\sigma}}$、および水素原子と定常摂動論を徹底演習する全6問です。
+
+## 解答のポイントと必須公式チェック
+
+- **正準交換関係とロバートソンの不確定性関係**：
+  $$[\hat{r}_\alpha, \hat{p}_\beta] = i\hbar\delta_{\alpha\beta}, \qquad \Delta A \cdot \Delta B \ge \frac{1}{2}\left|\langle[\hat{A}, \hat{B}]\rangle\right|, \qquad \Delta x \cdot \Delta p_x \ge \frac{\hbar}{2}$$
+- **1次元調和振動子の生成・消滅演算子**：
+  $$\hat{a} = \sqrt{\frac{m\omega}{2\hbar}}\left(\hat{x} + \frac{i}{m\omega}\hat{p}\right), \quad [\hat{a}, \hat{a}^\dagger] = 1, \quad \hat{H} = \hbar\omega\left(\hat{a}^\dagger\hat{a} + \frac{1}{2}\right), \quad \hat{a}|n\rangle = \sqrt{n}|n-1\rangle, \quad \hat{a}^\dagger|n\rangle = \sqrt{n+1}|n+1\rangle$$
+- **軌道角運動量代数と定常摂動論**：
+  $$[\hat{L}_\alpha, \hat{L}_\beta] = i\hbar\sum_\gamma \epsilon_{\alpha\beta\gamma}\hat{L}_\gamma, \qquad E_n = E_n^{(0)} + \langle n^{(0)}|\hat{V}|n^{(0)}\rangle + \sum_{m\neq n}\frac{|\langle m^{(0)}|\hat{V}|n^{(0)}\rangle|^2}{E_n^{(0)} - E_m^{(0)}} + \cdots$$
+
 ---
-title: 大学量子力学 演習問題集（シュレーディンガー方程式・不確定性原理・院試対策）
-description: 大学物理の量子力学演習問題。1次元無限井戸型ポテンシャルのエネルギー固有値と波動関数の規格化・ゆらぎ計算、正準交換関係と不確定性原理のコーシー＝シュワルツ証明。
----
 
-# ⚛️ 大学量子力学 厳選演習問題
+<UniversityProblemViewer category="quantum" />
 
-理工系学部および大学院入試（院試）を想定した、大学量子力学の厳選演習問題集です。
-シュレーディンガー方程式の境界値問題、ボルンの確率解釈に基づく規格化積分、エルミート演算子の期待値計算、交換関係と不確定性関係の厳密証明をマスターします。
-
-<ClientOnly>
-  <UniversityProblemViewer defaultUnit="quantum" />
-</ClientOnly>
-
----
-
-## 🧭 学習の指針・必須数学ツール
-
-1. **時間を含まないシュレーディンガー方程式**:
-   - $-\frac{\hbar^2}{2m}\frac{d^2\phi}{dx^2} + V(x)\phi = E\phi$
-   - 境界条件（波動関数の連続性と1階微分の連続性、無限遠でのゼロ収束）。
-2. **波動関数の規格化と期待値**:
-   - 規格化積分 $\int_{-\infty}^\infty |\phi(x)|^2 dx = 1$
-   - 位置の期待値 $\langle x \rangle = \int \phi^* x \phi dx$、運動量の期待値 $\langle p \rangle = \int \phi^* \left(-i\hbar\frac{d}{dx}\right) \phi dx$
-   - 不確定さ（標準偏差） $\Delta x = \sqrt{\langle x^2 \rangle - \langle x \rangle^2}$
-3. **演算子代数と不確定性原理**:
-   - 正準交換関係 $[\hat{x}, \hat{p}] = i\hbar \hat{I}$
-   - コーシー＝シュワルツの不等式を用いたケネジ＝ロバートソン不確定性関係 $\Delta A \Delta B \ge \frac{1}{2}|\langle [\hat{A}, \hat{B}] \rangle|$ の証明。
+<div style="margin-top:24px; display:flex; gap:12px; flex-wrap:wrap;">
+  <a href="/university/quantum/index" style="display:inline-block; background:#f8fafc; color:#334155; border:1px solid #cbd5e1; padding:10px 20px; border-radius:8px; text-decoration:none; font-weight:700;">
+    ← 量子力学の講義ページに戻る
+  </a>
+  <a href="/university/problems/index" style="display:inline-block; background:#1d4ed8; color:white; padding:10px 20px; border-radius:8px; text-decoration:none; font-weight:700;">
+    大学物理 総合演習トップ（全24問）へ →
+  </a>
+</div>
