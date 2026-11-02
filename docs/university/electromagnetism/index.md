@@ -1,6 +1,6 @@
 # 電磁気学（ベクトル解析・マクスウェル方程式と電磁場理論）
 
-<div class="level-badge" style="display:inline-block; background:#eff6ff; color:#1d4ed8; padding:4px 12px; border-radius:20px; font-weight:700; font-size:0.85rem; margin-bottom:16px;">
+<div class="level-badge">
   対象：大学1〜2年次 ／ 必須数学：ベクトル解析・偏微分方程式・多重積分・フーリエ解析
 </div>
 
@@ -437,11 +437,11 @@ $$
 
 マクスウェル方程式のベクトル解析、ポアソン方程式の境界値問題、鏡像法、ビオ・サバールの法則、電磁波とポインティングベクトルを実際の計算問題で確認しましょう。
 
-<div style="margin-top:20px; display:flex; gap:12px; flex-wrap:wrap;">
-  <a href="/university/problems/electromagnetism" style="display:inline-block; background:#1d4ed8; color:white; padding:12px 24px; border-radius:8px; text-decoration:none; font-weight:700;">
+<div class="univ-nav-group">
+  <a href="/university/problems/electromagnetism" class="univ-btn-primary">
     📝 電磁気学の演習問題一覧へ進む →
   </a>
-  <a href="/university/thermodynamics/index" style="display:inline-block; background:#f8fafc; color:#334155; border:1px solid #cbd5e1; padding:12px 24px; border-radius:8px; text-decoration:none; font-weight:700;">
+  <a href="/university/thermodynamics/index" class="univ-btn-secondary">
     次の単元：熱力学・統計力学へ →
   </a>
 </div>

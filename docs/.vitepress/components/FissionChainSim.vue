@@ -198,7 +198,7 @@ function draw() {
   // 1. 制御棒の視覚化（上部から降りてくるホウ素・カドミウム棒）
   const rodHeight = (controlRodDepth.value / 100) * (height - 60)
   ctx.fillStyle = 'rgba(71, 85, 105, 0.45)'
-  ctx.strokeStyle = '#64748b'
+  ctx.strokeStyle = '#94a3b8'
   ctx.lineWidth = 2
   for (let rx = 50; rx < width; rx += 55) {
     ctx.fillRect(rx - 4, 0, 8, rodHeight)

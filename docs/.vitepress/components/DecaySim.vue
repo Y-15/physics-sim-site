@@ -273,8 +273,8 @@ function drawDecaySim(ctx, w, h) {
   text(ctx, '【残存核数の時間変化 N(t)】', gx0, 56, '#e4e4e7', 'bold 12px sans-serif')
 
   // 軸
-  arrow(ctx, gx0, gy0, gx0 + gw + 15, gy0, '#71717a', 2, '時間 t [秒]', { align: 'left', lx: 5 })
-  arrow(ctx, gx0, gy0, gx0, gy0 - gh - 15, '#71717a', 2, '原子核数 N', { align: 'center', ly: -10 })
+  arrow(ctx, gx0, gy0, gx0 + gw + 15, gy0, '#94a3b8', 2, '時間 t [秒]', { align: 'left', lx: 5 })
+  arrow(ctx, gx0, gy0, gx0, gy0 - gh - 15, '#94a3b8', 2, '原子核数 N', { align: 'center', ly: -10 })
 
   // 半減期の縦点線 (T, 2T, 3T)
   const T = halfLife.value

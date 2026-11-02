@@ -103,6 +103,7 @@
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 
 const canvasRef = ref(null)
+const isMounted = ref(false)
 const plateVoltageV = ref(185)       // V
 const selectedChargeN = ref(2)       // 2e
 const dropletRadiusUm = ref(1.35)    // 1.35 µm
@@ -206,9 +207,11 @@ function updatePhysics() {
 }
 
 function draw() {
+  if (!isMounted.value) return
   const canvas = canvasRef.value
-  if (!canvas) return
+  if (!canvas || !canvas.isConnected) return
   const ctx = canvas.getContext('2d')
+  if (!ctx) return
   const w = canvas.width
   const h = canvas.height
 
@@ -335,7 +338,7 @@ function draw() {
   droplets.forEach(d => counts[d.n - 1]++)
 
   // 軸
-  ctx.strokeStyle = '#64748b'
+  ctx.strokeStyle = '#94a3b8'
   ctx.lineWidth = 1
   ctx.beginPath()
   ctx.moveTo(hX + 30, hY + hH - 30); ctx.lineTo(hX + hW - 15, hY + hH - 30)
@@ -365,16 +368,23 @@ function draw() {
   ctx.textAlign = 'center'
   ctx.fillText('測定電荷 q はすべて e の整数倍！ (q = ne)', hX + hW / 2, hY + hH + 22)
 
-  animId = requestAnimationFrame(draw)
+  if (isMounted.value) {
+    animId = requestAnimationFrame(draw)
+  }
 }
 
 onMounted(() => {
+  isMounted.value = true
   initDroplets()
   draw()
 })
 
 onUnmounted(() => {
-  if (animId) cancelAnimationFrame(animId)
+  isMounted.value = false
+  if (animId) {
+    cancelAnimationFrame(animId)
+    animId = null
+  }
 })
 </script>
 

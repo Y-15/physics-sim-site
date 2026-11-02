@@ -234,7 +234,7 @@ const draw = () => {
   ctx.fillStyle = 'rgba(15, 23, 42, 0.7)'
   ctx.fillRect(cylLeft, cylTop, pistonX - cylLeft, cylH)
 
-  ctx.strokeStyle = '#64748b'
+  ctx.strokeStyle = '#94a3b8'
   ctx.lineWidth = 4
   ctx.beginPath()
   // 上壁

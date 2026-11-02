@@ -74,9 +74,9 @@ description: 大学物理の全分野（力学・解析力学、電磁気学・�
 すべての問題に「必須数学ツール」「考え方のヒント」「途中式を一切省略しない厳密な解答・導出解説」を完備しています。
 
 <div style="background: linear-gradient(135deg, rgba(99, 102, 241, 0.12), rgba(56, 189, 248, 0.1)); border: 1px solid rgba(99, 102, 241, 0.35); border-radius: 12px; padding: 24px; margin: 1.5rem 0;">
-  <h3 style="margin: 0 0 8px 0; font-size: 1.25rem; color: #4f46e5;">📝 大学物理 演習問題集トップ（全24問 検索＆学習進捗管理）</h3>
+  <h3 style="margin: 0 0 8px 0; font-size: 1.25rem; color: var(--academic-accent);">📝 大学物理 演習問題集トップ（全24問 検索＆学習進捗管理）</h3>
   <p style="margin: 0 0 16px 0; font-size: 0.92rem; line-height: 1.6;">
     力学・解析力学（6問）、電磁気学（6問）、熱・統計力学（6問）、量子力学（6問）の全24問を分野別・難易度別（学部教養／学部専門／院試基礎）に検索・演習できる対話型問題バンクです。KaTeXによる高速数式レンダリングとローカル進捗保存に対応しています。
   </p>
-  <a href="/university/problems/index" style="display: inline-block; padding: 10px 20px; background: #4f46e5; color: #fff; font-weight: 700; font-size: 0.92rem; border-radius: 8px; text-decoration: none;">🚀 大学物理 演習問題集トップを開く →</a>
+  <a href="/university/problems/index" class="univ-btn-primary">🚀 大学物理 演習問題集トップを開く →</a>
 </div>

@@ -1,6 +1,6 @@
 # 大学物理 演習問題集（全24問・完全導出解説付き）
 
-<div class="level-badge" style="display:inline-block; background:#eff6ff; color:#1d4ed8; padding:4px 12px; border-radius:20px; font-weight:700; font-size:0.85rem; margin-bottom:16px;">
+<div class="level-badge">
   対象：大学教養〜専門課程・理系大学院入試対策 ／ 全24問（各分野6問）・ステップバイステップ完全導出
 </div>
 
@@ -26,4 +26,6 @@
 
 分野タブを切り替えて、すべての演習問題に取り組むことができます。
 
-<UniversityProblemViewer />
+<ClientOnly>
+  <UniversityProblemViewer />
+</ClientOnly>

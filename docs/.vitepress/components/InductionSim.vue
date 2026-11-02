@@ -349,7 +349,7 @@ function drawMagnetCoilSystem(ctx, w, h) {
 
   ctx.fillStyle = 'rgba(255,255,255,0.03)'
   ctx.fillRect(coilLeft, coilTop, coilW, coilH)
-  ctx.strokeStyle = '#64748b'
+  ctx.strokeStyle = '#94a3b8'
   ctx.lineWidth = 1.5
   ctx.strokeRect(coilLeft, coilTop, coilW, coilH)
 
@@ -387,14 +387,14 @@ function drawMagnetCoilSystem(ctx, w, h) {
   const galvY = cy + 90
   const galvR = 32
 
-  dot(ctx, galvX, galvY, galvR, '#1e293b', '#64748b', 2)
+  dot(ctx, galvX, galvY, galvR, '#1e293b', '#94a3b8', 2)
   dot(ctx, galvX, galvY, 4, '#fff')
   text(ctx, 'G', galvX, galvY - 14, { color: '#94a3b8', font: 'bold 11px sans-serif' })
 
   // 目盛り線 (- / 0 / +)
-  line(ctx, galvX - 16, galvY - 18, galvX - 12, galvY - 14, { color: '#64748b', width: 1.5 })
-  line(ctx, galvX, galvY - 20, galvX, galvY - 15, { color: '#64748b', width: 1.5 })
-  line(ctx, galvX + 16, galvY - 18, galvX + 12, galvY - 14, { color: '#64748b', width: 1.5 })
+  line(ctx, galvX - 16, galvY - 18, galvX - 12, galvY - 14, { color: '#94a3b8', width: 1.5 })
+  line(ctx, galvX, galvY - 20, galvX, galvY - 15, { color: '#94a3b8', width: 1.5 })
+  line(ctx, galvX + 16, galvY - 18, galvX + 12, galvY - 14, { color: '#94a3b8', width: 1.5 })
 
   // 検流計の指針（誘導電流に連動して左右に振れる）
   const needleAngle = Math.max(-0.6, Math.min(0.6, galvanoCurrent.value * 2.2))

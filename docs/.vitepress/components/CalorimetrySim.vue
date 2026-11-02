@@ -205,7 +205,7 @@ function draw() {
 
   // ビーカーガラス
   ctx.save()
-  ctx.strokeStyle = '#64748b'
+  ctx.strokeStyle = '#94a3b8'
   ctx.lineWidth = 3
   ctx.beginPath()
   ctx.moveTo(bX, bY)

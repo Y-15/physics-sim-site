@@ -182,7 +182,7 @@ function drawFilmMode(ctx, width, height) {
   const subY = filmY + displayThickness
   ctx.fillStyle = 'rgba(15, 23, 42, 0.9)'
   ctx.fillRect(40, subY, width - 80, height - subY - 30)
-  ctx.fillStyle = '#64748b'
+  ctx.fillStyle = '#94a3b8'
   ctx.fillText('基板・水 (屈折率 n₂ = 1.00 またはガラス 1.50)', 50, subY + 30)
 
   // 光線の入射・反射作図

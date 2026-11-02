@@ -16,7 +16,9 @@ head:
 
 ---
 
-<OthelloPlayer />
+<ClientOnly>
+  <OthelloPlayer />
+</ClientOnly>
 
 ---
 

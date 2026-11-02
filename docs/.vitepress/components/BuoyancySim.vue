@@ -266,7 +266,7 @@ function render() {
 
   // 直方体の塗り
   const isFloating = objectDensity.value < fluidDensity.value
-  ctx.fillStyle = isFloating ? '#d97706' : '#64748b'
+  ctx.fillStyle = isFloating ? '#d97706' : '#94a3b8'
   ctx.fillRect(bx, by, bw, bh)
   ctx.strokeStyle = '#fbbf24'
   ctx.lineWidth = 2

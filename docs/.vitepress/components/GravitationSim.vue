@@ -245,7 +245,7 @@ function draw() {
   dot(ctx, sx, sy, 6, '#fbbf24', '#fff')
 
   text(ctx, `打ち出し点での v₁ = ${(vc0.value * 1000).toFixed(2)} km/s,  脱出に必要な速さ v₂ = ${(Math.SQRT2 * vc0.value * 1000).toFixed(2)} km/s`, 14, 22, '#cbd5e1', '12px sans-serif')
-  text(ctx, '※ 地球の大きさ・距離は縮尺どおり。時間は大幅に早送りしています', 14, H - 12, '#64748b', '11px sans-serif')
+  text(ctx, '※ 地球の大きさ・距離は縮尺どおり。時間は大幅に早送りしています', 14, H - 12, '#94a3b8', '11px sans-serif')
 }
 
 watch([ratio, r0], reset)

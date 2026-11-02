@@ -201,7 +201,7 @@ function draw() {
   // シリンダー壁
   ctx.save()
   ctx.fillStyle = '#1e293b'
-  ctx.strokeStyle = '#64748b'
+  ctx.strokeStyle = '#94a3b8'
   ctx.lineWidth = 3
   ctx.beginPath()
   ctx.moveTo(cX - cW / 2, cTopY)

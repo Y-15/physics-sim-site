@@ -58,7 +58,9 @@ $$m a = F$$
 ### ② 鉛直アトウッドの器械
 定滑車に糸をかけ、両端に質量 $M$（大）と $m$（小）のおもりを吊り下げた場合：
 
-<AtwoodDiagram />
+<ClientOnly>
+  <AtwoodDiagram />
+</ClientOnly>
 
 * 物体A（下向きに加速、下向きを正）：
   $$M a = M g - T \quad \cdots\text{①}$$

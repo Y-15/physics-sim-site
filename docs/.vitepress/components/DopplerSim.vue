@@ -197,7 +197,7 @@ function stepSim(dtSec = 0.05) {
 
 function updateAndDraw(timestamp) {
   if (!lastTime) lastTime = timestamp
-  const dt = (timestamp - lastTime) / 1000
+  const dt = Math.min(0.05, (timestamp - lastTime) / 1000)
   lastTime = timestamp
 
   if (isRunning.value) {
@@ -205,10 +205,7 @@ function updateAndDraw(timestamp) {
   }
 
   const canvas = canvasRef.value
-  if (!canvas) {
-    animId = requestAnimationFrame(updateAndDraw)
-    return
-  }
+  if (!canvas) return
   const ctx = canvas.getContext('2d')
   const width = canvas.width
   const height = canvas.height

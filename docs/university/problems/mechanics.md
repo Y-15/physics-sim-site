@@ -1,6 +1,6 @@
 # 力学・解析力学 演習問題（全6問）
 
-<div class="level-badge" style="display:inline-block; background:#eff6ff; color:#1d4ed8; padding:4px 12px; border-radius:20px; font-weight:700; font-size:0.85rem; margin-bottom:16px;">
+<div class="level-badge">
   対象：大学1〜2年次・大学院入試対策 ／ 範囲：ニュートン力学（微分方程式）・中心力場・回転座標系・剛体・ラグランジュ＆ハミルトン解析力学
 </div>
 
@@ -17,13 +17,15 @@
 
 ---
 
-<UniversityProblemViewer category="mechanics" />
+<ClientOnly>
+  <UniversityProblemViewer category="mechanics" />
+</ClientOnly>
 
-<div style="margin-top:24px; display:flex; gap:12px; flex-wrap:wrap;">
-  <a href="/university/mechanics/index" style="display:inline-block; background:#f8fafc; color:#334155; border:1px solid #cbd5e1; padding:10px 20px; border-radius:8px; text-decoration:none; font-weight:700;">
+<div class="univ-nav-group">
+  <a href="/university/mechanics/index" class="univ-btn-secondary">
     ← 力学・解析力学の講義ページに戻る
   </a>
-  <a href="/university/problems/electromagnetism" style="display:inline-block; background:#1d4ed8; color:white; padding:10px 20px; border-radius:8px; text-decoration:none; font-weight:700;">
+  <a href="/university/problems/electromagnetism" class="univ-btn-primary">
     次の演習：電磁気学（全6問）へ →
   </a>
 </div>

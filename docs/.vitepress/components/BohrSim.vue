@@ -255,7 +255,7 @@ function drawAtom(ctx, w, h) {
     ctx.setLineDash([])
 
     // 軌道ラベル
-    text(ctx, `n=${n}`, cx + rad + 4, cy - 4, isCurrent ? '#38bdf8' : '#71717a', '10px sans-serif')
+    text(ctx, `n=${n}`, cx + rad + 4, cy - 4, isCurrent ? '#38bdf8' : '#94a3b8', '10px sans-serif')
   }
 
   // 原子核 (陽子 +e)
@@ -352,7 +352,7 @@ function drawEnergyLevels(ctx, w, h) {
     const isCur = n === currentN.value
 
     // レベル線
-    line(ctx, lx0, y, lx1, y, isCur ? '#38bdf8' : '#71717a', isCur ? 3 : 1.5)
+    line(ctx, lx0, y, lx1, y, isCur ? '#38bdf8' : '#94a3b8', isCur ? 3 : 1.5)
 
     // 密集する n=4, 5 のラベル重なりを防止するためオフセット調整
     const yOffset = n === 5 ? 1 : n === 4 ? 7 : 4

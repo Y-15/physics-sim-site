@@ -201,7 +201,7 @@ const draw = () => {
     const y = firstRowY + r * spacingY
     for (let c = 0; c < atomCols; c++) {
       const x = startX + c * spacingX
-      ctx.fillStyle = '#64748b'
+      ctx.fillStyle = '#94a3b8'
       ctx.beginPath()
       ctx.arc(x, y, 6, 0, Math.PI * 2)
       ctx.fill()
@@ -267,7 +267,7 @@ const draw = () => {
   const ampIn = 5.5
   const ampOut = isBraggMatched.value ? 6.5 : 2.2
   const phaseDiffRad = braggRatio.value * 2 * Math.PI
-  const refColor = isBraggMatched.value ? '#34d399' : '#64748b'
+  const refColor = isBraggMatched.value ? '#34d399' : '#94a3b8'
 
   const drawWaveSegment = (x1, y1, x2, y2, phase, amp, color, lw) => {
     const dx = x2 - x1

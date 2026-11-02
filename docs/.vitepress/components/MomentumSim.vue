@@ -119,7 +119,7 @@ function getBlockR(mass) { return 16 + mass * 5 }
 
 function draw(rawT) {
   if (!lastTime) lastTime = rawT
-  const dt = (rawT - lastTime) / 1000
+  const dt = Math.min(0.05, (rawT - lastTime) / 1000)
   lastTime = rawT
 
   if (isRunning.value) {

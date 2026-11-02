@@ -1,6 +1,6 @@
 # 熱力学・統計力学 演習問題（全6問）
 
-<div class="level-badge" style="display:inline-block; background:#eff6ff; color:#1d4ed8; padding:4px 12px; border-radius:20px; font-weight:700; font-size:0.85rem; margin-bottom:16px;">
+<div class="level-badge">
   対象：大学1〜3年次・大学院入試対策 ／ 範囲：熱力学ポテンシャル・マクスウェルの関係式・実在気体・相転移・カノニカル分配関数・量子統計
 </div>
 
@@ -17,13 +17,15 @@
 
 ---
 
-<UniversityProblemViewer category="thermodynamics" />
+<ClientOnly>
+  <UniversityProblemViewer category="thermodynamics" />
+</ClientOnly>
 
-<div style="margin-top:24px; display:flex; gap:12px; flex-wrap:wrap;">
-  <a href="/university/thermodynamics/index" style="display:inline-block; background:#f8fafc; color:#334155; border:1px solid #cbd5e1; padding:10px 20px; border-radius:8px; text-decoration:none; font-weight:700;">
+<div class="univ-nav-group">
+  <a href="/university/thermodynamics/index" class="univ-btn-secondary">
     ← 熱・統計力学の講義ページに戻る
   </a>
-  <a href="/university/problems/quantum" style="display:inline-block; background:#1d4ed8; color:white; padding:10px 20px; border-radius:8px; text-decoration:none; font-weight:700;">
+  <a href="/university/problems/quantum" class="univ-btn-primary">
     次の演習：量子力学（全6問）へ →
   </a>
 </div>

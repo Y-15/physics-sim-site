@@ -5,7 +5,7 @@ description: ベクトル微積分・微分方程式によるニュートン力�
 
 # 🏎️ 大学力学・解析力学（Classical & Analytical Mechanics）
 
-<div class="level-badge" style="display:inline-block; background:#eff6ff; color:#1d4ed8; padding:4px 12px; border-radius:20px; font-weight:700; font-size:0.85rem; margin-bottom:16px;">
+<div class="level-badge">
   対象：大学1〜2年次 ／ 必須数学：常微分方程式・ベクトル解析・線形代数・変分法
 </div>
 

@@ -106,7 +106,7 @@ function stepForward(delta = 0.1) {
 
 function draw(timestamp) {
   if (!lastTime) lastTime = timestamp
-  const dt = (timestamp - lastTime) / 1000
+  const dt = Math.min(0.05, (timestamp - lastTime) / 1000)
   lastTime = timestamp
 
   if (isPlaying.value) {
@@ -147,10 +147,10 @@ function draw(timestamp) {
   for (let m = -10; m <= 70; m += 10) {
     const mx = originPx + m * pxPerM
     if (mx >= 10 && mx <= w - 10) {
-      ctx.strokeStyle = m === 0 ? '#ef4444' : '#52525b'
+      ctx.strokeStyle = m === 0 ? '#ef4444' : '#94a3b8'
       ctx.lineWidth = m === 0 ? 2 : 1
       ctx.beginPath(); ctx.moveTo(mx, roadY - 5); ctx.lineTo(mx, roadY + 5); ctx.stroke()
-      ctx.fillStyle = m === 0 ? '#ef4444' : '#71717a'
+      ctx.fillStyle = m === 0 ? '#ef4444' : '#94a3b8'
       ctx.font = '10px sans-serif'; ctx.textAlign = 'center'
       ctx.fillText(`${m}m`, mx, roadY + 18)
     }
@@ -171,7 +171,7 @@ function draw(timestamp) {
   ctx.fillStyle = '#18181b'
   ctx.beginPath(); ctx.arc(carX - 10, carY, 4, 0, Math.PI*2); ctx.fill()
   ctx.beginPath(); ctx.arc(carX + 10, carY, 4, 0, Math.PI*2); ctx.fill()
-  ctx.strokeStyle = '#71717a'; ctx.lineWidth = 1.5
+  ctx.strokeStyle = '#94a3b8'; ctx.lineWidth = 1.5
   ctx.beginPath(); ctx.arc(carX - 10, carY, 4, 0, Math.PI*2); ctx.stroke()
   ctx.beginPath(); ctx.arc(carX + 10, carY, 4, 0, Math.PI*2); ctx.stroke()
 
@@ -243,7 +243,7 @@ function draw(timestamp) {
     const tx = graphLeft + (s / maxT) * graphW
     ctx.strokeStyle = 'rgba(71, 85, 105, 0.4)'; ctx.lineWidth = 1
     ctx.beginPath(); ctx.moveTo(tx, graphTop); ctx.lineTo(tx, graphBottom); ctx.stroke()
-    ctx.fillStyle = '#64748b'; ctx.font = '10px sans-serif'; ctx.textAlign = 'center'
+    ctx.fillStyle = '#94a3b8'; ctx.font = '10px sans-serif'; ctx.textAlign = 'center'
     ctx.fillText(`${s}`, tx, vAxisY + 14)
   }
 

@@ -217,7 +217,7 @@ function draw(timestamp) {
   ctx.lineWidth = 3
   ctx.beginPath(); ctx.moveTo(slopeBaseX, slopeBaseY); ctx.lineTo(slopeEndX, slopeEndY); ctx.stroke()
   // 底辺
-  ctx.strokeStyle = '#52525b'; ctx.lineWidth = 1.5
+  ctx.strokeStyle = '#94a3b8'; ctx.lineWidth = 1.5
   ctx.beginPath(); ctx.moveTo(slopeBaseX, slopeBaseY); ctx.lineTo(slopeEndX, slopeBaseY); ctx.stroke()
 
   // 角度 θ 円弧

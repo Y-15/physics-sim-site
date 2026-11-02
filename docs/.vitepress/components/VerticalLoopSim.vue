@@ -282,7 +282,7 @@ const draw = () => {
   ctx.stroke()
 
   // 中心点
-  ctx.fillStyle = '#64748b'
+  ctx.fillStyle = '#94a3b8'
   ctx.beginPath()
   ctx.arc(centerX, centerY, 4, 0, Math.PI * 2)
   ctx.fill()

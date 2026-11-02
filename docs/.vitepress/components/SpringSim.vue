@@ -131,7 +131,7 @@ function draw() {
   ctx.fillStyle = "#3f3f46"
   ctx.fillRect(wallX - 10, massY - 60, 10, 120)
   for (let yi = -3; yi <= 3; yi++) {
-    ctx.strokeStyle = "#52525b"
+    ctx.strokeStyle = "#94a3b8"
     ctx.lineWidth = 1
     ctx.beginPath()
     ctx.moveTo(wallX - 10, massY + yi * 18)
@@ -177,12 +177,12 @@ function draw() {
   ctx.textBaseline = "alphabetic"
 
   // 平衡点マーカー
-  ctx.strokeStyle = "#52525b"
+  ctx.strokeStyle = "#94a3b8"
   ctx.lineWidth = 1
   ctx.setLineDash([4,4])
   ctx.beginPath(); ctx.moveTo(eqX, massY - 60); ctx.lineTo(eqX, massY + 60); ctx.stroke()
   ctx.setLineDash([])
-  ctx.fillStyle = "#52525b"
+  ctx.fillStyle = "#94a3b8"
   ctx.font = "11px sans-serif"
   ctx.textAlign = "center"
   ctx.fillText("x = 0", eqX, massY + 68)

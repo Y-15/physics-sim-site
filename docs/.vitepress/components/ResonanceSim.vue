@@ -307,7 +307,7 @@ const draw = () => {
   const amp = 30 * resonanceFactor
 
   // 赤い定常波のエンベロープ（包絡線）
-  ctx.strokeStyle = isResonant.value ? '#ef4444' : '#64748b'
+  ctx.strokeStyle = isResonant.value ? '#ef4444' : '#94a3b8'
   ctx.lineWidth = isResonant.value ? 2.5 : 1.5
 
   ctx.beginPath()

@@ -666,7 +666,7 @@ function drawWallMode(ctx, w, h) {
   ctx.fillRect(0, wallY, w, h - wallY)
 
   // 壁面表面ライン
-  ctx.strokeStyle = '#64748b'
+  ctx.strokeStyle = '#94a3b8'
   ctx.lineWidth = 3
   ctx.beginPath()
   ctx.moveTo(0, wallY); ctx.lineTo(w, wallY)

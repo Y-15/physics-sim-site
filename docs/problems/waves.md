@@ -942,7 +942,7 @@ f'≈530 Hz
 
 **Step 1: ドップラー効果の使用公式**
 $$
-f\
+f' = \frac{V}{V - v_s} f
 $$
 *※ 問題で使用する関係式です。*
 
@@ -2300,7 +2300,7 @@ D=2.0 m
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
 
-明線間隔は、
+明線間隔は $\Delta x = \frac{\lambda D}{d}$ である。ガラス板を置くと光路長（光学的距離）が $\delta = (n - 1)t$ だけ増加し、干渉縞は $N = \frac{\delta}{\lambda}$ 個分だけ移動する。
 
 </details>
 

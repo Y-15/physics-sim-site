@@ -354,7 +354,7 @@ const draw = () => {
 
   // 回折格子からスクリーンへ向かう光線・波面パルスのアニメーション (y: 105〜160)
   const gratingY = 152
-  ctx.strokeStyle = '#64748b'
+  ctx.strokeStyle = '#94a3b8'
   ctx.lineWidth = 2
   ctx.setLineDash([4, 3])
   ctx.beginPath()

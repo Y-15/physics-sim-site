@@ -335,7 +335,7 @@ function drawSolenoid(ctx, width, height) {
   }
 
   // ソレノイド外枠
-  ctx.strokeStyle = '#64748b'
+  ctx.strokeStyle = '#94a3b8'
   ctx.lineWidth = 2
   ctx.strokeRect(left, top, solW, solH)
 

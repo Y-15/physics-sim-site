@@ -259,13 +259,13 @@ function drawCartSim(ctx, w, h, dt) {
   for (let sx = 40; sx <= 740; sx += 60) {
     const tieX = sx - cartX
     if (tieX >= 40 && tieX <= 740) {
-      line(ctx, tieX, railY, tieX - 10, railY + 10, '#52525b', 2)
+      line(ctx, tieX, railY, tieX - 10, railY + 10, '#94a3b8', 2)
     }
   }
 
   // 台車本体
   ctx.fillStyle = 'rgba(39, 39, 42, 0.7)'
-  ctx.strokeStyle = '#71717a'
+  ctx.strokeStyle = '#94a3b8'
   ctx.lineWidth = 2.5
   ctx.strokeRect(cx - cartW / 2, cy - cartH / 2, cartW, cartH)
   ctx.fillRect(cx - cartW / 2, cy - cartH / 2, cartW, cartH)
@@ -275,7 +275,7 @@ function drawCartSim(ctx, w, h, dt) {
   for (const wx of [cx - cartW / 3, cx + cartW / 3]) {
     const wy = cy + cartH / 2 + 12
     dot(ctx, wx, wy, 12, '#27272a', '#a1a1aa')
-    line(ctx, wx - 10 * Math.cos(wheelAng), wy - 10 * Math.sin(wheelAng), wx + 10 * Math.cos(wheelAng), wy + 10 * Math.sin(wheelAng), '#71717a', 1.5)
+    line(ctx, wx - 10 * Math.cos(wheelAng), wy - 10 * Math.sin(wheelAng), wx + 10 * Math.cos(wheelAng), wy + 10 * Math.sin(wheelAng), '#94a3b8', 1.5)
   }
 
   // 加速度矢印 (台車上部)
@@ -386,7 +386,7 @@ function drawElevatorSim(ctx, w, h, dt) {
   line(ctx, ex + ew / 2 + 20, 20, ex + ew / 2 + 20, 400, '#27272a', 2)
 
   // 吊りワイヤー
-  line(ctx, ex, 20, ex, ey - eh / 2, '#71717a', 3)
+  line(ctx, ex, 20, ex, ey - eh / 2, '#94a3b8', 3)
 
   // かご
   ctx.fillStyle = 'rgba(39, 39, 42, 0.7)'
@@ -467,7 +467,7 @@ function drawScaleMeter(ctx, x, y, nVal, normalN) {
   ctx.strokeRect(x - 70, y - 70, 140, 140)
 
   // 円盤
-  dot(ctx, x, y, 50, '#27272a', '#71717a')
+  dot(ctx, x, y, 50, '#27272a', '#94a3b8')
   text(ctx, '体重計の指示値', x, y - 56, '#a1a1aa', '10px sans-serif', 'center')
 
   // 針 (0N ~ 2*normalN)
@@ -516,7 +516,7 @@ function drawCentrifugalSim(ctx, w, h, dt) {
   ctx.restore()
 
   // 回転軸
-  dot(ctx, cx, cy, 6, '#71717a', '#ffffff')
+  dot(ctx, cx, cy, 6, '#94a3b8', '#ffffff')
   text(ctx, `ω = ${fmt(omega, 1)} rad/s`, cx, cy - maxVisualR - 35, '#38bdf8', 'bold 12px sans-serif', 'center')
 
   // 物体位置
@@ -532,7 +532,7 @@ function drawCentrifugalSim(ctx, w, h, dt) {
   const by = cy + currentVisualR * Math.sin(currentAngle)
 
   // 半径線
-  line(ctx, cx, cy, bx, by, '#71717a', 1, [3, 3])
+  line(ctx, cx, cy, bx, by, '#94a3b8', 1, [3, 3])
 
   // 物体 (ブロック)
   dot(ctx, bx, by, 12, isSlip ? '#ef4444' : '#fbbf24', '#ffffff')

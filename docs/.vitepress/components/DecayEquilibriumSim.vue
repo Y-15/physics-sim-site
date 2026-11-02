@@ -116,7 +116,7 @@ function draw() {
     ctx.stroke()
 
     // 縦軸目盛り
-    ctx.fillStyle = '#64748b'
+    ctx.fillStyle = '#94a3b8'
     ctx.font = '10px monospace'
     const val = 1000 - i * 200
     ctx.fillText(`${val}`, 12, y + 3)
@@ -130,7 +130,7 @@ function draw() {
     ctx.stroke()
 
     // 横軸目盛り (時間)
-    ctx.fillStyle = '#64748b'
+    ctx.fillStyle = '#94a3b8'
     ctx.font = '10px monospace'
     const tVal = (maxTime.value / 6) * i
     ctx.fillText(`${tVal.toFixed(0)}`, x - 6, height - padBottom + 15)

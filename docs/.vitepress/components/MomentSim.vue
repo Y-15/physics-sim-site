@@ -306,7 +306,7 @@ function drawLever(ctx, w, h, dt) {
   ctx.save()
 
   // 1. 支点の三角形台
-  ctx.fillStyle = '#64748b'
+  ctx.fillStyle = '#94a3b8'
   ctx.beginPath()
   ctx.moveTo(cx, cy)
   ctx.lineTo(cx - 30, cy + 50)
@@ -334,7 +334,7 @@ function drawLever(ctx, w, h, dt) {
 
   // 棒の本体
   ctx.fillStyle = '#334155'
-  ctx.strokeStyle = '#64748b'
+  ctx.strokeStyle = '#94a3b8'
   ctx.lineWidth = 3
   ctx.fillRect(-barHalfLen, -8, barHalfLen * 2, 16)
   ctx.strokeRect(-barHalfLen, -8, barHalfLen * 2, 16)
@@ -556,7 +556,7 @@ function drawLadder(ctx, w, h, dt) {
     const t = i / steps
     const sx = botX + (topX - botX) * t
     const sy = botY + (topY - botY) * t
-    dot(ctx, sx, sy, 3, '#64748b')
+    dot(ctx, sx, sy, 3, '#94a3b8')
   }
 
   // 棒の重心（中央）

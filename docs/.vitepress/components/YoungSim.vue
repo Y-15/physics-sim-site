@@ -155,7 +155,7 @@ function drawLaserSource(ctx, slitX, cy) {
   // レーザー射出口
   ctx.fillStyle = '#334155'
   ctx.fillRect(20, cy - 16, 40, 32)
-  ctx.strokeStyle = '#64748b'
+  ctx.strokeStyle = '#94a3b8'
   ctx.lineWidth = 2
   ctx.strokeRect(20, cy - 16, 40, 32)
 
@@ -259,7 +259,7 @@ function drawWaveFronts(ctx, sx, scrX, cy) {
 function drawScreenAndFringes(ctx, scrX, cy, availW, h) {
   // スクリーンの縦板
   ctx.fillStyle = '#0f172a'
-  ctx.strokeStyle = '#64748b'
+  ctx.strokeStyle = '#94a3b8'
   ctx.lineWidth = 2
   ctx.fillRect(scrX, 25, 12, h - 50)
   ctx.strokeRect(scrX, 25, 12, h - 50)

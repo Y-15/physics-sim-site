@@ -302,7 +302,7 @@ function drawLens(ctx, w, h) {
   const pxPerCm = 3.2
 
   // 1. 光軸（水平線）
-  line(ctx, 30, cy, w - 30, cy, { color: '#64748b', width: 2 })
+  line(ctx, 30, cy, w - 30, cy, { color: '#94a3b8', width: 2 })
   text(ctx, '光軸', w - 40, cy + 18, { color: '#94a3b8', font: '10px sans-serif' })
 
   // 2. レンズ（中央縦軸）
@@ -345,10 +345,10 @@ function drawLens(ctx, w, h) {
   text(ctx, "F'", cx + fPx, cy + 16, { align: 'center', color: '#f59e0b', font: 'bold 11px sans-serif' })
 
   // 2f の位置（等倍参照点）
-  dot(ctx, cx - 2 * fPx, cy, 3, '#64748b')
-  text(ctx, '2F', cx - 2 * fPx, cy + 16, { align: 'center', color: '#64748b', font: '10px sans-serif' })
-  dot(ctx, cx + 2 * fPx, cy, 3, '#64748b')
-  text(ctx, "2F'", cx + 2 * fPx, cy + 16, { align: 'center', color: '#64748b', font: '10px sans-serif' })
+  dot(ctx, cx - 2 * fPx, cy, 3, '#94a3b8')
+  text(ctx, '2F', cx - 2 * fPx, cy + 16, { align: 'center', color: '#94a3b8', font: '10px sans-serif' })
+  dot(ctx, cx + 2 * fPx, cy, 3, '#94a3b8')
+  text(ctx, "2F'", cx + 2 * fPx, cy + 16, { align: 'center', color: '#94a3b8', font: '10px sans-serif' })
 
   // 4. 物体（左側の赤い矢印）
   const objX = cx - objDistA.value * pxPerCm

@@ -319,7 +319,7 @@ function drawWaveform(ctx, w, h) {
   ctx.strokeStyle = 'rgba(63, 63, 70, 0.25)'
   ctx.lineWidth = 1
   ctx.setLineDash([2, 3])
-  line(ctx, gx0, gy0, gx0 + gw, gy0, '#52525b', 1) // 中央基準線 0V/0A
+  line(ctx, gx0, gy0, gx0 + gw, gy0, '#94a3b8', 1) // 中央基準線 0V/0A
   line(ctx, gx0, gy0 - gh / 2, gx0 + gw, gy0 - gh / 2, 'rgba(63, 63, 70, 0.25)', 1)
   line(ctx, gx0, gy0 + gh / 2, gx0 + gw, gy0 + gh / 2, 'rgba(63, 63, 70, 0.25)', 1)
   ctx.setLineDash([])
@@ -373,7 +373,7 @@ function drawWaveform(ctx, w, h) {
 
 function drawMiniCircuit(ctx, x, y, type) {
   ctx.save()
-  line(ctx, x, y, x + 340, y, '#52525b', 2)
+  line(ctx, x, y, x + 340, y, '#94a3b8', 2)
   // 電源
   dot(ctx, x + 40, y, 12, '#18181b', '#f43f5e')
   text(ctx, '~', x + 40, y + 4, '#f43f5e', 'bold 16px sans-serif', 'center')

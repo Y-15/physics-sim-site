@@ -228,7 +228,7 @@ const draw = () => {
   ctx.fillRect(cylLeft, cylTop, cylW, cylH)
 
   // 断熱壁の太い枠線（黄色・黒のハッチング風または厚いスレート枠）
-  ctx.strokeStyle = '#64748b'
+  ctx.strokeStyle = '#94a3b8'
   ctx.lineWidth = 6
   ctx.strokeRect(cylLeft, cylTop, cylW, cylH)
 

@@ -159,7 +159,7 @@ function drawBox(ctx, ox, oy, w, h, dt) {
   // 容器外枠
   ctx.fillStyle = '#0f172a'
   ctx.fillRect(bx, by, bw, bh)
-  ctx.strokeStyle = '#64748b'
+  ctx.strokeStyle = '#94a3b8'
   ctx.lineWidth = 4
   ctx.strokeRect(bx, by, bw, bh)
 
@@ -207,8 +207,8 @@ function drawMaxwellDistribution(ctx, ox, oy, w, h) {
   text(ctx, '📊 マクスウェル＝ボルツマン速度分布 f(v)', ox + 15, oy + 18, { align: 'left', color: '#f59e0b', font: 'bold 12px sans-serif' })
 
   // 軸
-  line(ctx, gx, gy + gh, gx + gw, gy + gh, { color: '#64748b', width: 1.5 })
-  line(ctx, gx, gy + gh, gx, gy, { color: '#64748b', width: 1.5 })
+  line(ctx, gx, gy + gh, gx + gw, gy + gh, { color: '#94a3b8', width: 1.5 })
+  line(ctx, gx, gy + gh, gx, gy, { color: '#94a3b8', width: 1.5 })
   text(ctx, '分子の速さ v [m/s] →', gx + gw - 10, gy + gh + 26, { align: 'right', color: '#94a3b8', font: '10px sans-serif' })
   text(ctx, '↑ 存在確率 f(v)', gx - 6, gy - 8, { align: 'left', color: '#94a3b8', font: '10px sans-serif' })
 

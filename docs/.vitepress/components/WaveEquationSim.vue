@@ -130,8 +130,8 @@ function drawYXGraph(ctx, ox, oy, w, h) {
   text(ctx, `時刻 t = ${curTime.value.toFixed(2)} s`, ox + w - 20, oy + 18, { align: 'right', color: '#94a3b8', font: '11px sans-serif' })
 
   // 軸
-  line(ctx, gx, gy, gx + gw, gy, { color: '#64748b', width: 1.5 }) // x軸
-  line(ctx, gx, oy + padT, gx, oy + h - padB, { color: '#64748b', width: 1.5 }) // y軸
+  line(ctx, gx, gy, gx + gw, gy, { color: '#94a3b8', width: 1.5 }) // x軸
+  line(ctx, gx, oy + padT, gx, oy + h - padB, { color: '#94a3b8', width: 1.5 }) // y軸
   text(ctx, '位置 x [m] →', gx + gw - 10, gy + 16, { align: 'right', color: '#94a3b8', font: '10px sans-serif' })
   text(ctx, '↑ 変位 y [m]', gx - 6, oy + padT + 6, { align: 'right', color: '#94a3b8', font: '10px sans-serif' })
 
@@ -219,8 +219,8 @@ function drawYTGraph(ctx, ox, oy, w, h) {
   text(ctx, `📹 y-t グラフ（位置 x₀ = ${observeX.value.toFixed(1)}m の媒質粒子の時間変化・ビデオ）`, gx + 8, oy + 18, { align: 'left', color: '#f59e0b', font: 'bold 12px sans-serif' })
 
   // 軸
-  line(ctx, gx, gy, gx + gw, gy, { color: '#64748b', width: 1.5 }) // t軸
-  line(ctx, gx, oy + padT, gx, oy + h - padB, { color: '#64748b', width: 1.5 }) // y軸
+  line(ctx, gx, gy, gx + gw, gy, { color: '#94a3b8', width: 1.5 }) // t軸
+  line(ctx, gx, oy + padT, gx, oy + h - padB, { color: '#94a3b8', width: 1.5 }) // y軸
   text(ctx, '時刻 t [s] →', gx + gw - 12, gy + 16, { align: 'right', color: '#94a3b8', font: '10px sans-serif' })
   text(ctx, '↑ 変位 y [m]', gx - 6, oy + padT + 6, { align: 'right', color: '#94a3b8', font: '10px sans-serif' })
 

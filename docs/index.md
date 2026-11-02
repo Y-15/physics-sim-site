@@ -68,7 +68,6 @@ features:
         <a class="btn-secondary" href="/problems/index">高校 演習問題集（全197問） →</a>
       </div>
     </div>
-
     <div class="portal-card university">
       <div class="portal-card-badge">🎓 理工系学部・大学院入試・学び直し</div>
       <h3>大学物理コース</h3>

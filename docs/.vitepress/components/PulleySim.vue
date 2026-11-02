@@ -269,7 +269,7 @@ function drawAtwood(ctx, w, h) {
   }
 
   // 天井ブラケットと滑車支柱
-  line(ctx, cx - 60, 14, cx + 60, 14, { color: '#64748b', width: 4 })
+  line(ctx, cx - 60, 14, cx + 60, 14, { color: '#94a3b8', width: 4 })
   line(ctx, cx, 14, cx, topY, { color: '#94a3b8', width: 4 })
 
   // 定滑車
@@ -350,7 +350,7 @@ function drawIncline(ctx, w, h) {
   ctx.lineTo(pulleyX, floorY)
   ctx.closePath()
   ctx.fill()
-  ctx.strokeStyle = '#64748b'
+  ctx.strokeStyle = '#94a3b8'
   ctx.lineWidth = 3
   ctx.stroke()
 

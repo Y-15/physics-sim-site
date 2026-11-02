@@ -268,7 +268,7 @@ function drawCylinder(ctx, ox, oy, w, h, dt) {
   const pistonX = cylLeft + cylW * (0.2 + vNorm * 0.72)
 
   // シリンダー外枠
-  ctx.strokeStyle = '#64748b'
+  ctx.strokeStyle = '#94a3b8'
   ctx.lineWidth = 5
   ctx.beginPath()
   ctx.moveTo(cylLeft + cylW, cylTop)

@@ -379,7 +379,7 @@ function render() {
 
   // 床 (y = 280)
   const floorY = 280
-  ctx.strokeStyle = '#64748b'
+  ctx.strokeStyle = '#94a3b8'
   ctx.lineWidth = 3
   ctx.beginPath()
   ctx.moveTo(30, floorY)
@@ -641,7 +641,7 @@ function drawArrowHead(ctx, x, y, angle, color) {
 
 function simLoop(time) {
   if (lastTime === 0) lastTime = time
-  const dt = Math.min((time - lastTime) / 1000, 0.1)
+  const dt = Math.min((time - lastTime) / 1000, 0.05)
   lastTime = time
 
   if (isPlaying.value) {

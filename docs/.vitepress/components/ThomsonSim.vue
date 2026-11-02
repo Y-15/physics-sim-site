@@ -212,7 +212,7 @@ function draw() {
 
   // 1. 電子銃（陰極と陽極加速スリット）
   ctx.fillStyle = '#334155'
-  ctx.strokeStyle = '#64748b'
+  ctx.strokeStyle = '#94a3b8'
   ctx.lineWidth = 2
   ctx.fillRect(gunX - 35, gunY - 25, 30, 50)
   ctx.strokeRect(gunX - 35, gunY - 25, 30, 50)
@@ -287,7 +287,7 @@ function draw() {
   ctx.strokeRect(screenX, gunY - 110, 16, 220)
 
   // 目盛り線
-  ctx.strokeStyle = '#64748b'
+  ctx.strokeStyle = '#94a3b8'
   ctx.lineWidth = 1
   for (let sy = gunY - 90; sy <= gunY + 90; sy += 30) {
     ctx.beginPath()

@@ -429,7 +429,7 @@ $$
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
 
-磁束の変化量は、
+ファラデーの電磁誘導の法則より、誘導起電力の大きさは $V = N \left|\frac{\Delta \Phi}{\Delta t}\right|$ である。磁束の変化量 $\Delta \Phi = \Phi_2 - \Phi_1$ を求め、所要時間 $\Delta t$ で割る。
 
 </details>
 
@@ -1896,7 +1896,7 @@ $$
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
 
-並列部分の合成抵抗は、
+並列部分の合成抵抗は $\frac{1}{R_p} = \frac{1}{6.0} + \frac{1}{3.0}$ より求まる。外部回路全体の合成抵抗 $R_{\mathrm{ext}} = 6.0 + R_p$ を求め、電池の内部抵抗 $r$ も含めた全抵抗 $R_{\mathrm{total}} = R_{\mathrm{ext}} + r$ より全電流 $I$ を求める。
 
 </details>
 
@@ -2835,13 +2835,13 @@ $$
 
 **Step 6: 逆向きに充電されたコンデンサーの解法で使用する式 6**
 $$
-Q\
+Q'_1 = 32\ \mu\mathrm{C}
 $$
 *※ 問題で使用する関係式です。*
 
 **Step 7: 逆向きに充電されたコンデンサーの解法で使用する式 7**
 $$
-Q\
+Q'_2 = 48\ \mu\mathrm{C}
 $$
 *※ 問題で使用する関係式です。*
 
@@ -3074,7 +3074,7 @@ $$
 <details class="hint-box">
 <summary>💡 考え方のヒントを見る</summary>
 
-誘導起電力は、
+棒が速さ $v$ で動くときの誘導起電力は $V = vBL$ である。回路を流れる誘導電流は $I = \frac{V}{R}$ であり、棒が受ける逆向きの磁気力（アンペール力）は $F_{\mathrm{mag}} = IBL = \frac{v B^2 L^2}{R}$ となる。外力 $F$ と磁気力がつり合うときに終端速度に達する。
 
 </details>
 

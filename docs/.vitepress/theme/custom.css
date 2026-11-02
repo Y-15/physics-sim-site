@@ -156,23 +156,46 @@
    数式（MathJax / KaTeX）表示の最適化
    過剰な囲み枠や濃い背景を排し、PCデフォルト幅で見切れないスッキリした学術レイアウト
    ========================================================================== */
+mjx-container {
+  box-sizing: border-box !important;
+  max-width: 100% !important;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+}
+
 mjx-container[display="true"],
 .katex-display {
+  display: block !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
   margin: 1rem 0 !important;
   padding: 0.4rem 0 !important;
   background: transparent !important;
   border: none !important;
   border-radius: 0 !important;
   box-shadow: none !important;
-  overflow-x: auto !important;
-  overflow-y: hidden !important;
   color: var(--academic-text-main) !important;
-  max-width: 100% !important;
   text-align: center;
 }
 
+/* リストネスト時の数式はみ出し防止 (Feature 2) */
+.VPDoc li > mjx-container,
+.VPDoc li > .katex-display {
+  max-width: calc(100% - 0.5rem) !important;
+  box-sizing: border-box !important;
+}
+
 /* インライン数式 */
-mjx-container:not([display="true"]),
+mjx-container:not([display="true"]) {
+  display: inline-block !important;
+  vertical-align: middle;
+  padding: 0 0.15em;
+  font-size: 100%;
+  color: var(--academic-text-main);
+}
+
 .katex:not(.katex-display .katex) {
   padding: 0 0.15em;
   font-size: 100%;
@@ -249,7 +272,12 @@ mjx-container svg {
    ベクターグラフカード (.vector-graph-card) - レスポンシブSVGダイアグラム
    ========================================================================== */
 .vector-graph-card {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  min-width: 0;
   background: #090d16;
+  color: #e2e8f0;
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: var(--academic-radius);
   padding: 1.25rem 1rem;
@@ -259,6 +287,13 @@ mjx-container svg {
   align-items: center;
   box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.2);
   overflow: hidden;
+}
+
+.vector-graph-card svg {
+  width: 100% !important;
+  max-width: 100%;
+  height: auto;
+  display: block;
 }
 
 .graph-title {
@@ -278,6 +313,10 @@ mjx-container svg {
   line-height: 1.55;
 }
 
+.graph-caption strong {
+  color: #38bdf8;
+}
+
 .vector-svg {
   width: 100%;
   max-width: 580px;
@@ -290,12 +329,13 @@ mjx-container svg {
    テーブル（表）の洗練スタイリング
    ========================================================================== */
 .VPDoc table {
-  width: 100%;
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
   border-collapse: separate;
   border-spacing: 0;
   margin: 1.5rem 0;
   border-radius: 10px;
-  overflow: hidden;
   border: 1px solid var(--academic-card-border);
 }
 
@@ -358,7 +398,7 @@ mjx-container svg {
 /* ==========================================================================
    リンク・読書リズムの最適化
    ========================================================================== */
-.VPDoc a:not(.vp-button):not(.header-anchor) {
+.VPDoc a:not(.vp-button):not(.header-anchor):not(.univ-btn-primary):not(.univ-btn-secondary):not(.jump-btn) {
   color: var(--academic-accent);
   text-decoration: none;
   border-bottom: 1px dashed var(--academic-accent);
@@ -366,9 +406,94 @@ mjx-container svg {
   padding-bottom: 1px;
 }
 
-.VPDoc a:not(.vp-button):not(.header-anchor):hover {
+.VPDoc a:not(.vp-button):not(.header-anchor):not(.univ-btn-primary):not(.univ-btn-secondary):not(.jump-btn):hover {
   color: var(--vp-c-brand-3);
   border-bottom-style: solid;
+}
+
+/* ==========================================================================
+   大学物理セクション共通コンポーネント (Feature 3)
+   ========================================================================== */
+.level-badge {
+  display: inline-block;
+  background: var(--academic-callout-bg);
+  color: var(--academic-accent);
+  border: 1px solid var(--academic-card-border);
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-weight: 700;
+  font-size: 0.85rem;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+.dark .level-badge {
+  background: rgba(56, 189, 248, 0.12);
+  color: var(--academic-accent);
+  border-color: rgba(56, 189, 248, 0.3);
+}
+
+.univ-nav-group {
+  margin-top: 1.5rem;
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.univ-btn-primary {
+  display: inline-block;
+  background: var(--vp-c-brand-1, #0284c7);
+  color: #ffffff !important;
+  padding: 10px 20px;
+  border-radius: 8px;
+  text-decoration: none !important;
+  border: 1px solid transparent !important;
+  border-bottom: 1px solid transparent !important;
+  font-weight: 700;
+  font-size: 0.92rem;
+  transition: all 0.2s ease;
+}
+
+.univ-btn-primary:hover {
+  opacity: 0.92;
+  transform: translateY(-1px);
+}
+
+.dark .univ-btn-primary {
+  background: #0284c7;
+  color: #ffffff !important;
+}
+
+.univ-btn-secondary {
+  display: inline-block;
+  background: var(--academic-card-bg);
+  color: var(--academic-text-main) !important;
+  border: 1px solid var(--academic-card-border) !important;
+  border-bottom: 1px solid var(--academic-card-border) !important;
+  padding: 10px 20px;
+  border-radius: 8px;
+  text-decoration: none !important;
+  font-weight: 700;
+  font-size: 0.92rem;
+  transition: all 0.2s ease;
+}
+
+.univ-btn-secondary:hover {
+  border-color: var(--academic-accent) !important;
+  color: var(--academic-accent) !important;
+  transform: translateY(-1px);
+}
+
+.dark .univ-btn-secondary {
+  background: rgba(30, 41, 59, 0.6);
+  color: var(--academic-text-main) !important;
+  border-color: rgba(255, 255, 255, 0.15) !important;
+}
+
+.dark .univ-btn-secondary:hover {
+  background: rgba(30, 41, 59, 0.9);
+  border-color: var(--academic-accent) !important;
+  color: var(--academic-accent) !important;
 }
 
 /* ==========================================================================
@@ -392,13 +517,15 @@ input:focus-visible {
   padding: 10px 14px;
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   border-radius: 12px;
   margin: 12px 0;
 }
 
-.playback-bar .btn,
+.playback-bar .lab-btn,
 .playback-bar .sim-btn,
-.playback-bar .lab-btn {
+.playback-bar .btn {
   font-family: inherit;
 }
 
@@ -592,13 +719,6 @@ input:focus-visible {
   text-rendering: auto;
 }
 
-.katex-display {
-  color: inherit;
-  margin: 0.8em 0;
-  overflow-x: auto;
-  overflow-y: hidden;
-  padding: 4px 0;
-}
 
 .katex-html {
   white-space: normal;

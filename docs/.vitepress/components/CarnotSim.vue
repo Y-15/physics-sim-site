@@ -165,7 +165,7 @@ for (let i = 0; i < 30; i++) {
 
 function updateAndDraw(timestamp) {
   if (!lastTime) lastTime = timestamp
-  const dt = (timestamp - lastTime) / 1000
+  const dt = Math.min(0.05, (timestamp - lastTime) / 1000)
   lastTime = timestamp
 
   if (isRunning.value) {
@@ -282,7 +282,7 @@ function updateAndDraw(timestamp) {
   const cylH = 130
 
   // シリンダー外枠
-  ctx.strokeStyle = '#64748b'
+  ctx.strokeStyle = '#94a3b8'
   ctx.lineWidth = 4
   ctx.strokeRect(cylX, cylY, cylW, cylH)
 
@@ -321,7 +321,7 @@ function updateAndDraw(timestamp) {
   ctx.fillStyle = '#94a3b8'
   ctx.fillRect(pistonX, cylY + 4, 16, cylH - 8)
   // ピストンロッド
-  ctx.fillStyle = '#64748b'
+  ctx.fillStyle = '#94a3b8'
   ctx.fillRect(pistonX + 16, cylY + cylH / 2 - 8, cylW + cylX - pistonX - 16, 16)
 
   // 熱源の配置（底面）

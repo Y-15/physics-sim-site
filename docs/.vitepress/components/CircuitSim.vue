@@ -272,7 +272,7 @@ function drawKirchhoff(ctx, w, h) {
   const yBottom = 334
 
   // 外枠・配線を描画
-  ctx.strokeStyle = '#52525b'
+  ctx.strokeStyle = '#94a3b8'
   ctx.lineWidth = 3
   ctx.beginPath()
   // 左ループ
@@ -356,7 +356,7 @@ function drawNonOhmic(ctx, w, h) {
 
   // 左側: 回路図 (x: 20 ~ 320)
   const cx1 = 70, cx2 = 250, cy1 = 100, cy2 = 300
-  ctx.strokeStyle = '#52525b'
+  ctx.strokeStyle = '#94a3b8'
   ctx.lineWidth = 3
   ctx.strokeRect(cx1, cy1, cx2 - cx1, cy2 - cy1)
 
@@ -387,8 +387,8 @@ function drawNonOhmic(ctx, w, h) {
   const toY = (cur) => gy0 - (cur / maxI) * gh
 
   // 軸
-  arrow(ctx, gx0, gy0, gx0 + gw + 20, gy0, '#71717a', 2, 'V [V]', { align: 'left', lx: 8 })
-  arrow(ctx, gx0, gy0, gx0, gy0 - gh - 20, '#71717a', 2, 'I [A]', { align: 'center', ly: -12 })
+  arrow(ctx, gx0, gy0, gx0 + gw + 20, gy0, '#94a3b8', 2, 'V [V]', { align: 'left', lx: 8 })
+  arrow(ctx, gx0, gy0, gx0, gy0 - gh - 20, '#94a3b8', 2, 'I [A]', { align: 'center', ly: -12 })
 
   // 目盛り
   for (let v = 5; v <= 20; v += 5) {
@@ -464,7 +464,7 @@ function drawBridge(ctx, w, h) {
 
   // 電源レール (外側)
   const yPower = 380
-  ctx.strokeStyle = '#52525b'
+  ctx.strokeStyle = '#94a3b8'
   ctx.lineWidth = 3
   ctx.beginPath()
   ctx.moveTo(xA, yA)
@@ -633,7 +633,7 @@ function drawGalvanometer(ctx, x, y, dV) {
   ctx.stroke()
 
   // G 文字
-  text(ctx, 'G', x, y - 6, '#71717a', 'bold 14px sans-serif', 'center')
+  text(ctx, 'G', x, y - 6, '#cbd5e1', 'bold 14px sans-serif', 'center')
 
   // 針 (dVに応じて傾く)
   const maxDeflect = Math.PI / 4
@@ -654,11 +654,11 @@ function drawGalvanometer(ctx, x, y, dV) {
 
 function drawGround(ctx, x, y) {
   ctx.save()
-  line(ctx, x, y, x, y + 12, '#52525b', 2)
-  line(ctx, x - 12, y + 12, x + 12, y + 12, '#52525b', 3)
-  line(ctx, x - 7, y + 17, x + 7, y + 17, '#52525b', 2)
-  line(ctx, x - 3, y + 21, x + 3, y + 21, '#52525b', 1.5)
-  text(ctx, '0V (基準)', x, y + 34, '#71717a', '10px sans-serif', 'center')
+  line(ctx, x, y, x, y + 12, '#94a3b8', 2)
+  line(ctx, x - 12, y + 12, x + 12, y + 12, '#94a3b8', 3)
+  line(ctx, x - 7, y + 17, x + 7, y + 17, '#94a3b8', 2)
+  line(ctx, x - 3, y + 21, x + 3, y + 21, '#94a3b8', 1.5)
+  text(ctx, '0V (基準)', x, y + 34, '#94a3b8', '10px sans-serif', 'center')
   ctx.restore()
 }
 

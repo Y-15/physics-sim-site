@@ -293,7 +293,7 @@ function drawPhototube(ctx, w, h) {
   ctx.ellipse(cx, cy, rx, ry, 0, 0, Math.PI * 2)
   ctx.fill()
   ctx.stroke()
-  text(ctx, '真空光電管', cx, cy - ry - 8, '#71717a', '11px sans-serif', 'center')
+  text(ctx, '真空光電管', cx, cy - ry - 8, '#cbd5e1', '11px sans-serif', 'center')
 
   // 陰極板 (左: C) - 金属板
   const catX = 120
@@ -339,7 +339,7 @@ function drawPhototube(ctx, w, h) {
 
   // 外部回路 (光電管の下部配線)
   const yWire = 340
-  ctx.strokeStyle = '#52525b'
+  ctx.strokeStyle = '#94a3b8'
   ctx.lineWidth = 2.5
   ctx.beginPath()
   // 陰極から下へ
@@ -399,8 +399,8 @@ function drawIVGraph(ctx, w, h) {
   const xZero = toX(0)
 
   // 軸
-  arrow(ctx, gx0, gy0, gx0 + gw + 15, gy0, '#71717a', 2, 'V [V]', { align: 'left', lx: 6 })
-  arrow(ctx, xZero, gy0, xZero, gy0 - gh - 15, '#71717a', 2, 'I [μA]', { align: 'center', ly: -10 })
+  arrow(ctx, gx0, gy0, gx0 + gw + 15, gy0, '#94a3b8', 2, 'V [V]', { align: 'left', lx: 6 })
+  arrow(ctx, xZero, gy0, xZero, gy0 - gh - 15, '#94a3b8', 2, 'I [μA]', { align: 'center', ly: -10 })
 
   // 目盛り
   for (let v = -4; v <= 4; v += 2) {
@@ -470,8 +470,8 @@ function drawV0NuGraph(ctx, w, h) {
   const toY = (v) => gy0 - (v / maxV0) * gh
 
   // 軸
-  arrow(ctx, gx0, gy0, gx0 + gw + 15, gy0, '#71717a', 2, 'ν [×10¹⁴ Hz]', { align: 'left', lx: 8 })
-  arrow(ctx, gx0, gy0, gx0, gy0 - gh - 15, '#71717a', 2, 'V₀ [V]', { align: 'center', ly: -10 })
+  arrow(ctx, gx0, gy0, gx0 + gw + 15, gy0, '#94a3b8', 2, 'ν [×10¹⁴ Hz]', { align: 'left', lx: 8 })
+  arrow(ctx, gx0, gy0, gx0, gy0 - gh - 15, '#94a3b8', 2, 'V₀ [V]', { align: 'center', ly: -10 })
 
   // 目盛り
   for (let n = 4; n <= 16; n += 2) {

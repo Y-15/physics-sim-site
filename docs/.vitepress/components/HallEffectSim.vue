@@ -181,7 +181,7 @@ const draw = () => {
       ctx.fillText('⊗', gx, gy)
     }
   }
-  ctx.fillStyle = '#64748b'
+  ctx.fillStyle = '#94a3b8'
   ctx.font = '11px sans-serif'
   ctx.fillText('一様磁場 B (奥向き ⊗)', blockLeft + 40, blockTop - 35)
 

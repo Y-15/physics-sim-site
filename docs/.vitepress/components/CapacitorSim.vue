@@ -228,7 +228,7 @@ useLoop(canvasRef, ({ ctx, width, height, dt }) => {
 
 function drawCircuit(ctx, cx, cy, topY, botY, pw) {
   const wireX = cx - pw / 2 - 40
-  ctx.strokeStyle = isConnected.value ? '#38bdf8' : '#64748b'
+  ctx.strokeStyle = isConnected.value ? '#38bdf8' : '#94a3b8'
   ctx.lineWidth = 2.5
 
   // 上極板からの配線
@@ -255,8 +255,8 @@ function drawCircuit(ctx, cx, cy, topY, botY, pw) {
     text(ctx, `V₀ = ${batteryV.value}V`, wireX - 32, cy + 32, { align: 'right', color: '#f59e0b', font: 'bold 11px sans-serif' })
   } else {
     // 開いたスイッチ記号
-    dot(ctx, wireX, cy - 25, 4, '#64748b')
-    dot(ctx, wireX, cy + 25, 4, '#64748b')
+    dot(ctx, wireX, cy - 25, 4, '#94a3b8')
+    dot(ctx, wireX, cy + 25, 4, '#94a3b8')
     // 跳ね上がったスイッチバー
     line(ctx, wireX, cy + 25, wireX + 18, cy - 10, { color: '#f43f5e', width: 2.5 })
     text(ctx, 'スイッチOFF (孤立)', wireX - 10, cy + 4, { align: 'right', color: '#f43f5e', font: 'bold 11px sans-serif' })

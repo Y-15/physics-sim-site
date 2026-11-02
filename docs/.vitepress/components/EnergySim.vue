@@ -260,7 +260,7 @@ function draw() {
   }
 
   // 高さマーカー
-  line(ctx, slopeStartX - 20, slopeStartY, slopeStartX - 20, groundY, '#71717a', 1, [3, 3])
+  line(ctx, slopeStartX - 20, slopeStartY, slopeStartX - 20, groundY, '#94a3b8', 1, [3, 3])
   arrow(ctx, slopeStartX - 20, groundY, slopeStartX - 20, slopeStartY, '#10b981', 1.5)
   arrow(ctx, slopeStartX - 20, slopeStartY, slopeStartX - 20, groundY, '#10b981', 1.5)
   text(ctx, `h = ${h0.value.toFixed(1)} m`, slopeStartX - 28, (slopeStartY + groundY) / 2, '#10b981', 'bold 11px sans-serif', 'right')
@@ -315,7 +315,7 @@ function draw() {
   ctx.fillStyle = '#f59e0b'
   ctx.fillRect(curBarX, barY, barW * qFrac, barH)
 
-  ctx.strokeStyle = '#52525b'; ctx.lineWidth = 1; ctx.strokeRect(barX, barY, barW, barH)
+  ctx.strokeStyle = '#94a3b8'; ctx.lineWidth = 1; ctx.strokeRect(barX, barY, barW, barH)
 
   // 凡例
   const legY = barY + 22

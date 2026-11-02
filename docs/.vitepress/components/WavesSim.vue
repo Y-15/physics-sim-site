@@ -283,13 +283,13 @@ function drawStanding() {
   if (isPipe) {
     ctx.fillStyle = 'rgba(56,189,248,0.05)'
     ctx.fillRect(left, y0 - 92, right - left, 184)
-    line(ctx, left, y0 - 92, right, y0 - 92, '#71717a', 3)
-    line(ctx, left, y0 + 92, right, y0 + 92, '#71717a', 3)
+    line(ctx, left, y0 - 92, right, y0 - 92, '#94a3b8', 3)
+    line(ctx, left, y0 + 92, right, y0 + 92, '#94a3b8', 3)
     if (bc.value === 'closed') line(ctx, right, y0 - 92, right, y0 + 92, '#fbbf24', 5)
     text(ctx, '開口端', left, y0 - 102, '#a1a1aa', '11px sans-serif', 'center')
     text(ctx, bc.value === 'closed' ? '閉口端' : '開口端', right, y0 - 102, bc.value === 'closed' ? '#fbbf24' : '#a1a1aa', '11px sans-serif', 'center')
   } else {
-    ctx.fillStyle = '#52525b'
+    ctx.fillStyle = '#94a3b8'
     ctx.fillRect(left - 10, y0 - 40, 10, 80)
     ctx.fillRect(right, y0 - 40, 10, 80)
   }

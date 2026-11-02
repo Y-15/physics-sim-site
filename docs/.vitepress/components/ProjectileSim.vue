@@ -290,7 +290,7 @@ const drawScene = (ballX = 0, ballY = 0, currentVx = vx0.value, currentVy = vy0.
   ctx.fillText(`最高点 H = ${maxHeight.value.toFixed(1)}m`, maxHx - 35, maxHy - 8)
 
   // 発射台
-  ctx.fillStyle = '#64748b'
+  ctx.fillStyle = '#94a3b8'
   ctx.beginPath()
   ctx.arc(originX, originY, 12, Math.PI, 0, false)
   ctx.fill()

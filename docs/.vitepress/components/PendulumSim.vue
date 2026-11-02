@@ -380,7 +380,7 @@ function drawScene() {
   }
 
   // 中心線（鉛直点線）
-  ctx.strokeStyle = '#52525b'
+  ctx.strokeStyle = '#94a3b8'
   ctx.setLineDash([4, 4])
   ctx.beginPath()
   ctx.moveTo(PIVOT_X, PIVOT_Y)
@@ -440,7 +440,7 @@ function drawScene() {
   ctx.stroke()
 
   // 支点の描画（壁とピン）
-  ctx.fillStyle = '#71717a'
+  ctx.fillStyle = '#94a3b8'
   ctx.fillRect(PIVOT_X - 30, PIVOT_Y - 10, 60, 10)
   ctx.fillStyle = '#38bdf8'
   ctx.beginPath()
@@ -527,11 +527,8 @@ function animate(currentTime) {
   if (!isPlaying.value) return
 
   if (!lastTime) lastTime = currentTime
-  let dt = (currentTime - lastTime) / 1000
+  let dt = Math.min(0.05, (currentTime - lastTime) / 1000)
   lastTime = currentTime
-
-  // 大きすぎるdtのスキップ（タブ切り替え対策）
-  if (dt > 0.1) dt = 0.1
 
   // 物理の小刻みサブステップ計算でさらに安定化
   if (!isDragging.value) {

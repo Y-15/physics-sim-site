@@ -101,7 +101,7 @@ function draw() {
   const hgGradient = ctx.createLinearGradient(0, basinY, 0, basinBottom)
   hgGradient.addColorStop(0, '#94a3b8')
   hgGradient.addColorStop(0.5, '#cbd5e1')
-  hgGradient.addColorStop(1, '#64748b')
+  hgGradient.addColorStop(1, '#94a3b8')
 
   ctx.fillStyle = hgGradient
   ctx.beginPath()

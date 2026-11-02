@@ -116,7 +116,7 @@ let lastTime = null
 
 function draw(timestamp) {
   if (!lastTime) lastTime = timestamp
-  const dt = (timestamp - lastTime) / 1000
+  const dt = Math.min(0.05, (timestamp - lastTime) / 1000)
   lastTime = timestamp
 
   if (isPlaying.value) {
@@ -189,7 +189,7 @@ function draw(timestamp) {
     ctx.beginPath(); ctx.moveTo(centerX - radiusPx - 20, projY); ctx.lineTo(centerX + radiusPx + 20, projY); ctx.stroke()
 
     // 中心と端点マーク
-    ctx.fillStyle = '#71717a'; ctx.font = '10px sans-serif'; ctx.textAlign = 'center'
+    ctx.fillStyle = '#94a3b8'; ctx.font = '10px sans-serif'; ctx.textAlign = 'center'
     ctx.fillText('x = 0', centerX, projY + 16)
     ctx.fillText('-r', centerX - radiusPx, projY + 16)
     ctx.fillText('+r', centerX + radiusPx, projY + 16)

@@ -1,6 +1,6 @@
 # 熱力学・統計力学（熱力学ポテンシャル・マクスウェルの関係式と統計アンサンブル）
 
-<div class="level-badge" style="display:inline-block; background:#eff6ff; color:#1d4ed8; padding:4px 12px; border-radius:20px; font-weight:700; font-size:0.85rem; margin-bottom:16px;">
+<div class="level-badge">
   対象：大学1〜3年次 ／ 必須数学：多変数関数の偏微分・全微分・ルジャンドル変換・ガウス積分・確率統計
 </div>
 
@@ -367,11 +367,11 @@ $$
 
 熱力学ポテンシャルとマクスウェルの関係式、ファン・デル・ワールス気体、カノニカル分配関数、2準位ショットキー比熱、量子統計の計算問題で実力を試しましょう。
 
-<div style="margin-top:20px; display:flex; gap:12px; flex-wrap:wrap;">
-  <a href="/university/problems/thermodynamics" style="display:inline-block; background:#1d4ed8; color:white; padding:12px 24px; border-radius:8px; text-decoration:none; font-weight:700;">
+<div class="univ-nav-group">
+  <a href="/university/problems/thermodynamics" class="univ-btn-primary">
     📝 熱・統計力学の演習問題一覧へ進む →
   </a>
-  <a href="/university/quantum/index" style="display:inline-block; background:#f8fafc; color:#334155; border:1px solid #cbd5e1; padding:12px 24px; border-radius:8px; text-decoration:none; font-weight:700;">
+  <a href="/university/quantum/index" class="univ-btn-secondary">
     次の単元：量子力学へ →
   </a>
 </div>
