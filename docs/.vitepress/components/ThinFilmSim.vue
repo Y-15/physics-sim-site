@@ -341,9 +341,9 @@ function drawNewtonMode(ctx, width, height) {
   ctx.font = '11px sans-serif'
   ctx.fillText('断面構造（平凸レンズ＋平面板）', diagX + 10, diagY + 20)
 
-  // 平凸レンズ（円弧）
+  // 平凸レンズ（円弧: 最下端が平面板 diagY + 80 に正確に接点接触）
   ctx.beginPath()
-  ctx.arc(diagX + 95, diagY - 80, 150, 0.45 * Math.PI, 0.55 * Math.PI)
+  ctx.arc(diagX + 95, diagY - 70, 150, 0.42 * Math.PI, 0.58 * Math.PI)
   ctx.strokeStyle = '#38bdf8'
   ctx.lineWidth = 2
   ctx.stroke()

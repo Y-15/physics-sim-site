@@ -101,7 +101,7 @@ $$\frac{1.4924 \times 10^{-10}\,\text{J}}{1.6022 \times 10^{-13}\,\text{J/MeV}} 
 原子核全体の結合エネルギー $B$ を核子数 $A$ で割った「<strong>核子1個あたりの結合エネルギー $B/A$</strong>」を質量数 $A$ に対してプロットすると、極めて示唆に富む曲線が得られます。
 
 <div class="vector-graph-card">
-<svg viewBox="0 0 540 280" xmlns="http://www.w3.org/2000/svg">
+<svg viewBox="0 0 580 280" xmlns="http://www.w3.org/2000/svg">
   <!-- 座標軸 -->
   <line x1="60" y1="240" x2="500" y2="240" stroke="#94a3b8" stroke-width="2"/>
   <line x1="60" y1="240" x2="60" y2="30" stroke="#94a3b8" stroke-width="2"/>

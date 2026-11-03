@@ -31,8 +31,8 @@ $$P_{\text{in}} = P_{\text{out}} = P_0$$
 
 <div class="vector-graph-card">
   <div class="graph-title">図1：熱気球に働く浮力と重力のつり合いモデル</div>
-  <svg viewBox="0 0 540 280" class="vector-svg">
-    <rect width="540" height="280" fill="#0f172a" rx="8"/>
+  <svg viewBox="0 0 600 280" class="vector-svg">
+    <rect width="600" height="280" fill="#0f172a" rx="8"/>
     <!-- 熱気球のエンベロープ -->
     <path d="M 270 50 A 60 60 0 0 1 320 120 L 285 170 L 255 170 L 220 120 A 60 60 0 0 1 270 50 Z" 
           fill="rgba(251, 146, 60, 0.2)" stroke="#fb923c" stroke-width="2.5"/>

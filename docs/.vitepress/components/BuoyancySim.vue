@@ -59,7 +59,7 @@
             <span>物体の深さ (上面位置):</span>
             <span class="control-val">{{ depthTop.toFixed(1) }} cm</span>
           </label>
-          <input type="range" v-model.number="depthTop" min="-5" max="30" step="0.5" class="sim-slider" />
+          <input type="range" v-model.number="depthTop" min="-5" max="22" step="0.5" class="sim-slider" />
         </div>
 
         <div class="control-group">
@@ -307,7 +307,8 @@ function render() {
   // 下面圧力矢印 (上向き)
   const depthBottom = depthTop.value + blockHeight
   if (depthBottom > 0) {
-    const pBotLen = Math.min(80, depthBottom * 2.2)
+    const maxBotLen = Math.max(10, 365 - (by + bh))
+    const pBotLen = Math.min(maxBotLen, Math.min(48, depthBottom * 1.6))
     ctx.strokeStyle = '#22d3ee'
     ctx.lineWidth = 2.5
     for (let x = bx + 10; x <= bx + bw - 10; x += 20) {
@@ -326,7 +327,7 @@ function render() {
     }
     ctx.fillStyle = '#22d3ee'
     ctx.font = 'bold 11px sans-serif'
-    ctx.fillText('下面水圧 P₂ S (上向き・大！)', bx + bw + 15, by + bh + 16)
+    ctx.fillText('下面水圧 P₂ S (上向き・大！)', bx + bw + 15, Math.min(370, by + bh + 16))
   }
 
   // 4. 合成ベクトル表示 (左側)

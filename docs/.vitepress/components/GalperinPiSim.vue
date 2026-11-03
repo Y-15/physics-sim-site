@@ -305,8 +305,9 @@ useLoop(canvasRef, ({ ctx, width, height, dt }) => {
   const realScale = (realW - 24) / maxDisplayX
   const sizeA = 26
   const sizeB = 46
-  const pxA = wallX + Math.min(maxDisplayX - 2.5, Math.max(0, drawPosA)) * realScale
-  const pxB = Math.max(pxA + sizeA + 2, wallX + Math.min(maxDisplayX - 1.2, Math.max(drawPosA, drawPosB)) * realScale)
+  const wallInnerX = wallX + 2 // 壁の線幅4px（半径2px）を考慮した内面接触境界
+  const pxA = wallInnerX + Math.min(maxDisplayX - 2.5, Math.max(0, drawPosA)) * realScale
+  const pxB = Math.max(pxA + sizeA + 2, wallInnerX + Math.min(maxDisplayX - 1.2, Math.max(drawPosA, drawPosB)) * realScale)
 
   // 小物体 A (質量 m)
   ctx.fillStyle = '#22d3ee'

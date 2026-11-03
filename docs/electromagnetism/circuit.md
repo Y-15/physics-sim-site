@@ -95,7 +95,7 @@ $$
 - **両者の交点 $(V_L, I_L)$ が、実際に回路に現れる電圧と電流（動作点）** です。
 
 <div class="vector-graph-card">
-<svg viewBox="0 0 540 320" xmlns="http://www.w3.org/2000/svg">
+<svg viewBox="-5 0 580 320" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <marker id="arr-axis-circ" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
       <path d="M0,0 L0,6 L7,3 z" fill="#94a3b8" />
@@ -176,7 +176,7 @@ $$
 下図のように、起電力 $E_1 = 12.0\,\text{V}$, $E_2 = 6.0\,\text{V}$ の内部抵抗の無視できる電源と、抵抗 $R_1 = 4.0\,\Omega$, $R_2 = 6.0\,\Omega$, $R_3 = 3.0\,\Omega$ を接続した。
 
 <div class="vector-graph-card">
-<svg viewBox="0 0 540 260" xmlns="http://www.w3.org/2000/svg">
+<svg viewBox="-5 0 590 260" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <marker id="arr-current" markerWidth="7" markerHeight="7" refX="5" refY="2.5" orient="auto">
       <path d="M0,0 L0,5 L6,2.5 z" fill="#f43f5e" />

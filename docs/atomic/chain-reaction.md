@@ -30,8 +30,8 @@ $$^{235}_{92}\text{U} + ^1_0n \longrightarrow ^{141}_{56}\text{Ba} + ^{92}_{36}\
 
 <div class="vector-graph-card">
   <div class="graph-title">図1：ウラン235の熱中性子吸収による核分裂と中性子の倍増</div>
-  <svg viewBox="0 0 540 240" class="vector-svg">
-    <rect width="540" height="240" fill="#090d16" rx="8"/>
+  <svg viewBox="0 0 590 240" class="vector-svg">
+    <rect width="590" height="240" fill="#090d16" rx="8"/>
     <!-- 入射中性子 n -->
     <circle cx="50" cy="120" r="4" fill="#ffffff"/>
     <line x1="50" y1="120" x2="130" y2="120" stroke="#ffffff" stroke-width="1.8" stroke-dasharray="3 3"/>

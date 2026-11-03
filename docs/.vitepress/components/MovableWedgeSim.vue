@@ -118,8 +118,11 @@ function updatePhysics(dtOverride = null) {
 
     state.value.time += dt
 
-    // 軌跡の記録
-    state.value.trail.push({ x: ballPos.value.x, y: ballPos.value.y })
+    // 軌跡の記録（接触点ではなく小球の真の中心座標 drawBx, drawBy を記録して軌跡ズレを解消）
+    const ballR = 12
+    const ballCenterX = ballPos.value.x - ballR * Math.sin(th)
+    const ballCenterY = ballPos.value.y - ballR * Math.cos(th)
+    state.value.trail.push({ x: ballCenterX, y: ballCenterY })
     if (state.value.trail.length > 300) {
       state.value.trail.shift()
     }
@@ -198,8 +201,8 @@ function draw() {
   // 4. 小球本体
   const bp = ballPos.value
   const ballR = 12
-  // 斜面に垂直な法線方向へ半径分オフセット
-  const offX = ballR * Math.sin(th)
+  // 斜面に垂直な外向き法線方向（左下がり斜面なので左上向き (-sinθ, -cosθ)）へ半径分オフセット
+  const offX = -ballR * Math.sin(th)
   const offY = -ballR * Math.cos(th)
   const drawBx = bp.x + offX
   const drawBy = bp.y + offY

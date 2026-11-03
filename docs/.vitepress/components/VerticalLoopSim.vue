@@ -215,11 +215,13 @@ const step = (dt) => {
       isDetached.value = true
       const centerX = 350
       const centerY = 160
-      const scale = 55
+      const scale = 38
       const radPx = R * scale
+      const ballR = 12 + mass.value * 2
+      const ballCenterR = radPx - ballR
 
-      ballX.value = centerX - radPx * Math.sin(theta.value)
-      ballY.value = centerY + radPx * Math.cos(theta.value)
+      ballX.value = centerX - ballCenterR * Math.sin(theta.value)
+      ballY.value = centerY + ballCenterR * Math.cos(theta.value)
       detachedTrail = [{ x: ballX.value, y: ballY.value }]
 
       // 接線方向の速度ベクトル
@@ -238,16 +240,17 @@ const step = (dt) => {
     }
   } else {
     // 放物運動中 (重力のみ)
+    const scale = 38
     ballX.value += ballVx.value * dt
     ballY.value += ballVy.value * dt
-    ballVy.value += g * 55 * dt // 重力加速度 (ピクセルスケール)
+    ballVy.value += g * scale * dt // 重力加速度 (ピクセルスケール)
     detachedTrail.push({ x: ballX.value, y: ballY.value })
 
-    currentV.value = Math.sqrt((ballVx.value / 55) ** 2 + (ballVy.value / 55) ** 2)
+    currentV.value = Math.sqrt((ballVx.value / scale) ** 2 + (ballVy.value / scale) ** 2)
     currentN.value = 0
 
     // 円底部または画面外落下でリセット
-    if (ballY.value > 290 || ballX.value < 40 || ballX.value > 660) {
+    if (ballY.value > 300 || ballX.value < 40 || ballX.value > 660) {
       resetSim()
     }
   }
@@ -271,8 +274,10 @@ const draw = () => {
 
   const centerX = 350
   const centerY = 160
-  const scale = 55
+  const scale = 38
   const radPx = radius.value * scale
+  const ballR = 12 + mass.value * 2
+  const ballCenterR = radPx - ballR
 
   // 1. 円軌道レール / ガイド
   ctx.strokeStyle = '#334155'
@@ -290,9 +295,9 @@ const draw = () => {
   // 2. 小球の位置
   let px = 0, py = 0
   if (!isDetached.value) {
-    // 円軌道上: 最下点 θ=0 (px = centerX, py = centerY + radPx)
-    px = centerX - radPx * Math.sin(theta.value)
-    py = centerY + radPx * Math.cos(theta.value)
+    // 円軌道内側: 最下点 θ=0 (px = centerX, py = centerY + ballCenterR)
+    px = centerX - ballCenterR * Math.sin(theta.value)
+    py = centerY + ballCenterR * Math.cos(theta.value)
 
     // 糸の描画
     if (trackType.value === 'string') {
@@ -323,7 +328,6 @@ const draw = () => {
   }
 
   // 3. 小球の描画
-  const ballR = 12 + mass.value * 2
   ctx.fillStyle = isDetached.value ? '#ef4444' : '#38bdf8'
   ctx.shadowColor = ctx.fillStyle
   ctx.shadowBlur = 10
@@ -357,8 +361,9 @@ const draw = () => {
     // ② 垂直抗力/張力 N（中心向き）
     if (currentN.value > 0.5) {
       const nLen = Math.min(60, currentN.value * 1.5)
-      const normX = (centerX - px) / radPx
-      const normY = (centerY - py) / radPx
+      const pDist = Math.hypot(centerX - px, centerY - py) || 1
+      const normX = (centerX - px) / pDist
+      const normY = (centerY - py) / pDist
 
       ctx.strokeStyle = '#f59e0b'
       ctx.fillStyle = '#f59e0b'

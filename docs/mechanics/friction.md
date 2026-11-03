@@ -35,7 +35,7 @@ description: 静止摩擦力と最大静止摩擦力の違い、動摩擦力、�
 摩擦力には、物体の状態に応じて **3つの異なる性質** があります。ここを区別することが力学克服の絶対条件です。
 
 <div class="vector-graph-card">
-<svg viewBox="0 0 540 280" xmlns="http://www.w3.org/2000/svg">
+<svg viewBox="0 0 610 280" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <marker id="arrowFr" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
       <path d="M0,0 L0,6 L8,3 z" fill="#a1a1aa"/>

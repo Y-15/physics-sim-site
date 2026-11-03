@@ -48,7 +48,7 @@ description: 高校物理の波動最頻出テーマ。音源移動による波�
 しかし、音源が前進しながら音波を送り出すと、 **1周期 $T_0$ の間に音源自身が前へ $v_s T_0$ だけ進む** ため、前方に送り出される波面の間隔がギュッと押し縮められます。
 
 <div class="vector-graph-card">
-<svg viewBox="0 0 540 220" xmlns="http://www.w3.org/2000/svg">
+<svg viewBox="0 0 540 240" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <marker id="arr-dop-s" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
       <path d="M0,0 L0,6 L7,3 z" fill="#fbbf24" />
@@ -158,7 +158,7 @@ $$f' = \frac{(V + w) - v_o}{(V + w) - v_s} f_0$$
 音源が直線上を移動し、直線から離れた地点にある観測者が音を聞く場合：
 
 <div class="vector-graph-card">
-<svg viewBox="0 0 540 200" xmlns="http://www.w3.org/2000/svg">
+<svg viewBox="0 0 590 200" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <marker id="arr-diag" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
       <path d="M0,0 L0,6 L7,3 z" fill="#38bdf8" />

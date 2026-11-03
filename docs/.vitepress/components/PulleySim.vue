@@ -338,7 +338,7 @@ function drawIncline(ctx, w, h) {
   const floorY = h - 45
   const startX = w * 0.12
   const inclineLen = w * 0.52
-  const pulleyR = 16
+  const pulleyR = 25
   const pulleyX = startX + inclineLen * Math.cos(rad)
   const pulleyY = floorY - inclineLen * Math.sin(rad)
 

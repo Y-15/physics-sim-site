@@ -30,7 +30,8 @@ description: 高校物理「波動（Waves）」の実践問題・オリジナ�
   <div class="graph-title">📐 正弦波の波形（y-xグラフ）と波の基本式</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-w-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-w-cyan-waves-q1-1" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-tw-emerald-waves-q1-1" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#34d399"/></marker>
   </defs>
   <line x1="30" y1="85" x2="470" y2="85" stroke="#64748b" stroke-width="1.5"/>
   <line x1="50" y1="145" x2="50" y2="25" stroke="#64748b" stroke-width="1.5"/>
@@ -45,7 +46,7 @@ description: 高校物理「波動（Waves）」の実践問題・オリジナ�
   <line x1="95" y1="85" x2="95" y2="55" stroke="#f43f5e" stroke-width="1.5"/>
   <rect x="100" y="65" width="40" height="15" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
   <text x="120" y="76" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">振幅 A</text>
-  <line x1="330" y1="35" x2="390" y2="35" stroke="#34d399" stroke-width="2" marker-end="url(#arr-w-cyan)"/>
+  <line x1="330" y1="35" x2="390" y2="35" stroke="#34d399" stroke-width="2" marker-end="url(#arr-tw-emerald-waves-q1-1)"/>
   <rect x="340" y="18" width="55" height="15" rx="3" fill="#0f172a" stroke="#34d399" stroke-width="1"/>
   <text x="367" y="29" fill="#34d399" font-size="9" font-weight="700" text-anchor="middle">進行方向 v</text>
   <rect x="290" y="115" width="180" height="24" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
@@ -107,7 +108,8 @@ $$
   <div class="graph-title">📐 正弦波の波形（y-xグラフ）と波の基本式</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-w-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-w-cyan-waves-q2-2" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-tw-emerald-waves-q2-2" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#34d399"/></marker>
   </defs>
   <line x1="30" y1="85" x2="470" y2="85" stroke="#64748b" stroke-width="1.5"/>
   <line x1="50" y1="145" x2="50" y2="25" stroke="#64748b" stroke-width="1.5"/>
@@ -122,7 +124,7 @@ $$
   <line x1="95" y1="85" x2="95" y2="55" stroke="#f43f5e" stroke-width="1.5"/>
   <rect x="100" y="65" width="40" height="15" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
   <text x="120" y="76" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">振幅 A</text>
-  <line x1="330" y1="35" x2="390" y2="35" stroke="#34d399" stroke-width="2" marker-end="url(#arr-w-cyan)"/>
+  <line x1="330" y1="35" x2="390" y2="35" stroke="#34d399" stroke-width="2" marker-end="url(#arr-tw-emerald-waves-q2-2)"/>
   <rect x="340" y="18" width="55" height="15" rx="3" fill="#0f172a" stroke="#34d399" stroke-width="1"/>
   <text x="367" y="29" fill="#34d399" font-size="9" font-weight="700" text-anchor="middle">進行方向 v</text>
   <rect x="290" y="115" width="180" height="24" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
@@ -184,7 +186,8 @@ $$
   <div class="graph-title">📐 正弦波の波形（y-xグラフ）と波の基本式</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-w-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-w-cyan-waves-q3-3" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-tw-emerald-waves-q3-3" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#34d399"/></marker>
   </defs>
   <line x1="30" y1="85" x2="470" y2="85" stroke="#64748b" stroke-width="1.5"/>
   <line x1="50" y1="145" x2="50" y2="25" stroke="#64748b" stroke-width="1.5"/>
@@ -199,7 +202,7 @@ $$
   <line x1="95" y1="85" x2="95" y2="55" stroke="#f43f5e" stroke-width="1.5"/>
   <rect x="100" y="65" width="40" height="15" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
   <text x="120" y="76" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">振幅 A</text>
-  <line x1="330" y1="35" x2="390" y2="35" stroke="#34d399" stroke-width="2" marker-end="url(#arr-w-cyan)"/>
+  <line x1="330" y1="35" x2="390" y2="35" stroke="#34d399" stroke-width="2" marker-end="url(#arr-tw-emerald-waves-q3-3)"/>
   <rect x="340" y="18" width="55" height="15" rx="3" fill="#0f172a" stroke="#34d399" stroke-width="1"/>
   <text x="367" y="29" fill="#34d399" font-size="9" font-weight="700" text-anchor="middle">進行方向 v</text>
   <rect x="290" y="115" width="180" height="24" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
@@ -261,7 +264,8 @@ $$
   <div class="graph-title">📐 正弦波の波形（y-xグラフ）と波の基本式</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-w-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-w-cyan-waves-q4-4" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-tw-emerald-waves-q4-4" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#34d399"/></marker>
   </defs>
   <line x1="30" y1="85" x2="470" y2="85" stroke="#64748b" stroke-width="1.5"/>
   <line x1="50" y1="145" x2="50" y2="25" stroke="#64748b" stroke-width="1.5"/>
@@ -276,7 +280,7 @@ $$
   <line x1="95" y1="85" x2="95" y2="55" stroke="#f43f5e" stroke-width="1.5"/>
   <rect x="100" y="65" width="40" height="15" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
   <text x="120" y="76" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">振幅 A</text>
-  <line x1="330" y1="35" x2="390" y2="35" stroke="#34d399" stroke-width="2" marker-end="url(#arr-w-cyan)"/>
+  <line x1="330" y1="35" x2="390" y2="35" stroke="#34d399" stroke-width="2" marker-end="url(#arr-tw-emerald-waves-q4-4)"/>
   <rect x="340" y="18" width="55" height="15" rx="3" fill="#0f172a" stroke="#34d399" stroke-width="1"/>
   <text x="367" y="29" fill="#34d399" font-size="9" font-weight="700" text-anchor="middle">進行方向 v</text>
   <rect x="290" y="115" width="180" height="24" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
@@ -340,7 +344,8 @@ $$
   <div class="graph-title">📐 正弦波の波形（y-xグラフ）と波の基本式</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-w-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-w-cyan-waves-q5-5" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-tw-emerald-waves-q5-5" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#34d399"/></marker>
   </defs>
   <line x1="30" y1="85" x2="470" y2="85" stroke="#64748b" stroke-width="1.5"/>
   <line x1="50" y1="145" x2="50" y2="25" stroke="#64748b" stroke-width="1.5"/>
@@ -355,7 +360,7 @@ $$
   <line x1="95" y1="85" x2="95" y2="55" stroke="#f43f5e" stroke-width="1.5"/>
   <rect x="100" y="65" width="40" height="15" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
   <text x="120" y="76" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">振幅 A</text>
-  <line x1="330" y1="35" x2="390" y2="35" stroke="#34d399" stroke-width="2" marker-end="url(#arr-w-cyan)"/>
+  <line x1="330" y1="35" x2="390" y2="35" stroke="#34d399" stroke-width="2" marker-end="url(#arr-tw-emerald-waves-q5-5)"/>
   <rect x="340" y="18" width="55" height="15" rx="3" fill="#0f172a" stroke="#34d399" stroke-width="1"/>
   <text x="367" y="29" fill="#34d399" font-size="9" font-weight="700" text-anchor="middle">進行方向 v</text>
   <rect x="290" y="115" width="180" height="24" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
@@ -417,7 +422,8 @@ $$
   <div class="graph-title">📐 正弦波の波形（y-xグラフ）と波の基本式</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-w-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-w-cyan-waves-q6-6" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-tw-emerald-waves-q6-6" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#34d399"/></marker>
   </defs>
   <line x1="30" y1="85" x2="470" y2="85" stroke="#64748b" stroke-width="1.5"/>
   <line x1="50" y1="145" x2="50" y2="25" stroke="#64748b" stroke-width="1.5"/>
@@ -432,7 +438,7 @@ $$
   <line x1="95" y1="85" x2="95" y2="55" stroke="#f43f5e" stroke-width="1.5"/>
   <rect x="100" y="65" width="40" height="15" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
   <text x="120" y="76" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">振幅 A</text>
-  <line x1="330" y1="35" x2="390" y2="35" stroke="#34d399" stroke-width="2" marker-end="url(#arr-w-cyan)"/>
+  <line x1="330" y1="35" x2="390" y2="35" stroke="#34d399" stroke-width="2" marker-end="url(#arr-tw-emerald-waves-q6-6)"/>
   <rect x="340" y="18" width="55" height="15" rx="3" fill="#0f172a" stroke="#34d399" stroke-width="1"/>
   <text x="367" y="29" fill="#34d399" font-size="9" font-weight="700" text-anchor="middle">進行方向 v</text>
   <rect x="290" y="115" width="180" height="24" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
@@ -488,7 +494,8 @@ $$
   <div class="graph-title">📐 正弦波の波形（y-xグラフ）と波の基本式</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-w-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-w-cyan-waves-q7-7" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-tw-emerald-waves-q7-7" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#34d399"/></marker>
   </defs>
   <line x1="30" y1="85" x2="470" y2="85" stroke="#64748b" stroke-width="1.5"/>
   <line x1="50" y1="145" x2="50" y2="25" stroke="#64748b" stroke-width="1.5"/>
@@ -503,7 +510,7 @@ $$
   <line x1="95" y1="85" x2="95" y2="55" stroke="#f43f5e" stroke-width="1.5"/>
   <rect x="100" y="65" width="40" height="15" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
   <text x="120" y="76" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">振幅 A</text>
-  <line x1="330" y1="35" x2="390" y2="35" stroke="#34d399" stroke-width="2" marker-end="url(#arr-w-cyan)"/>
+  <line x1="330" y1="35" x2="390" y2="35" stroke="#34d399" stroke-width="2" marker-end="url(#arr-tw-emerald-waves-q7-7)"/>
   <rect x="340" y="18" width="55" height="15" rx="3" fill="#0f172a" stroke="#34d399" stroke-width="1"/>
   <text x="367" y="29" fill="#34d399" font-size="9" font-weight="700" text-anchor="middle">進行方向 v</text>
   <rect x="290" y="115" width="180" height="24" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
@@ -563,7 +570,8 @@ $$
   <div class="graph-title">📐 正弦波の波形（y-xグラフ）と波の基本式</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-w-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-w-cyan-waves-q8-8" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-tw-emerald-waves-q8-8" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#34d399"/></marker>
   </defs>
   <line x1="30" y1="85" x2="470" y2="85" stroke="#64748b" stroke-width="1.5"/>
   <line x1="50" y1="145" x2="50" y2="25" stroke="#64748b" stroke-width="1.5"/>
@@ -578,7 +586,7 @@ $$
   <line x1="95" y1="85" x2="95" y2="55" stroke="#f43f5e" stroke-width="1.5"/>
   <rect x="100" y="65" width="40" height="15" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
   <text x="120" y="76" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">振幅 A</text>
-  <line x1="330" y1="35" x2="390" y2="35" stroke="#34d399" stroke-width="2" marker-end="url(#arr-w-cyan)"/>
+  <line x1="330" y1="35" x2="390" y2="35" stroke="#34d399" stroke-width="2" marker-end="url(#arr-tw-emerald-waves-q8-8)"/>
   <rect x="340" y="18" width="55" height="15" rx="3" fill="#0f172a" stroke="#34d399" stroke-width="1"/>
   <text x="367" y="29" fill="#34d399" font-size="9" font-weight="700" text-anchor="middle">進行方向 v</text>
   <rect x="290" y="115" width="180" height="24" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
@@ -731,21 +739,21 @@ $$
   <div class="graph-title">📐 光の屈折とスネルの法則・全反射</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-sn-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-sn-cyan-waves-q10-10" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
   </defs>
   <line x1="40" y1="80" x2="460" y2="80" stroke="#64748b" stroke-width="2"/>
   <line x1="200" y1="20" x2="200" y2="140" stroke="#64748b" stroke-width="1.5" stroke-dasharray="3,3"/>
-  <text x="280" y="60" fill="#94a3b8" font-size="9">媒質1 (屈折率 n₁)</text>
+  <text x="210" y="20" fill="#94a3b8" font-size="9">媒質1 (屈折率 n₁)</text>
   <text x="280" y="110" fill="#94a3b8" font-size="9">媒質2 (屈折率 n₂)</text>
-  <line x1="120" y1="30" x2="200" y2="80" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-sn-cyan)"/>
-  <line x1="200" y1="80" x2="250" y2="140" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-sn-cyan)"/>
-  <rect x="140" y="45" width="45" height="15" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <line x1="120" y1="30" x2="200" y2="80" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-sn-cyan-waves-q10-10)"/>
+  <line x1="200" y1="80" x2="250" y2="140" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-sn-cyan-waves-q10-10)"/>
+  <rect x="136" y="45" width="52" height="15" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
   <text x="162" y="56" fill="#38bdf8" font-size="9" text-anchor="middle">入射角 θ₁</text>
-  <rect x="215" y="105" width="45" height="15" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <rect x="211" y="105" width="52" height="15" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
   <text x="237" y="116" fill="#38bdf8" font-size="9" text-anchor="middle">屈折角 θ₂</text>
-  <rect x="310" y="30" width="165" height="42" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
-  <text x="392" y="48" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">スネルの法則: n₁sinθ₁ ＝ n₂sinθ₂</text>
-  <text x="392" y="64" fill="#fbbf24" font-size="9" text-anchor="middle">臨界角: sinθ_c ＝ n₂ / n₁</text>
+  <rect x="290" y="28" width="200" height="44" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="390" y="46" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">スネルの法則: n₁sinθ₁ ＝ n₂sinθ₂</text>
+  <text x="390" y="62" fill="#fbbf24" font-size="9" text-anchor="middle">臨界角: sinθ_c ＝ n₂ / n₁</text>
 </svg>
   <div class="graph-caption">境界面に入射した光は屈折率の違いによって曲がり、臨界角以上では全反射が起こります。</div>
 </div>
@@ -807,7 +815,8 @@ $$
   <div class="graph-title">📐 正弦波の波形（y-xグラフ）と波の基本式</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-w-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-w-cyan-waves-q11-11" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-tw-emerald-waves-q11-11" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#34d399"/></marker>
   </defs>
   <line x1="30" y1="85" x2="470" y2="85" stroke="#64748b" stroke-width="1.5"/>
   <line x1="50" y1="145" x2="50" y2="25" stroke="#64748b" stroke-width="1.5"/>
@@ -822,7 +831,7 @@ $$
   <line x1="95" y1="85" x2="95" y2="55" stroke="#f43f5e" stroke-width="1.5"/>
   <rect x="100" y="65" width="40" height="15" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
   <text x="120" y="76" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">振幅 A</text>
-  <line x1="330" y1="35" x2="390" y2="35" stroke="#34d399" stroke-width="2" marker-end="url(#arr-w-cyan)"/>
+  <line x1="330" y1="35" x2="390" y2="35" stroke="#34d399" stroke-width="2" marker-end="url(#arr-tw-emerald-waves-q11-11)"/>
   <rect x="340" y="18" width="55" height="15" rx="3" fill="#0f172a" stroke="#34d399" stroke-width="1"/>
   <text x="367" y="29" fill="#34d399" font-size="9" font-weight="700" text-anchor="middle">進行方向 v</text>
   <rect x="290" y="115" width="180" height="24" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
@@ -890,22 +899,23 @@ $$
   <div class="graph-title">📐 ドップラー効果と波面の圧縮・観測振動数</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-dp-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-dp-cyan-waves-q12-12" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-dop-rose-waves-q12-12" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#f43f5e"/></marker>
   </defs>
-  <line x1="30" y1="130" x2="470" y2="130" stroke="#475569" stroke-width="1.5"/>
+  <line x1="30" y1="130" x2="470" y2="130" stroke="#64748b" stroke-width="1.5"/>
   <circle cx="160" cy="80" r="55" fill="none" stroke="#64748b" stroke-width="1.5"/>
   <circle cx="180" cy="80" r="40" fill="none" stroke="#64748b" stroke-width="1.5"/>
   <circle cx="200" cy="80" r="25" fill="none" stroke="#38bdf8" stroke-width="2"/>
   <circle cx="210" cy="80" r="6" fill="#f43f5e"/>
-  <line x1="210" y1="80" x2="250" y2="80" stroke="#f43f5e" stroke-width="2" marker-end="url(#arr-dp-cyan)"/>
+  <line x1="210" y1="80" x2="250" y2="80" stroke="#f43f5e" stroke-width="2" marker-end="url(#arr-dop-rose-waves-q12-12)"/>
   <rect x="205" y="55" width="60" height="16" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
   <text x="235" y="67" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">音源 (v_s)</text>
   <circle cx="360" cy="80" r="7" fill="#34d399"/>
   <rect x="330" y="55" width="60" height="16" rx="3" fill="#0f172a" stroke="#34d399" stroke-width="1"/>
   <text x="360" y="67" fill="#34d399" font-size="9" font-weight="700" text-anchor="middle">観測者 (v_o)</text>
-  <rect x="290" y="105" width="180" height="38" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
-  <text x="380" y="121" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">f′ ＝ (V − v_o) / (V − v_s) × f</text>
-  <text x="380" y="135" fill="#cbd5e1" font-size="9" text-anchor="middle">前方波長: λ′ ＝ (V − v_s) / f</text>
+  <rect x="280" y="105" width="195" height="38" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="378" y="121" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">f′ ＝ (V − v_o) / (V − v_s) × f</text>
+  <text x="378" y="135" fill="#cbd5e1" font-size="9" text-anchor="middle">前方波長: λ′ ＝ (V − v_s) / f</text>
 </svg>
   <div class="graph-caption">音源が前進すると前方の波面が圧縮され波長が短縮するため、観測者の受け取る振動数が高くなります。</div>
 </div>
@@ -971,11 +981,12 @@ $$
   <div class="graph-title">📐 凸レンズの写像公式と光線追跡</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-op-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-op-cyan-waves-q13-13" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-opt-amber-waves-q13-13" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#fbbf24"/></marker>
   </defs>
   <line x1="30" y1="80" x2="470" y2="80" stroke="#64748b" stroke-width="1.5"/>
   <ellipse cx="250" cy="80" rx="8" ry="60" fill="rgba(56,189,248,0.2)" stroke="#38bdf8" stroke-width="2"/>
-  <line x1="100" y1="80" x2="100" y2="40" stroke="#fbbf24" stroke-width="3" marker-end="url(#arr-op-cyan)"/>
+  <line x1="100" y1="80" x2="100" y2="40" stroke="#fbbf24" stroke-width="3" marker-end="url(#arr-opt-amber-waves-q13-13)"/>
   <rect x="75" y="45" width="22" height="14" rx="2" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
   <text x="86" y="55" fill="#fbbf24" font-size="9" font-weight="700" text-anchor="middle">物</text>
   <line x1="100" y1="40" x2="250" y2="40" stroke="#38bdf8" stroke-width="1.5"/>
@@ -1049,7 +1060,8 @@ $$
   <div class="graph-title">📐 正弦波の波形（y-xグラフ）と波の基本式</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-w-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-w-cyan-waves-q14-14" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-tw-emerald-waves-q14-14" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#34d399"/></marker>
   </defs>
   <line x1="30" y1="85" x2="470" y2="85" stroke="#64748b" stroke-width="1.5"/>
   <line x1="50" y1="145" x2="50" y2="25" stroke="#64748b" stroke-width="1.5"/>
@@ -1064,7 +1076,7 @@ $$
   <line x1="95" y1="85" x2="95" y2="55" stroke="#f43f5e" stroke-width="1.5"/>
   <rect x="100" y="65" width="40" height="15" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
   <text x="120" y="76" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">振幅 A</text>
-  <line x1="330" y1="35" x2="390" y2="35" stroke="#34d399" stroke-width="2" marker-end="url(#arr-w-cyan)"/>
+  <line x1="330" y1="35" x2="390" y2="35" stroke="#34d399" stroke-width="2" marker-end="url(#arr-tw-emerald-waves-q14-14)"/>
   <rect x="340" y="18" width="55" height="15" rx="3" fill="#0f172a" stroke="#34d399" stroke-width="1"/>
   <text x="367" y="29" fill="#34d399" font-size="9" font-weight="700" text-anchor="middle">進行方向 v</text>
   <rect x="290" y="115" width="180" height="24" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
@@ -1127,8 +1139,8 @@ $$
   <line x1="60" y1="67" x2="420" y2="50" stroke="#38bdf8" stroke-width="1.5"/>
   <line x1="60" y1="102" x2="420" y2="50" stroke="#38bdf8" stroke-width="1.5"/>
   <circle cx="420" cy="50" r="4" fill="#f43f5e"/>
-  <rect x="425" y="42" width="45" height="15" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
-  <text x="447" y="53" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">点 P (明線)</text>
+  <rect x="420" y="42" width="60" height="15" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
+  <text x="450" y="53" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">点 P (明線)</text>
   <rect x="150" y="20" width="220" height="38" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
   <text x="260" y="35" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">明線条件: dx / L ＝ mλ</text>
   <text x="260" y="49" fill="#fbbf24" font-size="9" text-anchor="middle">明線間隔: Δx ＝ Lλ / d</text>
@@ -1188,7 +1200,7 @@ $$
 <div class="vector-graph-card">
   <div class="graph-title">📐 定常波の腹と節の位置関係</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
-  <line x1="40" y1="85" x2="460" y2="85" stroke="#475569" stroke-width="1.5"/>
+  <line x1="40" y1="85" x2="460" y2="85" stroke="#64748b" stroke-width="1.5"/>
   <path d="M 60,85 Q 110,35 160,85 Q 210,135 260,85 Q 310,35 360,85 Q 410,135 460,85" fill="none" stroke="#38bdf8" stroke-width="2.5"/>
   <path d="M 60,85 Q 110,135 160,85 Q 210,35 260,85 Q 310,135 360,85 Q 410,35 460,85" fill="none" stroke="#38bdf8" stroke-width="1.5" stroke-dasharray="3,3"/>
   <circle cx="60" cy="85" r="5" fill="#f43f5e"/>
@@ -1264,7 +1276,7 @@ $$
 <div class="vector-graph-card">
   <div class="graph-title">📐 定常波の腹と節の位置関係</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
-  <line x1="40" y1="85" x2="460" y2="85" stroke="#475569" stroke-width="1.5"/>
+  <line x1="40" y1="85" x2="460" y2="85" stroke="#64748b" stroke-width="1.5"/>
   <path d="M 60,85 Q 110,35 160,85 Q 210,135 260,85 Q 310,35 360,85 Q 410,135 460,85" fill="none" stroke="#38bdf8" stroke-width="2.5"/>
   <path d="M 60,85 Q 110,135 160,85 Q 210,35 260,85 Q 310,135 360,85 Q 410,35 460,85" fill="none" stroke="#38bdf8" stroke-width="1.5" stroke-dasharray="3,3"/>
   <circle cx="60" cy="85" r="5" fill="#f43f5e"/>
@@ -1411,7 +1423,7 @@ $$
 <div class="vector-graph-card">
   <div class="graph-title">📐 定常波の腹と節の位置関係</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
-  <line x1="40" y1="85" x2="460" y2="85" stroke="#475569" stroke-width="1.5"/>
+  <line x1="40" y1="85" x2="460" y2="85" stroke="#64748b" stroke-width="1.5"/>
   <path d="M 60,85 Q 110,35 160,85 Q 210,135 260,85 Q 310,35 360,85 Q 410,135 460,85" fill="none" stroke="#38bdf8" stroke-width="2.5"/>
   <path d="M 60,85 Q 110,135 160,85 Q 210,35 260,85 Q 310,135 360,85 Q 410,35 460,85" fill="none" stroke="#38bdf8" stroke-width="1.5" stroke-dasharray="3,3"/>
   <circle cx="60" cy="85" r="5" fill="#f43f5e"/>
@@ -1533,11 +1545,12 @@ $$
   <div class="graph-title">📐 凸レンズの写像公式と光線追跡</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-op-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-op-cyan-waves-q19-19" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-opt-amber-waves-q19-19" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#fbbf24"/></marker>
   </defs>
   <line x1="30" y1="80" x2="470" y2="80" stroke="#64748b" stroke-width="1.5"/>
   <ellipse cx="250" cy="80" rx="8" ry="60" fill="rgba(56,189,248,0.2)" stroke="#38bdf8" stroke-width="2"/>
-  <line x1="100" y1="80" x2="100" y2="40" stroke="#fbbf24" stroke-width="3" marker-end="url(#arr-op-cyan)"/>
+  <line x1="100" y1="80" x2="100" y2="40" stroke="#fbbf24" stroke-width="3" marker-end="url(#arr-opt-amber-waves-q19-19)"/>
   <rect x="75" y="45" width="22" height="14" rx="2" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
   <text x="86" y="55" fill="#fbbf24" font-size="9" font-weight="700" text-anchor="middle">物</text>
   <line x1="100" y1="40" x2="250" y2="40" stroke="#38bdf8" stroke-width="1.5"/>
@@ -1686,7 +1699,7 @@ $$
 <div class="vector-graph-card">
   <div class="graph-title">📐 定常波の腹と節の位置関係</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
-  <line x1="40" y1="85" x2="460" y2="85" stroke="#475569" stroke-width="1.5"/>
+  <line x1="40" y1="85" x2="460" y2="85" stroke="#64748b" stroke-width="1.5"/>
   <path d="M 60,85 Q 110,35 160,85 Q 210,135 260,85 Q 310,35 360,85 Q 410,135 460,85" fill="none" stroke="#38bdf8" stroke-width="2.5"/>
   <path d="M 60,85 Q 110,135 160,85 Q 210,35 260,85 Q 310,135 360,85 Q 410,35 460,85" fill="none" stroke="#38bdf8" stroke-width="1.5" stroke-dasharray="3,3"/>
   <circle cx="60" cy="85" r="5" fill="#f43f5e"/>
@@ -1867,22 +1880,23 @@ $$
   <div class="graph-title">📐 ドップラー効果と波面の圧縮・観測振動数</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-dp-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-dp-cyan-waves-q21-21" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-dop-rose-waves-q21-21" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#f43f5e"/></marker>
   </defs>
-  <line x1="30" y1="130" x2="470" y2="130" stroke="#475569" stroke-width="1.5"/>
+  <line x1="30" y1="130" x2="470" y2="130" stroke="#64748b" stroke-width="1.5"/>
   <circle cx="160" cy="80" r="55" fill="none" stroke="#64748b" stroke-width="1.5"/>
   <circle cx="180" cy="80" r="40" fill="none" stroke="#64748b" stroke-width="1.5"/>
   <circle cx="200" cy="80" r="25" fill="none" stroke="#38bdf8" stroke-width="2"/>
   <circle cx="210" cy="80" r="6" fill="#f43f5e"/>
-  <line x1="210" y1="80" x2="250" y2="80" stroke="#f43f5e" stroke-width="2" marker-end="url(#arr-dp-cyan)"/>
+  <line x1="210" y1="80" x2="250" y2="80" stroke="#f43f5e" stroke-width="2" marker-end="url(#arr-dop-rose-waves-q21-21)"/>
   <rect x="205" y="55" width="60" height="16" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
   <text x="235" y="67" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">音源 (v_s)</text>
   <circle cx="360" cy="80" r="7" fill="#34d399"/>
   <rect x="330" y="55" width="60" height="16" rx="3" fill="#0f172a" stroke="#34d399" stroke-width="1"/>
   <text x="360" y="67" fill="#34d399" font-size="9" font-weight="700" text-anchor="middle">観測者 (v_o)</text>
-  <rect x="290" y="105" width="180" height="38" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
-  <text x="380" y="121" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">f′ ＝ (V − v_o) / (V − v_s) × f</text>
-  <text x="380" y="135" fill="#cbd5e1" font-size="9" text-anchor="middle">前方波長: λ′ ＝ (V − v_s) / f</text>
+  <rect x="280" y="105" width="195" height="38" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="378" y="121" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">f′ ＝ (V − v_o) / (V − v_s) × f</text>
+  <text x="378" y="135" fill="#cbd5e1" font-size="9" text-anchor="middle">前方波長: λ′ ＝ (V − v_s) / f</text>
 </svg>
   <div class="graph-caption">音源が前進すると前方の波面が圧縮され波長が短縮するため、観測者の受け取る振動数が高くなります。</div>
 </div>
@@ -1964,8 +1978,8 @@ D=2.0 m
   <line x1="60" y1="67" x2="420" y2="50" stroke="#38bdf8" stroke-width="1.5"/>
   <line x1="60" y1="102" x2="420" y2="50" stroke="#38bdf8" stroke-width="1.5"/>
   <circle cx="420" cy="50" r="4" fill="#f43f5e"/>
-  <rect x="425" y="42" width="45" height="15" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
-  <text x="447" y="53" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">点 P (明線)</text>
+  <rect x="420" y="42" width="60" height="15" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
+  <text x="450" y="53" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">点 P (明線)</text>
   <rect x="150" y="20" width="220" height="38" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
   <text x="260" y="35" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">明線条件: dx / L ＝ mλ</text>
   <text x="260" y="49" fill="#fbbf24" font-size="9" text-anchor="middle">明線間隔: Δx ＝ Lλ / d</text>
@@ -2131,22 +2145,23 @@ $$
   <div class="graph-title">📐 ドップラー効果と波面の圧縮・観測振動数</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-dp-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-dp-cyan-waves-q23-23" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-dop-rose-waves-q23-23" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#f43f5e"/></marker>
   </defs>
-  <line x1="30" y1="130" x2="470" y2="130" stroke="#475569" stroke-width="1.5"/>
+  <line x1="30" y1="130" x2="470" y2="130" stroke="#64748b" stroke-width="1.5"/>
   <circle cx="160" cy="80" r="55" fill="none" stroke="#64748b" stroke-width="1.5"/>
   <circle cx="180" cy="80" r="40" fill="none" stroke="#64748b" stroke-width="1.5"/>
   <circle cx="200" cy="80" r="25" fill="none" stroke="#38bdf8" stroke-width="2"/>
   <circle cx="210" cy="80" r="6" fill="#f43f5e"/>
-  <line x1="210" y1="80" x2="250" y2="80" stroke="#f43f5e" stroke-width="2" marker-end="url(#arr-dp-cyan)"/>
+  <line x1="210" y1="80" x2="250" y2="80" stroke="#f43f5e" stroke-width="2" marker-end="url(#arr-dop-rose-waves-q23-23)"/>
   <rect x="205" y="55" width="60" height="16" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
   <text x="235" y="67" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">音源 (v_s)</text>
   <circle cx="360" cy="80" r="7" fill="#34d399"/>
   <rect x="330" y="55" width="60" height="16" rx="3" fill="#0f172a" stroke="#34d399" stroke-width="1"/>
   <text x="360" y="67" fill="#34d399" font-size="9" font-weight="700" text-anchor="middle">観測者 (v_o)</text>
-  <rect x="290" y="105" width="180" height="38" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
-  <text x="380" y="121" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">f′ ＝ (V − v_o) / (V − v_s) × f</text>
-  <text x="380" y="135" fill="#cbd5e1" font-size="9" text-anchor="middle">前方波長: λ′ ＝ (V − v_s) / f</text>
+  <rect x="280" y="105" width="195" height="38" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="378" y="121" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">f′ ＝ (V − v_o) / (V − v_s) × f</text>
+  <text x="378" y="135" fill="#cbd5e1" font-size="9" text-anchor="middle">前方波長: λ′ ＝ (V − v_s) / f</text>
 </svg>
   <div class="graph-caption">音源が前進すると前方の波面が圧縮され波長が短縮するため、観測者の受け取る振動数が高くなります。</div>
 </div>
@@ -2288,8 +2303,8 @@ D=2.0 m
   <line x1="60" y1="67" x2="420" y2="50" stroke="#38bdf8" stroke-width="1.5"/>
   <line x1="60" y1="102" x2="420" y2="50" stroke="#38bdf8" stroke-width="1.5"/>
   <circle cx="420" cy="50" r="4" fill="#f43f5e"/>
-  <rect x="425" y="42" width="45" height="15" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
-  <text x="447" y="53" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">点 P (明線)</text>
+  <rect x="420" y="42" width="60" height="15" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
+  <text x="450" y="53" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">点 P (明線)</text>
   <rect x="150" y="20" width="220" height="38" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
   <text x="260" y="35" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">明線条件: dx / L ＝ mλ</text>
   <text x="260" y="49" fill="#fbbf24" font-size="9" text-anchor="middle">明線間隔: Δx ＝ Lλ / d</text>
@@ -2430,21 +2445,21 @@ $$
   <div class="graph-title">📐 光の屈折とスネルの法則・全反射</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-sn-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-sn-cyan-waves-q25-25" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
   </defs>
   <line x1="40" y1="80" x2="460" y2="80" stroke="#64748b" stroke-width="2"/>
   <line x1="200" y1="20" x2="200" y2="140" stroke="#64748b" stroke-width="1.5" stroke-dasharray="3,3"/>
-  <text x="280" y="60" fill="#94a3b8" font-size="9">媒質1 (屈折率 n₁)</text>
+  <text x="210" y="20" fill="#94a3b8" font-size="9">媒質1 (屈折率 n₁)</text>
   <text x="280" y="110" fill="#94a3b8" font-size="9">媒質2 (屈折率 n₂)</text>
-  <line x1="120" y1="30" x2="200" y2="80" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-sn-cyan)"/>
-  <line x1="200" y1="80" x2="250" y2="140" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-sn-cyan)"/>
-  <rect x="140" y="45" width="45" height="15" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <line x1="120" y1="30" x2="200" y2="80" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-sn-cyan-waves-q25-25)"/>
+  <line x1="200" y1="80" x2="250" y2="140" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-sn-cyan-waves-q25-25)"/>
+  <rect x="136" y="45" width="52" height="15" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
   <text x="162" y="56" fill="#38bdf8" font-size="9" text-anchor="middle">入射角 θ₁</text>
-  <rect x="215" y="105" width="45" height="15" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <rect x="211" y="105" width="52" height="15" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
   <text x="237" y="116" fill="#38bdf8" font-size="9" text-anchor="middle">屈折角 θ₂</text>
-  <rect x="310" y="30" width="165" height="42" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
-  <text x="392" y="48" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">スネルの法則: n₁sinθ₁ ＝ n₂sinθ₂</text>
-  <text x="392" y="64" fill="#fbbf24" font-size="9" text-anchor="middle">臨界角: sinθ_c ＝ n₂ / n₁</text>
+  <rect x="290" y="28" width="200" height="44" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="390" y="46" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">スネルの法則: n₁sinθ₁ ＝ n₂sinθ₂</text>
+  <text x="390" y="62" fill="#fbbf24" font-size="9" text-anchor="middle">臨界角: sinθ_c ＝ n₂ / n₁</text>
 </svg>
   <div class="graph-caption">境界面に入射した光は屈折率の違いによって曲がり、臨界角以上では全反射が起こります。</div>
 </div>
@@ -2537,7 +2552,7 @@ g=9.8 m/s²
 <div class="vector-graph-card">
   <div class="graph-title">📐 定常波の腹と節の位置関係</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
-  <line x1="40" y1="85" x2="460" y2="85" stroke="#475569" stroke-width="1.5"/>
+  <line x1="40" y1="85" x2="460" y2="85" stroke="#64748b" stroke-width="1.5"/>
   <path d="M 60,85 Q 110,35 160,85 Q 210,135 260,85 Q 310,35 360,85 Q 410,135 460,85" fill="none" stroke="#38bdf8" stroke-width="2.5"/>
   <path d="M 60,85 Q 110,135 160,85 Q 210,35 260,85 Q 310,135 360,85 Q 410,35 460,85" fill="none" stroke="#38bdf8" stroke-width="1.5" stroke-dasharray="3,3"/>
   <circle cx="60" cy="85" r="5" fill="#f43f5e"/>
@@ -2865,11 +2880,12 @@ $$
   <div class="graph-title">📐 凸レンズの写像公式と光線追跡</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-op-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-op-cyan-waves-q27-27" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-opt-amber-waves-q27-27" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#fbbf24"/></marker>
   </defs>
   <line x1="30" y1="80" x2="470" y2="80" stroke="#64748b" stroke-width="1.5"/>
   <ellipse cx="250" cy="80" rx="8" ry="60" fill="rgba(56,189,248,0.2)" stroke="#38bdf8" stroke-width="2"/>
-  <line x1="100" y1="80" x2="100" y2="40" stroke="#fbbf24" stroke-width="3" marker-end="url(#arr-op-cyan)"/>
+  <line x1="100" y1="80" x2="100" y2="40" stroke="#fbbf24" stroke-width="3" marker-end="url(#arr-opt-amber-waves-q27-27)"/>
   <rect x="75" y="45" width="22" height="14" rx="2" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
   <text x="86" y="55" fill="#fbbf24" font-size="9" font-weight="700" text-anchor="middle">物</text>
   <line x1="100" y1="40" x2="250" y2="40" stroke="#38bdf8" stroke-width="1.5"/>
@@ -2939,7 +2955,8 @@ $$
   <div class="graph-title">📐 正弦波の波形（y-xグラフ）と波の基本式</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-w-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-w-cyan-waves-q28-28" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-tw-emerald-waves-q28-28" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#34d399"/></marker>
   </defs>
   <line x1="30" y1="85" x2="470" y2="85" stroke="#64748b" stroke-width="1.5"/>
   <line x1="50" y1="145" x2="50" y2="25" stroke="#64748b" stroke-width="1.5"/>
@@ -2954,7 +2971,7 @@ $$
   <line x1="95" y1="85" x2="95" y2="55" stroke="#f43f5e" stroke-width="1.5"/>
   <rect x="100" y="65" width="40" height="15" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
   <text x="120" y="76" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">振幅 A</text>
-  <line x1="330" y1="35" x2="390" y2="35" stroke="#34d399" stroke-width="2" marker-end="url(#arr-w-cyan)"/>
+  <line x1="330" y1="35" x2="390" y2="35" stroke="#34d399" stroke-width="2" marker-end="url(#arr-tw-emerald-waves-q28-28)"/>
   <rect x="340" y="18" width="55" height="15" rx="3" fill="#0f172a" stroke="#34d399" stroke-width="1"/>
   <text x="367" y="29" fill="#34d399" font-size="9" font-weight="700" text-anchor="middle">進行方向 v</text>
   <rect x="290" y="115" width="180" height="24" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>

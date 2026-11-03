@@ -22,7 +22,7 @@ description: 高校物理・難関大学入試最重要テーマ「2次元平面
 表面がなめらかな球同士の衝突では、衝突の瞬間に及ぼし合う力（撃力 $\vec{N}$）は、 「**2球の中心を結ぶ直線（法線方向 $\vec{n}$）**」 に沿ってのみ働きます。
 
 <div class="vector-diagram-card">
-  <svg viewBox="0 0 540 180" class="academic-svg" aria-label="接触面の法線と接線の直交分解">
+  <svg viewBox="0 0 600 185" class="academic-svg" aria-label="接触面の法線と接線の直交分解">
     <defs>
       <marker id="arrow-n" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto">
         <path d="M 0 1 L 10 5 L 0 9 z" fill="#ef4444" />

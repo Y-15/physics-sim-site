@@ -34,7 +34,7 @@ $$
 一般的な乗用車のガソリンエンジンでは、圧縮比は $\varepsilon \approx 8 \sim 11$ 程度です。
 
 <div class="vector-diagram-card">
-  <svg viewBox="0 0 540 280" class="academic-svg" aria-label="オットーサイクルのP-V線図">
+  <svg viewBox="-15 -10 600 295" class="academic-svg" aria-label="オットーサイクルのP-V線図">
     <defs>
       <marker id="arrow-axis" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto">
         <path d="M 0 1 L 10 5 L 0 9 z" fill="#94a3b8" />
@@ -47,7 +47,7 @@ $$
     <line x1="70" y1="240" x2="490" y2="240" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow-axis)" />
     <text x="500" y="244" fill="#94a3b8" font-size="13" font-weight="bold">体積 V</text>
     <line x1="70" y1="240" x2="70" y2="20" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow-axis)" />
-    <text x="70" y="14" fill="#94a3b8" font-size="13" font-weight="bold" text-anchor="middle">圧力 P</text>
+    <text x="70" y="16" fill="#94a3b8" font-size="13" font-weight="bold" text-anchor="middle">圧力 P</text>
     <!-- 体積補助線 V2 (上死点), V1 (下死点) -->
     <line x1="170" y1="240" x2="170" y2="40" stroke="rgba(148, 163, 184, 0.25)" stroke-dasharray="3,3" />
     <text x="170" y="258" fill="#94a3b8" font-size="12" font-weight="bold" text-anchor="middle">V₂（上死点）</text>

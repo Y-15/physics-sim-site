@@ -373,13 +373,15 @@ function drawLever(ctx, w, h, dt) {
 
   ctx.restore()
 
-  // 逆回転後のワールド座標でおもりの中心位置を計算（重力矢印は鉛直下向き）
+  // 逆回転後のワールド座標でおもりの中心位置（重心）を計算（重力矢印は鉛直下向き）
   const cosA = Math.cos(angle.value)
   const sinA = Math.sin(angle.value)
-  const wX1 = cx + x1 * cosA - (-8) * sinA
-  const wY1 = cy + x1 * sinA + (-8) * cosA
-  const wX2 = cx + x2 * cosA - (-8) * sinA
-  const wY2 = cy + x2 * sinA + (-8) * cosA
+  const localY1 = -8 - size1 / 2
+  const wX1 = cx + x1 * cosA - localY1 * sinA
+  const wY1 = cy + x1 * sinA + localY1 * cosA
+  const localY2 = -8 - size2 / 2
+  const wX2 = cx + x2 * cosA - localY2 * sinA
+  const wY2 = cy + x2 * sinA + localY2 * cosA
 
   // 左の重力矢印
   const arrLen1 = Math.min(70, 20 + m1.value * 5)
@@ -506,13 +508,14 @@ function drawLadder(ctx, w, h, dt) {
   line(ctx, wallX, floorY, w - 40, floorY, { color: '#f59e0b', width: 4 })
   text(ctx, `あらい床 (静止摩擦係数 μ = ${muS.value.toFixed(2)})`, w - 50, floorY + 22, { align: 'right', color: '#f59e0b', font: '11px sans-serif' })
 
-  // はしごの幾何座標（dynamicTheta を使用）
+  // はしごの幾何座標（dynamicTheta を使用、線幅8pxの半径4px分オフセットして壁・床へ接線接触）
   const rad = Math.max(0.01, dynamicTheta.value)
   const isLDown = dynamicTheta.value <= 0.03
-  const topX = wallX
-  const topY = floorY - ladderLen * Math.sin(rad)
-  const botX = wallX + ladderLen * Math.cos(rad)
-  const botY = floorY
+  const halfW = 4
+  const topX = wallX + halfW
+  const botY = floorY - halfW
+  const topY = botY - ladderLen * Math.sin(rad)
+  const botX = topX + ladderLen * Math.cos(rad)
 
   // スリップ中の砂埃発生
   if (isSlidingLadder.value && Math.random() < 0.6) {

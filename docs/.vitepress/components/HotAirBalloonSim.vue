@@ -113,11 +113,13 @@ function draw() {
   ctx.stroke()
 
   // 気球の位置
-  // 高度 0m -> 気球底面が groundY に接する
-  const altPx = balloonAltitude.value * 1.8
-  const bCenterY = groundY - 70 - altPx
-  const bCenterX = width / 2 - 40
+  // 高度 0m -> 気球底面（ゴンドラ底）が groundY に正確に接地する
   const bRadius = 45
+  const basketH = 14
+  const rigH = bRadius + 32 + basketH // 91px: 気球中心からゴンドラ底面までの全高
+  const altPx = balloonAltitude.value * 1.8
+  const bCenterY = groundY - rigH - altPx
+  const bCenterX = width / 2 - 40
 
   // 1. 気球の風船（涙滴型・エンベロープ）
   ctx.save()

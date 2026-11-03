@@ -179,16 +179,16 @@ function draw() {
   ctx.fillStyle = bg
   ctx.fillRect(0, 0, w, h)
 
-  // 軌道パラメータ
-  const aScale = 65 // px / AU
+  // 軌道パラメータ（最大軌道でも上下左右枠内に収まる適切なピクセルスケール）
+  const aScale = 36 // px / AU (最大4.0 AU時でも 144px となりキャンバス内(h=340)に完全に収まる)
   const a = semiMajorAxisAU.value * aScale
   const e = eccentricity.value
   const b = a * Math.sqrt(Math.max(0.01, 1 - e * e))
   const c = a * e // 焦点間半距離
 
   // 楕円の中心 (centerX, centerY)
-  // 太陽の焦点 (sunX, sunY) を画面中心よりやや左に固定
-  const sunX = w / 2 - 40
+  // 太陽の焦点 (sunX, sunY) を画面中心よりやや左に配置
+  const sunX = w / 2 - 50
   const sunY = h / 2
   const ellipseCenterX = sunX + c
   const ellipseCenterY = sunY

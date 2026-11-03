@@ -243,9 +243,9 @@ function draw(timestamp) {
   const paraUpY = -Math.sin(rad)
 
   const blockW = 44, blockH = 30
-  // ブロックの実際の中心（面から高さ blockH/2 浮かせた位置）
-  const bx = bCenterX - normX * (blockH / 2)
-  const by = bCenterY - normY * (blockH / 2)
+  // ブロックの実際の中心（斜面の外側＝法線方向へ blockH/2 浮かせ、底面を斜面に接地させる）
+  const bx = bCenterX + normX * (blockH / 2)
+  const by = bCenterY + normY * (blockH / 2)
 
   // ブロック描画 (斜め回転)
   ctx.save()
@@ -273,8 +273,8 @@ function draw(timestamp) {
   ctx.strokeStyle = '#e4e4e7'; ctx.lineWidth = 2.5
   ctx.beginPath(); ctx.moveTo(bx, by); ctx.lineTo(bx, by + mgLen); ctx.stroke()
   drawArrowHead(ctx, bx, by + mgLen, 0, 1, '#e4e4e7')
-  ctx.fillStyle = '#e4e4e7'; ctx.font = 'bold 11px sans-serif'; ctx.textAlign = 'left'
-  ctx.fillText(`mg = ${(m.value * g).toFixed(1)} N`, bx + 6, by + mgLen)
+  ctx.fillStyle = '#e4e4e7'; ctx.font = 'bold 11px sans-serif'
+  drawLabel(ctx, `mg = ${(m.value * g).toFixed(1)} N`, bx + 8, by + mgLen + 4, 'left', w, h)
 
   // 2. 垂直抗力 N (面に垂直上向き、シアン)
   const nLen = normalForce.value * vecScale
@@ -283,8 +283,8 @@ function draw(timestamp) {
   ctx.strokeStyle = '#38bdf8'; ctx.lineWidth = 3
   ctx.beginPath(); ctx.moveTo(bx, by); ctx.lineTo(nEndX, nEndY); ctx.stroke()
   drawArrowHead(ctx, nEndX, nEndY, normX, normY, '#38bdf8')
-  ctx.fillStyle = '#38bdf8'; ctx.font = 'bold 11px sans-serif'; ctx.textAlign = 'center'
-  ctx.fillText(`N = ${normalForce.value.toFixed(1)} N`, nEndX - 10, nEndY - 8)
+  ctx.fillStyle = '#38bdf8'; ctx.font = 'bold 11px sans-serif'
+  drawLabel(ctx, `N = ${normalForce.value.toFixed(1)} N`, nEndX - 6, nEndY - 8, 'right', w, h)
 
   // 3. 摩擦力 f (斜面上向き、黄色/赤色)
   const fLen = currentFriction.value * vecScale
@@ -294,8 +294,8 @@ function draw(timestamp) {
   ctx.strokeStyle = fColor; ctx.lineWidth = 3
   ctx.beginPath(); ctx.moveTo(bx, by); ctx.lineTo(fEndX, fEndY); ctx.stroke()
   drawArrowHead(ctx, fEndX, fEndY, paraUpX, paraUpY, fColor)
-  ctx.fillStyle = fColor; ctx.font = 'bold 11px sans-serif'; ctx.textAlign = 'left'
-  ctx.fillText(`${isSliding.value ? '動摩擦力 fₖ' : '静止摩擦力 fₛ'} = ${currentFriction.value.toFixed(1)} N`, fEndX + 6, fEndY - 6)
+  ctx.fillStyle = fColor; ctx.font = 'bold 11px sans-serif'
+  drawLabel(ctx, `${isSliding.value ? '動摩擦力 fₖ' : '静止摩擦力 fₛ'} = ${currentFriction.value.toFixed(1)} N`, fEndX + 6, fEndY - 8, 'left', w, h)
 
   // 4. 重力の斜面下向き分力 mg sin θ (オレンジ点線矢印)
   const downLen = forceDown.value * vecScale
@@ -306,10 +306,25 @@ function draw(timestamp) {
   ctx.beginPath(); ctx.moveTo(bx, by); ctx.lineTo(downEndX, downEndY); ctx.stroke()
   ctx.setLineDash([])
   drawArrowHead(ctx, downEndX, downEndY, -paraUpX, -paraUpY, '#fb923c')
-  ctx.fillStyle = '#fb923c'; ctx.font = '10px sans-serif'; ctx.textAlign = 'right'
-  ctx.fillText(`mg sin θ = ${forceDown.value.toFixed(1)} N`, downEndX - 6, downEndY + 12)
+  ctx.fillStyle = '#fb923c'; ctx.font = 'bold 10px sans-serif'
+  drawLabel(ctx, `mg sin θ = ${forceDown.value.toFixed(1)} N`, downEndX - 8, downEndY + 14, 'right', w, h)
 
   animId = requestAnimationFrame(draw)
+}
+
+// ラベル描画：キャンバス外にはみ出さないよう位置をクランプし、背景に半透明の下地を敷いて図形との重なりでも読めるようにする
+function drawLabel(ctx, text, x, y, align, cw, ch) {
+  const pad = 4
+  const tw = ctx.measureText(text).width
+  let left = align === 'right' ? x - tw : (align === 'center' ? x - tw / 2 : x)
+  left = Math.max(pad, Math.min(cw - tw - pad, left))
+  const top = Math.max(14, Math.min(ch - pad, y))
+  const color = ctx.fillStyle
+  ctx.fillStyle = 'rgba(9, 9, 11, 0.72)'
+  ctx.fillRect(left - 3, top - 12, tw + 6, 16)
+  ctx.fillStyle = color
+  ctx.textAlign = 'left'; ctx.textBaseline = 'alphabetic'
+  ctx.fillText(text, left, top)
 }
 
 function drawArrowHead(ctx, tipX, tipY, dirX, dirY, color) {

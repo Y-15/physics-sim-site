@@ -1,6 +1,6 @@
 <template>
   <div class="vector-diagram-card">
-    <svg viewBox="0 0 520 270" class="academic-svg" aria-label="アトウッドの器械の力の図解" xmlns="http://www.w3.org/2000/svg">
+    <svg viewBox="0 0 520 295" class="academic-svg" aria-label="アトウッドの器械の力の図解" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <!-- 矢印マーカー（赤：重力） -->
         <marker id="atwood-arrow-red" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
@@ -17,8 +17,8 @@
       </defs>
 
       <!-- 天井（固定梁） -->
-      <line x1="180" y1="20" x2="340" y2="20" stroke="#94a3b8" stroke-width="4" stroke-linecap="round" />
-      <g stroke="#94a3b8" stroke-width="1.5">
+      <line x1="180" y1="20" x2="340" y2="20" class="diagram-structural" stroke-width="4" stroke-linecap="round" />
+      <g class="diagram-structural" stroke-width="1.5">
         <line x1="195" y1="20" x2="185" y2="10" />
         <line x1="220" y1="20" x2="210" y2="10" />
         <line x1="245" y1="20" x2="235" y2="10" />
@@ -28,17 +28,16 @@
       </g>
 
       <!-- 滑車支持金具 -->
-      <line x1="260" y1="20" x2="260" y2="52" stroke="#94a3b8" stroke-width="4" stroke-linecap="round" />
+      <line x1="260" y1="20" x2="260" y2="52" class="diagram-structural" stroke-width="4" stroke-linecap="round" />
 
       <!-- 滑車外輪＆内輪 -->
-      <circle cx="260" cy="65" r="26" fill="#1e293b" stroke="#38bdf8" stroke-width="2.5" />
-      <circle cx="260" cy="65" r="18" fill="none" stroke="#475569" stroke-width="1" stroke-dasharray="3 3" />
+      <circle cx="260" cy="65" r="26" class="diagram-pulley-outer" stroke="#38bdf8" stroke-width="2.5" />
+      <circle cx="260" cy="65" r="18" fill="none" class="diagram-pulley-inner" stroke-width="1" stroke-dasharray="3 3" />
       <circle cx="260" cy="65" r="4.5" fill="#38bdf8" />
-      <text x="260" y="44" fill="#94a3b8" font-size="11" font-weight="bold" text-anchor="middle">定滑車</text>
+      <text x="260" y="44" class="diagram-pulley-label" font-size="11" font-weight="bold" text-anchor="middle">定滑車</text>
 
-      <!-- 糸（滑車に接して垂れ下がる） -->
-      <path d="M 234 65 L 234 130" stroke="#94a3b8" stroke-width="2.5" />
-      <path d="M 286 65 L 286 148" stroke="#94a3b8" stroke-width="2.5" />
+      <!-- 糸（滑車に接して連続して垂れ下がる） -->
+      <path d="M 234 130 L 234 65 A 26 26 0 0 1 286 65 L 286 148" fill="none" class="diagram-rope" stroke-width="2.5" />
 
       <!-- ================= 物体 A (大, M) ================= -->
       <g>
@@ -49,16 +48,16 @@
         <line x1="175" y1="135" x2="175" y2="175" stroke="#f59e0b" stroke-width="2.5" stroke-dasharray="4,3" marker-end="url(#atwood-arrow-amber)" />
         <text x="160" y="158" fill="#f59e0b" font-size="11" font-weight="bold" text-anchor="end">a (下降)</text>
 
-        <!-- 張力 T（上向き） -->
-        <line x1="222" y1="130" x2="222" y2="92" stroke="#0284c7" stroke-width="2.5" marker-end="url(#atwood-arrow-blue)" />
-        <text x="210" y="106" fill="#0284c7" font-size="12" font-weight="bold" text-anchor="end">T</text>
+        <!-- 張力 T（上向き、糸の作用線に一致） -->
+        <line x1="234" y1="130" x2="234" y2="92" stroke="#0284c7" stroke-width="2.5" marker-end="url(#atwood-arrow-blue)" />
+        <text x="224" y="106" fill="#0284c7" font-size="12" font-weight="bold" text-anchor="end">T</text>
 
         <!-- 重力 Mg（下向き・張力より大きい） -->
         <line x1="234" y1="168" x2="234" y2="226" stroke="#ef4444" stroke-width="3" marker-end="url(#atwood-arrow-red)" />
         <text x="234" y="244" fill="#ef4444" font-size="12" font-weight="bold" text-anchor="middle">Mg (重力)</text>
 
         <!-- 運動方程式ヒント -->
-        <text x="175" y="210" fill="#94a3b8" font-size="10" text-anchor="middle">Ma = Mg - T</text>
+        <text x="175" y="210" class="diagram-formula" font-size="10" text-anchor="middle">Ma = Mg - T</text>
       </g>
 
       <!-- ================= 物体 B (小, m) ================= -->
@@ -70,28 +69,28 @@
         <line x1="345" y1="172" x2="345" y2="132" stroke="#f59e0b" stroke-width="2.5" stroke-dasharray="4,3" marker-end="url(#atwood-arrow-amber)" />
         <text x="358" y="154" fill="#f59e0b" font-size="11" font-weight="bold" text-anchor="start">a (上昇)</text>
 
-        <!-- 張力 T（上向き・重力より大きい） -->
-        <line x1="298" y1="148" x2="298" y2="110" stroke="#0284c7" stroke-width="2.5" marker-end="url(#atwood-arrow-blue)" />
-        <text x="310" y="126" fill="#0284c7" font-size="12" font-weight="bold" text-anchor="start">T</text>
+        <!-- 張力 T（上向き、糸の作用線に一致） -->
+        <line x1="286" y1="148" x2="286" y2="110" stroke="#0284c7" stroke-width="2.5" marker-end="url(#atwood-arrow-blue)" />
+        <text x="296" y="126" fill="#0284c7" font-size="12" font-weight="bold" text-anchor="start">T</text>
 
         <!-- 重力 mg（下向き・張力より小さい） -->
         <line x1="286" y1="178" x2="286" y2="214" stroke="#ef4444" stroke-width="2.5" marker-end="url(#atwood-arrow-red)" />
         <text x="286" y="232" fill="#ef4444" font-size="11" font-weight="bold" text-anchor="middle">mg</text>
 
         <!-- 運動方程式ヒント -->
-        <text x="345" y="210" fill="#94a3b8" font-size="10" text-anchor="middle">ma = T - mg</text>
+        <text x="345" y="210" class="diagram-formula" font-size="10" text-anchor="middle">ma = T - mg</text>
       </g>
 
-      <!-- 凡例 (Legend) -->
-      <g transform="translate(10, 248)">
+      <!-- 凡例 (Legend) - 重力テキストと十分な間隔を確保 -->
+      <g transform="translate(18, 270)">
         <line x1="5" y1="5" x2="25" y2="5" stroke="#ef4444" stroke-width="2.5" marker-end="url(#atwood-arrow-red)" />
-        <text x="32" y="9" fill="#94a3b8" font-size="10">重力 (Mg, mg)</text>
+        <text x="32" y="9" class="diagram-legend-text" font-size="10">重力 (Mg, mg)</text>
 
-        <line x1="125" y1="5" x2="145" y2="5" stroke="#0284c7" stroke-width="2.5" marker-end="url(#atwood-arrow-blue)" />
-        <text x="152" y="9" fill="#94a3b8" font-size="10">糸の張力 (T: 左右等しい)</text>
+        <line x1="135" y1="5" x2="155" y2="5" stroke="#0284c7" stroke-width="2.5" marker-end="url(#atwood-arrow-blue)" />
+        <text x="162" y="9" class="diagram-legend-text" font-size="10">糸の張力 (T: 左右等しい)</text>
 
-        <line x1="285" y1="5" x2="305" y2="5" stroke="#f59e0b" stroke-width="2" stroke-dasharray="3,2" marker-end="url(#atwood-arrow-amber)" />
-        <text x="312" y="9" fill="#94a3b8" font-size="10">加速度 (a: 大きさ等しい)</text>
+        <line x1="305" y1="5" x2="325" y2="5" stroke="#f59e0b" stroke-width="2" stroke-dasharray="3,2" marker-end="url(#atwood-arrow-amber)" />
+        <text x="332" y="9" class="diagram-legend-text" font-size="10">加速度 (a: 大きさ等しい)</text>
       </g>
     </svg>
     <div class="diagram-caption">図: アトウッドの器械における各物体の力のつり合いと加速度の向き</div>
@@ -129,5 +128,53 @@
   font-weight: 600;
   color: var(--vp-c-text-2);
   text-align: center;
+}
+
+/* Light Mode Styles (High Contrast) */
+.diagram-structural {
+  stroke: #475569;
+}
+.diagram-rope {
+  stroke: #334155;
+}
+.diagram-pulley-outer {
+  fill: #f1f5f9;
+}
+.diagram-pulley-inner {
+  stroke: #64748b;
+}
+.diagram-pulley-label {
+  fill: #334155;
+}
+.diagram-formula {
+  fill: #1e293b;
+  font-weight: 600;
+}
+.diagram-legend-text {
+  fill: #334155;
+  font-weight: 500;
+}
+
+/* Dark Mode Styles */
+:global(.dark) .diagram-structural {
+  stroke: #94a3b8;
+}
+:global(.dark) .diagram-rope {
+  stroke: #cbd5e1;
+}
+:global(.dark) .diagram-pulley-outer {
+  fill: #1e293b;
+}
+:global(.dark) .diagram-pulley-inner {
+  stroke: #64748b;
+}
+:global(.dark) .diagram-pulley-label {
+  fill: #cbd5e1;
+}
+:global(.dark) .diagram-formula {
+  fill: #cbd5e1;
+}
+:global(.dark) .diagram-legend-text {
+  fill: #94a3b8;
 }
 </style>

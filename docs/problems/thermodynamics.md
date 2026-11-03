@@ -32,13 +32,13 @@ description: 高校物理「熱力学（Thermodynamics）」の実践問題・�
   <div class="graph-title">📐 比熱・熱容量と熱量保存の法則</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-hc-rose" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#f43f5e"/></marker>
+    <marker id="arr-hc-rose-thermodynamics-q1-1" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#f43f5e"/></marker>
   </defs>
   <rect x="80" y="45" width="130" height="85" rx="4" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
   <text x="145" y="75" fill="#38bdf8" font-size="11" font-weight="700" text-anchor="middle">物質 (質量 m)</text>
   <text x="145" y="95" fill="#94a3b8" font-size="9" text-anchor="middle">比熱 c [J/(g・K)]</text>
   <text x="145" y="112" fill="#fbbf24" font-size="9" text-anchor="middle">熱容量 C ＝ mc</text>
-  <line x1="30" y1="87" x2="75" y2="87" stroke="#f43f5e" stroke-width="3" marker-end="url(#arr-hc-rose)"/>
+  <line x1="30" y1="87" x2="75" y2="87" stroke="#f43f5e" stroke-width="3" marker-end="url(#arr-hc-rose-thermodynamics-q1-1)"/>
   <rect x="25" y="60" width="45" height="16" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
   <text x="47" y="72" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">熱量 Q</text>
   <rect x="250" y="35" width="225" height="60" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
@@ -230,13 +230,13 @@ $$
   <div class="graph-title">📐 比熱・熱容量と熱量保存の法則</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-hc-rose" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#f43f5e"/></marker>
+    <marker id="arr-hc-rose-thermodynamics-q4-4" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#f43f5e"/></marker>
   </defs>
   <rect x="80" y="45" width="130" height="85" rx="4" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
   <text x="145" y="75" fill="#38bdf8" font-size="11" font-weight="700" text-anchor="middle">物質 (質量 m)</text>
   <text x="145" y="95" fill="#94a3b8" font-size="9" text-anchor="middle">比熱 c [J/(g・K)]</text>
   <text x="145" y="112" fill="#fbbf24" font-size="9" text-anchor="middle">熱容量 C ＝ mc</text>
-  <line x1="30" y1="87" x2="75" y2="87" stroke="#f43f5e" stroke-width="3" marker-end="url(#arr-hc-rose)"/>
+  <line x1="30" y1="87" x2="75" y2="87" stroke="#f43f5e" stroke-width="3" marker-end="url(#arr-hc-rose-thermodynamics-q4-4)"/>
   <rect x="25" y="60" width="45" height="16" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
   <text x="47" y="72" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">熱量 Q</text>
   <rect x="250" y="35" width="225" height="60" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
@@ -448,13 +448,13 @@ $$
   <div class="graph-title">📐 比熱・熱容量と熱量保存の法則</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-hc-rose" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#f43f5e"/></marker>
+    <marker id="arr-hc-rose-thermodynamics-q7-7" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#f43f5e"/></marker>
   </defs>
   <rect x="80" y="45" width="130" height="85" rx="4" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
   <text x="145" y="75" fill="#38bdf8" font-size="11" font-weight="700" text-anchor="middle">物質 (質量 m)</text>
   <text x="145" y="95" fill="#94a3b8" font-size="9" text-anchor="middle">比熱 c [J/(g・K)]</text>
   <text x="145" y="112" fill="#fbbf24" font-size="9" text-anchor="middle">熱容量 C ＝ mc</text>
-  <line x1="30" y1="87" x2="75" y2="87" stroke="#f43f5e" stroke-width="3" marker-end="url(#arr-hc-rose)"/>
+  <line x1="30" y1="87" x2="75" y2="87" stroke="#f43f5e" stroke-width="3" marker-end="url(#arr-hc-rose-thermodynamics-q7-7)"/>
   <rect x="25" y="60" width="45" height="16" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
   <text x="47" y="72" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">熱量 Q</text>
   <rect x="250" y="35" width="225" height="60" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
@@ -518,15 +518,16 @@ $$
   <div class="graph-title">📐 気体分子運動論と圧力・平均運動エネルギー</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-g-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-g-cyan-thermodynamics-q8-8" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-g-rose-thermodynamics-q8-8" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#f43f5e"/></marker>
   </defs>
   <rect x="80" y="30" width="180" height="100" fill="rgba(30,41,59,0.4)" stroke="#64748b" stroke-width="2"/>
   <circle cx="120" cy="65" r="5" fill="#38bdf8"/>
-  <line x1="120" y1="65" x2="150" y2="50" stroke="#38bdf8" stroke-width="1.5" marker-end="url(#arr-g-cyan)"/>
+  <line x1="120" y1="65" x2="150" y2="50" stroke="#38bdf8" stroke-width="1.5" marker-end="url(#arr-g-cyan-thermodynamics-q8-8)"/>
   <circle cx="170" cy="100" r="5" fill="#38bdf8"/>
-  <line x1="170" y1="100" x2="200" y2="115" stroke="#38bdf8" stroke-width="1.5" marker-end="url(#arr-g-cyan)"/>
+  <line x1="170" y1="100" x2="200" y2="115" stroke="#38bdf8" stroke-width="1.5" marker-end="url(#arr-g-cyan-thermodynamics-q8-8)"/>
   <circle cx="210" cy="60" r="5" fill="#f43f5e"/>
-  <line x1="210" y1="60" x2="255" y2="60" stroke="#f43f5e" stroke-width="2" marker-end="url(#arr-g-cyan)"/>
+  <line x1="210" y1="60" x2="255" y2="60" stroke="#f43f5e" stroke-width="2" marker-end="url(#arr-g-rose-thermodynamics-q8-8)"/>
   <rect x="290" y="45" width="180" height="48" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
   <text x="380" y="64" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">平均運動E: ½ m(v²) ＝ 3/2 kT</text>
   <text x="380" y="82" fill="#fbbf24" font-size="9" text-anchor="middle">二乗平均速度: v_rms ＝ √(3RT/M)</text>
@@ -658,13 +659,13 @@ $$
   <div class="graph-title">📐 比熱・熱容量と熱量保存の法則</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-hc-rose" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#f43f5e"/></marker>
+    <marker id="arr-hc-rose-thermodynamics-q10-10" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#f43f5e"/></marker>
   </defs>
   <rect x="80" y="45" width="130" height="85" rx="4" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
   <text x="145" y="75" fill="#38bdf8" font-size="11" font-weight="700" text-anchor="middle">物質 (質量 m)</text>
   <text x="145" y="95" fill="#94a3b8" font-size="9" text-anchor="middle">比熱 c [J/(g・K)]</text>
   <text x="145" y="112" fill="#fbbf24" font-size="9" text-anchor="middle">熱容量 C ＝ mc</text>
-  <line x1="30" y1="87" x2="75" y2="87" stroke="#f43f5e" stroke-width="3" marker-end="url(#arr-hc-rose)"/>
+  <line x1="30" y1="87" x2="75" y2="87" stroke="#f43f5e" stroke-width="3" marker-end="url(#arr-hc-rose-thermodynamics-q10-10)"/>
   <rect x="25" y="60" width="45" height="16" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
   <text x="47" y="72" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">熱量 Q</text>
   <rect x="250" y="35" width="225" height="60" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
@@ -824,13 +825,13 @@ V₀=2.0×10⁻² m³
   <div class="graph-title">📐 比熱・熱容量と熱量保存の法則</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-hc-rose" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#f43f5e"/></marker>
+    <marker id="arr-hc-rose-thermodynamics-q12-12" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#f43f5e"/></marker>
   </defs>
   <rect x="80" y="45" width="130" height="85" rx="4" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
   <text x="145" y="75" fill="#38bdf8" font-size="11" font-weight="700" text-anchor="middle">物質 (質量 m)</text>
   <text x="145" y="95" fill="#94a3b8" font-size="9" text-anchor="middle">比熱 c [J/(g・K)]</text>
   <text x="145" y="112" fill="#fbbf24" font-size="9" text-anchor="middle">熱容量 C ＝ mc</text>
-  <line x1="30" y1="87" x2="75" y2="87" stroke="#f43f5e" stroke-width="3" marker-end="url(#arr-hc-rose)"/>
+  <line x1="30" y1="87" x2="75" y2="87" stroke="#f43f5e" stroke-width="3" marker-end="url(#arr-hc-rose-thermodynamics-q12-12)"/>
   <rect x="25" y="60" width="45" height="16" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
   <text x="47" y="72" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">熱量 Q</text>
   <rect x="250" y="35" width="225" height="60" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
@@ -1028,13 +1029,13 @@ P₀V₀=2.0×10³ J
   <div class="graph-title">📐 比熱・熱容量と熱量保存の法則</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-hc-rose" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#f43f5e"/></marker>
+    <marker id="arr-hc-rose-thermodynamics-q13-13" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#f43f5e"/></marker>
   </defs>
   <rect x="80" y="45" width="130" height="85" rx="4" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
   <text x="145" y="75" fill="#38bdf8" font-size="11" font-weight="700" text-anchor="middle">物質 (質量 m)</text>
   <text x="145" y="95" fill="#94a3b8" font-size="9" text-anchor="middle">比熱 c [J/(g・K)]</text>
   <text x="145" y="112" fill="#fbbf24" font-size="9" text-anchor="middle">熱容量 C ＝ mc</text>
-  <line x1="30" y1="87" x2="75" y2="87" stroke="#f43f5e" stroke-width="3" marker-end="url(#arr-hc-rose)"/>
+  <line x1="30" y1="87" x2="75" y2="87" stroke="#f43f5e" stroke-width="3" marker-end="url(#arr-hc-rose-thermodynamics-q13-13)"/>
   <rect x="25" y="60" width="45" height="16" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
   <text x="47" y="72" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">熱量 Q</text>
   <rect x="250" y="35" width="225" height="60" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
@@ -1190,8 +1191,10 @@ $$
   <div class="graph-title">📐 熱機関のエネルギーの流れと熱効率</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-he-rose" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#f43f5e"/></marker>
-    <marker id="arr-he-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-he-rose-thermodynamics-q14-14" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#f43f5e"/></marker>
+    <marker id="arr-he-cyan-thermodynamics-q14-14" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-he-amber-thermodynamics-q14-14" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#fbbf24"/></marker>
+    <marker id="arr-he-blue-thermodynamics-q14-14" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#0284c7"/></marker>
   </defs>
   <rect x="80" y="15" width="120" height="24" rx="4" fill="#f43f5e"/>
   <text x="140" y="31" fill="#fff" font-size="10" font-weight="700" text-anchor="middle">高温熱源 (T_H)</text>
@@ -1199,16 +1202,16 @@ $$
   <text x="140" y="84" fill="#fbbf24" font-size="10" font-weight="700" text-anchor="middle">機関</text>
   <rect x="80" y="125" width="120" height="24" rx="4" fill="#0284c7"/>
   <text x="140" y="141" fill="#fff" font-size="10" font-weight="700" text-anchor="middle">低温熱源 (T_L)</text>
-  <line x1="140" y1="39" x2="140" y2="58" stroke="#f43f5e" stroke-width="3" marker-end="url(#arr-he-rose)"/>
+  <line x1="140" y1="39" x2="140" y2="58" stroke="#f43f5e" stroke-width="3" marker-end="url(#arr-he-rose-thermodynamics-q14-14)"/>
   <text x="155" y="52" fill="#f43f5e" font-size="9" font-weight="700">Q₁</text>
-  <line x1="140" y1="102" x2="140" y2="125" stroke="#0284c7" stroke-width="3" marker-end="url(#arr-he-cyan)"/>
+  <line x1="140" y1="102" x2="140" y2="125" stroke="#0284c7" stroke-width="3" marker-end="url(#arr-he-blue-thermodynamics-q14-14)"/>
   <text x="155" y="118" fill="#38bdf8" font-size="9" font-weight="700">Q₂</text>
-  <line x1="162" y1="80" x2="225" y2="80" stroke="#fbbf24" stroke-width="3" marker-end="url(#arr-he-cyan)"/>
-  <rect x="230" y="70" width="70" height="20" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
-  <text x="265" y="84" fill="#fbbf24" font-size="10" font-weight="700" text-anchor="middle">仕事 W ＝ Q₁−Q₂</text>
-  <rect x="315" y="50" width="160" height="42" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
-  <text x="395" y="68" fill="#38bdf8" font-size="11" font-weight="700" text-anchor="middle">熱効率: e ＝ W / Q₁</text>
-  <text x="395" y="84" fill="#cbd5e1" font-size="9" text-anchor="middle">e ＝ (Q₁ − Q₂) / Q₁</text>
+  <line x1="162" y1="80" x2="214" y2="80" stroke="#fbbf24" stroke-width="3" marker-end="url(#arr-he-amber-thermodynamics-q14-14)"/>
+  <rect x="218" y="70" width="98" height="20" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
+  <text x="267" y="84" fill="#fbbf24" font-size="10" font-weight="700" text-anchor="middle">仕事 W ＝ Q₁−Q₂</text>
+  <rect x="324" y="50" width="160" height="42" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="404" y="68" fill="#38bdf8" font-size="11" font-weight="700" text-anchor="middle">熱効率: e ＝ W / Q₁</text>
+  <text x="404" y="84" fill="#cbd5e1" font-size="9" text-anchor="middle">e ＝ (Q₁ − Q₂) / Q₁</text>
 </svg>
   <div class="graph-caption">高温熱源から受け取った熱 Q₁ の一部を仕事 W に変え、残りの熱 Q₂ を低温熱源へ放出します。</div>
 </div>
@@ -1266,13 +1269,13 @@ $$
   <div class="graph-title">📐 比熱・熱容量と熱量保存の法則</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-hc-rose" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#f43f5e"/></marker>
+    <marker id="arr-hc-rose-thermodynamics-q15-15" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#f43f5e"/></marker>
   </defs>
   <rect x="80" y="45" width="130" height="85" rx="4" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
   <text x="145" y="75" fill="#38bdf8" font-size="11" font-weight="700" text-anchor="middle">物質 (質量 m)</text>
   <text x="145" y="95" fill="#94a3b8" font-size="9" text-anchor="middle">比熱 c [J/(g・K)]</text>
   <text x="145" y="112" fill="#fbbf24" font-size="9" text-anchor="middle">熱容量 C ＝ mc</text>
-  <line x1="30" y1="87" x2="75" y2="87" stroke="#f43f5e" stroke-width="3" marker-end="url(#arr-hc-rose)"/>
+  <line x1="30" y1="87" x2="75" y2="87" stroke="#f43f5e" stroke-width="3" marker-end="url(#arr-hc-rose-thermodynamics-q15-15)"/>
   <rect x="25" y="60" width="45" height="16" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
   <text x="47" y="72" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">熱量 Q</text>
   <rect x="250" y="35" width="225" height="60" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
@@ -1361,13 +1364,13 @@ PV^γ=一定
   <div class="graph-title">📐 比熱・熱容量と熱量保存の法則</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-hc-rose" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#f43f5e"/></marker>
+    <marker id="arr-hc-rose-thermodynamics-q16-16" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#f43f5e"/></marker>
   </defs>
   <rect x="80" y="45" width="130" height="85" rx="4" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
   <text x="145" y="75" fill="#38bdf8" font-size="11" font-weight="700" text-anchor="middle">物質 (質量 m)</text>
   <text x="145" y="95" fill="#94a3b8" font-size="9" text-anchor="middle">比熱 c [J/(g・K)]</text>
   <text x="145" y="112" fill="#fbbf24" font-size="9" text-anchor="middle">熱容量 C ＝ mc</text>
-  <line x1="30" y1="87" x2="75" y2="87" stroke="#f43f5e" stroke-width="3" marker-end="url(#arr-hc-rose)"/>
+  <line x1="30" y1="87" x2="75" y2="87" stroke="#f43f5e" stroke-width="3" marker-end="url(#arr-hc-rose-thermodynamics-q16-16)"/>
   <rect x="25" y="60" width="45" height="16" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
   <text x="47" y="72" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">熱量 Q</text>
   <rect x="250" y="35" width="225" height="60" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
@@ -1586,13 +1589,13 @@ g=10 m/s²
   <div class="graph-title">📐 比熱・熱容量と熱量保存の法則</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-hc-rose" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#f43f5e"/></marker>
+    <marker id="arr-hc-rose-thermodynamics-q17-17" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#f43f5e"/></marker>
   </defs>
   <rect x="80" y="45" width="130" height="85" rx="4" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
   <text x="145" y="75" fill="#38bdf8" font-size="11" font-weight="700" text-anchor="middle">物質 (質量 m)</text>
   <text x="145" y="95" fill="#94a3b8" font-size="9" text-anchor="middle">比熱 c [J/(g・K)]</text>
   <text x="145" y="112" fill="#fbbf24" font-size="9" text-anchor="middle">熱容量 C ＝ mc</text>
-  <line x1="30" y1="87" x2="75" y2="87" stroke="#f43f5e" stroke-width="3" marker-end="url(#arr-hc-rose)"/>
+  <line x1="30" y1="87" x2="75" y2="87" stroke="#f43f5e" stroke-width="3" marker-end="url(#arr-hc-rose-thermodynamics-q17-17)"/>
   <rect x="25" y="60" width="45" height="16" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
   <text x="47" y="72" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">熱量 Q</text>
   <rect x="250" y="35" width="225" height="60" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>

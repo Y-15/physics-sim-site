@@ -31,11 +31,11 @@ description: 高校物理「力学（Mechanics）」の実践問題・オリジ�
   <div class="graph-title">📐 等速直線運動と変位・速さの関係</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-um-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
-    <marker id="arr-um-slate" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#64748b"/></marker>
+    <marker id="arr-um-cyan-mechanics-q1-1" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-um-slate-mechanics-q1-1" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#64748b"/></marker>
   </defs>
-  <line x1="50" y1="130" x2="450" y2="130" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate)"/>
-  <line x1="70" y1="140" x2="70" y2="25" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate)"/>
+  <line x1="50" y1="130" x2="450" y2="130" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate-mechanics-q1-1)"/>
+  <line x1="70" y1="140" x2="70" y2="25" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate-mechanics-q1-1)"/>
   <text x="60" y="30" fill="#94a3b8" font-size="10">x</text>
   <text x="445" y="142" fill="#94a3b8" font-size="10">t</text>
   <line x1="70" y1="130" x2="260" y2="40" stroke="#38bdf8" stroke-width="2.5"/>
@@ -104,11 +104,11 @@ $$
   <div class="graph-title">📐 等加速度直線運動の v-t グラフ</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-vt-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
-    <marker id="arr-vt-slate" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#64748b"/></marker>
+    <marker id="arr-vt-cyan-mechanics-q2-2" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-vt-slate-mechanics-q2-2" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#64748b"/></marker>
   </defs>
-  <line x1="50" y1="135" x2="450" y2="135" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-vt-slate)"/>
-  <line x1="70" y1="145" x2="70" y2="20" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-vt-slate)"/>
+  <line x1="50" y1="135" x2="450" y2="135" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-vt-slate-mechanics-q2-2)"/>
+  <line x1="70" y1="145" x2="70" y2="20" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-vt-slate-mechanics-q2-2)"/>
   <text x="60" y="25" fill="#94a3b8" font-size="10">v</text>
   <text x="445" y="148" fill="#94a3b8" font-size="10">t</text>
   <polygon points="70,105 270,45 270,135 70,135" fill="rgba(56,189,248,0.15)" stroke="none"/>
@@ -184,11 +184,11 @@ $$
   <div class="graph-title">📐 等加速度直線運動の v-t グラフ</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-vt-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
-    <marker id="arr-vt-slate" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#64748b"/></marker>
+    <marker id="arr-vt-cyan-mechanics-q3-3" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-vt-slate-mechanics-q3-3" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#64748b"/></marker>
   </defs>
-  <line x1="50" y1="135" x2="450" y2="135" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-vt-slate)"/>
-  <line x1="70" y1="145" x2="70" y2="20" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-vt-slate)"/>
+  <line x1="50" y1="135" x2="450" y2="135" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-vt-slate-mechanics-q3-3)"/>
+  <line x1="70" y1="145" x2="70" y2="20" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-vt-slate-mechanics-q3-3)"/>
   <text x="60" y="25" fill="#94a3b8" font-size="10">v</text>
   <text x="445" y="148" fill="#94a3b8" font-size="10">t</text>
   <polygon points="70,105 270,45 270,135 70,135" fill="rgba(56,189,248,0.15)" stroke="none"/>
@@ -266,11 +266,11 @@ $$
   <div class="graph-title">📐 等速直線運動と変位・速さの関係</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-um-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
-    <marker id="arr-um-slate" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#64748b"/></marker>
+    <marker id="arr-um-cyan-mechanics-q4-4" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-um-slate-mechanics-q4-4" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#64748b"/></marker>
   </defs>
-  <line x1="50" y1="130" x2="450" y2="130" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate)"/>
-  <line x1="70" y1="140" x2="70" y2="25" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate)"/>
+  <line x1="50" y1="130" x2="450" y2="130" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate-mechanics-q4-4)"/>
+  <line x1="70" y1="140" x2="70" y2="25" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate-mechanics-q4-4)"/>
   <text x="60" y="30" fill="#94a3b8" font-size="10">x</text>
   <text x="445" y="142" fill="#94a3b8" font-size="10">t</text>
   <line x1="70" y1="130" x2="260" y2="40" stroke="#38bdf8" stroke-width="2.5"/>
@@ -339,11 +339,11 @@ $$
   <div class="graph-title">📐 等加速度直線運動の v-t グラフ</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-vt-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
-    <marker id="arr-vt-slate" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#64748b"/></marker>
+    <marker id="arr-vt-cyan-mechanics-q5-5" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-vt-slate-mechanics-q5-5" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#64748b"/></marker>
   </defs>
-  <line x1="50" y1="135" x2="450" y2="135" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-vt-slate)"/>
-  <line x1="70" y1="145" x2="70" y2="20" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-vt-slate)"/>
+  <line x1="50" y1="135" x2="450" y2="135" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-vt-slate-mechanics-q5-5)"/>
+  <line x1="70" y1="145" x2="70" y2="20" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-vt-slate-mechanics-q5-5)"/>
   <text x="60" y="25" fill="#94a3b8" font-size="10">v</text>
   <text x="445" y="148" fill="#94a3b8" font-size="10">t</text>
   <polygon points="70,105 270,45 270,135 70,135" fill="rgba(56,189,248,0.15)" stroke="none"/>
@@ -420,13 +420,13 @@ $$
 <div class="vector-graph-card">
   <div class="graph-title">📐 力学的エネルギー保存則</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
-  <path d="M 60,30 Q 180,140 440,80" fill="none" stroke="#475569" stroke-width="3"/>
+  <path d="M 60,30 Q 180,140 440,80" fill="none" stroke="#64748b" stroke-width="3"/>
   <circle cx="80" cy="40" r="10" fill="#fbbf24" stroke="#f59e0b" stroke-width="2"/>
   <rect x="40" y="60" width="80" height="30" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
   <text x="80" y="73" fill="#fbbf24" font-size="9" font-weight="700" text-anchor="middle">位置E: mgh</text>
   <text x="80" y="85" fill="#94a3b8" font-size="8" text-anchor="middle">運動E: 0</text>
   <circle cx="220" cy="115" r="10" fill="#0284c7" stroke="#38bdf8" stroke-width="2"/>
-  <rect x="180" y="125" width="85" height="30" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <rect x="176" y="125" width="92" height="30" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
   <text x="222" y="138" fill="#38bdf8" font-size="9" font-weight="700" text-anchor="middle">運動E: ½mv² (最大)</text>
   <text x="222" y="150" fill="#94a3b8" font-size="8" text-anchor="middle">位置E: 0 (基準)</text>
   <rect x="300" y="25" width="170" height="42" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
@@ -491,12 +491,12 @@ $$
   <div class="graph-title">📐 直線運動の位置・速度・加速度ベクトル</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-ka-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
-    <marker id="arr-ka-rose" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#f43f5e"/></marker>
-    <marker id="arr-ka-slate" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#94a3b8"/></marker>
+    <marker id="arr-ka-cyan-mechanics-q7-7" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-ka-rose-mechanics-q7-7" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#f43f5e"/></marker>
+    <marker id="arr-ka-slate-mechanics-q7-7" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#94a3b8"/></marker>
   </defs>
-  <line x1="30" y1="120" x2="470" y2="120" stroke="#475569" stroke-width="2"/>
-  <line x1="30" y1="135" x2="470" y2="135" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arr-ka-slate)"/>
+  <line x1="30" y1="120" x2="470" y2="120" stroke="#64748b" stroke-width="2"/>
+  <line x1="30" y1="135" x2="470" y2="135" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arr-ka-slate-mechanics-q7-7)"/>
   <rect x="220" y="140" width="60" height="16" rx="3" fill="#0f172a" stroke="#64748b" stroke-width="1"/>
   <text x="250" y="152" fill="#cbd5e1" font-size="10" text-anchor="middle">x 正方向</text>
   <circle cx="90" cy="100" r="14" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
@@ -508,10 +508,10 @@ $$
   <circle cx="360" cy="100" r="14" fill="#0284c7" stroke="#38bdf8" stroke-width="2.5"/>
   <rect x="345" y="70" width="30" height="15" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
   <text x="360" y="81" fill="#38bdf8" font-size="9" font-weight="700" text-anchor="middle">t₂</text>
-  <line x1="374" y1="95" x2="450" y2="95" stroke="#38bdf8" stroke-width="3" marker-end="url(#arr-ka-cyan)"/>
+  <line x1="374" y1="95" x2="450" y2="95" stroke="#38bdf8" stroke-width="3" marker-end="url(#arr-ka-cyan-mechanics-q7-7)"/>
   <rect x="400" y="75" width="45" height="16" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
   <text x="422" y="87" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">速度 v</text>
-  <line x1="374" y1="108" x2="430" y2="108" stroke="#f43f5e" stroke-width="2" marker-end="url(#arr-ka-rose)"/>
+  <line x1="374" y1="108" x2="430" y2="108" stroke="#f43f5e" stroke-width="2" marker-end="url(#arr-ka-rose-mechanics-q7-7)"/>
   <rect x="385" y="115" width="55" height="16" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
   <text x="412" y="127" fill="#f43f5e" font-size="10" font-weight="700" text-anchor="middle">加速度 a</text>
   <rect x="50" y="15" width="400" height="24" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
@@ -571,18 +571,18 @@ $$
   <div class="graph-title">📐 台車の衝突と運動量保存則・反発係数</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-mo-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
-    <marker id="arr-mo-amber" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#fbbf24"/></marker>
+    <marker id="arr-mo-cyan-mechanics-q8-8" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-mo-amber-mechanics-q8-8" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#fbbf24"/></marker>
   </defs>
-  <line x1="30" y1="130" x2="470" y2="130" stroke="#475569" stroke-width="2"/>
-  <rect x="100" y="90" width="60" height="32" rx="4" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+  <line x1="30" y1="130" x2="470" y2="130" stroke="#64748b" stroke-width="2"/>
+  <rect x="96" y="90" width="68" height="32" rx="4" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
   <text x="130" y="110" fill="#38bdf8" font-size="11" font-weight="700" text-anchor="middle">台車A (m₁)</text>
-  <line x1="165" y1="106" x2="220" y2="106" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-mo-cyan)"/>
+  <line x1="168" y1="106" x2="220" y2="106" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-mo-cyan-mechanics-q8-8)"/>
   <rect x="175" y="85" width="45" height="16" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
   <text x="197" y="97" fill="#38bdf8" font-size="9" font-weight="700" text-anchor="middle">速度 v₁</text>
-  <rect x="290" y="90" width="60" height="32" rx="4" fill="#1e293b" stroke="#fbbf24" stroke-width="2"/>
+  <rect x="286" y="90" width="68" height="32" rx="4" fill="#1e293b" stroke="#fbbf24" stroke-width="2"/>
   <text x="320" y="110" fill="#fbbf24" font-size="11" font-weight="700" text-anchor="middle">台車B (m₂)</text>
-  <line x1="355" y1="106" x2="395" y2="106" stroke="#fbbf24" stroke-width="2" marker-end="url(#arr-mo-amber)"/>
+  <line x1="355" y1="106" x2="395" y2="106" stroke="#fbbf24" stroke-width="2" marker-end="url(#arr-mo-amber-mechanics-q8-8)"/>
   <rect x="360" y="85" width="45" height="16" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
   <text x="382" y="97" fill="#fbbf24" font-size="9" text-anchor="middle">速度 v₂</text>
   <rect x="60" y="20" width="380" height="42" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
@@ -647,11 +647,11 @@ $$
   <div class="graph-title">📐 等加速度直線運動の v-t グラフ</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-vt-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
-    <marker id="arr-vt-slate" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#64748b"/></marker>
+    <marker id="arr-vt-cyan-mechanics-q9-9" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-vt-slate-mechanics-q9-9" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#64748b"/></marker>
   </defs>
-  <line x1="50" y1="135" x2="450" y2="135" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-vt-slate)"/>
-  <line x1="70" y1="145" x2="70" y2="20" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-vt-slate)"/>
+  <line x1="50" y1="135" x2="450" y2="135" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-vt-slate-mechanics-q9-9)"/>
+  <line x1="70" y1="145" x2="70" y2="20" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-vt-slate-mechanics-q9-9)"/>
   <text x="60" y="25" fill="#94a3b8" font-size="10">v</text>
   <text x="445" y="148" fill="#94a3b8" font-size="10">t</text>
   <polygon points="70,105 270,45 270,135 70,135" fill="rgba(56,189,248,0.15)" stroke="none"/>
@@ -737,21 +737,21 @@ $$
   <div class="graph-title">📐 ばねの弾性力と単振動モデル</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-sp-rose" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#f43f5e"/></marker>
-    <marker id="arr-sp-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-sp-rose-mechanics-q10-10" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#f43f5e"/></marker>
+    <marker id="arr-sp-cyan-mechanics-q10-10" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
   </defs>
   <line x1="50" y1="30" x2="50" y2="130" stroke="#94a3b8" stroke-width="3"/>
-  <line x1="50" y1="120" x2="450" y2="120" stroke="#475569" stroke-width="2"/>
+  <line x1="50" y1="120" x2="450" y2="120" stroke="#64748b" stroke-width="2"/>
   <path d="M 50,80 L 80,80 L 95,65 L 115,95 L 135,65 L 155,95 L 175,65 L 195,95 L 215,65 L 235,95 L 250,80 L 270,80" fill="none" stroke="#38bdf8" stroke-width="3"/>
   <rect x="270" y="60" width="45" height="40" rx="3" fill="#1e293b" stroke="#fbbf24" stroke-width="2"/>
   <text x="292" y="84" fill="#fbbf24" font-size="11" font-weight="700" text-anchor="middle">質量 m</text>
   <line x1="220" y1="45" x2="220" y2="120" stroke="#64748b" stroke-width="1.5" stroke-dasharray="3,3"/>
   <rect x="185" y="25" width="70" height="16" rx="3" fill="#0f172a" stroke="#64748b" stroke-width="1"/>
   <text x="220" y="37" fill="#cbd5e1" font-size="9" text-anchor="middle">自然長位置</text>
-  <line x1="220" y1="110" x2="270" y2="110" stroke="#38bdf8" stroke-width="2" marker-end="url(#arr-sp-cyan)"/>
+  <line x1="220" y1="110" x2="270" y2="110" stroke="#38bdf8" stroke-width="2" marker-end="url(#arr-sp-cyan-mechanics-q10-10)"/>
   <rect x="235" y="125" width="40" height="15" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
   <text x="255" y="136" fill="#38bdf8" font-size="9" font-weight="700" text-anchor="middle">変位 x</text>
-  <line x1="270" y1="75" x2="210" y2="75" stroke="#f43f5e" stroke-width="2.5" marker-end="url(#arr-sp-rose)"/>
+  <line x1="270" y1="75" x2="210" y2="75" stroke="#f43f5e" stroke-width="2.5" marker-end="url(#arr-sp-rose-mechanics-q10-10)"/>
   <rect x="175" y="55" width="80" height="16" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
   <text x="215" y="67" fill="#f43f5e" font-size="10" font-weight="700" text-anchor="middle">復元力 F ＝ -kx</text>
   <rect x="330" y="35" width="140" height="42" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
@@ -816,11 +816,11 @@ $$
   <div class="graph-title">📐 等加速度直線運動の v-t グラフ</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-vt-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
-    <marker id="arr-vt-slate" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#64748b"/></marker>
+    <marker id="arr-vt-cyan-mechanics-q11-11" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-vt-slate-mechanics-q11-11" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#64748b"/></marker>
   </defs>
-  <line x1="50" y1="135" x2="450" y2="135" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-vt-slate)"/>
-  <line x1="70" y1="145" x2="70" y2="20" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-vt-slate)"/>
+  <line x1="50" y1="135" x2="450" y2="135" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-vt-slate-mechanics-q11-11)"/>
+  <line x1="70" y1="145" x2="70" y2="20" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-vt-slate-mechanics-q11-11)"/>
   <text x="60" y="25" fill="#94a3b8" font-size="10">v</text>
   <text x="445" y="148" fill="#94a3b8" font-size="10">t</text>
   <polygon points="70,105 270,45 270,135 70,135" fill="rgba(56,189,248,0.15)" stroke="none"/>
@@ -900,11 +900,11 @@ $$
   <div class="graph-title">📐 等加速度直線運動の v-t グラフ</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-vt-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
-    <marker id="arr-vt-slate" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#64748b"/></marker>
+    <marker id="arr-vt-cyan-mechanics-q12-12" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-vt-slate-mechanics-q12-12" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#64748b"/></marker>
   </defs>
-  <line x1="50" y1="135" x2="450" y2="135" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-vt-slate)"/>
-  <line x1="70" y1="145" x2="70" y2="20" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-vt-slate)"/>
+  <line x1="50" y1="135" x2="450" y2="135" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-vt-slate-mechanics-q12-12)"/>
+  <line x1="70" y1="145" x2="70" y2="20" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-vt-slate-mechanics-q12-12)"/>
   <text x="60" y="25" fill="#94a3b8" font-size="10">v</text>
   <text x="445" y="148" fill="#94a3b8" font-size="10">t</text>
   <polygon points="70,105 270,45 270,135 70,135" fill="rgba(56,189,248,0.15)" stroke="none"/>
@@ -976,11 +976,11 @@ $$
   <div class="graph-title">📐 等加速度直線運動の v-t グラフ</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-vt-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
-    <marker id="arr-vt-slate" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#64748b"/></marker>
+    <marker id="arr-vt-cyan-mechanics-q13-13" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-vt-slate-mechanics-q13-13" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#64748b"/></marker>
   </defs>
-  <line x1="50" y1="135" x2="450" y2="135" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-vt-slate)"/>
-  <line x1="70" y1="145" x2="70" y2="20" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-vt-slate)"/>
+  <line x1="50" y1="135" x2="450" y2="135" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-vt-slate-mechanics-q13-13)"/>
+  <line x1="70" y1="145" x2="70" y2="20" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-vt-slate-mechanics-q13-13)"/>
   <text x="60" y="25" fill="#94a3b8" font-size="10">v</text>
   <text x="445" y="148" fill="#94a3b8" font-size="10">t</text>
   <polygon points="70,105 270,45 270,135 70,135" fill="rgba(56,189,248,0.15)" stroke="none"/>
@@ -1056,18 +1056,18 @@ $$
   <div class="graph-title">📐 台車の衝突と運動量保存則・反発係数</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-mo-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
-    <marker id="arr-mo-amber" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#fbbf24"/></marker>
+    <marker id="arr-mo-cyan-mechanics-q14-14" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-mo-amber-mechanics-q14-14" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#fbbf24"/></marker>
   </defs>
-  <line x1="30" y1="130" x2="470" y2="130" stroke="#475569" stroke-width="2"/>
-  <rect x="100" y="90" width="60" height="32" rx="4" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+  <line x1="30" y1="130" x2="470" y2="130" stroke="#64748b" stroke-width="2"/>
+  <rect x="96" y="90" width="68" height="32" rx="4" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
   <text x="130" y="110" fill="#38bdf8" font-size="11" font-weight="700" text-anchor="middle">台車A (m₁)</text>
-  <line x1="165" y1="106" x2="220" y2="106" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-mo-cyan)"/>
+  <line x1="168" y1="106" x2="220" y2="106" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-mo-cyan-mechanics-q14-14)"/>
   <rect x="175" y="85" width="45" height="16" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
   <text x="197" y="97" fill="#38bdf8" font-size="9" font-weight="700" text-anchor="middle">速度 v₁</text>
-  <rect x="290" y="90" width="60" height="32" rx="4" fill="#1e293b" stroke="#fbbf24" stroke-width="2"/>
+  <rect x="286" y="90" width="68" height="32" rx="4" fill="#1e293b" stroke="#fbbf24" stroke-width="2"/>
   <text x="320" y="110" fill="#fbbf24" font-size="11" font-weight="700" text-anchor="middle">台車B (m₂)</text>
-  <line x1="355" y1="106" x2="395" y2="106" stroke="#fbbf24" stroke-width="2" marker-end="url(#arr-mo-amber)"/>
+  <line x1="355" y1="106" x2="395" y2="106" stroke="#fbbf24" stroke-width="2" marker-end="url(#arr-mo-amber-mechanics-q14-14)"/>
   <rect x="360" y="85" width="45" height="16" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
   <text x="382" y="97" fill="#fbbf24" font-size="9" text-anchor="middle">速度 v₂</text>
   <rect x="60" y="20" width="380" height="42" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
@@ -1132,12 +1132,12 @@ $$
   <div class="graph-title">📐 直線運動の位置・速度・加速度ベクトル</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-ka-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
-    <marker id="arr-ka-rose" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#f43f5e"/></marker>
-    <marker id="arr-ka-slate" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#94a3b8"/></marker>
+    <marker id="arr-ka-cyan-mechanics-q15-15" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-ka-rose-mechanics-q15-15" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#f43f5e"/></marker>
+    <marker id="arr-ka-slate-mechanics-q15-15" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#94a3b8"/></marker>
   </defs>
-  <line x1="30" y1="120" x2="470" y2="120" stroke="#475569" stroke-width="2"/>
-  <line x1="30" y1="135" x2="470" y2="135" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arr-ka-slate)"/>
+  <line x1="30" y1="120" x2="470" y2="120" stroke="#64748b" stroke-width="2"/>
+  <line x1="30" y1="135" x2="470" y2="135" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arr-ka-slate-mechanics-q15-15)"/>
   <rect x="220" y="140" width="60" height="16" rx="3" fill="#0f172a" stroke="#64748b" stroke-width="1"/>
   <text x="250" y="152" fill="#cbd5e1" font-size="10" text-anchor="middle">x 正方向</text>
   <circle cx="90" cy="100" r="14" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
@@ -1149,10 +1149,10 @@ $$
   <circle cx="360" cy="100" r="14" fill="#0284c7" stroke="#38bdf8" stroke-width="2.5"/>
   <rect x="345" y="70" width="30" height="15" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
   <text x="360" y="81" fill="#38bdf8" font-size="9" font-weight="700" text-anchor="middle">t₂</text>
-  <line x1="374" y1="95" x2="450" y2="95" stroke="#38bdf8" stroke-width="3" marker-end="url(#arr-ka-cyan)"/>
+  <line x1="374" y1="95" x2="450" y2="95" stroke="#38bdf8" stroke-width="3" marker-end="url(#arr-ka-cyan-mechanics-q15-15)"/>
   <rect x="400" y="75" width="45" height="16" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
   <text x="422" y="87" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">速度 v</text>
-  <line x1="374" y1="108" x2="430" y2="108" stroke="#f43f5e" stroke-width="2" marker-end="url(#arr-ka-rose)"/>
+  <line x1="374" y1="108" x2="430" y2="108" stroke="#f43f5e" stroke-width="2" marker-end="url(#arr-ka-rose-mechanics-q15-15)"/>
   <rect x="385" y="115" width="55" height="16" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
   <text x="412" y="127" fill="#f43f5e" font-size="10" font-weight="700" text-anchor="middle">加速度 a</text>
   <rect x="50" y="15" width="400" height="24" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
@@ -1220,11 +1220,11 @@ $$
   <div class="graph-title">📐 等加速度直線運動の v-t グラフ</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-vt-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
-    <marker id="arr-vt-slate" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#64748b"/></marker>
+    <marker id="arr-vt-cyan-mechanics-q16-16" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-vt-slate-mechanics-q16-16" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#64748b"/></marker>
   </defs>
-  <line x1="50" y1="135" x2="450" y2="135" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-vt-slate)"/>
-  <line x1="70" y1="145" x2="70" y2="20" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-vt-slate)"/>
+  <line x1="50" y1="135" x2="450" y2="135" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-vt-slate-mechanics-q16-16)"/>
+  <line x1="70" y1="145" x2="70" y2="20" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-vt-slate-mechanics-q16-16)"/>
   <text x="60" y="25" fill="#94a3b8" font-size="10">v</text>
   <text x="445" y="148" fill="#94a3b8" font-size="10">t</text>
   <polygon points="70,105 270,45 270,135 70,135" fill="rgba(56,189,248,0.15)" stroke="none"/>
@@ -1306,11 +1306,11 @@ $$
   <div class="graph-title">📐 等加速度直線運動の v-t グラフ</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-vt-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
-    <marker id="arr-vt-slate" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#64748b"/></marker>
+    <marker id="arr-vt-cyan-mechanics-q17-17" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-vt-slate-mechanics-q17-17" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#64748b"/></marker>
   </defs>
-  <line x1="50" y1="135" x2="450" y2="135" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-vt-slate)"/>
-  <line x1="70" y1="145" x2="70" y2="20" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-vt-slate)"/>
+  <line x1="50" y1="135" x2="450" y2="135" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-vt-slate-mechanics-q17-17)"/>
+  <line x1="70" y1="145" x2="70" y2="20" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-vt-slate-mechanics-q17-17)"/>
   <text x="60" y="25" fill="#94a3b8" font-size="10">v</text>
   <text x="445" y="148" fill="#94a3b8" font-size="10">t</text>
   <polygon points="70,105 270,45 270,135 70,135" fill="rgba(56,189,248,0.15)" stroke="none"/>
@@ -1392,19 +1392,19 @@ $$
   <div class="graph-title">📐 鉛直投げ上げ・自由落下の運動と最高点</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-ff-rose" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#f43f5e"/></marker>
-    <marker id="arr-ff-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-ff-rose-mechanics-q18-18" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#f43f5e"/></marker>
+    <marker id="arr-ff-cyan-mechanics-q18-18" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
   </defs>
-  <line x1="40" y1="140" x2="460" y2="140" stroke="#475569" stroke-width="2"/>
+  <line x1="40" y1="140" x2="460" y2="140" stroke="#64748b" stroke-width="2"/>
   <line x1="120" y1="140" x2="120" y2="25" stroke="#38bdf8" stroke-width="2" stroke-dasharray="3,3"/>
   <circle cx="120" cy="130" r="10" fill="#0284c7" stroke="#38bdf8" stroke-width="2"/>
-  <line x1="120" y1="120" x2="120" y2="70" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-ff-cyan)"/>
+  <line x1="120" y1="120" x2="120" y2="70" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-ff-cyan-mechanics-q18-18)"/>
   <rect x="70" y="85" width="45" height="16" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
   <text x="92" y="97" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">初速 v₀</text>
   <circle cx="120" cy="30" r="10" fill="#fbbf24" stroke="#f59e0b" stroke-width="2"/>
   <rect x="140" y="22" width="75" height="16" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
   <text x="177" y="34" fill="#fbbf24" font-size="10" font-weight="700" text-anchor="middle">最高点 (v＝0)</text>
-  <line x1="220" y1="40" x2="220" y2="85" stroke="#f43f5e" stroke-width="2" marker-end="url(#arr-ff-rose)"/>
+  <line x1="220" y1="40" x2="220" y2="85" stroke="#f43f5e" stroke-width="2" marker-end="url(#arr-ff-rose-mechanics-q18-18)"/>
   <rect x="230" y="55" width="80" height="16" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
   <text x="270" y="67" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">重力加速度 g</text>
   <rect x="300" y="25" width="180" height="58" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
@@ -1468,19 +1468,19 @@ $$
   <div class="graph-title">📐 鉛直投げ上げ・自由落下の運動と最高点</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-ff-rose" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#f43f5e"/></marker>
-    <marker id="arr-ff-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-ff-rose-mechanics-q19-19" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#f43f5e"/></marker>
+    <marker id="arr-ff-cyan-mechanics-q19-19" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
   </defs>
-  <line x1="40" y1="140" x2="460" y2="140" stroke="#475569" stroke-width="2"/>
+  <line x1="40" y1="140" x2="460" y2="140" stroke="#64748b" stroke-width="2"/>
   <line x1="120" y1="140" x2="120" y2="25" stroke="#38bdf8" stroke-width="2" stroke-dasharray="3,3"/>
   <circle cx="120" cy="130" r="10" fill="#0284c7" stroke="#38bdf8" stroke-width="2"/>
-  <line x1="120" y1="120" x2="120" y2="70" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-ff-cyan)"/>
+  <line x1="120" y1="120" x2="120" y2="70" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-ff-cyan-mechanics-q19-19)"/>
   <rect x="70" y="85" width="45" height="16" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
   <text x="92" y="97" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">初速 v₀</text>
   <circle cx="120" cy="30" r="10" fill="#fbbf24" stroke="#f59e0b" stroke-width="2"/>
   <rect x="140" y="22" width="75" height="16" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
   <text x="177" y="34" fill="#fbbf24" font-size="10" font-weight="700" text-anchor="middle">最高点 (v＝0)</text>
-  <line x1="220" y1="40" x2="220" y2="85" stroke="#f43f5e" stroke-width="2" marker-end="url(#arr-ff-rose)"/>
+  <line x1="220" y1="40" x2="220" y2="85" stroke="#f43f5e" stroke-width="2" marker-end="url(#arr-ff-rose-mechanics-q19-19)"/>
   <rect x="230" y="55" width="80" height="16" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
   <text x="270" y="67" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">重力加速度 g</text>
   <rect x="300" y="25" width="180" height="58" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
@@ -1544,11 +1544,11 @@ $$
   <div class="graph-title">📐 等加速度直線運動の v-t グラフ</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-vt-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
-    <marker id="arr-vt-slate" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#64748b"/></marker>
+    <marker id="arr-vt-cyan-mechanics-q20-20" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-vt-slate-mechanics-q20-20" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#64748b"/></marker>
   </defs>
-  <line x1="50" y1="135" x2="450" y2="135" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-vt-slate)"/>
-  <line x1="70" y1="145" x2="70" y2="20" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-vt-slate)"/>
+  <line x1="50" y1="135" x2="450" y2="135" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-vt-slate-mechanics-q20-20)"/>
+  <line x1="70" y1="145" x2="70" y2="20" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-vt-slate-mechanics-q20-20)"/>
   <text x="60" y="25" fill="#94a3b8" font-size="10">v</text>
   <text x="445" y="148" fill="#94a3b8" font-size="10">t</text>
   <polygon points="70,105 270,45 270,135 70,135" fill="rgba(56,189,248,0.15)" stroke="none"/>
@@ -1632,11 +1632,11 @@ sin30°=0.50
   <div class="graph-title">📐 等加速度直線運動の v-t グラフ</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-vt-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
-    <marker id="arr-vt-slate" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#64748b"/></marker>
+    <marker id="arr-vt-cyan-mechanics-q21-21" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-vt-slate-mechanics-q21-21" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#64748b"/></marker>
   </defs>
-  <line x1="50" y1="135" x2="450" y2="135" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-vt-slate)"/>
-  <line x1="70" y1="145" x2="70" y2="20" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-vt-slate)"/>
+  <line x1="50" y1="135" x2="450" y2="135" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-vt-slate-mechanics-q21-21)"/>
+  <line x1="70" y1="145" x2="70" y2="20" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-vt-slate-mechanics-q21-21)"/>
   <text x="60" y="25" fill="#94a3b8" font-size="10">v</text>
   <text x="445" y="148" fill="#94a3b8" font-size="10">t</text>
   <polygon points="70,105 270,45 270,135 70,135" fill="rgba(56,189,248,0.15)" stroke="none"/>
@@ -1720,11 +1720,11 @@ $$
   <div class="graph-title">📐 等速直線運動と変位・速さの関係</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-um-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
-    <marker id="arr-um-slate" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#64748b"/></marker>
+    <marker id="arr-um-cyan-mechanics-q22-22" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-um-slate-mechanics-q22-22" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#64748b"/></marker>
   </defs>
-  <line x1="50" y1="130" x2="450" y2="130" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate)"/>
-  <line x1="70" y1="140" x2="70" y2="25" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate)"/>
+  <line x1="50" y1="130" x2="450" y2="130" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate-mechanics-q22-22)"/>
+  <line x1="70" y1="140" x2="70" y2="25" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate-mechanics-q22-22)"/>
   <text x="60" y="30" fill="#94a3b8" font-size="10">x</text>
   <text x="445" y="142" fill="#94a3b8" font-size="10">t</text>
   <line x1="70" y1="130" x2="260" y2="40" stroke="#38bdf8" stroke-width="2.5"/>
@@ -1799,11 +1799,11 @@ $$
   <div class="graph-title">📐 等速直線運動と変位・速さの関係</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-um-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
-    <marker id="arr-um-slate" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#64748b"/></marker>
+    <marker id="arr-um-cyan-mechanics-q23-23" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-um-slate-mechanics-q23-23" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#64748b"/></marker>
   </defs>
-  <line x1="50" y1="130" x2="450" y2="130" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate)"/>
-  <line x1="70" y1="140" x2="70" y2="25" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate)"/>
+  <line x1="50" y1="130" x2="450" y2="130" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate-mechanics-q23-23)"/>
+  <line x1="70" y1="140" x2="70" y2="25" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate-mechanics-q23-23)"/>
   <text x="60" y="30" fill="#94a3b8" font-size="10">x</text>
   <text x="445" y="142" fill="#94a3b8" font-size="10">t</text>
   <line x1="70" y1="130" x2="260" y2="40" stroke="#38bdf8" stroke-width="2.5"/>
@@ -1878,21 +1878,21 @@ $$
   <div class="graph-title">📐 ばねの弾性力と単振動モデル</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-sp-rose" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#f43f5e"/></marker>
-    <marker id="arr-sp-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-sp-rose-mechanics-q24-24" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#f43f5e"/></marker>
+    <marker id="arr-sp-cyan-mechanics-q24-24" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
   </defs>
   <line x1="50" y1="30" x2="50" y2="130" stroke="#94a3b8" stroke-width="3"/>
-  <line x1="50" y1="120" x2="450" y2="120" stroke="#475569" stroke-width="2"/>
+  <line x1="50" y1="120" x2="450" y2="120" stroke="#64748b" stroke-width="2"/>
   <path d="M 50,80 L 80,80 L 95,65 L 115,95 L 135,65 L 155,95 L 175,65 L 195,95 L 215,65 L 235,95 L 250,80 L 270,80" fill="none" stroke="#38bdf8" stroke-width="3"/>
   <rect x="270" y="60" width="45" height="40" rx="3" fill="#1e293b" stroke="#fbbf24" stroke-width="2"/>
   <text x="292" y="84" fill="#fbbf24" font-size="11" font-weight="700" text-anchor="middle">質量 m</text>
   <line x1="220" y1="45" x2="220" y2="120" stroke="#64748b" stroke-width="1.5" stroke-dasharray="3,3"/>
   <rect x="185" y="25" width="70" height="16" rx="3" fill="#0f172a" stroke="#64748b" stroke-width="1"/>
   <text x="220" y="37" fill="#cbd5e1" font-size="9" text-anchor="middle">自然長位置</text>
-  <line x1="220" y1="110" x2="270" y2="110" stroke="#38bdf8" stroke-width="2" marker-end="url(#arr-sp-cyan)"/>
+  <line x1="220" y1="110" x2="270" y2="110" stroke="#38bdf8" stroke-width="2" marker-end="url(#arr-sp-cyan-mechanics-q24-24)"/>
   <rect x="235" y="125" width="40" height="15" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
   <text x="255" y="136" fill="#38bdf8" font-size="9" font-weight="700" text-anchor="middle">変位 x</text>
-  <line x1="270" y1="75" x2="210" y2="75" stroke="#f43f5e" stroke-width="2.5" marker-end="url(#arr-sp-rose)"/>
+  <line x1="270" y1="75" x2="210" y2="75" stroke="#f43f5e" stroke-width="2.5" marker-end="url(#arr-sp-rose-mechanics-q24-24)"/>
   <rect x="175" y="55" width="80" height="16" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
   <text x="215" y="67" fill="#f43f5e" font-size="10" font-weight="700" text-anchor="middle">復元力 F ＝ -kx</text>
   <rect x="330" y="35" width="140" height="42" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
@@ -1959,11 +1959,11 @@ $$
   <div class="graph-title">📐 等加速度直線運動の v-t グラフ</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-vt-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
-    <marker id="arr-vt-slate" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#64748b"/></marker>
+    <marker id="arr-vt-cyan-mechanics-q25-25" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-vt-slate-mechanics-q25-25" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#64748b"/></marker>
   </defs>
-  <line x1="50" y1="135" x2="450" y2="135" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-vt-slate)"/>
-  <line x1="70" y1="145" x2="70" y2="20" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-vt-slate)"/>
+  <line x1="50" y1="135" x2="450" y2="135" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-vt-slate-mechanics-q25-25)"/>
+  <line x1="70" y1="145" x2="70" y2="20" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-vt-slate-mechanics-q25-25)"/>
   <text x="60" y="25" fill="#94a3b8" font-size="10">v</text>
   <text x="445" y="148" fill="#94a3b8" font-size="10">t</text>
   <polygon points="70,105 270,45 270,135 70,135" fill="rgba(56,189,248,0.15)" stroke="none"/>
@@ -2037,11 +2037,11 @@ BがAに追いつくのは、Bの出発から何秒後か。
   <div class="graph-title">📐 等速直線運動と変位・速さの関係</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-um-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
-    <marker id="arr-um-slate" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#64748b"/></marker>
+    <marker id="arr-um-cyan-mechanics-q26-26" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-um-slate-mechanics-q26-26" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#64748b"/></marker>
   </defs>
-  <line x1="50" y1="130" x2="450" y2="130" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate)"/>
-  <line x1="70" y1="140" x2="70" y2="25" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate)"/>
+  <line x1="50" y1="130" x2="450" y2="130" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate-mechanics-q26-26)"/>
+  <line x1="70" y1="140" x2="70" y2="25" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate-mechanics-q26-26)"/>
   <text x="60" y="30" fill="#94a3b8" font-size="10">x</text>
   <text x="445" y="142" fill="#94a3b8" font-size="10">t</text>
   <line x1="70" y1="130" x2="260" y2="40" stroke="#38bdf8" stroke-width="2.5"/>
@@ -2118,11 +2118,11 @@ $$
   <div class="graph-title">📐 等加速度直線運動の v-t グラフ</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-vt-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
-    <marker id="arr-vt-slate" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#64748b"/></marker>
+    <marker id="arr-vt-cyan-mechanics-q27-27" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-vt-slate-mechanics-q27-27" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#64748b"/></marker>
   </defs>
-  <line x1="50" y1="135" x2="450" y2="135" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-vt-slate)"/>
-  <line x1="70" y1="145" x2="70" y2="20" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-vt-slate)"/>
+  <line x1="50" y1="135" x2="450" y2="135" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-vt-slate-mechanics-q27-27)"/>
+  <line x1="70" y1="145" x2="70" y2="20" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-vt-slate-mechanics-q27-27)"/>
   <text x="60" y="25" fill="#94a3b8" font-size="10">v</text>
   <text x="445" y="148" fill="#94a3b8" font-size="10">t</text>
   <polygon points="70,105 270,45 270,135 70,135" fill="rgba(56,189,248,0.15)" stroke="none"/>
@@ -2225,18 +2225,18 @@ $$
   <div class="graph-title">📐 台車の衝突と運動量保存則・反発係数</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-mo-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
-    <marker id="arr-mo-amber" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#fbbf24"/></marker>
+    <marker id="arr-mo-cyan-mechanics-q28-28" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-mo-amber-mechanics-q28-28" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#fbbf24"/></marker>
   </defs>
-  <line x1="30" y1="130" x2="470" y2="130" stroke="#475569" stroke-width="2"/>
-  <rect x="100" y="90" width="60" height="32" rx="4" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+  <line x1="30" y1="130" x2="470" y2="130" stroke="#64748b" stroke-width="2"/>
+  <rect x="96" y="90" width="68" height="32" rx="4" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
   <text x="130" y="110" fill="#38bdf8" font-size="11" font-weight="700" text-anchor="middle">台車A (m₁)</text>
-  <line x1="165" y1="106" x2="220" y2="106" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-mo-cyan)"/>
+  <line x1="168" y1="106" x2="220" y2="106" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-mo-cyan-mechanics-q28-28)"/>
   <rect x="175" y="85" width="45" height="16" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
   <text x="197" y="97" fill="#38bdf8" font-size="9" font-weight="700" text-anchor="middle">速度 v₁</text>
-  <rect x="290" y="90" width="60" height="32" rx="4" fill="#1e293b" stroke="#fbbf24" stroke-width="2"/>
+  <rect x="286" y="90" width="68" height="32" rx="4" fill="#1e293b" stroke="#fbbf24" stroke-width="2"/>
   <text x="320" y="110" fill="#fbbf24" font-size="11" font-weight="700" text-anchor="middle">台車B (m₂)</text>
-  <line x1="355" y1="106" x2="395" y2="106" stroke="#fbbf24" stroke-width="2" marker-end="url(#arr-mo-amber)"/>
+  <line x1="355" y1="106" x2="395" y2="106" stroke="#fbbf24" stroke-width="2" marker-end="url(#arr-mo-amber-mechanics-q28-28)"/>
   <rect x="360" y="85" width="45" height="16" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
   <text x="382" y="97" fill="#fbbf24" font-size="9" text-anchor="middle">速度 v₂</text>
   <rect x="60" y="20" width="380" height="42" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
@@ -2301,11 +2301,11 @@ $$
   <div class="graph-title">📐 等速直線運動と変位・速さの関係</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-um-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
-    <marker id="arr-um-slate" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#64748b"/></marker>
+    <marker id="arr-um-cyan-mechanics-q29-29" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-um-slate-mechanics-q29-29" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#64748b"/></marker>
   </defs>
-  <line x1="50" y1="130" x2="450" y2="130" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate)"/>
-  <line x1="70" y1="140" x2="70" y2="25" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate)"/>
+  <line x1="50" y1="130" x2="450" y2="130" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate-mechanics-q29-29)"/>
+  <line x1="70" y1="140" x2="70" y2="25" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate-mechanics-q29-29)"/>
   <text x="60" y="30" fill="#94a3b8" font-size="10">x</text>
   <text x="445" y="142" fill="#94a3b8" font-size="10">t</text>
   <line x1="70" y1="130" x2="260" y2="40" stroke="#38bdf8" stroke-width="2.5"/>
@@ -2390,11 +2390,11 @@ $$
   <div class="graph-title">📐 等速直線運動と変位・速さの関係</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-um-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
-    <marker id="arr-um-slate" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#64748b"/></marker>
+    <marker id="arr-um-cyan-mechanics-q30-30" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-um-slate-mechanics-q30-30" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#64748b"/></marker>
   </defs>
-  <line x1="50" y1="130" x2="450" y2="130" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate)"/>
-  <line x1="70" y1="140" x2="70" y2="25" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate)"/>
+  <line x1="50" y1="130" x2="450" y2="130" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate-mechanics-q30-30)"/>
+  <line x1="70" y1="140" x2="70" y2="25" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate-mechanics-q30-30)"/>
   <text x="60" y="30" fill="#94a3b8" font-size="10">x</text>
   <text x="445" y="142" fill="#94a3b8" font-size="10">t</text>
   <line x1="70" y1="130" x2="260" y2="40" stroke="#38bdf8" stroke-width="2.5"/>
@@ -2481,11 +2481,11 @@ $$
   <div class="graph-title">📐 等速直線運動と変位・速さの関係</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-um-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
-    <marker id="arr-um-slate" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#64748b"/></marker>
+    <marker id="arr-um-cyan-mechanics-q31-31" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-um-slate-mechanics-q31-31" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#64748b"/></marker>
   </defs>
-  <line x1="50" y1="130" x2="450" y2="130" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate)"/>
-  <line x1="70" y1="140" x2="70" y2="25" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate)"/>
+  <line x1="50" y1="130" x2="450" y2="130" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate-mechanics-q31-31)"/>
+  <line x1="70" y1="140" x2="70" y2="25" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate-mechanics-q31-31)"/>
   <text x="60" y="30" fill="#94a3b8" font-size="10">x</text>
   <text x="445" y="142" fill="#94a3b8" font-size="10">t</text>
   <line x1="70" y1="130" x2="260" y2="40" stroke="#38bdf8" stroke-width="2.5"/>
@@ -2566,11 +2566,11 @@ $$
   <div class="graph-title">📐 等加速度直線運動の v-t グラフ</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-vt-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
-    <marker id="arr-vt-slate" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#64748b"/></marker>
+    <marker id="arr-vt-cyan-mechanics-q32-32" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-vt-slate-mechanics-q32-32" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#64748b"/></marker>
   </defs>
-  <line x1="50" y1="135" x2="450" y2="135" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-vt-slate)"/>
-  <line x1="70" y1="145" x2="70" y2="20" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-vt-slate)"/>
+  <line x1="50" y1="135" x2="450" y2="135" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-vt-slate-mechanics-q32-32)"/>
+  <line x1="70" y1="145" x2="70" y2="20" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-vt-slate-mechanics-q32-32)"/>
   <text x="60" y="25" fill="#94a3b8" font-size="10">v</text>
   <text x="445" y="148" fill="#94a3b8" font-size="10">t</text>
   <polygon points="70,105 270,45 270,135 70,135" fill="rgba(56,189,248,0.15)" stroke="none"/>
@@ -2652,11 +2652,11 @@ g=9.8 m/s², sin30°=0.500, cos30°=0.866
   <div class="graph-title">📐 等加速度直線運動の v-t グラフ</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-vt-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
-    <marker id="arr-vt-slate" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#64748b"/></marker>
+    <marker id="arr-vt-cyan-mechanics-q33-33" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-vt-slate-mechanics-q33-33" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#64748b"/></marker>
   </defs>
-  <line x1="50" y1="135" x2="450" y2="135" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-vt-slate)"/>
-  <line x1="70" y1="145" x2="70" y2="20" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-vt-slate)"/>
+  <line x1="50" y1="135" x2="450" y2="135" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-vt-slate-mechanics-q33-33)"/>
+  <line x1="70" y1="145" x2="70" y2="20" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-vt-slate-mechanics-q33-33)"/>
   <text x="60" y="25" fill="#94a3b8" font-size="10">v</text>
   <text x="445" y="148" fill="#94a3b8" font-size="10">t</text>
   <polygon points="70,105 270,45 270,135 70,135" fill="rgba(56,189,248,0.15)" stroke="none"/>
@@ -2837,11 +2837,11 @@ g=9.8 m/s²
   <div class="graph-title">📐 等速直線運動と変位・速さの関係</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-um-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
-    <marker id="arr-um-slate" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#64748b"/></marker>
+    <marker id="arr-um-cyan-mechanics-q34-34" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-um-slate-mechanics-q34-34" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#64748b"/></marker>
   </defs>
-  <line x1="50" y1="130" x2="450" y2="130" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate)"/>
-  <line x1="70" y1="140" x2="70" y2="25" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate)"/>
+  <line x1="50" y1="130" x2="450" y2="130" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate-mechanics-q34-34)"/>
+  <line x1="70" y1="140" x2="70" y2="25" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate-mechanics-q34-34)"/>
   <text x="60" y="30" fill="#94a3b8" font-size="10">x</text>
   <text x="445" y="142" fill="#94a3b8" font-size="10">t</text>
   <line x1="70" y1="130" x2="260" y2="40" stroke="#38bdf8" stroke-width="2.5"/>
@@ -3000,11 +3000,11 @@ $$
   <div class="graph-title">📐 等速直線運動と変位・速さの関係</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-um-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
-    <marker id="arr-um-slate" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#64748b"/></marker>
+    <marker id="arr-um-cyan-mechanics-q35-35" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-um-slate-mechanics-q35-35" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#64748b"/></marker>
   </defs>
-  <line x1="50" y1="130" x2="450" y2="130" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate)"/>
-  <line x1="70" y1="140" x2="70" y2="25" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate)"/>
+  <line x1="50" y1="130" x2="450" y2="130" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate-mechanics-q35-35)"/>
+  <line x1="70" y1="140" x2="70" y2="25" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate-mechanics-q35-35)"/>
   <text x="60" y="30" fill="#94a3b8" font-size="10">x</text>
   <text x="445" y="142" fill="#94a3b8" font-size="10">t</text>
   <line x1="70" y1="130" x2="260" y2="40" stroke="#38bdf8" stroke-width="2.5"/>
@@ -3144,11 +3144,11 @@ g=10 m/s²
   <div class="graph-title">📐 等速直線運動と変位・速さの関係</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-um-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
-    <marker id="arr-um-slate" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#64748b"/></marker>
+    <marker id="arr-um-cyan-mechanics-q36-36" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-um-slate-mechanics-q36-36" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#64748b"/></marker>
   </defs>
-  <line x1="50" y1="130" x2="450" y2="130" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate)"/>
-  <line x1="70" y1="140" x2="70" y2="25" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate)"/>
+  <line x1="50" y1="130" x2="450" y2="130" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate-mechanics-q36-36)"/>
+  <line x1="70" y1="140" x2="70" y2="25" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate-mechanics-q36-36)"/>
   <text x="60" y="30" fill="#94a3b8" font-size="10">x</text>
   <text x="445" y="142" fill="#94a3b8" font-size="10">t</text>
   <line x1="70" y1="130" x2="260" y2="40" stroke="#38bdf8" stroke-width="2.5"/>
@@ -3292,11 +3292,11 @@ g=10 m/s²
   <div class="graph-title">📐 等加速度直線運動の v-t グラフ</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-vt-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
-    <marker id="arr-vt-slate" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#64748b"/></marker>
+    <marker id="arr-vt-cyan-mechanics-q37-37" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-vt-slate-mechanics-q37-37" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#64748b"/></marker>
   </defs>
-  <line x1="50" y1="135" x2="450" y2="135" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-vt-slate)"/>
-  <line x1="70" y1="145" x2="70" y2="20" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-vt-slate)"/>
+  <line x1="50" y1="135" x2="450" y2="135" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-vt-slate-mechanics-q37-37)"/>
+  <line x1="70" y1="145" x2="70" y2="20" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-vt-slate-mechanics-q37-37)"/>
   <text x="60" y="25" fill="#94a3b8" font-size="10">v</text>
   <text x="445" y="148" fill="#94a3b8" font-size="10">t</text>
   <polygon points="70,105 270,45 270,135 70,135" fill="rgba(56,189,248,0.15)" stroke="none"/>
@@ -3435,11 +3435,11 @@ g=10 m/s²
   <div class="graph-title">📐 等速直線運動と変位・速さの関係</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-um-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
-    <marker id="arr-um-slate" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#64748b"/></marker>
+    <marker id="arr-um-cyan-mechanics-q38-38" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-um-slate-mechanics-q38-38" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#64748b"/></marker>
   </defs>
-  <line x1="50" y1="130" x2="450" y2="130" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate)"/>
-  <line x1="70" y1="140" x2="70" y2="25" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate)"/>
+  <line x1="50" y1="130" x2="450" y2="130" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate-mechanics-q38-38)"/>
+  <line x1="70" y1="140" x2="70" y2="25" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate-mechanics-q38-38)"/>
   <text x="60" y="30" fill="#94a3b8" font-size="10">x</text>
   <text x="445" y="142" fill="#94a3b8" font-size="10">t</text>
   <line x1="70" y1="130" x2="260" y2="40" stroke="#38bdf8" stroke-width="2.5"/>
@@ -3605,11 +3605,11 @@ g=10 m/s²
   <div class="graph-title">📐 等速直線運動と変位・速さの関係</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-um-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
-    <marker id="arr-um-slate" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#64748b"/></marker>
+    <marker id="arr-um-cyan-mechanics-q39-39" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-um-slate-mechanics-q39-39" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#64748b"/></marker>
   </defs>
-  <line x1="50" y1="130" x2="450" y2="130" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate)"/>
-  <line x1="70" y1="140" x2="70" y2="25" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate)"/>
+  <line x1="50" y1="130" x2="450" y2="130" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate-mechanics-q39-39)"/>
+  <line x1="70" y1="140" x2="70" y2="25" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate-mechanics-q39-39)"/>
   <text x="60" y="30" fill="#94a3b8" font-size="10">x</text>
   <text x="445" y="142" fill="#94a3b8" font-size="10">t</text>
   <line x1="70" y1="130" x2="260" y2="40" stroke="#38bdf8" stroke-width="2.5"/>
@@ -3777,11 +3777,11 @@ sin30°=(1)/(2), cos30°=(√3)/(2)
   <div class="graph-title">📐 等加速度直線運動の v-t グラフ</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-vt-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
-    <marker id="arr-vt-slate" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#64748b"/></marker>
+    <marker id="arr-vt-cyan-mechanics-q40-40" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-vt-slate-mechanics-q40-40" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#64748b"/></marker>
   </defs>
-  <line x1="50" y1="135" x2="450" y2="135" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-vt-slate)"/>
-  <line x1="70" y1="145" x2="70" y2="20" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-vt-slate)"/>
+  <line x1="50" y1="135" x2="450" y2="135" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-vt-slate-mechanics-q40-40)"/>
+  <line x1="70" y1="145" x2="70" y2="20" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-vt-slate-mechanics-q40-40)"/>
   <text x="60" y="25" fill="#94a3b8" font-size="10">v</text>
   <text x="445" y="148" fill="#94a3b8" font-size="10">t</text>
   <polygon points="70,105 270,45 270,135 70,135" fill="rgba(56,189,248,0.15)" stroke="none"/>
@@ -3982,11 +3982,11 @@ g=10 m/s²
   <div class="graph-title">📐 等加速度直線運動の v-t グラフ</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-vt-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
-    <marker id="arr-vt-slate" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#64748b"/></marker>
+    <marker id="arr-vt-cyan-mechanics-q41-41" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-vt-slate-mechanics-q41-41" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#64748b"/></marker>
   </defs>
-  <line x1="50" y1="135" x2="450" y2="135" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-vt-slate)"/>
-  <line x1="70" y1="145" x2="70" y2="20" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-vt-slate)"/>
+  <line x1="50" y1="135" x2="450" y2="135" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-vt-slate-mechanics-q41-41)"/>
+  <line x1="70" y1="145" x2="70" y2="20" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-vt-slate-mechanics-q41-41)"/>
   <text x="60" y="25" fill="#94a3b8" font-size="10">v</text>
   <text x="445" y="148" fill="#94a3b8" font-size="10">t</text>
   <polygon points="70,105 270,45 270,135 70,135" fill="rgba(56,189,248,0.15)" stroke="none"/>
@@ -4196,11 +4196,11 @@ $$
   <div class="graph-title">📐 等速直線運動と変位・速さの関係</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-um-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
-    <marker id="arr-um-slate" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#64748b"/></marker>
+    <marker id="arr-um-cyan-mechanics-q42-42" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-um-slate-mechanics-q42-42" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#64748b"/></marker>
   </defs>
-  <line x1="50" y1="130" x2="450" y2="130" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate)"/>
-  <line x1="70" y1="140" x2="70" y2="25" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate)"/>
+  <line x1="50" y1="130" x2="450" y2="130" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate-mechanics-q42-42)"/>
+  <line x1="70" y1="140" x2="70" y2="25" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate-mechanics-q42-42)"/>
   <text x="60" y="30" fill="#94a3b8" font-size="10">x</text>
   <text x="445" y="142" fill="#94a3b8" font-size="10">t</text>
   <line x1="70" y1="130" x2="260" y2="40" stroke="#38bdf8" stroke-width="2.5"/>
@@ -4395,23 +4395,23 @@ $$
   <div class="graph-title">📐 斜面上の物体の力の分解と運動方程式</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-fi-rose" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#f43f5e"/></marker>
-    <marker id="arr-fi-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
-    <marker id="arr-fi-amber" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#fbbf24"/></marker>
+    <marker id="arr-fi-rose-mechanics-q43-43" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#f43f5e"/></marker>
+    <marker id="arr-fi-cyan-mechanics-q43-43" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-fi-amber-mechanics-q43-43" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#fbbf24"/></marker>
   </defs>
   <polygon points="40,140 440,140 440,40" fill="rgba(30,41,59,0.5)" stroke="#64748b" stroke-width="2"/>
   <g transform="translate(240, 90) rotate(-14)">
-    <rect x="-25" y="-20" width="50" height="30" rx="3" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
-    <line x1="0" y1="-5" x2="0" y2="-45" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-fi-cyan)"/>
-    <rect x="-35" y="-60" width="70" height="15" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
-    <text x="0" y="-49" fill="#38bdf8" font-size="9" font-weight="700" text-anchor="middle">垂直抗力 N</text>
-    <line x1="0" y1="-5" x2="-45" y2="-5" stroke="#fbbf24" stroke-width="2" marker-end="url(#arr-fi-amber)"/>
-    <rect x="-75" y="-12" width="40" height="15" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
-    <text x="-55" y="-1" fill="#fbbf24" font-size="9" text-anchor="middle">摩擦力 f</text>
+    <rect x="-25" y="-30" width="50" height="30" rx="3" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+    <line x1="0" y1="-15" x2="0" y2="-55" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-fi-cyan-mechanics-q43-43)"/>
+    <rect x="-35" y="-70" width="70" height="15" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+    <text x="0" y="-59" fill="#38bdf8" font-size="9" font-weight="700" text-anchor="middle">垂直抗力 N</text>
+    <line x1="0" y1="-15" x2="-45" y2="-15" stroke="#fbbf24" stroke-width="2" marker-end="url(#arr-fi-amber-mechanics-q43-43)"/>
+    <rect x="-75" y="-22" width="40" height="15" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
+    <text x="-55" y="-11" fill="#fbbf24" font-size="9" text-anchor="middle">摩擦力 f</text>
   </g>
-  <line x1="240" y1="90" x2="240" y2="145" stroke="#f43f5e" stroke-width="2.5" marker-end="url(#arr-fi-rose)"/>
-  <rect x="245" y="125" width="50" height="16" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
-  <text x="270" y="137" fill="#f43f5e" font-size="10" font-weight="700" text-anchor="middle">重力 mg</text>
+  <line x1="240" y1="75" x2="240" y2="130" stroke="#f43f5e" stroke-width="2.5" marker-end="url(#arr-fi-rose-mechanics-q43-43)"/>
+  <rect x="245" y="110" width="50" height="16" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
+  <text x="270" y="122" fill="#f43f5e" font-size="10" font-weight="700" text-anchor="middle">重力 mg</text>
   <rect x="60" y="30" width="130" height="38" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
   <text x="125" y="46" fill="#38bdf8" font-size="9" font-weight="700" text-anchor="middle">垂直: N ＝ mg cosθ</text>
   <text x="125" y="60" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">斜面: ma ＝ mg sinθ − f</text>
@@ -4476,11 +4476,11 @@ $$
   <div class="graph-title">📐 等速直線運動と変位・速さの関係</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-um-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
-    <marker id="arr-um-slate" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#64748b"/></marker>
+    <marker id="arr-um-cyan-mechanics-q44-44" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-um-slate-mechanics-q44-44" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#64748b"/></marker>
   </defs>
-  <line x1="50" y1="130" x2="450" y2="130" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate)"/>
-  <line x1="70" y1="140" x2="70" y2="25" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate)"/>
+  <line x1="50" y1="130" x2="450" y2="130" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate-mechanics-q44-44)"/>
+  <line x1="70" y1="140" x2="70" y2="25" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate-mechanics-q44-44)"/>
   <text x="60" y="30" fill="#94a3b8" font-size="10">x</text>
   <text x="445" y="142" fill="#94a3b8" font-size="10">t</text>
   <line x1="70" y1="130" x2="260" y2="40" stroke="#38bdf8" stroke-width="2.5"/>
@@ -4663,21 +4663,21 @@ $$
   <div class="graph-title">📐 ばねの弾性力と単振動モデル</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-sp-rose" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#f43f5e"/></marker>
-    <marker id="arr-sp-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-sp-rose-mechanics-q45-45" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#f43f5e"/></marker>
+    <marker id="arr-sp-cyan-mechanics-q45-45" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
   </defs>
   <line x1="50" y1="30" x2="50" y2="130" stroke="#94a3b8" stroke-width="3"/>
-  <line x1="50" y1="120" x2="450" y2="120" stroke="#475569" stroke-width="2"/>
+  <line x1="50" y1="120" x2="450" y2="120" stroke="#64748b" stroke-width="2"/>
   <path d="M 50,80 L 80,80 L 95,65 L 115,95 L 135,65 L 155,95 L 175,65 L 195,95 L 215,65 L 235,95 L 250,80 L 270,80" fill="none" stroke="#38bdf8" stroke-width="3"/>
   <rect x="270" y="60" width="45" height="40" rx="3" fill="#1e293b" stroke="#fbbf24" stroke-width="2"/>
   <text x="292" y="84" fill="#fbbf24" font-size="11" font-weight="700" text-anchor="middle">質量 m</text>
   <line x1="220" y1="45" x2="220" y2="120" stroke="#64748b" stroke-width="1.5" stroke-dasharray="3,3"/>
   <rect x="185" y="25" width="70" height="16" rx="3" fill="#0f172a" stroke="#64748b" stroke-width="1"/>
   <text x="220" y="37" fill="#cbd5e1" font-size="9" text-anchor="middle">自然長位置</text>
-  <line x1="220" y1="110" x2="270" y2="110" stroke="#38bdf8" stroke-width="2" marker-end="url(#arr-sp-cyan)"/>
+  <line x1="220" y1="110" x2="270" y2="110" stroke="#38bdf8" stroke-width="2" marker-end="url(#arr-sp-cyan-mechanics-q45-45)"/>
   <rect x="235" y="125" width="40" height="15" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
   <text x="255" y="136" fill="#38bdf8" font-size="9" font-weight="700" text-anchor="middle">変位 x</text>
-  <line x1="270" y1="75" x2="210" y2="75" stroke="#f43f5e" stroke-width="2.5" marker-end="url(#arr-sp-rose)"/>
+  <line x1="270" y1="75" x2="210" y2="75" stroke="#f43f5e" stroke-width="2.5" marker-end="url(#arr-sp-rose-mechanics-q45-45)"/>
   <rect x="175" y="55" width="80" height="16" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
   <text x="215" y="67" fill="#f43f5e" font-size="10" font-weight="700" text-anchor="middle">復元力 F ＝ -kx</text>
   <rect x="330" y="35" width="140" height="42" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
@@ -4829,11 +4829,11 @@ $$
   <div class="graph-title">📐 等速直線運動と変位・速さの関係</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-um-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
-    <marker id="arr-um-slate" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#64748b"/></marker>
+    <marker id="arr-um-cyan-mechanics-q46-46" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-um-slate-mechanics-q46-46" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#64748b"/></marker>
   </defs>
-  <line x1="50" y1="130" x2="450" y2="130" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate)"/>
-  <line x1="70" y1="140" x2="70" y2="25" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate)"/>
+  <line x1="50" y1="130" x2="450" y2="130" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate-mechanics-q46-46)"/>
+  <line x1="70" y1="140" x2="70" y2="25" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate-mechanics-q46-46)"/>
   <text x="60" y="30" fill="#94a3b8" font-size="10">x</text>
   <text x="445" y="142" fill="#94a3b8" font-size="10">t</text>
   <line x1="70" y1="130" x2="260" y2="40" stroke="#38bdf8" stroke-width="2.5"/>
@@ -4997,11 +4997,11 @@ $$
   <div class="graph-title">📐 等速直線運動と変位・速さの関係</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-um-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
-    <marker id="arr-um-slate" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#64748b"/></marker>
+    <marker id="arr-um-cyan-mechanics-q47-47" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-um-slate-mechanics-q47-47" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#64748b"/></marker>
   </defs>
-  <line x1="50" y1="130" x2="450" y2="130" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate)"/>
-  <line x1="70" y1="140" x2="70" y2="25" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate)"/>
+  <line x1="50" y1="130" x2="450" y2="130" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate-mechanics-q47-47)"/>
+  <line x1="70" y1="140" x2="70" y2="25" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate-mechanics-q47-47)"/>
   <text x="60" y="30" fill="#94a3b8" font-size="10">x</text>
   <text x="445" y="142" fill="#94a3b8" font-size="10">t</text>
   <line x1="70" y1="130" x2="260" y2="40" stroke="#38bdf8" stroke-width="2.5"/>
@@ -5193,11 +5193,11 @@ $$
   <div class="graph-title">📐 等加速度直線運動の v-t グラフ</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-vt-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
-    <marker id="arr-vt-slate" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#64748b"/></marker>
+    <marker id="arr-vt-cyan-mechanics-q48-48" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-vt-slate-mechanics-q48-48" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#64748b"/></marker>
   </defs>
-  <line x1="50" y1="135" x2="450" y2="135" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-vt-slate)"/>
-  <line x1="70" y1="145" x2="70" y2="20" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-vt-slate)"/>
+  <line x1="50" y1="135" x2="450" y2="135" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-vt-slate-mechanics-q48-48)"/>
+  <line x1="70" y1="145" x2="70" y2="20" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-vt-slate-mechanics-q48-48)"/>
   <text x="60" y="25" fill="#94a3b8" font-size="10">v</text>
   <text x="445" y="148" fill="#94a3b8" font-size="10">t</text>
   <polygon points="70,105 270,45 270,135 70,135" fill="rgba(56,189,248,0.15)" stroke="none"/>
@@ -5303,11 +5303,11 @@ x=0
   <div class="graph-title">📐 等速直線運動と変位・速さの関係</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-um-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
-    <marker id="arr-um-slate" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#64748b"/></marker>
+    <marker id="arr-um-cyan-mechanics-q49-49" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-um-slate-mechanics-q49-49" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#64748b"/></marker>
   </defs>
-  <line x1="50" y1="130" x2="450" y2="130" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate)"/>
-  <line x1="70" y1="140" x2="70" y2="25" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate)"/>
+  <line x1="50" y1="130" x2="450" y2="130" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate-mechanics-q49-49)"/>
+  <line x1="70" y1="140" x2="70" y2="25" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate-mechanics-q49-49)"/>
   <text x="60" y="30" fill="#94a3b8" font-size="10">x</text>
   <text x="445" y="142" fill="#94a3b8" font-size="10">t</text>
   <line x1="70" y1="130" x2="260" y2="40" stroke="#38bdf8" stroke-width="2.5"/>
@@ -5671,11 +5671,11 @@ $$
   <div class="graph-title">📐 等加速度直線運動の v-t グラフ</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-vt-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
-    <marker id="arr-vt-slate" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#64748b"/></marker>
+    <marker id="arr-vt-cyan-mechanics-q50-50" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-vt-slate-mechanics-q50-50" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#64748b"/></marker>
   </defs>
-  <line x1="50" y1="135" x2="450" y2="135" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-vt-slate)"/>
-  <line x1="70" y1="145" x2="70" y2="20" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-vt-slate)"/>
+  <line x1="50" y1="135" x2="450" y2="135" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-vt-slate-mechanics-q50-50)"/>
+  <line x1="70" y1="145" x2="70" y2="20" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-vt-slate-mechanics-q50-50)"/>
   <text x="60" y="25" fill="#94a3b8" font-size="10">v</text>
   <text x="445" y="148" fill="#94a3b8" font-size="10">t</text>
   <polygon points="70,105 270,45 270,135 70,135" fill="rgba(56,189,248,0.15)" stroke="none"/>
@@ -5747,11 +5747,11 @@ $$
   <div class="graph-title">📐 等速直線運動と変位・速さの関係</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-um-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
-    <marker id="arr-um-slate" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#64748b"/></marker>
+    <marker id="arr-um-cyan-mechanics-q51-51" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-um-slate-mechanics-q51-51" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#64748b"/></marker>
   </defs>
-  <line x1="50" y1="130" x2="450" y2="130" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate)"/>
-  <line x1="70" y1="140" x2="70" y2="25" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate)"/>
+  <line x1="50" y1="130" x2="450" y2="130" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate-mechanics-q51-51)"/>
+  <line x1="70" y1="140" x2="70" y2="25" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate-mechanics-q51-51)"/>
   <text x="60" y="30" fill="#94a3b8" font-size="10">x</text>
   <text x="445" y="142" fill="#94a3b8" font-size="10">t</text>
   <line x1="70" y1="130" x2="260" y2="40" stroke="#38bdf8" stroke-width="2.5"/>
@@ -5845,11 +5845,11 @@ Pは、台に固定された水平な床面より高さ H の位置にある。�
   <div class="graph-title">📐 等速直線運動と変位・速さの関係</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-um-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
-    <marker id="arr-um-slate" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#64748b"/></marker>
+    <marker id="arr-um-cyan-mechanics-q52-52" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-um-slate-mechanics-q52-52" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#64748b"/></marker>
   </defs>
-  <line x1="50" y1="130" x2="450" y2="130" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate)"/>
-  <line x1="70" y1="140" x2="70" y2="25" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate)"/>
+  <line x1="50" y1="130" x2="450" y2="130" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate-mechanics-q52-52)"/>
+  <line x1="70" y1="140" x2="70" y2="25" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate-mechanics-q52-52)"/>
   <text x="60" y="30" fill="#94a3b8" font-size="10">x</text>
   <text x="445" y="142" fill="#94a3b8" font-size="10">t</text>
   <line x1="70" y1="130" x2="260" y2="40" stroke="#38bdf8" stroke-width="2.5"/>
@@ -6206,11 +6206,11 @@ $$
   <div class="graph-title">📐 等速直線運動と変位・速さの関係</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-um-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
-    <marker id="arr-um-slate" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#64748b"/></marker>
+    <marker id="arr-um-cyan-mechanics-q53-53" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-um-slate-mechanics-q53-53" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#64748b"/></marker>
   </defs>
-  <line x1="50" y1="130" x2="450" y2="130" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate)"/>
-  <line x1="70" y1="140" x2="70" y2="25" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate)"/>
+  <line x1="50" y1="130" x2="450" y2="130" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate-mechanics-q53-53)"/>
+  <line x1="70" y1="140" x2="70" y2="25" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-um-slate-mechanics-q53-53)"/>
   <text x="60" y="30" fill="#94a3b8" font-size="10">x</text>
   <text x="445" y="142" fill="#94a3b8" font-size="10">t</text>
   <line x1="70" y1="130" x2="260" y2="40" stroke="#38bdf8" stroke-width="2.5"/>

@@ -96,7 +96,7 @@ $$
     <rect width="760" height="320" fill="url(#gridTV)" rx="10"/>
     <!-- 左側: 力の矢印推移 (3段階) -->
     <g transform="translate(40, 30)">
-      <text x="140" y="25" fill="#38bdf8" font-size="14" font-weight="bold" text-anchor="middle">【速度の増加と力のつり合い推移】</text>
+      <text x="140" y="15" fill="#38bdf8" font-size="14" font-weight="bold" text-anchor="middle">【速度の増加と力のつり合い推移】</text>
       <!-- 段階1: t = 0 -->
       <g transform="translate(20, 60)">
         <circle cx="20" cy="50" r="14" fill="#38bdf8"/>
@@ -127,9 +127,9 @@ $$
         <line x1="20" y1="64" x2="20" y2="124" stroke="#34d399" stroke-width="3"/>
         <polygon points="17,124 20,132 23,124" fill="#34d399"/>
         <!-- f = mg (同じ長さ) -->
-        <line x1="20" y1="36" x2="20" y2="-24" stroke="#f43f5e" stroke-width="3"/>
-        <polygon points="17,-24 20,-32 23,-24" fill="#f43f5e"/>
-        <text x="35" y="-10" fill="#f43f5e" font-size="11">f=mg</text>
+        <line x1="20" y1="36" x2="20" y2="-10" stroke="#f43f5e" stroke-width="3"/>
+        <polygon points="17,-10 20,-18 23,-10" fill="#f43f5e"/>
+        <text x="35" y="-2" fill="#f43f5e" font-size="11">f=mg</text>
         <text x="20" y="175" fill="#ef4444" font-size="12" font-weight="bold" text-anchor="middle">③ 終端速度到達</text>
         <text x="20" y="195" fill="#ef4444" font-size="11" font-weight="bold" text-anchor="middle">a = 0 (等速)</text>
       </g>

@@ -25,7 +25,7 @@ description: 高校物理・大学入試超頻出「ブラッグ反射とX線結
 しかし、<strong>X線回折におけるブラッグ角 $\theta$ は、「結晶面そのものとX線のなす角（すれすれ角 / Glancing angle）」</strong>として定義されます！
 
 <div class="vector-diagram-card">
-  <svg viewBox="0 0 540 180" class="academic-svg" aria-label="X線結晶回折におけるブラッグ角（すれすれ角）の定義">
+  <svg viewBox="0 0 585 180" class="academic-svg" aria-label="X線結晶回折におけるブラッグ角（すれすれ角）の定義">
     <defs>
       <marker id="bragg-ray-arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto">
         <path d="M 0 1 L 10 5 L 0 9 z" fill="#38bdf8" />
@@ -76,7 +76,7 @@ description: 高校物理・大学入試超頻出「ブラッグ反射とX線結
 結晶の第1層の原子 A で反射する光線①と、第2層の直下の原子 B で反射する光線②を考えます。
 
 <div class="vector-diagram-card">
-  <svg viewBox="0 0 560 250" class="academic-svg" aria-label="結晶2層によるX線反射と光路差2d sinθの幾何学的導出">
+  <svg viewBox="0 0 590 260" class="academic-svg" aria-label="結晶2層によるX線反射と光路差2d sinθの幾何学的導出">
     <defs>
       <marker id="bragg-path-arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto">
         <path d="M 0 1 L 10 5 L 0 9 z" fill="#38bdf8" />

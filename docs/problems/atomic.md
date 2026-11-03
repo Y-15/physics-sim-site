@@ -36,9 +36,9 @@ h=6.6×10⁻³⁴ J· s
   <div class="graph-title">📐 光量子仮説と光子のエネルギー・運動量</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-pe-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-pe-cyan-atomic-q1-1" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
   </defs>
-  <path d="M 50,80 Q 75,45 100,80 T 150,80 T 200,80 L 235,80" fill="none" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-pe-cyan)"/>
+  <path d="M 50,80 Q 75,45 100,80 T 150,80 T 200,80 L 235,80" fill="none" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-pe-cyan-atomic-q1-1)"/>
   <circle cx="100" cy="80" r="5" fill="#fbbf24"/>
   <circle cx="150" cy="80" r="5" fill="#fbbf24"/>
   <circle cx="200" cy="80" r="5" fill="#fbbf24"/>
@@ -108,9 +108,9 @@ $$
 <div class="vector-graph-card">
   <div class="graph-title">📐 原子の構成と原子核（陽子・中性子・電子）</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
-  <circle cx="150" cy="80" r="50" fill="none" stroke="#475569" stroke-width="1.5" stroke-dasharray="3,3"/>
+  <circle cx="150" cy="80" r="50" fill="none" stroke="#64748b" stroke-width="1.5" stroke-dasharray="3,3"/>
   <circle cx="185" cy="45" r="5" fill="#38bdf8"/>
-  <rect x="195" y="35" width="45" height="15" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <rect x="192" y="35" width="50" height="15" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
   <text x="217" y="46" fill="#38bdf8" font-size="9" font-weight="700" text-anchor="middle">電子 (e⁻)</text>
   <circle cx="150" cy="80" r="22" fill="#1e293b" stroke="#f43f5e" stroke-width="2"/>
   <text x="150" y="77" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">原子核</text>
@@ -194,15 +194,15 @@ $$
   <div class="graph-title">📐 原子核の崩壊・半減期と質量エネルギー</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-nu-rose" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#f43f5e"/></marker>
+    <marker id="arr-nu-rose-atomic-q3-3" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#f43f5e"/></marker>
   </defs>
   <circle cx="100" cy="80" r="22" fill="#1e293b" stroke="#f43f5e" stroke-width="2"/>
   <text x="100" y="84" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">親核 (N₀)</text>
-  <line x1="125" y1="80" x2="185" y2="80" stroke="#f43f5e" stroke-width="2.5" marker-end="url(#arr-nu-rose)"/>
+  <line x1="125" y1="80" x2="185" y2="80" stroke="#f43f5e" stroke-width="2.5" marker-end="url(#arr-nu-rose-atomic-q3-3)"/>
   <circle cx="215" cy="65" r="15" fill="#1e293b" stroke="#38bdf8" stroke-width="1.5"/>
   <text x="215" y="69" fill="#38bdf8" font-size="8" text-anchor="middle">娘核</text>
-  <circle cx="240" cy="105" r="8" fill="#fbbf24"/>
-  <text x="240" y="108" fill="#0f172a" font-size="8" font-weight="700" text-anchor="middle">α/β</text>
+  <circle cx="240" cy="105" r="8" fill="#1e293b" stroke="#fbbf24" stroke-width="1.5"/>
+  <text x="240" y="108" fill="#fbbf24" font-size="8" font-weight="700" text-anchor="middle">α/β</text>
   <rect x="290" y="45" width="190" height="48" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
   <text x="385" y="64" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">半減期: N ＝ N₀ (½)^(t/T)</text>
   <text x="385" y="82" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">質量欠損: E ＝ Δm c²</text>
@@ -274,9 +274,9 @@ $$
 <div class="vector-graph-card">
   <div class="graph-title">📐 原子の構成と原子核（陽子・中性子・電子）</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
-  <circle cx="150" cy="80" r="50" fill="none" stroke="#475569" stroke-width="1.5" stroke-dasharray="3,3"/>
+  <circle cx="150" cy="80" r="50" fill="none" stroke="#64748b" stroke-width="1.5" stroke-dasharray="3,3"/>
   <circle cx="185" cy="45" r="5" fill="#38bdf8"/>
-  <rect x="195" y="35" width="45" height="15" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <rect x="192" y="35" width="50" height="15" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
   <text x="217" y="46" fill="#38bdf8" font-size="9" font-weight="700" text-anchor="middle">電子 (e⁻)</text>
   <circle cx="150" cy="80" r="22" fill="#1e293b" stroke="#f43f5e" stroke-width="2"/>
   <text x="150" y="77" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">原子核</text>
@@ -338,17 +338,17 @@ $$
   <div class="graph-title">📐 光電効果とアインシュタインの光電方程式</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-pe-rose" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#f43f5e"/></marker>
-    <marker id="arr-pe-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-pe-rose-atomic-q5-5" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#f43f5e"/></marker>
+    <marker id="arr-pe-cyan-atomic-q5-5" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
   </defs>
   <rect x="180" y="50" width="130" height="80" rx="4" fill="#1e293b" stroke="#64748b" stroke-width="2"/>
   <text x="245" y="70" fill="#94a3b8" font-size="10" text-anchor="middle">金属内部</text>
   <text x="245" y="115" fill="#fbbf24" font-size="9" text-anchor="middle">仕事関数 W</text>
-  <path d="M 60,60 Q 80,45 100,60 T 140,60 L 175,75" fill="none" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-pe-cyan)"/>
+  <path d="M 60,60 Q 80,45 100,60 T 140,60 L 175,75" fill="none" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-pe-cyan-atomic-q5-5)"/>
   <rect x="65" y="25" width="85" height="18" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
   <text x="107" y="38" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">光子 E ＝ hν</text>
   <circle cx="180" cy="75" r="5" fill="#f43f5e"/>
-  <line x1="180" y1="75" x2="120" y2="120" stroke="#f43f5e" stroke-width="2.5" marker-end="url(#arr-pe-rose)"/>
+  <line x1="180" y1="75" x2="120" y2="120" stroke="#f43f5e" stroke-width="2.5" marker-end="url(#arr-pe-rose-atomic-q5-5)"/>
   <rect x="65" y="125" width="105" height="18" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
   <text x="117" y="138" fill="#f43f5e" font-size="10" font-weight="700" text-anchor="middle">光電子 K_max</text>
   <rect x="325" y="45" width="160" height="48" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
@@ -415,9 +415,9 @@ $$
   <div class="graph-title">📐 光量子仮説と光子のエネルギー・運動量</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-pe-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-pe-cyan-atomic-q6-6" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
   </defs>
-  <path d="M 50,80 Q 75,45 100,80 T 150,80 T 200,80 L 235,80" fill="none" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-pe-cyan)"/>
+  <path d="M 50,80 Q 75,45 100,80 T 150,80 T 200,80 L 235,80" fill="none" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-pe-cyan-atomic-q6-6)"/>
   <circle cx="100" cy="80" r="5" fill="#fbbf24"/>
   <circle cx="150" cy="80" r="5" fill="#fbbf24"/>
   <circle cx="200" cy="80" r="5" fill="#fbbf24"/>
@@ -486,17 +486,17 @@ $$
   <div class="graph-title">📐 光電効果とアインシュタインの光電方程式</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-pe-rose" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#f43f5e"/></marker>
-    <marker id="arr-pe-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-pe-rose-atomic-q7-7" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#f43f5e"/></marker>
+    <marker id="arr-pe-cyan-atomic-q7-7" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
   </defs>
   <rect x="180" y="50" width="130" height="80" rx="4" fill="#1e293b" stroke="#64748b" stroke-width="2"/>
   <text x="245" y="70" fill="#94a3b8" font-size="10" text-anchor="middle">金属内部</text>
   <text x="245" y="115" fill="#fbbf24" font-size="9" text-anchor="middle">仕事関数 W</text>
-  <path d="M 60,60 Q 80,45 100,60 T 140,60 L 175,75" fill="none" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-pe-cyan)"/>
+  <path d="M 60,60 Q 80,45 100,60 T 140,60 L 175,75" fill="none" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-pe-cyan-atomic-q7-7)"/>
   <rect x="65" y="25" width="85" height="18" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
   <text x="107" y="38" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">光子 E ＝ hν</text>
   <circle cx="180" cy="75" r="5" fill="#f43f5e"/>
-  <line x1="180" y1="75" x2="120" y2="120" stroke="#f43f5e" stroke-width="2.5" marker-end="url(#arr-pe-rose)"/>
+  <line x1="180" y1="75" x2="120" y2="120" stroke="#f43f5e" stroke-width="2.5" marker-end="url(#arr-pe-rose-atomic-q7-7)"/>
   <rect x="65" y="125" width="105" height="18" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
   <text x="117" y="138" fill="#f43f5e" font-size="10" font-weight="700" text-anchor="middle">光電子 K_max</text>
   <rect x="325" y="45" width="160" height="48" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
@@ -563,9 +563,9 @@ $$
   <div class="graph-title">📐 光量子仮説と光子のエネルギー・運動量</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-pe-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-pe-cyan-atomic-q8-8" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
   </defs>
-  <path d="M 50,80 Q 75,45 100,80 T 150,80 T 200,80 L 235,80" fill="none" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-pe-cyan)"/>
+  <path d="M 50,80 Q 75,45 100,80 T 150,80 T 200,80 L 235,80" fill="none" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-pe-cyan-atomic-q8-8)"/>
   <circle cx="100" cy="80" r="5" fill="#fbbf24"/>
   <circle cx="150" cy="80" r="5" fill="#fbbf24"/>
   <circle cx="200" cy="80" r="5" fill="#fbbf24"/>
@@ -630,15 +630,15 @@ $$
   <div class="graph-title">📐 原子核の崩壊・半減期と質量エネルギー</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-nu-rose" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#f43f5e"/></marker>
+    <marker id="arr-nu-rose-atomic-q9-9" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#f43f5e"/></marker>
   </defs>
   <circle cx="100" cy="80" r="22" fill="#1e293b" stroke="#f43f5e" stroke-width="2"/>
   <text x="100" y="84" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">親核 (N₀)</text>
-  <line x1="125" y1="80" x2="185" y2="80" stroke="#f43f5e" stroke-width="2.5" marker-end="url(#arr-nu-rose)"/>
+  <line x1="125" y1="80" x2="185" y2="80" stroke="#f43f5e" stroke-width="2.5" marker-end="url(#arr-nu-rose-atomic-q9-9)"/>
   <circle cx="215" cy="65" r="15" fill="#1e293b" stroke="#38bdf8" stroke-width="1.5"/>
   <text x="215" y="69" fill="#38bdf8" font-size="8" text-anchor="middle">娘核</text>
-  <circle cx="240" cy="105" r="8" fill="#fbbf24"/>
-  <text x="240" y="108" fill="#0f172a" font-size="8" font-weight="700" text-anchor="middle">α/β</text>
+  <circle cx="240" cy="105" r="8" fill="#1e293b" stroke="#fbbf24" stroke-width="1.5"/>
+  <text x="240" y="108" fill="#fbbf24" font-size="8" font-weight="700" text-anchor="middle">α/β</text>
   <rect x="290" y="45" width="190" height="48" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
   <text x="385" y="64" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">半減期: N ＝ N₀ (½)^(t/T)</text>
   <text x="385" y="82" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">質量欠損: E ＝ Δm c²</text>
@@ -695,9 +695,9 @@ $$
   <div class="graph-title">📐 光量子仮説と光子のエネルギー・運動量</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-pe-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-pe-cyan-atomic-q10-10" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
   </defs>
-  <path d="M 50,80 Q 75,45 100,80 T 150,80 T 200,80 L 235,80" fill="none" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-pe-cyan)"/>
+  <path d="M 50,80 Q 75,45 100,80 T 150,80 T 200,80 L 235,80" fill="none" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-pe-cyan-atomic-q10-10)"/>
   <circle cx="100" cy="80" r="5" fill="#fbbf24"/>
   <circle cx="150" cy="80" r="5" fill="#fbbf24"/>
   <circle cx="200" cy="80" r="5" fill="#fbbf24"/>
@@ -784,15 +784,15 @@ $$
   <div class="graph-title">📐 原子核の崩壊・半減期と質量エネルギー</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-nu-rose" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#f43f5e"/></marker>
+    <marker id="arr-nu-rose-atomic-q11-11" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#f43f5e"/></marker>
   </defs>
   <circle cx="100" cy="80" r="22" fill="#1e293b" stroke="#f43f5e" stroke-width="2"/>
   <text x="100" y="84" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">親核 (N₀)</text>
-  <line x1="125" y1="80" x2="185" y2="80" stroke="#f43f5e" stroke-width="2.5" marker-end="url(#arr-nu-rose)"/>
+  <line x1="125" y1="80" x2="185" y2="80" stroke="#f43f5e" stroke-width="2.5" marker-end="url(#arr-nu-rose-atomic-q11-11)"/>
   <circle cx="215" cy="65" r="15" fill="#1e293b" stroke="#38bdf8" stroke-width="1.5"/>
   <text x="215" y="69" fill="#38bdf8" font-size="8" text-anchor="middle">娘核</text>
-  <circle cx="240" cy="105" r="8" fill="#fbbf24"/>
-  <text x="240" y="108" fill="#0f172a" font-size="8" font-weight="700" text-anchor="middle">α/β</text>
+  <circle cx="240" cy="105" r="8" fill="#1e293b" stroke="#fbbf24" stroke-width="1.5"/>
+  <text x="240" y="108" fill="#fbbf24" font-size="8" font-weight="700" text-anchor="middle">α/β</text>
   <rect x="290" y="45" width="190" height="48" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
   <text x="385" y="64" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">半減期: N ＝ N₀ (½)^(t/T)</text>
   <text x="385" y="82" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">質量欠損: E ＝ Δm c²</text>
@@ -857,15 +857,15 @@ $$
   <div class="graph-title">📐 原子核の崩壊・半減期と質量エネルギー</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-nu-rose" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#f43f5e"/></marker>
+    <marker id="arr-nu-rose-atomic-q12-12" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#f43f5e"/></marker>
   </defs>
   <circle cx="100" cy="80" r="22" fill="#1e293b" stroke="#f43f5e" stroke-width="2"/>
   <text x="100" y="84" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">親核 (N₀)</text>
-  <line x1="125" y1="80" x2="185" y2="80" stroke="#f43f5e" stroke-width="2.5" marker-end="url(#arr-nu-rose)"/>
+  <line x1="125" y1="80" x2="185" y2="80" stroke="#f43f5e" stroke-width="2.5" marker-end="url(#arr-nu-rose-atomic-q12-12)"/>
   <circle cx="215" cy="65" r="15" fill="#1e293b" stroke="#38bdf8" stroke-width="1.5"/>
   <text x="215" y="69" fill="#38bdf8" font-size="8" text-anchor="middle">娘核</text>
-  <circle cx="240" cy="105" r="8" fill="#fbbf24"/>
-  <text x="240" y="108" fill="#0f172a" font-size="8" font-weight="700" text-anchor="middle">α/β</text>
+  <circle cx="240" cy="105" r="8" fill="#1e293b" stroke="#fbbf24" stroke-width="1.5"/>
+  <text x="240" y="108" fill="#fbbf24" font-size="8" font-weight="700" text-anchor="middle">α/β</text>
   <rect x="290" y="45" width="190" height="48" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
   <text x="385" y="64" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">半減期: N ＝ N₀ (½)^(t/T)</text>
   <text x="385" y="82" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">質量欠損: E ＝ Δm c²</text>
@@ -930,9 +930,9 @@ hc=1240 eV· nm
   <div class="graph-title">📐 光量子仮説と光子のエネルギー・運動量</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-pe-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-pe-cyan-atomic-q13-13" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
   </defs>
-  <path d="M 50,80 Q 75,45 100,80 T 150,80 T 200,80 L 235,80" fill="none" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-pe-cyan)"/>
+  <path d="M 50,80 Q 75,45 100,80 T 150,80 T 200,80 L 235,80" fill="none" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-pe-cyan-atomic-q13-13)"/>
   <circle cx="100" cy="80" r="5" fill="#fbbf24"/>
   <circle cx="150" cy="80" r="5" fill="#fbbf24"/>
   <circle cx="200" cy="80" r="5" fill="#fbbf24"/>
@@ -1065,9 +1065,9 @@ hc=1240 eV· nm
   <div class="graph-title">📐 光量子仮説と光子のエネルギー・運動量</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-pe-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-pe-cyan-atomic-q14-14" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
   </defs>
-  <path d="M 50,80 Q 75,45 100,80 T 150,80 T 200,80 L 235,80" fill="none" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-pe-cyan)"/>
+  <path d="M 50,80 Q 75,45 100,80 T 150,80 T 200,80 L 235,80" fill="none" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-pe-cyan-atomic-q14-14)"/>
   <circle cx="100" cy="80" r="5" fill="#fbbf24"/>
   <circle cx="150" cy="80" r="5" fill="#fbbf24"/>
   <circle cx="200" cy="80" r="5" fill="#fbbf24"/>
@@ -1192,9 +1192,9 @@ $$
   <div class="graph-title">📐 光量子仮説と光子のエネルギー・運動量</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-pe-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-pe-cyan-atomic-q15-15" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
   </defs>
-  <path d="M 50,80 Q 75,45 100,80 T 150,80 T 200,80 L 235,80" fill="none" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-pe-cyan)"/>
+  <path d="M 50,80 Q 75,45 100,80 T 150,80 T 200,80 L 235,80" fill="none" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-pe-cyan-atomic-q15-15)"/>
   <circle cx="100" cy="80" r="5" fill="#fbbf24"/>
   <circle cx="150" cy="80" r="5" fill="#fbbf24"/>
   <circle cx="200" cy="80" r="5" fill="#fbbf24"/>
@@ -1271,9 +1271,9 @@ hc=1240 eV· nm
   <div class="graph-title">📐 光量子仮説と光子のエネルギー・運動量</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-pe-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-pe-cyan-atomic-q16-16" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
   </defs>
-  <path d="M 50,80 Q 75,45 100,80 T 150,80 T 200,80 L 235,80" fill="none" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-pe-cyan)"/>
+  <path d="M 50,80 Q 75,45 100,80 T 150,80 T 200,80 L 235,80" fill="none" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-pe-cyan-atomic-q16-16)"/>
   <circle cx="100" cy="80" r="5" fill="#fbbf24"/>
   <circle cx="150" cy="80" r="5" fill="#fbbf24"/>
   <circle cx="200" cy="80" r="5" fill="#fbbf24"/>
@@ -1436,15 +1436,15 @@ ln2=0.693
   <div class="graph-title">📐 原子核の崩壊・半減期と質量エネルギー</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-nu-rose" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#f43f5e"/></marker>
+    <marker id="arr-nu-rose-atomic-q17-17" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#f43f5e"/></marker>
   </defs>
   <circle cx="100" cy="80" r="22" fill="#1e293b" stroke="#f43f5e" stroke-width="2"/>
   <text x="100" y="84" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">親核 (N₀)</text>
-  <line x1="125" y1="80" x2="185" y2="80" stroke="#f43f5e" stroke-width="2.5" marker-end="url(#arr-nu-rose)"/>
+  <line x1="125" y1="80" x2="185" y2="80" stroke="#f43f5e" stroke-width="2.5" marker-end="url(#arr-nu-rose-atomic-q17-17)"/>
   <circle cx="215" cy="65" r="15" fill="#1e293b" stroke="#38bdf8" stroke-width="1.5"/>
   <text x="215" y="69" fill="#38bdf8" font-size="8" text-anchor="middle">娘核</text>
-  <circle cx="240" cy="105" r="8" fill="#fbbf24"/>
-  <text x="240" y="108" fill="#0f172a" font-size="8" font-weight="700" text-anchor="middle">α/β</text>
+  <circle cx="240" cy="105" r="8" fill="#1e293b" stroke="#fbbf24" stroke-width="1.5"/>
+  <text x="240" y="108" fill="#fbbf24" font-size="8" font-weight="700" text-anchor="middle">α/β</text>
   <rect x="290" y="45" width="190" height="48" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
   <text x="385" y="64" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">半減期: N ＝ N₀ (½)^(t/T)</text>
   <text x="385" y="82" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">質量欠損: E ＝ Δm c²</text>
@@ -1599,9 +1599,9 @@ $$
   <div class="graph-title">📐 光量子仮説と光子のエネルギー・運動量</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-pe-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-pe-cyan-atomic-q18-18" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
   </defs>
-  <path d="M 50,80 Q 75,45 100,80 T 150,80 T 200,80 L 235,80" fill="none" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-pe-cyan)"/>
+  <path d="M 50,80 Q 75,45 100,80 T 150,80 T 200,80 L 235,80" fill="none" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-pe-cyan-atomic-q18-18)"/>
   <circle cx="100" cy="80" r="5" fill="#fbbf24"/>
   <circle cx="150" cy="80" r="5" fill="#fbbf24"/>
   <circle cx="200" cy="80" r="5" fill="#fbbf24"/>
@@ -1668,9 +1668,9 @@ $$
   <div class="graph-title">📐 光量子仮説と光子のエネルギー・運動量</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-pe-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-pe-cyan-atomic-q19-19" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
   </defs>
-  <path d="M 50,80 Q 75,45 100,80 T 150,80 T 200,80 L 235,80" fill="none" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-pe-cyan)"/>
+  <path d="M 50,80 Q 75,45 100,80 T 150,80 T 200,80 L 235,80" fill="none" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-pe-cyan-atomic-q19-19)"/>
   <circle cx="100" cy="80" r="5" fill="#fbbf24"/>
   <circle cx="150" cy="80" r="5" fill="#fbbf24"/>
   <circle cx="200" cy="80" r="5" fill="#fbbf24"/>
@@ -1737,19 +1737,19 @@ $$
   <div class="graph-title">📐 ボーアの水素原子模型とエネルギー準位</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-bo-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-bo-cyan-atomic-q20-20" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
   </defs>
   <circle cx="180" cy="80" r="10" fill="#f43f5e"/>
   <text x="180" y="84" fill="#fff" font-size="10" font-weight="700" text-anchor="middle">＋e</text>
-  <circle cx="180" cy="80" r="35" fill="none" stroke="#475569" stroke-width="1.5" stroke-dasharray="3,3"/>
-  <circle cx="180" cy="80" r="60" fill="none" stroke="#475569" stroke-width="1.5" stroke-dasharray="3,3"/>
+  <circle cx="180" cy="80" r="35" fill="none" stroke="#64748b" stroke-width="1.5" stroke-dasharray="3,3"/>
+  <circle cx="180" cy="80" r="60" fill="none" stroke="#64748b" stroke-width="1.5" stroke-dasharray="3,3"/>
   <circle cx="215" cy="80" r="5" fill="#38bdf8"/>
   <circle cx="240" cy="80" r="5" fill="#fbbf24"/>
   <line x1="240" y1="80" x2="218" y2="80" stroke="#f43f5e" stroke-width="2"/>
-  <path d="M 230,80 Q 245,60 260,80 T 290,80" fill="none" stroke="#38bdf8" stroke-width="2" marker-end="url(#arr-bo-cyan)"/>
+  <path d="M 230,80 Q 245,60 260,80 T 290,80" fill="none" stroke="#38bdf8" stroke-width="2" marker-end="url(#arr-bo-cyan-atomic-q20-20)"/>
   <rect x="250" y="55" width="85" height="16" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
   <text x="292" y="67" fill="#38bdf8" font-size="9" font-weight="700" text-anchor="middle">放出光子 hν</text>
-  <rect x="340" y="45" width="145" height="45" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <rect x="334" y="45" width="156" height="45" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
   <text x="412" y="63" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">振動数条件: hν ＝ E₂ − E₁</text>
   <text x="412" y="79" fill="#fbbf24" font-size="9" text-anchor="middle">量子条件: 2πr ＝ nλ</text>
 </svg>
@@ -1809,9 +1809,9 @@ $$
   <div class="graph-title">📐 光量子仮説と光子のエネルギー・運動量</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-pe-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-pe-cyan-atomic-q21-21" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
   </defs>
-  <path d="M 50,80 Q 75,45 100,80 T 150,80 T 200,80 L 235,80" fill="none" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-pe-cyan)"/>
+  <path d="M 50,80 Q 75,45 100,80 T 150,80 T 200,80 L 235,80" fill="none" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-pe-cyan-atomic-q21-21)"/>
   <circle cx="100" cy="80" r="5" fill="#fbbf24"/>
   <circle cx="150" cy="80" r="5" fill="#fbbf24"/>
   <circle cx="200" cy="80" r="5" fill="#fbbf24"/>

@@ -36,7 +36,7 @@ description: 高校物理の波動分野。波の基本式（v=fλ）、波の�
 * **その場に留まるもの**: 媒質粒子そのもの（媒質は上下または前後にその場で単振動しているだけです）。
 
 <div class="vector-graph-card">
-<svg viewBox="0 0 540 230" xmlns="http://www.w3.org/2000/svg">
+<svg viewBox="0 0 540 255" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <marker id="arr-wave-prop" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
       <path d="M0,0 L0,6 L7,3 z" fill="#38bdf8" />

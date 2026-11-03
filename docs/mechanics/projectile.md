@@ -1,5 +1,5 @@
 ---
-title: 斜方投射（放物運動の公式・軌道方程式・45度定理）【高校物理シミュレーター】
+title: 斜方投射（放物運動の公式・軌道方程式）【高校物理シミュレーター】
 description: 水平方向の等速運動と鉛直方向の等加速度運動の分解、放物線の軌道方程式 y = x tanθ - g/(2v₀² cos²θ) x²、最高点・水平到達距離の完全導出、斜面への投射やモンキーハンティングなど大学入試頻出例題を完全攻略。
 ---
 
@@ -34,7 +34,7 @@ description: 水平方向の等速運動と鉛直方向の等加速度運動の�
 斜方投射を解く絶対の鉄則は、 **「水平方向（$x$軸）」と「鉛直方向（$y$軸）」に完全に分けて考えること** です。
 
 <div class="vector-graph-card">
-<svg viewBox="0 0 540 300" xmlns="http://www.w3.org/2000/svg">
+<svg viewBox="-15 0 610 300" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <marker id="proj-arrow-blue" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
       <path d="M0,0 L0,6 L7,3 z" fill="#38bdf8" />
@@ -226,7 +226,7 @@ $$
 
 ---
 
-## 5. 45°最大飛距離の定理と相補角の対称性
+## 5. 45°最大飛距離と相補角の対称性
 
 ### なぜ 45° で最大になるのか？
 水平到達距離 $R = \frac{v_0^2 \sin 2\theta}{g}$ において、変数 $\theta$（$0^\circ < \theta < 90^\circ$）に対して $R$ が最大となるのは、$\sin 2\theta$ が最大値 $1$ をとるときです：

@@ -32,17 +32,17 @@ description: 高校物理「電磁気（Electromagnetism）」の実践問題・
   <div class="graph-title">📐 クーロンの法則と点電荷間の静電気力</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-cl-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
-    <marker id="arr-cl-rose" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#f43f5e"/></marker>
+    <marker id="arr-cl-cyan-electromagnetism-q1-1" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-cl-rose-electromagnetism-q1-1" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#f43f5e"/></marker>
   </defs>
   <circle cx="100" cy="80" r="16" fill="#f43f5e"/>
   <text x="100" y="85" fill="#fff" font-size="11" font-weight="700" text-anchor="middle">＋q₁</text>
-  <line x1="100" y1="80" x2="50" y2="80" stroke="#f43f5e" stroke-width="2.5" marker-end="url(#arr-cl-rose)"/>
+  <line x1="100" y1="80" x2="50" y2="80" stroke="#f43f5e" stroke-width="2.5" marker-end="url(#arr-cl-rose-electromagnetism-q1-1)"/>
   <rect x="45" y="55" width="45" height="15" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
   <text x="67" y="66" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">力 F</text>
   <circle cx="230" cy="80" r="16" fill="#f43f5e"/>
   <text x="230" y="85" fill="#fff" font-size="11" font-weight="700" text-anchor="middle">＋q₂</text>
-  <line x1="230" y1="80" x2="280" y2="80" stroke="#f43f5e" stroke-width="2.5" marker-end="url(#arr-cl-rose)"/>
+  <line x1="230" y1="80" x2="280" y2="80" stroke="#f43f5e" stroke-width="2.5" marker-end="url(#arr-cl-rose-electromagnetism-q1-1)"/>
   <rect x="245" y="55" width="45" height="15" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
   <text x="267" y="66" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">力 F</text>
   <line x1="100" y1="120" x2="230" y2="120" stroke="#fbbf24" stroke-width="1.5"/>
@@ -110,13 +110,13 @@ $$
   <div class="graph-title">📐 点電荷の周囲の電場と電位・電気力線</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-ef-rose" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#f43f5e"/></marker>
+    <marker id="arr-ef-rose-electromagnetism-q2-2" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#f43f5e"/></marker>
   </defs>
   <circle cx="160" cy="80" r="16" fill="#f43f5e"/>
   <text x="160" y="85" fill="#fff" font-size="11" font-weight="700" text-anchor="middle">＋Q</text>
   <circle cx="160" cy="80" r="45" fill="none" stroke="#64748b" stroke-width="1" stroke-dasharray="3,3"/>
   <circle cx="160" cy="80" r="75" fill="none" stroke="#64748b" stroke-width="1" stroke-dasharray="3,3"/>
-  <line x1="178" y1="80" x2="250" y2="80" stroke="#f43f5e" stroke-width="2" marker-end="url(#arr-ef-rose)"/>
+  <line x1="178" y1="80" x2="250" y2="80" stroke="#f43f5e" stroke-width="2" marker-end="url(#arr-ef-rose-electromagnetism-q2-2)"/>
   <rect x="200" y="60" width="45" height="15" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
   <text x="222" y="71" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">電場 E</text>
   <rect x="300" y="40" width="175" height="55" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
@@ -180,23 +180,23 @@ $$
   <div class="graph-title">📐 直流回路とオームの法則・キルヒホッフ則</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-c-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-c-cyan-electromagnetism-q3-3" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
   </defs>
   <rect x="70" y="30" width="360" height="100" fill="none" stroke="#64748b" stroke-width="2"/>
   <line x1="60" y1="75" x2="80" y2="75" stroke="#f43f5e" stroke-width="3"/>
   <line x1="65" y1="85" x2="75" y2="85" stroke="#f43f5e" stroke-width="2"/>
-  <rect x="25" y="72" width="30" height="16" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
+  <rect x="12" y="72" width="56" height="16" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
   <text x="40" y="84" fill="#f43f5e" font-size="10" font-weight="700" text-anchor="middle">起電力 E</text>
-  <rect x="200" y="20" width="60" height="20" rx="3" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+  <rect x="197" y="20" width="66" height="20" rx="3" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
   <text x="230" y="34" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">抵抗 R₁</text>
-  <rect x="200" y="120" width="60" height="20" rx="3" fill="#1e293b" stroke="#fbbf24" stroke-width="2"/>
+  <rect x="197" y="120" width="66" height="20" rx="3" fill="#1e293b" stroke="#fbbf24" stroke-width="2"/>
   <text x="230" y="134" fill="#fbbf24" font-size="10" font-weight="700" text-anchor="middle">抵抗 R₂</text>
-  <line x1="120" y1="30" x2="160" y2="30" stroke="#38bdf8" stroke-width="2" marker-end="url(#arr-c-cyan)"/>
+  <line x1="120" y1="30" x2="160" y2="30" stroke="#38bdf8" stroke-width="2" marker-end="url(#arr-c-cyan-electromagnetism-q3-3)"/>
   <rect x="130" y="10" width="40" height="15" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
   <text x="150" y="21" fill="#38bdf8" font-size="9" font-weight="700" text-anchor="middle">電流 I</text>
-  <rect x="300" y="60" width="160" height="38" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
-  <text x="380" y="76" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">オーム則: V ＝ RI</text>
-  <text x="380" y="90" fill="#cbd5e1" font-size="9" text-anchor="middle">キルヒホッフ第2則: E ＝ RI</text>
+  <rect x="265" y="60" width="150" height="40" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="340" y="76" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">オーム則: V ＝ RI</text>
+  <text x="340" y="91" fill="#cbd5e1" font-size="9" text-anchor="middle">キルヒホッフ第2則: E ＝ RI</text>
 </svg>
   <div class="graph-caption">各素子の両端電位差 V = RI と、回路の任意の閉路で起電力の和＝電圧降下の和が成り立ちます。</div>
 </div>
@@ -254,23 +254,23 @@ $$
   <div class="graph-title">📐 直流回路とオームの法則・キルヒホッフ則</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-c-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-c-cyan-electromagnetism-q4-4" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
   </defs>
   <rect x="70" y="30" width="360" height="100" fill="none" stroke="#64748b" stroke-width="2"/>
   <line x1="60" y1="75" x2="80" y2="75" stroke="#f43f5e" stroke-width="3"/>
   <line x1="65" y1="85" x2="75" y2="85" stroke="#f43f5e" stroke-width="2"/>
-  <rect x="25" y="72" width="30" height="16" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
+  <rect x="12" y="72" width="56" height="16" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
   <text x="40" y="84" fill="#f43f5e" font-size="10" font-weight="700" text-anchor="middle">起電力 E</text>
-  <rect x="200" y="20" width="60" height="20" rx="3" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+  <rect x="197" y="20" width="66" height="20" rx="3" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
   <text x="230" y="34" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">抵抗 R₁</text>
-  <rect x="200" y="120" width="60" height="20" rx="3" fill="#1e293b" stroke="#fbbf24" stroke-width="2"/>
+  <rect x="197" y="120" width="66" height="20" rx="3" fill="#1e293b" stroke="#fbbf24" stroke-width="2"/>
   <text x="230" y="134" fill="#fbbf24" font-size="10" font-weight="700" text-anchor="middle">抵抗 R₂</text>
-  <line x1="120" y1="30" x2="160" y2="30" stroke="#38bdf8" stroke-width="2" marker-end="url(#arr-c-cyan)"/>
+  <line x1="120" y1="30" x2="160" y2="30" stroke="#38bdf8" stroke-width="2" marker-end="url(#arr-c-cyan-electromagnetism-q4-4)"/>
   <rect x="130" y="10" width="40" height="15" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
   <text x="150" y="21" fill="#38bdf8" font-size="9" font-weight="700" text-anchor="middle">電流 I</text>
-  <rect x="300" y="60" width="160" height="38" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
-  <text x="380" y="76" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">オーム則: V ＝ RI</text>
-  <text x="380" y="90" fill="#cbd5e1" font-size="9" text-anchor="middle">キルヒホッフ第2則: E ＝ RI</text>
+  <rect x="265" y="60" width="150" height="40" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="340" y="76" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">オーム則: V ＝ RI</text>
+  <text x="340" y="91" fill="#cbd5e1" font-size="9" text-anchor="middle">キルヒホッフ第2則: E ＝ RI</text>
 </svg>
   <div class="graph-caption">各素子の両端電位差 V = RI と、回路の任意の閉路で起電力の和＝電圧降下の和が成り立ちます。</div>
 </div>
@@ -330,23 +330,23 @@ $$
   <div class="graph-title">📐 直流回路とオームの法則・キルヒホッフ則</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-c-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-c-cyan-electromagnetism-q5-5" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
   </defs>
   <rect x="70" y="30" width="360" height="100" fill="none" stroke="#64748b" stroke-width="2"/>
   <line x1="60" y1="75" x2="80" y2="75" stroke="#f43f5e" stroke-width="3"/>
   <line x1="65" y1="85" x2="75" y2="85" stroke="#f43f5e" stroke-width="2"/>
-  <rect x="25" y="72" width="30" height="16" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
+  <rect x="12" y="72" width="56" height="16" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
   <text x="40" y="84" fill="#f43f5e" font-size="10" font-weight="700" text-anchor="middle">起電力 E</text>
-  <rect x="200" y="20" width="60" height="20" rx="3" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+  <rect x="197" y="20" width="66" height="20" rx="3" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
   <text x="230" y="34" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">抵抗 R₁</text>
-  <rect x="200" y="120" width="60" height="20" rx="3" fill="#1e293b" stroke="#fbbf24" stroke-width="2"/>
+  <rect x="197" y="120" width="66" height="20" rx="3" fill="#1e293b" stroke="#fbbf24" stroke-width="2"/>
   <text x="230" y="134" fill="#fbbf24" font-size="10" font-weight="700" text-anchor="middle">抵抗 R₂</text>
-  <line x1="120" y1="30" x2="160" y2="30" stroke="#38bdf8" stroke-width="2" marker-end="url(#arr-c-cyan)"/>
+  <line x1="120" y1="30" x2="160" y2="30" stroke="#38bdf8" stroke-width="2" marker-end="url(#arr-c-cyan-electromagnetism-q5-5)"/>
   <rect x="130" y="10" width="40" height="15" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
   <text x="150" y="21" fill="#38bdf8" font-size="9" font-weight="700" text-anchor="middle">電流 I</text>
-  <rect x="300" y="60" width="160" height="38" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
-  <text x="380" y="76" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">オーム則: V ＝ RI</text>
-  <text x="380" y="90" fill="#cbd5e1" font-size="9" text-anchor="middle">キルヒホッフ第2則: E ＝ RI</text>
+  <rect x="265" y="60" width="150" height="40" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="340" y="76" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">オーム則: V ＝ RI</text>
+  <text x="340" y="91" fill="#cbd5e1" font-size="9" text-anchor="middle">キルヒホッフ第2則: E ＝ RI</text>
 </svg>
   <div class="graph-caption">各素子の両端電位差 V = RI と、回路の任意の閉路で起電力の和＝電圧降下の和が成り立ちます。</div>
 </div>
@@ -406,7 +406,7 @@ $$
   <div class="graph-title">📐 電磁誘導の法則と導線棒の誘導起電力</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-ind-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-ind-cyan-electromagnetism-q6-6" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
   </defs>
   <line x1="60" y1="50" x2="350" y2="50" stroke="#64748b" stroke-width="3"/>
   <line x1="60" y1="120" x2="350" y2="120" stroke="#64748b" stroke-width="3"/>
@@ -416,7 +416,7 @@ $$
   <line x1="60" y1="100" x2="60" y2="120" stroke="#64748b" stroke-width="3"/>
   <line x1="220" y1="40" x2="220" y2="130" stroke="#38bdf8" stroke-width="5"/>
   <text x="235" y="60" fill="#38bdf8" font-size="9" font-weight="700">棒 L</text>
-  <line x1="220" y1="85" x2="275" y2="85" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-ind-cyan)"/>
+  <line x1="220" y1="85" x2="275" y2="85" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-ind-cyan-electromagnetism-q6-6)"/>
   <rect x="235" y="93" width="45" height="15" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
   <text x="257" y="104" fill="#38bdf8" font-size="9" font-weight="700" text-anchor="middle">速度 v</text>
   <rect x="340" y="55" width="135" height="38" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
@@ -487,13 +487,13 @@ $$
   <div class="graph-title">📐 点電荷の周囲の電場と電位・電気力線</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-ef-rose" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#f43f5e"/></marker>
+    <marker id="arr-ef-rose-electromagnetism-q7-7" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#f43f5e"/></marker>
   </defs>
   <circle cx="160" cy="80" r="16" fill="#f43f5e"/>
   <text x="160" y="85" fill="#fff" font-size="11" font-weight="700" text-anchor="middle">＋Q</text>
   <circle cx="160" cy="80" r="45" fill="none" stroke="#64748b" stroke-width="1" stroke-dasharray="3,3"/>
   <circle cx="160" cy="80" r="75" fill="none" stroke="#64748b" stroke-width="1" stroke-dasharray="3,3"/>
-  <line x1="178" y1="80" x2="250" y2="80" stroke="#f43f5e" stroke-width="2" marker-end="url(#arr-ef-rose)"/>
+  <line x1="178" y1="80" x2="250" y2="80" stroke="#f43f5e" stroke-width="2" marker-end="url(#arr-ef-rose-electromagnetism-q7-7)"/>
   <rect x="200" y="60" width="45" height="15" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
   <text x="222" y="71" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">電場 E</text>
   <rect x="300" y="40" width="175" height="55" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
@@ -553,13 +553,13 @@ $$
   <div class="graph-title">📐 点電荷の周囲の電場と電位・電気力線</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-ef-rose" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#f43f5e"/></marker>
+    <marker id="arr-ef-rose-electromagnetism-q8-8" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#f43f5e"/></marker>
   </defs>
   <circle cx="160" cy="80" r="16" fill="#f43f5e"/>
   <text x="160" y="85" fill="#fff" font-size="11" font-weight="700" text-anchor="middle">＋Q</text>
   <circle cx="160" cy="80" r="45" fill="none" stroke="#64748b" stroke-width="1" stroke-dasharray="3,3"/>
   <circle cx="160" cy="80" r="75" fill="none" stroke="#64748b" stroke-width="1" stroke-dasharray="3,3"/>
-  <line x1="178" y1="80" x2="250" y2="80" stroke="#f43f5e" stroke-width="2" marker-end="url(#arr-ef-rose)"/>
+  <line x1="178" y1="80" x2="250" y2="80" stroke="#f43f5e" stroke-width="2" marker-end="url(#arr-ef-rose-electromagnetism-q8-8)"/>
   <rect x="200" y="60" width="45" height="15" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
   <text x="222" y="71" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">電場 E</text>
   <rect x="300" y="40" width="175" height="55" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
@@ -625,23 +625,23 @@ $$
   <div class="graph-title">📐 直流回路とオームの法則・キルヒホッフ則</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-c-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-c-cyan-electromagnetism-q9-9" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
   </defs>
   <rect x="70" y="30" width="360" height="100" fill="none" stroke="#64748b" stroke-width="2"/>
   <line x1="60" y1="75" x2="80" y2="75" stroke="#f43f5e" stroke-width="3"/>
   <line x1="65" y1="85" x2="75" y2="85" stroke="#f43f5e" stroke-width="2"/>
-  <rect x="25" y="72" width="30" height="16" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
+  <rect x="12" y="72" width="56" height="16" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
   <text x="40" y="84" fill="#f43f5e" font-size="10" font-weight="700" text-anchor="middle">起電力 E</text>
-  <rect x="200" y="20" width="60" height="20" rx="3" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+  <rect x="197" y="20" width="66" height="20" rx="3" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
   <text x="230" y="34" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">抵抗 R₁</text>
-  <rect x="200" y="120" width="60" height="20" rx="3" fill="#1e293b" stroke="#fbbf24" stroke-width="2"/>
+  <rect x="197" y="120" width="66" height="20" rx="3" fill="#1e293b" stroke="#fbbf24" stroke-width="2"/>
   <text x="230" y="134" fill="#fbbf24" font-size="10" font-weight="700" text-anchor="middle">抵抗 R₂</text>
-  <line x1="120" y1="30" x2="160" y2="30" stroke="#38bdf8" stroke-width="2" marker-end="url(#arr-c-cyan)"/>
+  <line x1="120" y1="30" x2="160" y2="30" stroke="#38bdf8" stroke-width="2" marker-end="url(#arr-c-cyan-electromagnetism-q9-9)"/>
   <rect x="130" y="10" width="40" height="15" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
   <text x="150" y="21" fill="#38bdf8" font-size="9" font-weight="700" text-anchor="middle">電流 I</text>
-  <rect x="300" y="60" width="160" height="38" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
-  <text x="380" y="76" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">オーム則: V ＝ RI</text>
-  <text x="380" y="90" fill="#cbd5e1" font-size="9" text-anchor="middle">キルヒホッフ第2則: E ＝ RI</text>
+  <rect x="265" y="60" width="150" height="40" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="340" y="76" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">オーム則: V ＝ RI</text>
+  <text x="340" y="91" fill="#cbd5e1" font-size="9" text-anchor="middle">キルヒホッフ第2則: E ＝ RI</text>
 </svg>
   <div class="graph-caption">各素子の両端電位差 V = RI と、回路の任意の閉路で起電力の和＝電圧降下の和が成り立ちます。</div>
 </div>
@@ -709,23 +709,23 @@ $$
   <div class="graph-title">📐 直流回路とオームの法則・キルヒホッフ則</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-c-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-c-cyan-electromagnetism-q10-10" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
   </defs>
   <rect x="70" y="30" width="360" height="100" fill="none" stroke="#64748b" stroke-width="2"/>
   <line x1="60" y1="75" x2="80" y2="75" stroke="#f43f5e" stroke-width="3"/>
   <line x1="65" y1="85" x2="75" y2="85" stroke="#f43f5e" stroke-width="2"/>
-  <rect x="25" y="72" width="30" height="16" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
+  <rect x="12" y="72" width="56" height="16" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
   <text x="40" y="84" fill="#f43f5e" font-size="10" font-weight="700" text-anchor="middle">起電力 E</text>
-  <rect x="200" y="20" width="60" height="20" rx="3" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+  <rect x="197" y="20" width="66" height="20" rx="3" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
   <text x="230" y="34" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">抵抗 R₁</text>
-  <rect x="200" y="120" width="60" height="20" rx="3" fill="#1e293b" stroke="#fbbf24" stroke-width="2"/>
+  <rect x="197" y="120" width="66" height="20" rx="3" fill="#1e293b" stroke="#fbbf24" stroke-width="2"/>
   <text x="230" y="134" fill="#fbbf24" font-size="10" font-weight="700" text-anchor="middle">抵抗 R₂</text>
-  <line x1="120" y1="30" x2="160" y2="30" stroke="#38bdf8" stroke-width="2" marker-end="url(#arr-c-cyan)"/>
+  <line x1="120" y1="30" x2="160" y2="30" stroke="#38bdf8" stroke-width="2" marker-end="url(#arr-c-cyan-electromagnetism-q10-10)"/>
   <rect x="130" y="10" width="40" height="15" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
   <text x="150" y="21" fill="#38bdf8" font-size="9" font-weight="700" text-anchor="middle">電流 I</text>
-  <rect x="300" y="60" width="160" height="38" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
-  <text x="380" y="76" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">オーム則: V ＝ RI</text>
-  <text x="380" y="90" fill="#cbd5e1" font-size="9" text-anchor="middle">キルヒホッフ第2則: E ＝ RI</text>
+  <rect x="265" y="60" width="150" height="40" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="340" y="76" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">オーム則: V ＝ RI</text>
+  <text x="340" y="91" fill="#cbd5e1" font-size="9" text-anchor="middle">キルヒホッフ第2則: E ＝ RI</text>
 </svg>
   <div class="graph-caption">各素子の両端電位差 V = RI と、回路の任意の閉路で起電力の和＝電圧降下の和が成り立ちます。</div>
 </div>
@@ -793,23 +793,23 @@ $$
   <div class="graph-title">📐 直流回路とオームの法則・キルヒホッフ則</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-c-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-c-cyan-electromagnetism-q11-11" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
   </defs>
   <rect x="70" y="30" width="360" height="100" fill="none" stroke="#64748b" stroke-width="2"/>
   <line x1="60" y1="75" x2="80" y2="75" stroke="#f43f5e" stroke-width="3"/>
   <line x1="65" y1="85" x2="75" y2="85" stroke="#f43f5e" stroke-width="2"/>
-  <rect x="25" y="72" width="30" height="16" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
+  <rect x="12" y="72" width="56" height="16" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
   <text x="40" y="84" fill="#f43f5e" font-size="10" font-weight="700" text-anchor="middle">起電力 E</text>
-  <rect x="200" y="20" width="60" height="20" rx="3" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+  <rect x="197" y="20" width="66" height="20" rx="3" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
   <text x="230" y="34" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">抵抗 R₁</text>
-  <rect x="200" y="120" width="60" height="20" rx="3" fill="#1e293b" stroke="#fbbf24" stroke-width="2"/>
+  <rect x="197" y="120" width="66" height="20" rx="3" fill="#1e293b" stroke="#fbbf24" stroke-width="2"/>
   <text x="230" y="134" fill="#fbbf24" font-size="10" font-weight="700" text-anchor="middle">抵抗 R₂</text>
-  <line x1="120" y1="30" x2="160" y2="30" stroke="#38bdf8" stroke-width="2" marker-end="url(#arr-c-cyan)"/>
+  <line x1="120" y1="30" x2="160" y2="30" stroke="#38bdf8" stroke-width="2" marker-end="url(#arr-c-cyan-electromagnetism-q11-11)"/>
   <rect x="130" y="10" width="40" height="15" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
   <text x="150" y="21" fill="#38bdf8" font-size="9" font-weight="700" text-anchor="middle">電流 I</text>
-  <rect x="300" y="60" width="160" height="38" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
-  <text x="380" y="76" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">オーム則: V ＝ RI</text>
-  <text x="380" y="90" fill="#cbd5e1" font-size="9" text-anchor="middle">キルヒホッフ第2則: E ＝ RI</text>
+  <rect x="265" y="60" width="150" height="40" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="340" y="76" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">オーム則: V ＝ RI</text>
+  <text x="340" y="91" fill="#cbd5e1" font-size="9" text-anchor="middle">キルヒホッフ第2則: E ＝ RI</text>
 </svg>
   <div class="graph-caption">各素子の両端電位差 V = RI と、回路の任意の閉路で起電力の和＝電圧降下の和が成り立ちます。</div>
 </div>
@@ -889,7 +889,8 @@ $$
   <div class="graph-title">📐 平行板コンデンサーの電気量と静電エネルギー</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-cap-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-cap-cyan-electromagnetism-q12-12" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-cap-amber-electromagnetism-q12-12" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#fbbf24"/></marker>
   </defs>
   <line x1="180" y1="30" x2="180" y2="130" stroke="#f43f5e" stroke-width="4"/>
   <line x1="260" y1="30" x2="260" y2="130" stroke="#38bdf8" stroke-width="4"/>
@@ -897,16 +898,16 @@ $$
   <text x="152" y="83" fill="#f43f5e" font-size="10" font-weight="700" text-anchor="middle">＋Q (正)</text>
   <rect x="268" y="70" width="45" height="18" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
   <text x="290" y="83" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">−Q (負)</text>
-  <line x1="184" y1="50" x2="256" y2="50" stroke="#fbbf24" stroke-width="2" marker-end="url(#arr-cap-cyan)"/>
-  <line x1="184" y1="80" x2="256" y2="80" stroke="#fbbf24" stroke-width="2" marker-end="url(#arr-cap-cyan)"/>
-  <line x1="184" y1="110" x2="256" y2="110" stroke="#fbbf24" stroke-width="2" marker-end="url(#arr-cap-cyan)"/>
+  <line x1="184" y1="50" x2="256" y2="50" stroke="#fbbf24" stroke-width="2" marker-end="url(#arr-cap-amber-electromagnetism-q12-12)"/>
+  <line x1="184" y1="80" x2="256" y2="80" stroke="#fbbf24" stroke-width="2" marker-end="url(#arr-cap-amber-electromagnetism-q12-12)"/>
+  <line x1="184" y1="110" x2="256" y2="110" stroke="#fbbf24" stroke-width="2" marker-end="url(#arr-cap-amber-electromagnetism-q12-12)"/>
   <rect x="200" y="85" width="45" height="16" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
   <text x="222" y="97" fill="#fbbf24" font-size="9" font-weight="700" text-anchor="middle">電場 E</text>
   <rect x="330" y="50" width="140" height="48" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
   <text x="400" y="68" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">Q ＝ CV ,  C ＝ ε S/d</text>
   <text x="400" y="85" fill="#f43f5e" font-size="9" text-anchor="middle">エネルギー U ＝ ½ CV²</text>
 </svg>
-  <div class="graph-caption">極板間の電位差 V に対し Q = CV の電荷が蓄えられ、静電エネルギー $U = \frac{1}{2}CV^2$ が蓄積されます。</div>
+  <div class="graph-caption">極板間の電位差 V に対し Q = CV の電荷が蓄えられ、静電エネルギー U = ½CV² が蓄積されます。</div>
 </div>
 
 <details class="hint-box">
@@ -966,21 +967,22 @@ $$
   <div class="graph-title">📐 磁場中の荷電粒子の運動・ローレンツ力</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-mf-rose" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#f43f5e"/></marker>
-    <marker id="arr-mf-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-mf-rose-electromagnetism-q13-13" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#f43f5e"/></marker>
+    <marker id="arr-mf-cyan-electromagnetism-q13-13" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
   </defs>
-  <g fill="#475569" font-size="14">
-    <text x="80" y="50">⊗</text><text x="140" y="50">⊗</text><text x="200" y="50">⊗</text>
-    <text x="80" y="100">⊗</text><text x="140" y="100">⊗</text><text x="200" y="100">⊗</text>
+  <g fill="#94a3b8" font-size="14">
+    <text x="60" y="50">⊗</text><text x="100" y="50">⊗</text>
+    <text x="60" y="95">⊗</text><text x="100" y="95">⊗</text><text x="150" y="105">⊗</text>
+    <text x="60" y="135">⊗</text><text x="110" y="135">⊗</text><text x="160" y="135">⊗</text><text x="210" y="135">⊗</text>
   </g>
   <rect x="100" y="15" width="105" height="18" rx="3" fill="#0f172a" stroke="#64748b" stroke-width="1"/>
   <text x="152" y="28" fill="#94a3b8" font-size="9" text-anchor="middle">磁場 B (画面奥向き)</text>
   <circle cx="200" cy="85" r="9" fill="#f43f5e"/>
   <text x="200" y="89" fill="#fff" font-size="10" font-weight="700" text-anchor="middle">＋</text>
-  <line x1="200" y1="85" x2="260" y2="85" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-mf-cyan)"/>
+  <line x1="200" y1="85" x2="260" y2="85" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-mf-cyan-electromagnetism-q13-13)"/>
   <rect x="220" y="65" width="45" height="16" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
   <text x="242" y="77" fill="#38bdf8" font-size="9" font-weight="700" text-anchor="middle">速度 v</text>
-  <line x1="200" y1="85" x2="200" y2="35" stroke="#f43f5e" stroke-width="2.5" marker-end="url(#arr-mf-rose)"/>
+  <line x1="200" y1="85" x2="200" y2="35" stroke="#f43f5e" stroke-width="2.5" marker-end="url(#arr-mf-rose-electromagnetism-q13-13)"/>
   <rect x="145" y="40" width="50" height="16" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
   <text x="170" y="52" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">力 F＝qvB</text>
   <rect x="300" y="45" width="165" height="42" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
@@ -1045,23 +1047,23 @@ $$
   <div class="graph-title">📐 直流回路とオームの法則・キルヒホッフ則</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-c-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-c-cyan-electromagnetism-q14-14" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
   </defs>
   <rect x="70" y="30" width="360" height="100" fill="none" stroke="#64748b" stroke-width="2"/>
   <line x1="60" y1="75" x2="80" y2="75" stroke="#f43f5e" stroke-width="3"/>
   <line x1="65" y1="85" x2="75" y2="85" stroke="#f43f5e" stroke-width="2"/>
-  <rect x="25" y="72" width="30" height="16" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
+  <rect x="12" y="72" width="56" height="16" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
   <text x="40" y="84" fill="#f43f5e" font-size="10" font-weight="700" text-anchor="middle">起電力 E</text>
-  <rect x="200" y="20" width="60" height="20" rx="3" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+  <rect x="197" y="20" width="66" height="20" rx="3" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
   <text x="230" y="34" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">抵抗 R₁</text>
-  <rect x="200" y="120" width="60" height="20" rx="3" fill="#1e293b" stroke="#fbbf24" stroke-width="2"/>
+  <rect x="197" y="120" width="66" height="20" rx="3" fill="#1e293b" stroke="#fbbf24" stroke-width="2"/>
   <text x="230" y="134" fill="#fbbf24" font-size="10" font-weight="700" text-anchor="middle">抵抗 R₂</text>
-  <line x1="120" y1="30" x2="160" y2="30" stroke="#38bdf8" stroke-width="2" marker-end="url(#arr-c-cyan)"/>
+  <line x1="120" y1="30" x2="160" y2="30" stroke="#38bdf8" stroke-width="2" marker-end="url(#arr-c-cyan-electromagnetism-q14-14)"/>
   <rect x="130" y="10" width="40" height="15" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
   <text x="150" y="21" fill="#38bdf8" font-size="9" font-weight="700" text-anchor="middle">電流 I</text>
-  <rect x="300" y="60" width="160" height="38" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
-  <text x="380" y="76" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">オーム則: V ＝ RI</text>
-  <text x="380" y="90" fill="#cbd5e1" font-size="9" text-anchor="middle">キルヒホッフ第2則: E ＝ RI</text>
+  <rect x="265" y="60" width="150" height="40" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="340" y="76" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">オーム則: V ＝ RI</text>
+  <text x="340" y="91" fill="#cbd5e1" font-size="9" text-anchor="middle">キルヒホッフ第2則: E ＝ RI</text>
 </svg>
   <div class="graph-caption">各素子の両端電位差 V = RI と、回路の任意の閉路で起電力の和＝電圧降下の和が成り立ちます。</div>
 </div>
@@ -1121,23 +1123,23 @@ $$
   <div class="graph-title">📐 直流回路とオームの法則・キルヒホッフ則</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-c-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-c-cyan-electromagnetism-q15-15" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
   </defs>
   <rect x="70" y="30" width="360" height="100" fill="none" stroke="#64748b" stroke-width="2"/>
   <line x1="60" y1="75" x2="80" y2="75" stroke="#f43f5e" stroke-width="3"/>
   <line x1="65" y1="85" x2="75" y2="85" stroke="#f43f5e" stroke-width="2"/>
-  <rect x="25" y="72" width="30" height="16" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
+  <rect x="12" y="72" width="56" height="16" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
   <text x="40" y="84" fill="#f43f5e" font-size="10" font-weight="700" text-anchor="middle">起電力 E</text>
-  <rect x="200" y="20" width="60" height="20" rx="3" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+  <rect x="197" y="20" width="66" height="20" rx="3" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
   <text x="230" y="34" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">抵抗 R₁</text>
-  <rect x="200" y="120" width="60" height="20" rx="3" fill="#1e293b" stroke="#fbbf24" stroke-width="2"/>
+  <rect x="197" y="120" width="66" height="20" rx="3" fill="#1e293b" stroke="#fbbf24" stroke-width="2"/>
   <text x="230" y="134" fill="#fbbf24" font-size="10" font-weight="700" text-anchor="middle">抵抗 R₂</text>
-  <line x1="120" y1="30" x2="160" y2="30" stroke="#38bdf8" stroke-width="2" marker-end="url(#arr-c-cyan)"/>
+  <line x1="120" y1="30" x2="160" y2="30" stroke="#38bdf8" stroke-width="2" marker-end="url(#arr-c-cyan-electromagnetism-q15-15)"/>
   <rect x="130" y="10" width="40" height="15" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
   <text x="150" y="21" fill="#38bdf8" font-size="9" font-weight="700" text-anchor="middle">電流 I</text>
-  <rect x="300" y="60" width="160" height="38" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
-  <text x="380" y="76" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">オーム則: V ＝ RI</text>
-  <text x="380" y="90" fill="#cbd5e1" font-size="9" text-anchor="middle">キルヒホッフ第2則: E ＝ RI</text>
+  <rect x="265" y="60" width="150" height="40" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="340" y="76" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">オーム則: V ＝ RI</text>
+  <text x="340" y="91" fill="#cbd5e1" font-size="9" text-anchor="middle">キルヒホッフ第2則: E ＝ RI</text>
 </svg>
   <div class="graph-caption">各素子の両端電位差 V = RI と、回路の任意の閉路で起電力の和＝電圧降下の和が成り立ちます。</div>
 </div>
@@ -1197,7 +1199,8 @@ $$
   <div class="graph-title">📐 平行板コンデンサーの電気量と静電エネルギー</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-cap-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-cap-cyan-electromagnetism-q16-16" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-cap-amber-electromagnetism-q16-16" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#fbbf24"/></marker>
   </defs>
   <line x1="180" y1="30" x2="180" y2="130" stroke="#f43f5e" stroke-width="4"/>
   <line x1="260" y1="30" x2="260" y2="130" stroke="#38bdf8" stroke-width="4"/>
@@ -1205,16 +1208,16 @@ $$
   <text x="152" y="83" fill="#f43f5e" font-size="10" font-weight="700" text-anchor="middle">＋Q (正)</text>
   <rect x="268" y="70" width="45" height="18" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
   <text x="290" y="83" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">−Q (負)</text>
-  <line x1="184" y1="50" x2="256" y2="50" stroke="#fbbf24" stroke-width="2" marker-end="url(#arr-cap-cyan)"/>
-  <line x1="184" y1="80" x2="256" y2="80" stroke="#fbbf24" stroke-width="2" marker-end="url(#arr-cap-cyan)"/>
-  <line x1="184" y1="110" x2="256" y2="110" stroke="#fbbf24" stroke-width="2" marker-end="url(#arr-cap-cyan)"/>
+  <line x1="184" y1="50" x2="256" y2="50" stroke="#fbbf24" stroke-width="2" marker-end="url(#arr-cap-amber-electromagnetism-q16-16)"/>
+  <line x1="184" y1="80" x2="256" y2="80" stroke="#fbbf24" stroke-width="2" marker-end="url(#arr-cap-amber-electromagnetism-q16-16)"/>
+  <line x1="184" y1="110" x2="256" y2="110" stroke="#fbbf24" stroke-width="2" marker-end="url(#arr-cap-amber-electromagnetism-q16-16)"/>
   <rect x="200" y="85" width="45" height="16" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
   <text x="222" y="97" fill="#fbbf24" font-size="9" font-weight="700" text-anchor="middle">電場 E</text>
   <rect x="330" y="50" width="140" height="48" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
   <text x="400" y="68" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">Q ＝ CV ,  C ＝ ε S/d</text>
   <text x="400" y="85" fill="#f43f5e" font-size="9" text-anchor="middle">エネルギー U ＝ ½ CV²</text>
 </svg>
-  <div class="graph-caption">極板間の電位差 V に対し Q = CV の電荷が蓄えられ、静電エネルギー $U = \frac{1}{2}CV^2$ が蓄積されます。</div>
+  <div class="graph-caption">極板間の電位差 V に対し Q = CV の電荷が蓄えられ、静電エネルギー U = ½CV² が蓄積されます。</div>
 </div>
 
 <details class="hint-box">
@@ -1274,7 +1277,7 @@ $$
   <div class="graph-title">📐 電磁誘導の法則と導線棒の誘導起電力</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-ind-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-ind-cyan-electromagnetism-q17-17" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
   </defs>
   <line x1="60" y1="50" x2="350" y2="50" stroke="#64748b" stroke-width="3"/>
   <line x1="60" y1="120" x2="350" y2="120" stroke="#64748b" stroke-width="3"/>
@@ -1284,7 +1287,7 @@ $$
   <line x1="60" y1="100" x2="60" y2="120" stroke="#64748b" stroke-width="3"/>
   <line x1="220" y1="40" x2="220" y2="130" stroke="#38bdf8" stroke-width="5"/>
   <text x="235" y="60" fill="#38bdf8" font-size="9" font-weight="700">棒 L</text>
-  <line x1="220" y1="85" x2="275" y2="85" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-ind-cyan)"/>
+  <line x1="220" y1="85" x2="275" y2="85" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-ind-cyan-electromagnetism-q17-17)"/>
   <rect x="235" y="93" width="45" height="15" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
   <text x="257" y="104" fill="#38bdf8" font-size="9" font-weight="700" text-anchor="middle">速度 v</text>
   <rect x="340" y="55" width="135" height="38" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
@@ -1355,7 +1358,8 @@ $$
   <div class="graph-title">📐 平行板コンデンサーの電気量と静電エネルギー</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-cap-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-cap-cyan-electromagnetism-q18-18" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-cap-amber-electromagnetism-q18-18" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#fbbf24"/></marker>
   </defs>
   <line x1="180" y1="30" x2="180" y2="130" stroke="#f43f5e" stroke-width="4"/>
   <line x1="260" y1="30" x2="260" y2="130" stroke="#38bdf8" stroke-width="4"/>
@@ -1363,16 +1367,16 @@ $$
   <text x="152" y="83" fill="#f43f5e" font-size="10" font-weight="700" text-anchor="middle">＋Q (正)</text>
   <rect x="268" y="70" width="45" height="18" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
   <text x="290" y="83" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">−Q (負)</text>
-  <line x1="184" y1="50" x2="256" y2="50" stroke="#fbbf24" stroke-width="2" marker-end="url(#arr-cap-cyan)"/>
-  <line x1="184" y1="80" x2="256" y2="80" stroke="#fbbf24" stroke-width="2" marker-end="url(#arr-cap-cyan)"/>
-  <line x1="184" y1="110" x2="256" y2="110" stroke="#fbbf24" stroke-width="2" marker-end="url(#arr-cap-cyan)"/>
+  <line x1="184" y1="50" x2="256" y2="50" stroke="#fbbf24" stroke-width="2" marker-end="url(#arr-cap-amber-electromagnetism-q18-18)"/>
+  <line x1="184" y1="80" x2="256" y2="80" stroke="#fbbf24" stroke-width="2" marker-end="url(#arr-cap-amber-electromagnetism-q18-18)"/>
+  <line x1="184" y1="110" x2="256" y2="110" stroke="#fbbf24" stroke-width="2" marker-end="url(#arr-cap-amber-electromagnetism-q18-18)"/>
   <rect x="200" y="85" width="45" height="16" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
   <text x="222" y="97" fill="#fbbf24" font-size="9" font-weight="700" text-anchor="middle">電場 E</text>
   <rect x="330" y="50" width="140" height="48" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
   <text x="400" y="68" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">Q ＝ CV ,  C ＝ ε S/d</text>
   <text x="400" y="85" fill="#f43f5e" font-size="9" text-anchor="middle">エネルギー U ＝ ½ CV²</text>
 </svg>
-  <div class="graph-caption">極板間の電位差 V に対し Q = CV の電荷が蓄えられ、静電エネルギー $U = \frac{1}{2}CV^2$ が蓄積されます。</div>
+  <div class="graph-caption">極板間の電位差 V に対し Q = CV の電荷が蓄えられ、静電エネルギー U = ½CV² が蓄積されます。</div>
 </div>
 
 <details class="hint-box">
@@ -1430,23 +1434,23 @@ $$
   <div class="graph-title">📐 直流回路とオームの法則・キルヒホッフ則</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-c-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-c-cyan-electromagnetism-q19-19" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
   </defs>
   <rect x="70" y="30" width="360" height="100" fill="none" stroke="#64748b" stroke-width="2"/>
   <line x1="60" y1="75" x2="80" y2="75" stroke="#f43f5e" stroke-width="3"/>
   <line x1="65" y1="85" x2="75" y2="85" stroke="#f43f5e" stroke-width="2"/>
-  <rect x="25" y="72" width="30" height="16" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
+  <rect x="12" y="72" width="56" height="16" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
   <text x="40" y="84" fill="#f43f5e" font-size="10" font-weight="700" text-anchor="middle">起電力 E</text>
-  <rect x="200" y="20" width="60" height="20" rx="3" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+  <rect x="197" y="20" width="66" height="20" rx="3" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
   <text x="230" y="34" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">抵抗 R₁</text>
-  <rect x="200" y="120" width="60" height="20" rx="3" fill="#1e293b" stroke="#fbbf24" stroke-width="2"/>
+  <rect x="197" y="120" width="66" height="20" rx="3" fill="#1e293b" stroke="#fbbf24" stroke-width="2"/>
   <text x="230" y="134" fill="#fbbf24" font-size="10" font-weight="700" text-anchor="middle">抵抗 R₂</text>
-  <line x1="120" y1="30" x2="160" y2="30" stroke="#38bdf8" stroke-width="2" marker-end="url(#arr-c-cyan)"/>
+  <line x1="120" y1="30" x2="160" y2="30" stroke="#38bdf8" stroke-width="2" marker-end="url(#arr-c-cyan-electromagnetism-q19-19)"/>
   <rect x="130" y="10" width="40" height="15" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
   <text x="150" y="21" fill="#38bdf8" font-size="9" font-weight="700" text-anchor="middle">電流 I</text>
-  <rect x="300" y="60" width="160" height="38" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
-  <text x="380" y="76" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">オーム則: V ＝ RI</text>
-  <text x="380" y="90" fill="#cbd5e1" font-size="9" text-anchor="middle">キルヒホッフ第2則: E ＝ RI</text>
+  <rect x="265" y="60" width="150" height="40" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="340" y="76" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">オーム則: V ＝ RI</text>
+  <text x="340" y="91" fill="#cbd5e1" font-size="9" text-anchor="middle">キルヒホッフ第2則: E ＝ RI</text>
 </svg>
   <div class="graph-caption">各素子の両端電位差 V = RI と、回路の任意の閉路で起電力の和＝電圧降下の和が成り立ちます。</div>
 </div>
@@ -1538,21 +1542,22 @@ $$
   <div class="graph-title">📐 磁場中の荷電粒子の運動・ローレンツ力</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-mf-rose" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#f43f5e"/></marker>
-    <marker id="arr-mf-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-mf-rose-electromagnetism-q20-20" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#f43f5e"/></marker>
+    <marker id="arr-mf-cyan-electromagnetism-q20-20" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
   </defs>
-  <g fill="#475569" font-size="14">
-    <text x="80" y="50">⊗</text><text x="140" y="50">⊗</text><text x="200" y="50">⊗</text>
-    <text x="80" y="100">⊗</text><text x="140" y="100">⊗</text><text x="200" y="100">⊗</text>
+  <g fill="#94a3b8" font-size="14">
+    <text x="60" y="50">⊗</text><text x="100" y="50">⊗</text>
+    <text x="60" y="95">⊗</text><text x="100" y="95">⊗</text><text x="150" y="105">⊗</text>
+    <text x="60" y="135">⊗</text><text x="110" y="135">⊗</text><text x="160" y="135">⊗</text><text x="210" y="135">⊗</text>
   </g>
   <rect x="100" y="15" width="105" height="18" rx="3" fill="#0f172a" stroke="#64748b" stroke-width="1"/>
   <text x="152" y="28" fill="#94a3b8" font-size="9" text-anchor="middle">磁場 B (画面奥向き)</text>
   <circle cx="200" cy="85" r="9" fill="#f43f5e"/>
   <text x="200" y="89" fill="#fff" font-size="10" font-weight="700" text-anchor="middle">＋</text>
-  <line x1="200" y1="85" x2="260" y2="85" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-mf-cyan)"/>
+  <line x1="200" y1="85" x2="260" y2="85" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-mf-cyan-electromagnetism-q20-20)"/>
   <rect x="220" y="65" width="45" height="16" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
   <text x="242" y="77" fill="#38bdf8" font-size="9" font-weight="700" text-anchor="middle">速度 v</text>
-  <line x1="200" y1="85" x2="200" y2="35" stroke="#f43f5e" stroke-width="2.5" marker-end="url(#arr-mf-rose)"/>
+  <line x1="200" y1="85" x2="200" y2="35" stroke="#f43f5e" stroke-width="2.5" marker-end="url(#arr-mf-rose-electromagnetism-q20-20)"/>
   <rect x="145" y="40" width="50" height="16" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
   <text x="170" y="52" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">力 F＝qvB</text>
   <rect x="300" y="45" width="165" height="42" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
@@ -1623,23 +1628,23 @@ $$
   <div class="graph-title">📐 直流回路とオームの法則・キルヒホッフ則</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-c-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-c-cyan-electromagnetism-q21-21" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
   </defs>
   <rect x="70" y="30" width="360" height="100" fill="none" stroke="#64748b" stroke-width="2"/>
   <line x1="60" y1="75" x2="80" y2="75" stroke="#f43f5e" stroke-width="3"/>
   <line x1="65" y1="85" x2="75" y2="85" stroke="#f43f5e" stroke-width="2"/>
-  <rect x="25" y="72" width="30" height="16" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
+  <rect x="12" y="72" width="56" height="16" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
   <text x="40" y="84" fill="#f43f5e" font-size="10" font-weight="700" text-anchor="middle">起電力 E</text>
-  <rect x="200" y="20" width="60" height="20" rx="3" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+  <rect x="197" y="20" width="66" height="20" rx="3" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
   <text x="230" y="34" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">抵抗 R₁</text>
-  <rect x="200" y="120" width="60" height="20" rx="3" fill="#1e293b" stroke="#fbbf24" stroke-width="2"/>
+  <rect x="197" y="120" width="66" height="20" rx="3" fill="#1e293b" stroke="#fbbf24" stroke-width="2"/>
   <text x="230" y="134" fill="#fbbf24" font-size="10" font-weight="700" text-anchor="middle">抵抗 R₂</text>
-  <line x1="120" y1="30" x2="160" y2="30" stroke="#38bdf8" stroke-width="2" marker-end="url(#arr-c-cyan)"/>
+  <line x1="120" y1="30" x2="160" y2="30" stroke="#38bdf8" stroke-width="2" marker-end="url(#arr-c-cyan-electromagnetism-q21-21)"/>
   <rect x="130" y="10" width="40" height="15" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
   <text x="150" y="21" fill="#38bdf8" font-size="9" font-weight="700" text-anchor="middle">電流 I</text>
-  <rect x="300" y="60" width="160" height="38" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
-  <text x="380" y="76" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">オーム則: V ＝ RI</text>
-  <text x="380" y="90" fill="#cbd5e1" font-size="9" text-anchor="middle">キルヒホッフ第2則: E ＝ RI</text>
+  <rect x="265" y="60" width="150" height="40" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="340" y="76" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">オーム則: V ＝ RI</text>
+  <text x="340" y="91" fill="#cbd5e1" font-size="9" text-anchor="middle">キルヒホッフ第2則: E ＝ RI</text>
 </svg>
   <div class="graph-caption">各素子の両端電位差 V = RI と、回路の任意の閉路で起電力の和＝電圧降下の和が成り立ちます。</div>
 </div>
@@ -1705,23 +1710,23 @@ $$
   <div class="graph-title">📐 直流回路とオームの法則・キルヒホッフ則</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-c-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-c-cyan-electromagnetism-q22-22" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
   </defs>
   <rect x="70" y="30" width="360" height="100" fill="none" stroke="#64748b" stroke-width="2"/>
   <line x1="60" y1="75" x2="80" y2="75" stroke="#f43f5e" stroke-width="3"/>
   <line x1="65" y1="85" x2="75" y2="85" stroke="#f43f5e" stroke-width="2"/>
-  <rect x="25" y="72" width="30" height="16" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
+  <rect x="12" y="72" width="56" height="16" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
   <text x="40" y="84" fill="#f43f5e" font-size="10" font-weight="700" text-anchor="middle">起電力 E</text>
-  <rect x="200" y="20" width="60" height="20" rx="3" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+  <rect x="197" y="20" width="66" height="20" rx="3" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
   <text x="230" y="34" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">抵抗 R₁</text>
-  <rect x="200" y="120" width="60" height="20" rx="3" fill="#1e293b" stroke="#fbbf24" stroke-width="2"/>
+  <rect x="197" y="120" width="66" height="20" rx="3" fill="#1e293b" stroke="#fbbf24" stroke-width="2"/>
   <text x="230" y="134" fill="#fbbf24" font-size="10" font-weight="700" text-anchor="middle">抵抗 R₂</text>
-  <line x1="120" y1="30" x2="160" y2="30" stroke="#38bdf8" stroke-width="2" marker-end="url(#arr-c-cyan)"/>
+  <line x1="120" y1="30" x2="160" y2="30" stroke="#38bdf8" stroke-width="2" marker-end="url(#arr-c-cyan-electromagnetism-q22-22)"/>
   <rect x="130" y="10" width="40" height="15" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
   <text x="150" y="21" fill="#38bdf8" font-size="9" font-weight="700" text-anchor="middle">電流 I</text>
-  <rect x="300" y="60" width="160" height="38" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
-  <text x="380" y="76" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">オーム則: V ＝ RI</text>
-  <text x="380" y="90" fill="#cbd5e1" font-size="9" text-anchor="middle">キルヒホッフ第2則: E ＝ RI</text>
+  <rect x="265" y="60" width="150" height="40" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="340" y="76" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">オーム則: V ＝ RI</text>
+  <text x="340" y="91" fill="#cbd5e1" font-size="9" text-anchor="middle">キルヒホッフ第2則: E ＝ RI</text>
 </svg>
   <div class="graph-caption">各素子の両端電位差 V = RI と、回路の任意の閉路で起電力の和＝電圧降下の和が成り立ちます。</div>
 </div>
@@ -1872,23 +1877,23 @@ $$
   <div class="graph-title">📐 直流回路とオームの法則・キルヒホッフ則</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-c-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-c-cyan-electromagnetism-q23-23" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
   </defs>
   <rect x="70" y="30" width="360" height="100" fill="none" stroke="#64748b" stroke-width="2"/>
   <line x1="60" y1="75" x2="80" y2="75" stroke="#f43f5e" stroke-width="3"/>
   <line x1="65" y1="85" x2="75" y2="85" stroke="#f43f5e" stroke-width="2"/>
-  <rect x="25" y="72" width="30" height="16" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
+  <rect x="12" y="72" width="56" height="16" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
   <text x="40" y="84" fill="#f43f5e" font-size="10" font-weight="700" text-anchor="middle">起電力 E</text>
-  <rect x="200" y="20" width="60" height="20" rx="3" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+  <rect x="197" y="20" width="66" height="20" rx="3" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
   <text x="230" y="34" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">抵抗 R₁</text>
-  <rect x="200" y="120" width="60" height="20" rx="3" fill="#1e293b" stroke="#fbbf24" stroke-width="2"/>
+  <rect x="197" y="120" width="66" height="20" rx="3" fill="#1e293b" stroke="#fbbf24" stroke-width="2"/>
   <text x="230" y="134" fill="#fbbf24" font-size="10" font-weight="700" text-anchor="middle">抵抗 R₂</text>
-  <line x1="120" y1="30" x2="160" y2="30" stroke="#38bdf8" stroke-width="2" marker-end="url(#arr-c-cyan)"/>
+  <line x1="120" y1="30" x2="160" y2="30" stroke="#38bdf8" stroke-width="2" marker-end="url(#arr-c-cyan-electromagnetism-q23-23)"/>
   <rect x="130" y="10" width="40" height="15" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
   <text x="150" y="21" fill="#38bdf8" font-size="9" font-weight="700" text-anchor="middle">電流 I</text>
-  <rect x="300" y="60" width="160" height="38" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
-  <text x="380" y="76" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">オーム則: V ＝ RI</text>
-  <text x="380" y="90" fill="#cbd5e1" font-size="9" text-anchor="middle">キルヒホッフ第2則: E ＝ RI</text>
+  <rect x="265" y="60" width="150" height="40" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="340" y="76" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">オーム則: V ＝ RI</text>
+  <text x="340" y="91" fill="#cbd5e1" font-size="9" text-anchor="middle">キルヒホッフ第2則: E ＝ RI</text>
 </svg>
   <div class="graph-caption">各素子の両端電位差 V = RI と、回路の任意の閉路で起電力の和＝電圧降下の和が成り立ちます。</div>
 </div>
@@ -2046,17 +2051,17 @@ P(x,0) (x>0)
   <div class="graph-title">📐 クーロンの法則と点電荷間の静電気力</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-cl-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
-    <marker id="arr-cl-rose" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#f43f5e"/></marker>
+    <marker id="arr-cl-cyan-electromagnetism-q24-24" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-cl-rose-electromagnetism-q24-24" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#f43f5e"/></marker>
   </defs>
   <circle cx="100" cy="80" r="16" fill="#f43f5e"/>
   <text x="100" y="85" fill="#fff" font-size="11" font-weight="700" text-anchor="middle">＋q₁</text>
-  <line x1="100" y1="80" x2="50" y2="80" stroke="#f43f5e" stroke-width="2.5" marker-end="url(#arr-cl-rose)"/>
+  <line x1="100" y1="80" x2="50" y2="80" stroke="#f43f5e" stroke-width="2.5" marker-end="url(#arr-cl-rose-electromagnetism-q24-24)"/>
   <rect x="45" y="55" width="45" height="15" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
   <text x="67" y="66" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">力 F</text>
   <circle cx="230" cy="80" r="16" fill="#f43f5e"/>
   <text x="230" y="85" fill="#fff" font-size="11" font-weight="700" text-anchor="middle">＋q₂</text>
-  <line x1="230" y1="80" x2="280" y2="80" stroke="#f43f5e" stroke-width="2.5" marker-end="url(#arr-cl-rose)"/>
+  <line x1="230" y1="80" x2="280" y2="80" stroke="#f43f5e" stroke-width="2.5" marker-end="url(#arr-cl-rose-electromagnetism-q24-24)"/>
   <rect x="245" y="55" width="45" height="15" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
   <text x="267" y="66" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">力 F</text>
   <line x1="100" y1="120" x2="230" y2="120" stroke="#fbbf24" stroke-width="1.5"/>
@@ -2224,23 +2229,23 @@ $$
   <div class="graph-title">📐 直流回路とオームの法則・キルヒホッフ則</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-c-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-c-cyan-electromagnetism-q25-25" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
   </defs>
   <rect x="70" y="30" width="360" height="100" fill="none" stroke="#64748b" stroke-width="2"/>
   <line x1="60" y1="75" x2="80" y2="75" stroke="#f43f5e" stroke-width="3"/>
   <line x1="65" y1="85" x2="75" y2="85" stroke="#f43f5e" stroke-width="2"/>
-  <rect x="25" y="72" width="30" height="16" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
+  <rect x="12" y="72" width="56" height="16" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
   <text x="40" y="84" fill="#f43f5e" font-size="10" font-weight="700" text-anchor="middle">起電力 E</text>
-  <rect x="200" y="20" width="60" height="20" rx="3" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+  <rect x="197" y="20" width="66" height="20" rx="3" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
   <text x="230" y="34" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">抵抗 R₁</text>
-  <rect x="200" y="120" width="60" height="20" rx="3" fill="#1e293b" stroke="#fbbf24" stroke-width="2"/>
+  <rect x="197" y="120" width="66" height="20" rx="3" fill="#1e293b" stroke="#fbbf24" stroke-width="2"/>
   <text x="230" y="134" fill="#fbbf24" font-size="10" font-weight="700" text-anchor="middle">抵抗 R₂</text>
-  <line x1="120" y1="30" x2="160" y2="30" stroke="#38bdf8" stroke-width="2" marker-end="url(#arr-c-cyan)"/>
+  <line x1="120" y1="30" x2="160" y2="30" stroke="#38bdf8" stroke-width="2" marker-end="url(#arr-c-cyan-electromagnetism-q25-25)"/>
   <rect x="130" y="10" width="40" height="15" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
   <text x="150" y="21" fill="#38bdf8" font-size="9" font-weight="700" text-anchor="middle">電流 I</text>
-  <rect x="300" y="60" width="160" height="38" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
-  <text x="380" y="76" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">オーム則: V ＝ RI</text>
-  <text x="380" y="90" fill="#cbd5e1" font-size="9" text-anchor="middle">キルヒホッフ第2則: E ＝ RI</text>
+  <rect x="265" y="60" width="150" height="40" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="340" y="76" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">オーム則: V ＝ RI</text>
+  <text x="340" y="91" fill="#cbd5e1" font-size="9" text-anchor="middle">キルヒホッフ第2則: E ＝ RI</text>
 </svg>
   <div class="graph-caption">各素子の両端電位差 V = RI と、回路の任意の閉路で起電力の和＝電圧降下の和が成り立ちます。</div>
 </div>
@@ -2307,7 +2312,7 @@ g=9.8 m/s², sin30°=0.500
   <div class="graph-title">📐 電磁誘導の法則と導線棒の誘導起電力</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-ind-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-ind-cyan-electromagnetism-q26-26" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
   </defs>
   <line x1="60" y1="50" x2="350" y2="50" stroke="#64748b" stroke-width="3"/>
   <line x1="60" y1="120" x2="350" y2="120" stroke="#64748b" stroke-width="3"/>
@@ -2317,7 +2322,7 @@ g=9.8 m/s², sin30°=0.500
   <line x1="60" y1="100" x2="60" y2="120" stroke="#64748b" stroke-width="3"/>
   <line x1="220" y1="40" x2="220" y2="130" stroke="#38bdf8" stroke-width="5"/>
   <text x="235" y="60" fill="#38bdf8" font-size="9" font-weight="700">棒 L</text>
-  <line x1="220" y1="85" x2="275" y2="85" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-ind-cyan)"/>
+  <line x1="220" y1="85" x2="275" y2="85" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-ind-cyan-electromagnetism-q26-26)"/>
   <rect x="235" y="93" width="45" height="15" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
   <text x="257" y="104" fill="#38bdf8" font-size="9" font-weight="700" text-anchor="middle">速度 v</text>
   <rect x="340" y="55" width="135" height="38" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
@@ -2524,7 +2529,8 @@ C₂=3.0 μF
   <div class="graph-title">📐 平行板コンデンサーの電気量と静電エネルギー</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-cap-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-cap-cyan-electromagnetism-q27-27" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-cap-amber-electromagnetism-q27-27" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#fbbf24"/></marker>
   </defs>
   <line x1="180" y1="30" x2="180" y2="130" stroke="#f43f5e" stroke-width="4"/>
   <line x1="260" y1="30" x2="260" y2="130" stroke="#38bdf8" stroke-width="4"/>
@@ -2532,16 +2538,16 @@ C₂=3.0 μF
   <text x="152" y="83" fill="#f43f5e" font-size="10" font-weight="700" text-anchor="middle">＋Q (正)</text>
   <rect x="268" y="70" width="45" height="18" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
   <text x="290" y="83" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">−Q (負)</text>
-  <line x1="184" y1="50" x2="256" y2="50" stroke="#fbbf24" stroke-width="2" marker-end="url(#arr-cap-cyan)"/>
-  <line x1="184" y1="80" x2="256" y2="80" stroke="#fbbf24" stroke-width="2" marker-end="url(#arr-cap-cyan)"/>
-  <line x1="184" y1="110" x2="256" y2="110" stroke="#fbbf24" stroke-width="2" marker-end="url(#arr-cap-cyan)"/>
+  <line x1="184" y1="50" x2="256" y2="50" stroke="#fbbf24" stroke-width="2" marker-end="url(#arr-cap-amber-electromagnetism-q27-27)"/>
+  <line x1="184" y1="80" x2="256" y2="80" stroke="#fbbf24" stroke-width="2" marker-end="url(#arr-cap-amber-electromagnetism-q27-27)"/>
+  <line x1="184" y1="110" x2="256" y2="110" stroke="#fbbf24" stroke-width="2" marker-end="url(#arr-cap-amber-electromagnetism-q27-27)"/>
   <rect x="200" y="85" width="45" height="16" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
   <text x="222" y="97" fill="#fbbf24" font-size="9" font-weight="700" text-anchor="middle">電場 E</text>
   <rect x="330" y="50" width="140" height="48" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
   <text x="400" y="68" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">Q ＝ CV ,  C ＝ ε S/d</text>
   <text x="400" y="85" fill="#f43f5e" font-size="9" text-anchor="middle">エネルギー U ＝ ½ CV²</text>
 </svg>
-  <div class="graph-caption">極板間の電位差 V に対し Q = CV の電荷が蓄えられ、静電エネルギー $U = \frac{1}{2}CV^2$ が蓄積されます。</div>
+  <div class="graph-caption">極板間の電位差 V に対し Q = CV の電荷が蓄えられ、静電エネルギー U = ½CV² が蓄積されます。</div>
 </div>
 
 <details class="hint-box">
@@ -2716,7 +2722,8 @@ $$
   <div class="graph-title">📐 平行板コンデンサーの電気量と静電エネルギー</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-cap-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-cap-cyan-electromagnetism-q28-28" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-cap-amber-electromagnetism-q28-28" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#fbbf24"/></marker>
   </defs>
   <line x1="180" y1="30" x2="180" y2="130" stroke="#f43f5e" stroke-width="4"/>
   <line x1="260" y1="30" x2="260" y2="130" stroke="#38bdf8" stroke-width="4"/>
@@ -2724,16 +2731,16 @@ $$
   <text x="152" y="83" fill="#f43f5e" font-size="10" font-weight="700" text-anchor="middle">＋Q (正)</text>
   <rect x="268" y="70" width="45" height="18" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
   <text x="290" y="83" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">−Q (負)</text>
-  <line x1="184" y1="50" x2="256" y2="50" stroke="#fbbf24" stroke-width="2" marker-end="url(#arr-cap-cyan)"/>
-  <line x1="184" y1="80" x2="256" y2="80" stroke="#fbbf24" stroke-width="2" marker-end="url(#arr-cap-cyan)"/>
-  <line x1="184" y1="110" x2="256" y2="110" stroke="#fbbf24" stroke-width="2" marker-end="url(#arr-cap-cyan)"/>
+  <line x1="184" y1="50" x2="256" y2="50" stroke="#fbbf24" stroke-width="2" marker-end="url(#arr-cap-amber-electromagnetism-q28-28)"/>
+  <line x1="184" y1="80" x2="256" y2="80" stroke="#fbbf24" stroke-width="2" marker-end="url(#arr-cap-amber-electromagnetism-q28-28)"/>
+  <line x1="184" y1="110" x2="256" y2="110" stroke="#fbbf24" stroke-width="2" marker-end="url(#arr-cap-amber-electromagnetism-q28-28)"/>
   <rect x="200" y="85" width="45" height="16" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
   <text x="222" y="97" fill="#fbbf24" font-size="9" font-weight="700" text-anchor="middle">電場 E</text>
   <rect x="330" y="50" width="140" height="48" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
   <text x="400" y="68" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">Q ＝ CV ,  C ＝ ε S/d</text>
   <text x="400" y="85" fill="#f43f5e" font-size="9" text-anchor="middle">エネルギー U ＝ ½ CV²</text>
 </svg>
-  <div class="graph-caption">極板間の電位差 V に対し Q = CV の電荷が蓄えられ、静電エネルギー $U = \frac{1}{2}CV^2$ が蓄積されます。</div>
+  <div class="graph-caption">極板間の電位差 V に対し Q = CV の電荷が蓄えられ、静電エネルギー U = ½CV² が蓄積されます。</div>
 </div>
 
 <details class="hint-box">
@@ -2903,13 +2910,13 @@ B₂=0.20 T
   <div class="graph-title">📐 点電荷の周囲の電場と電位・電気力線</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-ef-rose" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#f43f5e"/></marker>
+    <marker id="arr-ef-rose-electromagnetism-q29-29" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#f43f5e"/></marker>
   </defs>
   <circle cx="160" cy="80" r="16" fill="#f43f5e"/>
   <text x="160" y="85" fill="#fff" font-size="11" font-weight="700" text-anchor="middle">＋Q</text>
   <circle cx="160" cy="80" r="45" fill="none" stroke="#64748b" stroke-width="1" stroke-dasharray="3,3"/>
   <circle cx="160" cy="80" r="75" fill="none" stroke="#64748b" stroke-width="1" stroke-dasharray="3,3"/>
-  <line x1="178" y1="80" x2="250" y2="80" stroke="#f43f5e" stroke-width="2" marker-end="url(#arr-ef-rose)"/>
+  <line x1="178" y1="80" x2="250" y2="80" stroke="#f43f5e" stroke-width="2" marker-end="url(#arr-ef-rose-electromagnetism-q29-29)"/>
   <rect x="200" y="60" width="45" height="15" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
   <text x="222" y="71" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">電場 E</text>
   <rect x="300" y="40" width="175" height="55" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
@@ -3051,7 +3058,7 @@ $$
   <div class="graph-title">📐 電磁誘導の法則と導線棒の誘導起電力</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-ind-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-ind-cyan-electromagnetism-q30-30" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
   </defs>
   <line x1="60" y1="50" x2="350" y2="50" stroke="#64748b" stroke-width="3"/>
   <line x1="60" y1="120" x2="350" y2="120" stroke="#64748b" stroke-width="3"/>
@@ -3061,7 +3068,7 @@ $$
   <line x1="60" y1="100" x2="60" y2="120" stroke="#64748b" stroke-width="3"/>
   <line x1="220" y1="40" x2="220" y2="130" stroke="#38bdf8" stroke-width="5"/>
   <text x="235" y="60" fill="#38bdf8" font-size="9" font-weight="700">棒 L</text>
-  <line x1="220" y1="85" x2="275" y2="85" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-ind-cyan)"/>
+  <line x1="220" y1="85" x2="275" y2="85" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-ind-cyan-electromagnetism-q30-30)"/>
   <rect x="235" y="93" width="45" height="15" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
   <text x="257" y="104" fill="#38bdf8" font-size="9" font-weight="700" text-anchor="middle">速度 v</text>
   <rect x="340" y="55" width="135" height="38" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
@@ -3245,7 +3252,7 @@ g=9.8 m/s²
   <div class="graph-title">📐 電磁誘導の法則と導線棒の誘導起電力</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-ind-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-ind-cyan-electromagnetism-q31-31" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
   </defs>
   <line x1="60" y1="50" x2="350" y2="50" stroke="#64748b" stroke-width="3"/>
   <line x1="60" y1="120" x2="350" y2="120" stroke="#64748b" stroke-width="3"/>
@@ -3255,7 +3262,7 @@ g=9.8 m/s²
   <line x1="60" y1="100" x2="60" y2="120" stroke="#64748b" stroke-width="3"/>
   <line x1="220" y1="40" x2="220" y2="130" stroke="#38bdf8" stroke-width="5"/>
   <text x="235" y="60" fill="#38bdf8" font-size="9" font-weight="700">棒 L</text>
-  <line x1="220" y1="85" x2="275" y2="85" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-ind-cyan)"/>
+  <line x1="220" y1="85" x2="275" y2="85" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-ind-cyan-electromagnetism-q31-31)"/>
   <rect x="235" y="93" width="45" height="15" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
   <text x="257" y="104" fill="#38bdf8" font-size="9" font-weight="700" text-anchor="middle">速度 v</text>
   <rect x="340" y="55" width="135" height="38" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
@@ -3515,7 +3522,8 @@ k=0.10 N/m
   <div class="graph-title">📐 平行板コンデンサーの電気量と静電エネルギー</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-cap-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-cap-cyan-electromagnetism-q32-32" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-cap-amber-electromagnetism-q32-32" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#fbbf24"/></marker>
   </defs>
   <line x1="180" y1="30" x2="180" y2="130" stroke="#f43f5e" stroke-width="4"/>
   <line x1="260" y1="30" x2="260" y2="130" stroke="#38bdf8" stroke-width="4"/>
@@ -3523,16 +3531,16 @@ k=0.10 N/m
   <text x="152" y="83" fill="#f43f5e" font-size="10" font-weight="700" text-anchor="middle">＋Q (正)</text>
   <rect x="268" y="70" width="45" height="18" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
   <text x="290" y="83" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">−Q (負)</text>
-  <line x1="184" y1="50" x2="256" y2="50" stroke="#fbbf24" stroke-width="2" marker-end="url(#arr-cap-cyan)"/>
-  <line x1="184" y1="80" x2="256" y2="80" stroke="#fbbf24" stroke-width="2" marker-end="url(#arr-cap-cyan)"/>
-  <line x1="184" y1="110" x2="256" y2="110" stroke="#fbbf24" stroke-width="2" marker-end="url(#arr-cap-cyan)"/>
+  <line x1="184" y1="50" x2="256" y2="50" stroke="#fbbf24" stroke-width="2" marker-end="url(#arr-cap-amber-electromagnetism-q32-32)"/>
+  <line x1="184" y1="80" x2="256" y2="80" stroke="#fbbf24" stroke-width="2" marker-end="url(#arr-cap-amber-electromagnetism-q32-32)"/>
+  <line x1="184" y1="110" x2="256" y2="110" stroke="#fbbf24" stroke-width="2" marker-end="url(#arr-cap-amber-electromagnetism-q32-32)"/>
   <rect x="200" y="85" width="45" height="16" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
   <text x="222" y="97" fill="#fbbf24" font-size="9" font-weight="700" text-anchor="middle">電場 E</text>
   <rect x="330" y="50" width="140" height="48" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
   <text x="400" y="68" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">Q ＝ CV ,  C ＝ ε S/d</text>
   <text x="400" y="85" fill="#f43f5e" font-size="9" text-anchor="middle">エネルギー U ＝ ½ CV²</text>
 </svg>
-  <div class="graph-caption">極板間の電位差 V に対し Q = CV の電荷が蓄えられ、静電エネルギー $U = \frac{1}{2}CV^2$ が蓄積されます。</div>
+  <div class="graph-caption">極板間の電位差 V に対し Q = CV の電荷が蓄えられ、静電エネルギー U = ½CV² が蓄積されます。</div>
 </div>
 
 <details class="hint-box">
@@ -3753,13 +3761,13 @@ e=1.6×10⁻¹⁹ C
   <div class="graph-title">📐 点電荷の周囲の電場と電位・電気力線</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-ef-rose" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#f43f5e"/></marker>
+    <marker id="arr-ef-rose-electromagnetism-q33-33" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#f43f5e"/></marker>
   </defs>
   <circle cx="160" cy="80" r="16" fill="#f43f5e"/>
   <text x="160" y="85" fill="#fff" font-size="11" font-weight="700" text-anchor="middle">＋Q</text>
   <circle cx="160" cy="80" r="45" fill="none" stroke="#64748b" stroke-width="1" stroke-dasharray="3,3"/>
   <circle cx="160" cy="80" r="75" fill="none" stroke="#64748b" stroke-width="1" stroke-dasharray="3,3"/>
-  <line x1="178" y1="80" x2="250" y2="80" stroke="#f43f5e" stroke-width="2" marker-end="url(#arr-ef-rose)"/>
+  <line x1="178" y1="80" x2="250" y2="80" stroke="#f43f5e" stroke-width="2" marker-end="url(#arr-ef-rose-electromagnetism-q33-33)"/>
   <rect x="200" y="60" width="45" height="15" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
   <text x="222" y="71" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">電場 E</text>
   <rect x="300" y="40" width="175" height="55" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
@@ -3934,21 +3942,22 @@ $$
   <div class="graph-title">📐 磁場中の荷電粒子の運動・ローレンツ力</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-mf-rose" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#f43f5e"/></marker>
-    <marker id="arr-mf-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-mf-rose-electromagnetism-q34-34" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#f43f5e"/></marker>
+    <marker id="arr-mf-cyan-electromagnetism-q34-34" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
   </defs>
-  <g fill="#475569" font-size="14">
-    <text x="80" y="50">⊗</text><text x="140" y="50">⊗</text><text x="200" y="50">⊗</text>
-    <text x="80" y="100">⊗</text><text x="140" y="100">⊗</text><text x="200" y="100">⊗</text>
+  <g fill="#94a3b8" font-size="14">
+    <text x="60" y="50">⊗</text><text x="100" y="50">⊗</text>
+    <text x="60" y="95">⊗</text><text x="100" y="95">⊗</text><text x="150" y="105">⊗</text>
+    <text x="60" y="135">⊗</text><text x="110" y="135">⊗</text><text x="160" y="135">⊗</text><text x="210" y="135">⊗</text>
   </g>
   <rect x="100" y="15" width="105" height="18" rx="3" fill="#0f172a" stroke="#64748b" stroke-width="1"/>
   <text x="152" y="28" fill="#94a3b8" font-size="9" text-anchor="middle">磁場 B (画面奥向き)</text>
   <circle cx="200" cy="85" r="9" fill="#f43f5e"/>
   <text x="200" y="89" fill="#fff" font-size="10" font-weight="700" text-anchor="middle">＋</text>
-  <line x1="200" y1="85" x2="260" y2="85" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-mf-cyan)"/>
+  <line x1="200" y1="85" x2="260" y2="85" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-mf-cyan-electromagnetism-q34-34)"/>
   <rect x="220" y="65" width="45" height="16" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
   <text x="242" y="77" fill="#38bdf8" font-size="9" font-weight="700" text-anchor="middle">速度 v</text>
-  <line x1="200" y1="85" x2="200" y2="35" stroke="#f43f5e" stroke-width="2.5" marker-end="url(#arr-mf-rose)"/>
+  <line x1="200" y1="85" x2="200" y2="35" stroke="#f43f5e" stroke-width="2.5" marker-end="url(#arr-mf-rose-electromagnetism-q34-34)"/>
   <rect x="145" y="40" width="50" height="16" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
   <text x="170" y="52" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">力 F＝qvB</text>
   <rect x="300" y="45" width="165" height="42" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
@@ -4005,7 +4014,7 @@ $$
   <div class="graph-title">📐 電磁誘導の法則と導線棒の誘導起電力</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-ind-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-ind-cyan-electromagnetism-q35-35" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
   </defs>
   <line x1="60" y1="50" x2="350" y2="50" stroke="#64748b" stroke-width="3"/>
   <line x1="60" y1="120" x2="350" y2="120" stroke="#64748b" stroke-width="3"/>
@@ -4015,7 +4024,7 @@ $$
   <line x1="60" y1="100" x2="60" y2="120" stroke="#64748b" stroke-width="3"/>
   <line x1="220" y1="40" x2="220" y2="130" stroke="#38bdf8" stroke-width="5"/>
   <text x="235" y="60" fill="#38bdf8" font-size="9" font-weight="700">棒 L</text>
-  <line x1="220" y1="85" x2="275" y2="85" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-ind-cyan)"/>
+  <line x1="220" y1="85" x2="275" y2="85" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-ind-cyan-electromagnetism-q35-35)"/>
   <rect x="235" y="93" width="45" height="15" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
   <text x="257" y="104" fill="#38bdf8" font-size="9" font-weight="700" text-anchor="middle">速度 v</text>
   <rect x="340" y="55" width="135" height="38" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
@@ -4072,13 +4081,13 @@ x軸上のx=-aに+Q、x=+aに-Qを固定した。原点の電位と電場を求�
   <div class="graph-title">📐 点電荷の周囲の電場と電位・電気力線</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-ef-rose" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#f43f5e"/></marker>
+    <marker id="arr-ef-rose-electromagnetism-q36-36" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#f43f5e"/></marker>
   </defs>
   <circle cx="160" cy="80" r="16" fill="#f43f5e"/>
   <text x="160" y="85" fill="#fff" font-size="11" font-weight="700" text-anchor="middle">＋Q</text>
   <circle cx="160" cy="80" r="45" fill="none" stroke="#64748b" stroke-width="1" stroke-dasharray="3,3"/>
   <circle cx="160" cy="80" r="75" fill="none" stroke="#64748b" stroke-width="1" stroke-dasharray="3,3"/>
-  <line x1="178" y1="80" x2="250" y2="80" stroke="#f43f5e" stroke-width="2" marker-end="url(#arr-ef-rose)"/>
+  <line x1="178" y1="80" x2="250" y2="80" stroke="#f43f5e" stroke-width="2" marker-end="url(#arr-ef-rose-electromagnetism-q36-36)"/>
   <rect x="200" y="60" width="45" height="15" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
   <text x="222" y="71" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">電場 E</text>
   <rect x="300" y="40" width="175" height="55" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
@@ -4187,7 +4196,8 @@ Mg>mgsinθ
   <div class="graph-title">📐 平行板コンデンサーの電気量と静電エネルギー</div>
   <svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr-cap-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-cap-cyan-electromagnetism-q37-37" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-cap-amber-electromagnetism-q37-37" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#fbbf24"/></marker>
   </defs>
   <line x1="180" y1="30" x2="180" y2="130" stroke="#f43f5e" stroke-width="4"/>
   <line x1="260" y1="30" x2="260" y2="130" stroke="#38bdf8" stroke-width="4"/>
@@ -4195,16 +4205,16 @@ Mg>mgsinθ
   <text x="152" y="83" fill="#f43f5e" font-size="10" font-weight="700" text-anchor="middle">＋Q (正)</text>
   <rect x="268" y="70" width="45" height="18" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
   <text x="290" y="83" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">−Q (負)</text>
-  <line x1="184" y1="50" x2="256" y2="50" stroke="#fbbf24" stroke-width="2" marker-end="url(#arr-cap-cyan)"/>
-  <line x1="184" y1="80" x2="256" y2="80" stroke="#fbbf24" stroke-width="2" marker-end="url(#arr-cap-cyan)"/>
-  <line x1="184" y1="110" x2="256" y2="110" stroke="#fbbf24" stroke-width="2" marker-end="url(#arr-cap-cyan)"/>
+  <line x1="184" y1="50" x2="256" y2="50" stroke="#fbbf24" stroke-width="2" marker-end="url(#arr-cap-amber-electromagnetism-q37-37)"/>
+  <line x1="184" y1="80" x2="256" y2="80" stroke="#fbbf24" stroke-width="2" marker-end="url(#arr-cap-amber-electromagnetism-q37-37)"/>
+  <line x1="184" y1="110" x2="256" y2="110" stroke="#fbbf24" stroke-width="2" marker-end="url(#arr-cap-amber-electromagnetism-q37-37)"/>
   <rect x="200" y="85" width="45" height="16" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
   <text x="222" y="97" fill="#fbbf24" font-size="9" font-weight="700" text-anchor="middle">電場 E</text>
   <rect x="330" y="50" width="140" height="48" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
   <text x="400" y="68" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">Q ＝ CV ,  C ＝ ε S/d</text>
   <text x="400" y="85" fill="#f43f5e" font-size="9" text-anchor="middle">エネルギー U ＝ ½ CV²</text>
 </svg>
-  <div class="graph-caption">極板間の電位差 V に対し Q = CV の電荷が蓄えられ、静電エネルギー $U = \frac{1}{2}CV^2$ が蓄積されます。</div>
+  <div class="graph-caption">極板間の電位差 V に対し Q = CV の電荷が蓄えられ、静電エネルギー U = ½CV² が蓄積されます。</div>
 </div>
 
 <details class="hint-box">

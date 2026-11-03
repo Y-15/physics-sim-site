@@ -75,6 +75,7 @@ $$
   }
 
   // 既存の <div class="vector-graph-card">...</div> があれば一旦除去（クリーンな再挿入のため）
+  content = content.replace(/\n\n<div class="vector-graph-card">[\s\S]*?<\/div>(?=\n\n\s*<details)/g, '');
   content = content.replace(/<div class="vector-graph-card">[\s\S]*?<\/div>\s*<\/div>\n\n/g, '');
 
   // 各問題カードを正規表現で検出して図解を挿入
@@ -94,7 +95,12 @@ $$
       return match;
     }
 
-    const graphBlock = `\n\n<div class="vector-graph-card">\n  <div class="graph-title">📐 ${illustration.title}</div>\n  ${illustration.svg}\n  <div class="graph-caption">${illustration.desc}</div>\n</div>`;
+    let svg = illustration.svg;
+    const suffix = `-${unit.id}-q${qNum}-${count}`;
+    svg = svg.replace(/\bid="([^"]+)"/g, `id="$1${suffix}"`);
+    svg = svg.replace(/url\(#([^)]+)\)/g, `url(#$1${suffix})`);
+
+    const graphBlock = `\n\n<div class="vector-graph-card">\n  <div class="graph-title">📐 ${illustration.title}</div>\n  ${svg}\n  <div class="graph-caption">${illustration.desc}</div>\n</div>`;
 
     return prefix + prompt.trim() + graphBlock;
   });

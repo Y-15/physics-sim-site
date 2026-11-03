@@ -476,7 +476,7 @@
       {
         "title": "摩擦力を含む運動の使用公式",
         "expression": "F_合=ma",
-        "latex": "F_{\\mathrm{合}}=ma",
+        "latex": "F_{\\text{合}}=ma",
         "note": "問題で使用する関係式です。"
       }
     ],
@@ -850,7 +850,7 @@
       {
         "title": "可動台上の小球の使用公式 1",
         "expression": "Σ p_前=Σ p_後",
-        "latex": "\\sum p_{\\mathrm{前}}=\\sum p_{\\mathrm{後}}",
+        "latex": "\\sum p_{\\text{前}}=\\sum p_{\\text{後}}",
         "note": "問題で使用する関係式です。"
       }
     ],
@@ -1070,7 +1070,7 @@
       {
         "title": "鉛直円運動とレールから離れない条件の使用公式 1",
         "expression": "E_力学=K+U",
-        "latex": "E_{\\mathrm{力学}}=K+U",
+        "latex": "E_{\\text{力学}}=K+U",
         "note": "問題で使用する関係式です。"
       }
     ],
@@ -1880,7 +1880,7 @@
       {
         "title": "うなりの使用公式",
         "expression": "f_うなり=|f₁-f₂|",
-        "latex": "f_{\\mathrm{うなり}}=|f_1-f_2|",
+        "latex": "f_{\\text{うなり}}=|f_1-f_2|",
         "note": "問題で使用する関係式です。"
       }
     ],
@@ -4333,7 +4333,7 @@
       {
         "title": "ボーア模型のエネルギー準位の使用する関係",
         "expression": "E_光子 = E_高い準位 - E_低い準位",
-        "latex": "E_{\\mathrm{光子}} = E_{\\mathrm{高い準位}} - E_{\\mathrm{低い準位}}",
+        "latex": "E_{\\text{光子}} = E_{\\text{高い準位}} - E_{\\text{低い準位}}",
         "note": "問題で使用する関係式です。"
       }
     ],
@@ -4421,7 +4421,7 @@
       {
         "title": "水素原子と光電効果の解法で使用する式 1",
         "expression": "E₃=-(13.6)/(9)=-1.51 eV",
-        "latex": "E_3=-\\frac{13.6}{9}=-1.51\\\\ \\mathrm{eV}",
+        "latex": "E_3=-\\frac{13.6}{9}=-1.51\\quad \\mathrm{eV}",
         "note": "問題で使用する関係式です。"
       }
     ],

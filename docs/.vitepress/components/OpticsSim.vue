@@ -362,9 +362,10 @@ function drawLens(ctx, w, h) {
 
   if (isConvex.value) {
     // 凸レンズの光線作図
-    // 光線①: 光軸に平行な光線 -> レンズで屈折して後方焦点 F' を通る
+    // 光線①: 光軸に平行な光線 -> レンズで屈折して後方焦点 F' (cx + fPx, cy) を通過
+    const slope1 = (cy - tipY) / fPx
     line(ctx, tipX, tipY, cx, tipY, { color: 'rgba(234, 179, 8, 0.75)', width: 1.8 })
-    line(ctx, cx, tipY, cx + w, tipY + (tipY - cy) * -1.8, { color: 'rgba(234, 179, 8, 0.75)', width: 1.8 })
+    line(ctx, cx, tipY, cx + w, tipY + slope1 * w, { color: 'rgba(234, 179, 8, 0.75)', width: 1.8 })
     drawRayPulses(ctx, tipX, tipY, cx, tipY, '#fde047', 1.0)
 
     // 光線②: レンズの中心 O を直進する光線

@@ -4,6 +4,8 @@ android_app_ref
 dist
 docs/.vitepress/dist
 docs/.vitepress/cache
+.vitepress/cache
+.agents/
 *.local
 npm-debug.log*
 yarn-debug.log*
@@ -18,4 +20,13 @@ fix_*.cjs
 normalize_*.cjs
 audit_*.cjs
 verify_*.cjs
+test_*.cjs
+test_results_*.json
+challenger_*.json
+INSPECTION_AUDIT_LOG.md
+PROJECT.md
+TEST_INFRA.md
+TEST_READY.md
+DESIGN_PATTERNS_PROPOSAL.md
+scripts/
 .cache/

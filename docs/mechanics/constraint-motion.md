@@ -29,8 +29,8 @@ description: 動滑車のひもの幾何学的拘束条件、動く斜面台上�
 
 <div class="vector-graph-card">
   <div class="graph-title">図1：動滑車におけるひもの幾何学的束縛条件</div>
-  <svg viewBox="0 0 540 260" class="vector-svg">
-    <rect width="540" height="260" fill="#0f172a" rx="8"/>
+  <svg viewBox="0 0 660 260" class="vector-svg">
+    <rect width="660" height="260" fill="#0f172a" rx="8"/>
     <!-- 天井 -->
     <line x1="100" y1="40" x2="440" y2="40" stroke="#64748b" stroke-width="3"/>
     <!-- 天井ハッチング -->
@@ -63,10 +63,10 @@ description: 動滑車のひもの幾何学的拘束条件、動く斜面台上�
     <text x="340" y="205" fill="#0f172a" font-size="12" font-weight="bold" text-anchor="middle">B</text>
     <text x="365" y="195" fill="#fbbf24" font-size="12">y_B</text>
     <!-- 座標軸と微分関係のテキスト -->
-    <text x="400" y="90" fill="#e2e8f0" font-size="12">ひもの長さ L = y_A + 2 y_B + const</text>
-    <text x="400" y="120" fill="#38bdf8" font-size="13" font-weight="bold">v_A + 2 v_B = 0</text>
-    <text x="400" y="145" fill="#f43f5e" font-size="14" font-weight="bold">a_A + 2 a_B = 0</text>
-    <text x="400" y="170" fill="#94a3b8" font-size="11">（Bが1m下がるとAは2m上がる）</text>
+    <text x="390" y="90" fill="#e2e8f0" font-size="12">ひもの長さ L = y_A + 2 y_B + const</text>
+    <text x="390" y="120" fill="#38bdf8" font-size="13" font-weight="bold">v_A + 2 v_B = 0</text>
+    <text x="390" y="145" fill="#f43f5e" font-size="14" font-weight="bold">a_A + 2 a_B = 0</text>
+    <text x="390" y="170" fill="#94a3b8" font-size="11">（Bが1m下がるとAは2m上がる）</text>
   </svg>
 </div>
 
@@ -86,8 +86,8 @@ $$\frac{d^2 y_A}{dt^2} + 2\frac{d^2 y_B}{dt^2} = 0 \implies \mathbf{a_A + 2a_B =
 
 <div class="vector-graph-card">
   <div class="graph-title">図2：動く斜面台（非慣性系）における力のつり合いと慣性力</div>
-  <svg viewBox="0 0 540 280" class="vector-svg">
-    <rect width="540" height="280" fill="#0f172a" rx="8"/>
+  <svg viewBox="0 0 540 300" class="vector-svg">
+    <rect width="540" height="300" fill="#0f172a" rx="8"/>
     <!-- 床 -->
     <line x1="50" y1="230" x2="490" y2="230" stroke="#64748b" stroke-width="2.5"/>
     <!-- 三角台 -->

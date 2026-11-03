@@ -6,7 +6,7 @@ const canvasRef = ref(null)
 // 物理パラメータ
 const atmosphericPressure = ref(760) // 大気圧 P0 [mmHg]
 const tubeTotalLength = ref(900) // ガラス管の全長 [mm]
-const tubePullUp = ref(850) // 水銀槽液面からのガラス管上端の高さ H [mm] (700 ~ 950)
+const tubePullUp = ref(850) // 水銀槽液面からのガラス管上端の高さ H [mm] (700 ~ 880: 下端が常に液面下に沈むよう制限)
 const gasAmount = ref(0) // 封入気体の量 [任意単位: 0ならトリチェリの真空]
 const gasTemperature = ref(300) // 気体温度 T [K] (250 ~ 400)
 
@@ -315,7 +315,7 @@ onUnmounted(() => {
       <div class="control-row">
         <div class="control-group">
           <label>ガラス管の引き上げ高さ <i>H</i>: <span>{{ tubePullUp }} mm</span></label>
-          <input type="range" v-model.number="tubePullUp" min="700" max="950" step="5" />
+          <input type="range" v-model.number="tubePullUp" min="700" max="880" step="5" />
         </div>
         <div class="control-group">
           <label>大気圧 <i>P</i><sub>0</sub>: <span>{{ atmosphericPressure }} mmHg</span></label>

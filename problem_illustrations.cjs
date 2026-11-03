@@ -50,7 +50,7 @@ function getIllustration(kind) {
     <marker id="arr-ka-rose" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#f43f5e"/></marker>
     <marker id="arr-ka-slate" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#94a3b8"/></marker>
   </defs>
-  <line x1="30" y1="120" x2="470" y2="120" stroke="#475569" stroke-width="2"/>
+  <line x1="30" y1="120" x2="470" y2="120" stroke="#64748b" stroke-width="2"/>
   <line x1="30" y1="135" x2="470" y2="135" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arr-ka-slate)"/>
   <rect x="220" y="140" width="60" height="16" rx="3" fill="#0f172a" stroke="#64748b" stroke-width="1"/>
   <text x="250" y="152" fill="#cbd5e1" font-size="10" text-anchor="middle">x 正方向</text>
@@ -83,7 +83,7 @@ function getIllustration(kind) {
     <marker id="arr-ff-rose" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#f43f5e"/></marker>
     <marker id="arr-ff-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
   </defs>
-  <line x1="40" y1="140" x2="460" y2="140" stroke="#475569" stroke-width="2"/>
+  <line x1="40" y1="140" x2="460" y2="140" stroke="#64748b" stroke-width="2"/>
   <line x1="120" y1="140" x2="120" y2="25" stroke="#38bdf8" stroke-width="2" stroke-dasharray="3,3"/>
   <circle cx="120" cy="130" r="10" fill="#0284c7" stroke="#38bdf8" stroke-width="2"/>
   <line x1="120" y1="120" x2="120" y2="70" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-ff-cyan)"/>
@@ -112,22 +112,22 @@ function getIllustration(kind) {
     <marker id="arr-pr-emerald" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#34d399"/></marker>
     <marker id="arr-pr-rose" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#f43f5e"/></marker>
   </defs>
-  <line x1="20" y1="140" x2="480" y2="140" stroke="#475569" stroke-width="2"/>
+  <line x1="20" y1="140" x2="480" y2="140" stroke="#64748b" stroke-width="2"/>
   <path d="M 50,140 Q 240,10 430,140" fill="none" stroke="#38bdf8" stroke-width="2" stroke-dasharray="4,4"/>
   <circle cx="50" cy="140" r="7" fill="#fbbf24"/>
   <circle cx="240" cy="75" r="8" fill="#fbbf24"/>
   <line x1="240" y1="75" x2="310" y2="75" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-pr-cyan)"/>
-  <rect x="255" y="55" width="55" height="16" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
-  <text x="282" y="67" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">v_x ＝ v₀cosθ</text>
+  <rect x="240" y="55" width="85" height="16" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="283" y="67" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">v_x ＝ v₀cosθ</text>
   <line x1="240" y1="75" x2="240" y2="115" stroke="#f43f5e" stroke-width="2" marker-end="url(#arr-pr-rose)"/>
   <rect x="180" y="90" width="55" height="16" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
   <text x="207" y="102" fill="#f43f5e" font-size="10" font-weight="700" text-anchor="middle">重力 mg</text>
   <line x1="50" y1="140" x2="105" y2="85" stroke="#34d399" stroke-width="2.5" marker-end="url(#arr-pr-emerald)"/>
   <rect x="80" y="70" width="55" height="16" rx="3" fill="#0f172a" stroke="#34d399" stroke-width="1"/>
   <text x="107" y="82" fill="#34d399" font-size="10" font-weight="700" text-anchor="middle">初速度 v₀</text>
-  <rect x="340" y="25" width="135" height="42" rx="4" fill="#0f172a" stroke="#64748b" stroke-width="1"/>
-  <text x="407" y="42" fill="#94a3b8" font-size="9" text-anchor="middle">水平: x ＝ (v₀cosθ)t</text>
-  <text x="407" y="58" fill="#f43f5e" font-size="9" text-anchor="middle">鉛直: y ＝ (v₀sinθ)t − ½gt²</text>
+  <rect x="320" y="25" width="165" height="42" rx="4" fill="#0f172a" stroke="#64748b" stroke-width="1"/>
+  <text x="402" y="42" fill="#94a3b8" font-size="9" text-anchor="middle">水平: x ＝ (v₀cosθ)t</text>
+  <text x="402" y="58" fill="#f43f5e" font-size="9" text-anchor="middle">鉛直: y ＝ (v₀sinθ)t − ½gt²</text>
 </svg>`
       };
 
@@ -143,17 +143,17 @@ function getIllustration(kind) {
   </defs>
   <polygon points="40,140 440,140 440,40" fill="rgba(30,41,59,0.5)" stroke="#64748b" stroke-width="2"/>
   <g transform="translate(240, 90) rotate(-14)">
-    <rect x="-25" y="-20" width="50" height="30" rx="3" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
-    <line x1="0" y1="-5" x2="0" y2="-45" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-fi-cyan)"/>
-    <rect x="-35" y="-60" width="70" height="15" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
-    <text x="0" y="-49" fill="#38bdf8" font-size="9" font-weight="700" text-anchor="middle">垂直抗力 N</text>
-    <line x1="0" y1="-5" x2="-45" y2="-5" stroke="#fbbf24" stroke-width="2" marker-end="url(#arr-fi-amber)"/>
-    <rect x="-75" y="-12" width="40" height="15" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
-    <text x="-55" y="-1" fill="#fbbf24" font-size="9" text-anchor="middle">摩擦力 f</text>
+    <rect x="-25" y="-30" width="50" height="30" rx="3" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+    <line x1="0" y1="-15" x2="0" y2="-55" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-fi-cyan)"/>
+    <rect x="-35" y="-70" width="70" height="15" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+    <text x="0" y="-59" fill="#38bdf8" font-size="9" font-weight="700" text-anchor="middle">垂直抗力 N</text>
+    <line x1="0" y1="-15" x2="-45" y2="-15" stroke="#fbbf24" stroke-width="2" marker-end="url(#arr-fi-amber)"/>
+    <rect x="-75" y="-22" width="40" height="15" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
+    <text x="-55" y="-11" fill="#fbbf24" font-size="9" text-anchor="middle">摩擦力 f</text>
   </g>
-  <line x1="240" y1="90" x2="240" y2="145" stroke="#f43f5e" stroke-width="2.5" marker-end="url(#arr-fi-rose)"/>
-  <rect x="245" y="125" width="50" height="16" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
-  <text x="270" y="137" fill="#f43f5e" font-size="10" font-weight="700" text-anchor="middle">重力 mg</text>
+  <line x1="240" y1="75" x2="240" y2="130" stroke="#f43f5e" stroke-width="2.5" marker-end="url(#arr-fi-rose)"/>
+  <rect x="245" y="110" width="50" height="16" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
+  <text x="270" y="122" fill="#f43f5e" font-size="10" font-weight="700" text-anchor="middle">重力 mg</text>
   <rect x="60" y="30" width="130" height="38" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
   <text x="125" y="46" fill="#38bdf8" font-size="9" font-weight="700" text-anchor="middle">垂直: N ＝ mg cosθ</text>
   <text x="125" y="60" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">斜面: ma ＝ mg sinθ − f</text>
@@ -170,7 +170,7 @@ function getIllustration(kind) {
     <marker id="arr-sp-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
   </defs>
   <line x1="50" y1="30" x2="50" y2="130" stroke="#94a3b8" stroke-width="3"/>
-  <line x1="50" y1="120" x2="450" y2="120" stroke="#475569" stroke-width="2"/>
+  <line x1="50" y1="120" x2="450" y2="120" stroke="#64748b" stroke-width="2"/>
   <path d="M 50,80 L 80,80 L 95,65 L 115,95 L 135,65 L 155,95 L 175,65 L 195,95 L 215,65 L 235,95 L 250,80 L 270,80" fill="none" stroke="#38bdf8" stroke-width="3"/>
   <rect x="270" y="60" width="45" height="40" rx="3" fill="#1e293b" stroke="#fbbf24" stroke-width="2"/>
   <text x="292" y="84" fill="#fbbf24" font-size="11" font-weight="700" text-anchor="middle">質量 m</text>
@@ -256,13 +256,13 @@ function getIllustration(kind) {
     <marker id="arr-mo-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
     <marker id="arr-mo-amber" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#fbbf24"/></marker>
   </defs>
-  <line x1="30" y1="130" x2="470" y2="130" stroke="#475569" stroke-width="2"/>
-  <rect x="100" y="90" width="60" height="32" rx="4" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+  <line x1="30" y1="130" x2="470" y2="130" stroke="#64748b" stroke-width="2"/>
+  <rect x="96" y="90" width="68" height="32" rx="4" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
   <text x="130" y="110" fill="#38bdf8" font-size="11" font-weight="700" text-anchor="middle">台車A (m₁)</text>
-  <line x1="165" y1="106" x2="220" y2="106" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-mo-cyan)"/>
+  <line x1="168" y1="106" x2="220" y2="106" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-mo-cyan)"/>
   <rect x="175" y="85" width="45" height="16" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
   <text x="197" y="97" fill="#38bdf8" font-size="9" font-weight="700" text-anchor="middle">速度 v₁</text>
-  <rect x="290" y="90" width="60" height="32" rx="4" fill="#1e293b" stroke="#fbbf24" stroke-width="2"/>
+  <rect x="286" y="90" width="68" height="32" rx="4" fill="#1e293b" stroke="#fbbf24" stroke-width="2"/>
   <text x="320" y="110" fill="#fbbf24" font-size="11" font-weight="700" text-anchor="middle">台車B (m₂)</text>
   <line x1="355" y1="106" x2="395" y2="106" stroke="#fbbf24" stroke-width="2" marker-end="url(#arr-mo-amber)"/>
   <rect x="360" y="85" width="45" height="16" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
@@ -282,7 +282,7 @@ function getIllustration(kind) {
     <marker id="arr-cm-rose" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#f43f5e"/></marker>
     <marker id="arr-cm-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
   </defs>
-  <circle cx="210" cy="85" r="55" fill="none" stroke="#475569" stroke-width="1.5" stroke-dasharray="3,3"/>
+  <circle cx="210" cy="85" r="55" fill="none" stroke="#64748b" stroke-width="1.5" stroke-dasharray="3,3"/>
   <circle cx="210" cy="85" r="4" fill="#94a3b8"/>
   <text x="210" y="102" fill="#94a3b8" font-size="9" text-anchor="middle">中心 O</text>
   <circle cx="265" cy="85" r="8" fill="#fbbf24"/>
@@ -312,7 +312,7 @@ function getIllustration(kind) {
   </defs>
   <circle cx="160" cy="80" r="32" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
   <text x="160" y="85" fill="#38bdf8" font-size="11" font-weight="700" text-anchor="middle">地球 (M)</text>
-  <circle cx="160" cy="80" r="75" fill="none" stroke="#475569" stroke-width="1.5" stroke-dasharray="3,3"/>
+  <circle cx="160" cy="80" r="75" fill="none" stroke="#64748b" stroke-width="1.5" stroke-dasharray="3,3"/>
   <circle cx="235" cy="80" r="6" fill="#fbbf24"/>
   <line x1="235" y1="80" x2="235" y2="35" stroke="#38bdf8" stroke-width="2" marker-end="url(#arr-gr-cyan)"/>
   <rect x="240" y="45" width="45" height="15" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
@@ -332,13 +332,13 @@ function getIllustration(kind) {
         title: '力学的エネルギー保存則',
         desc: '保存力のみが仕事をする場合、運動エネルギー K と位置エネルギー U の和は常に一定です。',
         svg: `<svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
-  <path d="M 60,30 Q 180,140 440,80" fill="none" stroke="#475569" stroke-width="3"/>
+  <path d="M 60,30 Q 180,140 440,80" fill="none" stroke="#64748b" stroke-width="3"/>
   <circle cx="80" cy="40" r="10" fill="#fbbf24" stroke="#f59e0b" stroke-width="2"/>
   <rect x="40" y="60" width="80" height="30" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
   <text x="80" y="73" fill="#fbbf24" font-size="9" font-weight="700" text-anchor="middle">位置E: mgh</text>
   <text x="80" y="85" fill="#94a3b8" font-size="8" text-anchor="middle">運動E: 0</text>
   <circle cx="220" cy="115" r="10" fill="#0284c7" stroke="#38bdf8" stroke-width="2"/>
-  <rect x="180" y="125" width="85" height="30" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <rect x="176" y="125" width="92" height="30" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
   <text x="222" y="138" fill="#38bdf8" font-size="9" font-weight="700" text-anchor="middle">運動E: ½mv² (最大)</text>
   <text x="222" y="150" fill="#94a3b8" font-size="8" text-anchor="middle">位置E: 0 (基準)</text>
   <rect x="300" y="25" width="170" height="42" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
@@ -360,11 +360,11 @@ function getIllustration(kind) {
   <rect x="120" y="50" width="50" height="80" rx="2" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
   <circle cx="145" cy="90" r="4" fill="#fbbf24"/>
   <line x1="145" y1="90" x2="145" y2="145" stroke="#f43f5e" stroke-width="2" marker-end="url(#arr-tp-rose)"/>
-  <rect x="155" y="115" width="45" height="15" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
-  <text x="177" y="126" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">重力 mg</text>
+  <rect x="155" y="132" width="45" height="15" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
+  <text x="177" y="143" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">重力 mg</text>
   <line x1="120" y1="60" x2="190" y2="60" stroke="#38bdf8" stroke-width="2" marker-end="url(#arr-tp-cyan)"/>
-  <rect x="145" y="42" width="45" height="15" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
-  <text x="167" y="53" fill="#38bdf8" font-size="9" font-weight="700" text-anchor="middle">外力 F</text>
+  <rect x="150" y="28" width="45" height="15" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="172" y="39" fill="#38bdf8" font-size="9" font-weight="700" text-anchor="middle">外力 F</text>
   <rect x="300" y="40" width="180" height="52" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
   <text x="390" y="58" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">転倒条件: N の作用点が端点へ</text>
   <text x="390" y="75" fill="#fbbf24" font-size="9" text-anchor="middle">端点まわりのモーメント: Fh ＞ mg(a/2)</text>
@@ -381,6 +381,7 @@ function getIllustration(kind) {
         svg: `<svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <marker id="arr-w-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-tw-emerald" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#34d399"/></marker>
   </defs>
   <line x1="30" y1="85" x2="470" y2="85" stroke="#64748b" stroke-width="1.5"/>
   <line x1="50" y1="145" x2="50" y2="25" stroke="#64748b" stroke-width="1.5"/>
@@ -395,7 +396,7 @@ function getIllustration(kind) {
   <line x1="95" y1="85" x2="95" y2="55" stroke="#f43f5e" stroke-width="1.5"/>
   <rect x="100" y="65" width="40" height="15" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
   <text x="120" y="76" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">振幅 A</text>
-  <line x1="330" y1="35" x2="390" y2="35" stroke="#34d399" stroke-width="2" marker-end="url(#arr-w-cyan)"/>
+  <line x1="330" y1="35" x2="390" y2="35" stroke="#34d399" stroke-width="2" marker-end="url(#arr-tw-emerald)"/>
   <rect x="340" y="18" width="55" height="15" rx="3" fill="#0f172a" stroke="#34d399" stroke-width="1"/>
   <text x="367" y="29" fill="#34d399" font-size="9" font-weight="700" text-anchor="middle">進行方向 v</text>
   <rect x="290" y="115" width="180" height="24" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
@@ -408,7 +409,7 @@ function getIllustration(kind) {
         title: '定常波の腹と節の位置関係',
         desc: '逆向きに進む同一波の合成により、振幅が常に 0 の節と、振幅が 2A となる腹が生じます。',
         svg: `<svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
-  <line x1="40" y1="85" x2="460" y2="85" stroke="#475569" stroke-width="1.5"/>
+  <line x1="40" y1="85" x2="460" y2="85" stroke="#64748b" stroke-width="1.5"/>
   <path d="M 60,85 Q 110,35 160,85 Q 210,135 260,85 Q 310,35 360,85 Q 410,135 460,85" fill="none" stroke="#38bdf8" stroke-width="2.5"/>
   <path d="M 60,85 Q 110,135 160,85 Q 210,35 260,85 Q 310,135 360,85 Q 410,35 460,85" fill="none" stroke="#38bdf8" stroke-width="1.5" stroke-dasharray="3,3"/>
   <circle cx="60" cy="85" r="5" fill="#f43f5e"/>
@@ -456,21 +457,22 @@ function getIllustration(kind) {
         svg: `<svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <marker id="arr-dp-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-dop-rose" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#f43f5e"/></marker>
   </defs>
-  <line x1="30" y1="130" x2="470" y2="130" stroke="#475569" stroke-width="1.5"/>
+  <line x1="30" y1="130" x2="470" y2="130" stroke="#64748b" stroke-width="1.5"/>
   <circle cx="160" cy="80" r="55" fill="none" stroke="#64748b" stroke-width="1.5"/>
   <circle cx="180" cy="80" r="40" fill="none" stroke="#64748b" stroke-width="1.5"/>
   <circle cx="200" cy="80" r="25" fill="none" stroke="#38bdf8" stroke-width="2"/>
   <circle cx="210" cy="80" r="6" fill="#f43f5e"/>
-  <line x1="210" y1="80" x2="250" y2="80" stroke="#f43f5e" stroke-width="2" marker-end="url(#arr-dp-cyan)"/>
+  <line x1="210" y1="80" x2="250" y2="80" stroke="#f43f5e" stroke-width="2" marker-end="url(#arr-dop-rose)"/>
   <rect x="205" y="55" width="60" height="16" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
   <text x="235" y="67" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">音源 (v_s)</text>
   <circle cx="360" cy="80" r="7" fill="#34d399"/>
   <rect x="330" y="55" width="60" height="16" rx="3" fill="#0f172a" stroke="#34d399" stroke-width="1"/>
   <text x="360" y="67" fill="#34d399" font-size="9" font-weight="700" text-anchor="middle">観測者 (v_o)</text>
-  <rect x="290" y="105" width="180" height="38" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
-  <text x="380" y="121" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">f′ ＝ (V − v_o) / (V − v_s) × f</text>
-  <text x="380" y="135" fill="#cbd5e1" font-size="9" text-anchor="middle">前方波長: λ′ ＝ (V − v_s) / f</text>
+  <rect x="280" y="105" width="195" height="38" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="378" y="121" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">f′ ＝ (V − v_o) / (V − v_s) × f</text>
+  <text x="378" y="135" fill="#cbd5e1" font-size="9" text-anchor="middle">前方波長: λ′ ＝ (V − v_s) / f</text>
 </svg>`
       };
 
@@ -481,10 +483,11 @@ function getIllustration(kind) {
         svg: `<svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <marker id="arr-op-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-opt-amber" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#fbbf24"/></marker>
   </defs>
   <line x1="30" y1="80" x2="470" y2="80" stroke="#64748b" stroke-width="1.5"/>
   <ellipse cx="250" cy="80" rx="8" ry="60" fill="rgba(56,189,248,0.2)" stroke="#38bdf8" stroke-width="2"/>
-  <line x1="100" y1="80" x2="100" y2="40" stroke="#fbbf24" stroke-width="3" marker-end="url(#arr-op-cyan)"/>
+  <line x1="100" y1="80" x2="100" y2="40" stroke="#fbbf24" stroke-width="3" marker-end="url(#arr-opt-amber)"/>
   <rect x="75" y="45" width="22" height="14" rx="2" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
   <text x="86" y="55" fill="#fbbf24" font-size="9" font-weight="700" text-anchor="middle">物</text>
   <line x1="100" y1="40" x2="250" y2="40" stroke="#38bdf8" stroke-width="1.5"/>
@@ -510,17 +513,17 @@ function getIllustration(kind) {
   </defs>
   <line x1="40" y1="80" x2="460" y2="80" stroke="#64748b" stroke-width="2"/>
   <line x1="200" y1="20" x2="200" y2="140" stroke="#64748b" stroke-width="1.5" stroke-dasharray="3,3"/>
-  <text x="280" y="60" fill="#94a3b8" font-size="9">媒質1 (屈折率 n₁)</text>
+  <text x="210" y="20" fill="#94a3b8" font-size="9">媒質1 (屈折率 n₁)</text>
   <text x="280" y="110" fill="#94a3b8" font-size="9">媒質2 (屈折率 n₂)</text>
   <line x1="120" y1="30" x2="200" y2="80" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-sn-cyan)"/>
   <line x1="200" y1="80" x2="250" y2="140" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-sn-cyan)"/>
-  <rect x="140" y="45" width="45" height="15" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <rect x="136" y="45" width="52" height="15" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
   <text x="162" y="56" fill="#38bdf8" font-size="9" text-anchor="middle">入射角 θ₁</text>
-  <rect x="215" y="105" width="45" height="15" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <rect x="211" y="105" width="52" height="15" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
   <text x="237" y="116" fill="#38bdf8" font-size="9" text-anchor="middle">屈折角 θ₂</text>
-  <rect x="310" y="30" width="165" height="42" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
-  <text x="392" y="48" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">スネルの法則: n₁sinθ₁ ＝ n₂sinθ₂</text>
-  <text x="392" y="64" fill="#fbbf24" font-size="9" text-anchor="middle">臨界角: sinθ_c ＝ n₂ / n₁</text>
+  <rect x="290" y="28" width="200" height="44" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="390" y="46" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">スネルの法則: n₁sinθ₁ ＝ n₂sinθ₂</text>
+  <text x="390" y="62" fill="#fbbf24" font-size="9" text-anchor="middle">臨界角: sinθ_c ＝ n₂ / n₁</text>
 </svg>`
       };
 
@@ -537,8 +540,8 @@ function getIllustration(kind) {
   <line x1="60" y1="67" x2="420" y2="50" stroke="#38bdf8" stroke-width="1.5"/>
   <line x1="60" y1="102" x2="420" y2="50" stroke="#38bdf8" stroke-width="1.5"/>
   <circle cx="420" cy="50" r="4" fill="#f43f5e"/>
-  <rect x="425" y="42" width="45" height="15" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
-  <text x="447" y="53" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">点 P (明線)</text>
+  <rect x="420" y="42" width="60" height="15" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
+  <text x="450" y="53" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">点 P (明線)</text>
   <rect x="150" y="20" width="220" height="38" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
   <text x="260" y="35" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">明線条件: dx / L ＝ mλ</text>
   <text x="260" y="49" fill="#fbbf24" font-size="9" text-anchor="middle">明線間隔: Δx ＝ Lλ / d</text>
@@ -576,18 +579,18 @@ function getIllustration(kind) {
   <rect x="70" y="30" width="360" height="100" fill="none" stroke="#64748b" stroke-width="2"/>
   <line x1="60" y1="75" x2="80" y2="75" stroke="#f43f5e" stroke-width="3"/>
   <line x1="65" y1="85" x2="75" y2="85" stroke="#f43f5e" stroke-width="2"/>
-  <rect x="25" y="72" width="30" height="16" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
+  <rect x="12" y="72" width="56" height="16" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
   <text x="40" y="84" fill="#f43f5e" font-size="10" font-weight="700" text-anchor="middle">起電力 E</text>
-  <rect x="200" y="20" width="60" height="20" rx="3" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+  <rect x="197" y="20" width="66" height="20" rx="3" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
   <text x="230" y="34" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">抵抗 R₁</text>
-  <rect x="200" y="120" width="60" height="20" rx="3" fill="#1e293b" stroke="#fbbf24" stroke-width="2"/>
+  <rect x="197" y="120" width="66" height="20" rx="3" fill="#1e293b" stroke="#fbbf24" stroke-width="2"/>
   <text x="230" y="134" fill="#fbbf24" font-size="10" font-weight="700" text-anchor="middle">抵抗 R₂</text>
   <line x1="120" y1="30" x2="160" y2="30" stroke="#38bdf8" stroke-width="2" marker-end="url(#arr-c-cyan)"/>
   <rect x="130" y="10" width="40" height="15" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
   <text x="150" y="21" fill="#38bdf8" font-size="9" font-weight="700" text-anchor="middle">電流 I</text>
-  <rect x="300" y="60" width="160" height="38" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
-  <text x="380" y="76" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">オーム則: V ＝ RI</text>
-  <text x="380" y="90" fill="#cbd5e1" font-size="9" text-anchor="middle">キルヒホッフ第2則: E ＝ RI</text>
+  <rect x="265" y="60" width="150" height="40" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="340" y="76" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">オーム則: V ＝ RI</text>
+  <text x="340" y="91" fill="#cbd5e1" font-size="9" text-anchor="middle">キルヒホッフ第2則: E ＝ RI</text>
 </svg>`
       };
 
@@ -598,6 +601,7 @@ function getIllustration(kind) {
         svg: `<svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <marker id="arr-cap-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-cap-amber" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#fbbf24"/></marker>
   </defs>
   <line x1="180" y1="30" x2="180" y2="130" stroke="#f43f5e" stroke-width="4"/>
   <line x1="260" y1="30" x2="260" y2="130" stroke="#38bdf8" stroke-width="4"/>
@@ -605,9 +609,9 @@ function getIllustration(kind) {
   <text x="152" y="83" fill="#f43f5e" font-size="10" font-weight="700" text-anchor="middle">＋Q (正)</text>
   <rect x="268" y="70" width="45" height="18" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
   <text x="290" y="83" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">−Q (負)</text>
-  <line x1="184" y1="50" x2="256" y2="50" stroke="#fbbf24" stroke-width="2" marker-end="url(#arr-cap-cyan)"/>
-  <line x1="184" y1="80" x2="256" y2="80" stroke="#fbbf24" stroke-width="2" marker-end="url(#arr-cap-cyan)"/>
-  <line x1="184" y1="110" x2="256" y2="110" stroke="#fbbf24" stroke-width="2" marker-end="url(#arr-cap-cyan)"/>
+  <line x1="184" y1="50" x2="256" y2="50" stroke="#fbbf24" stroke-width="2" marker-end="url(#arr-cap-amber)"/>
+  <line x1="184" y1="80" x2="256" y2="80" stroke="#fbbf24" stroke-width="2" marker-end="url(#arr-cap-amber)"/>
+  <line x1="184" y1="110" x2="256" y2="110" stroke="#fbbf24" stroke-width="2" marker-end="url(#arr-cap-amber)"/>
   <rect x="200" y="85" width="45" height="16" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
   <text x="222" y="97" fill="#fbbf24" font-size="9" font-weight="700" text-anchor="middle">電場 E</text>
   <rect x="330" y="50" width="140" height="48" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
@@ -647,9 +651,10 @@ function getIllustration(kind) {
     <marker id="arr-mf-rose" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#f43f5e"/></marker>
     <marker id="arr-mf-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
   </defs>
-  <g fill="#475569" font-size="14">
-    <text x="80" y="50">⊗</text><text x="140" y="50">⊗</text><text x="200" y="50">⊗</text>
-    <text x="80" y="100">⊗</text><text x="140" y="100">⊗</text><text x="200" y="100">⊗</text>
+  <g fill="#94a3b8" font-size="14">
+    <text x="60" y="50">⊗</text><text x="100" y="50">⊗</text>
+    <text x="60" y="95">⊗</text><text x="100" y="95">⊗</text><text x="150" y="105">⊗</text>
+    <text x="60" y="135">⊗</text><text x="110" y="135">⊗</text><text x="160" y="135">⊗</text><text x="210" y="135">⊗</text>
   </g>
   <rect x="100" y="15" width="105" height="18" rx="3" fill="#0f172a" stroke="#64748b" stroke-width="1"/>
   <text x="152" y="28" fill="#94a3b8" font-size="9" text-anchor="middle">磁場 B (画面奥向き)</text>
@@ -739,6 +744,7 @@ function getIllustration(kind) {
         svg: `<svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <marker id="arr-g-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-g-rose" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#f43f5e"/></marker>
   </defs>
   <rect x="80" y="30" width="180" height="100" fill="rgba(30,41,59,0.4)" stroke="#64748b" stroke-width="2"/>
   <circle cx="120" cy="65" r="5" fill="#38bdf8"/>
@@ -746,7 +752,7 @@ function getIllustration(kind) {
   <circle cx="170" cy="100" r="5" fill="#38bdf8"/>
   <line x1="170" y1="100" x2="200" y2="115" stroke="#38bdf8" stroke-width="1.5" marker-end="url(#arr-g-cyan)"/>
   <circle cx="210" cy="60" r="5" fill="#f43f5e"/>
-  <line x1="210" y1="60" x2="255" y2="60" stroke="#f43f5e" stroke-width="2" marker-end="url(#arr-g-cyan)"/>
+  <line x1="210" y1="60" x2="255" y2="60" stroke="#f43f5e" stroke-width="2" marker-end="url(#arr-g-rose)"/>
   <rect x="290" y="45" width="180" height="48" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
   <text x="380" y="64" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">平均運動E: ½ m(v²) ＝ 3/2 kT</text>
   <text x="380" y="82" fill="#fbbf24" font-size="9" text-anchor="middle">二乗平均速度: v_rms ＝ √(3RT/M)</text>
@@ -761,6 +767,8 @@ function getIllustration(kind) {
   <defs>
     <marker id="arr-he-rose" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#f43f5e"/></marker>
     <marker id="arr-he-cyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#38bdf8"/></marker>
+    <marker id="arr-he-amber" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#fbbf24"/></marker>
+    <marker id="arr-he-blue" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#0284c7"/></marker>
   </defs>
   <rect x="80" y="15" width="120" height="24" rx="4" fill="#f43f5e"/>
   <text x="140" y="31" fill="#fff" font-size="10" font-weight="700" text-anchor="middle">高温熱源 (T_H)</text>
@@ -770,14 +778,14 @@ function getIllustration(kind) {
   <text x="140" y="141" fill="#fff" font-size="10" font-weight="700" text-anchor="middle">低温熱源 (T_L)</text>
   <line x1="140" y1="39" x2="140" y2="58" stroke="#f43f5e" stroke-width="3" marker-end="url(#arr-he-rose)"/>
   <text x="155" y="52" fill="#f43f5e" font-size="9" font-weight="700">Q₁</text>
-  <line x1="140" y1="102" x2="140" y2="125" stroke="#0284c7" stroke-width="3" marker-end="url(#arr-he-cyan)"/>
+  <line x1="140" y1="102" x2="140" y2="125" stroke="#0284c7" stroke-width="3" marker-end="url(#arr-he-blue)"/>
   <text x="155" y="118" fill="#38bdf8" font-size="9" font-weight="700">Q₂</text>
-  <line x1="162" y1="80" x2="225" y2="80" stroke="#fbbf24" stroke-width="3" marker-end="url(#arr-he-cyan)"/>
-  <rect x="230" y="70" width="70" height="20" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
-  <text x="265" y="84" fill="#fbbf24" font-size="10" font-weight="700" text-anchor="middle">仕事 W ＝ Q₁−Q₂</text>
-  <rect x="315" y="50" width="160" height="42" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
-  <text x="395" y="68" fill="#38bdf8" font-size="11" font-weight="700" text-anchor="middle">熱効率: e ＝ W / Q₁</text>
-  <text x="395" y="84" fill="#cbd5e1" font-size="9" text-anchor="middle">e ＝ (Q₁ − Q₂) / Q₁</text>
+  <line x1="162" y1="80" x2="214" y2="80" stroke="#fbbf24" stroke-width="3" marker-end="url(#arr-he-amber)"/>
+  <rect x="218" y="70" width="98" height="20" rx="3" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
+  <text x="267" y="84" fill="#fbbf24" font-size="10" font-weight="700" text-anchor="middle">仕事 W ＝ Q₁−Q₂</text>
+  <rect x="324" y="50" width="160" height="42" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="404" y="68" fill="#38bdf8" font-size="11" font-weight="700" text-anchor="middle">熱効率: e ＝ W / Q₁</text>
+  <text x="404" y="84" fill="#cbd5e1" font-size="9" text-anchor="middle">e ＝ (Q₁ − Q₂) / Q₁</text>
 </svg>`
       };
 
@@ -819,15 +827,15 @@ function getIllustration(kind) {
   </defs>
   <circle cx="180" cy="80" r="10" fill="#f43f5e"/>
   <text x="180" y="84" fill="#fff" font-size="10" font-weight="700" text-anchor="middle">＋e</text>
-  <circle cx="180" cy="80" r="35" fill="none" stroke="#475569" stroke-width="1.5" stroke-dasharray="3,3"/>
-  <circle cx="180" cy="80" r="60" fill="none" stroke="#475569" stroke-width="1.5" stroke-dasharray="3,3"/>
+  <circle cx="180" cy="80" r="35" fill="none" stroke="#64748b" stroke-width="1.5" stroke-dasharray="3,3"/>
+  <circle cx="180" cy="80" r="60" fill="none" stroke="#64748b" stroke-width="1.5" stroke-dasharray="3,3"/>
   <circle cx="215" cy="80" r="5" fill="#38bdf8"/>
   <circle cx="240" cy="80" r="5" fill="#fbbf24"/>
   <line x1="240" y1="80" x2="218" y2="80" stroke="#f43f5e" stroke-width="2"/>
   <path d="M 230,80 Q 245,60 260,80 T 290,80" fill="none" stroke="#38bdf8" stroke-width="2" marker-end="url(#arr-bo-cyan)"/>
   <rect x="250" y="55" width="85" height="16" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
   <text x="292" y="67" fill="#38bdf8" font-size="9" font-weight="700" text-anchor="middle">放出光子 hν</text>
-  <rect x="340" y="45" width="145" height="45" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <rect x="334" y="45" width="156" height="45" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
   <text x="412" y="63" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">振動数条件: hν ＝ E₂ − E₁</text>
   <text x="412" y="79" fill="#fbbf24" font-size="9" text-anchor="middle">量子条件: 2πr ＝ nλ</text>
 </svg>`
@@ -867,8 +875,8 @@ function getIllustration(kind) {
   <line x1="125" y1="80" x2="185" y2="80" stroke="#f43f5e" stroke-width="2.5" marker-end="url(#arr-nu-rose)"/>
   <circle cx="215" cy="65" r="15" fill="#1e293b" stroke="#38bdf8" stroke-width="1.5"/>
   <text x="215" y="69" fill="#38bdf8" font-size="8" text-anchor="middle">娘核</text>
-  <circle cx="240" cy="105" r="8" fill="#fbbf24"/>
-  <text x="240" y="108" fill="#0f172a" font-size="8" font-weight="700" text-anchor="middle">α/β</text>
+  <circle cx="240" cy="105" r="8" fill="#1e293b" stroke="#fbbf24" stroke-width="1.5"/>
+  <text x="240" y="108" fill="#fbbf24" font-size="8" font-weight="700" text-anchor="middle">α/β</text>
   <rect x="290" y="45" width="190" height="48" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
   <text x="385" y="64" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">半減期: N ＝ N₀ (½)^(t/T)</text>
   <text x="385" y="82" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">質量欠損: E ＝ Δm c²</text>
@@ -976,9 +984,9 @@ function getIllustration(kind) {
         title: '原子の構成と原子核（陽子・中性子・電子）',
         desc: '原子番号 Z（陽子の数＝中性原子の電子の数）と質量数 A（陽子＋中性子の総数）から構成が決まります。',
         svg: `<svg class="vector-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
-  <circle cx="150" cy="80" r="50" fill="none" stroke="#475569" stroke-width="1.5" stroke-dasharray="3,3"/>
+  <circle cx="150" cy="80" r="50" fill="none" stroke="#64748b" stroke-width="1.5" stroke-dasharray="3,3"/>
   <circle cx="185" cy="45" r="5" fill="#38bdf8"/>
-  <rect x="195" y="35" width="45" height="15" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <rect x="192" y="35" width="50" height="15" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
   <text x="217" y="46" fill="#38bdf8" font-size="9" font-weight="700" text-anchor="middle">電子 (e⁻)</text>
   <circle cx="150" cy="80" r="22" fill="#1e293b" stroke="#f43f5e" stroke-width="2"/>
   <text x="150" y="77" fill="#f43f5e" font-size="9" font-weight="700" text-anchor="middle">原子核</text>

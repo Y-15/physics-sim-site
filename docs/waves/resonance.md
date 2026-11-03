@@ -33,7 +33,7 @@ description: 高校物理の波動分野・最頻出実験テーマ「気柱の�
 管の長さ $L$ に対する波長 $\lambda$ と振動数 $f$ の関係をベクター図で比較しましょう。
 
 <div class="vector-graph-card">
-  <svg viewBox="0 0 760 440" class="vector-graph" xmlns="http://www.w3.org/2000/svg">
+  <svg viewBox="0 0 780 440" class="vector-graph" xmlns="http://www.w3.org/2000/svg">
     <defs>
       <pattern id="gridRes" width="20" height="20" patternUnits="userSpaceOnUse">
         <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#334155" stroke-width="0.5"/>
@@ -43,10 +43,10 @@ description: 高校物理の波動分野・最頻出実験テーマ「気柱の�
         <stop offset="100%" stop-color="#131d31"/>
       </linearGradient>
     </defs>
-    <rect width="760" height="440" fill="url(#gradRes)" rx="10"/>
-    <rect width="760" height="440" fill="url(#gridRes)" rx="10"/>
+    <rect width="780" height="440" fill="url(#gradRes)" rx="10"/>
+    <rect width="780" height="440" fill="url(#gridRes)" rx="10"/>
     <!-- 左列: 閉管 (Closed Pipe) -->
-    <text x="50" y="35" fill="#38bdf8" font-size="16" font-weight="bold">【閉管（片側閉口）】: 奇数倍振動のみ (m = 1, 3, 5)</text>
+    <text x="50" y="35" fill="#38bdf8" font-size="13" font-weight="bold">【閉管（片側閉口）】: 奇数倍振動のみ (m = 1, 3, 5)</text>
     <!-- 閉管 基本振動 (m=1) -->
     <g transform="translate(40, 60)">
       <!-- 管枠 (右側閉端) -->
@@ -82,7 +82,7 @@ description: 高校物理の波動分野・最頻出実験テーマ「気柱の�
     <!-- 中央の仕切り線 -->
     <line x1="380" y1="20" x2="380" y2="420" stroke="#334155" stroke-width="1.5" stroke-dasharray="6,4"/>
     <!-- 右列: 開管 (Open Pipe) -->
-    <text x="410" y="35" fill="#f59e0b" font-size="16" font-weight="bold">【開管（両側開口）】: 全倍振動 (n = 1, 2, 3)</text>
+    <text x="410" y="35" fill="#f59e0b" font-size="13" font-weight="bold">【開管（両側開口）】: 全倍振動 (n = 1, 2, 3)</text>
     <!-- 開管 基本振動 (n=1) -->
     <g transform="translate(410, 60)">
       <rect x="0" y="0" width="300" height="60" fill="rgba(30, 41, 59, 0.6)" stroke="#64748b" stroke-width="2"/>
@@ -132,8 +132,8 @@ description: 高校物理の波動分野・最頻出実験テーマ「気柱の�
 水を入れたガラス管に一定振動数 $f$ の音叉を近づけ、水面を徐々に下げていく実験を考えます。
 
 <div class="vector-graph-card">
-  <svg viewBox="0 0 760 260" class="vector-graph" xmlns="http://www.w3.org/2000/svg">
-    <rect width="760" height="260" fill="#0f172a" rx="10"/>
+  <svg viewBox="0 0 770 280" class="vector-graph" xmlns="http://www.w3.org/2000/svg">
+    <rect width="770" height="280" fill="#0f172a" rx="10"/>
     <!-- 第1共鳴 -->
     <g transform="translate(80, 20)">
       <text x="70" y="20" fill="#38bdf8" font-size="14" font-weight="bold" text-anchor="middle">【第1共鳴】(管長 l₁)</text>

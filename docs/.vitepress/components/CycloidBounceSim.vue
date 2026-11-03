@@ -247,14 +247,15 @@ useLoop(canvasRef, ({ ctx, width, height, dt }) => {
   dot(ctx, pOrig.px, pOrig.py, 3, '#fff')
   text(ctx, 'O(0,0)', pOrig.px - 28, pOrig.py - 10, '#a1a1aa', '11px sans-serif')
 
-  // 2. 床面 y = -R の描画
+  // 2. 床面 y = -R の描画（小球半径 7px 分オフセットし、球底面が床面に正確に接地するように描画）
   if (floorEnabled.value) {
     const floorP = toPx(0, -rRadius.value)
+    const floorLineY = floorP.py + 7
     ctx.strokeStyle = '#f59e0b'
     ctx.lineWidth = 2.5
     ctx.beginPath()
-    ctx.moveTo(0, floorP.py)
-    ctx.lineTo(width, floorP.py)
+    ctx.moveTo(0, floorLineY)
+    ctx.lineTo(width, floorLineY)
     ctx.stroke()
 
     // ハッチング（床の厚み）
@@ -262,11 +263,11 @@ useLoop(canvasRef, ({ ctx, width, height, dt }) => {
     ctx.lineWidth = 1
     for (let hx = 0; hx < width; hx += 16) {
       ctx.beginPath()
-      ctx.moveTo(hx, floorP.py)
-      ctx.lineTo(hx - 8, floorP.py + 10)
+      ctx.moveTo(hx, floorLineY)
+      ctx.lineTo(hx - 8, floorLineY + 10)
       ctx.stroke()
     }
-    text(ctx, `床面 y = -R = -${rRadius.value.toFixed(2)}m`, 20, floorP.py + 24, '#f59e0b', 'bold 12px sans-serif')
+    text(ctx, `床面 y = -R = -${rRadius.value.toFixed(2)}m`, 20, floorLineY + 24, '#f59e0b', 'bold 12px sans-serif')
   }
 
   // 3. ドリフト慣性系 S' の円ガイド（破線円）

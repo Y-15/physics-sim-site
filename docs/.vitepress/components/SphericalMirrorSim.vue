@@ -185,47 +185,52 @@ function draw() {
 }
 
 function drawRayTraces(ctx, ox, oy, ix, iy, fx, cx, isConcave) {
-  // 光線1: 光軸に平行に入射 -> 鏡で反射して焦点 F を通る (水色)
+  // 球面鏡の円弧との交点 hitX を計算（鏡面突き抜け・空中反射の解消）
+  const R = 2 * Math.abs(f.value)
+  const dy = oy - axisY
+  const sagitta = R - Math.sqrt(Math.max(0, R * R - dy * dy))
+  const hitX = isConcave ? mirrorX - sagitta : mirrorX + sagitta
+
+  // 光線1: 光軸に平行に入射 -> 鏡の真の球面円弧面 hitX で反射して焦点 F を通る (水色)
   ctx.strokeStyle = '#38bdf8'
   ctx.lineWidth = 1.3
   ctx.beginPath()
   ctx.moveTo(ox, oy)
-  ctx.lineTo(mirrorX, oy) // 鏡の主平面
+  ctx.lineTo(hitX, oy) // 鏡の円弧面へ直接到達
   ctx.stroke()
-  drawRayPulses(ctx, ox, oy, mirrorX, oy, '#7dd3fc', 0)
+  drawRayPulses(ctx, ox, oy, hitX, oy, '#7dd3fc', 0)
 
   if (isConcave) {
     // 凹面鏡: 反射光は焦点 F を通って像へ
     ctx.beginPath()
-    ctx.moveTo(mirrorX, oy)
-    // 像の先端へ
-    const slope = (iy - oy) / (ix - mirrorX)
-    ctx.lineTo(mirrorX - 400, oy - 400 * slope)
+    ctx.moveTo(hitX, oy)
+    const slope = (oy - axisY) / (hitX - fx)
+    ctx.lineTo(hitX - 400, oy - 400 * slope)
     ctx.stroke()
-    drawRayPulses(ctx, mirrorX, oy, mirrorX - 300, oy - 300 * slope, '#38bdf8', 0.35)
+    drawRayPulses(ctx, hitX, oy, hitX - 300, oy - 300 * slope, '#38bdf8', 0.35)
 
     // 虚像の場合は奥へ点線
     if (imageDist.value < 0) {
       ctx.setLineDash([3, 3])
       ctx.beginPath()
-      ctx.moveTo(mirrorX, oy)
+      ctx.moveTo(hitX, oy)
       ctx.lineTo(ix, iy)
       ctx.stroke()
       ctx.setLineDash([])
     }
   } else {
     // 凸面鏡: 反射光は奥の焦点 F から発散するように前へ
-    const slope = (oy - axisY) / (mirrorX - fx)
+    const slope = (oy - axisY) / (hitX - fx)
     ctx.beginPath()
-    ctx.moveTo(mirrorX, oy)
-    ctx.lineTo(mirrorX - 300, oy - 300 * slope)
+    ctx.moveTo(hitX, oy)
+    ctx.lineTo(hitX - 300, oy - 300 * slope)
     ctx.stroke()
-    drawRayPulses(ctx, mirrorX, oy, mirrorX - 300, oy - 300 * slope, '#38bdf8', 0.35)
+    drawRayPulses(ctx, hitX, oy, hitX - 300, oy - 300 * slope, '#38bdf8', 0.35)
 
     // 焦点 F からの虚延長線
     ctx.setLineDash([3, 3])
     ctx.beginPath()
-    ctx.moveTo(mirrorX, oy)
+    ctx.moveTo(hitX, oy)
     ctx.lineTo(fx, axisY)
     ctx.stroke()
     ctx.setLineDash([])

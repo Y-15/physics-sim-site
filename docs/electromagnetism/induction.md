@@ -264,7 +264,7 @@ $$P_{\text{joule}} = I^2 R = \left( \frac{v B l}{R} \right)^2 R = \frac{B^2 l^2 
 微積分や微分方程式を一切使わずに、「**自己相似性」「無限等比級数」「力積と運動量の関係」「キルヒホッフの法則**」を組み合わせることで、直感に反する物理現象まで厳密に導き出せる構成になっています。
 
 <div class="vector-diagram-card">
-  <svg viewBox="0 0 700 240" class="academic-svg" aria-label="無限はしご型コンデンサー回路と落下導体棒">
+  <svg viewBox="0 0 770 260" class="academic-svg" aria-label="無限はしご型コンデンサー回路と落下導体棒">
     <defs>
       <marker id="arrInd" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
         <path d="M 0 1 L 10 5 L 0 9 z" fill="#38bdf8" />
@@ -354,7 +354,7 @@ $$P_{\text{joule}} = I^2 R = \left( \frac{v B l}{R} \right)^2 R = \frac{B^2 l^2 
     <!-- Infinite continuation dots -->
     <text x="590" y="55" fill="#38bdf8" font-size="20" font-family="sans-serif">…</text>
     <text x="590" y="175" fill="#38bdf8" font-size="20" font-family="sans-serif">…</text>
-    <text x="570" y="215" fill="#fbbf24" font-size="11" font-weight="bold" font-family="sans-serif">合成容量 C_∞ = (√5 - 1)/2 C</text>
+    <text x="550" y="215" fill="#fbbf24" font-size="11" font-weight="bold" font-family="sans-serif">合成容量 C_∞ = (√5 - 1)/2 C</text>
   </svg>
   <div class="diagram-caption">図: 無限はしご型コンデンサー回路と磁場中を落下する導体棒</div>
 </div>

@@ -203,9 +203,12 @@ function draw(timestamp) {
 
   // 速度ベクトル v (接線方向: 角度 + 90度)
   if (showVelocity.value) {
-    const vScale = 22
-    const vx = -speed.value * Math.sin(angle) * vScale
-    const vy = -speed.value * Math.cos(angle) * vScale
+    const vScale = 14
+    const vLen = Math.min(radiusPx * 0.9, speed.value * vScale)
+    const uVx = -Math.sin(angle)
+    const uVy = -Math.cos(angle)
+    const vx = uVx * vLen
+    const vy = uVy * vLen
     const endVx = objX + vx
     const endVy = objY + vy
 
@@ -214,9 +217,7 @@ function draw(timestamp) {
     ctx.beginPath(); ctx.moveTo(objX, objY); ctx.lineTo(endVx, endVy); ctx.stroke()
 
     // 矢印の頭
-    const vLen = Math.hypot(vx, vy)
     if (vLen > 5) {
-      const uVx = vx / vLen, uVy = vy / vLen
       ctx.fillStyle = '#38bdf8'
       ctx.beginPath()
       ctx.moveTo(endVx, endVy)
@@ -224,15 +225,19 @@ function draw(timestamp) {
       ctx.lineTo(endVx - uVx * 9 + uVy * 5, endVy - uVy * 9 - uVx * 5)
       ctx.fill()
     }
+    const labelY = Math.max(16, endVy + 4)
     ctx.fillStyle = '#38bdf8'; ctx.font = 'bold 12px sans-serif'; ctx.textAlign = 'left'
-    ctx.fillText(`v = ${speed.value.toFixed(2)} m/s`, endVx + 6, endVy + 4)
+    ctx.fillText(`v = ${speed.value.toFixed(2)} m/s`, endVx + 6, labelY)
   }
 
   // 向心加速度ベクトル a (中心方向)
   if (showAccel.value) {
-    const aScale = 6
-    const ax = -accel.value * Math.cos(angle) * aScale
-    const ay = accel.value * Math.sin(angle) * aScale
+    const aScale = 2.5
+    const aLen = Math.min(radiusPx * 0.85, accel.value * aScale)
+    const uAx = -Math.cos(angle)
+    const uAy = Math.sin(angle)
+    const ax = uAx * aLen
+    const ay = uAy * aLen
     const endAx = objX + ax
     const endAy = objY + ay
 
@@ -241,9 +246,7 @@ function draw(timestamp) {
     ctx.beginPath(); ctx.moveTo(objX, objY); ctx.lineTo(endAx, endAy); ctx.stroke()
 
     // 矢印の頭
-    const aLen = Math.hypot(ax, ay)
     if (aLen > 5) {
-      const uAx = ax / aLen, uAy = ay / aLen
       ctx.fillStyle = '#f59e0b'
       ctx.beginPath()
       ctx.moveTo(endAx, endAy)
@@ -251,8 +254,9 @@ function draw(timestamp) {
       ctx.lineTo(endAx - uAx * 9 + uAy * 5, endAy - uAy * 9 - uAx * 5)
       ctx.fill()
     }
+    const labelAy = Math.max(16, endAy - 6)
     ctx.fillStyle = '#f59e0b'; ctx.font = 'bold 12px sans-serif'; ctx.textAlign = 'left'
-    ctx.fillText(`a = ${accel.value.toFixed(2)} m/s² (中心向き)`, endAx + 6, endAy - 6)
+    ctx.fillText(`a = ${accel.value.toFixed(2)} m/s² (中心向き)`, endAx + 6, labelAy)
   }
 
   // 回転する物体

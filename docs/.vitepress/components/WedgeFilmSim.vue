@@ -187,8 +187,8 @@ function draw() {
   const splitY = 160
 
   // ---------- 断面図 ----------
-  const glassTopY = 40
   const glassBottomY = 135
+  const plateThickness = 22
   const maxWedgeGap = Math.min(45, thicknessUm.value * 1.0 + 8)
 
   // 上ガラス板（傾斜）
@@ -197,10 +197,10 @@ function draw() {
   ctx.strokeStyle = '#38bdf8'
   ctx.lineWidth = 1.5
   ctx.beginPath()
-  ctx.moveTo(marginX, glassTopY + 25)
-  ctx.lineTo(marginX + viewW, glassTopY + 25 - maxWedgeGap)
-  ctx.lineTo(marginX + viewW, glassTopY - maxWedgeGap)
-  ctx.lineTo(marginX, glassTopY)
+  ctx.moveTo(marginX, glassBottomY)
+  ctx.lineTo(marginX + viewW, glassBottomY - maxWedgeGap)
+  ctx.lineTo(marginX + viewW, glassBottomY - maxWedgeGap - plateThickness)
+  ctx.lineTo(marginX, glassBottomY - plateThickness)
   ctx.closePath()
   ctx.fill()
   ctx.stroke()
@@ -208,7 +208,7 @@ function draw() {
   ctx.fillStyle = '#bae6fd'
   ctx.font = 'bold 12px sans-serif'
   ctx.textAlign = 'left'
-  ctx.fillText('上側ガラス板 (屈折率 n_g ≈ 1.5)', marginX + 10, glassTopY + 15)
+  ctx.fillText('上側ガラス板 (屈折率 n_g ≈ 1.5)', marginX + 10, glassBottomY - plateThickness - 8)
   ctx.restore()
 
   // 下ガラス板（水平）
@@ -265,7 +265,7 @@ function draw() {
   const sampleFracs = [0.22, 0.48, 0.74]
   sampleFracs.forEach((frac) => {
     const rx = marginX + viewW * frac
-    const upperBotY = (glassTopY + 25) - maxWedgeGap * frac
+    const upperBotY = glassBottomY - maxWedgeGap * frac
     const lowerTopY = glassBottomY
     // 入射光（上から下へ）
     ctx.strokeStyle = rayColor

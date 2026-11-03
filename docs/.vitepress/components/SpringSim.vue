@@ -139,22 +139,29 @@ function draw() {
     ctx.stroke()
   }
 
-  // ばね（コイル描画）
+  // ばね（リード線＋コイル描画）
   const springLeft = wallX
   const springRight = massX - massW / 2
   const springMid = massY
-  const coils = 10
-  const coilStep = (springRight - springLeft) / coils
+  const leadLen = 12
+  const activeLeft = springLeft + leadLen
+  const activeRight = springRight - leadLen
+  const activeW = Math.max(10, activeRight - activeLeft)
+  const coils = 12
+  const coilStep = activeW / coils
+
   ctx.strokeStyle = "#6366f1"
   ctx.lineWidth = 2.5
   ctx.beginPath()
   ctx.moveTo(springLeft, springMid)
-  for (let i = 0; i <= coils; i++) {
-    const cx = springLeft + i * coilStep
-    const sign = i % 2 === 0 ? -1 : 1
+  ctx.lineTo(activeLeft, springMid)
+  for (let i = 1; i < coils; i++) {
+    const cx = activeLeft + i * coilStep
+    const sign = i % 2 === 1 ? -1 : 1
     const coilH = 14
     ctx.lineTo(cx, springMid + sign * coilH)
   }
+  ctx.lineTo(activeRight, springMid)
   ctx.lineTo(springRight, springMid)
   ctx.stroke()
 
