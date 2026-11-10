@@ -2,16 +2,28 @@
 import DefaultTheme from 'vitepress/theme'
 import PhysicsIntro from '../components/PhysicsIntro.vue'
 import AdUnit from '../components/AdUnit.vue'
+import ReferencesSection from '../components/ReferencesSection.vue'
 import { useData } from 'vitepress'
+import { computed } from 'vue'
 
 const { Layout } = DefaultTheme
 const { page, frontmatter } = useData()
+
+const isHighSchoolCourse = computed(() => {
+  const p = page.value.relativePath || ''
+  return /^(mechanics|waves|electromagnetism|thermodynamics|atomic|problems)\//.test(p)
+})
 </script>
 
 <template>
   <Layout>
     <template #layout-top>
       <PhysicsIntro v-if="frontmatter.layout === 'home'" />
+    </template>
+
+    <!-- 高校物理コースのページ末尾（学習上の注意の下・フッター上）に参考文献欄を挿入 -->
+    <template #doc-footer-before>
+      <ReferencesSection v-if="isHighSchoolCourse && !frontmatter.noReferences" />
     </template>
 
     <!-- 記事末尾の広告（各解説・シミュレータ・演習問題の直下） -->

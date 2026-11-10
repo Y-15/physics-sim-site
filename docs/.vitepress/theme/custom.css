@@ -159,8 +159,6 @@
 mjx-container {
   box-sizing: border-box !important;
   max-width: 100% !important;
-  overflow-x: auto !important;
-  overflow-y: hidden !important;
 }
 
 mjx-container[display="true"],
@@ -192,6 +190,7 @@ mjx-container:not([display="true"]) {
   display: inline-block !important;
   vertical-align: middle;
   padding: 0 0.15em;
+  overflow: visible !important;
   font-size: 100%;
   color: var(--academic-text-main);
 }

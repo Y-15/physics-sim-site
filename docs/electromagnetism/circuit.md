@@ -126,14 +126,14 @@ $$
   <!-- 動作点マーク -->
   <circle cx="220" cy="148" r="6" fill="#f43f5e" stroke="#fff" stroke-width="1.5" />
   <rect x="230" y="138" width="130" height="22" rx="4" fill="#0f172a" stroke="#f43f5e" stroke-width="1.2"/>
-  <text x="295" y="153" fill="#f43f5e" font-size="12" font-weight="700" text-anchor="middle">動作点 (V_L, I_L)</text>
+  <text x="295" y="153" fill="#f43f5e" font-size="12" font-weight="700" text-anchor="middle">動作点 (V<tspan dy="3" font-size="9">L</tspan><tspan dy="-3">, I</tspan><tspan dy="3" font-size="9">L</tspan><tspan dy="-3">)</tspan></text>
   <!-- 軸上の交点ラベル -->
   <rect x="195" y="275" width="50" height="18" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
-  <text x="220" y="288" fill="#f43f5e" font-size="11" font-weight="700" text-anchor="middle">V_L</text>
+  <text x="220" y="288" fill="#f43f5e" font-size="11" font-weight="700" text-anchor="middle">V<tspan dy="3" font-size="8">L</tspan></text>
   <rect x="10" y="139" width="45" height="18" rx="3" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
-  <text x="32" y="152" fill="#f43f5e" font-size="11" font-weight="700" text-anchor="middle">I_L</text>
+  <text x="32" y="152" fill="#f43f5e" font-size="11" font-weight="700" text-anchor="middle">I<tspan dy="3" font-size="8">L</tspan></text>
 </svg>
-<div class="graph-caption">図: 電球の非線形特性曲線 <i>I</i> = <i>f</i>(<i>V</i>) と外部回路の負荷線の交点作図法（動作点で実際の電圧 <i>V_L</i>・電流 <i>I_L</i> が決定される）</div>
+<div class="graph-caption">図: 電球の非線形特性曲線 <i>I</i> = <i>f</i>(<i>V</i>) と外部回路の負荷線の交点作図法（動作点で実際の電圧 <i>V</i><sub>L</sub>・電流 <i>I</i><sub>L</sub> が決定される）</div>
 </div>
 
 ### (5) ホイートストンブリッジ
@@ -207,7 +207,7 @@ $$
   <line x1="200" y1="50" x2="270" y2="50" stroke="#94a3b8" stroke-width="2.5" />
   <!-- 中央ノード P と R3 -->
   <circle cx="270" cy="50" r="5" fill="#fbbf24" />
-  <text x="270" y="38" fill="#fbbf24" font-size="14" font-weight="700" text-anchor="middle">点 P (電位 V_P)</text>
+  <text x="270" y="38" fill="#fbbf24" font-size="14" font-weight="700" text-anchor="middle">点 P (電位 V<tspan dy="3" font-size="10">P</tspan><tspan dy="-3">)</tspan></text>
   <line x1="270" y1="50" x2="270" y2="90" stroke="#94a3b8" stroke-width="2.5" />
   <rect x="258" y="90" width="24" height="60" rx="3" fill="#1e293b" stroke="#38bdf8" stroke-width="2" />
   <text x="290" y="125" fill="#f8fafc" font-size="12" font-weight="700">R₃ (3.0Ω)</text>

@@ -37,7 +37,7 @@
       </button>
     </div>
 
-    <div class="lab-canvas"><canvas ref="canvasRef"></canvas></div>
+    <div class="lab-canvas"><canvas ref="canvasRef" style="aspect-ratio: 720 / 400;"></canvas></div>
 
     <div class="lab-controls">
       <div class="lab-ctrl">
@@ -89,9 +89,9 @@
       </div>
 
       <div class="lab-stat">
-        <div class="k">ローレンツ力 F_L</div>
+        <div class="k">ローレンツ力 <i>F</i><sub>L</sub></div>
         <div class="v" style="color:#f59e0b">{{ lorentzForce_fN.toFixed(2) }} <small>fN</small></div>
-        <div class="f">F = |q|vB（速度に垂直＝仕事をしない）</div>
+        <div class="f"><i>F</i> = |<i>q</i>|<i>vB</i>（速度に垂直＝仕事をしない）</div>
       </div>
 
       <div class="lab-stat" v-if="simMode === 'selector'">
@@ -186,9 +186,23 @@ const straightSpeed = computed(() => {
 
 const isStraight = computed(() => Math.abs(speedV_kms.value - straightSpeed.value) < 8)
 
+// 論理キャンバスサイズ（固定論理解像度＋高DPI自動スケール）
+const W = 720
+const H = 400
+const CENTER_X = W / 2
+const CENTER_Y = H / 2
+
 // 粒子運動シミュレーション用
 const particles = ref([])
 const trails = ref([])
+
+function getGunPos() {
+  // 円運動モード: 磁場領域の中心 (360, 200)
+  // 速度セレクターモード: 極板入り口の左側、上下極板間の中心軸 (68, 200)
+  return simMode.value === 'circle'
+    ? { x: CENTER_X, y: CENTER_Y }
+    : { x: 68, y: CENTER_Y }
+}
 
 function reset() {
   clearTrails()
@@ -200,11 +214,10 @@ function clearTrails() {
 }
 
 function emitParticle() {
-  const startX = simMode.value === 'circle' ? 160 : 40
-  const startY = 210
+  const gun = getGunPos()
   particles.value = [{
-    x: startX,
-    y: startY,
+    x: gun.x,
+    y: gun.y,
     vx: speedV_kms.value * 2.2, // スケール調整
     vy: 0,
     trail: []
@@ -216,11 +229,14 @@ emitParticle()
 
 const canvasRef = ref(null)
 
-useLoop(canvasRef, ({ ctx, width, height, dt }) => {
-  clearGrid(ctx, width, height, 40)
+useLoop((dt) => {
+  const canvas = canvasRef.value
+  if (!canvas) return
+  const ctx = setupCanvas(canvas, W, H)
+  clearGrid(ctx, W, H, 40)
 
   // 1. 磁場領域・電場領域の背景描画
-  drawFields(ctx, width, height)
+  drawFields(ctx, W, H)
 
   // 2. 粒子の物理更新 & 軌跡
   let stepDt = isPlaying.value ? dt * timeScale.value : 0
@@ -228,7 +244,7 @@ useLoop(canvasRef, ({ ctx, width, height, dt }) => {
     stepDt = manualStepDt
     manualStepDt = 0
   }
-  updateAndDrawParticles(ctx, width, height, stepDt)
+  updateAndDrawParticles(ctx, W, H, stepDt)
 })
 
 function drawFields(ctx, w, h) {
@@ -238,15 +254,17 @@ function drawFields(ctx, w, h) {
   ctx.save()
 
   if (!isZero) {
+    const bx0 = simMode.value === 'circle' ? 40 : 80
+    const bw = simMode.value === 'circle' ? w - 80 : w - 140
     ctx.fillStyle = b > 0 ? 'rgba(56, 189, 248, 0.05)' : 'rgba(236, 72, 153, 0.05)'
-    ctx.fillRect(80, 40, w - 100, h - 80)
+    ctx.fillRect(bx0, 40, bw, h - 80)
     ctx.strokeStyle = 'rgba(255, 255, 255, 0.12)'
-    ctx.strokeRect(80, 40, w - 100, h - 80)
+    ctx.strokeRect(bx0, 40, bw, h - 80)
 
     // 磁場記号格子
     const step = 50
-    for (let y = 65; y < h - 60; y += step) {
-      for (let x = 110; x < w - 40; x += step) {
+    for (let y = 65; y < h - 50; y += step) {
+      for (let x = bx0 + 30; x < bx0 + bw - 15; x += step) {
         if (b > 0) {
           // ⊗ (奥向き)
           dot(ctx, x, y, 7, 'transparent', 'rgba(56, 189, 248, 0.4)', 1.2)
@@ -259,29 +277,38 @@ function drawFields(ctx, w, h) {
         }
       }
     }
-    text(ctx, `一様磁場 B = ${b.toFixed(2)} T (${b > 0 ? '⊗ 画面奥向き' : '⊙ 画面手前向き'})`, w - 120, 25, { align: 'right', color: b > 0 ? '#38bdf8' : '#ec4899', font: '11px sans-serif' })
+    text(ctx, `一様磁場 B = ${b.toFixed(2)} T (${b > 0 ? '⊗ 画面奥向き' : '⊙ 画面手前向き'})`, w - 24, 24, { align: 'right', color: b > 0 ? '#38bdf8' : '#ec4899', font: '11px sans-serif' })
   }
 
-  // 速度セレクターモードの電場極板 (上下)
+  // 速度セレクターモードの電場極板 (上下対称に配置し中心が y = h/2)
   if (simMode.value === 'selector') {
     const pLeft = 80
-    const pW = w - 180
-    // 上極板 (プラス)
+    const pW = w - 140
+    // 上極板 (プラス): y = 40..48
     ctx.fillStyle = '#ef4444'
     ctx.fillRect(pLeft, 40, pW, 8)
-    text(ctx, '+ + + + + 上極板 (+極) + + + + +', pLeft + pW / 2, 32, { align: 'center', color: '#ef4444', font: '10px sans-serif' })
+    text(ctx, '+ + + + + 上極板 (+極) + + + + +', pLeft + pW / 2, 28, { align: 'center', color: '#ef4444', font: '10px sans-serif' })
 
-    // 下極板 (マイナス)
+    // 下極板 (マイナス): y = h - 48 .. h - 40
     ctx.fillStyle = '#38bdf8'
     ctx.fillRect(pLeft, h - 48, pW, 8)
-    text(ctx, '- - - - - 下極板 (-極) - - - - -', pLeft + pW / 2, h - 26, { align: 'center', color: '#38bdf8', font: '10px sans-serif' })
+    text(ctx, '- - - - - 下極板 (-極) - - - - -', pLeft + pW / 2, h - 18, { align: 'center', color: '#38bdf8', font: '10px sans-serif' })
+
+    // 電極間の中心軸 (直進ライン目安)
+    line(ctx, pLeft, CENTER_Y, pLeft + pW, CENTER_Y, { color: 'rgba(16, 185, 129, 0.25)', width: 1, dash: [5, 5] })
 
     // 電場下向き矢印
     const eStep = 70
-    for (let ex = pLeft + 35; ex < pLeft + pW; ex += eStep) {
-      arrow(ctx, ex, 55, ex, h - 55, { color: 'rgba(239, 68, 68, 0.3)', width: 1.5, head: 6 })
+    for (let ex = pLeft + 35; ex < pLeft + pW - 10; ex += eStep) {
+      arrow(ctx, ex, 54, ex, h - 54, { color: 'rgba(239, 68, 68, 0.28)', width: 1.5, head: 6 })
     }
-    text(ctx, `下向き一様電場 E = ${eField_kVm.value} kV/m`, pLeft + 15, h / 2, { align: 'left', color: '#fca5a5', font: '11px sans-serif' })
+    text(ctx, `下向き一様電場 E = ${eField_kVm.value} kV/m`, pLeft + 15, 70, { align: 'left', color: '#fca5a5', font: '11px sans-serif' })
+
+    // 右端スリット（電極中心の高さに開口部）
+    ctx.fillStyle = '#475569'
+    ctx.fillRect(pLeft + pW, 40, 8, CENTER_Y - 14 - 40)
+    ctx.fillRect(pLeft + pW, CENTER_Y + 14, 8, h - 40 - (CENTER_Y + 14))
+    text(ctx, 'スリット', pLeft + pW + 14, CENTER_Y + 4, { align: 'left', color: '#94a3b8', font: '10px sans-serif' })
   }
   ctx.restore()
 }
@@ -290,10 +317,12 @@ function updateAndDrawParticles(ctx, w, h, dt) {
   const safeDt = Math.min(dt, 0.03)
   const qSign = chargeQ.value // -1 or +1 or +2
   const b = bFieldT.value
+  const bxMin = simMode.value === 'circle' ? 40 : 80
+  const bxMax = simMode.value === 'circle' ? w - 40 : w - 60
 
   particles.value.forEach(p => {
-    // 磁場領域内 (x > 80)
-    if (p.x > 80 && p.x < w - 20 && p.y > 40 && p.y < h - 40) {
+    // 磁場・電場領域内の判定
+    if (p.x >= bxMin && p.x <= bxMax && p.y > 48 && p.y < h - 48) {
       // ローレンツ力: F = q(v x B)
       const forceScale = 4.5
       let ax = qSign * p.vy * b * forceScale
@@ -322,7 +351,7 @@ function updateAndDrawParticles(ctx, w, h, dt) {
 
     // 軌跡記録
     p.trail.push({ x: p.x, y: p.y })
-    if (p.trail.length > 200) p.trail.shift()
+    if (p.trail.length > 260) p.trail.shift()
 
     // 軌跡描画
     if (p.trail.length > 1) {
@@ -348,21 +377,24 @@ function updateAndDrawParticles(ctx, w, h, dt) {
       arrow(ctx, p.x, p.y, p.x + vxNorm, p.y + vyNorm, { color: '#10b981', width: 2, head: 5 })
     }
 
-    // 磁場領域外または画面外に出たら自動再発射
+    // 磁場領域外または極板接触・画面外に出たら自動再発射
     if (
-      (simMode.value === 'circle' && (p.x < 78 || p.x > w - 18 || p.y < 38 || p.y > h - 38)) ||
+      (simMode.value === 'circle' && (p.x < bxMin - 2 || p.x > bxMax + 2 || p.y < 38 || p.y > h - 38)) ||
+      (simMode.value === 'selector' && (p.y <= 50 || p.y >= h - 50 || p.x > w + 10)) ||
       p.x < -20 || p.x > w + 20 || p.y < -20 || p.y > h + 20
     ) {
       emitParticle()
     }
   })
 
-  // 粒子発射銃
-  const startX = simMode.value === 'circle' ? 160 : 40
+  // 粒子発射銃 (常に中心または電極間中心に配置)
+  const gun = getGunPos()
   ctx.fillStyle = '#475569'
-  ctx.fillRect(startX - 25, 202, 25, 16)
+  ctx.fillRect(gun.x - 24, gun.y - 8, 24, 16)
   ctx.strokeStyle = '#94a3b8'
-  ctx.strokeRect(startX - 25, 202, 25, 16)
-  text(ctx, '粒子源', startX - 12, 196, { align: 'center', color: '#94a3b8', font: '10px sans-serif' })
+  ctx.lineWidth = 1.5
+  ctx.strokeRect(gun.x - 24, gun.y - 8, 24, 16)
+  dot(ctx, gun.x, gun.y, 3, '#38bdf8')
+  text(ctx, '粒子源', gun.x - 12, gun.y - 14, { align: 'center', color: '#e2e8f0', font: 'bold 10px sans-serif' })
 }
 </script>

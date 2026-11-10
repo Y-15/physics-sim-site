@@ -37,7 +37,6 @@
           <button class="lab-chip" @click="setPreset(3, 3)">同種電荷 (+3μC / +3μC)</button>
           <button class="lab-chip" @click="setPreset(4, -1)">非対称 (+4μC / -1μC)</button>
           <button class="lab-chip" @click="setPreset(4, 0)">単独点電荷 (+4μC)</button>
-          <button class="lab-chip" @click="initTestCharges">🚀 テスト電荷を発射</button>
         </div>
       </div>
     </div>
@@ -91,7 +90,6 @@ function setPreset(c1, c2) {
   q2.value = c2
   p1.value = { x: -0.6, y: 0 }
   p2.value = { x: 0.6, y: 0 }
-  initTestCharges()
 }
 
 const distBetween = computed(() => {
@@ -257,112 +255,6 @@ function calcPotential(x, y) {
 
 let pulsePhase = 0
 
-// テスト電荷オブジェクト群（t=0から初速度を持ってクーロン力により連続運動）
-const testCharges = []
-
-function spawnTestCharge(index = 0) {
-  // 正電荷付近、または中心対称な位置から外向きの初速度を持って射出
-  const source = (q1.value > 0) ? p1.value : (q2.value > 0 ? p2.value : { x: -0.5, y: 0 })
-  const angle = (index * (Math.PI * 2 / 8)) + 0.2
-  const dist = 0.12 + (index % 3) * 0.04
-  const x = source.x + Math.cos(angle) * dist
-  const y = source.y + Math.sin(angle) * dist
-  const speed = 0.7 + (index % 4) * 0.2
-  return {
-    x,
-    y,
-    vx: Math.cos(angle) * speed,
-    vy: Math.sin(angle) * speed,
-    q: 1, // 正のテスト電荷 +q
-    trail: [],
-    life: index * 15
-  }
-}
-
-function initTestCharges() {
-  testCharges.length = 0
-  for (let i = 0; i < 8; i++) {
-    const p = spawnTestCharge(i)
-    testCharges.push(p)
-  }
-}
-
-// t=0 から直ちに初期化
-initTestCharges()
-
-function updateAndDrawTestCharges(ctx, cx, cy, dt) {
-  const qOverM = 2.0e-5 // 加速度スケール係数
-  const safeDt = Math.min(0.05, dt)
-
-  testCharges.forEach((p, idx) => {
-    p.life++
-    const { ex, ey } = calcField(p.x, p.y)
-    const ax = qOverM * ex * p.q
-    const ay = qOverM * ey * p.q
-
-    p.vx += ax * safeDt
-    p.vy += ay * safeDt
-
-    // 速度の上限リミッター
-    const spd = Math.hypot(p.vx, p.vy)
-    if (spd > 3.2) {
-      p.vx = (p.vx / spd) * 3.2
-      p.vy = (p.vy / spd) * 3.2
-    }
-
-    p.x += p.vx * safeDt
-    p.y += p.vy * safeDt
-
-    const sx = cx + p.x * scale
-    const sy = cy + p.y * scale
-
-    // 軌跡記録（最大14点）
-    p.trail.push({ x: sx, y: sy })
-    if (p.trail.length > 14) p.trail.shift()
-
-    // 画面外または電荷に過度接近した場合に再発出
-    const d1 = Math.hypot(p.x - p1.value.x, p.y - p1.value.y)
-    const d2 = Math.hypot(p.x - p2.value.x, p.y - p2.value.y)
-    const isOut = Math.abs(p.x) > 2.2 || Math.abs(p.y) > 1.3 || d1 < 0.07 || d2 < 0.07 || p.life > 320
-
-    if (isOut) {
-      const fresh = spawnTestCharge(idx)
-      p.x = fresh.x
-      p.y = fresh.y
-      p.vx = fresh.vx
-      p.vy = fresh.vy
-      p.trail = []
-      p.life = 0
-    }
-
-    // 軌跡の描画
-    if (p.trail.length > 1) {
-      ctx.save()
-      ctx.beginPath()
-      ctx.moveTo(p.trail[0].x, p.trail[0].y)
-      for (let k = 1; k < p.trail.length; k++) {
-        ctx.lineTo(p.trail[k].x, p.trail[k].y)
-      }
-      ctx.strokeStyle = 'rgba(251, 191, 36, 0.4)'
-      ctx.lineWidth = 1.8
-      ctx.stroke()
-      ctx.restore()
-    }
-
-    // テスト電荷粒子の描画（金色発光）
-    ctx.save()
-    dot(ctx, sx, sy, 4.5, '#fbbf24', '#ffffff', 1.5)
-    // 進行方向の速度ベクトル
-    if (spd > 0.08) {
-      const vLen = Math.min(18, Math.max(6, spd * 6))
-      const ang = Math.atan2(p.vy, p.vx)
-      arrow(ctx, sx, sy, sx + Math.cos(ang) * vLen, sy + Math.sin(ang) * vLen, { color: '#fef08a', width: 1.5, head: 4 })
-    }
-    text(ctx, '+q', sx + 6, sy - 6, { color: '#fef08a', font: 'bold 9px sans-serif' })
-    ctx.restore()
-  })
-}
-
 useLoop(canvasRef, ({ ctx, width, height, dt }) => {
   pulsePhase = (pulsePhase + (dt || 0.016) * 1.8) % 1
   clearGrid(ctx, width, height, 40)
@@ -386,15 +278,12 @@ useLoop(canvasRef, ({ ctx, width, height, dt }) => {
     drawFieldLines(ctx, cx, cy, width, height)
   }
 
-  // 4. テスト電荷の運動（t=0から常時アニメーション再生）
-  updateAndDrawTestCharges(ctx, cx, cy, dt || 0.016)
-
-  // 5. 電荷本体の描画
+  // 4. 電荷本体の描画
   drawCharge(ctx, cx, cy, p1.value, q1.value, 'Q₁')
   drawCharge(ctx, cx, cy, p2.value, q2.value, 'Q₂')
 
   // ドラッグ案内テキスト
-  text(ctx, '💡 電荷を直接ドラッグして位置を移動 / テスト電荷 (+q) が電場から力を受けて運動', cx, height - 15, { align: 'center', color: '#94a3b8', font: '11px sans-serif' })
+  text(ctx, '💡 電荷を直接ドラッグして位置を移動できます', cx, height - 15, { align: 'center', color: '#94a3b8', font: '11px sans-serif' })
 })
 
 // 等電位線の描画（簡易サンプリング輪郭線）

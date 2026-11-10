@@ -53,6 +53,47 @@ $$F = |q| v B \sin\theta$$
 * 磁場に垂直に入射するとき（$\theta = 90^\circ$）： **最大値 $F = |q| v B$**
 * 磁場と平行に動くとき（$\theta = 0^\circ$ または $180^\circ$）： **力はゼロ（$F = 0$）**
 
+<div class="vector-graph-card">
+  <div class="graph-title">図1：速度ベクトル <i>v</i> と磁場 <i>B</i> のなす角 <i>θ</i> とローレンツ力 <i>F</i></div>
+  <svg viewBox="0 0 540 240" class="vector-svg" aria-label="ローレンツ力における速度と磁場のなす角θの図">
+    <defs>
+      <marker id="lz1-arr-b" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+        <path d="M 0 1 L 10 5 L 0 9 z" fill="#38bdf8" />
+      </marker>
+      <marker id="lz1-arr-v" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+        <path d="M 0 1 L 10 5 L 0 9 z" fill="#10b981" />
+      </marker>
+      <marker id="lz1-arr-f" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+        <path d="M 0 1 L 10 5 L 0 9 z" fill="#f43f5e" />
+      </marker>
+    </defs>
+    <!-- 磁場と速度がつくる水平平面 (斜め透視の平行四辺形) -->
+    <polygon points="100,185 400,185 460,125 160,125" fill="rgba(56, 189, 248, 0.08)" stroke="rgba(148, 163, 184, 0.35)" stroke-width="1.2" stroke-dasharray="4,3" />
+    <!-- 磁束密度 B ベクトル (右向き・平面上) -->
+    <line x1="190" y1="158" x2="395" y2="158" stroke="#38bdf8" stroke-width="3" marker-end="url(#lz1-arr-b)" />
+    <text x="410" y="163" fill="#38bdf8" font-size="14" font-weight="700">磁場 B</text>
+    <!-- 速度 v ベクトル (斜め上向き・同じ平面上の奥方向へ角度θ) -->
+    <line x1="190" y1="158" x2="315" y2="122" stroke="#10b981" stroke-width="3" marker-end="url(#lz1-arr-v)" />
+    <text x="328" y="122" fill="#10b981" font-size="14" font-weight="700">速度 v</text>
+    <!-- 角度 θ の弧 -->
+    <path d="M 248,158 A 58,58 0 0 0 241,143" fill="none" stroke="#fbbf24" stroke-width="2" />
+    <text x="262" y="147" fill="#fbbf24" font-size="15" font-weight="700">θ</text>
+    <!-- ローレンツ力 F (平面に対して垂直上向き・正電荷 +q) -->
+    <line x1="190" y1="158" x2="190" y2="48" stroke="#f43f5e" stroke-width="3.5" marker-end="url(#lz1-arr-f)" />
+    <text x="202" y="58" fill="#f43f5e" font-size="14" font-weight="700">ローレンツ力 F</text>
+    <text x="202" y="76" fill="#fda4af" font-size="12">大きさ F = |q| v B sin θ</text>
+    <!-- 直角マーク (F ⊥ B) -->
+    <polyline points="190,144 204,144 204,158" fill="none" stroke="#94a3b8" stroke-width="1.2" />
+    <!-- v sinθ の補助線 -->
+    <line x1="315" y1="122" x2="315" y2="158" stroke="rgba(16, 185, 129, 0.5)" stroke-width="1.5" stroke-dasharray="3,3" />
+    <text x="342" y="146" fill="#6ee7b7" font-size="11">v sin θ (Bに垂直成分)</text>
+    <!-- 荷電粒子 +q -->
+    <circle cx="190" cy="158" r="10" fill="#f43f5e" stroke="#ffffff" stroke-width="2" />
+    <text x="190" y="162" fill="#ffffff" font-size="11" font-weight="700" text-anchor="middle">+q</text>
+    <text x="270" y="216" fill="#cbd5e1" font-size="12" text-anchor="middle">力 F は常に「v と B の両方に垂直な向き」にはたらく（正電荷の例）</text>
+  </svg>
+</div>
+
 #### 力の向き（フレミングの左手の法則）
 * **中指**: 電流の向き（**正電荷なら運動の向き、負電荷なら運動と逆向き！**）
 * **人さし指**: 磁場の向き（$\text{N} \to \text{S}$）
@@ -94,9 +135,62 @@ $$T = \frac{2\pi r}{v} = \frac{2\pi \left(\frac{mv}{|q|B}\right)}{v} = \frac{2\p
 磁場に対して角 $\theta\,(\ne 90^\circ)$ で斜めに入射した場合：
 * **磁場に平行な成分 $v_\parallel = v \cos\theta$**: ローレンツ力を受けないため、**等速直線運動**を続ける。
 * **磁場に垂直な成分 $v_\perp = v \sin\theta$**: ローレンツ力により、半径 $r = \frac{m v \sin\theta}{|q| B}$ の**等速円運動**を行う。
-* **合成運動**: 円運動をしながら前方にまっすぐ進むため、**らせん階段のような軌道（らせん運動）**になります。
+* **合成運動**: 円運動をしながら前方にまっすぐ進むため、<strong>らせん階段のような軌道（らせん運動）</strong>になります。
   * 1回転する間に進む距離（ピッチ $p$）：
     $$p = v_\parallel \cdot T = (v \cos\theta) \times \frac{2\pi m}{|q| B}$$
+
+<div class="vector-graph-card">
+  <div class="graph-title">図2：磁場に対して角度 <i>θ</i> で斜めに入射した粒子のらせん運動</div>
+  <svg viewBox="0 0 560 250" class="vector-svg" aria-label="らせん運動と角度θ、速度成分分解の図">
+    <defs>
+      <marker id="lz2-arr-b" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+        <path d="M 0 1 L 10 5 L 0 9 z" fill="#38bdf8" />
+      </marker>
+      <marker id="lz2-arr-v" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+        <path d="M 0 1 L 10 5 L 0 9 z" fill="#10b981" />
+      </marker>
+      <marker id="lz2-arr-comp" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+        <path d="M 0 1 L 10 5 L 0 9 z" fill="#a78bfa" />
+      </marker>
+    </defs>
+    <!-- 中心軸 (磁場 B の向き) -->
+    <line x1="40" y1="130" x2="520" y2="130" stroke="#38bdf8" stroke-width="2" stroke-dasharray="6,4" marker-end="url(#lz2-arr-b)" />
+    <text x="485" y="116" fill="#38bdf8" font-size="13" font-weight="700">磁場 B</text>
+    <!-- 補助磁力線 -->
+    <line x1="50" y1="60" x2="500" y2="60" stroke="rgba(56, 189, 248, 0.25)" stroke-width="1.2" marker-end="url(#lz2-arr-b)" />
+    <line x1="50" y1="200" x2="500" y2="200" stroke="rgba(56, 189, 248, 0.25)" stroke-width="1.2" marker-end="url(#lz2-arr-b)" />
+    <!-- らせん軌道 -->
+    <path d="M 110,130 C 125,75 155,75 170,130 C 185,185 215,185 230,130 C 245,75 275,75 290,130 C 305,185 335,185 350,130 C 365,75 395,75 410,130 C 425,185 450,185 465,140"
+          fill="none" stroke="#f59e0b" stroke-width="2.6" stroke-linecap="round" />
+    <!-- 粒子点 (入射点) -->
+    <circle cx="110" cy="130" r="6" fill="#f43f5e" stroke="#fff" stroke-width="1.5" />
+    <text x="95" y="150" fill="#f43f5e" font-size="12" font-weight="700" text-anchor="end">+q</text>
+    <!-- 入射速度ベクトル v と成分分解 (平行 v cosθ, 垂直 v sinθ) -->
+    <line x1="110" y1="130" x2="188" y2="68" stroke="#10b981" stroke-width="2.8" marker-end="url(#lz2-arr-v)" />
+    <text x="195" y="65" fill="#10b981" font-size="13" font-weight="700">v</text>
+    <!-- v_parallel (暗背景ピル付きで曲線と重なっても視認性を確保) -->
+    <line x1="110" y1="130" x2="188" y2="130" stroke="#a78bfa" stroke-width="2.2" marker-end="url(#lz2-arr-comp)" />
+    <rect x="115" y="138" width="82" height="17" rx="4" fill="#090d16" fill-opacity="0.92" />
+    <text x="156" y="151" fill="#a78bfa" font-size="12" font-weight="700" text-anchor="middle">v∥ = v cos θ</text>
+    <!-- v_perp -->
+    <line x1="110" y1="130" x2="110" y2="68" stroke="#a78bfa" stroke-width="2.2" marker-end="url(#lz2-arr-comp)" />
+    <text x="102" y="88" fill="#a78bfa" font-size="12" font-weight="700" text-anchor="end">v⊥ = v sin θ</text>
+    <!-- 分解の点線長方形 -->
+    <line x1="110" y1="68" x2="188" y2="68" stroke="rgba(167, 139, 250, 0.5)" stroke-width="1.2" stroke-dasharray="3,3" />
+    <line x1="188" y1="68" x2="188" y2="130" stroke="rgba(167, 139, 250, 0.5)" stroke-width="1.2" stroke-dasharray="3,3" />
+    <!-- 角度 θ -->
+    <path d="M 148,130 A 38,38 0 0 0 139,107" fill="none" stroke="#fbbf24" stroke-width="2" />
+    <text x="154" y="114" fill="#fbbf24" font-size="14" font-weight="700">θ</text>
+    <!-- 1ピッチ p の表示 (頂点間または交差点間) -->
+    <line x1="230" y1="196" x2="350" y2="196" stroke="#e2e8f0" stroke-width="1.5" />
+    <line x1="230" y1="188" x2="230" y2="204" stroke="#e2e8f0" stroke-width="1.5" />
+    <line x1="350" y1="188" x2="350" y2="204" stroke="#e2e8f0" stroke-width="1.5" />
+    <text x="290" y="218" fill="#e2e8f0" font-size="12" font-weight="700" text-anchor="middle">ピッチ p = (v cos θ)・T</text>
+    <!-- 半径 r 表示 -->
+    <line x1="260" y1="130" x2="260" y2="88" stroke="#fda4af" stroke-width="1.5" stroke-dasharray="2,2" />
+    <text x="268" y="108" fill="#fda4af" font-size="11" font-weight="700">r</text>
+  </svg>
+</div>
 
 ---
 
@@ -153,6 +247,84 @@ $$q E = q v B \iff v = \frac{E}{B}$$
 電気量 $-e = -1.6 \times 10^{-19}\,\text{C}$、質量 $m$ の電子を水平右向きに速度セレクターに入射させたところ、電子は軌道を曲げられることなく直進し、細いスリット $\text{S}$ を通過した。
 スリット $\text{S}$ の右側（領域Ⅱ）には電場はなく、紙面の表から裏に向かう一様な磁場 $B_2 = 0.10\,\text{T}$ のみがかけられている。
 スリット $\text{S}$ を抜けた電子は領域Ⅱで半円を描いて運動し、スリットと同じ壁面上にある蛍光板の点 $\text{P}$ に衝突して輝点を生じた。スリット $\text{S}$ と点 $\text{P}$ の間の距離を $D = 6.8\,\text{mm} = 6.8 \times 10^{-3}\,\text{m}$ とする。重力の影響は無視できるものとする。
+
+<div class="vector-graph-card">
+  <div class="graph-title">図3：例題の模式図（速度セレクター［領域Ⅰ］と質量分析器［領域Ⅱ］）</div>
+  <svg viewBox="0 0 600 280" class="vector-svg" aria-label="速度セレクターと質量分析器の例題模式図">
+    <defs>
+      <marker id="lz3-arr-e" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+        <path d="M 0 1 L 10 5 L 0 9 z" fill="#f43f5e" />
+      </marker>
+      <marker id="lz3-arr-v" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+        <path d="M 0 1 L 10 5 L 0 9 z" fill="#10b981" />
+      </marker>
+      <marker id="lz3-arr-dim" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+        <path d="M 0 1 L 10 5 L 0 9 z" fill="#fbbf24" />
+      </marker>
+    </defs>
+    <!-- 領域分けの背景 -->
+    <rect x="70" y="55" width="212" height="190" fill="rgba(56, 189, 248, 0.04)" />
+    <rect x="295" y="30" width="265" height="225" fill="rgba(167, 139, 250, 0.05)" stroke="rgba(167, 139, 250, 0.25)" stroke-dasharray="4,3" />
+    <!-- 領域タイトル -->
+    <text x="172" y="28" fill="#e2e8f0" font-size="13" font-weight="700" text-anchor="middle">領域Ⅰ（速度セレクター）</text>
+    <text x="427" y="22" fill="#e2e8f0" font-size="13" font-weight="700" text-anchor="middle">領域Ⅱ（一様磁場 B₂）</text>
+    <!-- 上下極板 (領域Ⅰ：スリット壁と十分離して x=75..268 に配置) -->
+    <rect x="75" y="55" width="193" height="8" rx="2" fill="#ef4444" />
+    <text x="172" y="47" fill="#fca5a5" font-size="11" text-anchor="middle">上極板 (+)</text>
+    <rect x="75" y="235" width="193" height="8" rx="2" fill="#38bdf8" />
+    <text x="172" y="262" fill="#7dd3fc" font-size="11" text-anchor="middle">下極板 (-)</text>
+    <!-- 電場 E の下向き矢印 -->
+    <line x1="115" y1="68" x2="115" y2="225" stroke="rgba(244, 63, 94, 0.45)" stroke-width="1.5" marker-end="url(#lz3-arr-e)" />
+    <line x1="185" y1="68" x2="185" y2="225" stroke="rgba(244, 63, 94, 0.45)" stroke-width="1.5" marker-end="url(#lz3-arr-e)" />
+    <line x1="242" y1="68" x2="242" y2="225" stroke="rgba(244, 63, 94, 0.45)" stroke-width="1.5" marker-end="url(#lz3-arr-e)" />
+    <text x="150" y="94" fill="#f43f5e" font-size="12" font-weight="700" text-anchor="middle">電場 E ↓</text>
+    <!-- 領域Ⅰの磁場 B1 (紙面表向き ⊙) -->
+    <g stroke="#38bdf8" stroke-width="1.3" fill="none">
+      <circle cx="95" cy="135" r="7" /><circle cx="95" cy="135" r="2" fill="#38bdf8" />
+      <circle cx="150" cy="135" r="7" /><circle cx="150" cy="135" r="2" fill="#38bdf8" />
+      <circle cx="215" cy="135" r="7" /><circle cx="215" cy="135" r="2" fill="#38bdf8" />
+      <circle cx="176" cy="212" r="7" /><circle cx="176" cy="212" r="2" fill="#38bdf8" />
+      <circle cx="222" cy="212" r="7" /><circle cx="222" cy="212" r="2" fill="#38bdf8" />
+    </g>
+    <text x="80" y="216" fill="#38bdf8" font-size="12" font-weight="700">B₁ (⊙ 表向き)</text>
+    <!-- 領域Ⅱの磁場 B2 (紙面奥向き ⊗, D=2r寸法線領域を避けて右寄りに配置) -->
+    <g stroke="#a78bfa" stroke-width="1.3" fill="none" opacity="0.7">
+      <circle cx="450" cy="58" r="7" /><line x1="445" y1="53" x2="455" y2="63" /><line x1="455" y1="53" x2="445" y2="63" />
+      <circle cx="525" cy="58" r="7" /><line x1="520" y1="53" x2="530" y2="63" /><line x1="530" y1="53" x2="520" y2="63" />
+      <circle cx="450" cy="145" r="7" /><line x1="445" y1="140" x2="455" y2="150" /><line x1="455" y1="140" x2="445" y2="150" />
+      <circle cx="525" cy="145" r="7" /><line x1="520" y1="140" x2="530" y2="150" /><line x1="530" y1="140" x2="520" y2="150" />
+      <circle cx="450" cy="220" r="7" /><line x1="445" y1="215" x2="455" y2="225" /><line x1="455" y1="215" x2="445" y2="225" />
+      <circle cx="525" cy="220" r="7" /><line x1="520" y1="215" x2="530" y2="225" /><line x1="530" y1="215" x2="520" y2="225" />
+    </g>
+    <text x="455" y="242" fill="#c4b5fd" font-size="12" font-weight="700">B₂ (⊗ 奥向き)</text>
+    <!-- スリット S 付き壁・蛍光板 (x = 290, 上壁 y=30..170, 下壁 y=186..255) -->
+    <rect x="286" y="30" width="8" height="140" fill="#cbd5e1" />
+    <rect x="286" y="186" width="8" height="69" fill="#cbd5e1" />
+    <text x="275" y="198" fill="#cbd5e1" font-size="12" font-weight="700" text-anchor="end">スリット S</text>
+    <text x="300" y="44" fill="#94a3b8" font-size="11" text-anchor="start">蛍光板</text>
+    <!-- 電子の直線軌道 (領域Ⅰ: y = 178) -->
+    <line x1="35" y1="178" x2="294" y2="178" stroke="#10b981" stroke-width="2.5" stroke-dasharray="5,3" />
+    <!-- 領域Ⅱの半円軌道 (S: (294, 178) → P: (294, 82)、半径 r = 48) -->
+    <path d="M 294,178 A 48,48 0 0 0 294,82" fill="none" stroke="#10b981" stroke-width="2.8" />
+    <!-- 軌道半径 r 表示 -->
+    <circle cx="294" cy="130" r="2.5" fill="#94a3b8" />
+    <line x1="294" y1="130" x2="342" y2="130" stroke="#94a3b8" stroke-width="1.2" stroke-dasharray="3,2" />
+    <text x="318" y="123" fill="#cbd5e1" font-size="11" text-anchor="middle">r</text>
+    <!-- 電子粒子 (-e) 入射 -->
+    <circle cx="52" cy="178" r="8" fill="#38bdf8" stroke="#fff" stroke-width="1.5" />
+    <text x="52" y="182" fill="#090d16" font-size="11" font-weight="700" text-anchor="middle">e⁻</text>
+    <line x1="62" y1="178" x2="98" y2="178" stroke="#10b981" stroke-width="2.2" marker-end="url(#lz3-arr-v)" />
+    <text x="72" y="166" fill="#10b981" font-size="12" font-weight="700">v</text>
+    <!-- 衝突輝点 P (上極板 y=55..63 よりも下に配置して重複を完全回避) -->
+    <circle cx="294" cy="82" r="5.5" fill="#fbbf24" stroke="#fff" stroke-width="1.5" />
+    <text x="280" y="86" fill="#fbbf24" font-size="13" font-weight="700" text-anchor="end">点 P</text>
+    <!-- 距離 D = 2r の寸法線 (領域Ⅱ側の空きスペースにすっきり配置) -->
+    <line x1="294" y1="82" x2="378" y2="82" stroke="rgba(251, 191, 36, 0.4)" stroke-width="1" stroke-dasharray="3,2" />
+    <line x1="294" y1="178" x2="378" y2="178" stroke="rgba(251, 191, 36, 0.4)" stroke-width="1" stroke-dasharray="3,2" />
+    <line x1="372" y1="82" x2="372" y2="178" stroke="#fbbf24" stroke-width="1.5" marker-start="url(#lz3-arr-dim)" marker-end="url(#lz3-arr-dim)" />
+    <text x="382" y="134" fill="#fbbf24" font-size="12" font-weight="700" text-anchor="start">D = 2r</text>
+  </svg>
+</div>
 
 1. 領域Ⅰを直進した電子の速さ $v\,[\text{m/s}]$ を求めよ。
 2. 領域Ⅱにおける電子の軌道半径 $r\,[\text{m}]$ を求め、点 $\text{P}$ はスリット $\text{S}$ の上方・下方のどちらにあるか答えよ。

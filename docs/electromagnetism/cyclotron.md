@@ -27,58 +27,93 @@ description: 一様な磁場による等速円運動の「等時性」と高周�
 
 <div class="vector-graph-card">
   <div class="graph-title">図1：サイクロトロンの全体構造と粒子のスパイラル加速軌道</div>
-  <svg viewBox="0 0 540 320" class="vector-svg">
+  <svg viewBox="0 0 640 365" class="vector-svg" aria-label="サイクロトロンのD1・D2電極、ギャップ、高周波電源、スパイラル軌道、取り出しビームの構造図">
     <defs>
-      <pattern id="grid-bg-cyclotron" width="20" height="20" patternUnits="userSpaceOnUse">
+      <pattern id="cyc-grid-bg" width="20" height="20" patternUnits="userSpaceOnUse">
         <path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
       </pattern>
+      <marker id="cyc-arr-path" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+        <path d="M 0 1 L 10 5 L 0 9 z" fill="#f43f5e" />
+      </marker>
+      <marker id="cyc-arr-beam" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+        <path d="M 0 1 L 10 5 L 0 9 z" fill="#22c55e" />
+      </marker>
+      <marker id="cyc-arr-lead" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+        <path d="M 0 2 L 10 5 L 0 8 z" fill="#94a3b8" />
+      </marker>
     </defs>
-    <rect width="540" height="320" fill="#090d16" rx="8"/>
-    <rect width="540" height="320" fill="url(#grid-bg-cyclotron)" rx="8"/>
-    <!-- 磁場マーク (手前向き) -->
-    <g fill="none" stroke="rgba(56, 189, 248, 0.2)" stroke-width="1">
-      <circle cx="80" cy="60" r="5"/><circle cx="80" cy="60" r="1.5" fill="#38bdf8"/>
-      <circle cx="160" cy="60" r="5"/><circle cx="160" cy="60" r="1.5" fill="#38bdf8"/>
-      <circle cx="380" cy="60" r="5"/><circle cx="380" cy="60" r="1.5" fill="#38bdf8"/>
-      <circle cx="460" cy="60" r="5"/><circle cx="460" cy="60" r="1.5" fill="#38bdf8"/>
-      <circle cx="80" cy="260" r="5"/><circle cx="80" cy="260" r="1.5" fill="#38bdf8"/>
-      <circle cx="460" cy="260" r="5"/><circle cx="460" cy="260" r="1.5" fill="#38bdf8"/>
+    <!-- 背景 -->
+    <rect width="640" height="365" fill="#090d16" rx="8"/>
+    <rect width="640" height="365" fill="url(#cyc-grid-bg)" rx="8"/>
+    <!-- 一様磁場 B (紙面手前向き ⊙) 外周マーク -->
+    <g fill="none" stroke="rgba(56, 189, 248, 0.35)" stroke-width="1.2">
+      <circle cx="55" cy="70" r="6"/><circle cx="55" cy="70" r="2" fill="#38bdf8" stroke="none"/>
+      <circle cx="115" cy="70" r="6"/><circle cx="115" cy="70" r="2" fill="#38bdf8" stroke="none"/>
+      <circle cx="55" cy="285" r="6"/><circle cx="55" cy="285" r="2" fill="#38bdf8" stroke="none"/>
+      <circle cx="120" cy="285" r="6"/><circle cx="120" cy="285" r="2" fill="#38bdf8" stroke="none"/>
+      <circle cx="545" cy="70" r="6"/><circle cx="545" cy="70" r="2" fill="#38bdf8" stroke="none"/>
+      <circle cx="585" cy="285" r="6"/><circle cx="585" cy="285" r="2" fill="#38bdf8" stroke="none"/>
     </g>
-    <text x="35" y="45" fill="#38bdf8" font-size="12">一様な磁場 B (紙面手前向き ⊙)</text>
-    <!-- ディー D1 (左) -->
-    <path d="M 260 40 A 120 120 0 0 0 260 280 Z" fill="rgba(30, 41, 59, 0.6)" stroke="#38bdf8" stroke-width="2.5"/>
-    <text x="180" y="80" fill="#38bdf8" font-size="16" font-weight="bold">D₁</text>
-    <text x="145" y="105" fill="#94a3b8" font-size="11">内部電場 E = 0 (静電遮蔽)</text>
-    <!-- ディー D2 (右) -->
-    <path d="M 280 40 A 120 120 0 0 1 280 280 Z" fill="rgba(30, 41, 59, 0.6)" stroke="#38bdf8" stroke-width="2.5"/>
-    <text x="340" y="80" fill="#38bdf8" font-size="16" font-weight="bold">D₂</text>
-    <text x="315" y="105" fill="#94a3b8" font-size="11">内部電場 E = 0 (静電遮蔽)</text>
-    <!-- ギャップ領域 (加速領域) -->
-    <rect x="261" y="40" width="18" height="240" fill="rgba(251, 191, 36, 0.08)"/>
-    <text x="270" y="305" fill="#fbbf24" font-size="12" text-anchor="middle">隙間（加速ギャップ）</text>
-    <!-- 高周波交流電源の接続表示 -->
-    <path d="M 260 280 L 260 305 L 230 305" fill="none" stroke="#94a3b8" stroke-width="1.5"/>
-    <path d="M 280 280 L 280 305 L 310 305" fill="none" stroke="#94a3b8" stroke-width="1.5"/>
-    <circle cx="270" cy="305" r="12" fill="#1e293b" stroke="#38bdf8" stroke-width="1.5"/>
-    <path d="M 264 305 Q 267 301 270 305 T 276 305" fill="none" stroke="#38bdf8" stroke-width="1.5"/>
-    <!-- スパイラル加速軌道 (例) -->
-    <path d="M 270 160 
-             A 15 15 0 0 0 270 130 
-             L 270 130
-             A 35 35 0 0 1 270 200 
-             L 270 200
-             A 55 55 0 0 0 270 90
-             L 270 90
-             A 75 75 0 0 1 270 240
-             L 270 240
-             A 95 95 0 0 0 270 50
-             L 270 50
-             A 115 115 0 0 1 270 280 L 400 280" 
-          fill="none" stroke="#f43f5e" stroke-width="2" stroke-dasharray="3 2"/>
-    <!-- 粒子ビーム放出矢印 -->
-    <line x1="270" y1="280" x2="440" y2="280" stroke="#22c55e" stroke-width="3"/>
-    <polygon points="445,280 435,275 435,285" fill="#22c55e"/>
-    <text x="445" y="272" fill="#22c55e" font-size="12" font-weight="bold">取り出しビーム</text>
+    <text x="24" y="32" fill="#38bdf8" font-size="13" font-weight="700">一様な磁場 B（紙面手前向き ⊙）</text>
+    <!-- ギャップ領域の背景（加速領域：電場 E の発生区間 x=289..311, y=55..285） -->
+    <rect x="289" y="55" width="22" height="230" fill="rgba(251, 191, 36, 0.10)" />
+    <text x="300" y="28" fill="#fbbf24" font-size="12" font-weight="700" text-anchor="middle">加速ギャップ（高周波電場 E）</text>
+    <line x1="300" y1="34" x2="300" y2="53" stroke="#fbbf24" stroke-width="1.4" stroke-dasharray="3,2" />
+    <!-- 左ディー D1（中心 (289, 170), 半径 R=115） -->
+    <path d="M 289 55 A 115 115 0 0 0 289 285 Z"
+          fill="rgba(30, 41, 59, 0.65)" stroke="#38bdf8" stroke-width="2.5" />
+    <!-- 右ディー D2（中心 (311, 170), 半径 R=115, 取り出し口スリット -32°〜-13° を開ける） -->
+    <path d="M 311 55 A 115 115 0 0 1 311 285 Z"
+          fill="rgba(30, 41, 59, 0.65)" stroke="none" />
+    <path d="M 311 55 A 115 115 0 0 1 408.5 109.1"
+          fill="none" stroke="#38bdf8" stroke-width="2.5" stroke-linecap="round" />
+    <path d="M 423.1 144.1 A 115 115 0 0 1 311 285 L 311 55"
+          fill="none" stroke="#38bdf8" stroke-width="2.5" stroke-linejoin="round" />
+    <!-- 左右ディーの説明コールアウト -->
+    <text x="155" y="138" fill="#38bdf8" font-size="18" font-weight="700" text-anchor="end">D₁</text>
+    <text x="155" y="158" fill="#cbd5e1" font-size="12" text-anchor="end">内部電場 E = 0</text>
+    <text x="155" y="175" fill="#94a3b8" font-size="11" text-anchor="end">（静電遮蔽・等速円運動）</text>
+    <line x1="162" y1="150" x2="188" y2="150" stroke="#94a3b8" stroke-width="1.3" stroke-dasharray="3,2" marker-end="url(#cyc-arr-lead)" />
+    <text x="458" y="218" fill="#38bdf8" font-size="18" font-weight="700">D₂</text>
+    <text x="458" y="238" fill="#cbd5e1" font-size="12">内部電場 E = 0</text>
+    <text x="458" y="255" fill="#94a3b8" font-size="11">（静電遮蔽・等速円運動）</text>
+    <line x1="452" y1="226" x2="416" y2="218" stroke="#94a3b8" stroke-width="1.3" stroke-dasharray="3,2" marker-end="url(#cyc-arr-lead)" />
+    <!-- 偏向板（デフレクター電極）：ビーム取り出し口外側を沿う電極板 -->
+    <path d="M 378 86 Q 402 100 422 114" fill="none" stroke="#f59e0b" stroke-width="4" stroke-linecap="round" />
+    <text x="432" y="88" fill="#fbbf24" font-size="12" font-weight="700">偏向板（デフレクター）</text>
+    <line x1="430" y1="90" x2="410" y2="103" stroke="#fbbf24" stroke-width="1.2" stroke-dasharray="2,2" />
+    <!-- 高周波交流電源の配線（D1, D2の下端から下方中央の電源へ接続） -->
+    <polyline points="289,285 289,332 284,332" fill="none" stroke="#94a3b8" stroke-width="1.8" />
+    <polyline points="311,285 311,332 316,332" fill="none" stroke="#94a3b8" stroke-width="1.8" />
+    <circle cx="300" cy="332" r="16" fill="#1e293b" stroke="#38bdf8" stroke-width="2" />
+    <path d="M 291 332 Q 295.5 324 300 332 T 309 332" fill="none" stroke="#38bdf8" stroke-width="2" />
+    <text x="326" y="330" fill="#e2e8f0" font-size="12" font-weight="700">高周波交流電源</text>
+    <text x="326" y="346" fill="#94a3b8" font-size="11">（半周期 T/2 ごとに極性が反転）</text>
+    <!-- 粒子のスパイラル加速軌道（B=⊙ に対して +q は時計回り・同心半円の連結） -->
+    <path d="M 300 165
+             L 311 165
+             A 11 11 0 0 1 311 187 L 289 187
+             A 22 22 0 0 1 289 143 L 311 143
+             A 33 33 0 0 1 311 209 L 289 209
+             A 44 44 0 0 1 289 121 L 311 121
+             A 55 55 0 0 1 311 231 L 289 231
+             A 66 66 0 0 1 289 99 L 311 99
+             A 77 77 0 0 1 311 253 L 289 253
+             A 88 88 0 0 1 289 77 L 311 77
+             A 99 99 0 0 1 372.0 98.0
+             C 387.7 110.3, 401.1 118.4, 419.5 126.2"
+          fill="none" stroke="#f43f5e" stroke-width="2.2" stroke-linecap="round" />
+    <!-- 軌道進行方向の小矢印（時計回りを明示） -->
+    <line x1="201" y1="170" x2="201" y2="160" stroke="#f43f5e" stroke-width="2" marker-end="url(#cyc-arr-path)" />
+    <line x1="388" y1="172" x2="388" y2="182" stroke="#f43f5e" stroke-width="2" marker-end="url(#cyc-arr-path)" />
+    <line x1="292" y1="77" x2="306" y2="77" stroke="#fbbf24" stroke-width="2.4" marker-end="url(#cyc-arr-path)" />
+    <!-- 取り出しビーム（スリットから接線方向へ直進放出） -->
+    <line x1="419.5" y1="126.2" x2="532" y2="174" stroke="#22c55e" stroke-width="3.5" marker-end="url(#cyc-arr-beam)" />
+    <text x="488" y="140" fill="#4ade80" font-size="13" font-weight="700">取り出しビーム</text>
+    <text x="492" y="192" fill="#86efac" font-size="11">最大運動エネルギー</text>
+    <!-- 中心イオン源 S (+q) -->
+    <circle cx="300" cy="165" r="5" fill="#fbbf24" stroke="#ffffff" stroke-width="1.5" />
+    <text x="155" y="294" fill="#fbbf24" font-size="11" font-weight="700" text-anchor="end">S（●）：中心イオン源（+q）</text>
   </svg>
 </div>
 

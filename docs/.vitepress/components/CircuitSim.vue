@@ -117,41 +117,43 @@
 
       <template v-if="mode === 'nonOhmic'">
         <div class="stat-card">
-          <span class="label">動作点電圧 $V_L$ (電球)</span>
+          <span class="label">動作点電圧 <i>V</i><sub>L</sub> (電球)</span>
           <span class="val highlight">{{ fmt(noRes.V, 2) }} V</span>
         </div>
         <div class="stat-card">
-          <span class="label">動作点電流 $I_L$</span>
+          <span class="label">動作点電流 <i>I</i><sub>L</sub></span>
           <span class="val highlight-alt">{{ fmt(noRes.I, 3) }} A</span>
         </div>
         <div class="stat-card">
-          <span class="label">電球消費電力 $P = V_L I_L$</span>
+          <span class="label">電球消費電力 <i>P</i> = <i>V</i><sub>L</sub><i>I</i><sub>L</sub></span>
           <span class="val">{{ fmt(noRes.P, 2) }} W</span>
         </div>
         <div class="stat-card">
-          <span class="label">負荷線の傾き $-1/R$</span>
-          <span class="val">-{{ fmt(1 / nonOhmicR, 3) }} $\Omega^{-1}$</span>
+          <span class="label">負荷線の傾き −1/<i>R</i></span>
+          <span class="val">-{{ fmt(1 / nonOhmicR, 3) }} Ω<sup>−1</sup></span>
         </div>
       </template>
 
       <template v-if="mode === 'bridge'">
         <div class="stat-card">
-          <span class="label">電位 $V_C$ (上中点)</span>
+          <span class="label">電位 <i>V</i><sub>C</sub> (上中点)</span>
           <span class="val">{{ fmt(brRes.VC, 2) }} V</span>
         </div>
         <div class="stat-card">
-          <span class="label">電位 $V_D$ (下中点)</span>
+          <span class="label">電位 <i>V</i><sub>D</sub> (下中点)</span>
           <span class="val">{{ fmt(brRes.VD, 2) }} V</span>
         </div>
         <div class="stat-card">
-          <span class="label">電位差 $\Delta V = V_C - V_D$</span>
+          <span class="label">電位差 Δ<i>V</i> = <i>V</i><sub>C</sub> − <i>V</i><sub>D</sub></span>
           <span class="val highlight">{{ fmt(brRes.dVD, 3) }} V</span>
         </div>
         <div class="stat-card">
-          <span class="label">平衡状態 ($R_1 R_4 = R_2 R_3$)</span>
-          <span class="val" :class="{ 'is-balanced': brRes.balanced }">
-            {{ brRes.balanced ? '✓ 平衡達成 (I_G = 0)' : '× 不平衡' }}
+          <span class="label">平衡状態 (<i>R</i><sub>1</sub><i>R</i><sub>4</sub> = <i>R</i><sub>2</sub><i>R</i><sub>3</sub>)</span>
+          <span class="val" :class="brRes.balanced ? 'is-balanced' : 'is-unbalanced'">
+            <template v-if="brRes.balanced">✓ 平衡達成</template>
+            <template v-else>× 不平衡</template>
           </span>
+          <span class="subval" v-html="brRes.balanced ? '<i>I</i><sub>G</sub> = 0 A' : `<i>I</i><sub>G</sub> = ${fmt(brRes.IG, 3)} A`"></span>
         </div>
       </template>
     </div>
@@ -220,23 +222,42 @@ const noRes = computed(() => {
   return { V, I, P }
 })
 
-// 計算: ブリッジ
+// 計算: ブリッジ (検流計の内部抵抗 RG = 10 Ω を含めた厳密な節点解析)
 const brRes = computed(() => {
   const E = bridgeE.value
   const r1 = bridgeR1.value
   const r2 = bridgeR2.value
   const r3 = bridgeR3.value
   const r4 = bridgeR4.value
-  // 電源の負極を0Vとする
-  // 左上C点の電位 (R1とR2の分圧): VC = E * (r2 / (r1 + r2))
-  const VC = E * (r2 / (r1 + r2))
-  // 左下D点の電位 (R3とR4の分圧): VD = E * (r4 / (r3 + r4))
-  const VD = E * (r4 / (r3 + r4))
+  const rG = 10 // 検流計の内部抵抗 [Ω]
+
+  const g1 = 1 / r1
+  const g2 = 1 / r2
+  const g3 = 1 / r3
+  const g4 = 1 / r4
+  const gG = 1 / rG
+
+  // (g1 + g2 + gG) * VC - gG * VD = E * g1
+  // -gG * VC + (g3 + g4 + gG) * VD = E * g3
+  const a11 = g1 + g2 + gG
+  const a22 = g3 + g4 + gG
+  const det = a11 * a22 - gG * gG
+
+  const VC = (E * g1 * a22 + E * g3 * gG) / det
+  const VD = (a11 * E * g3 + gG * E * g1) / det
   const dVD = VC - VD
+
+  const I1 = (E - VC) * g1 // A -> C
+  const I2 = VC * g2       // C -> B
+  const I3 = (E - VD) * g3 // A -> D
+  const I4 = VD * g4       // D -> B
+  const IG = (VC - VD) * gG // C -> D (正ならCからD、負ならDからC)
+  const Itotal = I1 + I3
+
   const ratio1 = r1 * r4
   const ratio2 = r2 * r3
   const balanced = Math.abs(ratio1 - ratio2) < 0.001
-  return { VC, VD, dVD, balanced }
+  return { VC, VD, dVD, I1, I2, I3, I4, IG, Itotal, balanced }
 })
 
 // ループ処理
@@ -376,9 +397,9 @@ function drawNonOhmic(ctx, w, h) {
     { x: cx1, y: cy2 }
   ], I, 'I', '#fbbf24')
 
-  // 右側: I-V グラフと負荷線 (x: 350 ~ 750, y: 50 ~ 370)
+  // 右側: I-V グラフと負荷線 (x: 400 ~ 735, y: 50 ~ 370)
   const gx0 = 400, gy0 = 350
-  const gw = 330, gh = 280
+  const gw = 315, gh = 280
 
   // グラフ座標軸
   const maxV = 22
@@ -387,7 +408,7 @@ function drawNonOhmic(ctx, w, h) {
   const toY = (cur) => gy0 - (cur / maxI) * gh
 
   // 軸
-  arrow(ctx, gx0, gy0, gx0 + gw + 20, gy0, '#94a3b8', 2, 'V [V]', { align: 'left', lx: 8 })
+  arrow(ctx, gx0, gy0, gx0 + gw + 22, gy0, '#94a3b8', 2, 'V [V]', { align: 'left', lx: 6 })
   arrow(ctx, gx0, gy0, gx0, gy0 - gh - 20, '#94a3b8', 2, 'I [A]', { align: 'center', ly: -12 })
 
   // 目盛り
@@ -427,13 +448,15 @@ function drawNonOhmic(ctx, w, h) {
   ctx.lineTo(toX(vIntercept), toY(0))
   ctx.stroke()
 
-  // 負荷線の式表示
-  text(ctx, `負荷線: I = (E - V)/R`, toX(vIntercept * 0.4), toY((E - vIntercept * 0.4) / R) + 20, '#f43f5e', 'bold 12px sans-serif')
-  // 切片マーク
+  // 負荷線の式表示（点線の右側の空き領域へ）
+  const lx = Math.min(gx0 + gw - 155, toX(vIntercept * 0.55) + 6)
+  const ly = toY(Math.max(0, (E - vIntercept * 0.55) / R)) - 10
+  text(ctx, `負荷線: I = (E - V)/R`, lx, ly, '#f43f5e', 'bold 12px sans-serif', 'left')
+  // 切片マーク（数値目盛り・動作点ラベルと重ならない位置に表示）
   dot(ctx, toX(vIntercept), toY(0), 4, '#f43f5e')
-  text(ctx, `(E, 0)`, toX(vIntercept), toY(0) + 16, '#f43f5e', '11px sans-serif', 'center')
+  text(ctx, `(E, 0)`, toX(vIntercept) + 8, toY(0) - 10, '#f43f5e', 'bold 11px sans-serif', 'left')
   dot(ctx, toX(0), toY(iIntercept), 4, '#f43f5e')
-  text(ctx, `E/R`, toX(0) - 10, toY(iIntercept), '#f43f5e', '11px sans-serif', 'right')
+  text(ctx, `E/R`, toX(0) + 10, toY(iIntercept) - 10, '#f43f5e', 'bold 11px sans-serif', 'left')
 
   // 3. 動作点 (交点)
   const oX = toX(V)
@@ -449,7 +472,7 @@ function drawNonOhmic(ctx, w, h) {
 // 描画: ホイートストンブリッジ
 // -------------------------------------------------------------------
 function drawBridge(ctx, w, h) {
-  const { VC, VD, dVD, balanced } = brRes.value
+  const { VC, VD, dVD, I1, I2, I3, I4, IG, Itotal, balanced } = brRes.value
   const E = bridgeE.value
   const r1 = bridgeR1.value
   const r2 = bridgeR2.value
@@ -489,14 +512,39 @@ function drawBridge(ctx, w, h) {
   // 電源 E (下部中央)
   drawBattery(ctx, 390, yPower, E, 'E', true)
 
-  // 4つの抵抗
-  drawResistorDiagonal(ctx, (xA + xC) / 2, (yA + yC) / 2, r1, 'R₁', -0.55)
-  drawResistorDiagonal(ctx, (xC + xB) / 2, (yC + yB) / 2, r2, 'R₂', 0.55)
-  drawResistorDiagonal(ctx, (xA + xD) / 2, (yA + yD) / 2, r3, 'R₃', 0.55)
-  drawResistorDiagonal(ctx, (xD + xB) / 2, (yD + yB) / 2, r4, 'R₄', -0.55)
+  // 4つの抵抗（ひし形外側に文字を配置して導線との重なりを回避）
+  drawResistorDiagonal(ctx, (xA + xC) / 2, (yA + yC) / 2, r1, 'R₁', -0.55, -24, -14, 'right')
+  drawResistorDiagonal(ctx, (xC + xB) / 2, (yC + yB) / 2, r2, 'R₂', 0.55, 24, -14, 'left')
+  drawResistorDiagonal(ctx, (xA + xD) / 2, (yA + yD) / 2, r3, 'R₃', 0.55, -24, 22, 'right')
+  drawResistorDiagonal(ctx, (xD + xB) / 2, (yD + yB) / 2, r4, 'R₄', -0.55, 24, 22, 'left')
 
-  // 検流計 G
-  drawGalvanometer(ctx, 390, 210, dVD)
+  // 電流粒子アニメーション (各枝の電流の大きさと向きに応じて流動)
+  // 電源主幹回路 (B -> 右下 -> E -> 左下 -> A)
+  drawCurrentBranch(ctx, [
+    { x: xB, y: yB },
+    { x: xB + 80, y: yB },
+    { x: xB + 80, y: yPower },
+    { x: xA - 80, y: yPower },
+    { x: xA - 80, y: yA },
+    { x: xA, y: yA }
+  ], Itotal, 'I', '#fbbf24')
+
+  // 上側ルート (A -> C -> B)
+  drawCurrentBranch(ctx, [{ x: xA, y: yA }, { x: xC, y: yC }], I1, 'I₁', '#38bdf8')
+  drawCurrentBranch(ctx, [{ x: xC, y: yC }, { x: xB, y: yB }], I2, 'I₂', '#38bdf8')
+
+  // 下側ルート (A -> D -> B)
+  drawCurrentBranch(ctx, [{ x: xA, y: yA }, { x: xD, y: yD }], I3, 'I₃', '#34d399')
+  drawCurrentBranch(ctx, [{ x: xD, y: yD }, { x: xB, y: yB }], I4, 'I₄', '#34d399')
+
+  // 中央 検流計ライン (C <-> D): 不平衡時のみ粒子が流れ、平衡時は静止
+  if (Math.abs(IG) > 0.002) {
+    drawCurrentBranch(ctx, [{ x: xC, y: yC }, { x: xC, y: 186 }], IG, 'I_G', '#f43f5e')
+    drawCurrentBranch(ctx, [{ x: xD, y: 234 }, { x: xD, y: yD }], IG, 'I_G', '#f43f5e')
+  }
+
+  // 検流計 G (粒子より手前に描いて文字と針の視認性を確保)
+  drawGalvanometer(ctx, 390, 210, dVD, IG)
 
   // 接地点 (B側を0Vとする)
   drawGround(ctx, xB + 80, yPower)
@@ -508,10 +556,10 @@ function drawBridge(ctx, w, h) {
   text(ctx, `B (0V)`, xB + 12, yB - 10, '#e4e4e7', 'bold 12px sans-serif', 'left')
 
   dot(ctx, xC, yC, 6, '#38bdf8')
-  text(ctx, `C (V_C = ${fmt(VC, 2)} V)`, xC, yC - 16, '#38bdf8', 'bold 13px sans-serif', 'center')
+  text(ctx, `C (Vc = ${fmt(VC, 2)} V)`, xC, yC - 16, '#38bdf8', 'bold 13px sans-serif', 'center')
 
   dot(ctx, xD, yD, 6, '#f43f5e')
-  text(ctx, `D (V_D = ${fmt(VD, 2)} V)`, xD, yD + 26, '#f43f5e', 'bold 13px sans-serif', 'center')
+  text(ctx, `D (Vd = ${fmt(VD, 2)} V)`, xD, yD + 26, '#f43f5e', 'bold 13px sans-serif', 'center')
 
   // 平衡条件ステータスバナー
   ctx.fillStyle = balanced ? 'rgba(34, 197, 94, 0.2)' : 'rgba(239, 68, 68, 0.15)'
@@ -520,7 +568,7 @@ function drawBridge(ctx, w, h) {
   ctx.fillRect(20, 20, 320, 60)
   ctx.strokeRect(20, 20, 320, 60)
 
-  text(ctx, balanced ? '✓ 平衡条件成立！' : '× 不平衡状態', 35, 42, balanced ? '#4ade80' : '#f87171', 'bold 13px sans-serif')
+  text(ctx, balanced ? '✓ 平衡条件成立！(I_G = 0)' : `× 不平衡状態 (I_G = ${fmt(IG, 2)} A)`, 35, 42, balanced ? '#4ade80' : '#f87171', 'bold 13px sans-serif')
   text(ctx, `R₁R₄ = ${fmt(r1 * r4, 1)}  /  R₂R₃ = ${fmt(r2 * r3, 1)}`, 35, 64, '#e4e4e7', '12px monospace')
 }
 
@@ -571,7 +619,7 @@ function drawResistor(ctx, x, y, val, label, horizontal = true) {
   ctx.restore()
 }
 
-function drawResistorDiagonal(ctx, x, y, val, label, angle) {
+function drawResistorDiagonal(ctx, x, y, val, label, angle, lxOff = 0, lyOff = -16, align = 'center') {
   ctx.save()
   ctx.translate(x, y)
   ctx.rotate(angle)
@@ -581,7 +629,7 @@ function drawResistorDiagonal(ctx, x, y, val, label, angle) {
   ctx.lineWidth = 2
   ctx.strokeRect(-20, -8, 40, 16)
   ctx.rotate(-angle)
-  text(ctx, `${label}: ${val}Ω`, 0, -16, '#e4e4e7', 'bold 11px sans-serif', 'center')
+  text(ctx, `${label}: ${val}Ω`, lxOff, lyOff, '#e4e4e7', 'bold 12px sans-serif', align)
   ctx.restore()
 }
 
@@ -620,13 +668,13 @@ function drawBulb(ctx, x, y, v, cur, p) {
   ctx.restore()
 }
 
-function drawGalvanometer(ctx, x, y, dV) {
+function drawGalvanometer(ctx, x, y, dV, IG = 0) {
   ctx.save()
   ctx.fillStyle = '#09090b'
   ctx.fillRect(x - 24, y - 24, 48, 48)
 
   // 円枠
-  ctx.strokeStyle = '#a1a1aa'
+  ctx.strokeStyle = Math.abs(dV) < 0.01 ? '#22c55e' : '#a1a1aa'
   ctx.lineWidth = 2
   ctx.beginPath()
   ctx.arc(x, y, 22, 0, Math.PI * 2)
@@ -648,7 +696,9 @@ function drawGalvanometer(ctx, x, y, dV) {
   ctx.stroke()
   dot(ctx, x, y + 6, 3, '#e4e4e7')
 
-  text(ctx, `ΔV = ${fmt(dV, 2)}V`, x + 30, y, '#e4e4e7', 'bold 11px sans-serif', 'left', 'middle')
+  text(ctx, `ΔV = ${fmt(dV, 2)}V`, x + 30, y - 7, '#e4e4e7', 'bold 11px sans-serif', 'left', 'middle')
+  const igLabel = Math.abs(IG) < 0.002 ? 'I_G = 0 A' : `I_G = ${IG > 0 ? '↓' : '↑'} ${fmt(Math.abs(IG), 2)} A`
+  text(ctx, igLabel, x + 30, y + 10, Math.abs(IG) < 0.002 ? '#4ade80' : '#f43f5e', 'bold 11px sans-serif', 'left', 'middle')
   ctx.restore()
 }
 
@@ -679,11 +729,12 @@ function drawCurrentBranch(ctx, pts, cur, label, col) {
   }
   if (totalLen <= 0) return
 
-  // 粒子描画
+  // 粒子描画 (均等間隔で継ぎ目なく周回)
   const particleSpacing = 40
-  const numParticles = Math.floor(totalLen / particleSpacing)
+  const numParticles = Math.max(2, Math.round(totalLen / particleSpacing))
+  const stepSpacing = totalLen / numParticles
   for (let p = 0; p < numParticles; p++) {
-    const dist = (p * particleSpacing + animPhase * speed) % totalLen
+    const dist = (p * stepSpacing + animPhase * speed) % totalLen
     // 距離 dist に対応する座標を算出
     let acc = 0
     for (let i = 0; i < segLens.length; i++) {
@@ -691,7 +742,7 @@ function drawCurrentBranch(ctx, pts, cur, label, col) {
         const t = (dist - acc) / segLens[i]
         const px = path[i].x + (path[i + 1].x - path[i].x) * t
         const py = path[i].y + (path[i + 1].y - path[i].y) * t
-        dot(ctx, px, py, 3, col)
+        dot(ctx, px, py, 3.4, col)
         break
       }
       acc += segLens[i]
@@ -829,29 +880,42 @@ canvas {
 
 .stats-panel {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 10px;
+}
+
+@media (max-width: 720px) {
+  .stats-panel {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 .stat-card {
   background: #27272a;
   border: 1px solid #3f3f46;
   border-radius: 8px;
-  padding: 10px 14px;
+  padding: 10px 10px;
+  min-width: 0;
   display: flex;
   flex-direction: column;
   gap: 2px;
 }
 
 .stat-card .label {
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   color: #a1a1aa;
 }
 
 .stat-card .val {
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: 700;
   color: #fafafa;
+  font-family: monospace;
+}
+
+.stat-card .subval {
+  font-size: 0.74rem;
+  color: #a1a1aa;
   font-family: monospace;
 }
 
@@ -865,5 +929,9 @@ canvas {
 
 .stat-card .val.is-balanced {
   color: #4ade80;
+}
+
+.stat-card .val.is-unbalanced {
+  color: #f87171;
 }
 </style>
