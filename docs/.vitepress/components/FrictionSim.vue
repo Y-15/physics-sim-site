@@ -1,12 +1,55 @@
 <template>
   <div class="sim-container">
     <div class="sim-header">
-      <span class="sim-title">📐 摩擦力と斜面上の運動 実験室</span>
-      <span class="sim-badge">静止摩擦力・動摩擦力・摩擦角</span>
+      <span class="sim-title">📐 3D 摩擦力と斜面上の運動 実験室</span>
+      <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+        <span class="sim-badge" style="background:rgba(16,185,129,0.15);color:#10b981;border-color:rgba(16,185,129,0.3)">Three.js 3D Interactive</span>
+        <span class="sim-badge">静止摩擦力・動摩擦力・摩擦角</span>
+      </div>
     </div>
 
-    <div class="canvas-wrapper">
-      <canvas ref="canvasRef" width="700" height="380"></canvas>
+    <!-- 3D カメラ視点プリセット -->
+    <div class="camera-preset-bar">
+      <span class="preset-label">🎥 カメラ視点:</span>
+      <div class="preset-group">
+        <button
+          class="cam-chip"
+          :class="{ active: activeCam === '3d' }"
+          @click="setCameraPreset('3d')"
+        >
+          🎥 3D 俯瞰視点
+        </button>
+        <button
+          class="cam-chip"
+          :class="{ active: activeCam === 'side' }"
+          @click="setCameraPreset('side')"
+        >
+          📐 側面視点 (力の分解図)
+        </button>
+        <button
+          class="cam-chip"
+          :class="{ active: activeCam === 'top' }"
+          @click="setCameraPreset('top')"
+        >
+          🔼 上面視点
+        </button>
+      </div>
+    </div>
+
+    <!-- Three.js 3D ビューポート -->
+    <div class="three-viewport-wrap">
+      <div ref="threeContainer" class="three-viewport"></div>
+
+      <div class="three-hud-legend">
+        <span class="legend-item"><i class="dot-mg"></i>重力 <b>mg</b></span>
+        <span class="legend-item"><i class="dot-n"></i>垂直抗力 <b>N</b></span>
+        <span class="legend-item"><i class="dot-f"></i>摩擦力 <b>f</b></span>
+        <span class="legend-item"><i class="dot-down"></i>斜面分力 <b>mg sinθ</b></span>
+      </div>
+
+      <div class="three-hud-hint">
+        🖱️ ドラッグで3D回転 ・ ホイールで拡大縮小
+      </div>
     </div>
 
     <div class="controls-grid">
@@ -42,7 +85,7 @@
       </div>
       <div class="stat-card">
         <div class="stat-label">斜面平行の重力分力</div>
-        <div class="stat-value">{{ forceDown.toFixed(1) }} <span class="unit">N</span></div>
+        <div class="stat-value" style="color:#fb923c">{{ forceDown.toFixed(1) }} <span class="unit">N</span></div>
         <div class="stat-formula">mg sin θ</div>
       </div>
       <div class="stat-card">
@@ -52,12 +95,12 @@
       </div>
       <div class="stat-card highlight">
         <div class="stat-label">現在の摩擦力 f</div>
-        <div class="stat-value">{{ currentFriction.toFixed(1) }} <span class="unit">N</span></div>
+        <div class="stat-value" :style="{ color: isSliding ? '#f43f5e' : '#fbbf24' }">{{ currentFriction.toFixed(1) }} <span class="unit">N</span></div>
         <div class="stat-formula">{{ isSliding ? 'fₖ = μₖN (動摩擦力)' : 'fₛ = mg sin θ (静止摩擦力)' }}</div>
       </div>
       <div class="stat-card">
         <div class="stat-label">垂直抗力 N</div>
-        <div class="stat-value">{{ normalForce.toFixed(1) }} <span class="unit">N</span></div>
+        <div class="stat-value" style="color:#38bdf8">{{ normalForce.toFixed(1) }} <span class="unit">N</span></div>
         <div class="stat-formula">N = mg cos θ</div>
       </div>
     </div>
@@ -75,9 +118,14 @@
 
 <script setup>
 import { ref, computed, onMounted, onUnmounted, watch } from 'vue'
+import * as THREE from 'three'
+import { createThreeScene, createVectorArrow3D, createTextSprite } from './threeUtils.js'
 
-const canvasRef = ref(null)
+const threeContainer = ref(null)
+let threeCtx = null
+let sceneObjects = null
 
+const activeCam = ref('3d')
 const thetaDeg = ref(25)
 const muS = ref(0.5)
 const muK = ref(0.35)
@@ -106,13 +154,29 @@ const accel = computed(() => {
   return Math.max(0, g * (Math.sin(thetaRad.value) - muK.value * Math.cos(thetaRad.value)))
 })
 
-// アニメーション用ブロック位置
-let animId = null
-let blockS = 0 // 斜面に沿った移動距離 (px)
-let blockVel = 0 // 斜面に沿った速度
-let lastTime = null
+let blockS = 0 // 斜面に沿った移動距離 (3Dワールド単位: 0 〜 maxSlideDist)
+let blockVel = 0
 let pauseAtBottom = 0
 let isTilting = false
+
+function getMobileScale() {
+  if (!threeCtx || !threeCtx.camera) return 1.0
+  const aspect = threeCtx.camera.aspect || 1.7
+  return aspect < 1.35 ? Math.min(2.05, 1.48 / Math.max(0.65, aspect)) : 1.0
+}
+
+function setCameraPreset(preset, duration = 0.5) {
+  activeCam.value = preset
+  if (!threeCtx) return
+  const s = getMobileScale()
+  if (preset === '3d') {
+    threeCtx.moveCameraTo([0.4, 4.6 * s, 12.2 * s], [0, 1.9, 0], duration, 42)
+  } else if (preset === 'side') {
+    threeCtx.moveCameraTo([-0.1, 2.0, 40.0 * s], [-0.1, 2.0, 0], duration, 14)
+  } else if (preset === 'top') {
+    threeCtx.moveCameraTo([0, 40.0 * s, 0.01], [0, 0, 0], duration, 14)
+  }
+}
 
 function setExactCritical() {
   isTilting = false
@@ -136,14 +200,182 @@ function resetBlock() {
   blockS = 0
   blockVel = 0
   pauseAtBottom = 0
+  updateScene(0)
 }
 
-function draw(timestamp) {
-  if (!lastTime) lastTime = timestamp
-  const dt = Math.min(0.05, (timestamp - lastTime) / 1000)
-  lastTime = timestamp
+// 斜面のヒンジ（左下端）ワールド座標
+const hingeX = -3.6
+const hingeY = -0.35
+const slopeLength = 6.8
+const blockW = 0.95
+const blockH = 0.62
+const blockD = 0.85
 
-  if (isTilting) {
+function initThree() {
+  if (!threeContainer.value) return
+  let lastCamAspect = 0
+
+  threeCtx = createThreeScene(threeContainer.value, {
+    fov: 42,
+    background: 0x080c16,
+    initialCamPos: [0.4, 4.6, 12.2],
+    initialTarget: [0, 1.9, 0],
+    onFrame: (dt) => {
+      const curAspect = threeCtx?.camera?.aspect || 1.7
+      if (Math.abs(curAspect - lastCamAspect) > 0.18) {
+        lastCamAspect = curAspect
+        setCameraPreset(activeCam.value, 0)
+      }
+      updateScene(dt)
+    }
+  })
+
+  const { scene } = threeCtx
+
+  // 1. 水平基準床グリッドと台座
+  const grid = new THREE.GridHelper(16, 16, 0x1e293b, 0x0f172a)
+  grid.position.set(0, hingeY - 0.02, 0)
+  scene.add(grid)
+
+  const basePlank = new THREE.Mesh(
+    new THREE.BoxGeometry(8.2, 0.14, 2.5),
+    new THREE.MeshStandardMaterial({ color: 0x293548, roughness: 0.65, metalness: 0.25 })
+  )
+  basePlank.position.set(0.2, hingeY - 0.07, 0)
+  scene.add(basePlank)
+
+  // ヒンジ円柱
+  const hingeMesh = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.14, 0.14, 2.65, 20),
+    new THREE.MeshStandardMaterial({ color: 0x64748b, metalness: 0.7, roughness: 0.25 })
+  )
+  hingeMesh.rotation.x = Math.PI / 2
+  hingeMesh.position.set(hingeX, hingeY, 0)
+  scene.add(hingeMesh)
+
+  // 2. 斜面ピボットグループ（左下端ヒンジ中心に回転）
+  const rampPivot = new THREE.Group()
+  rampPivot.position.set(hingeX, hingeY, 0)
+  scene.add(rampPivot)
+
+  const rampThickness = 0.22
+  const rampGeo = new THREE.BoxGeometry(slopeLength, rampThickness, 2.3)
+  rampGeo.translate(slopeLength / 2, -rampThickness / 2, 0)
+  const rampMat = new THREE.MeshStandardMaterial({
+    color: 0x475569,
+    emissive: 0x1e293b,
+    emissiveIntensity: 0.45,
+    roughness: 0.4,
+    metalness: 0.35
+  })
+  const rampMesh = new THREE.Mesh(rampGeo, rampMat)
+  rampPivot.add(rampMesh)
+
+  // 斜面のサイドレール縁と上面ベベル目盛り（3Dの視認性向上）
+  const sideEdgeGeo = new THREE.BoxGeometry(slopeLength, 0.06, 0.07)
+  sideEdgeGeo.translate(slopeLength / 2, 0.03, 0)
+  const sideEdgeMat = new THREE.MeshStandardMaterial({
+    color: 0x38bdf8,
+    emissive: 0x0284c7,
+    emissiveIntensity: 0.4,
+    metalness: 0.5
+  })
+  const edgeFront = new THREE.Mesh(sideEdgeGeo, sideEdgeMat)
+  edgeFront.position.z = 1.12
+  const edgeBack = new THREE.Mesh(sideEdgeGeo, sideEdgeMat)
+  edgeBack.position.z = -1.12
+  rampPivot.add(edgeFront, edgeBack)
+
+  for (let d = 1; d <= 6; d++) {
+    const tick = new THREE.Mesh(
+      new THREE.BoxGeometry(0.04, 0.02, 2.15),
+      new THREE.MeshBasicMaterial({ color: 0x94a3b8 })
+    )
+    tick.position.set(d, 0.01, 0)
+    rampPivot.add(tick)
+  }
+
+  // 3. 3D ブロック（斜面座標系内の子要素またはワールド配置）
+  const blockMesh = new THREE.Mesh(
+    new THREE.BoxGeometry(blockW, blockH, blockD),
+    new THREE.MeshStandardMaterial({
+      color: 0x3b82f6,
+      emissive: 0x1d4ed8,
+      emissiveIntensity: 0.25,
+      metalness: 0.35,
+      roughness: 0.3
+    })
+  )
+  scene.add(blockMesh)
+
+  // 角度 θ の円弧ライン & ラベル
+  const arcGeo = new THREE.BufferGeometry()
+  arcGeo.setAttribute('position', new THREE.BufferAttribute(new Float32Array(32 * 3), 3))
+  const arcLine = new THREE.Line(
+    arcGeo,
+    new THREE.LineBasicMaterial({ color: 0x38bdf8 })
+  )
+  scene.add(arcLine)
+
+  const labelTheta = createTextSprite('θ = 25°', {
+    color: '#7dd3fc',
+    borderColor: '#38bdf8',
+    fontSize: 34,
+    scale: 0.48
+  })
+  scene.add(labelTheta)
+
+  // 4. 力の3Dベクトル矢印 (mg, N, f, mg sinθ)
+  const arrowMg = createVectorArrow3D({ color: 0xf59e0b, shaftRadius: 0.05, headRadius: 0.15, headLength: 0.34 })
+  const arrowN = createVectorArrow3D({ color: 0x38bdf8, shaftRadius: 0.055, headRadius: 0.16, headLength: 0.36 })
+  const arrowF = createVectorArrow3D({ color: 0xfbbf24, shaftRadius: 0.055, headRadius: 0.16, headLength: 0.36 })
+  const arrowDown = createVectorArrow3D({ color: 0xfb923c, shaftRadius: 0.048, headRadius: 0.14, headLength: 0.32, opacity: 0.9 })
+  scene.add(arrowMg, arrowN, arrowF, arrowDown)
+
+  const labelMg = createTextSprite('mg', { color: '#fde68a', borderColor: '#f59e0b', fontSize: 32, scale: 0.48 })
+  const labelN = createTextSprite('N', { color: '#7dd3fc', borderColor: '#38bdf8', fontSize: 32, scale: 0.48 })
+  const labelF = createTextSprite('f', { color: '#fde68a', borderColor: '#fbbf24', fontSize: 32, scale: 0.52 })
+  const labelDown = createTextSprite('mg sinθ', { color: '#fdba74', borderColor: '#fb923c', fontSize: 32, scale: 0.5 })
+  scene.add(labelMg, labelN, labelF, labelDown)
+
+  sceneObjects = {
+    rampPivot,
+    blockMesh,
+    arcGeo,
+    labelTheta,
+    arrowMg,
+    arrowN,
+    arrowF,
+    arrowDown,
+    labelMg,
+    labelN,
+    labelF,
+    labelDown
+  }
+
+  updateScene(0)
+  lastCamAspect = threeCtx.camera.aspect || 1.7
+  setCameraPreset(activeCam.value, 0)
+}
+
+function updateScene(dt) {
+  if (!sceneObjects) return
+  const {
+    rampPivot,
+    blockMesh,
+    arcGeo,
+    labelTheta,
+    arrowMg,
+    arrowN,
+    arrowF,
+    arrowDown,
+    labelMg,
+    labelN,
+    labelF,
+    labelDown
+  } = sceneObjects
+
+  if (isTilting && dt > 0) {
     if (!isSliding.value && thetaDeg.value < 65) {
       thetaDeg.value = Math.min(65, Math.round((thetaDeg.value + dt * 8) * 10) / 10)
     } else {
@@ -152,20 +384,12 @@ function draw(timestamp) {
   }
 
   const rad = thetaRad.value
-  const slopeBaseX = 90
-  const slopeBaseY = 335
-  // 斜面の高さがキャンバス上部をはみ出さないように斜辺長を自動調整
-  const maxSlopeH = 225
-  const maxSlopeW = 470
-  const slopeL = Math.min(
-    maxSlopeW / Math.max(0.2, Math.cos(rad)),
-    maxSlopeH / Math.max(0.1, Math.sin(rad)),
-    440
-  )
-  const initialOffset = 65
-  const maxSlideDist = Math.max(80, slopeL - initialOffset - 45)
+  rampPivot.rotation.z = rad
 
-  if (isSliding.value) {
+  const initialTopMargin = 1.25
+  const maxSlideDist = slopeLength - initialTopMargin - 0.95
+
+  if (isSliding.value && dt > 0) {
     if (blockS >= maxSlideDist) {
       pauseAtBottom += dt
       if (pauseAtBottom > 0.9) {
@@ -174,204 +398,159 @@ function draw(timestamp) {
         pauseAtBottom = 0
       }
     } else {
-      blockVel += accel.value * dt * 45 // スケール係数
+      blockVel += accel.value * dt * 0.65
       blockS += blockVel * dt
       if (blockS >= maxSlideDist) {
         blockS = maxSlideDist
         blockVel = 0
       }
     }
-  } else {
+  } else if (!isSliding.value) {
     blockVel = 0
     pauseAtBottom = 0
   }
 
-  const canvas = canvasRef.value
-  if (!canvas) return
-  const ctx = canvas.getContext('2d')
-  const w = canvas.width, h = canvas.height
+  // 斜面下端ヒンジからの距離 distAlongSlope
+  const distAlongSlope = slopeLength - initialTopMargin - blockS
+  const cosT = Math.cos(rad)
+  const sinT = Math.sin(rad)
 
-  ctx.fillStyle = '#09090b'
-  ctx.fillRect(0, 0, w, h)
+  // 斜面法線単位ベクトル（左上向き）と斜面平行上向き単位ベクトル（右上向き）
+  const normVec = new THREE.Vector3(-sinT, cosT, 0)
+  const paraUpVec = new THREE.Vector3(cosT, sinT, 0)
 
-  // グリッド
-  ctx.strokeStyle = 'rgba(63,63,70,0.3)'
-  ctx.lineWidth = 1
-  for (let x = 0; x <= w; x += 40) { ctx.beginPath(); ctx.moveTo(x,0); ctx.lineTo(x,h); ctx.stroke() }
-  for (let y = 0; y <= h; y += 40) { ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(w,y); ctx.stroke() }
+  // ブロック底面中心と重心ワールド座標
+  const contactX = hingeX + distAlongSlope * cosT
+  const contactY = hingeY + distAlongSlope * sinT
+  const centerPos = new THREE.Vector3(
+    contactX + normVec.x * (blockH / 2),
+    contactY + normVec.y * (blockH / 2),
+    0
+  )
 
-  const slopeEndX = slopeBaseX + slopeL * Math.cos(rad)
-  const slopeEndY = slopeBaseY - slopeL * Math.sin(rad)
+  blockMesh.position.copy(centerPos)
+  blockMesh.rotation.z = rad
 
-  // 斜面三角形の塗りつぶし
-  ctx.fillStyle = 'rgba(39, 39, 42, 0.7)'
-  ctx.beginPath()
-  ctx.moveTo(slopeBaseX, slopeBaseY)
-  ctx.lineTo(slopeEndX, slopeEndY)
-  ctx.lineTo(slopeEndX, slopeBaseY)
-  ctx.closePath()
-  ctx.fill()
+  const bMat = blockMesh.material
+  if (isSliding.value) {
+    bMat.color.setHex(0xf43f5e)
+    bMat.emissive.setHex(0xbe123c)
+  } else {
+    bMat.color.setHex(0x3b82f6)
+    bMat.emissive.setHex(0x1d4ed8)
+  }
 
-  // 斜面ライン
-  ctx.strokeStyle = '#a1a1aa'
-  ctx.lineWidth = 3
-  ctx.beginPath(); ctx.moveTo(slopeBaseX, slopeBaseY); ctx.lineTo(slopeEndX, slopeEndY); ctx.stroke()
-  // 底辺
-  ctx.strokeStyle = '#94a3b8'; ctx.lineWidth = 1.5
-  ctx.beginPath(); ctx.moveTo(slopeBaseX, slopeBaseY); ctx.lineTo(slopeEndX, slopeBaseY); ctx.stroke()
+  // 角度円弧の更新
+  const arcR = 1.45
+  const arcArr = arcGeo.getAttribute('position').array
+  for (let i = 0; i < 32; i++) {
+    const a = (i / 31) * rad
+    arcArr[i * 3] = hingeX + arcR * Math.cos(a)
+    arcArr[i * 3 + 1] = hingeY + arcR * Math.sin(a)
+    arcArr[i * 3 + 2] = 0.85
+  }
+  arcGeo.getAttribute('position').needsUpdate = true
+  labelTheta.updateText(`θ = ${thetaDeg.value}°`, '#7dd3fc', '#38bdf8')
+  labelTheta.position.set(hingeX + 1.55, hingeY + 0.35, 1.55)
 
-  // 角度 θ 円弧
-  ctx.strokeStyle = '#38bdf8'; ctx.lineWidth = 2
-  ctx.beginPath()
-  ctx.arc(slopeBaseX, slopeBaseY, 45, -rad, 0)
-  ctx.stroke()
-  ctx.fillStyle = '#38bdf8'; ctx.font = 'bold 12px sans-serif'; ctx.textAlign = 'left'
-  ctx.fillText(`θ = ${thetaDeg.value}°`, slopeBaseX + 54, slopeBaseY - 8)
+  // 力のベクトルスケール（質量 m に応じて自然な長さ 0.8 .. 2.3 に調整）
+  const forceScale = 2.0 / Math.max(12, m.value * g)
 
-  // ブロック位置（斜面上端から blockS だけ下った位置）
-  const currentOffset = initialOffset + blockS
-  const centerSlopeDist = slopeL - currentOffset
+  // 1. 重力 mg (鉛直真下・上面視点で分離するため前面 z=+1.55)
+  const mgVal = m.value * g
+  const mgLen = Math.max(0.75, mgVal * forceScale)
+  arrowMg.setVector(centerPos, new THREE.Vector3(0, -1, 0), mgLen)
+  labelMg.updateText(`mg = ${mgVal.toFixed(1)} N`, '#fde68a', '#f59e0b')
+  labelMg.position.set(centerPos.x + 0.45, centerPos.y - mgLen - 0.25, 1.55)
 
-  const bCenterX = slopeBaseX + centerSlopeDist * Math.cos(rad)
-  const bCenterY = slopeBaseY - centerSlopeDist * Math.sin(rad)
+  // 2. 垂直抗力 N (法線方向・上部のHUDに隠れないよう右横・最奥 z=-1.35)
+  const nVal = normalForce.value
+  const nLen = Math.max(0.5, nVal * forceScale)
+  arrowN.setVector(centerPos, normVec, nLen)
+  labelN.updateText(`N = ${nVal.toFixed(1)} N`, '#7dd3fc', '#38bdf8')
+  labelN.position.copy(centerPos).addScaledVector(normVec, nLen * 0.82)
+  labelN.position.x -= 0.95
+  labelN.position.z = -1.35
 
-  // 斜面に垂直な法線方向単位ベクトル (左上向き)
-  const normX = -Math.sin(rad)
-  const normY = -Math.cos(rad)
-  // 斜面平行上向き単位ベクトル (右上向き)
-  const paraUpX = Math.cos(rad)
-  const paraUpY = -Math.sin(rad)
+  // 3. 摩擦力 f (斜面上向き・上面視点分離のため z=-0.65)
+  const fVal = currentFriction.value
+  const fLen = fVal * forceScale
+  if (fLen > 0.08) {
+    arrowF.setVector(centerPos, paraUpVec, Math.max(0.45, fLen))
+    labelF.visible = true
+    const fName = isSliding.value ? '動摩擦力 fₖ' : '静止摩擦力 fₛ'
+    const fCol = isSliding.value ? '#fda4af' : '#fde68a'
+    const fBdr = isSliding.value ? '#f43f5e' : '#fbbf24'
+    labelF.updateText(`${fName} = ${fVal.toFixed(1)} N`, fCol, fBdr)
+    labelF.position.copy(centerPos).addScaledVector(paraUpVec, Math.max(0.45, fLen) + 0.55)
+    labelF.position.y += 0.25
+    labelF.position.z = -0.65
+  } else {
+    arrowF.visible = false
+    labelF.visible = false
+  }
 
-  const blockW = 44, blockH = 30
-  // ブロックの実際の中心（斜面の外側＝法線方向へ blockH/2 浮かせ、底面を斜面に接地させる）
-  const bx = bCenterX + normX * (blockH / 2)
-  const by = bCenterY + normY * (blockH / 2)
-
-  // ブロック描画 (斜め回転)
-  ctx.save()
-  ctx.translate(bx, by)
-  ctx.rotate(-rad)
-  ctx.fillStyle = isSliding.value ? '#f43f5e' : '#3b82f6'
-  ctx.strokeStyle = '#fff'; ctx.lineWidth = 1.5
-  ctx.beginPath()
-  ctx.roundRect(-blockW/2, -blockH/2, blockW, blockH, 4)
-  ctx.fill()
-  ctx.stroke()
-
-  ctx.fillStyle = '#fff'; ctx.font = 'bold 11px sans-serif'
-  ctx.textAlign = 'center'; ctx.textBaseline = 'middle'
-  ctx.fillText(`${m.value}kg`, 0, 0)
-  ctx.restore()
-
-  // -------------------------
-  // 力のベクトル矢印
-  // -------------------------
-  const vecScale = Math.min(2.2, 68 / (m.value * g))
-
-  // 1. 重力 mg (鉛直下向き、グレー点線 & 実線)
-  const mgLen = m.value * g * vecScale
-  ctx.strokeStyle = '#e4e4e7'; ctx.lineWidth = 2.5
-  ctx.beginPath(); ctx.moveTo(bx, by); ctx.lineTo(bx, by + mgLen); ctx.stroke()
-  drawArrowHead(ctx, bx, by + mgLen, 0, 1, '#e4e4e7')
-  ctx.fillStyle = '#e4e4e7'; ctx.font = 'bold 11px sans-serif'
-  drawLabel(ctx, `mg = ${(m.value * g).toFixed(1)} N`, bx + 8, by + mgLen + 4, 'left', w, h)
-
-  // 2. 垂直抗力 N (面に垂直上向き、シアン)
-  const nLen = normalForce.value * vecScale
-  const nEndX = bx + normX * nLen
-  const nEndY = by + normY * nLen
-  ctx.strokeStyle = '#38bdf8'; ctx.lineWidth = 3
-  ctx.beginPath(); ctx.moveTo(bx, by); ctx.lineTo(nEndX, nEndY); ctx.stroke()
-  drawArrowHead(ctx, nEndX, nEndY, normX, normY, '#38bdf8')
-  ctx.fillStyle = '#38bdf8'; ctx.font = 'bold 11px sans-serif'
-  drawLabel(ctx, `N = ${normalForce.value.toFixed(1)} N`, nEndX - 6, nEndY - 8, 'right', w, h)
-
-  // 3. 摩擦力 f (斜面上向き、黄色/赤色)
-  const fLen = currentFriction.value * vecScale
-  const fEndX = bx + paraUpX * fLen
-  const fEndY = by + paraUpY * fLen
-  const fColor = isSliding.value ? '#f43f5e' : '#fbbf24'
-  ctx.strokeStyle = fColor; ctx.lineWidth = 3
-  ctx.beginPath(); ctx.moveTo(bx, by); ctx.lineTo(fEndX, fEndY); ctx.stroke()
-  drawArrowHead(ctx, fEndX, fEndY, paraUpX, paraUpY, fColor)
-  ctx.fillStyle = fColor; ctx.font = 'bold 11px sans-serif'
-  drawLabel(ctx, `${isSliding.value ? '動摩擦力 fₖ' : '静止摩擦力 fₛ'} = ${currentFriction.value.toFixed(1)} N`, fEndX + 6, fEndY - 8, 'left', w, h)
-
-  // 4. 重力の斜面下向き分力 mg sin θ (オレンジ点線矢印)
-  const downLen = forceDown.value * vecScale
-  const downEndX = bx - paraUpX * downLen
-  const downEndY = by - paraUpY * downLen
-  ctx.strokeStyle = '#fb923c'; ctx.lineWidth = 2.5
-  ctx.setLineDash([4, 3])
-  ctx.beginPath(); ctx.moveTo(bx, by); ctx.lineTo(downEndX, downEndY); ctx.stroke()
-  ctx.setLineDash([])
-  drawArrowHead(ctx, downEndX, downEndY, -paraUpX, -paraUpY, '#fb923c')
-  ctx.fillStyle = '#fb923c'; ctx.font = 'bold 10px sans-serif'
-  drawLabel(ctx, `mg sin θ = ${forceDown.value.toFixed(1)} N`, downEndX - 8, downEndY + 14, 'right', w, h)
-
-  animId = requestAnimationFrame(draw)
-}
-
-// ラベル描画：キャンバス外にはみ出さないよう位置をクランプし、背景に半透明の下地を敷いて図形との重なりでも読めるようにする
-function drawLabel(ctx, text, x, y, align, cw, ch) {
-  const pad = 4
-  const tw = ctx.measureText(text).width
-  let left = align === 'right' ? x - tw : (align === 'center' ? x - tw / 2 : x)
-  left = Math.max(pad, Math.min(cw - tw - pad, left))
-  const top = Math.max(14, Math.min(ch - pad, y))
-  const color = ctx.fillStyle
-  ctx.fillStyle = 'rgba(9, 9, 11, 0.72)'
-  ctx.fillRect(left - 3, top - 12, tw + 6, 16)
-  ctx.fillStyle = color
-  ctx.textAlign = 'left'; ctx.textBaseline = 'alphabetic'
-  ctx.fillText(text, left, top)
-}
-
-function drawArrowHead(ctx, tipX, tipY, dirX, dirY, color) {
-  const headLen = 8
-  const angle = Math.atan2(dirY, dirX)
-  ctx.fillStyle = color
-  ctx.beginPath()
-  ctx.moveTo(tipX, tipY)
-  ctx.lineTo(tipX - headLen * Math.cos(angle - Math.PI / 6), tipY - headLen * Math.sin(angle - Math.PI / 6))
-  ctx.lineTo(tipX - headLen * Math.cos(angle + Math.PI / 6), tipY - headLen * Math.sin(angle + Math.PI / 6))
-  ctx.closePath()
-  ctx.fill()
+  // 4. 重力の斜面下向き分力 mg sinθ (上面視点分離のため z=+0.85)
+  const downVal = forceDown.value
+  const downLen = downVal * forceScale
+  if (downLen > 0.08) {
+    const paraDownVec = paraUpVec.clone().negate()
+    arrowDown.setVector(centerPos, paraDownVec, Math.max(0.45, downLen))
+    labelDown.visible = true
+    labelDown.updateText(`mg sinθ = ${downVal.toFixed(1)} N`, '#fdba74', '#fb923c')
+    labelDown.position.copy(centerPos).addScaledVector(paraDownVec, Math.max(0.45, downLen) + 0.55)
+    labelDown.position.y += 0.22
+    labelDown.position.z = 0.85
+  } else {
+    arrowDown.visible = false
+    labelDown.visible = false
+  }
 }
 
 watch([thetaDeg, muS, muK, m], () => {
-  resetBlock()
+  if (muK.value > muS.value) {
+    muK.value = muS.value
+  }
+  if (!isTilting) {
+    blockS = 0
+    blockVel = 0
+    pauseAtBottom = 0
+  }
+  updateScene(0)
 })
 
 onMounted(() => {
-  animId = requestAnimationFrame(draw)
+  initThree()
 })
 
 onUnmounted(() => {
-  if (animId) cancelAnimationFrame(animId)
+  if (threeCtx) {
+    threeCtx.dispose()
+    threeCtx = null
+  }
 })
 </script>
 
 <style scoped>
 .sim-container {
-  background: linear-gradient(145deg, #18181b, #09090b);
+  background: linear-gradient(145deg, #0f172a, #080c16);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 16px;
   padding: 1.5rem;
   margin: 1.5rem 0;
   color: #f4f4f5;
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Outfit', system-ui, sans-serif;
 }
 .sim-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 1rem;
+  margin-bottom: 0.85rem;
   flex-wrap: wrap;
   gap: 0.5rem;
 }
 .sim-title {
-  font-size: 1.1rem;
+  font-size: 1.12rem;
   font-weight: 700;
   background: linear-gradient(90deg, #fbbf24, #f43f5e);
   -webkit-background-clip: text;
@@ -386,19 +565,103 @@ onUnmounted(() => {
   border-radius: 9999px;
   font-weight: 600;
 }
-.canvas-wrapper {
-  background: #09090b;
+.camera-preset-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  padding: 8px 12px;
+  background: rgba(15, 23, 42, 0.75);
+  border: 1px solid rgba(56, 189, 248, 0.22);
+  border-radius: 10px;
+  margin-bottom: 0.85rem;
+}
+.preset-label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #38bdf8;
+}
+.preset-group {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.cam-chip {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  color: #cbd5e1;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.cam-chip:hover {
+  border-color: #38bdf8;
+  color: #fff;
+}
+.cam-chip.active {
+  background: rgba(56, 189, 248, 0.2);
+  border-color: #38bdf8;
+  color: #38bdf8;
+}
+.three-viewport-wrap {
+  position: relative;
+  width: 100%;
+  height: 400px;
+  background: #080c16;
   border-radius: 12px;
   overflow: hidden;
-  border: 1px solid #27272a;
-  display: flex;
-  justify-content: center;
+  border: 1px solid rgba(148, 163, 184, 0.22);
   margin-bottom: 1rem;
 }
-canvas {
+.three-viewport {
   width: 100%;
-  max-width: 700px;
-  height: auto;
+  height: 100%;
+}
+.three-hud-legend {
+  position: absolute;
+  top: 10px;
+  left: 12px;
+  max-width: calc(100% - 24px);
+  display: flex;
+  gap: 9px;
+  flex-wrap: wrap;
+  padding: 4px 10px;
+  border-radius: 8px;
+  background: rgba(9, 13, 22, 0.84);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  font-size: 0.72rem;
+  color: #e2e8f0;
+  pointer-events: none;
+}
+.legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+.legend-item i {
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+}
+.dot-mg { background: #f59e0b; box-shadow: 0 0 6px #f59e0b; }
+.dot-n { background: #38bdf8; box-shadow: 0 0 6px #38bdf8; }
+.dot-f { background: #fbbf24; box-shadow: 0 0 6px #fbbf24; }
+.dot-down { background: #fb923c; box-shadow: 0 0 6px #fb923c; }
+.three-hud-hint {
+  position: absolute;
+  bottom: 10px;
+  right: 12px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(9, 13, 22, 0.78);
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  font-size: 0.74rem;
+  color: #cbd5e1;
+  pointer-events: none;
 }
 .controls-grid {
   display: grid;
@@ -462,10 +725,6 @@ canvas {
   color: #09090b;
   font-weight: 700;
 }
-.btn-primary:hover {
-  opacity: 0.9;
-  transform: translateY(-1px);
-}
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
@@ -502,5 +761,18 @@ canvas {
   font-size: 0.75rem;
   color: #71717a;
   margin-top: 0.3rem;
+}
+@media (max-width: 768px) {
+  .sim-container {
+    padding: 1rem;
+  }
+  .three-viewport-wrap {
+    height: 330px;
+  }
+  .three-hud-legend {
+    right: 10px;
+    gap: 7px;
+    font-size: 0.68rem;
+  }
 }
 </style>

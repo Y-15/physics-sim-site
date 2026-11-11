@@ -1,8 +1,27 @@
 <template>
   <div class="lab" style="--ac:#38bdf8;--ac2:#c084fc">
     <div class="lab-head">
-      <span class="lab-title">🪐 人工衛星の軌道シミュレーター（地球のまわり）</span>
-      <span class="lab-badge">第1・第2宇宙速度／面積速度一定</span>
+      <span class="lab-title">🪐 3D 人工衛星の軌道シミュレーター（第1・第2宇宙速度と万有引力）</span>
+      <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+        <span class="lab-badge" style="--ac:#10b981">Three.js 3D Space</span>
+        <span class="lab-badge">第1・第2宇宙速度／面積速度一定</span>
+      </div>
+    </div>
+
+    <!-- 3D カメラ視点プリセット -->
+    <div class="camera-preset-bar">
+      <span class="preset-label">🎥 カメラ視点:</span>
+      <div class="preset-group">
+        <button class="lab-chip" :class="{ on: activeCam === '3d' }" @click="setCameraPreset('3d')">
+          🧊 3D 俯瞰視点
+        </button>
+        <button class="lab-chip" :class="{ on: activeCam === 'top' }" @click="setCameraPreset('top')">
+          ⭕ 真上（軌道平面・面積速度確認）
+        </button>
+        <button class="lab-chip" :class="{ on: activeCam === 'side' }" @click="setCameraPreset('side')">
+          📐 側面視点
+        </button>
+      </div>
     </div>
 
     <!-- 再生速度・アニメーションコントロールバー -->
@@ -27,7 +46,30 @@
       </button>
     </div>
 
-    <div class="lab-canvas"><canvas ref="canvasRef"></canvas></div>
+    <!-- Three.js 3D ビューポート -->
+    <div class="three-viewport-wrap">
+      <div ref="threeContainer" class="three-viewport"></div>
+
+      <div class="three-hud-top">
+        <div class="three-hud-legend">
+          <span class="legend-item"><i class="dot-v"></i>速度 <b>v</b></span>
+          <span class="legend-item"><i class="dot-f"></i>万有引力 <b>F = GMm/r²</b></span>
+          <span class="legend-item"><i class="dot-o"></i>{{ energy < 0 ? '束縛軌道 (E < 0)' : '脱出軌道 (E ≥ 0)' }}</span>
+        </div>
+      </div>
+
+      <div class="three-hud-bottom">
+        <div class="three-hud-hint">
+          🖱️ ドラッグで3D回転 ・ ホイールで拡大縮小
+        </div>
+      </div>
+    </div>
+
+    <div class="speed-telemetry-strip">
+      <div class="three-speed-info">
+        第1宇宙速度 <b>v₁ = {{ (vc0 * 1000).toFixed(2) }} km/s</b> ｜ 第2宇宙速度 <b>v₂ = {{ (Math.SQRT2 * vc0 * 1000).toFixed(2) }} km/s</b>
+      </div>
+    </div>
 
     <div class="lab-msg" v-if="status">{{ status }}</div>
 
@@ -50,23 +92,23 @@
           <button class="lab-chip" :class="{ on: Math.abs(ratio - 0.8) < 0.005 }" @click="preset(0.8)">遅すぎる</button>
           <button class="lab-chip" :class="{ on: Math.abs(ratio - 1.45) < 0.005 }" @click="preset(1.45)">脱出</button>
         </div>
-        <label style="margin-top:0.5rem"><input type="checkbox" v-model="showSectors" /> 一定時間ごとに掃く面積を表示</label>
+        <label style="margin-top:0.5rem"><input type="checkbox" v-model="showSectors" /> 一定時間ごとに掃く面積（3D扇形）を表示</label>
       </div>
     </div>
 
     <div class="lab-stats">
       <div class="lab-stat hl">
         <div class="k">現在の速さ v</div>
-        <div class="v">{{ (curV * 1000).toFixed(2) }} <small>km/s</small></div>
+        <div class="v" style="color:#10b981">{{ (curV * 1000).toFixed(2) }} <small>km/s</small></div>
         <div class="f">この位置での円軌道の速さ {{ (vc0 * 1000).toFixed(2) }} km/s</div>
       </div>
       <div class="lab-stat">
         <div class="k">地球中心からの距離 r</div>
-        <div class="v">{{ curR.toFixed(1) }} <small>×10³ km</small></div>
+        <div class="v" style="color:#38bdf8">{{ curR.toFixed(1) }} <small>×10³ km</small></div>
       </div>
       <div class="lab-stat">
         <div class="k">面積速度 ½ r v sinθ</div>
-        <div class="v">{{ (areal / 1e3).toFixed(2) }} <small>×10⁹ m²/s</small></div>
+        <div class="v" style="color:#c084fc">{{ (areal / 1e3).toFixed(2) }} <small>×10⁹ m²/s</small></div>
         <div class="f">軌道上のどこでも一定（第2法則）</div>
       </div>
       <div class="lab-stat">
@@ -86,12 +128,13 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, watch } from 'vue'
-import { setupCanvas, clearGrid, arrow, text, dot, line, useLoop } from './simUtils.js'
+import { ref, computed, onMounted, onUnmounted, watch } from 'vue'
+import * as THREE from 'three'
+import { createThreeScene, createVectorArrow3D, createTextSprite } from './threeUtils.js'
 
-const W = 720, H = 420
-const canvasRef = ref(null)
-let ctx = null
+const threeContainer = ref(null)
+let threeCtx = null
+let sceneObjs = null
 
 // 単位：距離 Mm（=10³ km）、時間 s、速さ Mm/s
 const GM = 3.986e-4 // 地球の GM [Mm³/s²]
@@ -100,11 +143,12 @@ const RE = 6.37 // 地球半径 [Mm]
 const ratio = ref(1.0)
 const r0 = ref(10)
 const playing = ref(true)
-const timeScale = ref(0.5) // デフォルトで楕円軌道や面積速度をじっくり追える0.5xスロー再生
+const timeScale = ref(0.5)
 const showSectors = ref(true)
 const status = ref('')
+const activeCam = ref('3d')
 
-const vc0 = computed(() => Math.sqrt(GM / r0.value)) // 打ち出し位置での円軌道の速さ
+const vc0 = computed(() => Math.sqrt(GM / r0.value))
 const T0 = computed(() => 2 * Math.PI * Math.sqrt(r0.value ** 3 / GM))
 
 let x = 0, y = 0, vx = 0, vy = 0, simT = 0, stopped = false
@@ -119,22 +163,62 @@ const periodText = computed(() => {
   return `${(T / 3600).toFixed(2)} 時間`
 })
 
-function preset(v) { ratio.value = v }
+function getMobScale() {
+  if (!threeContainer.value) return 1.0
+  const w = threeContainer.value.clientWidth || 720
+  const h = threeContainer.value.clientHeight || 420
+  const aspect = w / Math.max(1, h)
+  return (w < 540 || aspect < 1.22) ? Math.min(1.60, Math.max(1.32, 1.40 / Math.max(0.74, aspect))) : 1.0
+}
+
+function getCamParams(preset) {
+  const ms = getMobScale()
+  if (preset === 'top') {
+    return { pos: [0.2, 46.0 * ms, 0.45], target: [0.2, 0, 0], fov: 14 }
+  }
+  if (preset === 'side') {
+    return { pos: [0.2, 0.8, 46.0 * ms], target: [0.2, 0, 0], fov: 14 }
+  }
+  return { pos: [0.8 * ms, 9.2 * ms, 13.0 * ms], target: [0.3, 0, 0], fov: 42 }
+}
+
+function setCameraPreset(preset, duration = 0.5) {
+  activeCam.value = preset
+  if (!threeCtx) return
+  const { pos, target, fov } = getCamParams(preset)
+  threeCtx.moveCameraTo(pos, target, duration, fov)
+}
+
+let resizeObs = null
+let lastIsMob = false
+let lastSectorCount = -1
+let lastShowSectors = true
+
+function preset(v) {
+  ratio.value = v
+}
 
 function reset() {
-  x = -r0.value; y = 0
-  vx = 0; vy = -vc0.value * ratio.value // 反時計回り
-  simT = 0; stopped = false; trail = [{ x, y, t: 0 }]
+  x = -r0.value
+  y = 0
+  vx = 0
+  vy = -vc0.value * ratio.value // 反時計回り
+  simT = 0
+  stopped = false
+  trail = [{ x, y, t: 0 }]
+  lastSectorCount = -1
   status.value = ''
   measure()
   orbitT = energy.value < 0 ? 2 * Math.PI * Math.sqrt((-GM / (2 * energy.value)) ** 3 / GM) : Infinity
+  rebuildStaticPlanet()
+  updateFrame()
 }
 
 function acc(px, py) {
   const r2 = px * px + py * py
   const r = Math.sqrt(r2)
   const a = -GM / r2
-  return [a * px / r, a * py / r]
+  return [(a * px) / r, (a * py) / r]
 }
 
 function rk4(h) {
@@ -155,21 +239,19 @@ function measure() {
   const r = Math.hypot(x, y), v = Math.hypot(vx, vy)
   curR.value = r
   curV.value = v
-  // 1 Mm²/s = 10¹² m²/s。表示（×10⁹ m²/s）では areal/1e3 を使うので、ここで 1e6 倍しておく
   areal.value = 0.5 * Math.abs(x * vy - y * vx) * 1e6
-  // 1 kg あたりの力学的エネルギー [Mm²/s² = 10¹² J/kg]。表示では ×10⁶ J/kg に換算
   energy.value = 0.5 * v * v - GM / r
 }
 
 function stepSim(delta = 0.04) {
   step(delta)
-  draw()
+  updateFrame()
 }
 
 function step(dtReal) {
   if (stopped) return
-  const simDt = dtReal * timeScale.value * (T0.value / 7) // 円軌道1周 ≒ 7 秒で表示
-  const N = 40
+  const simDt = dtReal * timeScale.value * (T0.value / 7)
+  const N = 32
   for (let i = 0; i < N; i++) {
     rk4(simDt / N)
     simT += simDt / N
@@ -185,77 +267,463 @@ function step(dtReal) {
       break
     }
   }
-  if (simT <= orbitT * 1.001) trail.push({ x, y, t: simT })
-  if (trail.length > 4000) trail.shift()
+  if (simT <= orbitT * 1.001 && trail.length < 600) {
+    trail.push({ x, y, t: simT })
+  }
   measure()
 }
 
-function draw() {
-  clearGrid(ctx, W, H, 0, '#05070e')
-  // 背景の星
-  ctx.fillStyle = 'rgba(255,255,255,0.35)'
-  for (let i = 0; i < 60; i++) ctx.fillRect((i * 9973) % W, (i * 7919) % H, 1.4, 1.4)
+// 地球テクスチャをCanvasで生成
+function createEarthTexture() {
+  const canvas = document.createElement('canvas')
+  canvas.width = 512
+  canvas.height = 256
+  const ctx = canvas.getContext('2d')
+  const grad = ctx.createLinearGradient(0, 0, 0, 256)
+  grad.addColorStop(0, '#0284c7')
+  grad.addColorStop(0.5, '#0369a1')
+  grad.addColorStop(1, '#075985')
+  ctx.fillStyle = grad
+  ctx.fillRect(0, 0, 512, 256)
 
-  const cx = W * 0.32, cy = H * 0.5
-  const s = 100 / r0.value // px / Mm
-  const X = (px) => cx + px * s
-  const Y = (py) => cy - py * s
+  // 大陸風パッチ
+  ctx.fillStyle = 'rgba(16, 185, 129, 0.55)'
+  const patches = [
+    [110, 80, 48, 32],
+    [140, 140, 32, 48],
+    [250, 75, 55, 35],
+    [270, 130, 38, 45],
+    [370, 70, 65, 42],
+    [410, 165, 36, 26]
+  ]
+  patches.forEach(([px, py, rx, ry]) => {
+    ctx.beginPath()
+    ctx.ellipse(px, py, rx, ry, 0.3, 0, Math.PI * 2)
+    ctx.fill()
+  })
 
-  // 掃いた面積（一定時間ごと）
-  if (showSectors.value && energy.value < 0 && trail.length > 2) {
-    const dtSec = T0.value / 12
-    let start = 0
-    let idx = 0
-    for (let i = 1; i < trail.length; i++) {
-      const k = Math.floor(trail[i].t / dtSec)
-      if (k !== idx || i === trail.length - 1) {
-        ctx.beginPath()
-        ctx.moveTo(cx, cy)
-        for (let j = start; j <= i; j++) ctx.lineTo(X(trail[j].x), Y(trail[j].y))
-        ctx.closePath()
-        ctx.fillStyle = idx % 2 ? 'rgba(192,132,252,0.16)' : 'rgba(56,189,248,0.16)'
-        ctx.fill()
-        start = i
-        idx = k
+  // 雲バンド
+  ctx.fillStyle = 'rgba(255, 255, 255, 0.22)'
+  for (let i = 0; i < 12; i++) {
+    ctx.fillRect((i * 47) % 480, (i * 23) % 230, 55, 6)
+  }
+  return new THREE.CanvasTexture(canvas)
+}
+
+function initThree() {
+  if (!threeContainer.value) return
+  const init = getCamParams('3d')
+  lastIsMob = getMobScale() > 1.01
+  threeCtx = createThreeScene(threeContainer.value, {
+    fov: init.fov,
+    initialCamPos: init.pos,
+    initialTarget: init.target,
+    onFrame: (dt) => {
+      if (playing.value) {
+        step(dt)
+      }
+      if (sceneObjs && sceneObjs.earthMesh) {
+        sceneObjs.earthMesh.rotation.y += dt * 0.25
+      }
+      updateFrame()
+    }
+  })
+
+  if (typeof ResizeObserver !== 'undefined') {
+    resizeObs = new ResizeObserver(() => {
+      const nowMob = getMobScale() > 1.01
+      if (nowMob !== lastIsMob) {
+        lastIsMob = nowMob
+        setCameraPreset(activeCam.value, 0)
+      }
+    })
+    resizeObs.observe(threeContainer.value)
+  }
+
+  const { scene } = threeCtx
+
+  // 星空パーティクル
+  const starGeo = new THREE.BufferGeometry()
+  const starCount = 260
+  const starPos = new Float32Array(starCount * 3)
+  for (let i = 0; i < starCount; i++) {
+    starPos[i * 3] = (Math.sin(i * 127.1) * 0.5) * 70
+    starPos[i * 3 + 1] = (Math.cos(i * 311.7) * 0.5) * 45
+    starPos[i * 3 + 2] = (Math.sin(i * 74.7) * 0.5) * 70 - 15
+  }
+  starGeo.setAttribute('position', new THREE.BufferAttribute(starPos, 3))
+  const starPoints = new THREE.Points(
+    starGeo,
+    new THREE.PointsMaterial({ color: 0xe2e8f0, size: 0.16, transparent: true, opacity: 0.65 })
+  )
+  scene.add(starPoints)
+
+  // 重力場グリッドリング (軌道平面 y = -0.02)
+  const fieldGroup = new THREE.Group()
+  for (const rad of [1.5, 3.0, 4.5, 6.0]) {
+    const rGeo = new THREE.RingGeometry(rad - 0.022, rad + 0.022, 64)
+    rGeo.rotateX(-Math.PI / 2)
+    const rMat = new THREE.MeshBasicMaterial({
+      color: rad === 3.0 ? 0x475569 : 0x334155,
+      transparent: true,
+      opacity: rad === 3.0 ? 0.5 : 0.3,
+      side: THREE.DoubleSide
+    })
+    fieldGroup.add(new THREE.Mesh(rGeo, rMat))
+  }
+  scene.add(fieldGroup)
+
+  // 3D 地球メッシュ
+  const earthTex = createEarthTexture()
+  const earthGeo = new THREE.SphereGeometry(1, 36, 36)
+  const earthMat = new THREE.MeshStandardMaterial({
+    map: earthTex,
+    roughness: 0.45,
+    metalness: 0.1
+  })
+  const earthMesh = new THREE.Mesh(earthGeo, earthMat)
+  scene.add(earthMesh)
+
+  // 大気ハロー
+  const atmoGeo = new THREE.SphereGeometry(1.08, 32, 32)
+  const atmoMat = new THREE.MeshBasicMaterial({
+    color: 0x38bdf8,
+    transparent: true,
+    opacity: 0.18
+  })
+  const atmoMesh = new THREE.Mesh(atmoGeo, atmoMat)
+  earthMesh.add(atmoMesh)
+
+  const labelEarth = createTextSprite('地球 (Earth)', {
+    color: '#e0f2fe',
+    borderColor: '#38bdf8',
+    scale: 0.5
+  })
+  scene.add(labelEarth)
+
+  // 3D 人工衛星グループ (本体 + 太陽電池パドル)
+  const satGroup = new THREE.Group()
+  const satBody = new THREE.Mesh(
+    new THREE.SphereGeometry(0.22, 24, 24),
+    new THREE.MeshStandardMaterial({ color: 0xfbbf24, emissive: 0xd97706, emissiveIntensity: 0.45, metalness: 0.6 })
+  )
+  satGroup.add(satBody)
+
+  const panelGeo = new THREE.BoxGeometry(0.95, 0.03, 0.26)
+  const panelMat = new THREE.MeshStandardMaterial({ color: 0x0284c7, emissive: 0x0369a1, emissiveIntensity: 0.4 })
+  const panels = new THREE.Mesh(panelGeo, panelMat)
+  satGroup.add(panels)
+  scene.add(satGroup)
+
+  // 3D 軌道軌跡ライン
+  const maxTrail = 650
+  const trailGeo = new THREE.BufferGeometry()
+  trailGeo.setAttribute('position', new THREE.BufferAttribute(new Float32Array(maxTrail * 3), 3))
+  const trailMat = new THREE.LineBasicMaterial({ color: 0x38bdf8 })
+  const trailLine = new THREE.Line(trailGeo, trailMat)
+  scene.add(trailLine)
+
+  // 面積速度セクターメッシュグループ
+  const sectorsGroup = new THREE.Group()
+  scene.add(sectorsGroup)
+
+  // 3D ベクトル矢印
+  const arrowF = createVectorArrow3D({ color: 0xf43f5e, shaftRadius: 0.055, headRadius: 0.16, headLength: 0.38 })
+  const arrowV = createVectorArrow3D({ color: 0x10b981, shaftRadius: 0.055, headRadius: 0.16, headLength: 0.38 })
+  scene.add(arrowF, arrowV)
+
+  const labelF = createTextSprite('万有引力 F', { color: '#fda4af', borderColor: '#f43f5e', scale: 0.52 })
+  const labelV = createTextSprite('v', { color: '#6ee7b7', borderColor: '#10b981', scale: 0.52 })
+  scene.add(labelF, labelV)
+
+  sceneObjs = {
+    earthMesh,
+    labelEarth,
+    satGroup,
+    trailGeo,
+    trailMat,
+    trailLine,
+    maxTrail,
+    sectorsGroup,
+    arrowF,
+    arrowV,
+    labelF,
+    labelV
+  }
+
+  rebuildStaticPlanet()
+  updateFrame()
+}
+
+function getScale() {
+  // r0 Mm を 3.0 3D units にマッピング
+  return 3.0 / r0.value
+}
+
+function rebuildStaticPlanet() {
+  if (!sceneObjs) return
+  const s = getScale()
+  const earthR = RE * s
+  sceneObjs.earthMesh.scale.setScalar(earthR)
+  sceneObjs.labelEarth.position.set(0, earthR + 0.55, 0)
+}
+
+function updateFrame() {
+  if (!sceneObjs) return
+  const {
+    satGroup,
+    trailGeo,
+    trailMat,
+    maxTrail,
+    sectorsGroup,
+    arrowF,
+    arrowV,
+    labelF,
+    labelV
+  } = sceneObjs
+
+  const s = getScale()
+  // 2D (x, y) を 3D 水平面 (X = x*s, Y = 0, Z = -y*s) に配置
+  const sx = x * s
+  const sz = -y * s
+  const satPos = new THREE.Vector3(sx, 0, sz)
+  satGroup.position.copy(satPos)
+
+  // 軌跡の更新
+  trailMat.color.setHex(energy.value < 0 ? 0x38bdf8 : 0xf59e0b)
+  const arr = trailGeo.getAttribute('position').array
+  const count = Math.min(maxTrail, trail.length)
+  for (let i = 0; i < count; i++) {
+    arr[i * 3] = trail[i].x * s
+    arr[i * 3 + 1] = 0.02
+    arr[i * 3 + 2] = -trail[i].y * s
+  }
+  trailGeo.setDrawRange(0, count)
+  trailGeo.getAttribute('position').needsUpdate = true
+
+  // 面積速度セクター (3D Fan) — trail長またはトグル変化時のみ再生成して負荷軽減
+  const shouldRebuildSectors =
+    showSectors.value !== lastShowSectors ||
+    (showSectors.value && (trail.length < lastSectorCount || trail.length - lastSectorCount >= 3)) ||
+    (!showSectors.value && sectorsGroup.children.length > 0)
+
+  if (shouldRebuildSectors) {
+    lastShowSectors = showSectors.value
+    lastSectorCount = trail.length
+    while (sectorsGroup.children.length > 0) {
+      const c = sectorsGroup.children[0]
+      sectorsGroup.remove(c)
+      if (c.geometry) c.geometry.dispose()
+      if (c.material) c.material.dispose()
+    }
+
+    if (showSectors.value && energy.value < 0 && trail.length > 3) {
+      const dtSec = T0.value / 12
+      let start = 0
+      let idx = 0
+      for (let i = 1; i < trail.length; i++) {
+        const k = Math.floor(trail[i].t / dtSec)
+        if (k !== idx || i === trail.length - 1) {
+          if (i > start) {
+            const fanVerts = []
+            for (let j = start; j < i; j++) {
+              fanVerts.push(
+                0, 0.01, 0,
+                trail[j].x * s, 0.01, -trail[j].y * s,
+                trail[j + 1].x * s, 0.01, -trail[j + 1].y * s
+              )
+            }
+            const fanGeo = new THREE.BufferGeometry()
+            fanGeo.setAttribute('position', new THREE.Float32BufferAttribute(fanVerts, 3))
+            const fanMat = new THREE.MeshBasicMaterial({
+              color: idx % 2 === 0 ? 0x38bdf8 : 0xc084fc,
+              transparent: true,
+              opacity: 0.22,
+              side: THREE.DoubleSide
+            })
+            sectorsGroup.add(new THREE.Mesh(fanGeo, fanMat))
+          }
+          start = i
+          idx = k
+        }
       }
     }
   }
 
-  // 軌跡
-  ctx.strokeStyle = energy.value < 0 ? '#38bdf8' : '#f59e0b'
-  ctx.lineWidth = 1.8
-  ctx.beginPath()
-  trail.forEach((p, i) => (i ? ctx.lineTo(X(p.x), Y(p.y)) : ctx.moveTo(X(p.x), Y(p.y))))
-  ctx.stroke()
-
-  // 地球（縮尺どおり）
-  const g = ctx.createRadialGradient(cx - 10, cy - 10, 4, cx, cy, RE * s)
-  g.addColorStop(0, '#7dd3fc'); g.addColorStop(0.55, '#0369a1'); g.addColorStop(1, '#0c4a6e')
-  dot(ctx, cx, cy, RE * s, g)
-  text(ctx, '地球', cx, cy + 4, '#e0f2fe', 'bold 12px sans-serif', 'center')
-
-  // 衛星・ベクトル
-  const sx = X(x), sy = Y(y)
-  line(ctx, sx, sy, cx, cy, 'rgba(239,68,68,0.45)', 1.2, [3, 3])
+  // 万有引力ベクトル F (地球中心向き ・ 側面視点でも重ならないよう上方 +0.92Y に配置)
   const r = Math.hypot(x, y)
+  const fDir = new THREE.Vector3(-sx, 0, -sz).normalize()
   const aMag = GM / (r * r)
-  const aLen = Math.min(70, aMag * 6.5e6)
-  arrow(ctx, sx, sy, sx - (x / r) * aLen, sy + (y / r) * aLen, '#f87171', 2.2, '万有引力', { font: '11px sans-serif' })
-  arrow(ctx, sx, sy, sx + vx * 9000, sy - vy * 9000, '#34d399', 2.5, 'v', { font: 'bold 12px sans-serif' })
-  dot(ctx, sx, sy, 6, '#fbbf24', '#fff')
+  const fLen = Math.min(2.2, Math.max(0.55, aMag * 1.9e5))
+  arrowF.setVector(satPos, fDir, fLen)
+  labelF.position.copy(satPos).addScaledVector(fDir, fLen * 0.68).add(new THREE.Vector3(0, 0.92, 0))
 
-  text(ctx, `打ち出し点での v₁ = ${(vc0.value * 1000).toFixed(2)} km/s,  脱出に必要な速さ v₂ = ${(Math.SQRT2 * vc0.value * 1000).toFixed(2)} km/s`, 14, 22, '#cbd5e1', '12px sans-serif')
-  text(ctx, '※ 地球の大きさ・距離は縮尺どおり。時間は大幅に早送りしています', 14, H - 12, '#94a3b8', '11px sans-serif')
+  // 速度ベクトル v (下方 -0.58Y に配置して側面視点で万有引力Fと完全分離)
+  const vDir = new THREE.Vector3(vx, 0, -vy).normalize()
+  const vLen = Math.min(2.4, Math.max(0.6, (curV.value / vc0.value) * 1.35))
+  arrowV.setVector(satPos, vDir, vLen)
+  labelV.updateText(`v = ${(curV.value * 1000).toFixed(1)} km/s`, '#6ee7b7', '#10b981')
+  labelV.position.copy(satPos).addScaledVector(vDir, vLen + 0.5).add(new THREE.Vector3(0, -0.58, 0))
 }
 
 watch([ratio, r0], reset)
+watch(showSectors, updateFrame)
+
 onMounted(() => {
-  ctx = setupCanvas(canvasRef.value, W, H)
   reset()
+  initThree()
 })
-useLoop((dt) => {
-  if (!ctx) return
-  if (playing.value) step(dt)
-  draw()
+
+onUnmounted(() => {
+  if (resizeObs) {
+    resizeObs.disconnect()
+    resizeObs = null
+  }
+  if (threeCtx) {
+    threeCtx.dispose()
+    threeCtx = null
+  }
 })
 </script>
+
+<style scoped>
+.camera-preset-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  padding: 8px 12px;
+  background: rgba(15, 23, 42, 0.65);
+  border: 1px solid rgba(56, 189, 248, 0.22);
+  border-radius: 10px;
+  margin-bottom: 0.6rem;
+}
+.preset-label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #38bdf8;
+}
+.preset-group {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.three-viewport-wrap {
+  position: relative;
+  width: 100%;
+  height: 420px;
+  background: #050811;
+  border: 1px solid rgba(148, 163, 184, 0.22);
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 0.85rem;
+}
+.three-viewport {
+  width: 100%;
+  height: 100%;
+}
+.three-hud-top {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  right: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 6px;
+  pointer-events: none;
+  z-index: 5;
+}
+.three-hud-legend {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding: 5px 11px;
+  border-radius: 8px;
+  background: rgba(9, 13, 22, 0.84);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  font-size: 0.74rem;
+  color: #e2e8f0;
+  pointer-events: none;
+}
+.legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  white-space: nowrap;
+}
+.legend-item i {
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+}
+.dot-v { background: #10b981; box-shadow: 0 0 6px #10b981; }
+.dot-f { background: #f43f5e; box-shadow: 0 0 6px #f43f5e; }
+.dot-o { background: #38bdf8; box-shadow: 0 0 6px #38bdf8; }
+.three-hud-bottom {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  right: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 6px;
+  pointer-events: none;
+  z-index: 5;
+}
+.speed-telemetry-strip {
+  display: flex;
+  justify-content: flex-start;
+  margin: -0.45rem 0 0.75rem 0;
+}
+.three-speed-info {
+  padding: 5px 12px;
+  border-radius: 8px;
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  font-size: 0.76rem;
+  color: #cbd5e1;
+}
+.three-speed-info b {
+  color: #7dd3fc;
+}
+.three-hud-hint {
+  margin-left: auto;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(9, 13, 22, 0.8);
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  font-size: 0.73rem;
+  color: #cbd5e1;
+  pointer-events: none;
+}
+.speed-control-group {
+  border-radius: 10px;
+  flex-wrap: wrap;
+}
+.speed-label {
+  white-space: nowrap;
+}
+.speed-btn-group {
+  flex-wrap: wrap;
+}
+.speed-btn-group button,
+.lab-chip {
+  white-space: nowrap;
+}
+@media (max-width: 768px) {
+  .three-viewport-wrap {
+    height: 340px;
+  }
+  .three-hud-legend,
+  .three-speed-info,
+  .three-hud-hint {
+    font-size: 0.67rem;
+    padding: 3px 8px;
+  }
+}
+</style>

@@ -1,18 +1,49 @@
 <template>
   <div class="lab" style="--ac:#f59e0b;--ac2:#ef4444">
     <div class="lab-head">
-      <span class="lab-title">⚖️ 剛体のつり合いと力のモーメント 実験室</span>
-      <span class="lab-badge">{{ mode === 'lever' ? 'てこ・シーソーのつり合い' : '壁に立てかけた棒の滑り出し' }}</span>
+      <span class="lab-title">⚖️ 3D 剛体のつり合いと力のモーメント 実験室</span>
+      <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+        <span class="lab-badge" style="--ac:#10b981">Three.js 3D Interactive</span>
+        <span class="lab-badge">{{ mode === 'lever' ? 'てこ・シーソーのつり合い' : '壁に立てかけた棒の滑り出し' }}</span>
+      </div>
     </div>
 
     <!-- モード切替タブ -->
-    <div style="display:flex;gap:8px;padding:8px 16px;background:rgba(255,255,255,0.03);border-bottom:1px solid rgba(255,255,255,0.08)">
+    <div style="display:flex;gap:8px;padding:8px 16px;background:rgba(255,255,255,0.03);border-bottom:1px solid rgba(255,255,255,0.08);flex-wrap:wrap">
       <button class="lab-btn" :class="{ 'lab-btn-pri': mode === 'lever' }" @click="switchMode('lever')">
         📐 てこ・シーソー（回転のつり合い）
       </button>
       <button class="lab-btn" :class="{ 'lab-btn-pri': mode === 'ladder' }" @click="switchMode('ladder')">
         🧱 壁に立てかけた棒（滑り出し限界）
       </button>
+    </div>
+
+    <!-- 3D カメラ視点プリセット -->
+    <div class="camera-preset-bar">
+      <span class="preset-label">🎥 カメラ視点:</span>
+      <div class="preset-group">
+        <button
+          class="lab-chip"
+          :class="{ on: activeCam === '3d' }"
+          @click="setCameraPreset('3d')"
+        >
+          🎥 3D 俯瞰視点
+        </button>
+        <button
+          class="lab-chip"
+          :class="{ on: activeCam === 'front' }"
+          @click="setCameraPreset('front')"
+        >
+          📐 正面視点 (モーメント平面)
+        </button>
+        <button
+          class="lab-chip"
+          :class="{ on: activeCam === 'top' }"
+          @click="setCameraPreset('top')"
+        >
+          🔼 上面視点
+        </button>
+      </div>
     </div>
 
     <!-- アニメーション・実験コントロールバー -->
@@ -29,15 +60,33 @@
         </button>
       </div>
 
-      <div style="display:flex;align-items:center;gap:6px;font-size:0.85rem;color:#94a3b8">
-        <span>⏱️ 速度:</span>
-        <button class="lab-chip" :class="{ active: timeScale === 0.5 }" @click="timeScale = 0.5">0.5x</button>
-        <button class="lab-chip" :class="{ active: timeScale === 1.0 }" @click="timeScale = 1.0">1.0x</button>
-        <button class="lab-chip" :class="{ active: timeScale === 1.5 }" @click="timeScale = 1.5">1.5x</button>
+      <div style="display:flex;align-items:center;gap:6px;font-size:0.85rem;color:#94a3b8;flex-wrap:wrap">
+        <span style="white-space:nowrap">⏱️ 速度:</span>
+        <button class="lab-chip" :class="{ active: timeScale === 0.5, on: timeScale === 0.5 }" @click="timeScale = 0.5" style="white-space:nowrap">0.5x</button>
+        <button class="lab-chip" :class="{ active: timeScale === 1.0, on: timeScale === 1.0 }" @click="timeScale = 1.0" style="white-space:nowrap">1.0x</button>
+        <button class="lab-chip" :class="{ active: timeScale === 1.5, on: timeScale === 1.5 }" @click="timeScale = 1.5" style="white-space:nowrap">1.5x</button>
       </div>
     </div>
 
-    <div class="lab-canvas"><canvas ref="canvasRef"></canvas></div>
+    <!-- Three.js 3D ビューポート -->
+    <div class="three-viewport-wrap">
+      <div ref="threeContainer" class="three-viewport"></div>
+
+      <div class="three-hud-legend" v-if="mode === 'lever'">
+        <span class="legend-item"><i class="dot-m1"></i>左の力 <b>m₁g</b> (↺ M₁)</span>
+        <span class="legend-item"><i class="dot-m2"></i>右の力 <b>m₂g</b> (↻ M₂)</span>
+        <span class="legend-item"><i class="dot-n"></i>支点抗力 <b>N</b></span>
+      </div>
+      <div class="three-hud-legend" v-else>
+        <span class="legend-item"><i class="dot-m2"></i>壁の抗力 <b>N<sub>A</sub></b></span>
+        <span class="legend-item"><i class="dot-n"></i>床の抗力 <b>N<sub>B</sub></b></span>
+        <span class="legend-item"><i class="dot-m1"></i>静止摩擦力 <b>f</b> / 重力 <b>mg</b></span>
+      </div>
+
+      <div class="three-hud-hint">
+        🖱️ ドラッグで3D回転 ・ ホイールで拡大縮小
+      </div>
+    </div>
 
     <!-- てこモードのコントロール -->
     <div v-if="mode === 'lever'" class="lab-controls">
@@ -152,11 +201,17 @@
 </template>
 
 <script setup>
-import { ref, computed, watch } from 'vue'
-import { setupCanvas, clearGrid, arrow, text, dot, line, useLoop } from './simUtils.js'
+import { ref, computed, watch, onMounted, onUnmounted } from 'vue'
+import * as THREE from 'three'
+import { createThreeScene, createVectorArrow3D, createTextSprite } from './threeUtils.js'
+
+const threeContainer = ref(null)
+let threeCtx = null
+let sceneObjects = null
 
 const g = 9.8
 const mode = ref('lever')
+const activeCam = ref('3d')
 
 // アニメーション制御
 const isPlaying = ref(false)
@@ -170,12 +225,12 @@ const d1 = ref(2.0)
 const m2 = ref(2.0)
 const d2 = ref(4.0)
 const barMass = ref(1.0)
-const angle = ref(0) // 現在の傾き角（rad）
+const angle = ref(0) // 現在の傾き角（rad: +で反時計回り、-で時計回り）
 const angleVel = ref(0)
 
 const tauLeft = computed(() => m1.value * g * d1.value)
 const tauRight = computed(() => m2.value * g * d2.value)
-const tauNet = computed(() => tauLeft.value - tauRight.value) // >0で反時計
+const tauNet = computed(() => tauLeft.value - tauRight.value)
 const isLeverBalanced = computed(() => Math.abs(tauNet.value) < 0.2)
 const totalUpForce = computed(() => (m1.value + m2.value + barMass.value) * g)
 
@@ -192,18 +247,14 @@ function setLever(w1, len1, w2, len2) {
 const thetaDeg = ref(60)
 const muS = ref(0.4)
 const ladderM = ref(10.0)
-const climberPos = ref(0.6) // 0〜1
+const climberPos = ref(0.6)
 const climberM = ref(50.0)
 
-// はしご動的アニメーション変数
 const dynamicTheta = ref((60 * Math.PI) / 180)
 const dynamicOmega = ref(0)
 const dynamicClimberPos = ref(0.6)
 const isSlidingLadder = ref(false)
-const ladderDust = ref([])
-const impactRing = ref(0)
 
-// はしごの力学計算（静的理論値）
 const ladderThetaRad = computed(() => (thetaDeg.value * Math.PI) / 180)
 const normalFloorNB = computed(() => (ladderM.value + climberM.value) * g)
 const reqFriction = computed(() => {
@@ -215,15 +266,44 @@ const reqFriction = computed(() => {
 const maxFriction = computed(() => muS.value * normalFloorNB.value)
 const isLadderSafe = computed(() => reqFriction.value <= maxFriction.value)
 
-// 限界角：tanθ_min = (M/2 + m*x) / [ μ * (M + m) ]
 const criticalTheta = computed(() => {
   const tanMin = (ladderM.value * 0.5 + climberM.value * climberPos.value) / (muS.value * (ladderM.value + climberM.value))
   return (Math.atan(tanMin) * 180) / Math.PI
 })
 
+function getMobileScale() {
+  if (!threeCtx || !threeCtx.camera) return 1.0
+  const aspect = threeCtx.camera.aspect || 1.7
+  return aspect < 1.35 ? Math.min(2.2, 1.72 / Math.max(0.65, aspect)) : 1.0
+}
+
+function setCameraPreset(preset, duration = 0.5) {
+  activeCam.value = preset
+  if (!threeCtx) return
+  const s = getMobileScale()
+  if (mode.value === 'lever') {
+    if (preset === '3d') {
+      threeCtx.moveCameraTo([0, 3.8 * s, 11.4 * s], [0, 0.25, 0], duration, 42)
+    } else if (preset === 'front') {
+      threeCtx.moveCameraTo([0, 0.25, 38.0 * s], [0, 0.25, 0], duration, 14)
+    } else if (preset === 'top') {
+      threeCtx.moveCameraTo([0, 38.0 * s, 0.01], [0, 0, 0], duration, 14)
+    }
+  } else {
+    if (preset === '3d') {
+      threeCtx.moveCameraTo([1.8 * s, 3.8 * s, 10.8 * s], [0, 1.4, 0], duration, 42)
+    } else if (preset === 'front') {
+      threeCtx.moveCameraTo([0, 1.6, 38.0 * s], [0, 1.6, 0], duration, 14)
+    } else if (preset === 'top') {
+      threeCtx.moveCameraTo([0, 38.0 * s, 0.01], [0, 0, 0], duration, 14)
+    }
+  }
+}
+
 function switchMode(newMode) {
   mode.value = newMode
   resetSim()
+  setCameraPreset('3d')
 }
 
 function togglePlay() {
@@ -235,9 +315,8 @@ function togglePlay() {
   isPlaying.value = !isPlaying.value
   if (isPlaying.value) {
     if (mode.value === 'lever') {
-      // つり合い状態でも「実験スタート」時に軽く揺らして復元・つり合いを視覚化
       if (Math.abs(angleVel.value) < 0.05) {
-        angleVel.value = isLeverBalanced.value ? 0.45 : (tauNet.value > 0 ? -0.5 : 0.5)
+        angleVel.value = isLeverBalanced.value ? -0.45 : (tauNet.value > 0 ? 0.5 : -0.5)
       }
     } else if (mode.value === 'ladder') {
       if (isLadderSafe.value && !climberAutoClimb.value) {
@@ -254,8 +333,6 @@ function resetSim() {
   dynamicTheta.value = (thetaDeg.value * Math.PI) / 180
   dynamicOmega.value = 0
   dynamicClimberPos.value = climberPos.value
-  ladderDust.value = []
-  impactRing.value = 0
   angle.value = 0
   angleVel.value = 0
 }
@@ -266,370 +343,631 @@ watch([thetaDeg, climberPos, muS, ladderM, climberM], () => {
     dynamicClimberPos.value = climberPos.value
     isSlidingLadder.value = false
     isFinished.value = false
-    impactRing.value = 0
   }
 })
 
-const canvasRef = ref(null)
+function initThree() {
+  if (!threeContainer.value) return
+  let lastCamAspect = 0
 
-useLoop(canvasRef, ({ ctx, width, height, dt }) => {
-  clearGrid(ctx, width, height, 40)
-
-  if (mode.value === 'lever') {
-    drawLever(ctx, width, height, dt)
-  } else {
-    drawLadder(ctx, width, height, dt)
-  }
-})
-
-// てこの描画 & 微小振動シミュレーション
-function drawLever(ctx, w, h, dt) {
-  const cx = w / 2
-  const cy = h * 0.58
-  const maxTilt = 0.22 // 最大傾斜角（地面で止まる）
-
-  // 目標傾斜角
-  let targetAngle = 0
-  if (Math.abs(tauNet.value) > 0.5) {
-    targetAngle = tauNet.value > 0 ? -maxTilt : maxTilt
-  }
-
-  // 簡易スプリングダンパーで滑らかに傾ける
-  const speed = isPlaying.value ? 1.0 : 0.6
-  const kA = 15.0 * speed
-  const cA = 6.0 * speed
-  const scaledDt = Math.min(dt, 0.05) * timeScale.value
-  const acc = kA * (targetAngle - angle.value) - cA * angleVel.value
-  angleVel.value += acc * scaledDt
-  angle.value += angleVel.value * scaledDt
-
-  ctx.save()
-
-  // 1. 支点の三角形台
-  ctx.fillStyle = '#94a3b8'
-  ctx.beginPath()
-  ctx.moveTo(cx, cy)
-  ctx.lineTo(cx - 30, cy + 50)
-  ctx.lineTo(cx + 30, cy + 50)
-  ctx.closePath()
-  ctx.fill()
-  ctx.strokeStyle = '#94a3b8'
-  ctx.lineWidth = 2
-  ctx.stroke()
-
-  // 支点の回転ピン
-  dot(ctx, cx, cy, 6, '#f59e0b', '#fff', 2)
-  text(ctx, '支点 O', cx, cy + 65, { align: 'center', color: '#94a3b8', font: '11px sans-serif' })
-
-  // 支点の垂直抗力矢印 N
-  arrow(ctx, cx, cy, cx, cy - 65, { color: '#a855f7', width: 3, head: 9 })
-  text(ctx, `N = ${totalUpForce.value.toFixed(0)} N`, cx + 8, cy - 50, { align: 'left', color: '#a855f7', font: 'bold 12px sans-serif' })
-
-  // 2. シーソーの棒（回転）
-  ctx.translate(cx, cy)
-  ctx.rotate(angle.value)
-
-  const pxPerM = 55
-  const barHalfLen = 4.2 * pxPerM
-
-  // 棒の本体
-  ctx.fillStyle = '#334155'
-  ctx.strokeStyle = '#94a3b8'
-  ctx.lineWidth = 3
-  ctx.fillRect(-barHalfLen, -8, barHalfLen * 2, 16)
-  ctx.strokeRect(-barHalfLen, -8, barHalfLen * 2, 16)
-
-  // 目盛り線
-  ctx.strokeStyle = 'rgba(255,255,255,0.2)'
-  ctx.lineWidth = 1
-  for (let m = -4; m <= 4; m++) {
-    if (m === 0) continue
-    const x = m * pxPerM
-    ctx.beginPath()
-    ctx.moveTo(x, -8)
-    ctx.lineTo(x, 8)
-    ctx.stroke()
-  }
-
-  // 左のおもり位置 x1 = -d1 * pxPerM
-  const x1 = -d1.value * pxPerM
-  const size1 = Math.min(45, 20 + m1.value * 2.5)
-  ctx.fillStyle = '#f59e0b'
-  ctx.fillRect(x1 - size1 / 2, -8 - size1, size1, size1)
-  ctx.strokeStyle = '#fff'
-  ctx.lineWidth = 1.5
-  ctx.strokeRect(x1 - size1 / 2, -8 - size1, size1, size1)
-  text(ctx, `${m1.value}kg`, x1, -8 - size1 / 2, { align: 'center', base: 'middle', color: '#000', font: 'bold 11px sans-serif' })
-
-  // 右のおもり位置 x2 = d2 * pxPerM
-  const x2 = d2.value * pxPerM
-  const size2 = Math.min(45, 20 + m2.value * 2.5)
-  ctx.fillStyle = '#38bdf8'
-  ctx.fillRect(x2 - size2 / 2, -8 - size2, size2, size2)
-  ctx.strokeStyle = '#fff'
-  ctx.lineWidth = 1.5
-  ctx.strokeRect(x2 - size2 / 2, -8 - size2, size2, size2)
-  text(ctx, `${m2.value}kg`, x2, -8 - size2 / 2, { align: 'center', base: 'middle', color: '#000', font: 'bold 11px sans-serif' })
-
-  ctx.restore()
-
-  // 逆回転後のワールド座標でおもりの中心位置（重心）を計算（重力矢印は鉛直下向き）
-  const cosA = Math.cos(angle.value)
-  const sinA = Math.sin(angle.value)
-  const localY1 = -8 - size1 / 2
-  const wX1 = cx + x1 * cosA - localY1 * sinA
-  const wY1 = cy + x1 * sinA + localY1 * cosA
-  const localY2 = -8 - size2 / 2
-  const wX2 = cx + x2 * cosA - localY2 * sinA
-  const wY2 = cy + x2 * sinA + localY2 * cosA
-
-  // 左の重力矢印
-  const arrLen1 = Math.min(70, 20 + m1.value * 5)
-  arrow(ctx, wX1, wY1, wX1, wY1 + arrLen1, { color: '#f59e0b', width: 2.5, head: 8 })
-  text(ctx, `m₁g = ${(m1.value * g).toFixed(0)} N`, wX1 - 10, wY1 + arrLen1 + 14, { align: 'right', color: '#f59e0b', font: 'bold 11px sans-serif' })
-
-  // 右の重力矢印
-  const arrLen2 = Math.min(70, 20 + m2.value * 5)
-  arrow(ctx, wX2, wY2, wX2, wY2 + arrLen2, { color: '#38bdf8', width: 2.5, head: 8 })
-  text(ctx, `m₂g = ${(m2.value * g).toFixed(0)} N`, wX2 + 10, wY2 + arrLen2 + 14, { align: 'left', color: '#38bdf8', font: 'bold 11px sans-serif' })
-
-  // 腕の長さの寸法線
-  line(ctx, cx, cy - 35, cx - d1.value * pxPerM, cy - 35, { color: 'rgba(245,158,11,0.6)', width: 1.5, dash: [4, 4] })
-  text(ctx, `d₁ = ${d1.value.toFixed(1)} m`, cx - (d1.value * pxPerM) / 2, cy - 42, { align: 'center', color: '#f59e0b', font: '11px sans-serif' })
-
-  line(ctx, cx, cy - 35, cx + d2.value * pxPerM, cy - 35, { color: 'rgba(56,189,248,0.6)', width: 1.5, dash: [4, 4] })
-  text(ctx, `d₂ = ${d2.value.toFixed(1)} m`, cx + (d2.value * pxPerM) / 2, cy - 42, { align: 'center', color: '#38bdf8', font: '11px sans-serif' })
-
-  // モーメントバランスバー
-  drawBalanceMeter(ctx, cx, 40, tauLeft.value, tauRight.value)
-}
-
-// モーメント比較メーター
-function drawBalanceMeter(ctx, cx, cy, lVal, rVal) {
-  const barW = 260
-  const barH = 16
-  ctx.fillStyle = 'rgba(0,0,0,0.5)'
-  ctx.fillRect(cx - barW / 2, cy - barH / 2, barW, barH)
-  ctx.strokeStyle = 'rgba(255,255,255,0.2)'
-  ctx.strokeRect(cx - barW / 2, cy - barH / 2, barW, barH)
-
-  const total = lVal + rVal
-  const ratio = total > 0 ? lVal / total : 0.5
-  const splitX = cx - barW / 2 + barW * ratio
-
-  ctx.fillStyle = '#f59e0b'
-  ctx.fillRect(cx - barW / 2, cy - barH / 2, barW * ratio, barH)
-  ctx.fillStyle = '#38bdf8'
-  ctx.fillRect(splitX, cy - barH / 2, barW * (1 - ratio), barH)
-
-  // 中央インジケータ
-  line(ctx, cx, cy - 14, cx, cy + 14, { color: '#fff', width: 2 })
-  text(ctx, '↺ 反時計 M₁', cx - barW / 2 - 10, cy + 4, { align: 'right', color: '#f59e0b', font: 'bold 11px sans-serif' })
-  text(ctx, '時計 M₂ ↻', cx + barW / 2 + 10, cy + 4, { align: 'left', color: '#38bdf8', font: 'bold 11px sans-serif' })
-}
-
-// はしごの描画 & リアルタイム滑落シミュレーション
-function drawLadder(ctx, w, h, dt) {
-  const scaledDt = Math.min(dt, 0.05) * timeScale.value
-
-  // 1. 物理シミュレーション更新
-  if (isPlaying.value) {
-    // 人が登るモード
-    if (climberAutoClimb.value && !isSlidingLadder.value && !isFinished.value) {
-      dynamicClimberPos.value += scaledDt * 0.12
-      if (dynamicClimberPos.value >= 1.0) {
-        dynamicClimberPos.value = 1.0
+  threeCtx = createThreeScene(threeContainer.value, {
+    fov: 42,
+    background: 0x080c16,
+    initialCamPos: [0, 3.8, 10.6],
+    initialTarget: [0, 0.2, 0],
+    onFrame: (dt) => {
+      const curAspect = threeCtx?.camera?.aspect || 1.7
+      if (Math.abs(curAspect - lastCamAspect) > 0.18) {
+        lastCamAspect = curAspect
+        setCameraPreset(activeCam.value, 0)
       }
-      climberPos.value = Number(dynamicClimberPos.value.toFixed(2))
+      updateFrame(dt)
     }
-
-    // 動的力学判定
-    const curRad = dynamicTheta.value
-    const curTan = Math.tan(curRad)
-    const curNumerator = (ladderM.value * 0.5 + climberM.value * dynamicClimberPos.value) * g
-    const curReqF = curTan > 0.02 ? curNumerator / curTan : 9999
-    const curMaxF = muS.value * (ladderM.value + climberM.value) * g
-
-    // スリップ発生判定
-    if (curReqF > curMaxF && !isSlidingLadder.value && curRad > 0.04) {
-      isSlidingLadder.value = true
-    }
-
-    // スリップ滑落物理運動
-    if (isSlidingLadder.value) {
-      const muK = muS.value * 0.75
-      // 角度が小さくなるほど重力の腕が伸び、急激に加速して倒れ込む
-      const alpha = - (6.0 + 12.0 * Math.cos(curRad)) * Math.max(0.3, 1.0 - muK * 0.6)
-      dynamicOmega.value += alpha * scaledDt
-      dynamicTheta.value += dynamicOmega.value * scaledDt
-
-      // 床への激突判定
-      if (dynamicTheta.value <= 0.03) {
-        dynamicTheta.value = 0.01
-        dynamicOmega.value = 0
-        isSlidingLadder.value = false
-        isPlaying.value = false
-        isFinished.value = true
-        impactRing.value = 6
-      }
-    }
-  }
-
-  // 砂埃パーティクルの更新
-  for (let i = ladderDust.value.length - 1; i >= 0; i--) {
-    const p = ladderDust.value[i]
-    p.x += p.vx * scaledDt
-    p.y += p.vy * scaledDt
-    p.alpha -= scaledDt * 1.5
-    if (p.alpha <= 0) ladderDust.value.splice(i, 1)
-  }
-
-  // 衝撃波リング更新
-  if (impactRing.value > 0) {
-    impactRing.value += 75 * scaledDt
-    if (impactRing.value > 70) impactRing.value = 0
-  }
-
-  const wallX = w * 0.28
-  const floorY = h * 0.78
-  const ladderLen = Math.min(w * 0.5, h * 0.6)
-
-  // 壁と床の描画
-  ctx.fillStyle = '#1e293b'
-  ctx.fillRect(0, 0, wallX, floorY) // 壁の左側
-  ctx.fillStyle = '#0f172a'
-  ctx.fillRect(0, floorY, w, h - floorY) // 床
-
-  // 壁面（なめらか・水色ライン）
-  line(ctx, wallX, 40, wallX, floorY, { color: '#38bdf8', width: 4 })
-  text(ctx, 'なめらかな壁 (摩擦なし)', wallX - 10, 60, { align: 'right', color: '#38bdf8', font: '11px sans-serif' })
-
-  // 床面（あらい・黄色ライン）
-  line(ctx, wallX, floorY, w - 40, floorY, { color: '#f59e0b', width: 4 })
-  text(ctx, `あらい床 (静止摩擦係数 μ = ${muS.value.toFixed(2)})`, w - 50, floorY + 22, { align: 'right', color: '#f59e0b', font: '11px sans-serif' })
-
-  // はしごの幾何座標（dynamicTheta を使用、線幅8pxの半径4px分オフセットして壁・床へ接線接触）
-  const rad = Math.max(0.01, dynamicTheta.value)
-  const isLDown = dynamicTheta.value <= 0.03
-  const halfW = 4
-  const topX = wallX + halfW
-  const botY = floorY - halfW
-  const topY = botY - ladderLen * Math.sin(rad)
-  const botX = topX + ladderLen * Math.cos(rad)
-
-  // スリップ中の砂埃発生
-  if (isSlidingLadder.value && Math.random() < 0.6) {
-    ladderDust.value.push({
-      x: botX,
-      y: botY,
-      vx: Math.random() * 50 + 20,
-      vy: -Math.random() * 25 - 5,
-      alpha: 0.85,
-      radius: Math.random() * 4 + 2
-    })
-  }
-
-  // 砂埃描画
-  ladderDust.value.forEach(p => {
-    ctx.fillStyle = `rgba(251, 191, 36, ${p.alpha})`
-    ctx.beginPath()
-    ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2)
-    ctx.fill()
   })
 
-  // 衝撃波リング描画
-  if (impactRing.value > 0) {
-    ctx.strokeStyle = `rgba(239, 68, 68, ${Math.max(0, 1 - impactRing.value / 70)})`
-    ctx.lineWidth = 3
-    ctx.beginPath()
-    ctx.arc(botX, floorY, impactRing.value, 0, Math.PI * 2)
-    ctx.stroke()
+  const { scene } = threeCtx
+
+  const grid = new THREE.GridHelper(16, 16, 0x1e293b, 0x0f172a)
+  grid.position.set(0, -1.2, 0)
+  scene.add(grid)
+
+  // ======================================================
+  // グループ A: てこ・シーソーモード (leverGroup)
+  // ======================================================
+  const leverGroup = new THREE.Group()
+  scene.add(leverGroup)
+
+  // 支点の3D三角柱台座 (頂点が y = 0)
+  const fulcrumShape = new THREE.Shape()
+  fulcrumShape.moveTo(0, 0)
+  fulcrumShape.lineTo(-0.65, -1.2)
+  fulcrumShape.lineTo(0.65, -1.2)
+  fulcrumShape.closePath()
+  const fulcrumGeo = new THREE.ExtrudeGeometry(fulcrumShape, {
+    depth: 1.2,
+    bevelEnabled: false
+  })
+  fulcrumGeo.translate(0, 0, -0.6)
+  const fulcrumMesh = new THREE.Mesh(
+    fulcrumGeo,
+    new THREE.MeshStandardMaterial({
+      color: 0x64748b,
+      emissive: 0x1e293b,
+      emissiveIntensity: 0.45,
+      metalness: 0.5,
+      roughness: 0.35
+    })
+  )
+  leverGroup.add(fulcrumMesh)
+  fulcrumMesh.add(new THREE.LineSegments(
+    new THREE.EdgesGeometry(fulcrumGeo),
+    new THREE.LineBasicMaterial({ color: 0x94a3b8 })
+  ))
+
+  const pinMesh = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.12, 0.12, 1.38, 20),
+    new THREE.MeshStandardMaterial({ color: 0xf59e0b, emissive: 0xf59e0b, emissiveIntensity: 0.5 })
+  )
+  pinMesh.rotation.x = Math.PI / 2
+  leverGroup.add(pinMesh)
+
+  const fulcrumLabel = createTextSprite('支点 O', {
+    color: '#e2e8f0',
+    borderColor: 'rgba(148,163,184,0.6)',
+    fontSize: 30,
+    scale: 0.44
+  })
+  fulcrumLabel.position.set(0, -1.42, 0.95)
+  leverGroup.add(fulcrumLabel)
+
+  // 3D トルク回転リング（反時計回り M1: アンバー / 時計回り M2: シアン）
+  const createTorqueArc = (colorHex, isCCW) => {
+    const grp = new THREE.Group()
+    grp.position.set(0, 0, 0.72)
+    const rArc = 0.95
+    const startAngle = isCCW ? Math.PI * 0.72 : Math.PI * 0.28
+    const sweep = Math.PI * 0.56
+    const pts = []
+    for (let i = 0; i <= 24; i++) {
+      const t = i / 24
+      const a = isCCW ? startAngle + sweep * t : startAngle - sweep * t
+      pts.push(new THREE.Vector3(Math.cos(a) * rArc, Math.sin(a) * rArc, 0))
+    }
+    const curve = new THREE.CatmullRomCurve3(pts)
+    const arcMat = new THREE.MeshBasicMaterial({ color: colorHex, transparent: true, opacity: 0.9 })
+    grp.add(new THREE.Mesh(new THREE.TubeGeometry(curve, 24, 0.036, 10, false), arcMat))
+
+    const endPt = pts[pts.length - 1]
+    const prevPt = pts[pts.length - 2]
+    const tangent = endPt.clone().sub(prevPt).normalize()
+    const tipCone = new THREE.Mesh(new THREE.ConeGeometry(0.11, 0.26, 14), arcMat)
+    tipCone.position.copy(endPt)
+    tipCone.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), tangent)
+    grp.add(tipCone)
+    return { grp, arcMat }
+  }
+  const torqueLeftRing = createTorqueArc(0xf59e0b, true)
+  const torqueRightRing = createTorqueArc(0x38bdf8, false)
+  leverGroup.add(torqueLeftRing.grp, torqueRightRing.grp)
+
+  // シーソー棒のピボット
+  const beamPivot = new THREE.Group()
+  leverGroup.add(beamPivot)
+
+  const mScale = 1.05 // 1m = 1.05 ワールド単位
+  const beamLen = 8.6 * mScale
+  const beamGeo = new THREE.BoxGeometry(beamLen, 0.26, 0.9)
+  const beamMesh = new THREE.Mesh(
+    beamGeo,
+    new THREE.MeshStandardMaterial({
+      color: 0x64748b,
+      emissive: 0x1e293b,
+      emissiveIntensity: 0.45,
+      metalness: 0.5,
+      roughness: 0.3
+    })
+  )
+  beamPivot.add(beamMesh)
+  beamMesh.add(new THREE.LineSegments(
+    new THREE.EdgesGeometry(beamGeo),
+    new THREE.LineBasicMaterial({ color: 0x38bdf8, transparent: true, opacity: 0.7 })
+  ))
+
+  // 目盛り (-4m .. +4m)
+  for (let m = -4; m <= 4; m++) {
+    if (m === 0) continue
+    const tick = new THREE.Mesh(
+      new THREE.BoxGeometry(0.04, 0.26, 0.92),
+      new THREE.MeshBasicMaterial({ color: 0x94a3b8 })
+    )
+    tick.position.set(m * mScale, 0, 0)
+    beamPivot.add(tick)
   }
 
-  // はしごの棒描画
-  const isSafeNow = !isSlidingLadder.value && !isFinished.value && isLadderSafe.value
-  ctx.strokeStyle = isSafeNow ? '#cbd5e1' : '#ef4444'
-  ctx.lineWidth = 8
-  ctx.lineCap = 'round'
-  line(ctx, botX, botY, topX, topY, { color: isSafeNow ? '#cbd5e1' : '#ef4444', width: 8 })
+  // 左のおもり m1 & 右のおもり m2
+  const weight1Mesh = new THREE.Mesh(
+    new THREE.BoxGeometry(0.7, 0.7, 0.7),
+    new THREE.MeshStandardMaterial({ color: 0xf59e0b, emissive: 0xd97706, emissiveIntensity: 0.25, roughness: 0.3 })
+  )
+  const weight2Mesh = new THREE.Mesh(
+    new THREE.BoxGeometry(0.7, 0.7, 0.7),
+    new THREE.MeshStandardMaterial({ color: 0x38bdf8, emissive: 0x0284c7, emissiveIntensity: 0.25, roughness: 0.3 })
+  )
+  beamPivot.add(weight1Mesh, weight2Mesh)
 
-  // はしごのステップ
-  const steps = 7
-  for (let i = 1; i < steps; i++) {
-    const t = i / steps
-    const sx = botX + (topX - botX) * t
-    const sy = botY + (topY - botY) * t
-    dot(ctx, sx, sy, 3, '#94a3b8')
+  // 3D ベクトル矢印 (leverGroup直下、ワールド鉛直方向)
+  const arrowM1 = createVectorArrow3D({ color: 0xf59e0b, shaftRadius: 0.055, headRadius: 0.16, headLength: 0.36 })
+  const arrowM2 = createVectorArrow3D({ color: 0x38bdf8, shaftRadius: 0.055, headRadius: 0.16, headLength: 0.36 })
+  const arrowFulcrumN = createVectorArrow3D({ color: 0xa855f7, shaftRadius: 0.06, headRadius: 0.17, headLength: 0.38 })
+  leverGroup.add(arrowM1, arrowM2, arrowFulcrumN)
+
+  const labelM1 = createTextSprite('m₁g', { color: '#fde68a', borderColor: '#f59e0b', fontSize: 32, scale: 0.5 })
+  const labelM2 = createTextSprite('m₂g', { color: '#7dd3fc', borderColor: '#38bdf8', fontSize: 32, scale: 0.5 })
+  const labelFulcrumN = createTextSprite('N', { color: '#d8b4fe', borderColor: '#a855f7', fontSize: 32, scale: 0.5 })
+  const labelArm1 = createTextSprite('d₁ = 2.0m (↺ M₁)', { color: '#fde68a', borderColor: '#f59e0b', fontSize: 28, scale: 0.42 })
+  const labelArm2 = createTextSprite('d₂ = 4.0m (↻ M₂)', { color: '#7dd3fc', borderColor: '#38bdf8', fontSize: 28, scale: 0.42 })
+  leverGroup.add(labelM1, labelM2, labelFulcrumN, labelArm1, labelArm2)
+
+  // ======================================================
+  // グループ B: 壁に立てかけた棒モード (ladderGroup)
+  // ======================================================
+  const ladderGroup = new THREE.Group()
+  scene.add(ladderGroup)
+
+  const wallX = -2.6
+  const floorY = -1.15
+  const ladderLen = 4.8
+
+  // なめらかな壁 (左側 x = wallX)
+  const wallMesh = new THREE.Mesh(
+    new THREE.BoxGeometry(0.24, 5.2, 2.6),
+    new THREE.MeshStandardMaterial({
+      color: 0x0284c7,
+      emissive: 0x0369a1,
+      emissiveIntensity: 0.2,
+      transparent: true,
+      opacity: 0.55,
+      roughness: 0.15
+    })
+  )
+  wallMesh.position.set(wallX - 0.12, floorY + 2.6, 0)
+  ladderGroup.add(wallMesh)
+
+  const wallLbl = createTextSprite('なめらかな壁 (摩擦なし)', {
+    color: '#7dd3fc',
+    borderColor: '#38bdf8',
+    fontSize: 30,
+    scale: 0.44
+  })
+  wallLbl.position.set(wallX - 0.95, floorY + 1.45, 0)
+  ladderGroup.add(wallLbl)
+
+  // あらい床 (y = floorY)
+  const floorMesh = new THREE.Mesh(
+    new THREE.BoxGeometry(8.4, 0.2, 2.6),
+    new THREE.MeshStandardMaterial({ color: 0x334155, roughness: 0.8, metalness: 0.2 })
+  )
+  floorMesh.position.set(wallX + 3.9, floorY - 0.1, 0)
+  ladderGroup.add(floorMesh)
+
+  const floorLbl = createTextSprite('あらい床 (静止摩擦係数 μ)', {
+    color: '#fde68a',
+    borderColor: '#f59e0b',
+    fontSize: 30,
+    scale: 0.46
+  })
+  floorLbl.position.set(wallX + 4.4, floorY - 0.5, 0.8)
+  ladderGroup.add(floorLbl)
+
+  // 3D はしごモデル（左右2本のサイドレール＋7段のステップ）
+  const ladderObj = new THREE.Group()
+  ladderGroup.add(ladderObj)
+
+  const railMat = new THREE.MeshStandardMaterial({ color: 0xe2e8f0, metalness: 0.5, roughness: 0.3 })
+  const sideRailGeo = new THREE.CylinderGeometry(0.06, 0.06, ladderLen, 16)
+  sideRailGeo.translate(0, ladderLen / 2, 0)
+  const railFront = new THREE.Mesh(sideRailGeo, railMat)
+  railFront.position.z = 0.42
+  const railBack = new THREE.Mesh(sideRailGeo, railMat)
+  railBack.position.z = -0.42
+  ladderObj.add(railFront, railBack)
+
+  for (let i = 1; i <= 7; i++) {
+    const rung = new THREE.Mesh(
+      new THREE.CylinderGeometry(0.04, 0.04, 0.84, 14),
+      railMat
+    )
+    rung.rotation.x = Math.PI / 2
+    rung.position.set(0, (i / 8) * ladderLen, 0)
+    ladderObj.add(rung)
   }
 
-  // 棒の重心（中央）
-  const midX = (botX + topX) / 2
-  const midY = (botY + topY) / 2
-  dot(ctx, midX, midY, 5, '#10b981', '#fff', 1.5)
-  // 棒の重力矢印 Mg (鉛直真下)
-  arrow(ctx, midX, midY, midX, midY + 45, { color: '#10b981', width: 2, head: 7 })
-  text(ctx, `Mg = ${(ladderM.value * g).toFixed(0)} N`, midX + 8, midY + 35, { align: 'left', color: '#10b981', font: '11px sans-serif' })
+  // 登る人を表す 3D 球体マーカー
+  const climberMesh = new THREE.Mesh(
+    new THREE.SphereGeometry(0.24, 24, 24),
+    new THREE.MeshStandardMaterial({ color: 0xf59e0b, emissive: 0xf59e0b, emissiveIntensity: 0.4 })
+  )
+  ladderGroup.add(climberMesh)
 
-  // 登る人の位置
-  if (climberM.value > 0 && !isLDown) {
-    const curP = dynamicClimberPos.value
-    const px = botX + (topX - botX) * curP
-    const py = botY + (topY - botY) * curP
-    dot(ctx, px, py, 9, '#f59e0b', '#fff', 2)
-    // 人の重力矢印 mg (鉛直真下)
-    const pArrLen = Math.min(65, 20 + climberM.value * 0.6)
-    arrow(ctx, px, py, px, py + pArrLen, { color: '#f59e0b', width: 2.5, head: 7 })
-    text(ctx, `mg = ${(climberM.value * g).toFixed(0)} N`, px + 10, py + pArrLen, { align: 'left', color: '#f59e0b', font: 'bold 11px sans-serif' })
-    text(ctx, '人', px - 12, py - 6, { align: 'right', color: '#f59e0b', font: '11px sans-serif' })
+  // はしごの5つの力ベクトル (Mg, mg, N_A, N_B, f)
+  const arrowLadMg = createVectorArrow3D({ color: 0x10b981, shaftRadius: 0.045, headRadius: 0.14, headLength: 0.32 })
+  const arrowClimbMg = createVectorArrow3D({ color: 0xf59e0b, shaftRadius: 0.055, headRadius: 0.16, headLength: 0.36 })
+  const arrowNA = createVectorArrow3D({ color: 0x38bdf8, shaftRadius: 0.055, headRadius: 0.16, headLength: 0.36 })
+  const arrowNB = createVectorArrow3D({ color: 0xa855f7, shaftRadius: 0.055, headRadius: 0.16, headLength: 0.36 })
+  const arrowFric = createVectorArrow3D({ color: 0xf59e0b, shaftRadius: 0.055, headRadius: 0.16, headLength: 0.36 })
+  ladderGroup.add(arrowLadMg, arrowClimbMg, arrowNA, arrowNB, arrowFric)
+
+  const lblLadMg = createTextSprite('Mg', { color: '#6ee7b7', borderColor: '#10b981', fontSize: 30, scale: 0.44 })
+  const lblClimbMg = createTextSprite('mg', { color: '#fde68a', borderColor: '#f59e0b', fontSize: 32, scale: 0.48 })
+  const lblNA = createTextSprite('N_A', { color: '#7dd3fc', borderColor: '#38bdf8', fontSize: 32, scale: 0.48 })
+  const lblNB = createTextSprite('N_B', { color: '#d8b4fe', borderColor: '#a855f7', fontSize: 32, scale: 0.48 })
+  const lblFric = createTextSprite('f', { color: '#fde68a', borderColor: '#f59e0b', fontSize: 32, scale: 0.48 })
+  ladderGroup.add(lblLadMg, lblClimbMg, lblNA, lblNB, lblFric)
+
+  sceneObjects = {
+    leverGroup,
+    beamPivot,
+    weight1Mesh,
+    weight2Mesh,
+    arrowM1,
+    arrowM2,
+    arrowFulcrumN,
+    labelM1,
+    labelM2,
+    labelFulcrumN,
+    labelArm1,
+    labelArm2,
+    torqueLeftRing,
+    torqueRightRing,
+    mScale,
+    ladderGroup,
+    ladderObj,
+    railMat,
+    climberMesh,
+    wallX,
+    floorY,
+    ladderLen,
+    arrowLadMg,
+    arrowClimbMg,
+    arrowNA,
+    arrowNB,
+    arrowFric,
+    lblLadMg,
+    lblClimbMg,
+    lblNA,
+    lblNB,
+    lblFric
   }
 
-  // 力の矢印（倒れる前）
-  if (!isLDown) {
-    // 壁からの垂直抗力 N_A
-    arrow(ctx, topX, topY, topX + 50, topY, { color: '#38bdf8', width: 2.5, head: 7 })
-    text(ctx, `N_A = ${reqFriction.value.toFixed(1)} N`, topX + 55, topY - 6, { align: 'left', color: '#38bdf8', font: 'bold 11px sans-serif' })
+  updateFrame(0)
+  lastCamAspect = threeCtx.camera.aspect || 1.7
+  setCameraPreset(activeCam.value, 0)
+}
 
-    // 床からの垂直抗力 N_B
-    arrow(ctx, botX, botY, botX, botY - 60, { color: '#a855f7', width: 2.5, head: 7 })
-    text(ctx, `N_B = ${normalFloorNB.value.toFixed(1)} N`, botX + 8, botY - 45, { align: 'left', color: '#a855f7', font: 'bold 11px sans-serif' })
+function updateFrame(dt) {
+  if (!sceneObjects) return
+  const {
+    leverGroup,
+    beamPivot,
+    weight1Mesh,
+    weight2Mesh,
+    arrowM1,
+    arrowM2,
+    arrowFulcrumN,
+    labelM1,
+    labelM2,
+    labelFulcrumN,
+    labelArm1,
+    labelArm2,
+    torqueLeftRing,
+    torqueRightRing,
+    mScale,
+    ladderGroup,
+    ladderObj,
+    railMat,
+    climberMesh,
+    wallX,
+    floorY,
+    ladderLen,
+    arrowLadMg,
+    arrowClimbMg,
+    arrowNA,
+    arrowNB,
+    arrowFric,
+    lblLadMg,
+    lblClimbMg,
+    lblNA,
+    lblNB,
+    lblFric
+  } = sceneObjects
 
-    // 床からの静止摩擦力 f（左向き）
-    const fArrLen = Math.min(60, reqFriction.value * 0.3)
-    arrow(ctx, botX, botY, botX - fArrLen, botY, { color: isSafeNow ? '#f59e0b' : '#ef4444', width: 2.5, head: 7 })
-    text(ctx, `f = ${reqFriction.value.toFixed(1)} N`, botX - fArrLen - 8, botY + 16, { align: 'right', color: isSafeNow ? '#f59e0b' : '#ef4444', font: 'bold 11px sans-serif' })
+  const scaledDt = Math.min(dt, 0.05) * timeScale.value
 
-    // 角度 θ の円弧表示
-    ctx.strokeStyle = '#94a3b8'
-    ctx.lineWidth = 1.5
-    ctx.beginPath()
-    ctx.arc(botX, botY, 40, Math.PI, Math.PI - rad, true)
-    ctx.stroke()
-    const degDisplay = (rad * 180 / Math.PI).toFixed(0)
-    text(ctx, `θ = ${degDisplay}°`, botX - 52, botY - 12, { align: 'center', color: '#e2e8f0', font: 'bold 11px sans-serif' })
-  }
+  if (mode.value === 'lever') {
+    leverGroup.visible = true
+    ladderGroup.visible = false
 
-  // 状態バナー
-  if (isFinished.value) {
-    ctx.fillStyle = 'rgba(239, 68, 68, 0.25)'
-    ctx.strokeStyle = '#ef4444'
-    ctx.lineWidth = 2
-    ctx.fillRect(w * 0.22, 20, w * 0.72, 42)
-    ctx.strokeRect(w * 0.22, 20, w * 0.72, 42)
-    text(ctx, '💥 摩擦限界超過：足元が外側に滑り落ちて床に倒れ込みました！', w * 0.58, 46, { align: 'center', color: '#fca5a5', font: 'bold 13px sans-serif' })
-  } else if (isSlidingLadder.value) {
-    ctx.fillStyle = 'rgba(245, 158, 11, 0.25)'
-    ctx.strokeStyle = '#f59e0b'
-    ctx.lineWidth = 2
-    ctx.fillRect(w * 0.28, 20, w * 0.6, 40)
-    ctx.strokeRect(w * 0.28, 20, w * 0.6, 40)
-    text(ctx, '⚠️ スリップ中！足元が滑り出しています…', w * 0.58, 45, { align: 'center', color: '#fde68a', font: 'bold 13px sans-serif' })
-  } else if (!isLadderSafe.value) {
-    ctx.fillStyle = 'rgba(239, 68, 68, 0.2)'
-    ctx.strokeStyle = '#ef4444'
-    ctx.lineWidth = 2
-    ctx.fillRect(w * 0.28, 20, w * 0.6, 40)
-    ctx.strokeRect(w * 0.28, 20, w * 0.6, 40)
-    text(ctx, '⚠️ 摩擦限界超過！「実験スタート」で滑り落ちます', w * 0.58, 45, { align: 'center', color: '#fca5a5', font: 'bold 13px sans-serif' })
+    const maxTilt = 0.22
+    let targetAngle = 0
+    if (Math.abs(tauNet.value) > 0.5) {
+      targetAngle = tauNet.value > 0 ? maxTilt : -maxTilt
+    }
+
+    const speed = isPlaying.value ? 1.0 : 0.6
+    const kA = 15.0 * speed
+    const cA = 6.0 * speed
+    const acc = kA * (targetAngle - angle.value) - cA * angleVel.value
+    angleVel.value += acc * scaledDt
+    angle.value += angleVel.value * scaledDt
+
+    beamPivot.rotation.z = angle.value
+
+    const s1 = 0.42 + m1.value * 0.045
+    const s2 = 0.42 + m2.value * 0.045
+    weight1Mesh.scale.set(s1 / 0.7, s1 / 0.7, s1 / 0.7)
+    weight2Mesh.scale.set(s2 / 0.7, s2 / 0.7, s2 / 0.7)
+
+    const x1Local = -d1.value * mScale
+    const x2Local = d2.value * mScale
+    const y1Local = 0.12 + s1 / 2
+    const y2Local = 0.12 + s2 / 2
+
+    weight1Mesh.position.set(x1Local, y1Local, 0)
+    weight2Mesh.position.set(x2Local, y2Local, 0)
+
+    const cosA = Math.cos(angle.value)
+    const sinA = Math.sin(angle.value)
+
+    const wPos1 = new THREE.Vector3(
+      x1Local * cosA - y1Local * sinA,
+      x1Local * sinA + y1Local * cosA,
+      0
+    )
+    const wPos2 = new THREE.Vector3(
+      x2Local * cosA - y2Local * sinA,
+      x2Local * sinA + y2Local * cosA,
+      0
+    )
+
+    const len1 = Math.min(2.2, 0.65 + m1.value * 0.14)
+    const len2 = Math.min(2.2, 0.65 + m2.value * 0.14)
+
+    arrowM1.setVector(wPos1, new THREE.Vector3(0, -1, 0), len1)
+    labelM1.updateText(`m₁g = ${(m1.value * g).toFixed(0)} N`, '#fde68a', '#f59e0b')
+    labelM1.position.set(Math.min(-1.05, wPos1.x - 0.35), wPos1.y - len1 - 0.32, 0.45)
+
+    arrowM2.setVector(wPos2, new THREE.Vector3(0, -1, 0), len2)
+    labelM2.updateText(`m₂g = ${(m2.value * g).toFixed(0)} N`, '#7dd3fc', '#38bdf8')
+    labelM2.position.set(Math.max(1.05, wPos2.x + 0.35), wPos2.y - len2 - 0.32, 0.45)
+
+    const nLen = Math.min(2.4, 0.85 + (m1.value + m2.value + barMass.value) * 0.07)
+    arrowFulcrumN.setVector(new THREE.Vector3(0, 0, 0), new THREE.Vector3(0, 1, 0), nLen)
+    labelFulcrumN.updateText(`N = ${totalUpForce.value.toFixed(0)} N`, '#d8b4fe', '#a855f7')
+    labelFulcrumN.position.set(0, nLen + 0.42, 0)
+
+    const sLeft = Math.min(1.18, Math.max(0.75, tauLeft.value / 85))
+    const sRight = Math.min(1.18, Math.max(0.75, tauRight.value / 85))
+    torqueLeftRing.grp.scale.setScalar(sLeft)
+    torqueLeftRing.arcMat.opacity = tauLeft.value >= tauRight.value ? 0.95 : 0.48
+    torqueRightRing.grp.scale.setScalar(sRight)
+    torqueRightRing.arcMat.opacity = tauRight.value >= tauLeft.value ? 0.95 : 0.48
+
+    labelArm1.updateText(`d₁=${d1.value.toFixed(1)}m (↺ M₁=${tauLeft.value.toFixed(0)})`, '#fde68a', '#f59e0b')
+    labelArm1.position.set(Math.min(-2.45, x1Local * 0.9), 1.25, -0.55)
+
+    labelArm2.updateText(`d₂=${d2.value.toFixed(1)}m (↻ M₂=${tauRight.value.toFixed(0)})`, '#7dd3fc', '#38bdf8')
+    labelArm2.position.set(Math.max(2.45, x2Local * 0.9), 1.25, -0.55)
+  } else {
+    leverGroup.visible = false
+    ladderGroup.visible = true
+
+    if (isPlaying.value && scaledDt > 0) {
+      if (climberAutoClimb.value && !isSlidingLadder.value && !isFinished.value) {
+        dynamicClimberPos.value += scaledDt * 0.12
+        if (dynamicClimberPos.value >= 1.0) {
+          dynamicClimberPos.value = 1.0
+        }
+        climberPos.value = Number(dynamicClimberPos.value.toFixed(2))
+      }
+
+      const curRad = dynamicTheta.value
+      const curTan = Math.tan(curRad)
+      const curNumerator = (ladderM.value * 0.5 + climberM.value * dynamicClimberPos.value) * g
+      const curReqF = curTan > 0.02 ? curNumerator / curTan : 9999
+      const curMaxF = muS.value * (ladderM.value + climberM.value) * g
+
+      if (curReqF > curMaxF && !isSlidingLadder.value && curRad > 0.04) {
+        isSlidingLadder.value = true
+      }
+
+      if (isSlidingLadder.value) {
+        const muK = muS.value * 0.75
+        const alpha = -(6.0 + 12.0 * Math.cos(curRad)) * Math.max(0.3, 1.0 - muK * 0.6)
+        dynamicOmega.value += alpha * scaledDt
+        dynamicTheta.value += dynamicOmega.value * scaledDt
+
+        if (dynamicTheta.value <= 0.03) {
+          dynamicTheta.value = 0.02
+          dynamicOmega.value = 0
+          isSlidingLadder.value = false
+          isPlaying.value = false
+          isFinished.value = true
+        }
+      }
+    }
+
+    const rad = Math.max(0.02, dynamicTheta.value)
+    const isSafeNow = !isSlidingLadder.value && !isFinished.value && isLadderSafe.value
+    railMat.color.setHex(isSafeNow ? 0xe2e8f0 : 0xf43f5e)
+
+    // はしごの下端 (botX, floorY) と上端 (wallX, topY)
+    const botX = wallX + ladderLen * Math.cos(rad)
+    const botY = floorY
+    const topX = wallX
+    const topY = floorY + ladderLen * Math.sin(rad)
+
+    // ladderObj は (0,0,0) から +y 方向に長さ ladderLen で作られているので、
+    // 下端 (botX, botY, 0) に置き、Z軸回りに (Math.PI/2 - rad) 回転させると上端が (wallX, topY, 0) に一致！
+    ladderObj.position.set(botX, botY, 0)
+    ladderObj.rotation.z = Math.PI / 2 - rad
+
+    // はしごの重心 (中点)
+    const midPos = new THREE.Vector3((botX + topX) / 2, (botY + topY) / 2, 0)
+    arrowLadMg.setVector(midPos, new THREE.Vector3(0, -1, 0), 1.15)
+    lblLadMg.updateText(`Mg = ${(ladderM.value * g).toFixed(0)} N`, '#6ee7b7', '#10b981')
+    lblLadMg.position.set(midPos.x - 0.85, midPos.y - 1.45, 0.45)
+
+    // 登る人の位置
+    if (climberM.value > 0 && rad > 0.05) {
+      climberMesh.visible = true
+      const pRatio = dynamicClimberPos.value
+      const cPos = new THREE.Vector3(
+        botX + (topX - botX) * pRatio,
+        botY + (topY - botY) * pRatio,
+        0
+      )
+      climberMesh.position.copy(cPos)
+      const cLen = Math.min(1.8, 0.7 + climberM.value * 0.015)
+      arrowClimbMg.setVector(cPos, new THREE.Vector3(0, -1, 0), cLen)
+      lblClimbMg.visible = true
+      lblClimbMg.updateText(`mg = ${(climberM.value * g).toFixed(0)} N`, '#fde68a', '#f59e0b')
+      lblClimbMg.position.set(cPos.x + 0.85, cPos.y - cLen - 0.35, -0.45)
+    } else {
+      climberMesh.visible = false
+      arrowClimbMg.visible = false
+      lblClimbMg.visible = false
+    }
+
+    if (rad > 0.05) {
+      // 壁の垂直抗力 N_A (右向き)
+      const naLen = Math.min(1.9, Math.max(0.55, reqFriction.value * 0.0055))
+      const topPos = new THREE.Vector3(topX, topY, 0)
+      arrowNA.setVector(topPos, new THREE.Vector3(1, 0, 0), naLen)
+      lblNA.visible = true
+      lblNA.updateText(`N_A = ${reqFriction.value.toFixed(0)} N`, '#7dd3fc', '#38bdf8')
+      lblNA.position.set(topX + naLen + 0.55, topY + 0.25, 0)
+
+      // 床の垂直抗力 N_B (上向き)
+      const nbLen = Math.min(2.0, Math.max(0.75, normalFloorNB.value * 0.0028))
+      const botPos = new THREE.Vector3(botX, botY, 0)
+      arrowNB.setVector(botPos, new THREE.Vector3(0, 1, 0), nbLen)
+      lblNB.visible = true
+      lblNB.updateText(`N_B = ${normalFloorNB.value.toFixed(0)} N`, '#d8b4fe', '#a855f7')
+      lblNB.position.set(botX + 0.65, botY + nbLen + 0.25, 0)
+
+      // 床の静止摩擦力 f (左向き)
+      const fLen = Math.min(1.9, Math.max(0.55, reqFriction.value * 0.0055))
+      arrowFric.setVector(botPos, new THREE.Vector3(-1, 0, 0), fLen)
+      lblFric.visible = true
+      lblFric.updateText(`f = ${reqFriction.value.toFixed(0)} N`, isSafeNow ? '#fde68a' : '#fda4af', isSafeNow ? '#f59e0b' : '#ef4444')
+      lblFric.position.set(botX - fLen - 0.45, botY - 0.38, 0.4)
+    } else {
+      arrowNA.visible = false
+      arrowNB.visible = false
+      arrowFric.visible = false
+      lblNA.visible = false
+      lblNB.visible = false
+      lblFric.visible = false
+    }
   }
 }
+
+onMounted(() => {
+  initThree()
+})
+
+onUnmounted(() => {
+  if (threeCtx) {
+    threeCtx.dispose()
+    threeCtx = null
+  }
+})
 </script>
+
+<style scoped>
+.camera-preset-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  padding: 8px 16px;
+  background: rgba(15, 23, 42, 0.75);
+  border-bottom: 1px solid rgba(56, 189, 248, 0.2);
+}
+.preset-label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #38bdf8;
+}
+.preset-group {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.three-viewport-wrap {
+  position: relative;
+  width: 100%;
+  height: 410px;
+  background: #080c16;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+.three-viewport {
+  width: 100%;
+  height: 100%;
+}
+.three-hud-legend {
+  position: absolute;
+  top: 10px;
+  left: 12px;
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding: 5px 11px;
+  border-radius: 8px;
+  background: rgba(9, 13, 22, 0.84);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  font-size: 0.76rem;
+  color: #e2e8f0;
+  pointer-events: none;
+}
+.legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+.legend-item i {
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+}
+.dot-m1 { background: #f59e0b; box-shadow: 0 0 6px #f59e0b; }
+.dot-m2 { background: #38bdf8; box-shadow: 0 0 6px #38bdf8; }
+.dot-n { background: #a855f7; box-shadow: 0 0 6px #a855f7; }
+.three-hud-hint {
+  position: absolute;
+  bottom: 10px;
+  right: 12px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(9, 13, 22, 0.78);
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  font-size: 0.74rem;
+  color: #cbd5e1;
+  pointer-events: none;
+}
+.three-hud-legend {
+  max-width: calc(100% - 24px);
+}
+@media (max-width: 768px) {
+  .three-viewport-wrap {
+    height: 325px;
+  }
+  .three-hud-legend {
+    right: 10px;
+    gap: 8px;
+    font-size: 0.7rem;
+  }
+}
+</style>

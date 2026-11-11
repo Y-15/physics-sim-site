@@ -1,20 +1,49 @@
 <template>
   <div class="sim-container">
     <div class="sim-header">
-      <h3 class="sim-title">⚖️ 剛体の転倒 vs 滑り出し限界シミュレーター</h3>
+      <h3 class="sim-title">⚖️ 3D 剛体の転倒 vs 滑り出し限界シミュレーター</h3>
       <div class="sim-badges">
+        <span class="badge badge-cyan" style="background:rgba(16,185,129,0.15);color:#10b981;border-color:rgba(16,185,129,0.3)">Three.js 3D Interactive</span>
         <span class="badge" :class="stateBadgeClass">{{ stateLabel }}</span>
       </div>
     </div>
 
+    <!-- 3D カメラ視点プリセット -->
+    <div class="camera-preset-bar">
+      <span class="preset-label">🎥 カメラ視点:</span>
+      <div class="preset-group">
+        <button
+          class="cam-chip"
+          :class="{ active: activeCam === '3d' }"
+          @click="setCameraPreset('3d')"
+        >
+          🎥 3D 俯瞰視点
+        </button>
+        <button
+          class="cam-chip"
+          :class="{ active: activeCam === 'front' }"
+          @click="setCameraPreset('front')"
+        >
+          📐 正面視点 (抗力シフト x_N・重心鉛直線)
+        </button>
+        <button
+          class="cam-chip"
+          :class="{ active: activeCam === 'top' }"
+          @click="setCameraPreset('top')"
+        >
+          🔼 上面視点
+        </button>
+      </div>
+    </div>
+
     <!-- 再生・アニメーションコントロールバー -->
-    <div class="playback-bar">
+    <div class="playback-bar" style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px;">
       <button class="btn btn-primary" @click="togglePlay" style="padding: 6px 16px; font-weight: 700; border-radius: 8px; cursor: pointer;">
         {{ isPlaying ? '⏸ 一時停止' : (isFinished ? '🔄 最初から再生' : '▶ 実験スタート') }}
       </button>
-      <div class="speed-control-group">
-        <span class="speed-label">⏱️ 速度:</span>
-        <div class="speed-btn-group">
+      <div class="speed-control-group" style="display:flex;align-items:center;gap:6px;">
+        <span class="speed-label" style="font-size:0.8rem;color:#94a3b8;">⏱️ 速度:</span>
+        <div class="speed-btn-group" style="display:flex;gap:4px;">
           <button :class="{ active: timeScale === 0.5 }" @click="timeScale = 0.5">0.5x スロー</button>
           <button :class="{ active: timeScale === 1.0 }" @click="timeScale = 1.0">1.0x 標準</button>
           <button :class="{ active: timeScale === 1.5 }" @click="timeScale = 1.5">1.5x 高速</button>
@@ -28,9 +57,20 @@
       </button>
     </div>
 
-    <!-- メインCanvas -->
-    <div class="canvas-wrap">
-      <canvas ref="canvasRef" width="700" height="380" class="sim-canvas"></canvas>
+    <!-- Three.js 3D ビューポート -->
+    <div class="three-viewport-wrap">
+      <div ref="threeContainer" class="three-viewport"></div>
+
+      <div class="three-hud-legend">
+        <span class="legend-item"><i class="dot-f"></i>外力 <b>F</b></span>
+        <span class="legend-item"><i class="dot-n"></i>垂直抗力 <b>N</b> (作用点シフト)</span>
+        <span class="legend-item"><i class="dot-mg"></i>重力 <b>Mg</b> (重心G)</span>
+        <span class="legend-item"><i class="dot-fr"></i>摩擦力 <b>f</b></span>
+      </div>
+
+      <div class="three-hud-hint">
+        🖱️ ドラッグで3D回転 ・ ホイールで拡大縮小
+      </div>
     </div>
 
     <!-- リアルタイム情報パネル -->
@@ -127,23 +167,24 @@
 
 <script setup>
 import { ref, computed, watch, onMounted, onBeforeUnmount } from 'vue'
+import * as THREE from 'three'
+import { createThreeScene, createVectorArrow3D, createTextSprite } from './threeUtils.js'
 
-const canvasRef = ref(null)
+const threeContainer = ref(null)
+let threeCtx = null
+let sceneObjects = null
 
-// アニメーション状態
+const activeCam = ref('3d')
 const isPlaying = ref(false)
 const isFinished = ref(false)
 const timeScale = ref(1.0)
-let animationId = null
-let lastTime = 0
 
 // 動的シミュレーション変数
-const simX = ref(0) // 水平滑走距離 (px)
-const simVx = ref(0) // 水平滑走速度 (px/s)
-const simAngle = ref(0) // 転倒角 (rad)
-const simOmega = ref(0) // 角速度 (rad/s)
+const simX = ref(0) // 水平滑走距離 (cm換算ではなく3Dスケール用px相当)
+const simVx = ref(0)
+const simAngle = ref(0) // 転倒角 (rad, 正で時計回り)
+const simOmega = ref(0)
 const bounceCount = ref(0)
-const dustParticles = ref([])
 
 // 物理パラメータ
 const mass = ref(5.0) // kg
@@ -152,29 +193,21 @@ const width_w = ref(30) // cm
 const height_h = ref(60) // cm
 const forceHeight = ref(45) // cm
 const F = ref(15) // N
-const mu_s = ref(0.5) // 静止摩擦係数
-const mu_k = computed(() => mu_s.value * 0.8) // 動摩擦係数
+const mu_s = ref(0.5)
+const mu_k = computed(() => mu_s.value * 0.8)
 
-// 重力
-const weight = computed(() => mass.value * g) // 49 N
-
-// 滑り出し外力
+const weight = computed(() => mass.value * g)
 const maxFriction = computed(() => mu_s.value * weight.value)
 
-// 転倒限界外力 (右下端まわりのモーメント: F * h_F = Mg * (w/2))
 const toppleForce = computed(() => {
   if (forceHeight.value <= 0) return 999
   return (weight.value * (width_w.value / 2)) / forceHeight.value
 })
 
-// 垂直抗力の作用点シフト x_N (中心から右向き [cm])
 const xN = computed(() => {
   return (F.value * forceHeight.value) / weight.value
 })
 
-// 支点まわりの重力モーメントの腕の長さ d [cm]
-// 直立時: d = w/2 (復元)
-// 傾き角 θ: d = (w/2)*cosθ - (h/2)*sinθ
 const arm_d_cm = computed(() => {
   const theta = simAngle.value
   const w = width_w.value
@@ -182,9 +215,6 @@ const arm_d_cm = computed(() => {
   return (w / 2) * Math.cos(theta) - (h / 2) * Math.sin(theta)
 })
 
-// 支点まわりの重力モーメント τ_G [N·m]
-// 正: 反時計回り（直方体を元の直立状態に引き戻す「復元モーメント」）
-// 負: 時計回り（重心が支点を行き過ぎて押し倒す「転倒モーメント」）
 const tauG = computed(() => {
   return weight.value * (arm_d_cm.value / 100)
 })
@@ -196,7 +226,6 @@ const tauGLabel = computed(() => {
   return '死点（つり合い境界 0）'
 })
 
-// 状態判定
 const currentState = computed(() => {
   const isTopple = F.value > toppleForce.value
   const isSlide = F.value > maxFriction.value
@@ -221,9 +250,27 @@ const stateBadgeClass = computed(() => {
   return 'badge-yellow'
 })
 
+function getMobileScale() {
+  if (!threeCtx || !threeCtx.camera) return 1.0
+  const aspect = threeCtx.camera.aspect || 1.7
+  return aspect < 1.25 ? Math.min(1.85, 1.32 / Math.max(0.65, aspect)) : 1.0
+}
+
+function setCameraPreset(preset, duration = 0.5) {
+  activeCam.value = preset
+  if (!threeCtx) return
+  const s = getMobileScale()
+  if (preset === '3d') {
+    threeCtx.moveCameraTo([1.4 * s, 3.8 * s, 10.6 * s], [0.1, 1.4, 0], duration, 42)
+  } else if (preset === 'front') {
+    threeCtx.moveCameraTo([0.1, 1.4, 36.0 * s], [0.1, 1.4, 0], duration, 14)
+  } else if (preset === 'top') {
+    threeCtx.moveCameraTo([0.1, 36.0 * s, 0.01], [0.1, 0, 0], duration, 14)
+  }
+}
+
 function onParamChange() {
   if (!isPlaying.value) {
-    // 静止状態でリセット
     resetMotion()
   }
 }
@@ -234,8 +281,8 @@ function resetMotion() {
   simAngle.value = 0
   simOmega.value = 0
   bounceCount.value = 0
-  dustParticles.value = []
   isFinished.value = false
+  updateThreeScene()
 }
 
 function resetParams() {
@@ -265,19 +312,15 @@ function togglePlay() {
   if (isFinished.value) {
     resetMotion()
     isPlaying.value = true
-    lastTime = performance.now()
     return
   }
   isPlaying.value = !isPlaying.value
-  if (isPlaying.value) {
-    lastTime = performance.now()
-  }
 }
 
 function stepForward() {
   isPlaying.value = false
   updatePhysics(0.05)
-  render()
+  updateThreeScene()
 }
 
 function updatePhysics(dt) {
@@ -285,7 +328,6 @@ function updatePhysics(dt) {
   const state = currentState.value
 
   if (state === 'stable') {
-    // 実験再生中に静止状態なら外力 F を徐々に増加させて限界突破を実演
     if (isPlaying.value) {
       F.value = Math.min(60, Number((F.value + 6.0 * scaledDt).toFixed(1)))
     }
@@ -295,57 +337,37 @@ function updatePhysics(dt) {
   }
 
   if (state === 'sliding') {
-    // 滑走モード
-    // 加速度 a = (F - mu_k * Mg) / M [m/s^2]
     const frictionForce = mu_k.value * weight.value
     const netForce = Math.max(0, F.value - frictionForce)
-    const accel = netForce / mass.value // m/s^2
-    const pixelScale = 150 // 1m = 150px
-    const aPx = accel * pixelScale
+    const accel = netForce / mass.value
+    const aPx = accel * 150
 
     simVx.value += aPx * scaledDt
     simX.value += simVx.value * scaledDt
 
-    // 砂埃パーティクル生成
-    if (Math.random() < 0.4 && simVx.value > 10) {
-      dustParticles.value.push({
-        x: 300 - (width_w.value * 3) / 2 + simX.value,
-        y: 280,
-        vx: -Math.random() * 40 - 10,
-        vy: -Math.random() * 25 - 5,
-        alpha: 0.8,
-        radius: Math.random() * 4 + 2
-      })
-    }
-
-    // 画面端到達判定
-    if (simX.value > 300) {
+    if (simX.value > 240) {
       isPlaying.value = false
       isFinished.value = true
     }
   } else if (state === 'toppled') {
-    // 転倒モード（右下端を軸に回転）
-    // 慣性モーメント I = M(w^2 + h^2)/12 + M( (w/2)^2 + (h/2)^2 ) = M(w^2 + h^2)/3
     const wM = width_w.value / 100
     const hM = height_h.value / 100
-    const I = mass.value * (wM * wM + hM * hM) / 3 // kg m^2
+    const I = (mass.value * (wM * wM + hM * hM)) / 3
 
-    // トルク τ = F * h_F * cosθ - Mg * (w/2 * cosθ - h/2 * sinθ)
     const theta = simAngle.value
     const torqueF = F.value * (forceHeight.value / 100) * Math.cos(theta)
     const torqueG = weight.value * ((wM / 2) * Math.cos(theta) - (hM / 2) * Math.sin(theta))
     const netTorque = torqueF - torqueG
 
-    const alpha = Math.max(0.5, netTorque / I) // rad/s^2
+    const alpha = Math.max(0.5, netTorque / I)
 
     simOmega.value += alpha * scaledDt
     simAngle.value += simOmega.value * scaledDt
 
-    // 床への衝突 (90度 = Math.PI / 2)
     if (simAngle.value >= Math.PI / 2) {
       simAngle.value = Math.PI / 2
       if (bounceCount.value < 2) {
-        simOmega.value = -simOmega.value * 0.25 // バウンド
+        simOmega.value = -simOmega.value * 0.25
         bounceCount.value++
       } else {
         simOmega.value = 0
@@ -354,315 +376,340 @@ function updatePhysics(dt) {
       }
     }
   }
-
-  // パーティクル更新
-  for (let i = dustParticles.value.length - 1; i >= 0; i--) {
-    const p = dustParticles.value[i]
-    p.x += p.vx * scaledDt
-    p.y += p.vy * scaledDt
-    p.alpha -= scaledDt * 1.5
-    if (p.alpha <= 0) {
-      dustParticles.value.splice(i, 1)
-    }
-  }
 }
 
-function render() {
-  const canvas = canvasRef.value
-  if (!canvas) return
-  const ctx = canvas.getContext('2d')
-  const width = canvas.width
-  const height = canvas.height
+// 3D スケール: 1cm = 0.05 ワールド単位 (高さ60cm = 3.0, 幅30cm = 1.5)
+const cmScale = 0.05
+const baseOriginX = -0.8
 
-  ctx.fillStyle = '#090d16'
-  ctx.fillRect(0, 0, width, height)
+function initThree() {
+  if (!threeContainer.value) return
 
-  // 床 (y = 280)
-  const floorY = 280
-  ctx.strokeStyle = '#94a3b8'
-  ctx.lineWidth = 3
-  ctx.beginPath()
-  ctx.moveTo(30, floorY)
-  ctx.lineTo(width - 30, floorY)
-  ctx.stroke()
-
-  // 床のハッチング
-  ctx.strokeStyle = '#334155'
-  ctx.lineWidth = 1
-  for (let x = 40; x < width - 30; x += 15) {
-    ctx.beginPath()
-    ctx.moveTo(x, floorY)
-    ctx.lineTo(x - 10, floorY + 12)
-    ctx.stroke()
-  }
-
-  // 直方体の寸法スケーリング (1cm = 3px)
-  const scale = 3
-  const bw = width_w.value * scale
-  const bh = height_h.value * scale
-  const baseOriginX = 260
-  const bx = baseOriginX - bw / 2 + simX.value
-  const by = floorY - bh
-
-  // 砂埃パーティクルの描画
-  dustParticles.value.forEach(p => {
-    ctx.fillStyle = `rgba(251, 191, 36, ${p.alpha})`
-    ctx.beginPath()
-    ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2)
-    ctx.fill()
+  threeCtx = createThreeScene(threeContainer.value, {
+    fov: 42,
+    background: 0x080c16,
+    initialCamPos: [1.8, 3.8, 9.6],
+    initialTarget: [0.4, 1.4, 0],
+    onFrame: (dt) => {
+      if (isPlaying.value) {
+        updatePhysics(dt)
+      }
+      updateThreeScene()
+    }
   })
 
-  // 状態変数
-  const angle = simAngle.value
-  const isToppled = currentState.value === 'toppled'
-  const isSliding = currentState.value === 'sliding'
+  const { scene } = threeCtx
 
-  // 支点 P (右下端) のワールド座標
-  const pivotX = bx + bw
-  const pivotY = floorY
+  // 1. 床グリッドとステージ
+  const grid = new THREE.GridHelper(16, 16, 0x1e293b, 0x0f172a)
+  grid.position.set(0.4, -0.01, 0)
+  scene.add(grid)
 
-  // 1. 直方体本体の描画（回転座標系）
-  ctx.save()
-  if (angle > 0) {
-    ctx.translate(pivotX, pivotY)
-    ctx.rotate(angle)
-    ctx.translate(-pivotX, -pivotY)
+  const floorSlab = new THREE.Mesh(
+    new THREE.BoxGeometry(11.0, 0.16, 3.6),
+    new THREE.MeshStandardMaterial({ color: 0x334155, roughness: 0.65, metalness: 0.25 })
+  )
+  floorSlab.position.set(0.6, -0.08, 0)
+  scene.add(floorSlab)
+
+  // 2. 直方体ピボットグループ（右下端 P を原点として回転できるように配置）
+  const pivotGroup = new THREE.Group()
+  scene.add(pivotGroup)
+
+  // 1x1x1 の基準ボックスを生成し、scaleとpositionで (-bw/2, bh/2, 0) に配置
+  const boxGeo = new THREE.BoxGeometry(1, 1, 1.4)
+  const boxMat = new THREE.MeshStandardMaterial({
+    color: 0x0ea5e9,
+    emissive: 0x0284c7,
+    emissiveIntensity: 0.35,
+    transparent: true,
+    opacity: 0.52,
+    roughness: 0.25,
+    metalness: 0.35,
+    depthWrite: false
+  })
+  const blockMesh = new THREE.Mesh(boxGeo, boxMat)
+  pivotGroup.add(blockMesh)
+
+  const edgeLine = new THREE.LineSegments(
+    new THREE.EdgesGeometry(boxGeo),
+    new THREE.LineBasicMaterial({ color: 0x38bdf8 })
+  )
+  blockMesh.add(edgeLine)
+
+  // 支点 P の発光ピン
+  const pivotMarker = new THREE.Mesh(
+    new THREE.SphereGeometry(0.1, 16, 16),
+    new THREE.MeshBasicMaterial({ color: 0xf43f5e })
+  )
+  scene.add(pivotMarker)
+
+  // 重心 G の発光球体 & 鉛直作用線（Plumb Line）
+  const cgSphere = new THREE.Mesh(
+    new THREE.SphereGeometry(0.13, 20, 20),
+    new THREE.MeshStandardMaterial({ color: 0xfbbf24, emissive: 0xfbbf24, emissiveIntensity: 0.8 })
+  )
+  scene.add(cgSphere)
+
+  const plumbGeo = new THREE.BufferGeometry().setFromPoints([
+    new THREE.Vector3(),
+    new THREE.Vector3()
+  ])
+  const plumbLine = new THREE.Line(
+    plumbGeo,
+    new THREE.LineBasicMaterial({ color: 0x38bdf8, transparent: true, opacity: 0.65 })
+  )
+  scene.add(plumbLine)
+
+  // 支点 P と重心作用線の間の水平腕 d ライン
+  const armGeo = new THREE.BufferGeometry().setFromPoints([
+    new THREE.Vector3(),
+    new THREE.Vector3()
+  ])
+  const armLine = new THREE.Line(
+    armGeo,
+    new THREE.LineBasicMaterial({ color: 0x10b981 })
+  )
+  scene.add(armLine)
+
+  // 3. 3D ベクトル矢印 (外力 F, 重力 Mg, 垂直抗力 N, 摩擦力 f)
+  const arrowF = createVectorArrow3D({ color: 0xf43f5e, shaftRadius: 0.055, headRadius: 0.16, headLength: 0.36 })
+  const arrowMg = createVectorArrow3D({ color: 0x38bdf8, shaftRadius: 0.055, headRadius: 0.16, headLength: 0.36 })
+  const arrowN = createVectorArrow3D({ color: 0x10b981, shaftRadius: 0.055, headRadius: 0.16, headLength: 0.36 })
+  const arrowFric = createVectorArrow3D({ color: 0xfbbf24, shaftRadius: 0.05, headRadius: 0.15, headLength: 0.34 })
+  scene.add(arrowF, arrowMg, arrowN, arrowFric)
+
+  const labelF = createTextSprite('外力 F', { color: '#fda4af', borderColor: '#f43f5e', fontSize: 32, scale: 0.5 })
+  const labelMg = createTextSprite('重力 Mg (重心G)', { color: '#7dd3fc', borderColor: '#38bdf8', fontSize: 32, scale: 0.52 })
+  const labelN = createTextSprite('垂直抗力 N', { color: '#6ee7b7', borderColor: '#10b981', fontSize: 32, scale: 0.52 })
+  const labelFric = createTextSprite('摩擦力 f', { color: '#fde68a', borderColor: '#fbbf24', fontSize: 30, scale: 0.48 })
+  const labelArm = createTextSprite('腕 d', { color: '#6ee7b7', borderColor: '#10b981', fontSize: 30, scale: 0.48 })
+  scene.add(labelF, labelMg, labelN, labelFric, labelArm)
+
+  sceneObjects = {
+    pivotGroup,
+    blockMesh,
+    boxMat,
+    edgeLine,
+    pivotMarker,
+    cgSphere,
+    plumbLine,
+    armLine,
+    arrowF,
+    arrowMg,
+    arrowN,
+    arrowFric,
+    labelF,
+    labelMg,
+    labelN,
+    labelFric,
+    labelArm
   }
 
-  ctx.fillStyle = isToppled && angle > 0.05
-    ? 'rgba(244, 63, 94, 0.28)'
-    : (isSliding && simX.value > 0 ? 'rgba(251, 191, 36, 0.28)' : 'rgba(30, 41, 59, 0.85)')
-  ctx.strokeStyle = isToppled && angle > 0.05
-    ? '#f43f5e'
-    : (isSliding && simX.value > 0 ? '#fbbf24' : '#38bdf8')
-  ctx.lineWidth = 2.5
-  ctx.fillRect(bx, by, bw, bh)
-  ctx.strokeRect(bx, by, bw, bh)
+  updateThreeScene()
+  setCameraPreset(activeCam.value, 0)
+}
 
-  // 直方体内部の中心軸点線
-  ctx.strokeStyle = 'rgba(255, 255, 255, 0.15)'
-  ctx.setLineDash([3, 3])
-  ctx.beginPath()
-  ctx.moveTo(bx + bw / 2, by)
-  ctx.lineTo(bx + bw / 2, floorY)
-  ctx.stroke()
-  ctx.setLineDash([])
+let lastTxtMg = ''
+let lastTxtF = ''
+let lastTxtN = ''
+let lastTxtFric = ''
+let lastTxtArm = ''
 
-  // 外力 F ベクトル（直方体の左面にかかる）
-  if (angle < Math.PI / 3) {
-    const fyPos = floorY - forceHeight.value * scale
-    ctx.strokeStyle = '#f43f5e'
-    ctx.lineWidth = 3
-    ctx.beginPath()
-    ctx.moveTo(bx - 60, fyPos)
-    ctx.lineTo(bx, fyPos)
-    ctx.stroke()
-    drawArrowHead(ctx, bx, fyPos, 0, '#f43f5e')
-    ctx.fillStyle = '#f43f5e'
-    ctx.font = 'bold 12px sans-serif'
-    ctx.fillText(`外力 F = ${F.value}N`, bx - 75, fyPos - 10)
+function updateThreeScene() {
+  if (!sceneObjects) return
+  const {
+    pivotGroup,
+    blockMesh,
+    boxMat,
+    edgeLine,
+    pivotMarker,
+    cgSphere,
+    plumbLine,
+    armLine,
+    arrowF,
+    arrowMg,
+    arrowN,
+    arrowFric,
+    labelF,
+    labelMg,
+    labelN,
+    labelFric,
+    labelArm
+  } = sceneObjects
+
+  const bw = width_w.value * cmScale
+  const bh = height_h.value * cmScale
+  const slideOffset = (simX.value / 3) * cmScale // 2D版の 1cm=3px に合わせた移動量
+  const angle = simAngle.value // 時計回り回転角
+
+  // 右下端の支点 P のワールド座標
+  const pivotX = baseOriginX + bw / 2 + slideOffset
+  const pivotY = 0
+
+  pivotGroup.position.set(pivotX, pivotY, 0)
+  pivotGroup.rotation.z = -angle // 時計回り回転は Z軸負回転
+
+  blockMesh.scale.set(bw, bh, 1)
+  blockMesh.position.set(-bw / 2, bh / 2, 0)
+
+  const state = currentState.value
+  if (state === 'toppled') {
+    boxMat.color.setHex(0xf43f5e)
+    boxMat.emissive.setHex(0xbe123c)
+    edgeLine.material.color.setHex(0xfda4af)
+  } else if (state === 'sliding') {
+    boxMat.color.setHex(0xf59e0b)
+    boxMat.emissive.setHex(0xb45309)
+    edgeLine.material.color.setHex(0xfde68a)
+  } else {
+    boxMat.color.setHex(0x0ea5e9)
+    boxMat.emissive.setHex(0x0284c7)
+    edgeLine.material.color.setHex(0x38bdf8)
   }
 
-  ctx.restore() // ワールド座標系に戻す
+  pivotMarker.position.set(pivotX, pivotY, 0.72)
 
-  // 2. ワールド座標系での物理量計算
-  // 支点 P(pivotX, pivotY) からの重心ベクトル: 直立時は (-bw/2, -bh/2)
-  // 時計回り angle 回転後の重心 G のワールド座標:
+  // 重心 G のワールド座標
   const cosA = Math.cos(angle)
   const sinA = Math.sin(angle)
   const gx = pivotX - (bw / 2) * cosA + (bh / 2) * sinA
-  const gy = pivotY - (bw / 2) * sinA - (bh / 2) * cosA
+  const gy = pivotY + (bw / 2) * sinA + (bh / 2) * cosA
+  const gPos = new THREE.Vector3(gx, gy, 0)
+  cgSphere.position.copy(gPos)
 
-  // 支点 P のマーカー描画
-  ctx.fillStyle = '#f43f5e'
-  ctx.beginPath()
-  ctx.arc(pivotX, pivotY, angle > 0 ? 5 : 3, 0, Math.PI * 2)
-  ctx.fill()
-  if (angle > 0 || currentState.value === 'toppled') {
-    ctx.fillStyle = '#fca5a5'
-    ctx.font = 'bold 11px sans-serif'
-    ctx.fillText('支点 P', pivotX + 6, angle === 0 ? pivotY + 32 : pivotY + 16)
+  // 重心の鉛直作用線 Plumb Line
+  const pAttr = plumbLine.geometry.getAttribute('position')
+  pAttr.setXYZ(0, gx, gy, 0.72)
+  pAttr.setXYZ(1, gx, 0, 0.72)
+  pAttr.needsUpdate = true
+
+  // 1. 重力 Mg ベクトル (常に鉛直真下・上面視点と3D俯瞰の両方で重ならないよう右下手前 z=+1.35)
+  const mgLen = 1.45
+  arrowMg.setVector(gPos, new THREE.Vector3(0, -1, 0), mgLen)
+  const txtMg = `重力 Mg = ${weight.value.toFixed(1)} N`
+  if (txtMg !== lastTxtMg) {
+    lastTxtMg = txtMg
+    labelMg.updateText(txtMg, '#7dd3fc', '#38bdf8')
+  }
+  labelMg.position.set(gx + 0.50, Math.max(0.38, gy - mgLen - 0.2), 1.35)
+
+  // 2. 外力 F ベクトル (左面の中央高さ h_F を右向きに押す)
+  if (F.value > 0 && angle < Math.PI / 3) {
+    const fH = forceHeight.value * cmScale
+    // 左面上の点 (-bw, fH) を pivotGroup 回転させたワールド座標
+    const fx = pivotX - bw * cosA + fH * sinA
+    const fy = pivotY + bw * sinA + fH * cosA
+    const fLen = Math.min(2.1, Math.max(0.55, F.value * 0.032))
+    const fStart = new THREE.Vector3(fx - fLen, fy, 0)
+    arrowF.setVector(fStart, new THREE.Vector3(1, 0, 0), fLen)
+    labelF.visible = true
+    const txtF = `外力 F = ${F.value} N`
+    if (txtF !== lastTxtF) {
+      lastTxtF = txtF
+      labelF.updateText(txtF, '#fda4af', '#f43f5e')
+    }
+    labelF.position.set(fx - fLen - 0.55, fy + 0.34, 0.0)
+  } else {
+    arrowF.visible = false
+    labelF.visible = false
   }
 
-  // 重心 G の描画（ワールド座標）
-  ctx.fillStyle = '#fbbf24'
-  ctx.beginPath()
-  ctx.arc(gx, gy, 5, 0, Math.PI * 2)
-  ctx.fill()
-  ctx.fillStyle = '#f8fafc'
-  ctx.font = 'bold 11px sans-serif'
-  ctx.fillText('重心 G', gx - 18, gy - 12)
+  // 3. 垂直抗力 N（作用点シフト x_N）と摩擦力 f
+  if (angle < 0.02) {
+    const shiftCm = Math.min(xN.value, width_w.value / 2)
+    const nx = (pivotX - bw / 2) + shiftCm * cmScale
+    const nOrigin = new THREE.Vector3(nx, 0, 0.35)
+    const nLen = 1.45
+    arrowN.setVector(nOrigin, new THREE.Vector3(0, 1, 0), nLen)
+    labelN.visible = true
+    const txtN = `N (シフト +${shiftCm.toFixed(1)}cm)`
+    if (txtN !== lastTxtN) {
+      lastTxtN = txtN
+      labelN.updateText(txtN, '#6ee7b7', '#10b981')
+    }
+    labelN.position.set(nx + 0.85, nLen + 0.25, 0.0)
 
-  // 重力の鉛直作用線（重心 G から真下へ床面まで伸ばす破線）
-  ctx.strokeStyle = 'rgba(56, 189, 248, 0.45)'
-  ctx.lineWidth = 1.5
-  ctx.setLineDash([3, 3])
-  ctx.beginPath()
-  ctx.moveTo(gx, gy)
-  ctx.lineTo(gx, floorY + 10)
-  ctx.stroke()
-  ctx.setLineDash([])
-
-  // ★重要★ 重力 Mg ベクトル（どんな状態でも常に「鉛直真下」に向く！）
-  const mgLen = 65
-  ctx.strokeStyle = '#38bdf8'
-  ctx.lineWidth = 3
-  ctx.beginPath()
-  ctx.moveTo(gx, gy)
-  ctx.lineTo(gx, gy + mgLen)
-  ctx.stroke()
-  drawArrowHead(ctx, gx, gy + mgLen, Math.PI / 2, '#38bdf8')
-  ctx.fillStyle = '#38bdf8'
-  ctx.font = 'bold 12px sans-serif'
-  ctx.textAlign = 'right'
-  ctx.fillText(`重力 Mg = ${weight.value.toFixed(1)} N (鉛直真下)`, gx - 10, gy + 45)
-  ctx.textAlign = 'left'
-
-  // 傾きがある場合 (0 < angle < 90度): 支点まわりの水平腕 d とモーメント τ_G の変化を可視化
-  if (angle > 0 && angle < Math.PI / 2 - 0.02) {
-    const dVal = arm_d_cm.value
-    const dimY = floorY - 12
-
-    // 支点 P と 重心作用線 gx の間の水平寸法線
-    ctx.strokeStyle = dVal >= 0 ? '#10b981' : '#f43f5e'
-    ctx.lineWidth = 2
-    ctx.beginPath()
-    ctx.moveTo(gx, dimY)
-    ctx.lineTo(pivotX, dimY)
-    ctx.stroke()
-
-    // 両端ドット
-    ctx.fillStyle = dVal >= 0 ? '#10b981' : '#f43f5e'
-    ctx.beginPath()
-    ctx.arc(gx, dimY, 3, 0, Math.PI * 2)
-    ctx.arc(pivotX, dimY, 3, 0, Math.PI * 2)
-    ctx.fill()
-
-    // 腕のラベルとモーメント状態
-    ctx.font = 'bold 11px sans-serif'
-    if (dVal > 0.1) {
-      ctx.fillStyle = '#34d399'
-      ctx.fillText(`復元の腕 d = ${dVal.toFixed(1)}cm (元に戻すモーメント ↩️)`, Math.min(gx, pivotX) - 20, dimY - 8)
-    } else if (dVal < -0.1) {
-      ctx.fillStyle = '#f87171'
-      ctx.fillText(`転倒の腕 d = ${Math.abs(dVal).toFixed(1)}cm (押し倒すモーメント ⤵️)`, Math.min(gx, pivotX) - 20, dimY - 8)
+    // 摩擦力 f (底面左向き・3D俯瞰の Mg とも上面の F/Mg とも分離するため左下手前)
+    if (F.value > 0) {
+      const fricLen = Math.min(1.6, Math.max(0.45, F.value * 0.026))
+      const fricOrigin = new THREE.Vector3(pivotX - bw / 2, 0.04, 0.55)
+      arrowFric.setVector(fricOrigin, new THREE.Vector3(-1, 0, 0), fricLen)
+      labelFric.visible = true
+      const txtFric = state === 'sliding' ? '動摩擦力 μₖN' : '静止摩擦力 f'
+      if (txtFric !== lastTxtFric) {
+        lastTxtFric = txtFric
+        labelFric.updateText(txtFric, '#fde68a', '#fbbf24')
+      }
+      labelFric.position.set(pivotX - bw - fricLen - 1.35, -0.52, 0.95)
     } else {
-      ctx.fillStyle = '#fbbf24'
-      ctx.fillText(`死点 d = 0cm (つり合い境界)`, Math.min(gx, pivotX) - 10, dimY - 8)
+      arrowFric.visible = false
+      labelFric.visible = false
     }
-  }
+    armLine.visible = false
+    labelArm.visible = false
+  } else if (angle < Math.PI / 2 - 0.02) {
+    // 転倒中: 支点 P に垂直抗力 N が集中し、水平腕 d を可視化
+    arrowN.setVector(new THREE.Vector3(pivotX, 0, 0.35), new THREE.Vector3(0, 1, 0), 1.35)
+    labelN.visible = true
+    if (lastTxtN !== '支点 P (抗力集中)') {
+      lastTxtN = '支点 P (抗力集中)'
+      labelN.updateText('支点 P (抗力集中)', '#6ee7b7', '#10b981')
+    }
+    labelN.position.set(pivotX + 0.85, 1.55, 0.0)
 
-  // 直立静止時 (angle === 0) の垂直抗力 N と摩擦力 f
-  if (angle === 0) {
-    const shiftClamped = Math.min(xN.value, width_w.value / 2)
-    const nx = (bx + bw / 2) + shiftClamped * scale
-    ctx.strokeStyle = '#10b981'
-    ctx.lineWidth = 3
-    ctx.beginPath()
-    ctx.moveTo(nx, floorY)
-    ctx.lineTo(nx, floorY - 70)
-    ctx.stroke()
-    drawArrowHead(ctx, nx, floorY - 70, -Math.PI / 2, '#10b981')
-    ctx.fillStyle = '#10b981'
-    ctx.font = 'bold 12px sans-serif'
-    ctx.fillText(`垂直抗力 N = ${weight.value.toFixed(1)} N`, nx + 8, floorY - 50)
+    arrowFric.visible = false
+    labelFric.visible = false
 
-    // 作用点マーカー（右側へ配置して摩擦力ラベルとの重なりを防止）
-    ctx.fillStyle = '#10b981'
-    ctx.beginPath()
-    ctx.arc(nx, floorY, 4, 0, Math.PI * 2)
-    ctx.fill()
-    ctx.font = 'bold 10px sans-serif'
-    ctx.textAlign = 'left'
-    ctx.fillText(`作用点 (+${shiftClamped.toFixed(1)}cm)`, nx + 6, floorY + 18)
+    armLine.visible = true
+    const aAttr = armLine.geometry.getAttribute('position')
+    aAttr.setXYZ(0, gx, 0.12, 0.75)
+    aAttr.setXYZ(1, pivotX, 0.12, 0.75)
+    aAttr.needsUpdate = true
 
-    // 摩擦力 f ベクトル (底面、左向き)
-    const frictionLen = Math.min(60, Math.max(15, (F.value / 60) * 80))
-    ctx.strokeStyle = '#fbbf24'
-    ctx.lineWidth = 3
-    ctx.beginPath()
-    ctx.moveTo(bx + bw / 2, floorY)
-    ctx.lineTo(bx + bw / 2 - frictionLen, floorY)
-    ctx.stroke()
-    drawArrowHead(ctx, bx + bw / 2 - frictionLen, floorY, Math.PI, '#fbbf24')
-    ctx.fillStyle = '#fbbf24'
-    ctx.font = 'bold 11px sans-serif'
-    ctx.textAlign = 'right'
-    ctx.fillText(isSliding ? '動摩擦力 μ_k N' : '静止摩擦力 f', bx + bw / 2 - 4, floorY + 18)
-    ctx.textAlign = 'left'
-  }
-
-  // 床に倒れ込んだ後 (angle >= Math.PI / 2 - 0.02)
-  if (angle >= Math.PI / 2 - 0.02) {
-    // 完全に倒れた直方体は [pivotX, pivotX + bh] の床面に横たわる
+    const dVal = arm_d_cm.value
+    armLine.material.color.setHex(dVal >= 0 ? 0x10b981 : 0xf43f5e)
+    labelArm.visible = true
+    const txtArm = dVal >= 0 ? `復元腕 d = ${dVal.toFixed(1)}cm ↩️` : `転倒腕 d = ${Math.abs(dVal).toFixed(1)}cm ⤵️`
+    if (txtArm !== lastTxtArm) {
+      lastTxtArm = txtArm
+      labelArm.updateText(
+        txtArm,
+        dVal >= 0 ? '#6ee7b7' : '#fda4af',
+        dVal >= 0 ? '#10b981' : '#f43f5e'
+      )
+    }
+    labelArm.position.set((gx + pivotX) / 2, -0.38, 1.65)
+  } else {
+    // 完全に倒れた後
     const contactCenter = pivotX + bh / 2
-    ctx.strokeStyle = '#10b981'
-    ctx.lineWidth = 3
-    ctx.beginPath()
-    ctx.moveTo(contactCenter, floorY)
-    ctx.lineTo(contactCenter, floorY - 65)
-    ctx.stroke()
-    drawArrowHead(ctx, contactCenter, floorY - 65, -Math.PI / 2, '#10b981')
-    ctx.fillStyle = '#10b981'
-    ctx.font = 'bold 12px sans-serif'
-    ctx.fillText(`床の垂直抗力 N = ${weight.value.toFixed(1)} N (床面で受けてつり合い)`, contactCenter + 8, floorY - 45)
-
-    // 倒れ込み衝撃リング
-    if (bounceCount.value > 0) {
-      ctx.strokeStyle = 'rgba(244, 63, 94, 0.6)'
-      ctx.lineWidth = 2
-      ctx.beginPath()
-      ctx.arc(pivotX, floorY, 25, 0, Math.PI * 2)
-      ctx.stroke()
+    arrowN.setVector(new THREE.Vector3(contactCenter, 0, 0), new THREE.Vector3(0, 1, 0), 1.35)
+    labelN.visible = true
+    if (lastTxtN !== '床の垂直抗力 N') {
+      lastTxtN = '床の垂直抗力 N'
+      labelN.updateText('床の垂直抗力 N', '#6ee7b7', '#10b981')
     }
-  }
-
-  // 速度表示（滑走時）
-  if (simVx.value > 0) {
-    ctx.fillStyle = '#fbbf24'
-    ctx.font = 'bold 12px sans-serif'
-    ctx.fillText(`速度 v = ${(simVx.value / 150).toFixed(2)} m/s`, bx + bw / 2 - 30, by - 15)
+    labelN.position.set(contactCenter, 1.65, 0.4)
+    arrowFric.visible = false
+    labelFric.visible = false
+    armLine.visible = false
+    labelArm.visible = false
   }
 }
 
-function drawArrowHead(ctx, x, y, angle, color) {
-  ctx.save()
-  ctx.translate(x, y)
-  ctx.rotate(angle)
-  ctx.fillStyle = color
-  ctx.beginPath()
-  ctx.moveTo(0, 0)
-  ctx.lineTo(-8, -4)
-  ctx.lineTo(-8, 4)
-  ctx.closePath()
-  ctx.fill()
-  ctx.restore()
-}
-
-function simLoop(time) {
-  if (lastTime === 0) lastTime = time
-  const dt = Math.min((time - lastTime) / 1000, 0.05)
-  lastTime = time
-
-  if (isPlaying.value) {
-    updatePhysics(dt)
-  }
-  render()
-
-  animationId = requestAnimationFrame(simLoop)
-}
+watch([F, forceHeight, mu_s, width_w], () => {
+  updateThreeScene()
+})
 
 onMounted(() => {
-  render()
-  animationId = requestAnimationFrame(simLoop)
+  initThree()
 })
 
 onBeforeUnmount(() => {
-  if (animationId) cancelAnimationFrame(animationId)
-})
-
-watch([F, forceHeight, mu_s, width_w], () => {
-  render()
+  if (threeCtx) {
+    threeCtx.dispose()
+    threeCtx = null
+  }
 })
 </script>
 
@@ -674,8 +721,8 @@ watch([F, forceHeight, mu_s, width_w], () => {
   border-radius: 12px;
   padding: 16px;
   margin: 18px 0;
+  font-family: 'Outfit', system-ui, sans-serif;
 }
-
 .sim-header {
   display: flex;
   justify-content: space-between;
@@ -684,69 +731,170 @@ watch([F, forceHeight, mu_s, width_w], () => {
   gap: 8px;
   margin-bottom: 12px;
 }
-
 .sim-title {
   font-size: 1.1rem;
   font-weight: 700;
   margin: 0;
   color: #f8fafc;
 }
-
 .sim-badges {
   display: flex;
   gap: 6px;
+  flex-wrap: wrap;
 }
-
 .badge {
   font-size: 0.8rem;
   font-weight: 600;
   padding: 3px 10px;
   border-radius: 9999px;
 }
-
 .badge-cyan {
   background: rgba(34, 211, 238, 0.15);
   color: #22d3ee;
   border: 1px solid rgba(34, 211, 238, 0.3);
 }
-
 .badge-rose {
   background: rgba(244, 63, 94, 0.15);
   color: #f43f5e;
   border: 1px solid rgba(244, 63, 94, 0.3);
 }
-
 .badge-yellow {
   background: rgba(251, 191, 36, 0.15);
   color: #fbbf24;
   border: 1px solid rgba(251, 191, 36, 0.3);
 }
-
-.canvas-wrap {
-  width: 100%;
+.camera-preset-bar {
   display: flex;
-  justify-content: center;
-  background: #090d16;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  padding: 8px 12px;
+  background: rgba(15, 23, 42, 0.75);
+  border: 1px solid rgba(56, 189, 248, 0.22);
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+.preset-label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #38bdf8;
+}
+.preset-group {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.cam-chip {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  color: #cbd5e1;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.cam-chip:hover {
+  border-color: #38bdf8;
+  color: #fff;
+}
+.cam-chip.active {
+  background: rgba(56, 189, 248, 0.2);
+  border-color: #38bdf8;
+  color: #38bdf8;
+}
+.speed-btn-group button {
+  background: #1e293b;
+  border: 1px solid #334155;
+  color: #cbd5e1;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  cursor: pointer;
+}
+.speed-btn-group button.active {
+  background: #0284c7;
+  border-color: #38bdf8;
+  color: #fff;
+}
+.btn {
+  padding: 6px 14px;
   border-radius: 8px;
-  overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
 }
-
-.sim-canvas {
+.btn-primary {
+  background: #0284c7;
+  color: #fff;
+}
+.btn-secondary {
+  background: #334155;
+  color: #f8fafc;
+}
+.three-viewport-wrap {
+  position: relative;
   width: 100%;
-  max-width: 700px;
-  height: auto;
-  aspect-ratio: 700 / 380;
-  display: block;
+  height: 400px;
+  background: #080c16;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.12);
 }
-
+.three-viewport {
+  width: 100%;
+  height: 100%;
+}
+.three-hud-legend {
+  position: absolute;
+  top: 10px;
+  left: 12px;
+  max-width: calc(100% - 24px);
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding: 5px 10px;
+  border-radius: 8px;
+  background: rgba(9, 13, 22, 0.84);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  font-size: 0.75rem;
+  color: #e2e8f0;
+  pointer-events: none;
+}
+.legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+.legend-item i {
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+}
+.dot-f { background: #f43f5e; box-shadow: 0 0 6px #f43f5e; }
+.dot-n { background: #10b981; box-shadow: 0 0 6px #10b981; }
+.dot-mg { background: #38bdf8; box-shadow: 0 0 6px #38bdf8; }
+.dot-fr { background: #fbbf24; box-shadow: 0 0 6px #fbbf24; }
+.three-hud-hint {
+  position: absolute;
+  bottom: 10px;
+  right: 12px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(9, 13, 22, 0.78);
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  font-size: 0.74rem;
+  color: #cbd5e1;
+  pointer-events: none;
+}
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
   gap: 10px;
   margin-top: 14px;
 }
-
 .stat-card {
   background: #1e293b;
   border: 1px solid #334155;
@@ -754,35 +902,29 @@ watch([F, forceHeight, mu_s, width_w], () => {
   padding: 8px 12px;
   text-align: center;
 }
-
 .stat-card.highlight {
   background: rgba(56, 189, 248, 0.12);
   border-color: rgba(56, 189, 248, 0.45);
 }
-
 .stat-label {
   font-size: 0.75rem;
   color: #cbd5e1;
   margin-bottom: 4px;
 }
-
 .stat-value {
   font-size: 1.1rem;
   font-weight: 700;
   color: #f8fafc;
 }
-
 .stat-unit {
   font-size: 0.8rem;
   font-weight: normal;
   color: #94a3b8;
 }
-
 .text-blue { color: #38bdf8; }
 .text-cyan { color: #22d3ee; }
 .text-yellow { color: #fbbf24; }
 .text-rose { color: #f43f5e; }
-
 .controls-panel {
   margin-top: 16px;
   background: #1e293b;
@@ -790,20 +932,17 @@ watch([F, forceHeight, mu_s, width_w], () => {
   padding: 14px;
   border-radius: 8px;
 }
-
 .control-row {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: 16px;
   margin-bottom: 12px;
 }
-
 .control-group {
   display: flex;
   flex-direction: column;
   gap: 6px;
 }
-
 .control-label {
   display: flex;
   justify-content: space-between;
@@ -811,25 +950,21 @@ watch([F, forceHeight, mu_s, width_w], () => {
   font-weight: 600;
   color: #e2e8f0;
 }
-
 .control-val {
   color: #38bdf8;
   font-family: monospace;
 }
-
 .sim-slider {
   width: 100%;
   accent-color: #38bdf8;
   cursor: pointer;
 }
-
 .btn-group {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
   margin-top: 6px;
 }
-
 .sim-btn {
   padding: 6px 14px;
   border-radius: 6px;
@@ -838,27 +973,16 @@ watch([F, forceHeight, mu_s, width_w], () => {
   cursor: pointer;
   transition: all 0.2s ease;
 }
-
 .sim-btn.secondary {
   background: #334155;
   color: #f8fafc;
   border: none;
 }
-.sim-btn.secondary:hover {
-  background: #475569;
-}
-
 .sim-btn.outline {
   background: rgba(15, 23, 42, 0.6);
   color: #e2e8f0;
   border: 1px solid #475569;
 }
-.sim-btn.outline:hover {
-  background: rgba(56, 189, 248, 0.15);
-  border-color: #38bdf8;
-  color: #38bdf8;
-}
-
 .sim-footer-note {
   margin-top: 12px;
   font-size: 0.85rem;
@@ -868,5 +992,31 @@ watch([F, forceHeight, mu_s, width_w], () => {
   padding: 10px 14px;
   border-radius: 6px;
   border-left: 3px solid #38bdf8;
+}
+.speed-label,
+.speed-btn-group button {
+  white-space: nowrap;
+}
+@media (max-width: 768px) {
+  .sim-container {
+    padding: 12px;
+  }
+  .three-viewport-wrap {
+    height: 325px;
+  }
+  .three-hud-legend {
+    right: 10px;
+    gap: 8px;
+    font-size: 0.7rem;
+  }
+  .speed-control-group {
+    border-radius: 12px !important;
+    padding: 6px 10px !important;
+    flex-wrap: wrap !important;
+    width: 100%;
+  }
+  .speed-btn-group {
+    flex-wrap: wrap !important;
+  }
 }
 </style>
