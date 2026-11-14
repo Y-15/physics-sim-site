@@ -1,390 +1,678 @@
-<script setup>
-import { ref, onMounted, onUnmounted, computed } from 'vue'
-
-const canvasRef = ref(null)
-
-// 物理パラメータ
-const dBdt = ref(2.0) // 磁場上昇率 [T/s] (0.5 ~ 5.0)
-const orbitRadiusTarget = ref(110) // 設計軌道半径 R0 [px]
-const fieldProfileRatio = ref(2.0) // 平均磁場と軌道磁場の比 (B_bar / B0) -> 2.0 で安定
-const isPlaying = ref(true)
-const timeScale = ref(0.4) // 誘導加速と軌道安定性が追える0.4x推奨
-
-let animationFrameId = null
-
-const width = 500
-const height = 380
-const centerX = 175
-const centerY = height / 2
-
-// 電子状態
-const state = ref({
-  theta: 0,
-  r: 130, // 現在の半径
-  v: 1.0, // 周速度
-  bZero: 0.2, // 軌道上の磁場 [T]
-  bAvg: 0.4,  // 軌道内の平均磁場 [T]
-  time: 0,
-  isStable: true,
-  statusMsg: '安定加速中 (2:1条件適合)'
-})
-
-// 誘導電場の大きさ E = (R / 2) * (dB_avg / dt)
-const inducedEField = computed(() => {
-  const R = orbitRadiusTarget.value / 100 // スケール m
-  const bRate = dBdt.value
-  return (R * 0.5 * bRate * 50).toFixed(1)
-})
-
-function resetSim() {
-  state.value = {
-    theta: 0,
-    r: orbitRadiusTarget.value,
-    v: 1.2,
-    bZero: 0.2,
-    bAvg: 0.2 * fieldProfileRatio.value,
-    time: 0,
-    isStable: true,
-    statusMsg: '安定加速中 (2:1条件適合)'
-  }
-}
-
-function stepForward() {
-  updatePhysics(0.04)
-}
-
-function updatePhysics(dtOverride = null) {
-  if (!isPlaying.value && !dtOverride) return
-
-  const dt = (dtOverride || 0.03) * timeScale.value
-  const s = state.value
-  const R0 = orbitRadiusTarget.value
-  const ratio = fieldProfileRatio.value
-
-  // 磁場の上昇
-  s.bZero += dBdt.value * dt * 0.05
-  s.bAvg = s.bZero * ratio
-
-  // 接線方向の加速: dv/dt ∝ E ∝ R0 * (dB_avg/dt)
-  const accel = 0.8 * dBdt.value * dt
-  s.v += accel
-
-  // 半径の安定性判定:
-  // p = m*v, ローレンツ力向心力から r = p / (e * B0)
-  // もし ratio == 2.0 なら p の増加率と B0 の増加率が釣り合い r = R0 一定
-  // ratio > 2.0 (中心磁場強すぎ) => 加速が強すぎて半径拡大
-  // ratio < 2.0 (中心磁場弱すぎ) => 磁場の押さえ込みが勝ち半径縮小
-  const idealRatio = 2.0
-  const drift = (ratio - idealRatio) * 0.4 * s.v * dt
-  s.r += drift
-
-  // ドーナツ真空管の壁（幅 50px）との衝突判定
-  const innerWall = R0 - 30
-  const outerWall = R0 + 30
-  if (s.r < innerWall) {
-    s.isStable = false
-    s.statusMsg = '内壁に衝突！ (加速不足 / 軌道縮小)'
-  } else if (s.r > outerWall) {
-    s.isStable = false
-    s.statusMsg = '外壁に衝突！ (加速過剰 / 軌道拡大)'
-  } else {
-    s.isStable = true
-    if (Math.abs(ratio - 2.0) < 0.05) {
-      s.statusMsg = '理想軌道で加速中 (B_avg = 2 B₀)'
-    } else {
-      s.statusMsg = '軌道ドリフト中'
-    }
-  }
-
-  // 角度更新
-  const omega = s.v / (s.r * 0.08)
-  s.theta += omega * dt
-  s.time += dt
-}
-
-function draw() {
-  const canvas = canvasRef.value
-  if (!canvas) return
-  const ctx = canvas.getContext('2d')
-
-  // 背景
-  ctx.fillStyle = '#090d16'
-  ctx.fillRect(0, 0, width, height)
-
-  const R0 = orbitRadiusTarget.value
-
-  // 1. ドーナツ型真空チェンバー（真空ドーナツ管）
-  ctx.save()
-  ctx.beginPath()
-  ctx.arc(centerX, centerY, R0 + 32, 0, Math.PI * 2)
-  ctx.arc(centerX, centerY, R0 - 32, 0, Math.PI * 2, true)
-  ctx.fillStyle = 'rgba(30, 41, 59, 0.6)'
-  ctx.fill()
-  ctx.strokeStyle = '#475569'
-  ctx.lineWidth = 2
-  ctx.stroke()
-  ctx.restore()
-
-  // 理想軌道（中心線：水色点線）
-  ctx.strokeStyle = 'rgba(56, 189, 248, 0.4)'
-  ctx.lineWidth = 1.5
-  ctx.setLineDash([4, 4])
-  ctx.beginPath()
-  ctx.arc(centerX, centerY, R0, 0, Math.PI * 2)
-  ctx.stroke()
-  ctx.setLineDash([])
-
-  // 2. 中心電磁石のコア（高密度磁束領域）
-  const coreR = R0 - 45
-  const coreGrad = ctx.createRadialGradient(centerX, centerY, 5, centerX, centerY, coreR)
-  coreGrad.addColorStop(0, 'rgba(56, 189, 248, 0.4)')
-  coreGrad.addColorStop(1, 'rgba(14, 165, 233, 0.05)')
-  ctx.fillStyle = coreGrad
-  ctx.beginPath()
-  ctx.arc(centerX, centerY, coreR, 0, Math.PI * 2)
-  ctx.fill()
-  ctx.strokeStyle = 'rgba(56, 189, 248, 0.5)'
-  ctx.lineWidth = 1.5
-  ctx.stroke()
-
-  ctx.fillStyle = '#38bdf8'
-  ctx.font = 'bold 12px sans-serif'
-  ctx.fillText('中心磁極コア', centerX - 36, centerY - 6)
-  ctx.fillStyle = '#94a3b8'
-  ctx.font = '10px monospace'
-  ctx.fillText(`平均磁束 B_avg`, centerX - 38, centerY + 12)
-
-  // 3. 円周方向の誘導電場 E の矢印（反時計回り）
-  ctx.strokeStyle = 'rgba(251, 191, 36, 0.35)'
-  ctx.lineWidth = 1.5
-  for (let ang = 0; ang < Math.PI * 2; ang += Math.PI / 3) {
-    const ax = centerX + R0 * Math.cos(ang)
-    const ay = centerY + R0 * Math.sin(ang)
-    const tangX = -Math.sin(ang)
-    const tangY = Math.cos(ang)
-    ctx.beginPath()
-    ctx.moveTo(ax, ay)
-    ctx.lineTo(ax + tangX * 22, ay + tangY * 22)
-    ctx.stroke()
-  }
-
-  // 4. 電子（e⁻）本体と回転軌道
-  const s = state.value
-  const ex = centerX + s.r * Math.cos(s.theta)
-  const ey = centerY + s.r * Math.sin(s.theta)
-
-  // 電子の発光グロー
-  const eGlow = ctx.createRadialGradient(ex, ey, 2, ex, ey, 14)
-  eGlow.addColorStop(0, '#f43f5e')
-  eGlow.addColorStop(1, 'rgba(244, 63, 94, 0)')
-  ctx.fillStyle = eGlow
-  ctx.beginPath()
-  ctx.arc(ex, ey, 14, 0, Math.PI * 2)
-  ctx.fill()
-
-  // 電子球
-  ctx.fillStyle = '#fbbf24'
-  ctx.beginPath()
-  ctx.arc(ex, ey, 5.5, 0, Math.PI * 2)
-  ctx.fill()
-  ctx.strokeStyle = '#ffffff'
-  ctx.lineWidth = 2
-  ctx.stroke()
-
-  // 電子ラベル
-  ctx.fillStyle = '#ffffff'
-  ctx.font = 'bold 11px monospace'
-  ctx.fillText('e⁻', ex + 8, ey - 6)
-
-  // 5. 状態テキスト
-  ctx.fillStyle = s.isStable ? '#10b981' : '#f43f5e'
-  ctx.font = 'bold 12px sans-serif'
-  ctx.fillText(`状態: ${s.statusMsg}`, 20, height - 20)
-
-  updatePhysics()
-  animationFrameId = requestAnimationFrame(draw)
-}
-
-onMounted(() => {
-  resetSim()
-  animationFrameId = requestAnimationFrame(draw)
-})
-
-onUnmounted(() => {
-  if (animationFrameId) {
-    cancelAnimationFrame(animationFrameId)
-  }
-})
-</script>
-
 <template>
-  <div class="sim-container">
-    <div class="sim-header">
-      <div class="sim-title">
-        <span class="icon">🧲</span>
-        <span>ベータトロン誘導加速器シミュレーター</span>
+  <div class="lab" style="--ac:#38bdf8;--ac2:#f59e0b">
+    <div class="lab-head">
+      <span class="lab-title">🧲 3D ベータトロン誘導加速器（ファラデー電磁誘導 × 2:1の法則）</span>
+      <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+        <span class="lab-badge" style="--ac:#10b981">Three.js 3D Interactive</span>
+        <span class="lab-badge" :style="{ '--ac': isStable ? '#10b981' : '#f43f5e' }">
+          {{ isStable ? '安定加速中 (2:1条件適合)' : '軌道崩壊 (管壁衝突)' }}
+        </span>
       </div>
-      <div class="badge">ファラデーの電磁誘導則 × 2:1の法則</div>
     </div>
 
-    <!-- 再生速度・アニメーションコントロールバー -->
+    <p class="lab-desc">
+      電磁石の中心コア磁束の増大によって生じる円周方向の誘導電場 <i>E</i> による電子の相対論的加速と、軌道半径 <i>R</i> を一定に保つための「2対1の法則（ΔΦ = 2π<i>R</i><sup>2</sup> Δ<i>B</i><sub>0</sub> ⇔ <i>B̄</i> = 2<i>B</i><sub>0</sub>）」を、3Dテーパー磁極とドーナツ型真空加速管で体感します。
+    </p>
+
+    <!-- カメラ視点プリセットバー -->
+    <div class="camera-preset-bar">
+      <span class="preset-label">🎥 カメラ視点:</span>
+      <div class="preset-group">
+        <button class="lab-chip" :class="{ on: activeCam === '3d' }" @click="setCameraPreset('3d')">
+          🎥 3D 俯瞰
+        </button>
+        <button class="lab-chip" :class="{ on: activeCam === 'front' }" @click="setCameraPreset('front')">
+          📐 磁極断面
+        </button>
+        <button class="lab-chip" :class="{ on: activeCam === 'top' }" @click="setCameraPreset('top')">
+          🔼 真上軌道
+        </button>
+      </div>
+    </div>
+
+    <!-- 再生・速度コントロールバー -->
     <div class="playback-bar">
-      <button class="btn btn-primary" @click="isPlaying = !isPlaying" style="padding: 6px 16px; font-weight: 700; border-radius: 8px; cursor: pointer;">
+      <button
+        class="lab-btn primary"
+        @click="togglePlay"
+        style="padding: 5px 14px; font-weight: 700; border-radius: 8px; font-size: 0.84rem;"
+      >
         {{ isPlaying ? '⏸ 一時停止' : '▶ 加速再開' }}
       </button>
       <div class="speed-control-group">
         <span class="speed-label">⏱️ 再生速度:</span>
         <div class="speed-btn-group">
           <button :class="{ active: timeScale === 0.25 }" @click="timeScale = 0.25">🐢 0.25x (超スロー)</button>
-          <button :class="{ active: timeScale === 0.5 }" @click="timeScale = 0.5">🎯 0.5x (推奨・観察)</button>
+          <button :class="{ active: timeScale === 0.5 }" @click="timeScale = 0.5">0.5x (推奨)</button>
           <button :class="{ active: timeScale === 1.0 }" @click="timeScale = 1.0">1.0x (標準)</button>
-          <button :class="{ active: timeScale === 1.5 }" @click="timeScale = 1.5">1.5x (速め)</button>
+          <button :class="{ active: timeScale === 1.5 }" @click="timeScale = 1.5">1.5x</button>
         </div>
       </div>
-      <button class="btn btn-secondary" @click="stepForward" style="padding: 6px 12px; border-radius: 8px; font-size: 0.85rem; cursor: pointer;">
+      <button class="lab-btn" @click="stepSim" style="padding: 5px 12px; font-size: 0.82rem;">
         ⏭ コマ送り
       </button>
-      <button class="btn btn-secondary" @click="resetSim" style="padding: 6px 12px; border-radius: 8px; font-size: 0.85rem; cursor: pointer;">
+      <button class="lab-btn" @click="resetSim" style="padding: 5px 12px; font-size: 0.82rem;">
         ⏮ 最初から加速
+      </button>
+      <button class="lab-btn lab-btn-pri" @click="setIdealRatio" style="margin-left:auto; background:#0284c7; border-color:#38bdf8;">
+        🎯 理想の 2:1 条件 (B̄ = 2B₀) に合わせる
       </button>
     </div>
 
-    <div class="canvas-wrapper">
-      <canvas ref="canvasRef" :width="width" :height="height" class="sim-canvas"></canvas>
+    <!-- Three.js 3D ステージ -->
+    <div class="three-stage three-viewport-wrap">
+      <div ref="threeContainer" class="three-viewport"></div>
 
-      <div class="overlay-stats">
-        <div class="stat-row">
-          <span class="lbl">電子速度 <i>v</i>:</span>
-          <span class="val highlight">{{ (state.v * 15).toFixed(1) }} ×10⁶ m/s</span>
-        </div>
-        <div class="stat-row">
-          <span class="lbl">誘導電場 <i>E</i>:</span>
-          <span class="val">{{ inducedEField }} V/m相当</span>
-        </div>
-        <div class="stat-row">
-          <span class="lbl">軌道磁場 <i>B</i><sub>0</sub>:</span>
-          <span class="val">{{ state.bZero.toFixed(2) }} T</span>
-        </div>
-        <div class="stat-row">
-          <span class="lbl">平均磁場 <i>B</i>̄:</span>
-          <span class="val">{{ state.bAvg.toFixed(2) }} T</span>
-        </div>
-        <div class="stat-row highlight-box">
-          <span class="lbl">磁場比 <i>B</i>̄ / <i>B</i><sub>0</sub>:</span>
-          <span class="val" :style="{ color: Math.abs(fieldProfileRatio - 2.0) < 0.1 ? '#10b981' : '#f43f5e' }">
-            {{ fieldProfileRatio.toFixed(2) }} (理想: 2.00)
-          </span>
+      <div class="three-hud-legend">
+        <span class="legend-item">
+          <i style="background:#38bdf8;box-shadow:0 0 6px #38bdf8"></i>
+          ドーナツ真空管 (ガラス)
+        </span>
+        <span class="legend-item">
+          <i style="background:#fbbf24;box-shadow:0 0 6px #fbbf24"></i>
+          円周方向 誘導電場 E
+        </span>
+        <span class="legend-item">
+          <i style="background:#f43f5e;box-shadow:0 0 6px #f43f5e"></i>
+          相対論的電子 e⁻
+        </span>
+        <span class="legend-item">
+          <i style="background:#10b981;box-shadow:0 0 6px #10b981"></i>
+          設計安定軌道 R₀
+        </span>
+      </div>
+
+      <div class="three-hud-hint">
+        🖱️ ドラッグで3D回転 ・ ホイールで拡大縮小
+      </div>
+    </div>
+
+    <!-- 状態ステータス帯 -->
+    <div class="ortho-status-strip">
+      <span class="three-ortho-badge" :style="{ borderColor: isStable ? '#10b981' : '#f43f5e', color: '#f8fafc' }">
+        ベータトロン条件: ΔΦ = 2π<i>R</i>² Δ<i>B</i><sub>0</sub> ｜ 磁場比 <i>B̄</i> / <i>B</i><sub>0</sub> = {{ fieldProfileRatio.toFixed(2) }} (理想: 2.00) ｜
+        電子速さ <i>v</i> = {{ (electronVelocity / 1e6).toFixed(1) }} ×10⁶ m/s (β = {{ beta.toFixed(3) }}) ｜ 状態: {{ statusMsg }}
+      </span>
+    </div>
+
+    <!-- コントロールパネル -->
+    <div class="lab-controls">
+      <div class="lab-ctrl">
+        <label>磁場上昇率 (d<i>B</i>/d<i>t</i>): <strong>{{ dBdt.toFixed(1) }} T/s</strong></label>
+        <input type="range" v-model.number="dBdt" min="0.5" max="4.0" step="0.5" />
+        <div class="lab-note">中心磁束の変化率が大きいほど強い円周方向誘導電場 <i>E</i> = (<i>R</i>/2)(d<i>B̄</i>/d<i>t</i>) が生じます</div>
+      </div>
+
+      <div class="lab-ctrl">
+        <label>磁場プロファイル比 <i>B̄</i> / <i>B</i><sub>0</sub>: <strong>{{ fieldProfileRatio.toFixed(2) }}</strong></label>
+        <input type="range" v-model.number="fieldProfileRatio" min="1.4" max="2.6" step="0.05" />
+        <div class="lab-note">
+          2.00 より大きいと中心加速が勝って外壁衝突、2.00 より小さいと軌道磁場が勝って内壁衝突します
         </div>
       </div>
     </div>
 
-    <!-- コントロール群 -->
-    <div class="controls-panel">
-      <div class="control-row">
-        <div class="control-group">
-          <label>磁場上昇率 (dB / dt): <span>{{ dBdt.toFixed(1) }} T/s</span></label>
-          <input type="range" v-model.number="dBdt" min="0.5" max="4.0" step="0.5" />
-        </div>
-        <div class="control-group">
-          <label>磁場プロファイル比 <i>B</i>̄ / <i>B</i><sub>0</sub>: <span>{{ fieldProfileRatio.toFixed(2) }}</span></label>
-          <input type="range" v-model.number="fieldProfileRatio" min="1.4" max="2.6" step="0.05" />
-        </div>
+    <!-- 物理量モニター -->
+    <div class="lab-stats">
+      <div class="lab-stat hl">
+        <div class="k">電子の速度 <i>v</i></div>
+        <div class="v" style="color:#f43f5e">{{ (electronVelocity / 1e6).toFixed(1) }} <small>×10⁶ m/s</small></div>
+        <div class="f">光速比 β = v/c = {{ beta.toFixed(3) }}</div>
       </div>
 
-      <div class="control-buttons">
-        <button class="btn btn-secondary" @click="fieldProfileRatio = 2.0" style="color:#38bdf8; border-color:#38bdf8;">
-          🎯 理想の 2:1 条件（B̄ = 2B₀）にワンタップで合わせる
-        </button>
+      <div class="lab-stat">
+        <div class="k">相対論的運動エネルギー <i>K</i></div>
+        <div class="v" style="color:#fbbf24">{{ kineticEnergyMeV.toFixed(3) }} <small>MeV</small></div>
+        <div class="f">ローレンツ因子 γ = {{ gammaFactor.toFixed(3) }}</div>
       </div>
-    </div>
 
-    <div class="betatron-note">
-      💡 <strong>2対1の法則（The 2:1 Rule）</strong>：電磁誘導で電子を加速すると運動量 <i>p</i> が増え、軌道半径 <i>r</i> = (<i>p</i> / eB<sub>0</sub>) を一定に保つには軌道上の磁場 <i>B</i><sub>0</sub> も増やす必要があります。計算すると、中心内部の平均磁束密度 <i>B</i>̄ は軌道上の磁束密度 <i>B</i><sub>0</sub> の<strong>ちょうど2倍（<i>B</i>̄ = 2B<sub>0</sub>）</strong>でなければ軌道半径が維持できません！スライダーを動かして条件が崩れたときのドリフトを観察してください。
+      <div class="lab-stat">
+        <div class="k">誘導電場 <i>E</i></div>
+        <div class="v" style="color:#38bdf8">{{ inducedEField.toFixed(1) }} <small>V/m</small></div>
+        <div class="f"><i>E</i> = (<i>R</i> / 2) (d<i>B̄</i>/d<i>t</i>)</div>
+      </div>
+
+      <div class="lab-stat">
+        <div class="k">軌道上磁場 <i>B</i><sub>0</sub></div>
+        <div class="v" style="color:#10b981">{{ bZero.toFixed(2) }} <small>T</small></div>
+        <div class="f">向心ローレンツ力を供給</div>
+      </div>
+
+      <div class="lab-stat">
+        <div class="k">中心平均磁場 <i>B̄</i></div>
+        <div class="v" style="color:#a855f7">{{ bAvg.toFixed(2) }} <small>T</small></div>
+        <div class="f">Φ = π <i>R</i>² <i>B̄</i> (中心高密度磁束)</div>
+      </div>
+
+      <div class="lab-stat">
+        <div class="k">軌道半径 <i>r</i> / <i>R</i><sub>0</sub></div>
+        <div class="v" :style="{ color: isStable ? '#10b981' : '#f43f5e' }">
+          {{ (currentRadius / R0_base * 100).toFixed(1) }} <small>%</small>
+        </div>
+        <div class="f">設計半径 <i>R</i><sub>0</sub> = 3.2 m 相当</div>
+      </div>
     </div>
   </div>
 </template>
 
+<script setup>
+import { ref, computed, onMounted, onUnmounted } from 'vue'
+import * as THREE from 'three'
+import { createThreeScene, createVectorArrow3D, createTextSprite } from './threeUtils.js'
+
+const activeCam = ref('3d')
+const isPlaying = ref(true)
+const timeScale = ref(0.5)
+
+// 物理パラメータ
+const dBdt = ref(2.0) // T/s
+const fieldProfileRatio = ref(2.0) // B_bar / B0 (理想は 2.00)
+const R0_base = 3.2 // 3D設計軌道半径
+
+// 電子の状態
+const currentRadius = ref(3.2)
+const electronAngle = ref(0)
+const bZero = ref(0.25)
+const isStable = ref(true)
+const statusMsg = ref('安定加速中 (2:1条件適合)')
+
+// 相対論的定数
+const c = 2.99792e8 // m/s
+const m0 = 9.10938e-31 // kg
+const eCharge = 1.60218e-19 // C
+let electronP = 1.602e-22 // 相対論的運動量 [kg m/s]
+
+// 計算プロパティ
+const bAvg = computed(() => bZero.value * fieldProfileRatio.value)
+
+// 誘導電場 E = (R / 2) * (dB_bar / dt)
+const inducedEField = computed(() => (R0_base * 0.5 * dBdt.value * fieldProfileRatio.value * 25))
+
+// 相対論的速度 v = p / sqrt(m0^2 + (p/c)^2)
+const electronVelocity = computed(() => {
+  const p = electronP
+  return p / Math.sqrt(m0 * m0 + (p / c) ** 2)
+})
+
+const beta = computed(() => electronVelocity.value / c)
+const gammaFactor = computed(() => (beta.value < 0.9999 ? 1 / Math.sqrt(1 - beta.value ** 2) : 99))
+const kineticEnergyMeV = computed(() => ((gammaFactor.value - 1) * m0 * (c ** 2)) / (1.602e-13))
+
+function setIdealRatio() {
+  fieldProfileRatio.value = 2.0
+  isStable.value = true
+  statusMsg.value = '理想軌道で安定加速中 (B̄ = 2B₀)'
+}
+
+function togglePlay() {
+  isPlaying.value = !isPlaying.value
+}
+
+function resetSim() {
+  currentRadius.value = R0_base
+  electronAngle.value = 0
+  bZero.value = 0.25
+  electronP = 1.602e-22
+  isStable.value = true
+  statusMsg.value = '初期状態から加速開始'
+  momentumHistory.length = 0
+}
+
+function stepSim() {
+  updatePhysics(0.04)
+}
+
+function setCameraPreset(preset, dur = 0.5) {
+  activeCam.value = preset
+  if (!threeCtx) return
+
+  const isNarrow = (threeCtx.camera?.aspect || 1.7) < 1.35
+  const mult = isNarrow ? 1.35 : 1.0
+
+  if (nBadge && sBadge) {
+    if (preset === 'top') {
+      nBadge.visible = false
+      sBadge.visible = false
+    } else {
+      nBadge.visible = true
+      sBadge.visible = true
+    }
+  }
+
+  if (preset === '3d') {
+    threeCtx.moveCameraTo([0, 9.5 * mult, 14.5 * mult], [0, 0, 0], dur, 42)
+  } else if (preset === 'front') {
+    threeCtx.moveCameraTo([0, 0.8, 30 * mult], [0, 0, 0], dur, 14)
+  } else if (preset === 'top') {
+    threeCtx.moveCameraTo([0, 32 * mult, 0.01], [0, 0, 0], dur, 14)
+  }
+}
+
+// ----------------------------------------------------
+// 3D シーン構成
+// ----------------------------------------------------
+const threeContainer = ref(null)
+let threeCtx = null
+let sceneGroup = null
+
+// 電磁石磁極と真空管
+let upperPoleMesh = null
+let lowerPoleMesh = null
+let centerCoreMesh = null
+let torusTubeMesh = null
+let coreFluxLinesGroup = null
+let eFieldArrowsGroup = null
+let nBadge = null
+let sBadge = null
+
+// 電子球と発光トレイル
+let electronMesh = null
+let electronLight = null
+let electronTrail = null
+const trailPoints = []
+
+// 運動量・速度グラフボード
+let plotCanvas = null
+let plotTexture = null
+let plotCtx = null
+const momentumHistory = []
+
+function build3DScene() {
+  if (!threeCtx) return
+  if (sceneGroup) threeCtx.scene.remove(sceneGroup)
+
+  sceneGroup = new THREE.Group()
+  threeCtx.scene.add(sceneGroup)
+
+  // 1. 基板グリッド
+  const grid = new THREE.GridHelper(16, 16, 0x1e293b, 0x0f172a)
+  grid.position.y = -2.4
+  sceneGroup.add(grid)
+
+  // 2. 電磁石の上下テーパー磁極 (Tapered Electromagnet Poles)
+  // 磁場分布 B(r) ∝ r^-n を作るため外周に向かってギャップが広がるテーパー形状
+  const poleMat = new THREE.MeshStandardMaterial({
+    color: 0x334155,
+    metalness: 0.85,
+    roughness: 0.35
+  })
+
+  // 上部磁極 (Upper Pole N)
+  const upperPoleGeo = new THREE.CylinderGeometry(2.0, 4.4, 1.4, 36)
+  upperPoleMesh = new THREE.Mesh(upperPoleGeo, poleMat)
+  upperPoleMesh.position.set(0, 1.8, 0)
+  sceneGroup.add(upperPoleMesh)
+
+  nBadge = createTextSprite('電磁石 N極 (上部磁極)', { color: '#f43f5e', fontSize: 28, scale: 0.42 })
+  nBadge.position.set(0, 2.1, 0)
+  sceneGroup.add(nBadge)
+
+  // 下部磁極 (Lower Pole S)
+  const lowerPoleGeo = new THREE.CylinderGeometry(4.4, 2.0, 1.4, 36)
+  lowerPoleMesh = new THREE.Mesh(lowerPoleGeo, poleMat)
+  lowerPoleMesh.position.set(0, -1.8, 0)
+  sceneGroup.add(lowerPoleMesh)
+
+  sBadge = createTextSprite('電磁石 S極 (下部磁極)', { color: '#38bdf8', fontSize: 28, scale: 0.42 })
+  sBadge.position.set(0, -2.1, 0)
+  sceneGroup.add(sBadge)
+
+  // 中心高密度磁極コア (Central High-Flux Core)
+  const coreGeo = new THREE.CylinderGeometry(1.6, 1.6, 2.2, 32)
+  const coreMat = new THREE.MeshStandardMaterial({
+    color: 0x1e293b,
+    metalness: 0.7,
+    roughness: 0.4
+  })
+  centerCoreMesh = new THREE.Mesh(coreGeo, coreMat)
+  sceneGroup.add(centerCoreMesh)
+
+  const coreLabel = createTextSprite('中心磁極コア (平均磁束密度 B̄)', { color: '#38bdf8', fontSize: 26, scale: 0.38 })
+  coreLabel.position.set(0, 0.4, 0)
+  sceneGroup.add(coreLabel)
+
+  // 中心コア磁束ライン群 (Vertical Core Flux Lines)
+  coreFluxLinesGroup = new THREE.Group()
+  for (let i = 0; i < 16; i++) {
+    const ang = (i / 16) * Math.PI * 2
+    const cr = 0.4 + (i % 3) * 0.45
+    const cx = Math.cos(ang) * cr
+    const cz = Math.sin(ang) * cr
+    const arr = createVectorArrow3D({ color: 0x38bdf8, shaftRadius: 0.04, headRadius: 0.12, headLength: 0.3 })
+    arr.setVector(new THREE.Vector3(cx, -1.0, cz), new THREE.Vector3(0, 1, 0), 2.0)
+    coreFluxLinesGroup.add(arr)
+  }
+  sceneGroup.add(coreFluxLinesGroup)
+
+  // 3. ドーナツ型真空加速管 (Toroidal Vacuum Chamber)
+  const torusGeo = new THREE.TorusGeometry(R0_base, 0.65, 32, 64)
+  torusGeo.rotateX(Math.PI / 2)
+  const torusMat = new THREE.MeshPhysicalMaterial({
+    color: 0x38bdf8,
+    transparent: true,
+    opacity: 0.22,
+    roughness: 0.1,
+    transmission: 0.85,
+    side: THREE.DoubleSide
+  })
+  torusTubeMesh = new THREE.Mesh(torusGeo, torusMat)
+  sceneGroup.add(torusTubeMesh)
+
+  // 設計軌道ライン (Radius R0 Ring)
+  const orbitCurvePts = []
+  for (let i = 0; i <= 64; i++) {
+    const ang = (i / 64) * Math.PI * 2
+    orbitCurvePts.push(new THREE.Vector3(Math.cos(ang) * R0_base, 0, Math.sin(ang) * R0_base))
+  }
+  const orbitGeo = new THREE.BufferGeometry().setFromPoints(orbitCurvePts)
+  const orbitLine = new THREE.Line(orbitGeo, new THREE.LineDashedMaterial({ color: 0x10b981, dashSize: 0.3, gapSize: 0.15 }))
+  orbitLine.computeLineDistances()
+  sceneGroup.add(orbitLine)
+
+  const orbitLabel = createTextSprite('設計安定軌道 R₀', { color: '#10b981', fontSize: 26, scale: 0.38 })
+  orbitLabel.position.set(R0_base + 0.9, 0, 0)
+  sceneGroup.add(orbitLabel)
+
+  // 4. 円周方向 誘導電場 E ベクトル矢印群 (Azimuthal Electric Field)
+  eFieldArrowsGroup = new THREE.Group()
+  const numE = 8
+  for (let i = 0; i < numE; i++) {
+    const ang = (i / numE) * Math.PI * 2
+    const ax = Math.cos(ang) * R0_base
+    const az = Math.sin(ang) * R0_base
+    const tangX = -Math.sin(ang)
+    const tangZ = Math.cos(ang)
+    const arr = createVectorArrow3D({ color: 0xfbbf24, shaftRadius: 0.05, headRadius: 0.15, headLength: 0.35 })
+    arr.setVector(new THREE.Vector3(ax, 0, az), new THREE.Vector3(tangX, 0, tangZ), 1.2)
+    eFieldArrowsGroup.add(arr)
+  }
+  sceneGroup.add(eFieldArrowsGroup)
+
+  // 5. 電子粒子 e⁻
+  const eleGeo = new THREE.SphereGeometry(0.16, 16, 16)
+  const eleMat = new THREE.MeshStandardMaterial({
+    color: 0xf43f5e,
+    emissive: 0xf43f5e,
+    emissiveIntensity: 0.8
+  })
+  electronMesh = new THREE.Mesh(eleGeo, eleMat)
+  sceneGroup.add(electronMesh)
+
+  electronLight = new THREE.PointLight(0xf43f5e, 2, 3)
+  sceneGroup.add(electronLight)
+
+  // 電子の発光軌跡 (Trail)
+  const trailGeo = new THREE.BufferGeometry()
+  const trailMat = new THREE.LineBasicMaterial({ color: 0xf43f5e, transparent: true, opacity: 0.7 })
+  electronTrail = new THREE.Line(trailGeo, trailMat)
+  sceneGroup.add(electronTrail)
+
+  // 6. 奥側: 3D 相対論的速度・運動量プロットボード
+  plotCanvas = document.createElement('canvas')
+  plotCanvas.width = 512
+  plotCanvas.height = 256
+  plotCtx = plotCanvas.getContext('2d')
+
+  plotTexture = new THREE.CanvasTexture(plotCanvas)
+  plotTexture.minFilter = THREE.LinearFilter
+  plotTexture.magFilter = THREE.LinearFilter
+
+  const plotPlaneGeo = new THREE.PlaneGeometry(6.4, 3.2)
+  const plotPlaneMat = new THREE.MeshBasicMaterial({
+    map: plotTexture,
+    transparent: true,
+    opacity: 0.94,
+    side: THREE.DoubleSide
+  })
+  const plotBoard = new THREE.Mesh(plotPlaneGeo, plotPlaneMat)
+  plotBoard.position.set(0, 2.4, -4.5)
+  plotBoard.rotation.x = 0.16
+  sceneGroup.add(plotBoard)
+}
+
+// ----------------------------------------------------
+// 物理シミュレーションと 3D 更新ループ
+// ----------------------------------------------------
+function updatePhysics(dt) {
+  if (!isPlaying.value) return
+
+  const effectiveDt = dt * timeScale.value
+  const R0 = R0_base
+  const ratio = fieldProfileRatio.value
+
+  // 磁場の上昇
+  bZero.value += dBdt.value * effectiveDt * 0.04
+
+  // 接線加速: dp/dt = e * E = e * (R/2) * (dB_bar/dt)
+  const dp = eCharge * (R0 * 0.5) * (dBdt.value * ratio) * effectiveDt * 3e11
+  electronP += dp
+
+  // 軌道安定性の検証:
+  // p = e * r * B0  =>  r = p / (e * B0)
+  // もし ratio == 2.00 なら dp/dt と e*R0*dB0/dt が釣り合い r = R0 が厳密に維持される
+  const idealRatio = 2.0
+  const driftRate = (ratio - idealRatio) * 0.35 * beta.value * effectiveDt
+  currentRadius.value += driftRate
+
+  // ドーナツ真空管壁との衝突判定 (チューブ半径 0.65)
+  const innerWall = R0 - 0.6
+  const outerWall = R0 + 0.6
+
+  if (currentRadius.value < innerWall) {
+    isStable.value = false
+    statusMsg.value = '内壁に衝突！ (加速不足 / 軌道縮小)'
+  } else if (currentRadius.value > outerWall) {
+    isStable.value = false
+    statusMsg.value = '外壁に衝突！ (加速過剰 / 軌道拡大)'
+  } else {
+    isStable.value = true
+    if (Math.abs(ratio - 2.0) < 0.05) {
+      statusMsg.value = '理想軌道で安定加速中 (B̄ = 2B₀)'
+    } else {
+      statusMsg.value = '軌道ドリフト中 (壁面接近)'
+    }
+  }
+
+  // 電子の回転角速度更新
+  const omegaSim = (electronVelocity.value / (currentRadius.value * 1e8)) * 3.5
+  electronAngle.value += omegaSim * effectiveDt
+
+  // 電子メッシュ位置同期
+  const curR = Math.max(1.0, currentRadius.value)
+  const ex = Math.cos(electronAngle.value) * curR
+  const ez = Math.sin(electronAngle.value) * curR
+
+  if (electronMesh) {
+    electronMesh.position.set(ex, 0, ez)
+    electronLight.position.set(ex, 0, ez)
+  }
+
+  // 軌跡更新
+  trailPoints.push(new THREE.Vector3(ex, 0, ez))
+  if (trailPoints.length > 50) trailPoints.shift()
+  if (electronTrail) {
+    electronTrail.geometry.setFromPoints(trailPoints)
+  }
+
+  // 中心コア磁束ラインの伸縮
+  if (coreFluxLinesGroup) {
+    const scale = Math.min(2.5, bAvg.value * 2.0)
+    coreFluxLinesGroup.scale.set(1, scale, 1)
+  }
+
+  // プロットボード更新
+  updatePlotTexture()
+}
+
+function updatePlotTexture() {
+  if (!plotCtx || !plotTexture) return
+
+  momentumHistory.push({
+    beta: beta.value,
+    k: kineticEnergyMeV.value
+  })
+  if (momentumHistory.length > 200) momentumHistory.shift()
+
+  const ctx = plotCtx
+  const w = plotCanvas.width
+  const h = plotCanvas.height
+
+  ctx.fillStyle = '#090d16'
+  ctx.fillRect(0, 0, w, h)
+
+  // グリッド線
+  ctx.strokeStyle = '#1e293b'
+  ctx.lineWidth = 1
+  ctx.beginPath()
+  for (let x = 0; x <= w; x += 40) {
+    ctx.moveTo(x, 0); ctx.lineTo(x, h)
+  }
+  for (let y = 0; y <= h; y += 40) {
+    ctx.moveTo(0, y); ctx.lineTo(w, y)
+  }
+  ctx.stroke()
+
+  // 軸
+  ctx.strokeStyle = '#475569'
+  ctx.lineWidth = 1.5
+  ctx.beginPath()
+  ctx.moveTo(40, 20)
+  ctx.lineTo(40, h - 30)
+  ctx.lineTo(w - 20, h - 30)
+  ctx.stroke()
+
+  // 光速限界線 β = 1.0 (赤点線)
+  const cLineY = 50
+  ctx.strokeStyle = 'rgba(244, 63, 94, 0.6)'
+  ctx.setLineDash([4, 4])
+  ctx.beginPath()
+  ctx.moveTo(40, cLineY)
+  ctx.lineTo(w - 20, cLineY)
+  ctx.stroke()
+  ctx.setLineDash([])
+
+  ctx.font = 'bold 15px sans-serif'
+  ctx.fillStyle = '#f43f5e'
+  ctx.fillText('光速限界 β = v/c → 1.0', 50, 42)
+  ctx.fillStyle = '#fbbf24'
+  ctx.fillText('運動エネルギー K [MeV]', 270, 42)
+
+  if (momentumHistory.length < 2) {
+    plotTexture.needsUpdate = true
+    return
+  }
+
+  // 1. 速度比 β(t) 曲線 (赤)
+  ctx.beginPath()
+  ctx.strokeStyle = '#f43f5e'
+  ctx.lineWidth = 2.5
+  const step = (w - 60) / 200
+  const yBase = h - 30
+  for (let idx = 0; idx < momentumHistory.length; idx++) {
+    const x = 40 + idx * step
+    const y = yBase - momentumHistory[idx].beta * (yBase - cLineY)
+    if (idx === 0) ctx.moveTo(x, y)
+    else ctx.lineTo(x, y)
+  }
+  ctx.stroke()
+
+  // 2. 運動エネルギー K(t) 曲線 (黄色)
+  ctx.beginPath()
+  ctx.strokeStyle = '#fbbf24'
+  ctx.lineWidth = 2.2
+  const maxK = 15 // MeV
+  for (let idx = 0; idx < momentumHistory.length; idx++) {
+    const x = 40 + idx * step
+    const y = yBase - (momentumHistory[idx].k / maxK) * (yBase - 50)
+    if (idx === 0) ctx.moveTo(x, y)
+    else ctx.lineTo(x, y)
+  }
+  ctx.stroke()
+
+  plotTexture.needsUpdate = true
+}
+
+// ----------------------------------------------------
+// ライフサイクル管理
+// ----------------------------------------------------
+onMounted(() => {
+  if (!threeContainer.value) return
+
+  threeCtx = createThreeScene(threeContainer.value, {
+    fov: 42,
+    initialCamPos: [0, 8.5, 12.8],
+    initialTarget: [0, 0, 0],
+    background: 0x080c16,
+    onFrame: (dt) => {
+      updatePhysics(dt)
+    }
+  })
+
+  build3DScene()
+  resetSim()
+  setCameraPreset(activeCam.value, 0)
+})
+
+onUnmounted(() => {
+  if (threeCtx) {
+    threeCtx.dispose()
+    threeCtx = null
+  }
+})
+</script>
+
 <style scoped>
-.sim-container {
-  background: linear-gradient(135deg, #090d16 0%, #0f172a 100%);
+.lab {
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+.lab-desc {
+  font-size: 0.85rem;
+  color: #94a3b8;
+  line-height: 1.5;
+  margin: 0 0 0.75rem 0;
+}
+
+.camera-preset-bar {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 8px 12px;
+  margin-bottom: 0.55rem;
+  background: rgba(15, 23, 42, 0.72);
   border: 1px solid rgba(56, 189, 248, 0.25);
-  border-radius: 14px;
-  padding: 1.25rem;
-  margin: 1.5rem 0;
-  color: #e2e8f0;
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5), 0 0 15px rgba(56, 189, 248, 0.1);
-}
-
-.sim-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  padding-bottom: 0.75rem;
-}
-
-.sim-title {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-weight: 700;
-  font-size: 1.05rem;
-  color: #38bdf8;
-}
-
-.badge {
-  background: rgba(56, 189, 248, 0.15);
-  color: #38bdf8;
-  font-size: 0.75rem;
-  padding: 0.2rem 0.6rem;
-  border-radius: 9999px;
-  border: 1px solid rgba(56, 189, 248, 0.3);
-}
-
-.canvas-wrapper {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  background: #020617;
   border-radius: 10px;
-  overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-.sim-canvas {
-  width: 100%;
-  max-width: 500px;
-  height: auto;
-  aspect-ratio: 500 / 380;
-  display: block;
+.preset-label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #38bdf8;
 }
 
-.overlay-stats {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background: rgba(15, 23, 42, 0.88);
-  backdrop-filter: blur(8px);
-  padding: 0.45rem 0.65rem;
-  border-radius: 8px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  font-size: 0.72rem;
+.preset-group {
   display: flex;
-  flex-direction: column;
-  gap: 0.22rem;
+  gap: 6px;
+  flex-wrap: wrap;
+  align-items: center;
 }
 
 .playback-bar {
   display: flex;
-  flex-wrap: wrap;
   align-items: center;
   gap: 8px;
-  margin-bottom: 10px;
-  padding: 8px 10px;
-  background: rgba(15, 23, 42, 0.7);
-  border: 1px solid rgba(56, 189, 248, 0.2);
-  border-radius: 8px;
+  flex-wrap: wrap;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  margin: 0 0 0.65rem 0;
+  padding: 8px 12px;
+  border-radius: 10px;
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .speed-control-group {
@@ -392,11 +680,18 @@ onUnmounted(() => {
   align-items: center;
   gap: 6px;
   flex-wrap: wrap;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  border-radius: 9999px;
+  padding: 4px 10px;
+  background: rgba(0, 0, 0, 0.25);
 }
 
 .speed-label {
-  font-size: 0.78rem;
+  font-size: 0.75rem;
   color: #94a3b8;
+  white-space: nowrap;
 }
 
 .speed-btn-group {
@@ -406,12 +701,12 @@ onUnmounted(() => {
 }
 
 .speed-btn-group button {
-  background: #1e293b;
-  color: #cbd5e1;
-  border: 1px solid #334155;
-  padding: 4px 8px;
+  padding: 2px 8px;
   font-size: 0.74rem;
   border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.05);
+  color: #cbd5e1;
   cursor: pointer;
 }
 
@@ -419,124 +714,115 @@ onUnmounted(() => {
   background: #0284c7;
   color: #fff;
   border-color: #38bdf8;
-  font-weight: 700;
 }
 
-.btn-primary {
-  background: #0284c7;
-  color: #ffffff;
-  border: 1px solid #38bdf8;
+.three-viewport-wrap {
+  position: relative;
+  width: 100%;
+  height: 440px;
+  background: #080c16;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid rgba(148, 163, 184, 0.22);
+  margin-bottom: 0.65rem;
 }
 
-.stat-row {
+.three-viewport {
+  width: 100%;
+  height: 100%;
+}
+
+.three-hud-legend {
+  position: absolute;
+  top: 10px;
+  left: 12px;
+  max-width: calc(100% - 24px);
   display: flex;
-  justify-content: space-between;
-  gap: 0.75rem;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding: 5px 11px;
+  border-radius: 8px;
+  background: rgba(9, 13, 22, 0.84);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  font-size: 0.74rem;
+  color: #e2e8f0;
+  pointer-events: none;
 }
 
-.stat-row .lbl {
-  color: #94a3b8;
+.legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  white-space: nowrap;
 }
 
-.stat-row .val {
-  font-family: monospace;
-  font-weight: 700;
-  color: #f1f5f9;
+.legend-item i {
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
 }
 
-.stat-row .val.highlight {
-  color: #fbbf24;
+.three-hud-hint {
+  position: absolute;
+  bottom: 10px;
+  right: 12px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(9, 13, 22, 0.8);
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  font-size: 0.72rem;
+  color: #cbd5e1;
+  pointer-events: none;
 }
 
-.stat-row.highlight-box {
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  padding-top: 0.25rem;
-  margin-top: 0.15rem;
-}
-
-.controls-panel {
-  margin-top: 1rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.85rem;
-}
-
-.control-row {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 0.75rem;
-}
-
-.control-group {
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-}
-
-.control-group label {
-  font-size: 0.75rem;
-  color: #94a3b8;
-  display: flex;
-  justify-content: space-between;
-}
-
-.control-group label span {
-  font-family: monospace;
-  color: #38bdf8;
-  font-weight: bold;
-}
-
-input[type="range"] {
-  accent-color: #38bdf8;
-  cursor: pointer;
-}
-
-.control-buttons {
+.ortho-status-strip {
   display: flex;
   justify-content: flex-end;
-  flex-wrap: wrap;
-  gap: 0.5rem;
+  margin: -0.2rem 0 0.8rem 0;
 }
 
-.btn {
-  padding: 0.35rem 0.85rem;
+.three-ortho-badge {
+  display: inline-block;
+  padding: 4px 11px;
+  border-radius: 8px;
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid rgba(56, 189, 248, 0.45);
   font-size: 0.75rem;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: 500;
-  transition: all 0.2s;
+  font-weight: 600;
 }
 
-.btn-secondary {
-  background: #1e293b;
-  color: #e2e8f0;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-.btn-secondary:hover {
-  background: #334155;
+@media (max-width: 768px) {
+  .three-viewport-wrap {
+    height: 350px;
+  }
+  .three-hud-legend {
+    right: 10px;
+    gap: 7px;
+    font-size: 0.67rem;
+    padding: 4px 8px;
+  }
+  .three-hud-hint {
+    font-size: 0.67rem;
+    padding: 3px 8px;
+  }
+  .three-ortho-badge {
+    font-size: 0.7rem;
+    padding: 4px 9px;
+  }
 }
 
-.btn-reset {
-  background: transparent;
-  color: #94a3b8;
-  border: 1px solid rgba(148, 163, 184, 0.2);
-}
-.btn-reset:hover {
-  color: #f1f5f9;
-  border-color: #94a3b8;
-}
-
-.betatron-note {
-  margin-top: 0.85rem;
-  padding: 0.6rem 0.8rem;
-  background: rgba(30, 41, 59, 0.4);
-  border-left: 3px solid #38bdf8;
-  border-radius: 4px;
-  font-size: 0.8rem;
-  color: #94a3b8;
-  line-height: 1.5;
-}
-.betatron-note strong {
-  color: #38bdf8;
+@media (max-width: 640px) {
+  .lab {
+    padding: 0.85rem;
+  }
+  .speed-control-group {
+    border-radius: 10px;
+    padding: 5px 9px;
+    width: 100%;
+  }
+  .ortho-status-strip {
+    justify-content: flex-start;
+  }
 }
 </style>

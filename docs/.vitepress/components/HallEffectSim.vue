@@ -1,563 +1,1063 @@
 <template>
-  <div class="sim-container">
+  <div class="sim-container" :style="{ '--ac': carrierType === 'electron' ? '#38bdf8' : '#fb7185' }">
     <div class="sim-header">
       <div class="title-row">
         <span class="icon">🧲</span>
-        <h3>ホール効果・キャリア判定シミュレーター</h3>
+        <h3 class="sim-title">3D ホール効果・キャリア判定シミュレーター</h3>
+        <span class="badge" :class="carrierType === 'electron' ? 'badge-cyan' : 'badge-rose'">
+          {{ carrierType === 'electron' ? '自由電子 e⁻ (n型 / 金属)' : '正孔・ホール h⁺ (p型半導体)' }}
+        </span>
       </div>
-      <p class="subtitle">磁場中の導体・半導体に電流を流したときに発生するホール電圧 <i>V</i><sub><i>H</i></sub>。電子キャリア（-<i>e</i>）と正孔キャリア（+<i>e</i>）で生じる起電力の極性が逆転する仕組みを可視化します。</p>
-    </div>
-
-    <div class="canvas-wrapper">
-      <canvas ref="canvasRef" width="700" height="300"></canvas>
-      <div class="carrier-badge" :class="carrierType">
-        キャリア: {{ carrierType === 'electron' ? '自由電子 (金属 / n型)' : '正孔・ホール (p型)' }}
-      </div>
-    </div>
-
-    <!-- コントロールパネル -->
-    <div class="control-panel">
-      <div class="control-grid">
-        <div class="control-group">
-          <label>
-            <span>キャリアの種類:</span>
-            <div class="btn-group">
-              <button class="select-btn" :class="{ active: carrierType === 'electron' }" @click="carrierType = 'electron'">
-                電子 (-e, n型/金属)
-              </button>
-              <button class="select-btn" :class="{ active: carrierType === 'hole' }" @click="carrierType = 'hole'">
-                正孔 (+e, p型半導体)
-              </button>
-            </div>
-          </label>
-        </div>
-
-        <div class="control-group">
-          <label>
-            <span>電流 <i>I</i>: <strong>{{ currentA.toFixed(1) }} A</strong> (右向き)</span>
-            <input type="range" v-model.number="currentA" min="0.5" max="5.0" step="0.5" />
-          </label>
-        </div>
-
-        <div class="control-group">
-          <label>
-            <span>磁束密度 <i>B</i>: <strong>{{ magneticTesla.toFixed(1) }} T</strong> (手前→奥)</span>
-            <input type="range" v-model.number="magneticTesla" min="0.2" max="2.0" step="0.2" />
-          </label>
-        </div>
-
-        <div class="control-group">
-          <label>
-            <span>キャリア密度 <i>n</i>: <strong>{{ carrierDensity }}</strong></span>
-            <div class="btn-group">
-              <button class="select-btn" :class="{ active: isHighDensity }" @click="isHighDensity = !isHighDensity">
-                {{ isHighDensity ? '金属並 (高密度: 小VH)' : '半導体並 (低密度: 大VH)' }}
-              </button>
-            </div>
-          </label>
-        </div>
-      </div>
-
-      <div class="button-row">
-        <button class="btn btn-primary" @click="toggleCarrier">
-          🔄 キャリア切り替え ({{ carrierType === 'electron' ? '正孔へ' : '電子へ' }})
+      <div class="sim-tabs">
+        <button
+          class="tab-btn"
+          :class="{ active: carrierType === 'electron' }"
+          @click="setCarrier('electron')"
+        >
+          電子キャリア (-e, n型/金属)
+        </button>
+        <button
+          class="tab-btn"
+          :class="{ active: carrierType === 'hole' }"
+          @click="setCarrier('hole')"
+        >
+          正孔キャリア (+e, p型半導体)
         </button>
       </div>
     </div>
 
-    <!-- 物理量モニター -->
-    <div class="stats-monitor">
-      <div class="stat-card">
-        <span class="label">ホール電圧 <i>V</i><sub><i>H</i></sub></span>
-        <span class="value" :class="{ positive: signedVh > 0, negative: signedVh < 0 }">
-          {{ signedVh > 0 ? '+' : '' }}{{ signedVh.toFixed(2) }} <span class="unit">mV</span>
-        </span>
-        <span class="subtext">上面電位 - 下面電位</span>
+    <p class="desc">
+      磁場 <i>B</i> 中の導体・半導体ブロックに電流 <i>I</i> を流したときに、荷電キャリアが受けるローレンツ力 <i>F</i><sub><i>B</i></sub> = <i>q</i>(<i>v</i> × <i>B</i>) と
+      上下端面に生じる電荷集積・ホール電圧 <i>V</i><sub><i>H</i></sub> の極性反転を 3D でリアルタイム検証します。
+    </p>
+
+    <!-- 3D カメラ視点プリセット -->
+    <div class="camera-preset-bar">
+      <span class="preset-label">🎥 3Dカメラ視点:</span>
+      <div class="preset-group">
+        <button class="chip-btn" :class="{ active: activeCam === '3d' }" @click="setCameraPreset('3d')">
+          🎥 3D俯瞰
+        </button>
+        <button class="chip-btn" :class="{ active: activeCam === 'front' }" @click="setCameraPreset('front')">
+          📐 正面断面
+        </button>
+        <button class="chip-btn" :class="{ active: activeCam === 'top' }" @click="setCameraPreset('top')">
+          🔼 上面
+        </button>
+      </div>
+    </div>
+
+    <!-- 再生速度・アニメーションコントロールバー -->
+    <div class="playback-bar">
+      <button class="btn btn-primary" @click="isPlaying = !isPlaying">
+        {{ isPlaying ? '⏸ 一時停止' : '▶ 再生' }}
+      </button>
+      <div class="speed-control-group">
+        <span class="speed-label">⏱️ 再生速度:</span>
+        <div class="speed-btn-group">
+          <button :class="{ active: timeScale === 0.5 }" @click="timeScale = 0.5">🐢 0.5x</button>
+          <button :class="{ active: timeScale === 1.0 }" @click="timeScale = 1.0">1.0x (標準)</button>
+          <button :class="{ active: timeScale === 1.5 }" @click="timeScale = 1.5">1.5x</button>
+        </div>
+      </div>
+      <button class="btn btn-secondary" @click="toggleCarrier">
+        🔄 キャリア反転 ({{ carrierType === 'electron' ? 'e⁻ → h⁺' : 'h⁺ → e⁻' }})
+      </button>
+      <button class="btn btn-secondary" @click="resetCamera">🔄 視点リセット</button>
+    </div>
+
+    <!-- 3D ビューポート -->
+    <div class="three-viewport-wrap">
+      <div ref="threeContainer" class="three-viewport"></div>
+
+      <div class="three-hud-top">
+        <div class="three-hud-legend">
+          <span class="legend-item">
+            <i class="dot" :style="{ background: carrierType === 'electron' ? '#38bdf8' : '#fb7185', boxShadow: '0 0 6px ' + (carrierType === 'electron' ? '#38bdf8' : '#fb7185') }"></i>
+            {{ carrierType === 'electron' ? '電子 (-e) ドリフト' : '正孔 (+e) ドリフト' }}
+          </span>
+          <span class="legend-item">
+            <i class="dot" style="background:#fbbf24;box-shadow:0 0 6px #fbbf24"></i>
+            電流 <i>I</i> (右向き +X)
+          </span>
+          <span class="legend-item">
+            <i class="dot" style="background:#38bdf8;box-shadow:0 0 6px #38bdf8"></i>
+            磁場 <i>B</i> (奥向き -Z)
+          </span>
+          <span class="legend-item">
+            <i class="dot" style="background:#10b981;box-shadow:0 0 6px #10b981"></i>
+            ローレンツ力 <i>F</i><sub><i>B</i></sub>
+          </span>
+          <span class="legend-item">
+            <i class="dot" style="background:#ec4899;box-shadow:0 0 6px #ec4899"></i>
+            ホール電場 <i>E</i><sub><i>H</i></sub>
+          </span>
+        </div>
+      </div>
+
+      <div class="three-hud-bottom">
+        <div class="three-hud-hint">🖱️ ドラッグで3D視点回転 ・ ホイールでズーム</div>
+      </div>
+    </div>
+
+    <!-- 状態ステータス帯 -->
+    <div class="mode-status-strip">
+      <span class="three-status-badge" :class="carrierType">
+        {{ carrierType === 'electron'
+            ? '⚡ 電子キャリア: ローレンツ力により電子 (-e) が上面へ偏り蓄積 → 上面が負極(-)・下面が正極(+)となり、ホール電圧 V_H < 0 となる'
+            : '⚡ 正孔キャリア: ローレンツ力により正孔 (+e) が上面へ偏り蓄積 → 上面が正極(+)・下面が負極(-)となり、ホール電圧 V_H > 0 となる' }}
+      </span>
+    </div>
+
+    <!-- リアルタイム情報モニター -->
+    <div class="stats-grid">
+      <div class="stat-card highlight">
+        <div class="stat-label">ホール電圧 <i>V</i><sub><i>H</i></sub> (上面 − 下面)</div>
+        <div class="stat-value" :class="signedVh >= 0 ? 'text-rose' : 'text-cyan'">
+          {{ signedVh > 0 ? '+' : '' }}{{ signedVh.toFixed(2) }} <span class="stat-unit">mV</span>
+        </div>
+        <div class="stat-formula">
+          <i>V</i><sub><i>H</i></sub> = <span class="frac"><span class="num"><i>I B</i></span><span class="den"><i>n q t</i></span></span>
+          ({{ carrierType === 'electron' ? '負の電圧' : '正の電圧' }})
+        </div>
       </div>
 
       <div class="stat-card">
-        <span class="label">上面の帯電極性</span>
-        <span class="value highlight">{{ topChargeText }}</span>
-        <span class="subtext">ローレンツ力による集積</span>
+        <div class="stat-label">上面の帯電極性</div>
+        <div class="stat-value" :class="carrierType === 'electron' ? 'text-cyan' : 'text-rose'">
+          {{ carrierType === 'electron' ? '− 極 (電子集積)' : '+ 極 (正孔集積)' }}
+        </div>
+        <div class="stat-formula">ローレンツ力 <i>q</i>(<i>v</i> × <i>B</i>) による偏向</div>
       </div>
 
       <div class="stat-card">
-        <span class="label">ホール電場 <i>E</i><sub><i>H</i></sub></span>
-        <span class="value">{{ (Math.abs(signedVh) / 20).toFixed(2) }} <span class="unit">V/m</span></span>
-        <span class="subtext"><i>E</i><sub><i>H</i></sub> = <i>v</i> × <i>B</i></span>
+        <div class="stat-label">ホール電場 <i>E</i><sub><i>H</i></sub></div>
+        <div class="stat-value text-yellow">{{ (Math.abs(signedVh) / 20).toFixed(2) }} <span class="stat-unit">V/m</span></div>
+        <div class="stat-formula"><i>E</i><sub><i>H</i></sub> = <i>v</i><sub><i>d</i></sub> <i>B</i> (静電力とつり合い)</div>
       </div>
 
       <div class="stat-card">
-        <span class="label">ドリフト速度 <i>v</i><sub><i>d</i></sub></span>
-        <span class="value">{{ driftSpeedDisplay.toFixed(1) }} <span class="unit">mm/s</span></span>
-        <span class="subtext">{{ carrierType === 'electron' ? '左向きにドリフト' : '右向きにドリフト' }}</span>
+        <div class="stat-label">ドリフト速度 <i>v</i><sub><i>d</i></sub></div>
+        <div class="stat-value text-blue">{{ driftSpeedDisplay.toFixed(1) }} <span class="stat-unit">mm/s</span></div>
+        <div class="stat-formula">{{ carrierType === 'electron' ? '← 左向きドリフト (-X)' : '→ 右向きドリフト (+X)' }}</div>
       </div>
+    </div>
+
+    <!-- コントロールパネル -->
+    <div class="controls-panel">
+      <div class="controls-grid">
+        <div class="control-group">
+          <label class="control-label">
+            <span>キャリアの種類:</span>
+            <span class="control-val" :class="carrierType === 'electron' ? 'text-cyan' : 'text-rose'">
+              {{ carrierType === 'electron' ? '電子 (-e)' : '正孔 (+e)' }}
+            </span>
+          </label>
+          <div class="btn-group">
+            <button class="select-btn" :class="{ active: carrierType === 'electron' }" @click="setCarrier('electron')">
+              電子 (-e, n型/金属)
+            </button>
+            <button class="select-btn" :class="{ active: carrierType === 'hole' }" @click="setCarrier('hole')">
+              正孔 (+e, p型半導体)
+            </button>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <label class="control-label">
+            <span>電流 <i>I</i>:</span>
+            <span class="control-val text-yellow">{{ currentA.toFixed(1) }} A (右向き)</span>
+          </label>
+          <input type="range" v-model.number="currentA" min="0.5" max="5.0" step="0.5" class="sim-slider" />
+        </div>
+
+        <div class="control-group">
+          <label class="control-label">
+            <span>磁束密度 <i>B</i>:</span>
+            <span class="control-val text-cyan">{{ magneticTesla.toFixed(1) }} T (手前→奥)</span>
+          </label>
+          <input type="range" v-model.number="magneticTesla" min="0.2" max="2.0" step="0.2" class="sim-slider" />
+        </div>
+
+        <div class="control-group">
+          <label class="control-label">
+            <span>キャリア密度 <i>n</i>:</span>
+            <span class="control-val">{{ carrierDensity }}</span>
+          </label>
+          <div class="btn-group">
+            <button class="select-btn" :class="{ active: isHighDensity }" @click="isHighDensity = !isHighDensity">
+              {{ isHighDensity ? '金属並 (高密度: 小VH)' : '半導体並 (低密度: 大VH)' }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 解説コールアウト -->
+    <div class="sim-footer-note">
+      💡 <strong>なぜキャリアの符号が判定できるのか？</strong>:
+      <ul>
+        <li><strong>電流が右向き</strong> のとき、<strong>電子（負）は左へ進み</strong>、<strong>正孔（正）は右へ進みます</strong>。</li>
+        <li>奥向き磁場 <i>B</i> を加えると、電荷の符号と速度ベクトルの向きの双方が反転するため、<strong>ローレンツ力 <i>q</i>(<i>v</i> × <i>B</i>) の働く向きはどちらのキャリアでも「上向き」</strong> になります。</li>
+        <li>その結果、上面にはキャリアそのものが集まるため、<strong>電子なら上面がマイナス電位（<i>V</i><sub><i>H</i></sub> &lt; 0）</strong>、<strong>正孔なら上面がプラス電位（<i>V</i><sub><i>H</i></sub> &gt; 0）</strong> となり、電圧の正負を測るだけでキャリアを100%特定できます。</li>
+      </ul>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted, computed } from 'vue'
+import { ref, computed, watch, onMounted, onUnmounted } from 'vue'
+import * as THREE from 'three'
+import { createThreeScene, createVectorArrow3D, createTextSprite } from './threeUtils.js'
 
-const canvasRef = ref(null)
-const carrierType = ref('electron') // 'electron' (-e) or 'hole' (+e)
+const carrierType = ref('electron') // 'electron' | 'hole'
 const currentA = ref(2.5) // A
 const magneticTesla = ref(1.0) // T
 const isHighDensity = ref(false)
+const isPlaying = ref(true)
+const timeScale = ref(1.0)
+const activeCam = ref('3d')
 
-const carrierDensity = computed(() => isHighDensity.value ? '高 (10²⁸ m⁻³)' : '中 (10²³ m⁻³)')
+const carrierDensity = computed(() => isHighDensity.value ? '高 (10²⁸ m⁻³)' : '低 (10²³ m⁻³)')
+const driftSpeedDisplay = computed(() => {
+  const base = isHighDensity.value ? 0.8 : 3.6
+  return base * (currentA.value / 2.5)
+})
 
-// ホール電圧の計算: V_H = (I * B) / (n * q * t)
-// スケール調整した模擬ミリボルト値
 const signedVh = computed(() => {
-  const densityMult = isHighDensity.value ? 0.3 : 1.5
+  const densityMult = isHighDensity.value ? 0.35 : 1.6
   const magnitude = currentA.value * magneticTesla.value * densityMult * 1.2
-  // 電子（q = -e）の場合: 上面に電子が偏る -> 上面はマイナス電位 -> V_H = V_top - V_bottom < 0
-  // 正孔（q = +e）の場合: 上面に正孔が偏る -> 上面はプラス電位 -> V_H > 0
   return carrierType.value === 'electron' ? -magnitude : magnitude
 })
 
-const topChargeText = computed(() => {
-  return carrierType.value === 'electron' ? '負 (ー極)' : '正 (＋極)'
-})
+function setCarrier(type) {
+  carrierType.value = type
+  rebuildSlabScene()
+}
 
-const driftSpeedDisplay = computed(() => {
-  return (currentA.value / (isHighDensity.value ? 2.5 : 0.8)) * 1.5
-})
-
-const toggleCarrier = () => {
+function toggleCarrier() {
   carrierType.value = carrierType.value === 'electron' ? 'hole' : 'electron'
+  rebuildSlabScene()
 }
 
-// キャリアパーティクル群
-const particles = []
-const initParticles = () => {
-  particles.length = 0
-  const count = 35
-  for (let i = 0; i < count; i++) {
-    particles.push({
-      x: 100 + Math.random() * 260,
-      y: 90 + Math.random() * 110,
-      vx: 0,
-      vy: 0
-    })
-  }
+const threeContainer = ref(null)
+let threeCtx = null
+let scene = null
+let slabGroup = null
+let carrierParticles = []
+let topChargeMeshes = []
+let bottomChargeMeshes = []
+let fbArrow = null
+let feArrow = null
+let vArrow = null
+let voltmeterLabel = null
+
+// ==========================================================
+// カメラ制御 & プリセット
+// ==========================================================
+function getMobScale() {
+  if (!threeContainer.value) return 1.0
+  const w = threeContainer.value.clientWidth || 720
+  const h = threeContainer.value.clientHeight || 420
+  const aspect = w / Math.max(1, h)
+  return w < 540 || aspect < 1.35 ? Math.min(1.85, Math.max(1.15, 1.52 / Math.max(0.65, aspect))) : 1.0
 }
 
-let animId = null
-
-const draw = () => {
-  const canvas = canvasRef.value
-  if (!canvas) return
-  const ctx = canvas.getContext('2d')
-  const width = canvas.width
-  const height = canvas.height
-
-  ctx.clearRect(0, 0, width, height)
-
-  // 背景
-  const bgGrad = ctx.createLinearGradient(0, 0, 0, height)
-  bgGrad.addColorStop(0, '#090d16')
-  bgGrad.addColorStop(1, '#111827')
-  ctx.fillStyle = bgGrad
-  ctx.fillRect(0, 0, width, height)
-
-  // 左〜中央: 導体ブロック (x: 80〜420, y: 70〜220)
-  // 右側: ホール電圧計 (x: 480〜670)
-
-  const blockLeft = 100
-  const blockRight = 420
-  const blockTop = 80
-  const blockBottom = 210
-  const blockW = blockRight - blockLeft
-  const blockH = blockBottom - blockTop
-
-  // 1. 垂直磁場の記号（画面手前から奥へ向かう × 印）
-  ctx.fillStyle = 'rgba(71, 85, 105, 0.4)'
-  ctx.font = '14px sans-serif'
-  ctx.textAlign = 'center'
-  for (let gx = blockLeft - 20; gx <= blockRight + 20; gx += 40) {
-    for (let gy = blockTop - 20; gy <= blockBottom + 30; gy += 40) {
-      ctx.fillText('⊗', gx, gy)
-    }
+function getCamParams(preset) {
+  const ms = getMobScale()
+  if (preset === 'front') {
+    return { pos: [0, 0, 32 * ms], target: [0, 0, 0], fov: 14 }
   }
-  ctx.fillStyle = '#94a3b8'
-  ctx.font = '11px sans-serif'
-  ctx.fillText('一様磁場 B (奥向き ⊗)', blockLeft + 40, blockTop - 35)
-
-  // 2. 導体ブロック本体
-  ctx.fillStyle = 'rgba(30, 41, 59, 0.85)'
-  ctx.fillRect(blockLeft, blockTop, blockW, blockH)
-  ctx.strokeStyle = '#94a3b8'
-  ctx.lineWidth = 3
-  ctx.strokeRect(blockLeft, blockTop, blockW, blockH)
-
-  // 電流 I の矢印（右向き）
-  ctx.strokeStyle = '#f59e0b'
-  ctx.fillStyle = '#f59e0b'
-  ctx.lineWidth = 3
-  ctx.beginPath()
-  ctx.moveTo(blockLeft - 40, (blockTop + blockBottom) / 2)
-  ctx.lineTo(blockLeft - 10, (blockTop + blockBottom) / 2)
-  ctx.stroke()
-  ctx.beginPath()
-  ctx.moveTo(blockLeft - 10, (blockTop + blockBottom) / 2)
-  ctx.lineTo(blockLeft - 18, (blockTop + blockBottom) / 2 - 5)
-  ctx.lineTo(blockLeft - 18, (blockTop + blockBottom) / 2 + 5)
-  ctx.closePath()
-  ctx.fill()
-  ctx.font = 'bold 12px sans-serif'
-  ctx.fillText(`電流 I (${currentA.value}A)`, blockLeft - 30, (blockTop + blockBottom) / 2 - 12)
-
-  // 3. 上面・下面の蓄積電荷（＋／ー）
-  const qCount = 8
-  ctx.font = 'bold 13px monospace'
-  if (carrierType.value === 'electron') {
-    // 上面に電子（ー）、下面に正電荷（＋）
-    ctx.fillStyle = '#38bdf8'
-    for (let i = 0; i < qCount; i++) {
-      ctx.fillText('-', blockLeft + 25 + i * 36, blockTop - 6)
-    }
-    ctx.fillStyle = '#ef4444'
-    for (let i = 0; i < qCount; i++) {
-      ctx.fillText('+', blockLeft + 25 + i * 36, blockBottom + 16)
-    }
-  } else {
-    // 正孔: 上面に正孔（＋）、下面に負電荷（ー）
-    ctx.fillStyle = '#ef4444'
-    for (let i = 0; i < qCount; i++) {
-      ctx.fillText('+', blockLeft + 25 + i * 36, blockTop - 6)
-    }
-    ctx.fillStyle = '#38bdf8'
-    for (let i = 0; i < qCount; i++) {
-      ctx.fillText('-', blockLeft + 25 + i * 36, blockBottom + 16)
-    }
+  if (preset === 'top') {
+    return { pos: [0, 32 * ms, 0.01], target: [0, 0, 0], fov: 14 }
   }
+  return { pos: [7.8 * ms, 6.2 * ms, 9.8 * ms], target: [0, 0, 0], fov: 38 }
+}
 
-  // 4. キャリア粒子の運動アニメーション
-  const speed = driftSpeedDisplay.value * 0.4
+function setCameraPreset(preset, duration = 0.5) {
+  activeCam.value = preset
+  if (!threeCtx) return
+  const params = getCamParams(preset)
+  threeCtx.moveCameraTo(params.pos, params.target, duration, params.fov)
+}
+
+function resetCamera() {
+  setCameraPreset('3d')
+}
+
+// ==========================================================
+// 3D ホール素子シーン構築
+// ==========================================================
+const SLAB_W = 6.4 // X 長さ (電流方向)
+const SLAB_H = 2.8 // Y 幅 (ホール電圧方向)
+const SLAB_D = 2.0 // Z 厚さ (磁場方向)
+
+function rebuildSlabScene() {
+  if (!scene) return
+
+  if (slabGroup) scene.remove(slabGroup)
+  slabGroup = new THREE.Group()
+  scene.add(slabGroup)
+
+  carrierParticles.length = 0
+  topChargeMeshes.length = 0
+  bottomChargeMeshes.length = 0
+
+  // 1. 基板 & グリッド
+  const grid = new THREE.GridHelper(10, 20, 0x38bdf8, 0x1e293b)
+  grid.position.y = -2.2
+  slabGroup.add(grid)
+
+  // 2. ホール素子半導体ブロック (透明直方体)
   const isElec = carrierType.value === 'electron'
+  const slabGeo = new THREE.BoxGeometry(SLAB_W, SLAB_H, SLAB_D)
+  const slabMat = new THREE.MeshStandardMaterial({
+    color: isElec ? 0x0f172a : 0x1c1917,
+    roughness: 0.3,
+    metalness: 0.2,
+    transparent: true,
+    opacity: 0.72
+  })
+  const slabMesh = new THREE.Mesh(slabGeo, slabMat)
+  slabGroup.add(slabMesh)
 
-  particles.forEach(p => {
-    // ドリフト移動: 電子は左へ（-speed）、正孔は右へ（+speed）
-    p.x += isElec ? -speed : speed
+  // エッジワイヤーフレーム (輪郭強調)
+  const edgesGeo = new THREE.EdgesGeometry(slabGeo)
+  const edgeMat = new THREE.LineBasicMaterial({
+    color: isElec ? 0x38bdf8 : 0xfb7185,
+    transparent: true,
+    opacity: 0.8
+  })
+  const edgesMesh = new THREE.LineSegments(edgesGeo, edgeMat)
+  slabGroup.add(edgesMesh)
 
-    // ローレンツ力による上向き偏向 (f_L = q(v × B))
-    // 電子: vは左向き(-x)、Bは奥向き(-z) ⇒ v × B は上向き、q=-e なので力は上向き！
-    // 正孔: vは右向き(+x)、Bは奥向き(-z) ⇒ v × B は上向き、q=+e なので力は上向き！
-    // どちらのキャリアも「上面（上向き）」にローレンツ力を受ける！
-    p.y += -0.15 * magneticTesla.value
+  // 3. 電極端子 (左右端: 電流給電電極)
+  const elecGeo = new THREE.BoxGeometry(0.18, SLAB_H, SLAB_D)
+  const elecMat = new THREE.MeshStandardMaterial({ color: 0xd97706, metalness: 0.85, roughness: 0.25 })
+  const leftElec = new THREE.Mesh(elecGeo, elecMat)
+  leftElec.position.set(-SLAB_W / 2 - 0.09, 0, 0)
+  slabGroup.add(leftElec)
 
-    // 境界判定
-    if (p.x < blockLeft + 10) p.x = blockRight - 10
-    if (p.x > blockRight - 10) p.x = blockLeft + 10
-    if (p.y < blockTop + 8) p.y = blockBottom - 8
-    if (p.y > blockBottom - 8) p.y = blockTop + 8
+  const rightElec = new THREE.Mesh(elecGeo, elecMat)
+  rightElec.position.set(SLAB_W / 2 + 0.09, 0, 0)
+  slabGroup.add(rightElec)
 
-    // 粒子描画
-    ctx.beginPath()
-    ctx.arc(p.x, p.y, isElec ? 4.5 : 5.5, 0, Math.PI * 2)
+  // 電流給電リード線
+  const leadPts1 = [new THREE.Vector3(-SLAB_W / 2 - 0.2, 0, 0), new THREE.Vector3(-SLAB_W / 2 - 1.2, 0, 0)]
+  const lead1 = new THREE.Line(new THREE.BufferGeometry().setFromPoints(leadPts1), new THREE.LineBasicMaterial({ color: 0xfbbf24, linewidth: 3 }))
+  slabGroup.add(lead1)
+
+  const leadPts2 = [new THREE.Vector3(SLAB_W / 2 + 0.2, 0, 0), new THREE.Vector3(SLAB_W / 2 + 1.2, 0, 0)]
+  const lead2 = new THREE.Line(new THREE.BufferGeometry().setFromPoints(leadPts2), new THREE.LineBasicMaterial({ color: 0xfbbf24, linewidth: 3 }))
+  slabGroup.add(lead2)
+
+  // 電流矢印ラベル
+  const curSprite = createTextSprite('電流 I (+X 右向き)', { color: '#fbbf24', borderColor: '#f59e0b', fontSize: 28, scale: 0.38 })
+  curSprite.position.set(0, -SLAB_H / 2 - 0.5, SLAB_D / 2 + 0.3)
+  slabGroup.add(curSprite)
+
+  // 4. ホール電圧検出用 電極端子 (上面・下面)
+  const probeGeo = new THREE.CylinderGeometry(0.2, 0.2, 0.12, 16)
+  const probeMat = new THREE.MeshStandardMaterial({ color: 0xfbbf24, metalness: 0.9, roughness: 0.1 })
+
+  const topProbe = new THREE.Mesh(probeGeo, probeMat)
+  topProbe.position.set(0, SLAB_H / 2 + 0.06, 0)
+  slabGroup.add(topProbe)
+
+  const bottomProbe = new THREE.Mesh(probeGeo, probeMat)
+  bottomProbe.position.set(0, -SLAB_H / 2 - 0.06, 0)
+  slabGroup.add(bottomProbe)
+
+  // 電圧計 (デジタルボルトメーター)
+  const vMeterBox = new THREE.Mesh(
+    new THREE.BoxGeometry(1.6, 0.8, 0.4),
+    new THREE.MeshStandardMaterial({ color: 0x0f172a, metalness: 0.5, roughness: 0.4 })
+  )
+  vMeterBox.position.set(0, SLAB_H / 2 + 1.6, 0)
+  slabGroup.add(vMeterBox)
+
+  // 電圧計リード線 (上電極 & 下電極から電圧計へ)
+  const vLeadPtsTop = [new THREE.Vector3(0, SLAB_H / 2 + 0.12, 0), new THREE.Vector3(0, SLAB_H / 2 + 1.2, 0)]
+  slabGroup.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(vLeadPtsTop), new THREE.LineBasicMaterial({ color: 0xec4899 })))
+
+  const vLeadPtsBot = [
+    new THREE.Vector3(0, -SLAB_H / 2 - 0.12, 0),
+    new THREE.Vector3(-1.8, -SLAB_H / 2 - 0.3, 0),
+    new THREE.Vector3(-1.8, SLAB_H / 2 + 1.6, 0),
+    new THREE.Vector3(-0.8, SLAB_H / 2 + 1.6, 0)
+  ]
+  slabGroup.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(vLeadPtsBot), new THREE.LineBasicMaterial({ color: 0x38bdf8 })))
+
+  // 電圧計デジタルラベル
+  const vText = `${signedVh.value > 0 ? '+' : ''}${signedVh.value.toFixed(2)} mV`
+  voltmeterLabel = createTextSprite(`VH: ${vText}`, {
+    color: isElec ? '#38bdf8' : '#fb7185',
+    borderColor: isElec ? '#38bdf8' : '#fb7185',
+    fontSize: 28,
+    scale: 0.38
+  })
+  voltmeterLabel.position.set(0, SLAB_H / 2 + 2.3, 0)
+  slabGroup.add(voltmeterLabel)
+
+  // 5. 一様磁場 B (手前→奥: -Z方向) の矢印群
+  const bArrowGroup = new THREE.Group()
+  const bStepX = 1.6
+  const bStepY = 1.0
+  for (let x = -SLAB_W * 0.35; x <= SLAB_W * 0.35; x += bStepX) {
+    for (let y = -SLAB_H * 0.3; y <= SLAB_H * 0.3; y += bStepY) {
+      const bArr = createVectorArrow3D({ color: 0x38bdf8, shaftRadius: 0.04, headRadius: 0.12, headLength: 0.32, opacity: 0.55 })
+      bArr.setVector(new THREE.Vector3(x, y, SLAB_D * 0.7), new THREE.Vector3(0, 0, -1), SLAB_D * 1.4)
+      bArrowGroup.add(bArr)
+    }
+  }
+  slabGroup.add(bArrowGroup)
+
+  const bSprite = createTextSprite('磁場 B (-Z 奥向き ⊗)', { color: '#38bdf8', borderColor: '#0284c7', fontSize: 26, scale: 0.35 })
+  bSprite.position.set(0, SLAB_H / 2 + 0.35, -SLAB_D / 2 - 0.3)
+  slabGroup.add(bSprite)
+
+  // 6. 表面蓄積電荷ビーズ (上面・下面)
+  const chargeGeo = new THREE.SphereGeometry(0.1, 10, 10)
+  const topChargeMat = new THREE.MeshStandardMaterial({
+    color: isElec ? 0x38bdf8 : 0xfb7185,
+    emissive: isElec ? 0x38bdf8 : 0xfb7185,
+    emissiveIntensity: 0.6
+  })
+  const botChargeMat = new THREE.MeshStandardMaterial({
+    color: isElec ? 0xfb7185 : 0x38bdf8,
+    emissive: isElec ? 0xfb7185 : 0x38bdf8,
+    emissiveIntensity: 0.6
+  })
+
+  for (let i = 0; i < 9; i++) {
+    const x = (i / 8) * (SLAB_W - 0.8) - (SLAB_W - 0.8) / 2
+    // 上面
+    const cTop = new THREE.Mesh(chargeGeo, topChargeMat)
+    cTop.position.set(x, SLAB_H / 2 - 0.06, 0)
+    slabGroup.add(cTop)
+    topChargeMeshes.push(cTop)
+
+    // 下面
+    const cBot = new THREE.Mesh(chargeGeo, botChargeMat)
+    cBot.position.set(x, -SLAB_H / 2 + 0.06, 0)
+    slabGroup.add(cBot)
+    bottomChargeMeshes.push(cBot)
+  }
+
+  // 上面極性ラベル
+  const topSignSprite = createTextSprite(isElec ? '帯電 (−) マイナス極' : '帯電 (+) プラス極', {
+    color: isElec ? '#38bdf8' : '#fb7185',
+    borderColor: isElec ? '#38bdf8' : '#fb7185',
+    fontSize: 26,
+    scale: 0.34
+  })
+  topSignSprite.position.set(0, SLAB_H / 2 + 0.45, 0)
+  slabGroup.add(topSignSprite)
+
+  // 7. ドリフト電荷キャリア粒子 (直方体内部を移動)
+  const pCount = 28
+  const pGeo = new THREE.SphereGeometry(0.11, 12, 12)
+  const pMat = new THREE.MeshStandardMaterial({
+    color: isElec ? 0x38bdf8 : 0xfb7185,
+    emissive: isElec ? 0x38bdf8 : 0xfb7185,
+    emissiveIntensity: 0.85
+  })
+
+  for (let k = 0; k < pCount; k++) {
+    const p = new THREE.Mesh(pGeo, pMat)
+    p.userData = {
+      x: (Math.random() - 0.5) * (SLAB_W - 0.6),
+      y: (Math.random() - 0.5) * (SLAB_H - 0.6),
+      z: (Math.random() - 0.5) * (SLAB_D - 0.6),
+      vx: isElec ? -1 : 1 // 電子は左へ、正孔は右へ
+    }
+    p.position.set(p.userData.x, p.userData.y, p.userData.z)
+    slabGroup.add(p)
+    carrierParticles.push(p)
+  }
+
+  // 8. 代表キャリア上の 3D 力ベクトル (Fb, Fe, v)
+  fbArrow = createVectorArrow3D({ color: 0x10b981, shaftRadius: 0.06, headRadius: 0.18, headLength: 0.45 })
+  feArrow = createVectorArrow3D({ color: 0xec4899, shaftRadius: 0.06, headRadius: 0.18, headLength: 0.45 })
+  vArrow = createVectorArrow3D({ color: 0xfbbf24, shaftRadius: 0.06, headRadius: 0.18, headLength: 0.45 })
+  slabGroup.add(fbArrow)
+  slabGroup.add(feArrow)
+  slabGroup.add(vArrow)
+
+  updateRepresentativeCarrierVectors()
+}
+
+// ----------------------------------------------------------
+// 代表キャリアのベクトル更新 (中央付近の粒子)
+// ----------------------------------------------------------
+function updateRepresentativeCarrierVectors() {
+  if (!fbArrow || !feArrow || !vArrow) return
+
+  const isElec = carrierType.value === 'electron'
+  const repPos = new THREE.Vector3(0, 0, 0.4)
+
+  // 速度ベクトル v: 電子は -X (左), 正孔は +X (右)
+  vArrow.setVector(repPos, new THREE.Vector3(isElec ? -1 : 1, 0, 0), 1.2)
+
+  // ローレンツ力 Fb = q(v x B):
+  // どちらのキャリアでも Fb は上向き (+Y)!
+  fbArrow.setVector(repPos, new THREE.Vector3(0, 1, 0), 1.3)
+
+  // 静電力 Fe = q E_H:
+  // 上向きのローレンツ力と釣り合うため、キャリアに働く電気力は下向き (-Y)!
+  feArrow.setVector(repPos, new THREE.Vector3(0, -1, 0), 1.3)
+}
+
+// ==========================================================
+// 毎フレーム アニメーション処理 (onFrame)
+// ==========================================================
+function onFrame(dt) {
+  if (!isPlaying.value) return
+
+  const effectiveDt = dt * timeScale.value
+  const isElec = carrierType.value === 'electron'
+  const speed = driftSpeedDisplay.value * 0.45
+
+  // 粒子ドリフト & 上面偏向運動
+  carrierParticles.forEach(p => {
+    // X方向ドリフト
+    p.position.x += p.userData.vx * speed * effectiveDt
+    // 上面へのローレンツ力偏向 (Y方向への微小加速)
+    p.position.y += 0.25 * effectiveDt
+
+    // 境界条件 (端から出たら反対側からリスポーン)
+    const halfW = (SLAB_W - 0.4) / 2
+    const halfH = (SLAB_H - 0.3) / 2
+
     if (isElec) {
-      ctx.fillStyle = '#38bdf8'
-      ctx.fill()
-      ctx.fillStyle = '#0f172a'
-      ctx.font = 'bold 9px monospace'
-      ctx.fillText('-', p.x, p.y + 3)
+      if (p.position.x < -halfW) {
+        p.position.x = halfW
+        p.position.y = (Math.random() - 0.5) * (SLAB_H - 0.6)
+      }
     } else {
-      ctx.fillStyle = '#ef4444'
-      ctx.fill()
-      ctx.fillStyle = '#ffffff'
-      ctx.font = 'bold 9px monospace'
-      ctx.fillText('+', p.x, p.y + 3)
+      if (p.position.x > halfW) {
+        p.position.x = -halfW
+        p.position.y = (Math.random() - 0.5) * (SLAB_H - 0.6)
+      }
+    }
+
+    // 上下端面でのバウンド/制限
+    if (p.position.y > halfH) {
+      p.position.y = halfH
+    } else if (p.position.y < -halfH) {
+      p.position.y = -halfH
     }
   })
 
-  // 5. ホール電圧計へのリード線
-  ctx.strokeStyle = '#cbd5e1'
-  ctx.lineWidth = 2
-  // 上面端子
-  ctx.beginPath()
-  ctx.moveTo((blockLeft + blockRight) / 2, blockTop)
-  ctx.lineTo((blockLeft + blockRight) / 2, blockTop - 25)
-  ctx.lineTo(520, blockTop - 25)
-  ctx.lineTo(520, 100)
-  ctx.stroke()
-
-  // 下面端子
-  ctx.beginPath()
-  ctx.moveTo((blockLeft + blockRight) / 2, blockBottom)
-  ctx.lineTo((blockLeft + blockRight) / 2, blockBottom + 25)
-  ctx.lineTo(580, blockBottom + 25)
-  ctx.lineTo(580, 200)
-  ctx.stroke()
-
-  // --- 右側: アナログ電圧計 ---
-  const meterCenterX = 560
-  const meterCenterY = 150
-  const meterR = 65
-
-  // メーター背景円形パネル
-  ctx.fillStyle = '#1e293b'
-  ctx.beginPath()
-  ctx.arc(meterCenterX, meterCenterY, meterR, 0, Math.PI * 2)
-  ctx.fill()
-  ctx.strokeStyle = '#475569'
-  ctx.lineWidth = 3
-  ctx.stroke()
-
-  // 目盛り円弧
-  ctx.strokeStyle = '#94a3b8'
-  ctx.lineWidth = 1.5
-  ctx.beginPath()
-  ctx.arc(meterCenterX, meterCenterY + 15, 45, -Math.PI * 0.75, -Math.PI * 0.25)
-  ctx.stroke()
-
-  // ゼロ位置、マイナス、プラス
-  ctx.fillStyle = '#94a3b8'
-  ctx.font = '10px sans-serif'
-  ctx.fillText('0', meterCenterX, meterCenterY - 33)
-  ctx.fillText('-', meterCenterX - 35, meterCenterY - 15)
-  ctx.fillText('+', meterCenterX + 35, meterCenterY - 15)
-
-  // 指針
-  // signedVh に応じて左右に傾く
-  const maxVhDisplay = 10.0
-  const needleAngle = -Math.PI / 2 + (signedVh.value / maxVhDisplay) * (Math.PI * 0.25)
-
-  ctx.strokeStyle = signedVh.value >= 0 ? '#34d399' : '#f43f5e'
-  ctx.lineWidth = 2.5
-  ctx.beginPath()
-  ctx.moveTo(meterCenterX, meterCenterY + 15)
-  ctx.lineTo(meterCenterX + Math.cos(needleAngle) * 45, (meterCenterY + 15) + Math.sin(needleAngle) * 45)
-  ctx.stroke()
-
-  // 指針中心軸
-  ctx.fillStyle = '#f8fafc'
-  ctx.beginPath()
-  ctx.arc(meterCenterX, meterCenterY + 15, 4, 0, Math.PI * 2)
-  ctx.fill()
-
-  ctx.fillStyle = '#38bdf8'
-  ctx.font = 'bold 12px sans-serif'
-  ctx.fillText('ホール電圧計 V_H', meterCenterX, meterCenterY + 45)
+  // 電圧計ラベルの数値更新
+  if (voltmeterLabel) {
+    const vText = `${signedVh.value > 0 ? '+' : ''}${signedVh.value.toFixed(2)} mV`
+    const isE = carrierType.value === 'electron'
+    voltmeterLabel.updateText(`VH: ${vText}`, isE ? '#38bdf8' : '#fb7185', isE ? '#38bdf8' : '#fb7185')
+  }
 }
 
-const animate = () => {
-  draw()
-  animId = requestAnimationFrame(animate)
-}
+watch([currentA, magneticTesla, isHighDensity], () => {
+  if (voltmeterLabel) {
+    const vText = `${signedVh.value > 0 ? '+' : ''}${signedVh.value.toFixed(2)} mV`
+    const isE = carrierType.value === 'electron'
+    voltmeterLabel.updateText(`VH: ${vText}`, isE ? '#38bdf8' : '#fb7185', isE ? '#38bdf8' : '#fb7185')
+  }
+  updateRepresentativeCarrierVectors()
+})
 
 onMounted(() => {
-  initParticles()
-  animId = requestAnimationFrame(animate)
+  if (!threeContainer.value) return
+  threeCtx = createThreeScene(threeContainer.value, {
+    fov: 38,
+    initialCamPos: [7.8, 6.2, 9.8],
+    initialTarget: [0, 0, 0],
+    background: 0x080c16,
+    onFrame
+  })
+  scene = threeCtx.scene
+
+  rebuildSlabScene()
+  setCameraPreset('3d', 0)
 })
 
 onUnmounted(() => {
-  if (animId) cancelAnimationFrame(animId)
+  if (threeCtx) {
+    threeCtx.dispose()
+    threeCtx = null
+  }
 })
 </script>
 
 <style scoped>
 .sim-container {
-  background: #0f172a;
-  border-radius: 12px;
-  padding: 1.2rem;
-  color: #e2e8f0;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  background: linear-gradient(135deg, #090d16 0%, #0f172a 100%);
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  border-radius: 14px;
+  padding: 1.25rem;
   margin: 1.5rem 0;
-  border: 1px solid #1e293b;
+  color: #e2e8f0;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5), 0 0 15px rgba(56, 189, 248, 0.1);
 }
 
-.sim-header .title-row {
+.sim-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 0.85rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding-bottom: 0.75rem;
+}
+
+.title-row {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  margin-bottom: 0.3rem;
-}
-
-.sim-header .icon {
-  font-size: 1.5rem;
-}
-
-.sim-header h3 {
-  margin: 0;
-  font-size: 1.25rem;
-  color: #38bdf8;
-}
-
-.subtitle {
-  font-size: 0.85rem;
-  color: #94a3b8;
-  margin: 0 0 1rem 0;
-  line-height: 1.4;
-}
-
-.canvas-wrapper {
-  position: relative;
-  border-radius: 8px;
-  overflow: hidden;
-  border: 1px solid #334155;
-  background: #000;
-}
-
-canvas {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-
-.carrier-badge {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  font-size: 0.75rem;
-  padding: 4px 10px;
-  border-radius: 20px;
-  font-weight: bold;
-  backdrop-filter: blur(4px);
-}
-
-.carrier-badge.electron {
-  background: rgba(56, 189, 248, 0.2);
-  color: #38bdf8;
-  border: 1px solid rgba(56, 189, 248, 0.4);
-}
-
-.carrier-badge.hole {
-  background: rgba(239, 68, 68, 0.2);
-  color: #f87171;
-  border: 1px solid rgba(239, 68, 68, 0.4);
-}
-
-.control-panel {
-  margin-top: 1rem;
-  background: #1e293b;
-  padding: 1rem;
-  border-radius: 8px;
-}
-
-.control-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 0.8rem;
-}
-
-.control-group label {
-  display: flex;
-  flex-direction: column;
-  gap: 0.3rem;
-  font-size: 0.85rem;
-  color: #cbd5e1;
-}
-
-.btn-group {
-  display: flex;
-  gap: 0.3rem;
-}
-
-.select-btn {
-  flex: 1;
-  padding: 0.35rem;
-  background: #334155;
-  color: #cbd5e1;
-  border: 1px solid #475569;
-  border-radius: 6px;
-  font-size: 0.75rem;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.select-btn.active {
-  background: #0284c7;
-  color: #fff;
-  border-color: #38bdf8;
-  font-weight: bold;
-}
-
-.control-group strong {
-  color: #38bdf8;
-}
-
-input[type="range"] {
-  accent-color: #38bdf8;
-  cursor: pointer;
-}
-
-.button-row {
-  display: flex;
-  gap: 0.6rem;
-  margin-top: 1rem;
   flex-wrap: wrap;
 }
 
-.btn {
-  padding: 0.5rem 1rem;
-  border: none;
-  border-radius: 6px;
-  font-size: 0.85rem;
-  font-weight: bold;
-  cursor: pointer;
-  transition: all 0.2s;
+.icon {
+  font-size: 1.3rem;
 }
 
-.btn-primary {
-  background: #0284c7;
-  color: white;
-}
-.btn-primary:hover {
-  background: #0369a1;
-}
-
-.stats-monitor {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-  gap: 0.6rem;
-  margin-top: 1rem;
-}
-
-.stat-card {
-  background: #1e293b;
-  padding: 0.7rem;
-  border-radius: 8px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  border-left: 3px solid #38bdf8;
-}
-
-.stat-card .label {
-  font-size: 0.75rem;
-  color: #94a3b8;
-  margin-bottom: 0.2rem;
-}
-
-.stat-card .value {
-  font-size: 1.1rem;
-  font-weight: bold;
+.sim-title {
+  margin: 0;
+  font-size: 1.12rem;
+  font-weight: 700;
   color: #f8fafc;
 }
 
-.stat-card .value.positive {
-  color: #34d399;
+.badge {
+  font-size: 0.75rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 9999px;
+  font-weight: 600;
 }
 
-.stat-card .value.negative {
-  color: #f43f5e;
+.badge-cyan {
+  background: rgba(56, 189, 248, 0.15);
+  color: #38bdf8;
+  border: 1px solid rgba(56, 189, 248, 0.35);
 }
 
-.stat-card .value.highlight {
-  color: #f59e0b;
+.badge-rose {
+  background: rgba(251, 113, 133, 0.15);
+  color: #fb7185;
+  border: 1px solid rgba(251, 113, 133, 0.35);
 }
 
-.stat-card .unit {
+.sim-tabs {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+
+.tab-btn {
+  background: rgba(30, 41, 59, 0.6);
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  color: #94a3b8;
+  padding: 0.35rem 0.8rem;
+  border-radius: 6px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.tab-btn:hover {
+  border-color: #38bdf8;
+  color: #f8fafc;
+}
+
+.tab-btn.active {
+  background: rgba(56, 189, 248, 0.2);
+  border-color: #38bdf8;
+  color: #38bdf8;
+}
+
+.desc {
+  font-size: 0.9rem;
+  color: #94a3b8;
+  margin-bottom: 1rem;
+  line-height: 1.6;
+}
+
+.camera-preset-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.preset-label {
   font-size: 0.8rem;
+  color: #94a3b8;
+  font-weight: 600;
+}
+
+.preset-group {
+  display: flex;
+  gap: 0.35rem;
+  flex-wrap: wrap;
+}
+
+.chip-btn {
+  background: rgba(15, 23, 42, 0.7);
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  color: #94a3b8;
+  padding: 0.3rem 0.65rem;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.chip-btn:hover {
+  border-color: #38bdf8;
+  color: #e2e8f0;
+}
+
+.chip-btn.active {
+  background: rgba(56, 189, 248, 0.2);
+  border-color: #38bdf8;
+  color: #38bdf8;
+}
+
+.playback-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.75rem;
+  background: rgba(15, 23, 42, 0.5);
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.speed-control-group {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.speed-label {
+  font-size: 0.8rem;
+  color: #94a3b8;
+}
+
+.speed-btn-group {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.speed-btn-group button {
+  background: rgba(30, 41, 59, 0.6);
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  color: #94a3b8;
+  padding: 0.2rem 0.45rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.speed-btn-group button.active {
+  background: #38bdf8;
+  color: #0f172a;
+  font-weight: 700;
+  border-color: #38bdf8;
+}
+
+.btn {
+  padding: 0.35rem 0.85rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s ease;
+}
+
+.btn-primary {
+  background: #38bdf8;
+  color: #090d16;
+}
+
+.btn-primary:hover {
+  background: #7dd3fc;
+}
+
+.btn-secondary {
+  background: rgba(30, 41, 59, 0.8);
+  color: #e2e8f0;
+  border: 1px solid rgba(148, 163, 184, 0.3);
+}
+
+.btn-secondary:hover {
+  border-color: #38bdf8;
+}
+
+.three-viewport-wrap {
+  position: relative;
+  width: 100%;
+  height: 420px;
+  background: #080c16;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid rgba(56, 189, 248, 0.2);
+  margin-bottom: 0.75rem;
+}
+
+.three-viewport {
+  width: 100%;
+  height: 100%;
+}
+
+.three-hud-top {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  right: 10px;
+  pointer-events: none;
+}
+
+.three-hud-legend {
+  display: flex;
+  gap: 0.85rem;
+  flex-wrap: wrap;
+  background: rgba(9, 13, 22, 0.85);
+  backdrop-filter: blur(6px);
+  padding: 0.35rem 0.75rem;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 0.75rem;
+  width: fit-content;
+}
+
+.legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: #cbd5e1;
+}
+
+.legend-item .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.three-hud-bottom {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  pointer-events: none;
+}
+
+.three-hud-hint {
+  background: rgba(9, 13, 22, 0.8);
+  padding: 0.3rem 0.65rem;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 0.75rem;
+  color: #94a3b8;
+}
+
+.mode-status-strip {
+  margin-bottom: 0.85rem;
+}
+
+.three-status-badge {
+  display: block;
+  padding: 0.5rem 0.85rem;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+.three-status-badge.electron {
+  background: rgba(56, 189, 248, 0.15);
+  border-left: 3px solid #38bdf8;
+  color: #7dd3fc;
+}
+
+.three-status-badge.hole {
+  background: rgba(251, 113, 133, 0.15);
+  border-left: 3px solid #fb7185;
+  color: #fca5a5;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.stat-card {
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+}
+
+.stat-card.highlight {
+  border-color: rgba(56, 189, 248, 0.4);
+  background: rgba(56, 189, 248, 0.05);
+}
+
+.stat-label {
+  font-size: 0.8rem;
+  color: #94a3b8;
+  margin-bottom: 0.25rem;
+}
+
+.stat-value {
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.text-blue {
+  color: #60a5fa;
+}
+
+.text-yellow {
+  color: #fbbf24;
+}
+
+.text-cyan {
+  color: #38bdf8;
+}
+
+.text-rose {
+  color: #fb7185;
+}
+
+.stat-unit {
+  font-size: 0.85rem;
   font-weight: normal;
   color: #94a3b8;
 }
 
-.stat-card .subtext {
-  font-size: 0.65rem;
+.stat-formula {
+  font-size: 0.75rem;
   color: #64748b;
-  margin-top: 0.2rem;
+  margin-top: 0.35rem;
+}
+
+.frac {
+  display: inline-flex;
+  flex-direction: column;
+  vertical-align: middle;
+  text-align: center;
+  font-size: 0.9em;
+  line-height: 1;
+}
+
+.frac .num {
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 1px;
+}
+
+.frac .den {
+  padding-top: 1px;
+}
+
+.controls-panel {
+  background: rgba(15, 23, 42, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 8px;
+  padding: 0.85rem 1rem;
+  margin-bottom: 1rem;
+}
+
+.controls-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+}
+
+.control-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.control-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.82rem;
+  color: #cbd5e1;
+  margin-bottom: 0.35rem;
+}
+
+.control-val {
+  font-weight: 700;
+}
+
+.sim-slider {
+  width: 100%;
+  accent-color: #38bdf8;
+  cursor: pointer;
+}
+
+.btn-group {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+
+.select-btn {
+  background: rgba(30, 41, 59, 0.8);
+  border: 1px solid rgba(148, 163, 184, 0.3);
+  color: #cbd5e1;
+  padding: 0.3rem 0.65rem;
+  border-radius: 5px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.select-btn:hover {
+  border-color: #38bdf8;
+  color: #38bdf8;
+}
+
+.select-btn.active {
+  background: rgba(56, 189, 248, 0.2);
+  border-color: #38bdf8;
+  color: #38bdf8;
+}
+
+.sim-footer-note {
+  background: rgba(15, 23, 42, 0.5);
+  border-left: 3px solid #38bdf8;
+  padding: 0.75rem 1rem;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  color: #cbd5e1;
+  line-height: 1.6;
+}
+
+.sim-footer-note ul {
+  margin: 0.5rem 0 0 1.25rem;
+  padding: 0;
+}
+
+.sim-footer-note li {
+  margin-bottom: 0.25rem;
+}
+
+@media (max-width: 768px) {
+  .three-viewport-wrap {
+    height: 340px;
+  }
 }
 </style>

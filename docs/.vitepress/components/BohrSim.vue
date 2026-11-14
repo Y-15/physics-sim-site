@@ -1,616 +1,1021 @@
 <template>
-  <div class="bohr-sim">
-    <div class="sim-header">
-      <div class="title-row">
-        <h3>🔬 ボーアの水素原子模型・量子条件・スペクトル系列</h3>
-        <span class="badge">Bohr Model &amp; Spectrum</span>
+  <div class="lab" :style="{ '--ac': '#38bdf8', '--ac2': '#a855f7' }">
+    <div class="lab-head">
+      <span class="lab-title">🔬 3D ボーアの水素原子模型・量子条件・スペクトル系列</span>
+      <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+        <span class="lab-badge" style="--ac:#10b981">Three.js 3D Interactive</span>
+        <span class="lab-badge">n = {{ currentN }} ｜ E<sub>{{ currentN }}</sub> = {{ En.toFixed(2) }} eV</span>
       </div>
-      <p class="desc">
-        電子のド・ブロイ波が軌道円周上で「定常波」をつくるボーアの量子条件 2π <i>r</i> = <i>n</i>λ と、準位間遷移による光子の放出（ライマン・バルマー・パッシェン系列）をリアルタイムに体験できます。
-      </p>
     </div>
 
-    <div class="canvas-wrap">
-      <canvas ref="canvasRef"></canvas>
+    <p class="lab-desc">
+      電子のド・ブロイ波が軌道円周上で「定常波」をつくるボーアの量子条件 2π<i>r</i> = <i>n</i>λ と、準位間遷移による光子の放出・吸収（ライマン・バルマー・パッシェン系列）を 3D 原子模型とエネルギー準位図の同時連動で体験できます。
+    </p>
+
+    <!-- カメラ視点プリセット -->
+    <div class="camera-preset-bar">
+      <span class="preset-label">🎥 カメラ視点:</span>
+      <div class="preset-group">
+        <button class="lab-chip" :class="{ on: activeCam === '3d' }" @click="setCameraPreset('3d')">
+          🎥 3D 俯瞰視点
+        </button>
+        <button class="lab-chip" :class="{ on: activeCam === 'front' }" @click="setCameraPreset('front')">
+          📐 正面断面視点
+        </button>
+        <button class="lab-chip" :class="{ on: activeCam === 'top' }" @click="setCameraPreset('top')">
+          🔼 真上視点
+        </button>
+      </div>
+    </div>
+
+    <!-- 再生速度・アニメーションコントロールバー -->
+    <div class="playback-bar">
+      <button
+        class="lab-btn primary"
+        @click="isPlaying = !isPlaying"
+        style="padding: 5px 14px; font-weight: 700; border-radius: 8px; font-size: 0.84rem;"
+      >
+        {{ isPlaying ? '⏸ 一時停止' : '▶ 再生' }}
+      </button>
+      <div class="speed-control-group">
+        <span class="speed-label">⏱️ 再生速度:</span>
+        <div class="speed-btn-group">
+          <button :class="{ active: timeScale === 0.5 }" @click="timeScale = 0.5">🐢 0.5x</button>
+          <button :class="{ active: timeScale === 1.0 }" @click="timeScale = 1.0">1.0x (標準)</button>
+          <button :class="{ active: timeScale === 1.5 }" @click="timeScale = 1.5">1.5x</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Three.js 3D ステージ -->
+    <div class="three-stage three-viewport-wrap">
+      <div ref="threeContainer" class="three-viewport"></div>
+
+      <div class="three-hud-legend">
+        <span class="legend-item">
+          <i style="background:#ef4444;box-shadow:0 0 6px #ef4444"></i>
+          原子核 (+e)
+        </span>
+        <span class="legend-item">
+          <i style="background:#38bdf8;box-shadow:0 0 6px #38bdf8"></i>
+          電子 (-e) ＆ 定常波
+        </span>
+        <span class="legend-item">
+          <i style="background:#fbbf24;box-shadow:0 0 6px #fbbf24"></i>
+          定常波の節 (2n個)
+        </span>
+        <span class="legend-item">
+          <i :style="{ background: lastPhotonColor, boxShadow: '0 0 6px ' + lastPhotonColor }"></i>
+          遷移光子 hν
+        </span>
+      </div>
+
+      <div class="three-hud-hint">
+        🖱️ ドラッグで3D回転 ・ ホイールで拡大縮小
+      </div>
+    </div>
+
+    <!-- 遷移ステータス帯 -->
+    <div class="ortho-status-strip">
+      <span class="three-ortho-badge" :style="{ borderColor: lastPhotonColor, color: '#f8fafc' }">
+        量子条件: 2πr<sub>{{ currentN }}</sub> = {{ currentN }}λ<sub>dB</sub> ｜
+        直近遷移: n={{ prevN }} → n={{ currentN }}
+        <template v-if="lastPhotonWl"> (λ = {{ lastPhotonWl.toFixed(1) }} nm : {{ lastPhotonType }})</template>
+      </span>
     </div>
 
     <!-- コントロール群 -->
-    <div class="controls-panel">
-      <div class="controls-grid">
-        <!-- 主量子数 n の選択 -->
-        <div class="control-group">
-          <label><span>現在の電子の軌道 (主量子数 <i>n</i>):</span> <strong>n = {{ currentN }}</strong></label>
-          <div class="n-buttons">
-            <button
-              v-for="n in 5"
-              :key="n"
-              :class="{ active: currentN === n }"
-              @click="setOrbit(n)"
-            >
-              n = {{ n }}
-            </button>
-          </div>
+    <div class="lab-controls">
+      <div class="lab-ctrl">
+        <label>現在の電子の軌道 (主量子数 <i>n</i>): <strong>n = {{ currentN }}</strong></label>
+        <div class="lab-row">
+          <button
+            v-for="n in 5"
+            :key="n"
+            class="lab-chip"
+            :class="{ on: currentN === n }"
+            @click="setOrbit(n)"
+          >
+            n = {{ n }}
+          </button>
         </div>
+        <div class="lab-note">軌道半径は n² 倍に広がり、定常波の波長数が n 個になります</div>
+      </div>
 
-        <!-- 遷移先の指定 -->
-        <div class="control-group">
-          <label>遷移先を選択して光子を放出/吸収：</label>
-          <div class="transition-buttons">
-            <button
-              v-for="target in availableTransitions"
-              :key="target"
-              @click="triggerTransition(target)"
-              class="trans-btn"
-            >
-              {{ currentN > target ? '放出 (降下)' : '吸収 (励起)' }} ➔ n = {{ target }}
-            </button>
-          </div>
+      <div class="lab-ctrl">
+        <label>遷移先を選択して光子を放出 / 吸収：</label>
+        <div class="lab-row">
+          <button
+            v-for="target in availableTransitions"
+            :key="target"
+            class="lab-chip trans-chip"
+            @click="triggerTransition(target)"
+          >
+            {{ currentN > target ? '⬇ 放出' : '⬆ 吸収' }} → n={{ target }}
+          </button>
         </div>
+        <div class="lab-note">準位が下がると光子放出、上がると光子吸収が 3D アニメーションします</div>
+      </div>
 
-        <!-- アニメーション表示切替 -->
-        <div class="control-group">
-          <label>定常波の振幅表示：</label>
-          <label class="checkbox-label">
-            <input type="checkbox" v-model="showWave" />
-            ド・ブロイ波（物質波）の波長・節の表示
-          </label>
-        </div>
+      <div class="lab-ctrl">
+        <label>ド・ブロイ物質波 &amp; 定常波表示</label>
+        <label style="display:inline-flex;align-items:center;gap:6px;cursor:pointer;color:#38bdf8;margin-top:4px">
+          <input type="checkbox" v-model="showWave" />
+          物質波の定常波と節 (ノード) を表示
+        </label>
+        <div class="lab-note">円周上にぴったり n 個の波長が収まる状態のみ安定存在できます</div>
       </div>
     </div>
 
-    <!-- スペクトル系列タブ -->
+    <!-- スペクトル系列バッジ -->
     <div class="series-panel">
       <span class="series-title">代表的なスペクトル系列：</span>
       <div class="series-badges">
-        <span class="badge-series lyman">ライマン系列 (<i>n</i> → 1: 紫外線)</span>
-        <span class="badge-series balmer">バルマー系列 (<i>n</i> → 2: 可視光線)</span>
-        <span class="badge-series paschen">パッシェン系列 (<i>n</i> → 3: 赤外線)</span>
+        <span class="badge-series lyman">ライマン系列 (<i>n</i> → 1: 紫外線 UV)</span>
+        <span class="badge-series balmer">バルマー系列 (<i>n</i> → 2: 可視光線 Hα赤 / Hβ水色 / Hγ青紫)</span>
+        <span class="badge-series paschen">パッシェン系列 (<i>n</i> → 3: 赤外線 IR)</span>
       </div>
     </div>
 
     <!-- ステータス値カード -->
-    <div class="stats-panel">
-      <div class="stat-card">
-        <span class="label">軌道半径 <i>r</i><sub><i>n</i></sub> = <i>n</i>² <i>r</i><sub>1</sub></span>
-        <span class="val highlight">{{ fmt(rn, 3) }} nm</span>
+    <div class="lab-stats">
+      <div class="lab-stat hl">
+        <div class="k">軌道半径 <i>r</i><sub><i>n</i></sub> = <i>n</i>² <i>r</i><sub>1</sub></div>
+        <div class="v" style="color:#38bdf8">{{ rn.toFixed(3) }} <small>nm</small></div>
+        <div class="f">r₁ = 0.0529 nm (ボーア半径)</div>
       </div>
-      <div class="stat-card">
-        <span class="label">エネルギー準位 <i>E</i><sub><i>n</i></sub> = -13.6/<i>n</i>²</span>
-        <span class="val highlight-alt">{{ fmt(En, 2) }} eV</span>
+      <div class="lab-stat">
+        <div class="k">エネルギー準位 <i>E</i><sub><i>n</i></sub> = −13.6/<i>n</i>²</div>
+        <div class="v" style="color:#fbbf24">{{ En.toFixed(2) }} <small>eV</small></div>
+        <div class="f">束縛状態の負のエネルギー</div>
       </div>
-      <div class="stat-card">
-        <span class="label">電子の速さ <i>v</i><sub><i>n</i></sub> = <i>v</i><sub>1</sub>/<i>n</i></span>
-        <span class="val">{{ fmt(vn * 1e-6, 2) }} × 10<sup>6</sup> m/s</span>
+      <div class="lab-stat">
+        <div class="k">電子の速さ <i>v</i><sub><i>n</i></sub> = <i>v</i><sub>1</sub>/<i>n</i></div>
+        <div class="v">{{ (vn * 1e-6).toFixed(2) }} <small>×10⁶ m/s</small></div>
+        <div class="f">外側の軌道ほどゆっくり運動</div>
       </div>
-      <div class="stat-card">
-        <span class="label">物質波波長 λ<sub>dB</sub> = <i>h</i>/mv</span>
-        <span class="val">{{ fmt(lambdaDB, 3) }} nm</span>
+      <div class="lab-stat">
+        <div class="k">物質波波長 λ<sub>dB</sub> = <i>h</i>/<i>mv</i></div>
+        <div class="v">{{ lambdaDB.toFixed(3) }} <small>nm</small></div>
+        <div class="f">円周 2πr<sub>n</sub> / λ<sub>dB</sub> = {{ currentN }} 波長分</div>
       </div>
-      <div class="stat-card">
-        <span class="label">円周 2π <i>r</i><sub><i>n</i></sub> / λ<sub>dB</sub></span>
-        <span class="val highlight">{{ currentN }} 波長分 (完全定常波)</span>
-      </div>
-      <div class="stat-card">
-        <span class="label">直近の遷移波長 λ</span>
-        <span class="val" :style="{ color: lastPhotonColor }">
-          {{ lastPhotonWl ? fmt(lastPhotonWl, 1) + ' nm (' + lastPhotonType + ')' : '—' }}
-        </span>
+      <div class="lab-stat">
+        <div class="k">直近の遷移光子波長 λ</div>
+        <div class="v" :style="{ color: lastPhotonColor, fontSize: '0.98rem' }">
+          {{ lastPhotonWl ? lastPhotonWl.toFixed(1) + ' nm' : '—' }}
+        </div>
+        <div class="f">{{ lastPhotonType }}</div>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
-import { setupCanvas, clearGrid, dot, text, line, arrow, useLoop, fmt } from './simUtils'
+import { ref, computed, watch, onMounted, onUnmounted } from 'vue'
+import * as THREE from 'three'
+import { createThreeScene, createVectorArrow3D, createTextSprite } from './threeUtils.js'
 
-const canvasRef = ref(null)
-
-// 物理定数
-const r1 = 0.0529 // ボーア半径 nm (n=1)
-const E1 = -13.606 // 基底エネルギー eV
-const v1 = 2.188e6 // n=1 での速さ m/s
-const c = 2.9979e8 // m/s
-const hc_eV_nm = 1239.84 // hc in eV*nm
+const r1 = 0.0529
+const E1 = -13.606
+const v1 = 2.188e6
+const hc_eV_nm = 1239.84
 
 const currentN = ref(2)
+const prevN = ref(3)
 const showWave = ref(true)
 
-// 直近の光子遷移情報
-const lastPhotonWl = ref(656.3) // Hα線 nm
-const lastPhotonColor = ref('#f43f5e')
-const lastPhotonType = ref('バルマー Hα 赤色光')
+const lastPhotonWl = ref(656.3)
+const lastPhotonColor = ref('#ef4444')
+const lastPhotonColorInt = ref(0xef4444)
+const lastPhotonType = ref('バルマー Hα (赤色光)')
 
-// 軌道半径
+const activeCam = ref('3d')
+const isPlaying = ref(true)
+const timeScale = ref(1.0)
+
 const rn = computed(() => currentN.value * currentN.value * r1)
-// エネルギー
 const En = computed(() => E1 / (currentN.value * currentN.value))
-// 速さ
 const vn = computed(() => v1 / currentN.value)
-// ド・ブロイ波長
 const lambdaDB = computed(() => (2 * Math.PI * rn.value) / currentN.value)
 
-// 遷移可能な軌道一覧 (1〜5 のうち現在以外)
-const availableTransitions = computed(() => {
-  return [1, 2, 3, 4, 5].filter((n) => n !== currentN.value)
-})
+const availableTransitions = computed(() => [1, 2, 3, 4, 5].filter(n => n !== currentN.value))
 
-// 光子アニメーション用パーティクル
-const flyingPhotons = []
-let electronAngle = 0
+// 3D レイアウト定数
+const ATOM_CX = -2.35
+const LADDER_CX = 3.25
+const ORBIT_STEP = 0.54 // n=1..5 -> 0.54 .. 2.70
+
+const threeContainer = ref(null)
+let threeCtx = null
+let staticGroup = null
+let ladderGroup = null
+let dynamicGroup = null
+let lastCamAspect = 0
+
+let electronAngle = 0.45
 let wavePhase = 0
 
-// 軌道変更
+let electronGroup = null
+let velArrow = null
+let waveTubeMesh = null
+let waveLineGeo = null
+let wavePositions = null
+let nodeSpheres = []
+const flyingPhotons = []
+
+function getMobileScale() {
+  if (!threeCtx?.camera) return 1.0
+  const aspect = threeCtx.camera.aspect || 1.7
+  return aspect < 1.35 ? Math.min(2.15, 1.56 / Math.max(0.62, aspect)) : 1.0
+}
+
+function isNarrowViewport() {
+  return Boolean(threeCtx?.camera && threeCtx.camera.aspect < 1.35)
+}
+
+function getSpriteScale(base = 0.40) {
+  if (!isNarrowViewport()) return base
+  return base * Math.min(1.82, getMobileScale() * 1.02)
+}
+
+function setCameraPreset(preset, duration = 0.5) {
+  activeCam.value = preset
+  if (!threeCtx) return
+  const s = getMobileScale()
+  if (preset === '3d') {
+    threeCtx.moveCameraTo([0.45 * s, 5.4 * s, 12.6 * s], [0.45, 0.05, 0], duration, 42)
+  } else if (preset === 'front') {
+    threeCtx.moveCameraTo([0.45, 0.1, 47.0 * s], [0.45, 0.05, 0], duration, 14)
+  } else if (preset === 'top') {
+    threeCtx.moveCameraTo([0.45, 49.0 * s, -0.35], [0.45, 0, -0.4], duration, 14)
+  }
+}
+
+function clearGroup(group) {
+  if (!group) return
+  while (group.children.length > 0) {
+    const child = group.children[0]
+    group.remove(child)
+    child.traverse(obj => {
+      if (obj.geometry) obj.geometry.dispose()
+      if (obj.material) {
+        if (Array.isArray(obj.material)) {
+          obj.material.forEach(m => {
+            if (m.map) m.map.dispose()
+            m.dispose()
+          })
+        } else {
+          if (obj.material.map) obj.material.map.dispose()
+          obj.material.dispose()
+        }
+      }
+    })
+  }
+}
+
+function orbitRadius(n) {
+  return n * ORBIT_STEP
+}
+
+// 視認性最適化されたエネルギー段位配置 (間隔が上に行くほど狭まる定性的特徴を保ちつつ、n=1..5全段が重ならず読める間隔を確保)
+function energyToLocalY(n) {
+  if (n === Infinity) return 2.15
+  const yMap = {
+    1: -1.95,
+    2: -0.35,
+    3: 0.48,
+    4: 1.08,
+    5: 1.58
+  }
+  return yMap[n] ?? 0
+}
+
+function buildAtomShells() {
+  if (!staticGroup) return
+  clearGroup(staticGroup)
+
+  const narrow = isNarrowViewport()
+  const floorY = -2.45
+
+  const grid = new THREE.GridHelper(17, 17, 0x1e293b, 0x0f172a)
+  grid.position.set(0.45, floorY, 0)
+  staticGroup.add(grid)
+
+  // 原子核 (+e)
+  const nucMesh = new THREE.Mesh(
+    new THREE.SphereGeometry(0.23, 24, 24),
+    new THREE.MeshStandardMaterial({
+      color: 0xef4444,
+      emissive: 0xef4444,
+      emissiveIntensity: 0.85,
+      roughness: 0.2
+    })
+  )
+  nucMesh.position.set(ATOM_CX, 0, 0)
+  staticGroup.add(nucMesh)
+
+  const nucGlow = new THREE.Mesh(
+    new THREE.SphereGeometry(0.40, 20, 20),
+    new THREE.MeshBasicMaterial({
+      color: 0xf87171,
+      transparent: true,
+      opacity: 0.25,
+      depthWrite: false
+    })
+  )
+  nucGlow.position.set(ATOM_CX, 0, 0)
+  staticGroup.add(nucGlow)
+
+  const nucLbl = createTextSprite(narrow ? '陽子 +e' : '原子核 (+e)', {
+    color: '#fca5a5',
+    borderColor: '#ef4444',
+    fontSize: 26,
+    scale: getSpriteScale(0.35)
+  })
+  nucLbl.position.set(ATOM_CX, -0.78, 0.88)
+  staticGroup.add(nucLbl)
+
+  // 各軌道のラベル配置角 (Z/X/Yすべてで非重複になるよう放射状に分散)
+  const labelAngles = {
+    1: -0.35,      // 右上奥
+    2: Math.PI - 0.3, // 左奥
+    3: 0.42,       // 右手前
+    4: Math.PI + 0.45, // 左手前
+    5: -Math.PI * 0.65 // 左上奥
+  }
+
+  for (let n = 1; n <= 5; n++) {
+    const r = orbitRadius(n)
+    const isCur = n === currentN.value
+    const ringGeo = new THREE.TorusGeometry(r, isCur ? 0.028 : 0.014, 10, 72)
+    ringGeo.rotateX(Math.PI / 2)
+    const ringMat = new THREE.MeshBasicMaterial({
+      color: isCur ? 0x38bdf8 : 0x64748b,
+      transparent: true,
+      opacity: isCur ? 0.90 : 0.34
+    })
+    const ring = new THREE.Mesh(ringGeo, ringMat)
+    ring.position.set(ATOM_CX, 0, 0)
+    staticGroup.add(ring)
+
+    if (!narrow || n === 1 || n === currentN.value || n === 5) {
+      const lbl = createTextSprite(`n=${n}`, {
+        color: isCur ? '#7dd3fc' : '#94a3b8',
+        borderColor: isCur ? '#38bdf8' : 'rgba(148,163,184,0.35)',
+        fontSize: 24,
+        scale: getSpriteScale(0.30)
+      })
+      const ang = labelAngles[n]
+      const rOff = n === 1 ? r + 0.28 : r + 0.12
+      const yOff = n === 1 ? 0.32 : n === 2 ? 0.42 : n === 3 ? -0.32 : 0.15
+      lbl.position.set(ATOM_CX + rOff * Math.cos(ang), yOff, rOff * Math.sin(ang))
+      staticGroup.add(lbl)
+    }
+  }
+
+  const atomTitle = createTextSprite(narrow ? 'ボーア原子模型' : `ボーア原子模型 (2πr = ${currentN.value}λ_dB)`, {
+    color: '#7dd3fc',
+    borderColor: '#38bdf8',
+    fontSize: 28,
+    scale: getSpriteScale(0.38)
+  })
+  atomTitle.position.set(ATOM_CX, 2.35, -2.55)
+  staticGroup.add(atomTitle)
+}
+
+function buildEnergyLadder() {
+  if (!ladderGroup) return
+  clearGroup(ladderGroup)
+
+  const narrow = isNarrowViewport()
+
+  // 3D 展示イーゼル状に -38° 傾斜させて配置 -> 3D俯瞰/正面断面/真上の全視点で全段が明瞭に分離！
+  ladderGroup.position.set(LADDER_CX, 0.0, 0.0)
+  ladderGroup.rotation.x = -0.66
+
+  const boardW = 3.75
+  const boardH = 5.0
+  const board = new THREE.Mesh(
+    new THREE.BoxGeometry(boardW, boardH, 0.12),
+    new THREE.MeshStandardMaterial({ color: 0x0f172a, roughness: 0.72, metalness: 0.22 })
+  )
+  board.position.set(0, 0.1, -0.14)
+  ladderGroup.add(board)
+
+  const frame = new THREE.LineLoop(
+    new THREE.BufferGeometry().setFromPoints([
+      new THREE.Vector3(-boardW / 2, -boardH / 2 + 0.1, -0.07),
+      new THREE.Vector3(boardW / 2, -boardH / 2 + 0.1, -0.07),
+      new THREE.Vector3(boardW / 2, boardH / 2 + 0.1, -0.07),
+      new THREE.Vector3(-boardW / 2, boardH / 2 + 0.1, -0.07)
+    ]),
+    new THREE.LineBasicMaterial({ color: 0x334155 })
+  )
+  ladderGroup.add(frame)
+
+  const titleLbl = createTextSprite(narrow ? 'エネルギー準位 Eₙ' : 'エネルギー準位 Eₙ = −13.6/n²', {
+    color: '#e2e8f0',
+    borderColor: '#94a3b8',
+    fontSize: 27,
+    scale: getSpriteScale(0.37)
+  })
+  titleLbl.position.set(0, 2.82, 0.14)
+  ladderGroup.add(titleLbl)
+
+  // n = ∞ 電離限界
+  const yInf = energyToLocalY(Infinity)
+  const infBar = new THREE.Mesh(
+    new THREE.BoxGeometry(2.05, 0.045, 0.08),
+    new THREE.MeshBasicMaterial({ color: 0xf43f5e })
+  )
+  infBar.position.set(-0.35, yInf, 0)
+  ladderGroup.add(infBar)
+
+  const infLbl = createTextSprite('n=∞ (0eV)', {
+    color: '#fda4af',
+    borderColor: '#f43f5e',
+    fontSize: 22,
+    scale: getSpriteScale(0.28)
+  })
+  infLbl.position.set(1.22, yInf, 0.10)
+  ladderGroup.add(infLbl)
+
+  // n = 1..5 準位バー (左寄り x = -0.35 にバー、右 x = +1.22 にラベルで完全分離)
+  for (let n = 1; n <= 5; n++) {
+    const ev = E1 / (n * n)
+    const y = energyToLocalY(n)
+    const isCur = n === currentN.value
+
+    const bar = new THREE.Mesh(
+      new THREE.BoxGeometry(2.05, isCur ? 0.08 : 0.045, isCur ? 0.14 : 0.08),
+      new THREE.MeshStandardMaterial({
+        color: isCur ? 0x38bdf8 : 0x64748b,
+        emissive: isCur ? 0x0284c7 : 0x000000,
+        emissiveIntensity: isCur ? 0.9 : 0
+      })
+    )
+    bar.position.set(-0.35, y, 0)
+    ladderGroup.add(bar)
+
+    if (isCur) {
+      const eDot = new THREE.Mesh(
+        new THREE.SphereGeometry(0.115, 16, 16),
+        new THREE.MeshStandardMaterial({ color: 0x38bdf8, emissive: 0x38bdf8, emissiveIntensity: 0.95 })
+      )
+      eDot.position.set(-1.12, y, 0.10)
+      ladderGroup.add(eDot)
+    }
+
+    const lblText = narrow ? `n=${n} (${ev.toFixed(1)}eV)` : `n=${n} (${ev.toFixed(2)} eV)`
+    const nLbl = createTextSprite(lblText, {
+      color: isCur ? '#7dd3fc' : '#cbd5e1',
+      borderColor: isCur ? '#38bdf8' : 'rgba(148,163,184,0.35)',
+      fontSize: 22,
+      scale: getSpriteScale(0.28)
+    })
+    nLbl.position.set(1.22, y, 0.10)
+    ladderGroup.add(nLbl)
+  }
+
+  // 直近遷移矢印 (バー中央 x = -0.15, hνラベルをさらに左 x = -1.18 に分離)
+  if (prevN.value !== currentN.value) {
+    const yFrom = energyToLocalY(prevN.value)
+    const yTo = energyToLocalY(currentN.value)
+    const dirY = yTo > yFrom ? 1 : -1
+    const len = Math.abs(yTo - yFrom)
+    if (len > 0.12) {
+      const tArrow = createVectorArrow3D({
+        color: lastPhotonColorInt.value,
+        shaftRadius: 0.038,
+        headRadius: 0.11,
+        headLength: 0.24
+      })
+      tArrow.setVector(
+        new THREE.Vector3(-0.22, yFrom, 0.14),
+        new THREE.Vector3(0, dirY, 0),
+        len
+      )
+      ladderGroup.add(tArrow)
+
+      const tLbl = createTextSprite(`hν ${lastPhotonWl.value.toFixed(0)}nm`, {
+        color: '#ffffff',
+        borderColor: lastPhotonColor.value,
+        fontSize: 23,
+        scale: getSpriteScale(0.29)
+      })
+      tLbl.position.set(-1.18, (yFrom + yTo) / 2, 0.22)
+      ladderGroup.add(tLbl)
+    }
+  }
+}
+
+function initDynamicObjects() {
+  if (!dynamicGroup) return
+  clearGroup(dynamicGroup)
+  nodeSpheres = []
+
+  electronGroup = new THREE.Group()
+  const eCore = new THREE.Mesh(
+    new THREE.SphereGeometry(0.135, 18, 18),
+    new THREE.MeshStandardMaterial({
+      color: 0x38bdf8,
+      emissive: 0x0ea5e9,
+      emissiveIntensity: 0.95
+    })
+  )
+  const eHalo = new THREE.Mesh(
+    new THREE.SphereGeometry(0.25, 16, 16),
+    new THREE.MeshBasicMaterial({ color: 0x38bdf8, transparent: true, opacity: 0.28, depthWrite: false })
+  )
+  electronGroup.add(eCore, eHalo)
+  dynamicGroup.add(electronGroup)
+
+  velArrow = createVectorArrow3D({
+    color: 0x34d399,
+    shaftRadius: 0.032,
+    headRadius: 0.095,
+    headLength: 0.22
+  })
+  dynamicGroup.add(velArrow)
+
+  const STEPS = 180
+  waveLineGeo = new THREE.BufferGeometry()
+  wavePositions = new Float32Array((STEPS + 1) * 3)
+  waveLineGeo.setAttribute('position', new THREE.BufferAttribute(wavePositions, 3))
+  waveTubeMesh = new THREE.Line(
+    waveLineGeo,
+    new THREE.LineBasicMaterial({ color: 0x7dd3fc, transparent: true, opacity: 0.95 })
+  )
+  waveTubeMesh.frustumCulled = false
+  dynamicGroup.add(waveTubeMesh)
+
+  const nodeGeo = new THREE.SphereGeometry(0.072, 10, 10)
+  const nodeMat = new THREE.MeshBasicMaterial({ color: 0xfbbf24 })
+  for (let i = 0; i < 10; i++) {
+    const nm = new THREE.Mesh(nodeGeo, nodeMat)
+    nm.visible = false
+    dynamicGroup.add(nm)
+    nodeSpheres.push(nm)
+  }
+}
+
+function createPhotonWaveMesh(colorHex) {
+  const grp = new THREE.Group()
+  const pts = []
+  const segs = 28
+  for (let i = 0; i <= segs; i++) {
+    const u = i / segs
+    const x = (u - 0.5) * 1.15
+    const env = Math.sin(u * Math.PI)
+    const y = Math.sin(u * Math.PI * 5) * 0.16 * env
+    const z = Math.cos(u * Math.PI * 5) * 0.08 * env
+    pts.push(new THREE.Vector3(x, y, z))
+  }
+  const curve = new THREE.CatmullRomCurve3(pts)
+  const tube = new THREE.Mesh(
+    new THREE.TubeGeometry(curve, 28, 0.036, 8, false),
+    new THREE.MeshStandardMaterial({
+      color: colorHex,
+      emissive: colorHex,
+      emissiveIntensity: 0.95
+    })
+  )
+  const core = new THREE.Mesh(
+    new THREE.SphereGeometry(0.115, 14, 14),
+    new THREE.MeshBasicMaterial({ color: colorHex })
+  )
+  grp.add(tube, core)
+  return grp
+}
+
+function classifyTransition(nFrom, nTo) {
+  const low = Math.min(nFrom, nTo)
+  const high = Math.max(nFrom, nTo)
+  if (low === 1) {
+    return { hexStr: '#a855f7', hexInt: 0xa855f7, desc: 'ライマン系列 (紫外線 UV)' }
+  }
+  if (low === 2) {
+    if (high === 3) return { hexStr: '#ef4444', hexInt: 0xef4444, desc: 'バルマー Hα (赤色光)' }
+    if (high === 4) return { hexStr: '#06b6d4', hexInt: 0x06b6d4, desc: 'バルマー Hβ (青緑色光)' }
+    if (high === 5) return { hexStr: '#6366f1', hexInt: 0x6366f1, desc: 'バルマー Hγ (青紫色光)' }
+    return { hexStr: '#8b5cf6', hexInt: 0x8b5cf6, desc: 'バルマー系列 (紫色光)' }
+  }
+  if (low === 3) {
+    return { hexStr: '#f97316', hexInt: 0xf97316, desc: 'パッシェン系列 (赤外線 IR)' }
+  }
+  return { hexStr: '#fb7185', hexInt: 0xfb7185, desc: 'ブラケット系列 (遠赤外線 IR)' }
+}
+
 function setOrbit(n) {
   triggerTransition(n)
 }
 
-// 遷移トリガー
+function spawnPhotonPacket(nFrom, nTo, info, wl) {
+  if (!dynamicGroup) return
+  const isEmission = nFrom > nTo
+  const rTo = orbitRadius(nTo)
+  const dirAngle = electronAngle
+  const dirVec = new THREE.Vector3(Math.cos(dirAngle), 0.14, Math.sin(dirAngle)).normalize()
+
+  const origin = isEmission
+    ? new THREE.Vector3(ATOM_CX + rTo * Math.cos(dirAngle), 0.1, rTo * Math.sin(dirAngle))
+    : new THREE.Vector3(ATOM_CX + (rTo + 2.8) * Math.cos(dirAngle), 0.35, (rTo + 2.8) * Math.sin(dirAngle))
+
+  const mesh = createPhotonWaveMesh(info.hexInt)
+  mesh.position.copy(origin)
+  mesh.quaternion.setFromUnitVectors(new THREE.Vector3(1, 0, 0), isEmission ? dirVec : dirVec.clone().negate())
+
+  const lbl = createTextSprite(`hν (${wl.toFixed(0)}nm)`, {
+    color: '#ffffff',
+    borderColor: info.hexStr,
+    fontSize: 23,
+    scale: getSpriteScale(0.30)
+  })
+  lbl.position.set(0, 0.34, 0)
+  mesh.add(lbl)
+  dynamicGroup.add(mesh)
+
+  flyingPhotons.push({
+    mesh,
+    vel: isEmission ? dirVec.multiplyScalar(2.4) : dirVec.multiplyScalar(-2.2),
+    life: isEmission ? 2.4 : 1.15
+  })
+}
+
 function triggerTransition(targetN) {
   const nFrom = currentN.value
   const nTo = targetN
   if (nFrom === nTo) return
 
-  // エネルギー差
-  const E_from = E1 / (nFrom * nFrom)
-  const E_to = E1 / (nTo * nTo)
-  const deltaE = Math.abs(E_to - E_from)
-  const wl = hc_eV_nm / deltaE // nm
+  const eFrom = E1 / (nFrom * nFrom)
+  const eTo = E1 / (nTo * nTo)
+  const deltaE = Math.abs(eTo - eFrom)
+  const wl = hc_eV_nm / deltaE
 
+  const info = classifyTransition(nFrom, nTo)
+  prevN.value = nFrom
+  currentN.value = nTo
   lastPhotonWl.value = wl
+  lastPhotonColor.value = info.hexStr
+  lastPhotonColorInt.value = info.hexInt
+  lastPhotonType.value = info.desc
 
-  // 光の種類・色判定
-  let col = '#ffffff'
-  let desc = ''
-  if (Math.min(nFrom, nTo) === 1) {
-    col = '#a855f7' // 紫外線 (ライマン)
-    desc = 'ライマン系列 (紫外線)'
-  } else if (Math.min(nFrom, nTo) === 2) {
-    // バルマー系列 (可視光)
-    if (Math.max(nFrom, nTo) === 3) { col = '#ef4444'; desc = 'バルマー Hα (赤色光)' }
-    else if (Math.max(nFrom, nTo) === 4) { col = '#06b6d4'; desc = 'バルマー Hβ (青緑色光)' }
-    else if (Math.max(nFrom, nTo) === 5) { col = '#3b82f6'; desc = 'バルマー Hγ (青紫色光)' }
-    else { col = '#8b5cf6'; desc = 'バルマー (紫色光)' }
-  } else if (Math.min(nFrom, nTo) === 3) {
-    col = '#f97316' // 赤外線 (パッシェン)
-    desc = 'パッシェン系列 (赤外線)'
-  } else {
-    col = '#ef4444'
-    desc = '赤外線'
-  }
-
-  lastPhotonColor.value = col
-  lastPhotonType.value = desc
-
-  // 光子放出アニメーション生成
-  const cx = 250, cy = 210
-  const rPixel = 38 * nFrom
-  const px = cx + rPixel * Math.cos(electronAngle)
-  const py = cy + rPixel * Math.sin(electronAngle)
-
-  flyingPhotons.push({
-    x: px,
-    y: py,
-    vx: Math.cos(electronAngle) * 160 + (nFrom > nTo ? 80 : -80),
-    vy: Math.sin(electronAngle) * 160,
-    color: col,
-    isEmission: nFrom > nTo,
-    wl: wl,
-    life: 1.8
-  })
-
-  currentN.value = targetN
+  spawnPhotonPacket(nFrom, nTo, info, wl)
+  buildAtomShells()
+  buildEnergyLadder()
 }
 
-// アニメーションループ
-useLoop((dt) => {
-  electronAngle += (vn.value / 1e6) * dt * 3.5
-  wavePhase += dt * 8
+function updateDynamic(dt) {
+  if (isPlaying.value && dt > 0) {
+    const effDt = Math.min(0.05, dt) * timeScale.value
+    electronAngle += (vn.value / 1e6) * effDt * 1.65
+    wavePhase += effDt * 6.5
 
-  const canvas = canvasRef.value
-  if (!canvas) return
-  const w = 780
-  const h = 420
-  const ctx = setupCanvas(canvas, w, h)
-  clearGrid(ctx, w, h, 30, '#09090b')
+    for (let i = flyingPhotons.length - 1; i >= 0; i--) {
+      const p = flyingPhotons[i]
+      p.mesh.position.addScaledVector(p.vel, effDt)
+      p.life -= effDt
+      if (p.life <= 0) {
+        dynamicGroup.remove(p.mesh)
+        p.mesh.traverse(obj => {
+          if (obj.geometry) obj.geometry.dispose()
+          if (obj.material) {
+            if (obj.material.map) obj.material.map.dispose()
+            obj.material.dispose()
+          }
+        })
+        flyingPhotons.splice(i, 1)
+      }
+    }
+  }
 
-  updatePhotons(dt)
-  drawAtom(ctx, w, h)
-  drawEnergyLevels(ctx, w, h)
+  const n = currentN.value
+  const r = orbitRadius(n)
+  const ex = ATOM_CX + r * Math.cos(electronAngle)
+  const ez = r * Math.sin(electronAngle)
+
+  if (electronGroup) {
+    electronGroup.position.set(ex, 0, ez)
+  }
+
+  if (velArrow) {
+    const vx = -Math.sin(electronAngle)
+    const vz = Math.cos(electronAngle)
+    const vLen = 0.52 + (1 / n) * 0.48
+    velArrow.setVector(new THREE.Vector3(ex, 0, ez), new THREE.Vector3(vx, 0, vz), vLen)
+  }
+
+  if (waveTubeMesh && waveLineGeo && wavePositions) {
+    waveTubeMesh.visible = showWave.value
+    const STEPS = 180
+    if (showWave.value) {
+      const ampR = 0.16
+      const ampY = 0.12
+      const osc = Math.cos(wavePhase)
+      for (let i = 0; i <= STEPS; i++) {
+        const theta = (i / STEPS) * Math.PI * 2
+        const s = Math.sin(n * theta) * osc
+        const rr = r + ampR * s
+        wavePositions[i * 3] = ATOM_CX + rr * Math.cos(theta)
+        wavePositions[i * 3 + 1] = ampY * s
+        wavePositions[i * 3 + 2] = rr * Math.sin(theta)
+      }
+      waveLineGeo.getAttribute('position').needsUpdate = true
+    }
+  }
+
+  for (let i = 0; i < nodeSpheres.length; i++) {
+    const nm = nodeSpheres[i]
+    if (showWave.value && i < 2 * n) {
+      nm.visible = true
+      const theta = (i * Math.PI) / n
+      nm.position.set(ATOM_CX + r * Math.cos(theta), 0, r * Math.sin(theta))
+    } else {
+      nm.visible = false
+    }
+  }
+}
+
+watch(showWave, () => {
+  updateDynamic(0)
 })
 
-function updatePhotons(dt) {
-  for (let i = flyingPhotons.length - 1; i >= 0; i--) {
-    const p = flyingPhotons[i]
-    p.x += p.vx * dt
-    p.y += p.vy * dt
-    p.life -= dt
-    if (p.life <= 0) {
-      flyingPhotons.splice(i, 1)
+onMounted(() => {
+  if (!threeContainer.value) return
+  threeCtx = createThreeScene(threeContainer.value, {
+    fov: 42,
+    initialCamPos: [0.45, 5.4, 12.6],
+    initialTarget: [0.45, 0.05, 0],
+    maxDistance: 130,
+    onFrame: (dt) => {
+      const curAspect = threeCtx?.camera?.aspect || 1.7
+      if (Math.abs(curAspect - lastCamAspect) > 0.16) {
+        lastCamAspect = curAspect
+        setCameraPreset(activeCam.value, 0)
+        buildAtomShells()
+        buildEnergyLadder()
+      }
+      updateDynamic(dt)
     }
+  })
+
+  staticGroup = new THREE.Group()
+  ladderGroup = new THREE.Group()
+  dynamicGroup = new THREE.Group()
+  threeCtx.scene.add(staticGroup)
+  threeCtx.scene.add(ladderGroup)
+  threeCtx.scene.add(dynamicGroup)
+
+  lastCamAspect = threeCtx.camera.aspect || 1.7
+  buildAtomShells()
+  buildEnergyLadder()
+  initDynamicObjects()
+  spawnPhotonPacket(3, 2, classifyTransition(3, 2), 656.3)
+  updateDynamic(0)
+  setCameraPreset(activeCam.value, 0)
+})
+
+onUnmounted(() => {
+  if (threeCtx) {
+    threeCtx.dispose()
+    threeCtx = null
   }
-}
-
-// -------------------------------------------------------------------
-// 描画: 水素原子模型 (左側: x: 30 ~ 470)
-// -------------------------------------------------------------------
-function drawAtom(ctx, w, h) {
-  const cx = 240
-  const cy = 210
-  const baseScale = 36 // n=1 の半径ピクセル
-
-  // 原子の同心円軌道 (n=1〜5)
-  for (let n = 1; n <= 5; n++) {
-    const rad = n * baseScale
-    const isCurrent = n === currentN.value
-
-    ctx.strokeStyle = isCurrent ? 'rgba(56, 189, 248, 0.5)' : 'rgba(113, 113, 122, 0.25)'
-    ctx.lineWidth = isCurrent ? 2 : 1
-    if (!isCurrent) ctx.setLineDash([3, 4])
-    else ctx.setLineDash([])
-
-    ctx.beginPath()
-    ctx.arc(cx, cy, rad, 0, Math.PI * 2)
-    ctx.stroke()
-    ctx.setLineDash([])
-
-    // 軌道ラベル
-    text(ctx, `n=${n}`, cx + rad + 4, cy - 4, isCurrent ? '#38bdf8' : '#94a3b8', '10px sans-serif')
-  }
-
-  // 原子核 (陽子 +e)
-  dot(ctx, cx, cy, 10, '#ef4444', '#ffffff')
-  text(ctx, '+e', cx, cy + 3, '#ffffff', 'bold 9px sans-serif', 'center')
-  text(ctx, '原子核 (陽子)', cx, cy + 22, '#ef4444', 'bold 11px sans-serif', 'center')
-
-  // 現在の軌道上での物質波（ド・ブロイ波定常波）描画
-  const n = currentN.value
-  const rad = n * baseScale
-
-  if (showWave.value) {
-    ctx.save()
-    ctx.strokeStyle = '#38bdf8'
-    ctx.lineWidth = 2.5
-    ctx.beginPath()
-    const waveAmp = 7 // 振幅
-    const steps = 180
-    for (let i = 0; i <= steps; i++) {
-      const theta = (i / steps) * Math.PI * 2
-      // 定常波: r(θ) = rad + A * sin(n*θ) * cos(phase)
-      const r_theta = rad + waveAmp * Math.sin(n * theta) * Math.cos(wavePhase)
-      const wx = cx + r_theta * Math.cos(theta)
-      const wy = cy + r_theta * Math.sin(theta)
-      if (i === 0) ctx.moveTo(wx, wy)
-      else ctx.lineTo(wx, wy)
-    }
-    ctx.closePath()
-    ctx.stroke()
-    ctx.restore()
-  }
-
-  // 電子位置
-  const ex = cx + rad * Math.cos(electronAngle)
-  const ey = cy + rad * Math.sin(electronAngle)
-
-  // 電子 (グロー)
-  const grad = ctx.createRadialGradient(ex, ey, 2, ex, ey, 14)
-  grad.addColorStop(0, '#38bdf8')
-  grad.addColorStop(1, 'rgba(56, 189, 248, 0)')
-  ctx.fillStyle = grad
-  ctx.beginPath()
-  ctx.arc(ex, ey, 14, 0, Math.PI * 2)
-  ctx.fill()
-
-  dot(ctx, ex, ey, 6, '#38bdf8', '#ffffff')
-  text(ctx, '-e', ex, ey + 2, '#000000', 'bold 8px sans-serif', 'center')
-
-  // 速度ベクトル
-  const ux = -Math.sin(electronAngle)
-  const uy = Math.cos(electronAngle)
-  const vLen = 28
-  arrow(ctx, ex, ey, ex + ux * vLen, ey + uy * vLen, '#34d399', 2, `v_${n}`, { align: 'left', lx: 6 })
-
-  // 飛んでいる光子
-  for (const p of flyingPhotons) {
-    dot(ctx, p.x, p.y, 5, p.color, '#ffffff')
-    // 波動線（ギザギザ）
-    ctx.strokeStyle = p.color
-    ctx.lineWidth = 2
-    ctx.beginPath()
-    ctx.arc(p.x, p.y, 10, 0, Math.PI * 2)
-    ctx.stroke()
-    text(ctx, `hν (${fmt(p.wl, 0)}nm)`, p.x + 12, p.y - 4, p.color, 'bold 10px sans-serif')
-  }
-
-  // 量子条件の注記
-  text(ctx, `ボーアの量子条件: 2πr = nλ_dB (n = ${n})`, 30, 395, '#38bdf8', 'bold 12px monospace')
-}
-
-// -------------------------------------------------------------------
-// 描画: エネルギー準位図 (右側: x: 500 ~ 750)
-// -------------------------------------------------------------------
-function drawEnergyLevels(ctx, w, h) {
-  const lx0 = 490
-  const lx1 = 670
-  const y0 = 360 // E = -13.6 eV (n=1)
-  const yInf = 80 // E = 0 eV (n=∞)
-  const totalH = y0 - yInf
-
-  text(ctx, '【水素原子のエネルギー準位】', lx0, 48, '#e4e4e7', 'bold 13px sans-serif')
-
-  // E=0 線 (電離限界)
-  line(ctx, lx0, yInf, lx1, yInf, '#f43f5e', 2)
-  text(ctx, 'n = ∞ (0 eV: 電離)', 770, yInf - 6, '#f43f5e', '10px sans-serif', 'right')
-
-  // 各準位の y 座標: En = E1 / n^2
-  // E1 = -13.6 eV -> y0, 0 eV -> yInf
-  const toY = (ev) => yInf + (ev / E1) * totalH
-
-  for (let n = 1; n <= 5; n++) {
-    const enVal = E1 / (n * n)
-    const y = toY(enVal)
-    const isCur = n === currentN.value
-
-    // レベル線
-    line(ctx, lx0, y, lx1, y, isCur ? '#38bdf8' : '#94a3b8', isCur ? 3 : 1.5)
-
-    // 密集する n=4, 5 のラベル重なりを防止するためオフセット調整
-    const yOffset = n === 5 ? 1 : n === 4 ? 7 : 4
-
-    // ラベル
-    text(ctx, `n = ${n}`, lx0 - 8, y + yOffset, isCur ? '#38bdf8' : '#a1a1aa', isCur ? 'bold 11px sans-serif' : '11px sans-serif', 'right')
-    if (n <= 3 || isCur || (n === 4 && currentN.value !== 5)) {
-      text(ctx, `${enVal.toFixed(2)} eV`, 770, y + yOffset, isCur ? '#38bdf8' : '#a1a1aa', isCur ? 'bold 10px monospace' : '10px monospace', 'right')
-    }
-
-    // 現在の準位に電子マーカー
-    if (isCur) {
-      dot(ctx, (lx0 + lx1) / 2, y, 6, '#38bdf8', '#ffffff')
-      text(ctx, '● 現在の電子', (lx0 + lx1) / 2 + 10, y + yOffset, '#38bdf8', 'bold 10px sans-serif')
-    }
-  }
-
-  // 遷移の矢印表示 (n=2 へのバルマー系列を例示)
-  const y2 = toY(E1 / 4)
-  const y3 = toY(E1 / 9)
-  line(ctx, lx0 + 35, y3, lx0 + 35, y2, 'rgba(239, 68, 68, 0.4)', 2)
-  text(ctx, 'Hα', lx0 + 40, (y2 + y3) / 2 + 3, '#ef4444', 'bold 10px sans-serif')
-}
+})
 </script>
 
 <style scoped>
-.bohr-sim {
-  background: #18181b;
-  border: 1px solid #27272a;
-  border-radius: 12px;
-  padding: 18px;
-  margin: 1.5rem 0;
-  color: #f4f4f5;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
-}
-
-.sim-header {
-  margin-bottom: 12px;
-}
-
-.title-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-}
-
-.title-row h3 {
-  margin: 0;
-  font-size: 1.15rem;
-  font-weight: 700;
-  color: #fafafa;
-}
-
-.badge {
-  background: #27272a;
-  border: 1px solid #3f3f46;
-  color: #38bdf8;
-  font-size: 0.75rem;
-  padding: 2px 8px;
-  border-radius: 9999px;
-  font-family: monospace;
-}
-
-.desc {
+.lab-desc {
   font-size: 0.85rem;
-  color: #a1a1aa;
-  margin: 6px 0 0 0;
+  color: #94a3b8;
   line-height: 1.5;
+  margin: 0 0 0.75rem 0;
 }
 
-.canvas-wrap {
-  width: 100%;
-  background: #09090b;
-  border: 1px solid #27272a;
-  border-radius: 8px;
-  overflow: hidden;
-  margin-bottom: 14px;
-}
-
-canvas {
-  display: block;
-  width: 100%;
-  height: auto;
-  aspect-ratio: 780 / 420;
-}
-
-.controls-panel {
-  background: #27272a;
-  border-radius: 8px;
-  padding: 12px 16px;
-  margin-bottom: 12px;
-}
-
-.controls-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 12px;
-}
-
-.control-group {
+.camera-preset-bar {
   display: flex;
-  flex-direction: column;
-  gap: 6px;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 8px 12px;
+  margin-bottom: 0.55rem;
+  background: rgba(15, 23, 42, 0.72);
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  border-radius: 10px;
 }
 
-.control-group label {
+.preset-label {
   font-size: 0.8rem;
-  color: #d4d4d8;
-}
-
-.control-group strong {
+  font-weight: 700;
   color: #38bdf8;
 }
 
-.n-buttons {
+.preset-group {
   display: flex;
   gap: 6px;
   flex-wrap: wrap;
+  align-items: center;
 }
 
-.n-buttons button {
-  background: #18181b;
-  color: #a1a1aa;
-  border: 1px solid #3f3f46;
-  border-radius: 6px;
-  padding: 4px 10px;
-  font-size: 0.8rem;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.n-buttons button:hover {
-  background: #27272a;
-  color: #fff;
-}
-
-.n-buttons button.active {
-  background: #0284c7;
-  border-color: #38bdf8;
-  color: #fff;
-  font-weight: 700;
-}
-
-.transition-buttons {
+.playback-bar {
   display: flex;
-  gap: 6px;
+  align-items: center;
+  gap: 8px;
   flex-wrap: wrap;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  margin: 0 0 0.65rem 0;
+  padding: 8px 12px;
+  border-radius: 10px;
 }
 
-.trans-btn {
-  background: #3f3f46;
-  color: #f4f4f5;
-  border: 1px solid #52525b;
-  border-radius: 6px;
-  padding: 4px 8px;
-  font-size: 0.75rem;
-  cursor: pointer;
-  transition: all 0.15s;
-}
-
-.trans-btn:hover {
-  background: #f59e0b;
-  border-color: #fbbf24;
-  color: #000;
-}
-
-.checkbox-label {
+.speed-control-group {
   display: flex;
   align-items: center;
   gap: 6px;
-  cursor: pointer;
-  font-size: 0.8rem !important;
-  color: #38bdf8 !important;
+  flex-wrap: wrap;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  border-radius: 9999px;
+  padding: 4px 10px;
+}
+
+.speed-btn-group {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+  max-width: 100%;
+  min-width: 0;
+}
+
+.speed-label,
+.speed-btn-group button {
+  white-space: nowrap;
+}
+
+.three-viewport-wrap {
+  position: relative;
+  width: 100%;
+  height: 430px;
+  background: #080c16;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid rgba(148, 163, 184, 0.22);
+  margin-bottom: 0.65rem;
+}
+
+.three-viewport {
+  width: 100%;
+  height: 100%;
+}
+
+.three-hud-legend {
+  position: absolute;
+  top: 10px;
+  left: 12px;
+  max-width: calc(100% - 24px);
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding: 5px 11px;
+  border-radius: 8px;
+  background: rgba(9, 13, 22, 0.84);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  font-size: 0.74rem;
+  color: #e2e8f0;
+  pointer-events: none;
+}
+
+.legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  white-space: nowrap;
+}
+
+.legend-item i {
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+}
+
+.three-hud-hint {
+  position: absolute;
+  bottom: 10px;
+  right: 12px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(9, 13, 22, 0.8);
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  font-size: 0.72rem;
+  color: #cbd5e1;
+  pointer-events: none;
+}
+
+.ortho-status-strip {
+  display: flex;
+  justify-content: flex-end;
+  margin: -0.2rem 0 0.8rem 0;
+}
+
+.three-ortho-badge {
+  display: inline-block;
+  padding: 4px 11px;
+  border-radius: 8px;
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid rgba(56, 189, 248, 0.45);
+  font-size: 0.75rem;
+  font-weight: 600;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.trans-chip:hover {
+  border-color: #fbbf24;
+  color: #fde68a;
 }
 
 .series-panel {
   display: flex;
   align-items: center;
-  gap: 10px;
-  background: #202024;
-  border: 1px solid #333338;
-  border-radius: 8px;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
   padding: 8px 12px;
-  margin-bottom: 14px;
+  margin-bottom: 0.9rem;
   flex-wrap: wrap;
 }
 
 .series-title {
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   font-weight: 600;
   color: #e4e4e7;
 }
 
 .series-badges {
   display: flex;
-  gap: 8px;
+  gap: 7px;
   flex-wrap: wrap;
 }
 
 .badge-series {
   font-size: 0.72rem;
-  padding: 2px 8px;
+  padding: 2px 9px;
   border-radius: 9999px;
-  font-family: sans-serif;
 }
 
 .badge-series.lyman {
-  background: rgba(168, 85, 247, 0.2);
+  background: rgba(168, 85, 247, 0.18);
   border: 1px solid #a855f7;
-  color: #c084fc;
+  color: #d8b4fe;
 }
 
 .badge-series.balmer {
-  background: rgba(56, 189, 248, 0.2);
+  background: rgba(56, 189, 248, 0.18);
   border: 1px solid #38bdf8;
-  color: #38bdf8;
+  color: #7dd3fc;
 }
 
 .badge-series.paschen {
-  background: rgba(249, 115, 22, 0.2);
+  background: rgba(249, 115, 22, 0.18);
   border: 1px solid #f97316;
-  color: #fb923c;
+  color: #fdba74;
 }
 
-.stats-panel {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 10px;
+@media (max-width: 768px) {
+  .three-viewport-wrap {
+    height: 345px;
+  }
+  .three-hud-legend {
+    right: 10px;
+    gap: 7px;
+    font-size: 0.67rem;
+    padding: 4px 8px;
+  }
+  .three-hud-hint {
+    font-size: 0.67rem;
+    padding: 3px 8px;
+  }
+  .three-ortho-badge {
+    font-size: 0.7rem;
+    padding: 4px 9px;
+  }
 }
 
-.stat-card {
-  background: #27272a;
-  border: 1px solid #3f3f46;
-  border-radius: 8px;
-  padding: 10px 14px;
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.stat-card .label {
-  font-size: 0.72rem;
-  color: #a1a1aa;
-}
-
-.stat-card .val {
-  font-size: 1.05rem;
-  font-weight: 700;
-  color: #fafafa;
-  font-family: monospace;
-}
-
-.stat-card .val.highlight {
-  color: #38bdf8;
-}
-
-.stat-card .val.highlight-alt {
-  color: #fbbf24;
+@media (max-width: 640px) {
+  .lab {
+    padding: 0.85rem;
+  }
+  .speed-control-group {
+    border-radius: 10px;
+    padding: 5px 9px;
+    width: 100%;
+  }
+  .ortho-status-strip {
+    justify-content: flex-start;
+  }
 }
 </style>
